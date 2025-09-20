@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { LeadsContent } from "@/components/leads/clients/content"
 import { PasteImport } from "@/components/leads/paste-import"
+import { AiLeadExtractor } from "./ai-lead-extractor"
 // Remove server-only dictionary import - will be passed as prop
 import { toast } from "sonner"
 import { createLead } from "@/components/leads/clients/actions"
@@ -21,7 +22,8 @@ import {
   Send,
   Loader2,
   ClipboardPaste,
-  Globe
+  Globe,
+  Brain
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -128,14 +130,16 @@ export default function LeadsClient({ lang, dictionary }: LeadsClientProps) {
   return (
     <section className="relative flex flex-col items-center justify-center py-12 md:py-16">
       {/* Header */}
-      <PageHeader title="Leads Agent" />
-      <p className="text-muted-foreground text-center max-w-2xl mt-2">
-        Import, generate, and manage your leads with AI assistance. Paste contact information,
-        scrape websites, or connect to data sources.
+      <PageHeader title="AI-Enhanced Leads Agent" />
+      <p className="text-muted-foreground text-center max-w-2xl mt-2 flex items-center justify-center gap-2">
+        <Brain className="h-4 w-4" />
+        Import, generate, and manage your leads with AI assistance. Extract leads from any text using advanced AI models.
       </p>
 
       {/* Main Interface */}
       <div className="w-full max-w-4xl mt-8 space-y-4">
+        {/* AI Lead Extractor - New Component */}
+        <AiLeadExtractor />
         {/* Input Area */}
         <Card className="p-6">
           <div className="space-y-4">
