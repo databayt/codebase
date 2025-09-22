@@ -103,7 +103,7 @@
 
 Your workflows automatically use specialized subagents:
 
-- **architecture-advisor**: File structure, patterns
+- **architect**: File structure, patterns
 - **bug-detective**: Error analysis, debugging
 - **nextjs-expert**: Next.js optimization
 - **react-code-reviewer**: React best practices

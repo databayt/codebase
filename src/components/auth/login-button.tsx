@@ -33,7 +33,7 @@ export const LoginButton = ({
           {children}
         </DialogTrigger>
         <DialogContent className="p-0 w-auto bg-transparent border-none">
-          <LoginForm />
+          <LoginForm dictionary={{}} />
         </DialogContent>
       </Dialog>
     )

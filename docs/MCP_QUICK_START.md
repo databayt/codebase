@@ -198,9 +198,9 @@ claude
 
 ### Best Combinations
 
-1. **Linear + architecture-advisor**
+1. **Linear + architect**
    ```markdown
-   > @claude Get requirements from Linear and plan with architecture-advisor
+   > @claude Get requirements from Linear and plan with architect
    ```
 
 2. **Sentry + bug-detective**

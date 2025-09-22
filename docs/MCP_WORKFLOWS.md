@@ -12,7 +12,7 @@ Step 1: Gather Requirements
   Also review the Figma designs referenced in the issue.
 
 Step 2: Implementation with Subagents
-> @claude Based on the requirements, use the architecture-advisor to plan
+> @claude Based on the requirements, use the architect to plan
   the file structure. Then implement using shadcn-ui-specialist for UI
   and typescript-pro for type safety. Ensure all components follow our
   atomic design pattern.
@@ -199,7 +199,7 @@ Step 4: Verification
   1. Analyze current implementation
   2. Check Sentry for auth-related errors
   3. Review Linear for auth improvement requests
-  4. Use architecture-advisor for structure
+  4. Use architect for structure
   5. Implement with NextAuth v5 best practices
   6. Ensure postgres user schema compatibility
   7. Test with Stripe customer linking

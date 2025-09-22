@@ -49,7 +49,6 @@ export const {
   auth,
   signIn,
   signOut,
-  update,
 } = NextAuth({
   pages: {
     signIn: "/login",
@@ -76,7 +75,7 @@ export const {
       // For OAuth providers (Google, Facebook, etc.)
       if (account?.provider !== "credentials") {
         // Check if a user with this email already exists
-        if (user.email) {
+        if (user.email && account) {
           const existingUser = await db.user.findUnique({
             where: { email: user.email }
           });
@@ -106,7 +105,7 @@ export const {
                   token_type: account.token_type,
                   scope: account.scope,
                   id_token: account.id_token,
-                  session_state: account.session_state,
+                  session_state: account.session_state?.toString(),
                 }
               });
             }
@@ -125,7 +124,7 @@ export const {
       }
 
       // For credentials provider
-      const existingUser = await getUserById(user.id);
+      const existingUser = await getUserById(user.id!);
 
       // Prevent sign in without email verification
       if (!existingUser?.emailVerified) return false;
@@ -154,8 +153,8 @@ export const {
 
       if (session.user) {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-        session.user.name = token.name;
-        session.user.email = token.email;
+        session.user.name = token.name as string | null | undefined;
+        session.user.email = token.email!;
         session.user.isOAuth = token.isOAuth as boolean;
       }
 

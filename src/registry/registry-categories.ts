@@ -1,0 +1,48 @@
+export interface RegistryCategory {
+  name: string
+  slug: string
+  hidden?: boolean
+}
+
+export const registryCategories: RegistryCategory[] = [
+  {
+    name: "Sidebar",
+    slug: "sidebar",
+    hidden: false
+  },
+  {
+    name: "Dashboard",
+    slug: "dashboard",
+    hidden: false
+  },
+  {
+    name: "Authentication",
+    slug: "authentication",
+    hidden: false
+  },
+  {
+    name: "Login",
+    slug: "login",
+    hidden: false
+  },
+  {
+    name: "Hero",
+    slug: "hero",
+    hidden: false
+  },
+  {
+    name: "Charts",
+    slug: "charts",
+    hidden: true
+  },
+  {
+    name: "Forms",
+    slug: "forms",
+    hidden: false
+  },
+  {
+    name: "Tables",
+    slug: "tables",
+    hidden: false
+  }
+]

@@ -1,3 +1,4 @@
+
 import TemplateContent from "@/components/root/template/content";
 import { getDictionary } from "@/components/local/dictionaries";
 import { type Locale } from "@/components/local/config";

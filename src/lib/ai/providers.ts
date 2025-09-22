@@ -32,9 +32,9 @@ export const providers = {
     powerful: anthropic('claude-3-opus-20240229')
   },
   groq: {
-    fast: groq('llama-3.1-8b-instant'),
-    balanced: groq('llama-3.1-70b-versatile'),
-    powerful: groq('llama-3.2-90b-text-preview')
+    fast: groq('llama-3.1-8b-instant'), // Fast model for simple tasks
+    balanced: groq('openai/gpt-oss-20b'), // Supports structured outputs
+    powerful: groq('openai/gpt-oss-120b') // Most powerful, supports structured outputs
   },
   openai: {
     fast: openai('gpt-4o-mini'),
@@ -51,9 +51,9 @@ const taskStrategy = {
     fallback: { provider: 'openai', model: 'balanced' }
   },
   extraction: {
-    primary: 'groq',
-    model: 'balanced',
-    fallback: { provider: 'openai', model: 'fast' }
+    primary: 'groq',  // Use Groq (free)
+    model: 'powerful',  // Using model that supports JSON
+    fallback: { provider: 'anthropic', model: 'fast' }
   },
   generation: {
     primary: 'anthropic',

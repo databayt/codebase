@@ -52,7 +52,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            Use the architecture-advisor subagent to create an implementation plan:
+            Use the architect subagent to create an implementation plan:
 
             1. Analyze the feature request
             2. Determine file structure in src/app/[lang]/

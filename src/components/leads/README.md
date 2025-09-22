@@ -1,224 +1,291 @@
-# Leads Management System
+# Leads Block
 
 ## Overview
-The Leads Management System is a comprehensive CRM module for managing potential customers and tracking their journey through the sales pipeline. Built with Next.js 15, TypeScript, and Prisma ORM.
+The Leads block is a comprehensive lead management system for tracking potential customers through the sales pipeline. It features an AI-powered Lead Agent interface for intelligent lead generation, along with advanced lead extraction, scoring, and enrichment capabilities.
 
 ## Architecture
 
-### Directory Structure
+### Directory Structure (Standardized)
 ```
-src/components/leads/
-├── clients/                 # Client-specific lead components
-│   ├── actions.ts          # Server actions for CRUD operations
-│   ├── columns.tsx         # Table column definitions
-│   ├── constants.ts        # Status, source, priority enums
-│   ├── content.tsx         # Main content wrapper
-│   ├── custom-data-table.tsx # Custom styled data table
-│   ├── form.tsx            # Lead creation/edit form
-│   ├── lead-actions.tsx    # Dropdown action handlers
-│   ├── list-params.ts     # URL search params schema
-│   ├── table.tsx           # Main table component
-│   ├── types.ts            # TypeScript interfaces
-│   └── validation.ts       # Zod validation schemas
-├── students/               # Student-specific components (reference)
-│   ├── form.tsx           # Multi-step form example
-│   └── footer.tsx         # Form footer with progress
-├── bulk-operations.tsx     # Bulk action handlers
-├── lead-detail-sheet.tsx   # Lead detail view sheet
-├── lead-preview.tsx        # Preview component for imports
-├── leads-table.tsx         # Legacy table component
-├── loading-states.tsx      # Skeleton loaders
-├── mobile-lead-card.tsx    # Mobile responsive card
-└── paste-import.tsx        # Paste/import interface
+src/
+├── app/[lang]/(blocks)/leads/
+│   └── page.tsx                 # Simple page wrapper importing LeadsContent
+├── components/leads/
+│   ├── action.ts                # Server actions & API calls
+│   ├── all.tsx                  # List view with table
+│   ├── analytics.tsx            # Analytics dashboard
+│   ├── card.tsx                 # Lead card components
+│   ├── constant.ts              # Enums, options, static data
+│   ├── content.tsx              # Main UI orchestration
+│   ├── detail.tsx               # Detailed lead view
+│   ├── featured.tsx             # Featured leads display
+│   ├── form.tsx                 # Lead creation/edit forms
+│   ├── prompt.tsx               # AI Lead Agent interface (NEW)
+│   ├── type.ts                  # TypeScript interfaces
+│   ├── use-leads.ts             # Custom React hooks
+│   ├── validation.ts            # Zod schemas
+│   ├── README.md                # This file
+│   └── ISSUE.md                 # Known issues & roadmap
+├── components/atom/
+│   ├── prompt-input.tsx         # Vercel AI Elements prompt component (NEW)
+│   └── icons.tsx                # Custom SVG icons for prompt UI (NEW)
 ```
 
 ## Core Features
 
-### 1. Lead Management
-- **CRUD Operations**: Create, read, update, delete leads
-- **Bulk Actions**: Select and perform actions on multiple leads
-- **Status Tracking**: NEW → CONTACTED → QUALIFIED → PROPOSAL → NEGOTIATION → CLOSED_WON/LOST
-- **Lead Scoring**: 0-100 score system with visual indicators
-- **Source Tracking**: Manual, Import, API, Website, Referral, Social Media, Email Campaign
-- **Priority Levels**: Low, Medium, High, Urgent
+### 1. AI Lead Agent Interface (NEW)
+- **Full-Screen Hero Section**: Engaging h-screen prompt interface at the top of the leads page
+- **Vercel AI Elements Design**: Modern prompt input following industry-leading patterns
+- **Multi-Modal Input**: Support for text prompts, file uploads, and voice commands
+- **File Processing**: Drag-and-drop CSV/Excel files for bulk lead import
+- **Smart Navigation**: Smooth scroll to existing leads table
 
-### 2. Import Capabilities
-- **Paste Import**: Copy/paste raw text data
-- **AI Extraction**: Intelligent field detection using AI
-- **Batch Import**: Process multiple leads simultaneously
-- **Duplicate Detection**: Automatic duplicate checking
-- **Validation**: Real-time field validation
+### 2. Lead Management
+- **CRUD Operations**: Full create, read, update, delete functionality
+- **Status Pipeline**: NEW → CONTACTED → QUALIFIED → PROPOSAL → NEGOTIATION → CLOSED
+- **Lead Scoring**: AI-powered scoring (0-100) with visual indicators
+- **Priority Levels**: LOW, MEDIUM, HIGH, URGENT
+- **Source Tracking**: MANUAL, WEB, FILE, IMPORT, API, REFERRAL, SOCIAL_MEDIA
 
-### 3. User Interface
+### 3. AI-Powered Features
+- **Lead Generation**: Describe target audience to generate qualified leads
+- **Lead Extraction**: Extract leads from raw text using AI
+- **Lead Scoring**: Automatic scoring based on lead quality
+- **Lead Enrichment**: AI-enhanced lead data with insights
+- **Bulk Analysis**: Process multiple leads simultaneously
+
+### 4. User Interface
+- **Lead Agent Prompt**: Full-screen AI interface for lead generation
 - **Data Table**: Advanced filtering, sorting, pagination
-- **Detail Sheets**: Slide-out panels for lead details
-- **Mobile Support**: Responsive card layout for mobile
-- **Dark Mode**: Full theme support
-- **RTL Support**: Arabic language support
+- **Analytics Dashboard**: Visual metrics and KPIs
+- **Featured View**: Showcase high-priority leads
+- **Detail Sheets**: Comprehensive lead information
+- **Responsive Design**: Mobile-optimized layouts
 
-### 4. Internationalization
-- **Languages**: English (en) and Arabic (ar)
-- **Dictionary-based**: All text from translation files
-- **RTL Layout**: Automatic direction switching
+## Server Actions (action.ts)
+
+### Core CRUD Operations
+```typescript
+createLead(input: CreateLeadInput)      // Create new lead
+updateLead(id: string, input: UpdateLeadInput)  // Update existing lead
+deleteLead(id: string)                  // Delete lead
+getLeads(filters?, page?, pageSize?)    // List with filtering
+getLeadById(id: string)                 // Get single lead
+```
+
+### Bulk Operations
+```typescript
+bulkUpdateLeads(input: BulkUpdateInput) // Update multiple leads
+```
+
+### AI Operations
+```typescript
+extractLeadsFromText(input: AIExtractionInput)  // Extract leads from text
+scoreLeads(leadIds: string[])                   // AI scoring
+enrichLead(leadId: string)                      // AI enrichment
+```
+
+### Analytics
+```typescript
+getLeadAnalytics()  // Dashboard metrics
+```
 
 ## Data Model
 
-### Lead Schema (Prisma)
-```prisma
-model Lead {
-  id                String    @id @default(cuid())
-  name              String
-  company           String?
-  email             String?
-  phone             String?
-  website           String?
-  description       String?
-  notes             String?
-  status            LeadStatus @default(NEW)
-  source            LeadSource @default(MANUAL)
-  priority          Priority   @default(MEDIUM)
-  score             Int?
-  tags              String[]
-  confidence        Float?     // AI extraction confidence
-  rawInput          String?    // Original import data
-  extractionMetadata Json?     // AI extraction details
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
-  lastContactedAt   DateTime?
-  nextFollowUp      DateTime?
-
-  // Relations
-  userId            String
-  user              User      @relation(fields: [userId], references: [id])
-  assignedTo        String?
-  assignedUser      User?     @relation("AssignedLeads", fields: [assignedTo], references: [id])
-  interactions      Interaction[]
-  history           LeadHistory[]
-
-  @@index([userId, status])
-  @@index([email])
+### Lead Schema
+```typescript
+interface Lead {
+  id: string
+  name: string
+  email?: string
+  company?: string
+  title?: string
+  phone?: string
+  linkedinUrl?: string
+  website?: string
+  industry?: string
+  status: LeadStatus
+  source: LeadSource
+  priority: Priority
+  score?: number
+  tags: string[]
+  notes?: string
+  confidence?: number
+  extractionMetadata?: Json
+  createdAt: Date
+  updatedAt: Date
+  userId: string
 }
 ```
 
-## Component APIs
+### Enums
+```typescript
+enum LeadStatus {
+  NEW, CONTACTED, QUALIFIED, PROPOSAL,
+  NEGOTIATION, CLOSED_WON, CLOSED_LOST
+}
 
-### Server Actions
+enum LeadSource {
+  MANUAL, WEB, FILE, IMPORT, API,
+  REFERRAL, SOCIAL_MEDIA, EMAIL_CAMPAIGN
+}
 
-#### `createLead(data: LeadCreateInput)`
-Creates a new lead with validation and duplicate checking.
-
-#### `updateLead(data: LeadUpdateInput)`
-Updates existing lead with audit trail.
-
-#### `deleteLead(id: string)`
-Soft deletes a lead with cascade handling.
-
-#### `listLeads(params: LeadSearchParams)`
-Lists leads with filtering, sorting, and pagination.
-
-#### `importLeads(data: BulkImportInput)`
-Bulk imports leads with AI extraction.
-
-### Client Components
-
-#### `LeadsTable`
-Main table component with advanced features.
-```tsx
-<LeadsTable
-  data={leads}
-  pagination={pagination}
-  dictionary={dictionary}
-/>
+enum Priority {
+  LOW, MEDIUM, HIGH, URGENT
+}
 ```
 
-#### `LeadForm`
-Comprehensive form for creating/editing leads.
+## Component Usage
+
+### Main Content Component
 ```tsx
-<LeadForm
-  form={form}
-  onSubmit={handleSubmit}
-  mode="create|edit"
-  dictionary={dictionary}
-/>
+import LeadsContent from "@/components/leads/content";
+
+// In page.tsx
+export default function Leads() {
+  return <LeadsContent />;
+}
 ```
 
-#### `PasteImport`
-AI-powered paste import interface.
+### Lead Agent Prompt Component
 ```tsx
-<PasteImport
-  onImport={handleImport}
-  dictionary={dictionary}
-/>
+import LeadsPrompt from "@/components/leads/prompt";
+
+// The prompt component is automatically rendered in LeadsContent
+// It provides:
+// - Full-screen hero section with Lead Agent branding
+// - AI-powered prompt input for lead generation
+// - File upload support (CSV/Excel)
+// - Smooth scroll navigation to leads table
+```
+
+### Using Server Actions
+```tsx
+import { createLead, getLeads } from "@/components/leads/action";
+
+// Create a lead
+const result = await createLead({
+  name: "John Doe",
+  email: "john@example.com",
+  company: "Acme Corp",
+  status: "NEW"
+});
+
+// Get leads with filters
+const leads = await getLeads(
+  { status: "NEW", scoreMin: 70 },
+  1,  // page
+  10  // pageSize
+);
+```
+
+### AI Features Usage
+```tsx
+import { extractLeadsFromText, scoreLeads } from "@/components/leads/action";
+
+// Extract leads from text
+const extraction = await extractLeadsFromText({
+  rawText: "Contact John Doe at john@example.com...",
+  source: "web",
+  options: { autoScore: true }
+});
+
+// Score multiple leads
+const scores = await scoreLeads(["lead-id-1", "lead-id-2"]);
+```
+
+## Validation Schemas
+
+The block uses Zod for comprehensive validation:
+
+```typescript
+// Create lead validation
+const createLeadSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email().optional(),
+  company: z.string().max(100).optional(),
+  // ... more fields
+});
+
+// Filter validation
+const leadFilterSchema = z.object({
+  search: z.string().optional(),
+  status: z.enum([...]).optional(),
+  scoreMin: z.number().min(0).max(100).optional(),
+  // ... more filters
+});
 ```
 
 ## State Management
 
-### Form State
-- React Hook Form for form management
-- Zod for validation
-- Optimistic updates with `useTransition`
-
-### Table State
-- TanStack Table for data grid
-- URL-based filtering/sorting
-- Server-side pagination
-
-### UI State
-- Sheets for detail views
-- Modals for forms
-- Toast notifications for feedback
+- **Server State**: Server actions with revalidation
+- **Form State**: React Hook Form with Zod resolvers
+- **UI State**: Local state for modals, sheets, filters
+- **Optimistic Updates**: Immediate UI feedback
 
 ## Performance Optimizations
 
 1. **Server Components**: Data fetching on server
-2. **Lazy Loading**: Dynamic imports for heavy components
-3. **Debouncing**: Search and filter inputs
-4. **Virtual Scrolling**: For large datasets
-5. **Optimistic Updates**: Immediate UI feedback
-6. **Caching**: Next.js cache with tags
+2. **Pagination**: Server-side pagination for large datasets
+3. **Caching**: Next.js cache with proper revalidation
+4. **Lazy Loading**: Dynamic imports for heavy components
+5. **Debouncing**: Search and filter inputs
 
 ## Security
 
-1. **Authentication**: Required for all operations
-2. **Authorization**: User-based data isolation
-3. **Validation**: Server-side schema validation
-4. **Sanitization**: Input cleaning for XSS prevention
-5. **Rate Limiting**: API endpoint protection
+1. **Authentication**: Required via `requireAuth()`
+2. **User Isolation**: Data scoped by userId
+3. **Input Validation**: Zod schemas on all inputs
+4. **Type Safety**: Full TypeScript coverage
+
+## Recent Changes
+
+### Latest Updates (Lead Agent Interface)
+- **NEW: Lead Agent Prompt**: Added full-screen hero section with AI prompt interface
+- **NEW: Vercel AI Elements**: Integrated prompt-input component following Vercel patterns
+- **NEW: Custom Icons**: Added PlusIcon, AttachIcon, VoiceIcon, SendUpIcon
+- **NEW: File Upload**: Support for CSV/Excel file processing
+- **ENHANCED: UI Flow**: Smooth navigation between prompt and leads table
+
+### Architecture Refactor
+- **Removed nested folders**: No more `ai/` or `clients/` subdirectories
+- **Flat structure**: All files now in `/components/leads/`
+- **Simplified imports**: Direct imports from leads folder
+- **Consolidated actions**: All server actions in single `action.ts`
+- **Standard page pattern**: Minimal page.tsx with metadata only
+
+### Migration Notes
+- Old path: `/components/leads/ai/action.ts` → New: `/components/leads/action.ts`
+- Old path: `/components/leads/clients/*` → Removed or merged
+- Page now uses standard pattern with `LeadsContent` component
+- Added `prompt.tsx` for AI Lead Agent interface
+- Added `prompt-input.tsx` and `icons.tsx` to `/components/atom/`
 
 ## Testing Checklist
 
-- [ ] Unit tests for validation schemas
-- [ ] Integration tests for server actions
-- [ ] Component tests for forms
-- [ ] E2E tests for critical flows
-- [ ] Accessibility testing
-- [ ] Performance testing
-- [ ] Security testing
+### Lead Agent Interface
+- [ ] Prompt input accepts text and files
+- [ ] File upload supports CSV/Excel formats
+- [ ] Submit button enables with content
+- [ ] Processing state shows visual feedback
+- [ ] Smooth scroll to leads table works
+- [ ] Voice button displays (future implementation)
 
-## Development Guidelines
-
-### Adding New Features
-1. Update TypeScript types in `types.ts`
-2. Add validation in `validation.ts`
-3. Create server action in `actions.ts`
-4. Update UI components
-5. Add translations to dictionaries
-6. Test thoroughly
-
-### Code Style
-- Use TypeScript strict mode
-- Follow ESLint configuration
-- Use Prettier for formatting
-- Write descriptive comments
-- Keep components small and focused
+### Core Functionality
+- [ ] Server action error handling
+- [ ] Form validation
+- [ ] AI extraction accuracy
+- [ ] Bulk operations
+- [ ] Filter combinations
+- [ ] Mobile responsiveness
+- [ ] RTL support
 
 ## Known Issues
-See [ISSUE.md](./ISSUE.md) for current issues and enhancement roadmap.
+See [ISSUE.md](./ISSUE.md) for current issues and roadmap.
 
 ## Future Enhancements
-- Email integration
-- Calendar sync
-- Advanced analytics
-- AI-powered insights
+- Email campaign integration
+- Advanced analytics dashboard
 - Workflow automation
-- Third-party integrations
+- CRM integrations (Salesforce, HubSpot)
+- Lead nurturing sequences

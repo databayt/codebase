@@ -9,7 +9,7 @@ import { z } from "zod";
 export async function GET(request: Request) {
   try {
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -110,7 +110,7 @@ const createLeadSchema = z.object({
 export async function POST(request: Request) {
   try {
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -120,7 +120,7 @@ export async function POST(request: Request) {
     const lead = await db.lead.create({
       data: {
         ...validatedData,
-        userId: user.id,
+        userId: user.id!,
         tags: validatedData.tags || [],
       },
       include: {
@@ -140,7 +140,7 @@ export async function POST(request: Request) {
         leadId: lead.id,
         action: "CREATE",
         changes: { created: true },
-        userId: user.id,
+        userId: user.id!,
       },
     });
 
@@ -148,7 +148,7 @@ export async function POST(request: Request) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Invalid request data", details: error.errors },
+        { error: "Invalid request data", details: error instanceof z.ZodError ? error.issues : error },
         { status: 400 }
       );
     }
@@ -164,7 +164,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -182,7 +182,7 @@ export async function DELETE(request: Request) {
     const leads = await db.lead.findMany({
       where: {
         id: { in: ids },
-        userId: user.id,
+        userId: user.id!,
       },
     });
 
@@ -197,7 +197,7 @@ export async function DELETE(request: Request) {
     await db.lead.deleteMany({
       where: {
         id: { in: ids },
-        userId: user.id,
+        userId: user.id!,
       },
     });
 

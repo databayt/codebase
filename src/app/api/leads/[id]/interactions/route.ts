@@ -6,24 +6,25 @@ import { db } from "@/lib/db";
 import { z } from "zod";
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // GET /api/leads/[id]/interactions - Get interactions for a lead
 export async function GET(request: Request, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Verify lead ownership
     const lead = await db.lead.findFirst({
       where: {
-        id: params.id,
-        userId: user.id,
+        id: id,
+        userId: user.id!,
       },
     });
 
@@ -33,7 +34,7 @@ export async function GET(request: Request, { params }: RouteParams) {
 
     const interactions = await db.interaction.findMany({
       where: {
-        leadId: params.id,
+        leadId: id,
       },
       orderBy: {
         createdAt: "desc",
@@ -69,16 +70,17 @@ const createInteractionSchema = z.object({
 
 export async function POST(request: Request, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Verify lead ownership
     const lead = await db.lead.findFirst({
       where: {
-        id: params.id,
-        userId: user.id,
+        id: id,
+        userId: user.id!,
       },
     });
 
@@ -92,8 +94,8 @@ export async function POST(request: Request, { params }: RouteParams) {
     const interaction = await db.interaction.create({
       data: {
         ...validatedData,
-        leadId: params.id,
-        userId: user.id,
+        leadId: id,
+        userId: user.id!,
       },
       include: {
         user: {
@@ -109,7 +111,7 @@ export async function POST(request: Request, { params }: RouteParams) {
     // Update lastContactedAt on the lead
     await db.lead.update({
       where: {
-        id: params.id,
+        id: id,
       },
       data: {
         lastContactedAt: new Date(),
@@ -119,7 +121,7 @@ export async function POST(request: Request, { params }: RouteParams) {
     // Create history entry
     await db.leadHistory.create({
       data: {
-        leadId: params.id,
+        leadId: id,
         action: "STATUS_CHANGE",
         changes: {
           interaction: {
@@ -127,7 +129,7 @@ export async function POST(request: Request, { params }: RouteParams) {
             subject: validatedData.subject,
           },
         },
-        userId: user.id,
+        userId: user.id!,
       },
     });
 
@@ -135,7 +137,7 @@ export async function POST(request: Request, { params }: RouteParams) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Invalid request data", details: error.errors },
+        { error: "Invalid request data", details: error instanceof z.ZodError ? error.issues : error },
         { status: 400 }
       );
     }

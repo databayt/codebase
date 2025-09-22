@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-01",
+  "description": "Landing page hero section with CTA and gradient background",
+  "type": "registry:template",
+  "dependencies": [],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "templates/hero-01/page.tsx",
+      "content": "import { Button } from \"@/registry/new-york/ui/button\"\nimport { ArrowRight, Sparkles } from \"lucide-react\"\n\nexport default function HeroTemplate() {\n  return (\n    <section className=\"relative isolate overflow-hidden bg-gradient-to-b from-blue-50 to-white\">\n      <div className=\"absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80\">\n        <div\n          className=\"relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]\"\n          style={{\n            clipPath:\n              \"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)\",\n          }}\n        />\n      </div>\n\n      <div className=\"mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8\">\n        <div className=\"mx-auto max-w-2xl text-center\">\n          <div className=\"mb-8 flex justify-center\">\n            <div className=\"relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20\">\n              <Sparkles className=\"inline h-4 w-4 mr-1\" />\n              Announcing our next round of funding.{\" \"}\n              <a href=\"#\" className=\"font-semibold text-blue-600\">\n                <span className=\"absolute inset-0\" aria-hidden=\"true\" />\n                Read more <span aria-hidden=\"true\">&rarr;</span>\n              </a>\n            </div>\n          </div>\n\n          <h1 className=\"text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl\">\n            Build Better Software\n            <span className=\"block text-blue-600\">Faster Than Ever</span>\n          </h1>\n\n          <p className=\"mt-6 text-lg leading-8 text-gray-600\">\n            Empower your development team with our comprehensive template system.\n            Create stunning, production-ready applications in minutes, not months.\n            Built on modern React patterns and best practices.\n          </p>\n\n          <div className=\"mt-10 flex items-center justify-center gap-x-6\">\n            <Button size=\"lg\" className=\"px-8\">\n              Get Started\n              <ArrowRight className=\"ml-2 h-4 w-4\" />\n            </Button>\n            <Button size=\"lg\" variant=\"outline\">\n              View Templates\n            </Button>\n          </div>\n\n          <div className=\"mt-16 grid grid-cols-3 gap-8 text-center\">\n            <div>\n              <div className=\"text-3xl font-bold text-gray-900\">50+</div>\n              <div className=\"mt-2 text-sm text-gray-600\">Templates</div>\n            </div>\n            <div>\n              <div className=\"text-3xl font-bold text-gray-900\">100K+</div>\n              <div className=\"mt-2 text-sm text-gray-600\">Downloads</div>\n            </div>\n            <div>\n              <div className=\"text-3xl font-bold text-gray-900\">5★</div>\n              <div className=\"mt-2 text-sm text-gray-600\">Rating</div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div className=\"absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]\">\n        <div\n          className=\"relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]\"\n          style={{\n            clipPath:\n              \"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)\",\n          }}\n        />\n      </div>\n    </section>\n  )\n}",
+      "type": "registry:page",
+      "target": "app/hero-01/page.tsx"
+    }
+  ],
+  "categories": [
+    "hero"
+  ],
+  "meta": {
+    "iframeHeight": "600px"
+  }
+}

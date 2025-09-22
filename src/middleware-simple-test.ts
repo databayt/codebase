@@ -17,7 +17,7 @@ export default function middleware(request: NextRequest) {
   console.log("🧪 [SimpleMiddleware] Host:", host)
 
   // Try to construct baseUrl the same way
-  let baseUrl: string
+  let baseUrl: string = ''
   try {
     if (host) {
       baseUrl = `${protocol}://${host}`

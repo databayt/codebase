@@ -174,7 +174,7 @@ Then authenticate with:
 
 ```markdown
 > @claude Review the feature requirements in Notion doc "Q1 Roadmap".
-  Use the architecture-advisor subagent to plan the implementation.
+  Use the architect subagent to plan the implementation.
   Check our current Vercel bundle size and suggest how to implement
   without significantly increasing it.
 ```

@@ -182,7 +182,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            Use architecture-advisor and nextjs-expert subagents to:
+            Use architect and nextjs-expert subagents to:
 
             1. Analyze feature requirements from latest issue
             2. Plan file structure in src/app/[lang]/

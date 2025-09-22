@@ -1,18 +1,11 @@
-import { Metadata } from "next";
-import { getDictionary } from "@/components/local/dictionaries";
-import LeadsClient from "./leads-client";
+import LeadsContent from "@/components/leads/content";
 
-export const metadata: Metadata = {
-  title: "Leads Management",
-  description: "Manage your leads and track interactions",
-};
+export const runtime = "nodejs";
 
-export default async function LeadsPage({
-  params,
-}: {
-  params: { lang: string };
-}) {
-  const dictionary = await getDictionary(params.lang);
+export const metadata = {
+  title: "Leads",
+}
 
-  return <LeadsClient lang={params.lang} dictionary={dictionary} />;
+export default function Leads() {
+  return <LeadsContent />;
 }

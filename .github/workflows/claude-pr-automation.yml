@@ -31,7 +31,7 @@ jobs:
           prompt: |
             Perform a comprehensive PR review using multiple specialized subagents:
 
-            ## 1. Architecture Review (architecture-advisor)
+            ## 1. Architecture Review (architect)
             - Verify file placement and structure
             - Check runtime strategy decisions
             - Validate component organization

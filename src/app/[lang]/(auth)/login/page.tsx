@@ -11,7 +11,7 @@ interface LoginPageProps {
 
 const LoginPage = async ({ params }: LoginPageProps) => {
   const resolvedParams = await params;
-  const dict = await getDictionary(resolvedParams.lang);
+  const dict = await getDictionary(resolvedParams.lang as "en" | "ar");
 
   return (
     <LoginForm dictionary={dict} />

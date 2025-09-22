@@ -1,4 +1,19 @@
-import { MainNavItem, SidebarNavItem } from "types/nav"
+// import { MainNavItem, SidebarNavItem } from "types/nav"
+
+interface MainNavItem {
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+}
+
+interface SidebarNavItem {
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+  items?: SidebarNavItem[];
+}
 
 export interface DocsConfig {
   mainNav: MainNavItem[]

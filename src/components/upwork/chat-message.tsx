@@ -11,8 +11,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { FilePreview } from "@/components/template/chatbot/file-preview"
-import { MarkdownRenderer } from "@/components/template/chatbot/markdown-rendrer"
+// import { FilePreview } from "@/components/template/chatbot/file-preview"
+// import { MarkdownRenderer } from "@/components/template/chatbot/markdown-rendrer"
 
 const chatBubbleVariants = cva(
   "group/message relative break-words rounded-lg p-3 text-sm sm:max-w-[70%]",
@@ -155,13 +155,13 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         {files ? (
           <div className="mb-1 flex flex-wrap gap-2">
             {files.map((file, index) => {
-              return <FilePreview file={file} key={index} />
+              return <div key={index}>File: {file.name}</div> // <FilePreview file={file} key={index} />
             })}
           </div>
         ) : null}
 
         <div className={cn(chatBubbleVariants({ isUser, animation }))}>
-          <MarkdownRenderer>{content}</MarkdownRenderer>
+          <div>{content}</div> {/* <MarkdownRenderer>{content}</MarkdownRenderer> */}
         </div>
 
         {showTimeStamp && createdAt ? (
@@ -191,7 +191,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
             key={`text-${index}`}
           >
             <div className={cn(chatBubbleVariants({ isUser, animation }))}>
-              <MarkdownRenderer>{part.text}</MarkdownRenderer>
+              <div>{part.text}</div> {/* <MarkdownRenderer>{part.text}</MarkdownRenderer> */}
               {actions ? (
                 <div className="absolute -bottom-4 right-2 flex space-x-1 rounded-lg border bg-background p-1 text-foreground opacity-0 transition-opacity group-hover/message:opacity-100">
                   {actions}

@@ -3,6 +3,7 @@
 
 import NextAuth from "next-auth"
 import type { NextAuthConfig } from "next-auth"
+import { UserRole } from "@prisma/client"
 
 // Basic config without database or bcrypt dependencies
 const authConfig: NextAuthConfig = {
@@ -30,7 +31,7 @@ const authConfig: NextAuthConfig = {
       }
 
       if (token.role && session.user) {
-        session.user.role = token.role as string
+        session.user.role = token.role as UserRole
       }
 
       return session

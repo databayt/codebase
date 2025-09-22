@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dashboard-01",
+  "description": "Analytics dashboard with sidebar navigation, data tables, and charts",
+  "type": "registry:template",
+  "dependencies": [
+    "@tanstack/react-table",
+    "recharts",
+    "date-fns"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "input",
+    "label",
+    "select",
+    "separator",
+    "sidebar",
+    "breadcrumb",
+    "dropdown-menu",
+    "avatar",
+    "badge",
+    "table",
+    "chart"
+  ],
+  "files": [],
+  "categories": [
+    "dashboard"
+  ],
+  "meta": {
+    "iframeHeight": "900px"
+  }
+}

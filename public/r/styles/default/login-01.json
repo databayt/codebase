@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login-01",
+  "description": "Modern login form with social authentication options",
+  "type": "registry:template",
+  "dependencies": [
+    "react-hook-form",
+    "zod",
+    "@hookform/resolvers"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "input",
+    "label",
+    "form",
+    "separator"
+  ],
+  "files": [],
+  "categories": [
+    "authentication",
+    "login"
+  ],
+  "meta": {
+    "iframeHeight": "600px"
+  }
+}

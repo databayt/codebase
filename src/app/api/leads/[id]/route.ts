@@ -6,23 +6,24 @@ import { db } from "@/lib/db";
 import { z } from "zod";
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // GET /api/leads/[id] - Get a single lead
 export async function GET(request: Request, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const lead = await db.lead.findFirst({
       where: {
-        id: params.id,
-        userId: user.id,
+        id: id,
+        userId: user.id!,
       },
       include: {
         assignedUser: {
@@ -101,8 +102,9 @@ const updateLeadSchema = z.object({
 
 export async function PATCH(request: Request, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -112,8 +114,8 @@ export async function PATCH(request: Request, { params }: RouteParams) {
     // Check if lead exists and user has access
     const existingLead = await db.lead.findFirst({
       where: {
-        id: params.id,
-        userId: user.id,
+        id: id,
+        userId: user.id!,
       },
     });
 
@@ -136,7 +138,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
     // Update the lead
     const updatedLead = await db.lead.update({
       where: {
-        id: params.id,
+        id: id,
       },
       data: {
         ...validatedData,
@@ -159,10 +161,10 @@ export async function PATCH(request: Request, { params }: RouteParams) {
     if (Object.keys(changes).length > 0) {
       await db.leadHistory.create({
         data: {
-          leadId: params.id,
+          leadId: id,
           action: "UPDATE",
           changes,
-          userId: user.id,
+          userId: user.id!,
         },
       });
     }
@@ -171,7 +173,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Invalid request data", details: error.errors },
+        { error: "Invalid request data", details: error instanceof z.ZodError ? error.issues : error },
         { status: 400 }
       );
     }
@@ -186,16 +188,17 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 // DELETE /api/leads/[id] - Delete a single lead
 export async function DELETE(request: Request, { params }: RouteParams) {
   try {
+    const { id } = await params;
     const user = await currentUser();
-    if (!user) {
+    if (!user || !user.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Check if lead exists and user has access
     const existingLead = await db.lead.findFirst({
       where: {
-        id: params.id,
-        userId: user.id,
+        id: id,
+        userId: user.id!,
       },
     });
 
@@ -206,7 +209,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
     // Delete the lead (cascade will handle related records)
     await db.lead.delete({
       where: {
-        id: params.id,
+        id: id,
       },
     });
 

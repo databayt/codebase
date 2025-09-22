@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  reactStrictMode: false, // Disable strict mode to prevent double rendering
 };
 
 const withMDX = createMDX({

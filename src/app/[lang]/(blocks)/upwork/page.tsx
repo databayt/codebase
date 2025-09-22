@@ -1,7 +1,11 @@
-"use client"
+import { UpworkContent } from "@/components/upwork/content";
 
-import UpworkBot from "@/components/upwork/bot"
+export const runtime = "nodejs";
 
-export default function UpworkAgentPage() {
-  return <UpworkBot />
-} 
+export const metadata = {
+  title: "Upwork",
+}
+
+export default function Upwork() {
+  return <UpworkContent />;
+}

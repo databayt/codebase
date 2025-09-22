@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { extractMultipleLeads, extractLeadFromText } from "@/lib/text-extraction";
+import { createLead } from "./action";
 
 interface DetectedField {
   name: string;
@@ -38,12 +39,12 @@ interface ImportProgress {
 }
 
 interface PasteImportInterfaceProps {
-  onImport: (data: any[]) => Promise<void>;
+  onImport?: (data: any[]) => Promise<void>;
+  onComplete?: () => void;
   className?: string;
-  dictionary: any;
 }
 
-export function PasteImportInterface({ onImport, className, dictionary }: PasteImportInterfaceProps) {
+export function PasteImportInterface({ onImport, onComplete, className }: PasteImportInterfaceProps) {
   const [rawData, setRawData] = useState("");
   const [detectedFields, setDetectedFields] = useState<DetectedField[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -56,7 +57,7 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
 
   // Detect fields from pasted data using advanced extraction
   const detectFields = useCallback((text: string) => {
-    setProgress({ current: 0, total: 100, status: "detecting", message: dictionary.leads.import.analyzingData });
+    setProgress({ current: 0, total: 100, status: "detecting", message: "Analyzing data..." });
 
     if (!text.trim()) return [];
 
@@ -115,7 +116,7 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
 
     setProgress({ current: 100, total: 100, status: "idle" });
     return fields;
-  }, [dictionary]);
+  }, []);
 
   // Handle paste event
   const handlePaste = useCallback((text: string) => {
@@ -127,10 +128,10 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
       // Basic validation
       const errors: string[] = [];
       if (fields.length === 0) {
-        errors.push(dictionary.leads.import.noPatterns);
+        errors.push("No recognizable patterns found");
       }
       if (!fields.find(f => f.type === "email" || f.type === "phone")) {
-        errors.push(dictionary.leads.import.noContact);
+        errors.push("No contact information detected");
       }
       setValidationErrors(errors);
     }
@@ -141,51 +142,67 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
     if (!rawData.trim() || validationErrors.length > 0) return;
 
     setIsProcessing(true);
-    setProgress({ current: 0, total: 100, status: "validating", message: dictionary.leads.import.validating });
+    setProgress({ current: 0, total: 100, status: "validating", message: "Validating data..." });
 
     try {
       // Simulate validation
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setProgress({ current: 30, total: 100, status: "validating", message: dictionary.leads.import.checkingDuplicates });
+      setProgress({ current: 30, total: 100, status: "validating", message: "Checking for duplicates..." });
 
       await new Promise(resolve => setTimeout(resolve, 1000));
-      setProgress({ current: 60, total: 100, status: "importing", message: dictionary.leads.import.importing });
+      setProgress({ current: 60, total: 100, status: "importing", message: "Importing leads..." });
 
       // Parse and prepare data for import using intelligent extraction
       const extractedLeads = extractMultipleLeads(rawData);
 
-      // Convert extracted leads to the format expected by the import function
-      const parsedData = extractedLeads.map((lead, index) => ({
-        id: `temp-${index}`,
-        raw: lead.rawInput,
-        extractedData: lead,
-        // For backwards compatibility, also provide basic fields array
-        fields: [
-          lead.name || '',
-          lead.company || '',
-          lead.email || '',
-          lead.phone || '',
-          lead.website || '',
-          lead.description || ''
-        ].filter(Boolean)
-      }));
+      // Import leads to database
+      let successCount = 0;
+      let errorCount = 0;
 
-      await onImport(parsedData);
+      for (const lead of extractedLeads) {
+        try {
+          const leadData = {
+            name: lead.name || 'Unknown',
+            email: lead.email || '',
+            company: lead.company || '',
+            phone: lead.phone || '',
+            website: lead.website || '',
+            notes: lead.description || '',
+            status: 'NEW' as const,
+            source: 'IMPORT' as const,
+            score: Math.floor(Math.random() * 30) + 70, // Random score 70-100
+          };
 
-      setProgress({ current: 100, total: 100, status: "complete", message: `${dictionary.leads.import.success} ${parsedData.length} ${dictionary.leads.import.leads}` });
+          const result = await createLead(leadData);
+          if (result.success) {
+            successCount++;
+          } else {
+            errorCount++;
+            console.error('Failed to create lead:', result.error);
+          }
+        } catch (error) {
+          errorCount++;
+          console.error('Error creating lead:', error);
+        }
+      }
+
+      setProgress({ current: 100, total: 100, status: "complete", message: `Successfully imported ${successCount} leads${errorCount > 0 ? ` (${errorCount} failed)` : ''}` });
 
       // Clear form after successful import
       setTimeout(() => {
         setRawData("");
         setDetectedFields([]);
         setProgress({ current: 0, total: 0, status: "idle" });
+        if (onComplete) {
+          onComplete();
+        }
       }, 3000);
     } catch (error) {
       setProgress({
         current: 0,
         total: 0,
         status: "error",
-        message: error instanceof Error ? error.message : dictionary.leads.import.failed
+        message: error instanceof Error ? error.message : "Import failed"
       });
     } finally {
       setIsProcessing(false);
@@ -213,21 +230,22 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <CardTitle>{dictionary.leads.import.title}</CardTitle>
+              <CardTitle>Import Leads</CardTitle>
               <CardDescription>
-                {dictionary.leads.import.description}
+                Paste or type contact information to automatically extract leads
               </CardDescription>
             </div>
             <Badge variant="outline" className="gap-1">
               <FileText className="h-3 w-3" />
-              {dictionary.leads.import.textImport}
+              Text Import
             </Badge>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative">
             <Textarea
-              placeholder={dictionary.leads.import.placeholder}
+              placeholder="Paste your text data here...
+Example: John Doe - CEO - john@example.com"
               value={rawData}
               onChange={(e) => handlePaste(e.target.value)}
               className="min-h-[200px] font-mono text-sm"
@@ -258,7 +276,7 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
               disabled={isProcessing}
             >
               <Copy className="mr-2 h-3 w-3" />
-              {dictionary.leads.import.useSample}
+              Use Sample Data
             </Button>
           </div>
 
@@ -268,7 +286,7 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-primary" />
-                  <CardTitle className="text-sm">{dictionary.leads.import.detectedFields}</CardTitle>
+                  <CardTitle className="text-sm">Detected Fields</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -313,7 +331,7 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
           {validationErrors.length > 0 && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>{dictionary.leads.import.validationIssues}</AlertTitle>
+              <AlertTitle>Validation Issues</AlertTitle>
               <AlertDescription>
                 <ul className="mt-2 list-inside list-disc text-sm">
                   {validationErrors.map((error, index) => (
@@ -347,7 +365,7 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
         </CardContent>
         <CardFooter className="flex justify-between">
           <p className="text-sm text-muted-foreground">
-            {rawData.trim().split('\n').filter(l => l.trim()).length} {dictionary.leads.import.linesDetected}
+            {rawData.trim().split('\n').filter(l => l.trim()).length} lines detected
           </p>
           <Button
             onClick={handleImport}
@@ -357,12 +375,12 @@ export function PasteImportInterface({ onImport, className, dictionary }: PasteI
             {isProcessing ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                {dictionary.leads.import.processing}
+                Processing...
               </>
             ) : (
               <>
                 <Upload className="h-4 w-4" />
-                {dictionary.leads.import.importButton}
+                Import Leads
                 <ArrowRight className="h-4 w-4" />
               </>
             )}

@@ -54,7 +54,7 @@ export async function GET(request: NextRequest, context?: any) {
   try {
     console.log("🔐 [OAuth GET] Processing GET request")
     const { GET: handler } = await getAuthHandlers(request)
-    const response = await handler(request, context)
+    const response = await handler(request)
     console.log("✅ [OAuth GET] Request completed successfully")
     return response
   } catch (error) {
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest, context?: any) {
   try {
     console.log("🔐 [OAuth POST] Processing POST request")
     const { POST: handler } = await getAuthHandlers(request)
-    const response = await handler(request, context)
+    const response = await handler(request)
     console.log("✅ [OAuth POST] Request completed successfully")
     return response
   } catch (error) {
