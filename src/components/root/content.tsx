@@ -2,7 +2,7 @@ import Hero from './hero';
 import RootTabs from './tabs';
 import type { getDictionary } from '@/components/local/dictionaries';
 import type { Locale } from '@/components/local/config';
-import {CardsDemo} from "@/components/template/cards";
+import {CardsDemo} from "@/components/root/cards";
 
 interface RootContentProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>;

@@ -45,7 +45,8 @@ function fixImport(content: string) {
   return content.replace(regex, replacement)
 }
 
-const REGISTRY_PATH = path.join(process.cwd(), "public/r")
+// Go up 4 levels from src/components/root/template/ to get to project root
+const REGISTRY_PATH = path.join(process.cwd(), "../../../..", "public/r")
 
 const REGISTRY_INDEX_WHITELIST: z.infer<typeof registryItemTypeSchema>[] = [
   "registry:ui",
@@ -332,6 +333,8 @@ async function buildStyles(registry: Registry) {
         continue
       }
 
+      console.log(`Processing ${item.name} (${item.type})`)
+
       let files
       if (item.files) {
         files = await Promise.all(
@@ -348,22 +351,28 @@ async function buildStyles(registry: Registry) {
 
             let content: string
             try {
-              // For templates, read from src/components/template/ instead of registry/
-              const isTemplate = item.type === "registry:template"
-              const basePath = isTemplate
-                ? path.join(process.cwd(), "src", "components")
-                : path.join(process.cwd(), "registry", style.name)
+              // Go up 4 levels from src/components/root/template/ to get to project root
+              const projectRoot = path.join(process.cwd(), "../../../..")
 
-              content = await fs.readFile(
-                path.join(basePath, file.path),
-                "utf8"
-              )
+              let basePath: string
+              if (item.type === "registry:template") {
+                basePath = path.join(projectRoot, "src", "components")
+              } else if (item.type === "registry:ui") {
+                // UI components are in src/components/ui
+                basePath = path.join(projectRoot, "src", "components")
+              } else {
+                basePath = path.join(process.cwd(), "registry", style.name)
+              }
+
+              const filePath = path.join(basePath, file.path)
+              content = await fs.readFile(filePath, "utf8")
 
               // Only fix imports for v0- templates.
               if (item.name.startsWith("v0-")) {
                 content = fixImport(content)
               }
             } catch (error) {
+              console.error(`Failed to read ${file.path}: ${error.message}`)
               return
             }
 
@@ -419,11 +428,15 @@ async function buildStyles(registry: Registry) {
       })
 
       if (payload.success) {
+        const jsonPath = path.join(targetPath, `${item.name}.json`)
+        console.log(`Writing ${item.name}.json to ${jsonPath}`)
         await fs.writeFile(
-          path.join(targetPath, `${item.name}.json`),
+          jsonPath,
           JSON.stringify(payload.data, null, 2),
           "utf8"
         )
+      } else {
+        console.error(`Failed to validate ${item.name}:`, payload.error)
       }
     }
   }

@@ -57,8 +57,9 @@ export const templates: TemplateItem[] = [
 ]
 
 export const FEATURED_TEMPLATES = [
-    "login-01",
     "hero-01",
-    "dashboard-01",
+    "login-01",
     "sidebar-01",
+    "header-01",
+    "footer-01",
 ]

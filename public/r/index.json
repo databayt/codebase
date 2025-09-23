@@ -1,0 +1,102 @@
+[
+  {
+    "name": "button",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/button.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "card",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/card.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "input",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/input.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "label",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/label.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "sidebar",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/sidebar.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "scroll-area",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/scroll-area.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "navigation-menu",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/navigation-menu.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "sheet",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/sheet.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "select",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/select.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "tabs",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/tabs.tsx",
+        "type": "registry:ui"
+      }
+    ]
+  }
+]

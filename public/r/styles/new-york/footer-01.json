@@ -1,0 +1,24 @@
+{
+  "name": "footer-01",
+  "type": "registry:template",
+  "description": "Simple footer with links and copyright.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "template/footer-01/page.tsx",
+      "content": "import FooterContent from \"./content\"\n\nexport default function FooterTemplate() {\n  return (\n    <div className=\"min-h-screen flex flex-col\">\n      <main className=\"flex-1 container mx-auto py-8\">\n        <h1 className=\"text-3xl font-bold mb-4\">Footer Template</h1>\n        <p className=\"text-muted-foreground mb-8\">\n          A simple footer component with links and copyright information.\n        </p>\n        <div className=\"h-64 bg-muted rounded-lg flex items-center justify-center\">\n          <p className=\"text-muted-foreground\">Page content goes here</p>\n        </div>\n      </main>\n      <FooterContent />\n    </div>\n  )\n}",
+      "type": "registry:page",
+      "target": "app/footer/page.tsx"
+    },
+    {
+      "path": "template/footer-01/content.tsx",
+      "content": "import { siteConfig } from \"@/config/site\"\r\nimport type { getDictionary } from \"@/components/local/dictionaries\"\r\n\r\ninterface SiteFooterProps {\r\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\r\n}\r\n\r\nexport function SiteFooter({ dictionary }: SiteFooterProps) {\r\n  return (\r\n    <footer className=\"border-grid border-t py-6 md:py-0\">\r\n      <div className=\"w-full\">\r\n        <div className=\"py-4 px-0 mx-0\">\r\n          <div className=\"text-balance text-center text-sm leading-loose text-muted-foreground md:text-left rtl:md:text-right px-0 mx-0\">\r\n            {dictionary?.footer?.inspiredBy || \"Inspired by\"}{\" \"}\r\n            <a\r\n              href=\"https://ui.shadcn.com\"\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"font-medium underline underline-offset-4\"\r\n            >\r\n              {dictionary?.footer?.shadcn || \"Shadcn\"}\r\n            </a>\r\n            . {dictionary?.footer?.poweredBy || \"Built by\"}{\" \"}\r\n            <a\r\n              href={siteConfig.links.twitter}\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"font-medium underline underline-offset-4\"\r\n            >\r\n              {dictionary?.footer?.databayt || \"Databayt\"}\r\n            </a>\r\n            . {dictionary?.footer?.sourceCode || \"The source code is available on\"}{\" \"}\r\n            <a\r\n              href={siteConfig.links.github}\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"font-medium underline underline-offset-4\"\r\n            >\r\n              {dictionary?.footer?.github || \"GitHub\"}\r\n            </a>\r\n            .\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </footer>\r\n  )\r\n}\r\n",
+      "type": "registry:component",
+      "target": "components/footer.tsx"
+    }
+  ],
+  "categories": [
+    "navigation",
+    "footer"
+  ]
+}
