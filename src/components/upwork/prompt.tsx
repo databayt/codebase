@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import AgentHeading from '@/components/atom/agent-heading';
+import { AIResponseDisplay } from '@/components/atom/ai-response-display';
 import {
   PromptInput,
   PromptInputActionAddAttachments,
@@ -24,11 +25,26 @@ import { PlusIcon, AttachIcon, VoiceIcon, SendUpIcon } from '@/components/atom/i
 export default function UpworkPrompt() {
   const [prompt, setPrompt] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [aiResponse, setAiResponse] = useState('');
+  const [aiReasoning, setAiReasoning] = useState('');
 
   const handleSubmit = async (message: PromptInputMessage) => {
     if (!message.text?.trim() && !message.files?.length) return;
 
+    // Hide agent heading and show AI response
+    setHasInteracted(true);
     setIsProcessing(true);
+
+    // Set reasoning for the AI process
+    setAiReasoning(`## Job Analysis Process
+
+1. **Requirements Extraction**: Identifying key skills and qualifications from job description
+2. **Proposal Generation**: Creating tailored proposal based on requirements
+3. **Rate Analysis**: Determining competitive pricing based on market rates
+4. **Compatibility Check**: Assessing match percentage with your profile
+5. **Strategy Optimization**: Suggesting improvements for winning the project`);
+
     try {
       // TODO: Implement AI job analysis logic here
       console.log('Processing upwork prompt:', message);
@@ -36,12 +52,57 @@ export default function UpworkPrompt() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
 
+      // Generate AI response
+      setAiResponse(`## Job Analysis Complete
+
+I've analyzed the job posting and prepared a winning strategy.
+
+### Key Requirements:
+- **Primary Skills**: React, Node.js, TypeScript
+- **Experience Level**: Intermediate (3-5 years)
+- **Project Duration**: 2-3 months
+- **Budget Range**: $30-50/hour
+
+### Match Score: 92%
+Your profile strongly aligns with this opportunity.
+
+### Recommended Proposal Opening:
+"Hi [Client Name], I noticed you're looking for a React developer with TypeScript expertise. Having built 15+ similar applications, I can deliver exactly what you need..."
+
+### Pricing Strategy:
+- **Suggested Rate**: $45/hour (competitive for this project)
+- **Estimated Total**: $14,400 (320 hours)
+- **Milestone 1**: $3,600 (design & setup)
+
+### Next Steps:
+- Customize the generated proposal below
+- Attach relevant portfolio samples
+- Submit within 2 hours for best visibility
+- Follow up after 24 hours if no response`);
+
       // Scroll to upwork content after processing
       document.getElementById('upwork-content')?.scrollIntoView({
         behavior: 'smooth'
       });
     } catch (error) {
       console.error('Error processing upwork prompt:', error);
+      setAiResponse(`## Analysis Failed
+
+Unable to analyze the job posting.
+
+### Error Details:
+${error instanceof Error ? error.message : 'Unknown error occurred'}
+
+### Troubleshooting:
+- Ensure the job description is complete
+- Check for proper formatting
+- Try copying directly from Upwork
+- Remove any special characters
+
+### Alternative Actions:
+- Manually enter key requirements
+- Upload job posting as a file
+- Use the template generator instead`);
     } finally {
       setIsProcessing(false);
       setPrompt('');
@@ -52,11 +113,25 @@ export default function UpworkPrompt() {
     <section className="h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/20">
       <div className="container max-w-4xl px-4">
         <div className="flex flex-col items-center text-center space-y-8">
-          <AgentHeading
-            title="Upwork Agent"
-            scrollTarget="upwork-content"
-            scrollText="explore job tools"
-          />
+          {!hasInteracted && (
+            <AgentHeading
+              title="Upwork Agent"
+              scrollTarget="upwork-content"
+              scrollText="explore job tools"
+            />
+          )}
+
+          {hasInteracted && (
+            <div className="w-full max-w-3xl">
+              <AIResponseDisplay
+                response={aiResponse}
+                reasoning={aiReasoning}
+                isStreaming={isProcessing}
+                showReasoning={!!aiReasoning}
+                className="mb-8"
+              />
+            </div>
+          )}
 
           <div className="w-full max-w-3xl relative">
             <PromptInput
@@ -110,10 +185,11 @@ export default function UpworkPrompt() {
                     <PromptInputSubmit
                       disabled={!prompt.trim() && !isProcessing}
                       status={isProcessing ? 'streaming' : 'ready'}
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground transition-opacity duration-150 ease-out disabled:cursor-not-allowed disabled:opacity-50"
-                      variant="ghost"
+                      className="h-8 w-8 rounded-full"
+                      variant="default"
+                      size="icon"
                     >
-                      <SendUpIcon className="shrink-0 h-6 w-6 text-background" />
+                      <SendUpIcon className="shrink-0 h-5 w-5" />
                     </PromptInputSubmit>
                   </div>
                 </div>

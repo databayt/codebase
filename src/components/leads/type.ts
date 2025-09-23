@@ -26,6 +26,7 @@ export interface Lead {
   userId: string;
   lastContactedAt?: Date;
   metadata?: Record<string, any>;
+  verified: boolean;
 }
 
 // Lead creation input

@@ -22,6 +22,7 @@ export default function TestImport() {
       status: 'NEW',
       source: 'MANUAL',
       score: 75,
+      tags: [],
     };
 
     addLog(`Creating lead: ${JSON.stringify(testLead)}`);

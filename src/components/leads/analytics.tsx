@@ -6,17 +6,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   TrendingUp,
   Users,
   Target,
   Award,
-  ArrowUp,
-  ArrowDown,
-  Minus,
 } from 'lucide-react';
 import { getLeadAnalytics } from './action';
 import { LEAD_STATUS, LEAD_SOURCE } from './constant';
@@ -25,7 +21,7 @@ interface AnalyticsProps {
   className?: string;
 }
 
-export function LeadAnalytics({ className }: AnalyticsProps) {
+export function LeadAnalytics({ className = '' }: AnalyticsProps) {
   const [analytics, setAnalytics] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -48,19 +44,17 @@ export function LeadAnalytics({ className }: AnalyticsProps) {
 
   if (isLoading) {
     return (
-      <div className={`grid gap-4 md:grid-cols-2 lg:grid-cols-4 ${className}`}>
+      <>
         {[...Array(4)].map((_, i) => (
-          <Card key={i}>
-            <CardHeader className="pb-2">
-              <Skeleton className="h-4 w-20" />
-            </CardHeader>
-            <CardContent>
+          <Card key={i} className="shadow-none h-fit">
+            <CardContent className="flex flex-col items-start p-2.5">
+              <Skeleton className="h-8 w-8 rounded-full mb-1.5" />
               <Skeleton className="h-8 w-16" />
-              <Skeleton className="h-3 w-24 mt-2" />
+              <Skeleton className="h-4 w-20" />
             </CardContent>
           </Card>
         ))}
-      </div>
+      </>
     );
   }
 
@@ -73,91 +67,47 @@ export function LeadAnalytics({ className }: AnalyticsProps) {
     ? Math.round((analytics.statusDistribution?.find((s: any) => s.status === 'CLOSED_WON')?._count || 0) / analytics.totalLeads * 100)
     : 0;
 
-  // Calculate week-over-week change (mock)
-  const weekChange = analytics.newLeadsThisWeek > 5 ? '+' : analytics.newLeadsThisWeek < 2 ? '-' : '';
-  const changePercent = Math.abs(analytics.newLeadsThisWeek > 0 ? Math.round((analytics.newLeadsThisWeek - 3) / 3 * 100) : 0);
-
   return (
-    <div className={`grid gap-4 md:grid-cols-2 lg:grid-cols-4 ${className}`}>
+    <>
       {/* Total Leads Card */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Leads</CardTitle>
-          <Users className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{analytics.totalLeads}</div>
-          <p className="text-xs text-muted-foreground mt-1">
-            All time leads in your pipeline
-          </p>
+      <Card className="shadow-none h-fit">
+        <CardContent className="flex flex-col items-start p-2.5">
+          <Users className="h-8 w-8 text-muted-foreground mb-1.5" />
+          <div className="text-3xl font-bold leading-tight">{analytics.totalLeads}</div>
+          <p className="text-sm text-muted-foreground">Total Leads</p>
         </CardContent>
       </Card>
 
       {/* New This Week Card */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">New This Week</CardTitle>
-          <TrendingUp className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{analytics.newLeadsThisWeek}</div>
-          <div className="flex items-center text-xs mt-1">
-            {weekChange === '+' && (
-              <>
-                <ArrowUp className="h-3 w-3 text-green-500 mr-1" />
-                <span className="text-green-500">+{changePercent}%</span>
-                <span className="text-muted-foreground ml-1">from last week</span>
-              </>
-            )}
-            {weekChange === '-' && (
-              <>
-                <ArrowDown className="h-3 w-3 text-red-500 mr-1" />
-                <span className="text-red-500">-{changePercent}%</span>
-                <span className="text-muted-foreground ml-1">from last week</span>
-              </>
-            )}
-            {weekChange === '' && (
-              <>
-                <Minus className="h-3 w-3 text-muted-foreground mr-1" />
-                <span className="text-muted-foreground">Same as last week</span>
-              </>
-            )}
-          </div>
+      <Card className="shadow-none h-fit">
+        <CardContent className="flex flex-col items-start p-2.5">
+          <TrendingUp className="h-8 w-8 text-muted-foreground mb-1.5" />
+          <div className="text-3xl font-bold leading-tight">{analytics.newLeadsThisWeek}</div>
+          <p className="text-sm text-muted-foreground">New This Week</p>
         </CardContent>
       </Card>
 
       {/* Conversion Rate Card */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
-          <Target className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{conversionRate}%</div>
-          <Progress value={conversionRate} className="h-1 mt-2" />
-          <p className="text-xs text-muted-foreground mt-1">
-            Leads converted to customers
-          </p>
+      <Card className="shadow-none h-fit">
+        <CardContent className="flex flex-col items-start p-2.5">
+          <Target className="h-8 w-8 text-muted-foreground mb-1.5" />
+          <div className="text-3xl font-bold leading-tight">{conversionRate}%</div>
+          <p className="text-sm text-muted-foreground">Conversion Rate</p>
         </CardContent>
       </Card>
 
       {/* Top Source Card */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Top Source</CardTitle>
-          <Award className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
+      <Card className="shadow-none h-fit">
+        <CardContent className="flex flex-col items-start p-2.5">
+          <Award className="h-8 w-8 text-muted-foreground mb-1.5" />
+          <div className="text-3xl font-bold leading-tight">
             {analytics.sourceDistribution?.[0]?.source
               ? LEAD_SOURCE[analytics.sourceDistribution[0].source as keyof typeof LEAD_SOURCE]
               : 'N/A'}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
-            {analytics.sourceDistribution?.[0]?._count || 0} leads from this source
-          </p>
+          <p className="text-sm text-muted-foreground">Top Source</p>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }

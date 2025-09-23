@@ -13,6 +13,9 @@ model Lead {
   description       String?   @db.Text
   notes             String?   @db.Text
 
+  // Verification status
+  verified          Boolean   @default(false)
+
   // Extraction metadata
   rawInput          String?   @db.Text
   extractionMetadata Json?    // {confidence, model, extractedAt, detectedPatterns}

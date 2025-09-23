@@ -5,7 +5,7 @@ export const Index: Record<string, any> = {
     "dashboard-01": {
       "name": "dashboard-01",
       "description": "Analytics dashboard with sidebar navigation, data tables, and charts",
-      // "component": React.lazy(() => import("@/registry/default/templates/dashboard-01/page")),
+      "component": React.lazy(() => import("@/registry/default/templates/dashboard-01/page")),
       "files": [
         "registry/default/templates/dashboard-01/page.tsx",
         "registry/default/templates/dashboard-01/components/header.tsx",
@@ -43,7 +43,7 @@ export const Index: Record<string, any> = {
     "sidebar-01": {
       "name": "sidebar-01",
       "description": "Collapsible sidebar with multi-level navigation and search",
-      // "component": React.lazy(() => import("@/registry/default/templates/sidebar-01/page")),
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-01/page")),
       "files": [
         "registry/default/templates/sidebar-01/page.tsx",
         "registry/default/templates/sidebar-01/components/app-sidebar.tsx",
@@ -71,7 +71,7 @@ export const Index: Record<string, any> = {
     "login-01": {
       "name": "login-01",
       "description": "Modern login form with social authentication options",
-      // "component": React.lazy(() => import("@/registry/default/templates/login-01/page")),
+      "component": React.lazy(() => import("@/registry/default/templates/login-01/page")),
       "files": [
         "registry/default/templates/login-01/page.tsx",
         "registry/default/templates/login-01/components/login-form.tsx"
@@ -158,7 +158,7 @@ export const Index: Record<string, any> = {
     "dashboard-01": {
       "name": "dashboard-01",
       "description": "Analytics dashboard with sidebar navigation, data tables, and charts",
-      // "component": React.lazy(() => import("@/registry/new-york/templates/dashboard-01/page")),
+      "component": React.lazy(() => import("@/registry/new-york/templates/dashboard-01/page")),
       "files": [
         "registry/new-york/templates/dashboard-01/page.tsx",
         "registry/new-york/templates/dashboard-01/components/header.tsx",
@@ -196,7 +196,7 @@ export const Index: Record<string, any> = {
     "sidebar-01": {
       "name": "sidebar-01",
       "description": "Collapsible sidebar with multi-level navigation and search",
-      // "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-01/page")),
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-01/page")),
       "files": [
         "registry/new-york/templates/sidebar-01/page.tsx",
         "registry/new-york/templates/sidebar-01/components/app-sidebar.tsx",
@@ -224,7 +224,7 @@ export const Index: Record<string, any> = {
     "login-01": {
       "name": "login-01",
       "description": "Modern login form with social authentication options",
-      // "component": React.lazy(() => import("@/registry/new-york/templates/login-01/page")),
+      "component": React.lazy(() => import("@/registry/new-york/templates/login-01/page")),
       "files": [
         "registry/new-york/templates/login-01/page.tsx",
         "registry/new-york/templates/login-01/components/login-form.tsx"

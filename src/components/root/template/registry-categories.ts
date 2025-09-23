@@ -64,4 +64,44 @@ export const registryCategories = [
     slug: "charts-tooltip",
     hidden: true,
   },
+  {
+    name: "Marketing",
+    slug: "marketing",
+    hidden: false,
+  },
+  {
+    name: "Landing",
+    slug: "landing",
+    hidden: false,
+  },
+  {
+    name: "Navigation",
+    slug: "navigation",
+    hidden: false,
+  },
+  {
+    name: "Header",
+    slug: "header",
+    hidden: false,
+  },
+  {
+    name: "Footer",
+    slug: "footer",
+    hidden: false,
+  },
+  {
+    name: "Documentation",
+    slug: "documentation",
+    hidden: false,
+  },
+  {
+    name: "Cards",
+    slug: "cards",
+    hidden: false,
+  },
+  {
+    name: "Components",
+    slug: "components",
+    hidden: false,
+  },
 ]

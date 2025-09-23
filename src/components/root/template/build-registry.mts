@@ -12,12 +12,12 @@ import {
 import { Project, ScriptKind } from "ts-morph"
 import { z } from "zod"
 
-import { registry } from "../registry"
-import { baseColors, baseColorsV4 } from "../registry/registry-base-colors"
-import { registryCategories } from "../registry/registry-categories"
-import { colorMapping, colors } from "../registry/registry-colors"
-import { iconLibraries, icons } from "../registry/registry-icons"
-import { styles } from "../registry/registry-styles"
+import { registry } from "./index"
+import { baseColors, baseColorsV4 } from "./registry-base-colors"
+import { registryCategories } from "./registry-categories"
+import { colorMapping, colors } from "./registry-colors"
+import { iconLibraries, icons } from "./registry-icons"
+import { styles } from "./registry-styles"
 
 // Define the fixImport function inline to avoid import issues
 function fixImport(content: string) {
@@ -139,8 +139,14 @@ export const Index: Record<string, any> = {
     // Build style index.
     for (const item of registry.items) {
       const resolveFiles = item.files?.map(
-        (file: string | { path: string; type?: string; target?: string }) =>
-          `registry/${style.name}/${typeof file === "string" ? file : file.path}`
+        (file: string | { path: string; type?: string; target?: string }) => {
+          const filePath = typeof file === "string" ? file : file.path
+          // For templates, use src/components path
+          if (item.type === "registry:template") {
+            return path.join("src", "components", filePath)
+          }
+          return `registry/${style.name}/${filePath}`
+        }
       )
       if (!resolveFiles) {
         continue
@@ -310,7 +316,7 @@ export const Index: Record<string, any> = {
 }
 
 // ----------------------------------------------------------------------------
-// Build registry/styles/[style]/[name].json.
+// Build registry/styles/[style]/[...categories].json.
 // ----------------------------------------------------------------------------
 async function buildStyles(registry: Registry) {
   for (const style of styles) {
@@ -342,8 +348,14 @@ async function buildStyles(registry: Registry) {
 
             let content: string
             try {
+              // For templates, read from src/components/template/ instead of registry/
+              const isTemplate = item.type === "registry:template"
+              const basePath = isTemplate
+                ? path.join(process.cwd(), "src", "components")
+                : path.join(process.cwd(), "registry", style.name)
+
               content = await fs.readFile(
-                path.join(process.cwd(), "registry", style.name, file.path),
+                path.join(basePath, file.path),
                 "utf8"
               )
 
@@ -428,7 +440,7 @@ async function buildStyles(registry: Registry) {
 }
 
 // ----------------------------------------------------------------------------
-// Build registry/styles/[name]/index.json.
+// Build registry/styles/[...categories]/index.json.
 // ----------------------------------------------------------------------------
 async function buildStylesIndex() {
   for (const style of styles) {
@@ -834,7 +846,8 @@ try {
 
   // Wrap in async IIFE
   (async () => {
-    await syncStyles()
+    // Skip syncStyles for templates since they're in src/components/template/
+    // await syncStyles()
     await buildRegistry(result.data as any)
     await buildStyles(result.data as any)
     await buildStylesIndex()

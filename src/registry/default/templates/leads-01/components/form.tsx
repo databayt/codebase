@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/registry/default/ui/button"
 import {
   Form,
   FormControl,
@@ -12,16 +12,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/registry/default/ui/form"
+import { Input } from "@/registry/default/ui/input"
+import { Textarea } from "@/registry/default/ui/textarea"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/registry/default/ui/select"
 
 const leadFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),

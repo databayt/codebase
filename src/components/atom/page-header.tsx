@@ -26,7 +26,7 @@ export function PageHeader({
   ...props
 }: PageHeaderProps) {
   return (
-    <section className={cn("border-grid border-b-[0.5px]", className)} {...props}>
+    <section className={cn(className)} {...props}>
       <div className="flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12">
         {announcement && (
           <div className={cn(announcementClassName)}>

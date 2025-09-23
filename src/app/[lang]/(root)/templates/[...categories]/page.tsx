@@ -1,23 +1,24 @@
 import { notFound } from "next/navigation"
-import { templates } from "@/registry/registry-templates"
+import { templates } from "@/components/root/template/registry-templates"
 import dynamic from "next/dynamic"
 import { type Locale } from "@/components/local/config"
 
 interface TemplatePageProps {
   params: Promise<{
-    name: string
+    categories: string[]
     lang: Locale
   }>
 }
 
 export function generateStaticParams() {
   return templates.map((template) => ({
-    name: template.name,
+    categories: [template.name],
   }))
 }
 
 export default async function TemplatePage({ params }: TemplatePageProps) {
-  const { name } = await params
+  const { categories } = await params
+  const name = categories?.[0]
   const template = templates.find((t) => t.name === name)
 
   if (!template) {
@@ -26,7 +27,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
 
   // Dynamically import the template component
   const TemplateComponent = dynamic(
-    () => import(`@/registry/new-york/templates/${template.name}/page`),
+    () => import(`@/components/template/${template.name}/page`),
     {
       loading: () => (
         <div className="flex h-[600px] items-center justify-center">
@@ -74,8 +75,8 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
         <div className="text-sm text-muted-foreground">
           <p>This template includes:</p>
           <ul className="list-disc list-inside mt-2 space-y-1">
-            {template.files.map((file) => (
-              <li key={file.path}>{file.path}</li>
+            {template.files?.map((file) => (
+              <li key={typeof file === 'string' ? file : file.path}>{typeof file === 'string' ? file : file.path}</li>
             ))}
           </ul>
         </div>

@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/default/ui/card"
 import { ArrowUpRight, ArrowDownRight } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/registry/default/lib/utils"
 
 interface LeadCardProps {
   title: string

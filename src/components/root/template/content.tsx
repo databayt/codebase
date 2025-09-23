@@ -1,6 +1,10 @@
 import Hero from './hero';
 import TemplateTabs from './tabs';
 import TemplatesPage from './all';
+import { FEATURED_TEMPLATES } from './config';
+import { TemplateDisplay } from './template-display';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import type { getDictionary } from '@/components/local/dictionaries';
 import type { Locale } from '@/components/local/config';
 
@@ -14,7 +18,24 @@ export default function TemplateContent({ dictionary, params }: TemplateContentP
         <>
             <Hero dictionary={dictionary} params={params} />
             <TemplateTabs dictionary={dictionary} />
-            <TemplatesPage />
+
+            <div>
+                {FEATURED_TEMPLATES.map((template) => (
+                    <div
+                        key={template}
+                        className="border-grid  border-b py-8 first:pt-10 -mr-3 last:border-b-0 md:py-12"
+                    >
+                        <TemplateDisplay name={template} />
+                    </div>
+                ))}
+                <div className="container-wrapper">
+                    <div className="container flex justify-center py-6">
+                        <Button asChild variant="outline">
+                            <Link href="/templates">Browse all templates</Link>
+                        </Button>
+                    </div>
+                </div>
+            </div>
 
         </>
     );

@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import AgentHeading from '@/components/atom/agent-heading';
+import { AIResponseDisplay } from '@/components/atom/ai-response-display';
 import {
   PromptInput,
   PromptInputActionAddAttachments,
@@ -24,11 +25,30 @@ import { PlusIcon, AttachIcon, VoiceIcon, SendUpIcon } from '@/components/atom/i
 export default function ScraperPrompt() {
   const [prompt, setPrompt] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [aiResponse, setAiResponse] = useState('');
+  const [aiReasoning, setAiReasoning] = useState('');
 
   const handleSubmit = async (message: PromptInputMessage) => {
     if (!message.text?.trim() && !message.files?.length) return;
 
+    // Hide agent heading and show AI response
+    setHasInteracted(true);
     setIsProcessing(true);
+
+    // Only set reasoning if we're using AI (text input for URLs)
+    if (message.text?.trim()) {
+      setAiReasoning(`## Web Scraping Process
+
+1. **URL Analysis**: Parsing and validating the provided URLs
+2. **Site Structure**: Analyzing website structure and identifying data patterns
+3. **Data Extraction**: Using intelligent selectors to extract relevant information
+4. **Data Cleaning**: Processing and formatting the extracted data
+5. **Quality Assurance**: Validating extracted data for completeness and accuracy`);
+    } else {
+      setAiReasoning(''); // No reasoning for file uploads
+    }
+
     try {
       // TODO: Implement AI scraping logic here
       console.log('Processing scraper prompt:', message);
@@ -36,12 +56,58 @@ export default function ScraperPrompt() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
 
+      // Generate AI response
+      setAiResponse(`## Scraping Results
+
+Successfully extracted data from the specified sources.
+
+### Extracted Data Summary:
+- **Total URLs Processed**: 5
+- **Successful Extractions**: 5
+- **Data Points Collected**: 247
+- **Average Response Time**: 1.2s
+
+### Sample Data:
+1. **Company Name**: Tech Innovations Inc.
+   - Contact: john.doe@techinnovations.com
+   - Phone: (555) 123-4567
+   - Website: techinnovations.com
+
+2. **Company Name**: Digital Solutions LLC
+   - Contact: sarah@digitalsolutions.io
+   - Phone: (555) 987-6543
+   - Website: digitalsolutions.io
+
+### Next Steps:
+- Review extracted data in the table below
+- Export data as CSV or JSON
+- Set up automated scraping schedule
+- Configure data validation rules`);
+
       // Scroll to scraper content after processing
       document.getElementById('scraper-content')?.scrollIntoView({
         behavior: 'smooth'
       });
     } catch (error) {
       console.error('Error processing scraper prompt:', error);
+      setAiResponse(`## Scraping Failed
+
+Unable to extract data from the provided sources.
+
+### Error Details:
+${error instanceof Error ? error.message : 'Unknown error occurred'}
+
+### Common Issues:
+- Website may have anti-scraping measures
+- Invalid or inaccessible URLs
+- Network connectivity issues
+- Rate limiting or IP blocking
+
+### Suggestions:
+- Verify all URLs are accessible
+- Try scraping fewer pages at once
+- Consider using proxy rotation
+- Check robots.txt compliance`);
     } finally {
       setIsProcessing(false);
       setPrompt('');
@@ -52,11 +118,25 @@ export default function ScraperPrompt() {
     <section className="h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/20">
       <div className="container max-w-4xl px-4">
         <div className="flex flex-col items-center text-center space-y-8">
-          <AgentHeading
-            title="Scraper Agent"
-            scrollTarget="scraper-content"
-            scrollText="explore scraper tools"
-          />
+          {!hasInteracted && (
+            <AgentHeading
+              title="Scraper Agent"
+              scrollTarget="scraper-content"
+              scrollText="explore scraper tools"
+            />
+          )}
+
+          {hasInteracted && (
+            <div className="w-full max-w-3xl">
+              <AIResponseDisplay
+                response={aiResponse}
+                reasoning={aiReasoning}
+                isStreaming={isProcessing}
+                showReasoning={!!aiReasoning}
+                className="mb-8"
+              />
+            </div>
+          )}
 
           <div className="w-full max-w-3xl relative">
             <PromptInput
@@ -110,10 +190,11 @@ export default function ScraperPrompt() {
                     <PromptInputSubmit
                       disabled={!prompt.trim() && !isProcessing}
                       status={isProcessing ? 'streaming' : 'ready'}
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground transition-opacity duration-150 ease-out disabled:cursor-not-allowed disabled:opacity-50"
-                      variant="ghost"
+                      className="h-8 w-8 rounded-full"
+                      variant="default"
+                      size="icon"
                     >
-                      <SendUpIcon className="shrink-0 h-6 w-6 text-background" />
+                      <SendUpIcon className="shrink-0 h-5 w-5" />
                     </PromptInputSubmit>
                   </div>
                 </div>

@@ -9,8 +9,12 @@ import { revalidatePath } from 'next/cache';
 import { currentUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { generateObject, generateText } from 'ai';
-import { selectProvider } from '@/lib/ai/providers';
+import { selectProvider, providers } from '@/lib/ai/providers';
 import { z } from 'zod';
+import { LeadStatus, LeadSource } from '@prisma/client';
+
+// Global action counter for tracking
+let actionCounter = 0;
 import {
   createLeadSchema,
   updateLeadSchema,
@@ -47,20 +51,50 @@ async function requireAuth() {
  * Create a new lead
  */
 export async function createLead(input: CreateLeadInput) {
-  console.log('=====================================');
-  console.log('🔧 SERVER: createLead called');
-  console.log('🔧 Input data:', JSON.stringify(input, null, 2));
+  const actionId = ++actionCounter;
+  const timestamp = new Date().toISOString();
+
+  console.log('\n🎆 ===== SERVER ACTION START =====');
+  console.log(`🆔 Action ID: ${actionId}`);
+  console.log(`⏰ Timestamp: ${timestamp}`);
+  console.log(`🔧 Action: createLead`);
+  console.log(`📥 Input received:`, {
+    name: input.name,
+    email: input.email,
+    company: input.company,
+    status: input.status,
+    source: input.source,
+    score: input.score,
+    hasNotes: !!input.notes,
+    tagsCount: input.tags?.length || 0
+  });
+  console.log(`📝 Full input data:`, JSON.stringify(input, null, 2));
 
   try {
+    console.log(`🔐 [${actionId}] Starting authentication...`);
     const user = await requireAuth();
-    console.log('🔧 SERVER: Auth user:', user.id, user.email);
+    console.log(`✅ [${actionId}] Auth successful:`, {
+      userId: user.id,
+      email: user.email,
+      name: user.name
+    });
 
+    console.log(`🧪 [${actionId}] Starting validation...`);
     const validated = createLeadSchema.parse(input);
-    console.log('🔧 SERVER: Validation passed');
-    console.log('🔧 SERVER: Validated data:', JSON.stringify(validated, null, 2));
+    console.log(`✅ [${actionId}] Validation passed`);
+    console.log(`📊 [${actionId}] Validated data:`, {
+      ...validated,
+      transformations: {
+        emailLowercased: input.email !== validated.email,
+        statusDefaulted: !input.status && validated.status === 'NEW',
+        sourceDefaulted: !input.source && validated.source === 'MANUAL',
+        scoreDefaulted: !input.score && validated.score === 50
+      }
+    });
 
     // Check for duplicates
     if (validated.email) {
+      console.log(`🔍 [${actionId}] Checking for duplicate email: ${validated.email}`);
       const existing = await db.lead.findFirst({
         where: {
           email: validated.email,
@@ -69,49 +103,93 @@ export async function createLead(input: CreateLeadInput) {
       });
 
       if (existing) {
-        console.log('⚠️ SERVER: Duplicate email found:', validated.email);
-        console.log('⚠️ SERVER: Existing lead ID:', existing.id);
+        console.log(`⚠️ [${actionId}] DUPLICATE FOUND!`);
+        console.log(`⚠️ [${actionId}] Existing lead:`, {
+          id: existing.id,
+          name: existing.name,
+          email: existing.email,
+          createdAt: existing.createdAt
+        });
+        console.log(`🎆 ===== SERVER ACTION END (DUPLICATE) =====\n`);
         return {
           success: false,
           error: 'A lead with this email already exists',
         };
+      } else {
+        console.log(`✅ [${actionId}] No duplicate found`);
       }
+    } else {
+      console.log(`ℹ️ [${actionId}] No email provided, skipping duplicate check`);
     }
 
     // Remove title field as it's not in the Prisma schema
     const { title, ...leadData } = validated;
+    console.log(`🗝️ [${actionId}] Removed 'title' field from data (not in schema)`);
 
     // The validation schema already provides uppercase enum keys
     // which match what Prisma expects
     const dbData = {
       ...leadData,
       userId: user.id,
+      status: leadData.status as LeadStatus,
+      source: leadData.source as LeadSource,
     };
 
-    console.log('💾 SERVER: Attempting database save...');
-    console.log('💾 SERVER: Database data:', JSON.stringify(dbData, null, 2));
+    console.log(`💾 [${actionId}] Preparing database save...`);
+    console.log(`💾 [${actionId}] Database payload:`, JSON.stringify(dbData, null, 2));
+    console.log(`💾 [${actionId}] Executing db.lead.create...`);
 
+    const startTime = Date.now();
     const lead = await db.lead.create({
       data: dbData,
     });
+    const dbTime = Date.now() - startTime;
 
-    console.log('✅ SERVER: Lead created successfully!');
-    console.log('✅ SERVER: New lead ID:', lead.id);
-    console.log('✅ SERVER: Lead details:', JSON.stringify(lead, null, 2));
+    console.log(`✅ [${actionId}] DATABASE SAVE SUCCESSFUL!`);
+    console.log(`⏱️ [${actionId}] Database operation time: ${dbTime}ms`);
+    console.log(`🆔 [${actionId}] New lead ID: ${lead.id}`);
+    console.log(`📄 [${actionId}] Created lead details:`, {
+      id: lead.id,
+      name: lead.name,
+      email: lead.email,
+      company: lead.company,
+      status: lead.status,
+      source: lead.source,
+      score: lead.score,
+      createdAt: lead.createdAt,
+      updatedAt: lead.updatedAt
+    });
 
+    console.log(`🔄 [${actionId}] Revalidating path: /[lang]/leads`);
     revalidatePath('/[lang]/leads');
-    console.log('🔄 SERVER: Path revalidated');
+    console.log(`✅ [${actionId}] Path revalidated successfully`);
+
+    const totalTime = Date.now() - new Date(timestamp).getTime();
+    console.log(`⏱️ [${actionId}] Total action time: ${totalTime}ms`);
+    console.log(`🎆 ===== SERVER ACTION END (SUCCESS) =====\n`);
 
     return {
       success: true,
       data: lead,
     };
   } catch (error) {
-    console.error('❌ SERVER: Create lead error!');
-    console.error('❌ SERVER: Error type:', error?.constructor?.name);
-    console.error('❌ SERVER: Error message:', error instanceof Error ? error.message : 'Unknown error');
-    console.error('❌ SERVER: Full error:', error);
-    console.log('=====================================');
+    const totalTime = Date.now() - new Date(timestamp).getTime();
+    console.error(`❌ [${actionId}] ERROR OCCURRED!`);
+    console.error(`❌ [${actionId}] Error type:`, error?.constructor?.name);
+    console.error(`❌ [${actionId}] Error message:`, error instanceof Error ? error.message : 'Unknown error');
+
+    if (error instanceof z.ZodError) {
+      console.error(`❌ [${actionId}] Validation errors:`, error.issues);
+    }
+
+    if (error && typeof error === 'object' && 'code' in error) {
+      console.error(`❌ [${actionId}] Error code:`, (error as any).code);
+    }
+
+    console.error(`❌ [${actionId}] Stack trace:`, error instanceof Error ? error.stack : 'No stack trace');
+    console.error(`⏱️ [${actionId}] Total action time before error: ${totalTime}ms`);
+    console.log(`🎆 ===== SERVER ACTION END (ERROR) =====\n`);
+
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to create lead',
@@ -141,7 +219,11 @@ export async function updateLead(id: string, input: UpdateLeadInput) {
 
     const lead = await db.lead.update({
       where: { id },
-      data: validated,
+      data: {
+        ...validated,
+        status: validated.status ? validated.status as LeadStatus : undefined,
+        source: validated.source ? validated.source as LeadSource : undefined,
+      },
     });
 
     revalidatePath('/[lang]/leads');
@@ -224,7 +306,10 @@ export async function bulkUpdateLeads(input: BulkUpdateInput) {
       where: {
         id: { in: validated.leadIds },
       },
-      data: validated.updates,
+      data: {
+        ...validated.updates,
+        status: validated.updates.status ? validated.updates.status as LeadStatus : undefined,
+      },
     });
 
     revalidatePath('/[lang]/leads');
@@ -356,20 +441,54 @@ export async function getLeads(
 export async function extractLeadsFromText(
   input: AIExtractionInput
 ): Promise<{ success: boolean; data?: AIExtractionResult; error?: string }> {
+  const actionId = ++actionCounter;
+  const timestamp = new Date().toISOString();
+
+  console.log('\n🤖 ===== AI EXTRACTION START =====');
+  console.log(`🆔 Action ID: ${actionId}`);
+  console.log(`⏰ Timestamp: ${timestamp}`);
+  console.log(`🔧 Action: extractLeadsFromText`);
+  console.log(`📥 Input received:`, {
+    textLength: input.rawText?.length || 0,
+    source: input.source,
+    model: input.model || 'groq',
+    options: input.options
+  });
+
   try {
+    console.log(`🔐 [${actionId}] Starting authentication...`);
     const user = await requireAuth();
+    console.log(`✅ [${actionId}] Auth successful: ${user.email}`);
+
+    console.log(`🧪 [${actionId}] Validating AI extraction input...`);
     const validated = aiExtractionInputSchema.parse(input);
+    console.log(`✅ [${actionId}] Validation passed`);
 
     // Check if AI keys are configured
-    if (!process.env.GROQ_API_KEY && !process.env.OPENAI_API_KEY && !process.env.ANTHROPIC_API_KEY) {
-      console.log('⚠️ AI extraction disabled - no API keys configured');
+    const hasGroq = !!process.env.GROQ_API_KEY;
+    const hasOpenAI = !!process.env.OPENAI_API_KEY;
+    const hasAnthropic = !!process.env.ANTHROPIC_API_KEY;
+
+    console.log(`🔑 [${actionId}] AI API Keys status:`, {
+      groq: hasGroq,
+      openai: hasOpenAI,
+      anthropic: hasAnthropic,
+      anyAvailable: hasGroq || hasOpenAI || hasAnthropic
+    });
+
+    if (!hasGroq && !hasOpenAI && !hasAnthropic) {
+      console.log(`⚠️ [${actionId}] AI extraction disabled - no API keys configured`);
+      console.log(`📝 [${actionId}] Falling back to pattern-based extraction`);
 
       // Parse text to extract basic lead info (simple extraction without AI)
       const lines = validated.rawText.split('\n');
+      console.log(`📄 [${actionId}] Processing ${lines.length} lines of text`);
       const extractedLeads: any[] = [];
 
       // Simple pattern matching for emails and names
-      for (const line of lines) {
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        console.log(`🔍 [${actionId}] Scanning line ${i + 1}: "${line.substring(0, 50)}${line.length > 50 ? '...' : ''}"`);
         const emailMatch = line.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
         if (emailMatch) {
           // Extract name before email if possible
@@ -400,7 +519,27 @@ export async function extractLeadsFromText(
 
       // Save extracted leads if auto-save is enabled
       let createdCount = 0;
+      let duplicateCount = 0;
+      const duplicateEmails: string[] = [];
+      const createdLeads: any[] = [];
+
       if (validated.options?.autoScore) {
+        // Check for existing leads first
+        const emailsToCheck = extractedLeads
+          .filter(l => l.email && !l.email.includes('example.com'))
+          .map(l => l.email.toLowerCase());
+
+        const existingLeads = emailsToCheck.length > 0 ? await db.lead.findMany({
+          where: {
+            userId: user.id,
+            email: { in: emailsToCheck }
+          },
+          select: { email: true, name: true, id: true }
+        }) : [];
+
+        const existingEmails = new Set(existingLeads.map(l => l.email?.toLowerCase()));
+        console.log(`🔍 Found ${existingLeads.length} existing leads with matching emails`);
+
         const sourceMap: Record<string, string> = {
           'manual': 'MANUAL',
           'web': 'WEBSITE',
@@ -409,6 +548,15 @@ export async function extractLeadsFromText(
         };
 
         for (const lead of extractedLeads) {
+          const normalizedEmail = lead.email?.toLowerCase();
+
+          if (normalizedEmail && existingEmails.has(normalizedEmail)) {
+            duplicateCount++;
+            duplicateEmails.push(normalizedEmail);
+            console.log(`⚠️ Duplicate lead skipped: ${lead.name} (${normalizedEmail})`);
+            continue;
+          }
+
           console.log(`📝 Creating lead from text: ${lead.name}`);
           const createResult = await createLead({
             ...lead,
@@ -418,6 +566,7 @@ export async function extractLeadsFromText(
           });
           if (createResult.success) {
             createdCount++;
+            createdLeads.push(createResult.data);
             console.log(`✅ Lead created: ${createResult.data?.id}`);
           }
         }
@@ -428,16 +577,38 @@ export async function extractLeadsFromText(
         data: {
           leads: extractedLeads,
           created: createdCount,
+          duplicates: duplicateCount,
+          duplicateEmails,
+          createdLeads,
           metadata: {
             model: 'simple-extraction',
             processingTime: 50,
             tokensUsed: 0,
           },
+          feedbackMessage: duplicateCount > 0
+              ? `Found ${duplicateCount} duplicate lead(s) that were skipped. Created ${createdCount} new lead(s).`
+              : `Successfully extracted and created ${createdCount} new lead(s).`,
         },
       };
     }
 
-    const model = selectProvider('extraction', 'cost');
+    // Select model based on user preference
+    let model;
+    const selectedModel = validated.model || 'groq';
+
+    console.log(`🤖 [${actionId}] Using AI model: ${selectedModel}`);
+
+    if (selectedModel === 'claude') {
+      model = providers.anthropic.balanced; // Claude 3.5 Sonnet
+      console.log(`🤖 [${actionId}] Selected: Claude 3.5 Sonnet (Quality)`);
+    } else if (selectedModel === 'openai') {
+      model = providers.openai.fast; // GPT-4o-mini
+      console.log(`🤖 [${actionId}] Selected: GPT-4o-mini (Balanced)`);
+    } else {
+      // Default to Groq for speed and cost
+      model = providers.groq.balanced; // Groq with JSON support
+      console.log(`🤖 [${actionId}] Selected: Groq Llama (Fast & Free)`);
+    }
 
     const LeadExtractionSchema = z.object({
       leads: z.array(z.object({
@@ -479,8 +650,37 @@ export async function extractLeadsFromText(
 
     // Save extracted leads if auto-save is enabled
     let createdCount = 0;
+    let duplicateCount = 0;
+    const duplicateEmails: string[] = [];
+    const createdLeads: any[] = [];
+
     if (validated.options?.autoScore) {
+      // Check for existing leads first
+      const existingLeads = await db.lead.findMany({
+        where: {
+          userId: user.id,
+          email: {
+            in: result.object.leads
+              .filter(l => l.email)
+              .map(l => l.email!.toLowerCase())
+          }
+        },
+        select: { email: true, name: true, id: true }
+      });
+
+      const existingEmails = new Set(existingLeads.map(l => l.email?.toLowerCase()));
+      console.log(`🔍 Found ${existingLeads.length} existing leads with matching emails`);
+
       for (const lead of result.object.leads) {
+        const normalizedEmail = lead.email?.toLowerCase();
+
+        if (normalizedEmail && existingEmails.has(normalizedEmail)) {
+          duplicateCount++;
+          duplicateEmails.push(normalizedEmail);
+          console.log(`⚠️ Duplicate lead skipped: ${lead.name} (${normalizedEmail})`);
+          continue;
+        }
+
         console.log(`🤖 AI creating lead: ${lead.name}`);
         // Map lowercase source to uppercase for database
         const sourceMap: Record<string, string> = {
@@ -497,6 +697,7 @@ export async function extractLeadsFromText(
         });
         if (createResult.success) {
           createdCount++;
+          createdLeads.push(createResult.data);
           console.log(`✅ AI lead created: ${createResult.data?.id}`);
         } else {
           console.error(`❌ Failed to create AI lead: ${lead.name}`, createResult.error);
@@ -509,11 +710,17 @@ export async function extractLeadsFromText(
       data: {
         leads: result.object.leads,
         created: createdCount,
+        duplicates: duplicateCount,
+        duplicateEmails,
+        createdLeads,
         metadata: {
           model: model.modelId,
           processingTime,
           tokensUsed: 0, // Would need actual token count from model
         },
+        feedbackMessage: duplicateCount > 0
+            ? `Found ${duplicateCount} duplicate lead(s) that were skipped. Created ${createdCount} new lead(s).`
+            : `Successfully created ${createdCount} new lead(s).`,
       },
     };
   } catch (error) {

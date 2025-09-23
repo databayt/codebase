@@ -55,3 +55,10 @@ export const templates: TemplateItem[] = [
     href: "https://template.databayt.org/saas-landing",
   },
 ]
+
+export const FEATURED_TEMPLATES = [
+    "login-01",
+    "hero-01",
+    "dashboard-01",
+    "sidebar-01",
+]

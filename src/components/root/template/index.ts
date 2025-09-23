@@ -25,3 +25,16 @@ export const registry = {
     ...examples,
   ],
 }
+
+// Export individual registry modules
+export { templates } from "./registry-templates"
+export {
+  Registry,
+  RegistryEntry,
+  registrySchema,
+  registryEntrySchema,
+  registryItemSchema,
+  registryItemFileSchema,
+  registryItemTypeSchema,
+  registryItemCssVarsSchema,
+} from "./registry"

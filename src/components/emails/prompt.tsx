@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import AgentHeading from '@/components/atom/agent-heading';
+import { AIResponseDisplay } from '@/components/atom/ai-response-display';
 import {
   PromptInput,
   PromptInputActionAddAttachments,
@@ -24,11 +25,30 @@ import { PlusIcon, AttachIcon, VoiceIcon, SendUpIcon } from '@/components/atom/i
 export default function EmailsPrompt() {
   const [prompt, setPrompt] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [aiResponse, setAiResponse] = useState('');
+  const [aiReasoning, setAiReasoning] = useState('');
 
   const handleSubmit = async (message: PromptInputMessage) => {
     if (!message.text?.trim() && !message.files?.length) return;
 
+    // Hide agent heading and show AI response
+    setHasInteracted(true);
     setIsProcessing(true);
+
+    // Only set reasoning if we're using AI (text input)
+    if (message.text?.trim()) {
+      setAiReasoning(`## Email Generation Process
+
+1. **Understanding Context**: Analyzing your requirements for email campaigns
+2. **Template Selection**: Identifying the best template structure for your needs
+3. **Content Generation**: Creating personalized email content using AI
+4. **Optimization**: Enhancing subject lines and CTAs for better engagement
+5. **Validation**: Ensuring email follows best practices and deliverability standards`);
+    } else {
+      setAiReasoning(''); // No reasoning for file uploads
+    }
+
     try {
       // TODO: Implement AI email generation logic here
       console.log('Processing emails prompt:', message);
@@ -36,12 +56,44 @@ export default function EmailsPrompt() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
 
+      // Generate AI response
+      setAiResponse(`## Email Campaign Generated
+
+Successfully created email templates based on your requirements.
+
+### Generated Templates:
+1. **Welcome Series** - 5-email automated sequence for new subscribers
+2. **Product Launch** - High-converting announcement template
+3. **Follow-up Sequence** - 3-email nurture campaign
+
+### Subject Lines Generated:
+- "Welcome to [Company] - Your Journey Starts Here"
+- "Exclusive Launch: Be the First to Experience [Product]"
+- "Quick Question About Your Recent Interest"
+
+### Next Steps:
+- Review generated templates in the Templates tab
+- Customize content to match your brand voice
+- Schedule campaign deployment
+- Set up A/B testing for optimization`);
+
       // Scroll to emails content after processing
       document.getElementById('emails-content')?.scrollIntoView({
         behavior: 'smooth'
       });
     } catch (error) {
       console.error('Error processing emails prompt:', error);
+      setAiResponse(`## Generation Failed
+
+Unable to generate email templates.
+
+### Error Details:
+${error instanceof Error ? error.message : 'Unknown error occurred'}
+
+### Suggestions:
+- Provide more specific requirements
+- Check your prompt for clarity
+- Try generating one template at a time`);
     } finally {
       setIsProcessing(false);
       setPrompt('');
@@ -52,11 +104,25 @@ export default function EmailsPrompt() {
     <section className="h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/20">
       <div className="container max-w-4xl px-4">
         <div className="flex flex-col items-center text-center space-y-8">
-          <AgentHeading
-            title="Email Agent"
-            scrollTarget="emails-content"
-            scrollText="explore email tools"
-          />
+          {!hasInteracted && (
+            <AgentHeading
+              title="Email Agent"
+              scrollTarget="emails-content"
+              scrollText="explore email tools"
+            />
+          )}
+
+          {hasInteracted && (
+            <div className="w-full max-w-3xl">
+              <AIResponseDisplay
+                response={aiResponse}
+                reasoning={aiReasoning}
+                isStreaming={isProcessing}
+                showReasoning={!!aiReasoning}
+                className="mb-8"
+              />
+            </div>
+          )}
 
           <div className="w-full max-w-3xl relative">
             <PromptInput
@@ -110,10 +176,11 @@ export default function EmailsPrompt() {
                     <PromptInputSubmit
                       disabled={!prompt.trim() && !isProcessing}
                       status={isProcessing ? 'streaming' : 'ready'}
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground transition-opacity duration-150 ease-out disabled:cursor-not-allowed disabled:opacity-50"
-                      variant="ghost"
+                      className="h-8 w-8 rounded-full"
+                      variant="default"
+                      size="icon"
                     >
-                      <SendUpIcon className="shrink-0 h-6 w-6 text-background" />
+                      <SendUpIcon className="shrink-0 h-5 w-5" />
                     </PromptInputSubmit>
                   </div>
                 </div>

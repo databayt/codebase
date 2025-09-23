@@ -11,6 +11,7 @@
 @import "../styles/gradient-animation.css";
 @import "../styles/marquee.css";
 @import "../styles/text.css";
+@source "../node_modules/streamdown/dist/index.js";
 
 @keyframes blink {
   0%, 50% { opacity: 1; }

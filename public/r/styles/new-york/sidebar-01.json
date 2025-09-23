@@ -14,7 +14,14 @@
     "avatar",
     "collapsible"
   ],
-  "files": [],
+  "files": [
+    {
+      "path": "templates/sidebar-01/page.tsx",
+      "content": "\"use client\"\n\nexport default function SidebarPage() {\n  return (\n    <div className=\"flex h-screen\">\n      <div className=\"w-64 border-r bg-background\">\n        <div className=\"p-6\">\n          <h2 className=\"text-lg font-semibold\">Sidebar Navigation</h2>\n        </div>\n        <nav className=\"space-y-1 p-2\">\n          <a className=\"flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground\">\n            Dashboard\n          </a>\n          <a className=\"flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground\">\n            Analytics\n          </a>\n          <a className=\"flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground\">\n            Reports\n          </a>\n          <a className=\"flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground\">\n            Settings\n          </a>\n        </nav>\n      </div>\n      <div className=\"flex-1 p-6\">\n        <h1 className=\"text-2xl font-bold\">Main Content Area</h1>\n        <p className=\"text-muted-foreground mt-2\">\n          This is a sidebar navigation template with collapsible menu items.\n        </p>\n      </div>\n    </div>\n  )\n}",
+      "type": "registry:page",
+      "target": "app/sidebar-01/page.tsx"
+    }
+  ],
   "categories": [
     "sidebar"
   ],

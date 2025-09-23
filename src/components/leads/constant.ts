@@ -17,10 +17,10 @@ export const LEAD_STATUS = {
 
 // Lead source options (matching Prisma enum)
 export const LEAD_SOURCE = {
-  MANUAL: 'MANUAL',
-  IMPORT: 'IMPORT',
+  MANUAL: 'MAN',
+  IMPORT: 'AUTO',
   API: 'API',
-  WEBSITE: 'WEBSITE',
+  WEBSITE: 'WEB',
   REFERRAL: 'REFERRAL',
   SOCIAL_MEDIA: 'SOCIAL_MEDIA',
   EMAIL_CAMPAIGN: 'EMAIL_CAMPAIGN',

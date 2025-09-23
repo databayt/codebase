@@ -55,16 +55,32 @@ export function PasteImportInterface({ onImport, onComplete, className }: PasteI
     status: "idle"
   });
 
+  console.log('🎯 [PasteImportInterface] Component rendered with state:', {
+    rawDataLength: rawData.length,
+    detectedFieldsCount: detectedFields.length,
+    isProcessing,
+    hasValidationErrors: validationErrors.length > 0,
+    progressStatus: progress.status
+  });
+
   // Detect fields from pasted data using advanced extraction
   const detectFields = useCallback((text: string) => {
+    console.log('🔍 [PasteImportInterface.detectFields] Starting field detection');
+    console.log('🔍 [PasteImportInterface.detectFields] Text length:', text.length);
+
     setProgress({ current: 0, total: 100, status: "detecting", message: "Analyzing data..." });
 
-    if (!text.trim()) return [];
+    if (!text.trim()) {
+      console.log('⚠️ [PasteImportInterface.detectFields] Empty text, returning empty fields');
+      return [];
+    }
 
     const fields: DetectedField[] = [];
 
     // Try to extract a sample lead to see what fields are available
+    console.log('🧪 [PasteImportInterface.detectFields] Extracting sample lead from text');
     const sampleLead = extractLeadFromText(text);
+    console.log('🧪 [PasteImportInterface.detectFields] Sample lead extracted:', sampleLead);
 
     // Build detected fields based on what was found
     if (sampleLead.email) {
@@ -104,7 +120,10 @@ export function PasteImportInterface({ onImport, onComplete, className }: PasteI
     }
 
     // Check if we can extract multiple leads
+    console.log('📋 [PasteImportInterface.detectFields] Checking for multiple leads');
     const multipleLeads = extractMultipleLeads(text);
+    console.log('📋 [PasteImportInterface.detectFields] Found', multipleLeads.length, 'leads');
+
     if (multipleLeads.length > 1) {
       fields.push({
         name: "Multiple Entries",
@@ -114,18 +133,27 @@ export function PasteImportInterface({ onImport, onComplete, className }: PasteI
       });
     }
 
+    console.log('✅ [PasteImportInterface.detectFields] Field detection complete:', {
+      fieldsCount: fields.length,
+      fields: fields.map(f => ({ name: f.name, type: f.type, confidence: f.confidence }))
+    });
+
     setProgress({ current: 100, total: 100, status: "idle" });
     return fields;
   }, []);
 
   // Handle paste event
   const handlePaste = useCallback((text: string) => {
+    console.log('📋 [PasteImportInterface.handlePaste] Handling paste/input event');
+    console.log('📋 [PasteImportInterface.handlePaste] Text length:', text.length);
+
     setRawData(text);
     if (text.trim()) {
       const fields = detectFields(text);
       setDetectedFields(fields);
 
       // Basic validation
+      console.log('✔️ [PasteImportInterface.handlePaste] Running validation');
       const errors: string[] = [];
       if (fields.length === 0) {
         errors.push("No recognizable patterns found");
@@ -133,33 +161,60 @@ export function PasteImportInterface({ onImport, onComplete, className }: PasteI
       if (!fields.find(f => f.type === "email" || f.type === "phone")) {
         errors.push("No contact information detected");
       }
+
+      console.log('✔️ [PasteImportInterface.handlePaste] Validation result:', {
+        errorsCount: errors.length,
+        errors: errors
+      });
+
       setValidationErrors(errors);
     }
   }, [detectFields]);
 
   // Process and import data
   const handleImport = useCallback(async () => {
-    if (!rawData.trim() || validationErrors.length > 0) return;
+    console.log('🚀 [PasteImportInterface.handleImport] Starting import process');
+    console.log('🚀 [PasteImportInterface.handleImport] Pre-conditions:', {
+      rawDataLength: rawData.length,
+      hasValidationErrors: validationErrors.length > 0,
+      validationErrors: validationErrors
+    });
+
+    if (!rawData.trim() || validationErrors.length > 0) {
+      console.log('⚠️ [PasteImportInterface.handleImport] Aborting: empty data or validation errors');
+      return;
+    }
 
     setIsProcessing(true);
     setProgress({ current: 0, total: 100, status: "validating", message: "Validating data..." });
+    console.log('🔄 [PasteImportInterface.handleImport] Processing started');
 
     try {
       // Simulate validation
+      console.log('⏳ [PasteImportInterface.handleImport] Simulating validation...');
       await new Promise(resolve => setTimeout(resolve, 1000));
       setProgress({ current: 30, total: 100, status: "validating", message: "Checking for duplicates..." });
 
+      console.log('⏳ [PasteImportInterface.handleImport] Checking for duplicates...');
       await new Promise(resolve => setTimeout(resolve, 1000));
       setProgress({ current: 60, total: 100, status: "importing", message: "Importing leads..." });
+      console.log('📥 [PasteImportInterface.handleImport] Starting lead import...');
 
       // Parse and prepare data for import using intelligent extraction
+      console.log('🧪 [PasteImportInterface.handleImport] Extracting leads from raw data');
       const extractedLeads = extractMultipleLeads(rawData);
+      console.log('🧪 [PasteImportInterface.handleImport] Extracted', extractedLeads.length, 'leads:',
+        extractedLeads.map(l => ({ name: l.name, email: l.email, company: l.company })));
 
       // Import leads to database
       let successCount = 0;
       let errorCount = 0;
+      console.log('💾 [PasteImportInterface.handleImport] Starting database import for', extractedLeads.length, 'leads');
 
-      for (const lead of extractedLeads) {
+      for (let i = 0; i < extractedLeads.length; i++) {
+        const lead = extractedLeads[i];
+        console.log(`💾 [PasteImportInterface.handleImport] Processing lead ${i + 1}/${extractedLeads.length}`);
+
         try {
           const leadData = {
             name: lead.name || 'Unknown',
@@ -173,31 +228,62 @@ export function PasteImportInterface({ onImport, onComplete, className }: PasteI
             score: Math.floor(Math.random() * 30) + 70, // Random score 70-100
           };
 
+          console.log(`💾 [PasteImportInterface.handleImport] Lead data prepared:`, leadData);
+
+          console.log(`🔄 [PasteImportInterface.handleImport] Calling createLead...`);
           const result = await createLead(leadData);
+
+          console.log(`📤 [PasteImportInterface.handleImport] createLead result:`, {
+            success: result.success,
+            error: result.error,
+            leadId: result.data?.id
+          });
+
           if (result.success) {
             successCount++;
+            console.log(`✅ [PasteImportInterface.handleImport] Lead ${i + 1} created successfully. Total success: ${successCount}`);
           } else {
             errorCount++;
-            console.error('Failed to create lead:', result.error);
+            console.error(`❌ [PasteImportInterface.handleImport] Failed to create lead ${i + 1}:`, result.error);
           }
         } catch (error) {
           errorCount++;
-          console.error('Error creating lead:', error);
+          console.error(`❌ [PasteImportInterface.handleImport] Exception creating lead ${i + 1}:`, error);
+          console.error(`❌ [PasteImportInterface.handleImport] Error stack:`, error instanceof Error ? error.stack : 'No stack');
         }
       }
 
-      setProgress({ current: 100, total: 100, status: "complete", message: `Successfully imported ${successCount} leads${errorCount > 0 ? ` (${errorCount} failed)` : ''}` });
+      const importMessage = duplicateCount > 0
+        ? `Imported ${successCount} new lead(s). Skipped ${duplicateCount} duplicate(s).`
+        : `Successfully imported ${successCount} lead(s)${errorCount > 0 ? ` (${errorCount} failed)` : ''}`;
+
+      console.log(`🎯 [PasteImportInterface.handleImport] Import complete:`, {
+        totalLeads: extractedLeads.length,
+        successCount,
+        errorCount,
+        duplicateCount,
+        duplicateEmails,
+        message: importMessage
+      });
+
+      setProgress({ current: 100, total: 100, status: "complete", message: importMessage });
 
       // Clear form after successful import
+      console.log('🕒 [PasteImportInterface.handleImport] Scheduling cleanup in 3 seconds...');
       setTimeout(() => {
+        console.log('🧹 [PasteImportInterface.handleImport] Cleaning up and calling onComplete');
         setRawData("");
         setDetectedFields([]);
         setProgress({ current: 0, total: 0, status: "idle" });
         if (onComplete) {
+          console.log('🔄 [PasteImportInterface.handleImport] Calling onComplete callback');
           onComplete();
         }
       }, 3000);
     } catch (error) {
+      console.error('❌ [PasteImportInterface.handleImport] Import error:', error);
+      console.error('❌ [PasteImportInterface.handleImport] Error stack:', error instanceof Error ? error.stack : 'No stack');
+
       setProgress({
         current: 0,
         total: 0,
@@ -205,6 +291,7 @@ export function PasteImportInterface({ onImport, onComplete, className }: PasteI
         message: error instanceof Error ? error.message : "Import failed"
       });
     } finally {
+      console.log('🏁 [PasteImportInterface.handleImport] Resetting processing state');
       setIsProcessing(false);
     }
   }, [rawData, validationErrors, onImport]);

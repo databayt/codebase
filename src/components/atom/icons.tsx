@@ -531,3 +531,53 @@ export const SendUpIcon = ({ className }: { className?: string }) => (
         <path d="M442.39-616.87 309.78-487.26q-11.82 11.83-27.78 11.33t-27.78-12.33q-11.83-11.83-11.83-27.78 0-15.96 11.83-27.79l198.43-199q11.83-11.82 28.35-11.82t28.35 11.82l198.43 199q11.83 11.83 11.83 27.79 0 15.95-11.83 27.78-11.82 11.83-27.78 11.83t-27.78-11.83L521.61-618.87v348.83q0 16.95-11.33 28.28-11.32 11.33-28.28 11.33t-28.28-11.33q-11.33-11.33-11.33-28.28z" />
     </svg>
 )
+
+export const ModelIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" className={className}>
+        <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M9.5 42.5h29a4 4 0 0 0 4-4v-29a4 4 0 0 0-4-4h-29a4 4 0 0 0-4 4v29a4 4 0 0 0 4 4" strokeWidth="2.5"/>
+        <circle cx="16.5" cy="19" r="5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"/>
+        <circle cx="31.5" cy="19" r="5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"/>
+    </svg>
+)
+
+export const AILogoIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.89 595.28" className={className}>
+        <g>
+            <polygon fill="currentColor" points="557.09,211.99 565.4,538.36 631.96,538.36 640.28,93.18"/>
+            <polygon fill="currentColor" points="640.28,56.91 538.72,56.91 379.35,284.53 430.13,357.05"/>
+            <polygon fill="currentColor" points="201.61,538.36 303.17,538.36 353.96,465.84 303.17,393.31"/>
+            <polygon fill="currentColor" points="201.61,211.99 430.13,538.36 531.69,538.36 303.17,211.99"/>
+        </g>
+    </svg>
+)
+
+export const AIBrainIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className={className}>
+        <path fill="currentColor" d="M8.644 2.553a1 1 0 1 0-1.788.894L9.68 9.1L5.067 5.926a1 1 0 0 0-1.134 1.648l5.472 3.762L3.053 11a1 1 0 1 0-.106 2l5.795.305l-4.297 2.864a1 1 0 1 0 1.11 1.664l3.642-2.428l-2.51 3.515a1 1 0 1 0 1.627 1.162l3.033-4.246l-.833 5a1 1 0 0 0 1.972.33l.802-4.812l2.37 3.688a1 1 0 0 0 1.683-1.082l-1.786-2.778l2.767 2.554a1 1 0 0 0 1.356-1.47l-3.035-2.802l4.233.53a1 1 0 0 0 .248-1.985l-4.19-.524l4.295-1.01a1 1 0 1 0-.458-1.947l-5.59 1.315l4.105-5.224a1 1 0 1 0-1.572-1.236L13.857 9.29l.881-5.636a1 1 0 1 0-1.976-.308l-.886 5.67z"/>
+    </svg>
+)
+
+export const Sparkles = ({ className }: { className?: string }) => (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+        <path d="M5 3v4"/>
+        <path d="M19 17v4"/>
+        <path d="M3 5h4"/>
+        <path d="M17 19h4"/>
+    </svg>
+)
+
+export const Cpu = ({ className }: { className?: string }) => (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+        <rect x="9" y="9" width="6" height="6"/>
+        <line x1="9" y1="1" x2="9" y2="4"/>
+        <line x1="15" y1="1" x2="15" y2="4"/>
+        <line x1="9" y1="20" x2="9" y2="23"/>
+        <line x1="15" y1="20" x2="15" y2="23"/>
+        <line x1="20" y1="9" x2="23" y2="9"/>
+        <line x1="20" y1="14" x2="23" y2="14"/>
+        <line x1="1" y1="9" x2="4" y2="9"/>
+        <line x1="1" y1="14" x2="4" y2="14"/>
+    </svg>
+)

@@ -124,6 +124,10 @@ export const aiExtractionInputSchema = z.object({
   source: z.enum(['manual', 'web', 'file', 'api'])
     .default('manual'),
 
+  model: z.enum(['groq', 'claude', 'openai'])
+    .optional()
+    .default('groq'),
+
   options: z.object({
     autoScore: z.boolean().default(true),
     detectDuplicates: z.boolean().default(true),

@@ -49,7 +49,7 @@ export function AiStreamingText({
             break;
           }
 
-          const chunk = decoder.decode(value as ArrayBuffer, { stream: true });
+          const chunk = decoder.decode(value as unknown as ArrayBuffer, { stream: true });
           accumulatedText += chunk;
           setDisplayText(accumulatedText);
         }
