@@ -1,9 +1,9 @@
-import HeaderContent from "./content"
+import { SiteHeader } from "./content"
 
 export default function HeaderTemplate() {
   return (
     <div className="min-h-screen">
-      <HeaderContent />
+      <SiteHeader />
       <main className="container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-4">Header Navigation Template</h1>
         <p className="text-muted-foreground">

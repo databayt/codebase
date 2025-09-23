@@ -1,4 +1,4 @@
-import FooterContent from "./content"
+import { SiteFooter } from "./content"
 
 export default function FooterTemplate() {
   return (
@@ -12,7 +12,7 @@ export default function FooterTemplate() {
           <p className="text-muted-foreground">Page content goes here</p>
         </div>
       </main>
-      <FooterContent />
+      <SiteFooter />
     </div>
   )
 }
