@@ -464,6 +464,80 @@ tsx scripts/build-registry.mts
 tsx scripts/test-template.ts login-01
 ```
 
+## Fullscreen Template View
+
+### Current Implementation
+The template viewer includes a fullscreen button in the toolbar that links to `/templates/[template-name]`:
+
+```tsx
+// In template-viewer.tsx
+<Link href={`/templates/${item.name}`} target="_blank">
+    <Fullscreen className="h-3.5 w-3.5" />
+</Link>
+```
+
+This opens the template in a new tab at `/[lang]/(root)/templates/[...categories]/page.tsx`, which renders the template with metadata but within the standard page layout.
+
+### shadcn Implementation Comparison
+shadcn's blocks system uses a dedicated `/view/[block-name]` route that:
+- Renders the template in complete isolation (no app shell/navigation)
+- Provides a clean, distraction-free preview environment
+- Allows the template to use the full viewport
+- Maintains minimal wrapper for essential functionality
+
+**Key Differences:**
+| Feature | Our Implementation | shadcn Blocks |
+|---------|-------------------|---------------|
+| Route Pattern | `/templates/[name]` | `/view/[name]` |
+| Rendering | Within app layout with metadata | Isolated, full viewport |
+| Navigation | Standard site navigation visible | No navigation, pure template |
+| Container | Standard container with padding | Edge-to-edge rendering |
+| URL Target | Opens in new tab | Opens in new tab |
+
+### Recommended Implementation for True Fullscreen
+
+To achieve shadcn-like fullscreen viewing:
+
+1. **Create dedicated view route**: `app/[lang]/view/[template]/page.tsx`
+2. **Use minimal layout**: Create `app/[lang]/view/layout.tsx` without navigation
+3. **Update fullscreen button link**:
+```tsx
+<Link href={`/view/${item.name}`} target="_blank">
+    <Fullscreen className="h-3.5 w-3.5" />
+</Link>
+```
+
+4. **View page implementation**:
+```tsx
+// app/[lang]/view/[template]/page.tsx
+export default async function ViewPage({ params }) {
+    const template = await getTemplate(params.template)
+    const Component = await import(`@/components/template/${template.name}/page`)
+
+    return <Component />  // No wrapper, pure component
+}
+```
+
+5. **Minimal layout**:
+```tsx
+// app/[lang]/view/layout.tsx
+export default function ViewLayout({ children }) {
+    return (
+        <html>
+            <body className="min-h-screen">
+                {children}
+            </body>
+        </html>
+    )
+}
+```
+
+This approach provides:
+- Clean, isolated template preview
+- Full viewport usage
+- No distracting UI elements
+- Better representation of how template looks in production
+
 ## Migration from shadcn Blocks
 
 When migrating shadcn blocks to our template system:

@@ -182,8 +182,8 @@ export const StripeIcon = (props: IconProps) => (
 )
 
 export const MathIcon = (props: IconProps) => (
-    <svg viewBox="0 0 24 24" {...props}>
-        <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M3 8h10M5 8v8m6-8v6.03A1.97 1.97 0 0 0 12.97 16H13" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
+        <path fill="currentColor" d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2M6 7h11v2h-2v5a1 1 0 0 0 1 1a1 1 0 0 0 1-1h2a3 3 0 0 1-3 3a3 3 0 0 1-3-3V9h-3v8H8V9H6"/>
     </svg>
 )
 

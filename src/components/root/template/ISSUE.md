@@ -39,6 +39,16 @@
 **Impact**: Users must manually merge templates
 **Priority**: LOW
 
+### 6. Fullscreen View Not Isolated
+**Gap**: "View in fullscreen" button opens template with full page layout
+**shadcn Approach**: Dedicated `/view/[block-name]` route with isolated rendering
+**Current Issues**:
+- Templates shown with site navigation and layout
+- Not a true fullscreen/isolated preview
+- Container padding and constraints applied
+- Different from production appearance
+**Priority**: MEDIUM
+
 ## Implementation Tasks
 
 ### Phase 1: Core Infrastructure (Week 1)
@@ -47,6 +57,7 @@
 - [x] Add validation for registry entries
 - [x] Restructure template system to flat structure
 - [x] Fix getRegistryItem to read from JSON
+- [ ] Implement isolated fullscreen view route (/view/[template])
 - [ ] Create automated testing for templates
 - [ ] Set up preview image generation
 
@@ -132,17 +143,23 @@ import { Button } from "@/components/ui/button"
    - Must handle dependency installation
 
 ### High Priority
-1. **Preview Image Generation**
+1. **Isolated Fullscreen View**
+   - Create `/view/[template]` route for clean preview
+   - Remove all navigation and layout chrome
+   - Match shadcn's distraction-free viewing experience
+   - Better represent production appearance
+
+2. **Preview Image Generation**
    - Automate screenshot capture
    - Support dark/light mode previews
    - Optimize image sizes
 
-2. **Template Validation**
+3. **Template Validation**
    - Ensure all imports are valid
    - Check for required dependencies
    - Validate file structure
 
-3. **Documentation Site**
+4. **Documentation Site**
    - Interactive template gallery
    - Live customization preview
    - Code examples with copy
