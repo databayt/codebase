@@ -12,9 +12,16 @@ model Lead {
   website           String?
   description       String?   @db.Text
   notes             String?   @db.Text
+  title             String?   // Job title
+  location          String?   // Location/region
+
+  // Lead categorization
+  leadType          String?   @default("CLIENT") // CLIENT, COMPETITOR, JOB, PARTNER, etc.
 
   // Verification status
   verified          Boolean   @default(false)
+  emailVerified     Boolean   @default(false)
+  phoneVerified     Boolean   @default(false)
 
   // Extraction metadata
   rawInput          String?   @db.Text
@@ -26,6 +33,11 @@ model Lead {
   linkedinUrl       String?
   companySize       String?
   industry          String?
+
+  // Import tracking
+  importId          String?   // Batch import identifier
+  importedAt        DateTime?
+  scraperSource     String?   // LinkedIn, Indeed, etc.
 
   // Status & tracking
   status            LeadStatus @default(NEW)

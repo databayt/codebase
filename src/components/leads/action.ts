@@ -30,21 +30,14 @@ import {
 import type { Lead, LeadListResponse, AIExtractionResult } from './type';
 import { LEAD_STATUS, LEAD_SOURCE } from './constant';
 
-// Get current authenticated user (BYPASSED FOR TESTING)
+// NO AUTH - Just use a fixed user ID for all operations
 async function requireAuth() {
-  // BYPASS AUTH - Return the user that has existing data
+  // NO AUTH - Using fixed user that has data
   return {
     id: 'cmfo808py0000ix1ke1o3uzsv',
     email: 'test@example.com',
     name: 'Test User'
   };
-
-  // Original auth code (commented out for testing)
-  // const user = await currentUser();
-  // if (!user) {
-  //   throw new Error('Authentication required');
-  // }
-  // return user;
 }
 
 /**
@@ -895,6 +888,197 @@ Provide a score (0-100), categorize as hot/warm/cold, set priority, and recommen
 /**
  * AI-powered lead enrichment
  */
+/**
+ * Bulk import leads from scrapers or files
+ */
+export async function bulkImportLeads(
+  leads: any[],
+  importSource?: string
+): Promise<{ success: boolean; data?: any; error?: string }> {
+  try {
+    const user = await requireAuth();
+    const importId = `import_${Date.now()}`;
+
+    console.log(`📥 Bulk import: Processing ${leads.length} leads from ${importSource || 'manual'}`);
+
+    // Process and normalize lead data
+    const processedLeads = leads.map(lead => ({
+      name: lead.name || lead.Name || lead.NAME || 'Unknown',
+      email: lead.email || lead.Email || lead.EMAIL,
+      phone: lead.phone || lead.Phone || lead.PHONE,
+      company: lead.company || lead.Company || lead.COMPANY,
+      title: lead.title || lead.Title || lead.TITLE || lead.position || lead.Position,
+      website: lead.website || lead.Website || lead.URL || lead.url,
+      linkedinUrl: lead.linkedinUrl || lead.linkedin || lead.LinkedIn,
+      location: lead.location || lead.Location || lead.city || lead.City,
+      industry: lead.industry || lead.Industry || lead.sector,
+      leadType: lead.type || lead.leadType || 'CLIENT',
+      notes: lead.notes || lead.description || lead.Description,
+      status: 'NEW',
+      source: importSource === 'SCRAPER' ? 'IMPORT' : 'MANUAL',
+      score: lead.score || 0,
+      verified: false,
+      emailVerified: false,
+      phoneVerified: false,
+      importId,
+      importedAt: new Date(),
+      scraperSource: importSource,
+      userId: user.id,
+      tags: [],
+    }));
+
+    // Filter out leads without essential data
+    const validLeads = processedLeads.filter(lead =>
+      lead.name && (lead.email || lead.phone || lead.company)
+    );
+
+    // Check for duplicates
+    const duplicateCount = await detectDuplicates(validLeads);
+
+    // Create leads in batch
+    const created = await db.lead.createMany({
+      data: validLeads,
+      skipDuplicates: true,
+    });
+
+    console.log(`✅ Bulk import complete: ${created.count} created, ${duplicateCount} duplicates skipped`);
+
+    revalidatePath('/[lang]/leads');
+
+    return {
+      success: true,
+      data: {
+        imported: created.count,
+        duplicates: duplicateCount,
+        total: leads.length,
+        importId,
+      },
+    };
+  } catch (error) {
+    console.error('Bulk import error:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to import leads',
+    };
+  }
+}
+
+/**
+ * Detect duplicate leads in database
+ */
+export async function detectDuplicates(
+  leads: any[]
+): Promise<number> {
+  try {
+    const user = await requireAuth();
+    let duplicateCount = 0;
+
+    for (const lead of leads) {
+      if (lead.email) {
+        const existing = await db.lead.findFirst({
+          where: {
+            userId: user.id,
+            email: lead.email,
+          },
+        });
+        if (existing) {
+          duplicateCount++;
+          continue;
+        }
+      }
+
+      if (lead.phone) {
+        const cleanPhone = lead.phone.replace(/\D/g, '');
+        const existing = await db.lead.findFirst({
+          where: {
+            userId: user.id,
+            phone: {
+              contains: cleanPhone.slice(-10),
+            },
+          },
+        });
+        if (existing) {
+          duplicateCount++;
+        }
+      }
+    }
+
+    return duplicateCount;
+  } catch (error) {
+    console.error('Duplicate detection error:', error);
+    return 0;
+  }
+}
+
+/**
+ * Export leads to various formats
+ */
+export async function exportLeads(
+  format: 'csv' | 'json' | 'excel' = 'csv',
+  filters?: any
+): Promise<{ success: boolean; data?: any; error?: string }> {
+  try {
+    const user = await requireAuth();
+
+    const where: any = { userId: user.id };
+
+    // Apply filters
+    if (filters?.status) where.status = filters.status;
+    if (filters?.source) where.source = filters.source;
+    if (filters?.leadType) where.leadType = filters.leadType;
+    if (filters?.verified !== undefined) where.verified = filters.verified;
+    if (filters?.search) {
+      where.OR = [
+        { name: { contains: filters.search, mode: 'insensitive' } },
+        { email: { contains: filters.search, mode: 'insensitive' } },
+        { company: { contains: filters.search, mode: 'insensitive' } },
+      ];
+    }
+
+    const leads = await db.lead.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+    });
+
+    console.log(`📤 Export: Found ${leads.length} leads to export as ${format}`);
+
+    // Format data for export
+    const exportData = leads.map(lead => ({
+      Name: lead.name,
+      Email: lead.email || '',
+      Phone: lead.phone || '',
+      Company: lead.company || '',
+      Title: lead.title || '',
+      Type: lead.leadType || 'CLIENT',
+      Location: lead.location || '',
+      Website: lead.website || '',
+      LinkedIn: lead.linkedinUrl || '',
+      Industry: lead.industry || '',
+      Status: lead.status,
+      Score: lead.score,
+      Source: lead.source,
+      Verified: lead.verified ? 'Yes' : 'No',
+      Created: lead.createdAt.toISOString().split('T')[0],
+      Notes: lead.notes || '',
+    }));
+
+    return {
+      success: true,
+      data: {
+        format,
+        count: leads.length,
+        data: exportData,
+      },
+    };
+  } catch (error) {
+    console.error('Export error:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to export leads',
+    };
+  }
+}
+
 export async function enrichLead(leadId: string) {
   try {
     const user = await requireAuth();

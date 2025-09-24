@@ -78,9 +78,13 @@ export function CardsActivityGoal({ dictionary }: CardsActivityGoalProps) {
 
   return (
     <Card className="shadow-none border">
-      <CardHeader className="pb-4">
-        <CardTitle>{dictionary?.cards?.activityGoal?.moveGoal || "Move Goal"}</CardTitle>
-        <CardDescription>Set your daily activity goal.</CardDescription>
+      <CardHeader className="pb-4 space-y-1">
+        <CardTitle className="text-base font-semibold">
+          {dictionary?.cards?.activityGoal?.moveGoal || "Move Goal"}
+        </CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
+          Set your daily activity goal.
+        </CardDescription>
       </CardHeader>
       <CardContent className="pb-2">
         <div className="flex items-center justify-center space-x-2">

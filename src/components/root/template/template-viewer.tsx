@@ -89,7 +89,7 @@ function TemplateViewerProvider({
 }) {
     const [view, setView] = React.useState<TemplateViewerContext["view"]>("preview")
     const [style, setStyle] =
-        React.useState<TemplateViewerContext["style"]>("new-york")
+        React.useState<TemplateViewerContext["style"]>("default")
     const [activeFile, setActiveFile] = React.useState<
         TemplateViewerContext["activeFile"]
     >(highlightedFiles?.[0].target ?? null)
@@ -199,7 +199,7 @@ function TemplateViewerToolbar() {
                             asChild
                             title="Open in New Tab"
                         >
-                            <Link href={`/view/styles/${style}/${item.name}`} target="_blank">
+                            <Link href={`/templates/${item.name}`} target="_blank">
                                 <span className="sr-only">Open in New Tab</span>
                                 <Fullscreen className="h-3.5 w-3.5" />
                             </Link>
@@ -235,6 +235,20 @@ function TemplateViewerToolbar() {
 
 function TemplateViewerView() {
     const { item, style, resizablePanelRef } = useTemplateViewer()
+    const [Component, setComponent] = React.useState<React.ComponentType | null>(null)
+
+    React.useEffect(() => {
+        // Dynamically import the component from the registry
+        import("@/__registry__").then(mod => {
+            const registryComponent = mod.Index?.["default"]?.[item.name]?.component
+            if (registryComponent) {
+                // The component is already wrapped in React.lazy, so just set it
+                setComponent(() => registryComponent)
+            }
+        }).catch(() => {
+            console.error(`Failed to load template: ${item.name}`)
+        })
+    }, [item.name])
 
     return (
         <div className="group-data-[view=code]/template-view-wrapper:hidden md:h-[--height]">
@@ -242,31 +256,25 @@ function TemplateViewerView() {
                 <ResizablePanelGroup direction="horizontal" className="relative z-10">
                     <ResizablePanel
                         ref={resizablePanelRef}
-                        className="relative aspect-[4/2.5] rounded-xl border bg-background md:aspect-auto"
+                        className="relative aspect-[4/2.5] rounded-xl border bg-background md:aspect-auto overflow-auto"
                         defaultSize={100}
                         minSize={30}
                     >
-                        <Image
-                            src={`/r/styles/${style}/${item.name}-light.png`}
-                            alt={item.name}
-                            data-template={item.name}
-                            width={1440}
-                            height={900}
-                            className="object-cover dark:hidden md:hidden md:dark:hidden"
-                        />
-                        <Image
-                            src={`/r/styles/${style}/${item.name}-dark.png`}
-                            alt={item.name}
-                            data-template={item.name}
-                            width={1440}
-                            height={900}
-                            className="hidden object-cover dark:block md:hidden md:dark:hidden"
-                        />
-                        <iframe
-                            src={`/view/styles/${style}/${item.name}`}
-                            height={item.meta?.iframeHeight ?? 930}
-                            className="relative z-20 hidden w-full bg-background md:block"
-                        />
+                        <div className="relative z-20 w-full min-h-[400px] md:min-h-[--height] p-6">
+                            {Component ? (
+                                <React.Suspense fallback={
+                                    <div className="flex h-[400px] items-center justify-center text-muted-foreground">
+                                        Loading template...
+                                    </div>
+                                }>
+                                    <Component />
+                                </React.Suspense>
+                            ) : (
+                                <div className="flex h-[400px] items-center justify-center text-muted-foreground">
+                                    Loading component...
+                                </div>
+                            )}
+                        </div>
                     </ResizablePanel>
                     <ResizableHandle className="relative hidden w-3 bg-transparent p-0 after:absolute after:right-0 after:top-1/2 after:h-8 after:w-[6px] after:-translate-y-1/2 after:translate-x-[-1px] after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
                     <ResizablePanel defaultSize={0} minSize={0} />

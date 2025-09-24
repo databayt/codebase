@@ -53,17 +53,36 @@ export interface SocialLink {
 }
 
 export interface ExtractedLead {
+  // Core fields
+  id?: string;
   name: string;
   email?: string;
   phone?: string;
-  title?: string;
+
+  // Professional info
   company?: string;
-  linkedinUrl?: string;
-  location?: string;
+  title?: string;
   department?: string;
+  seniority?: 'entry' | 'mid' | 'senior' | 'executive';
+
+  // Social profiles
+  linkedinUrl?: string;
+  twitterUrl?: string;
+  githubUrl?: string;
+
+  // Location
+  location?: string;
+  country?: string;
+  timezone?: string;
+
+  // Metadata
   confidence: number;
   sourceUrl: string;
+  extractedAt?: Date;
   context?: string;
+  enrichedData?: any;
+  validationStatus?: 'valid' | 'invalid' | 'unverified';
+  qualityScore?: number;
 }
 
 export interface CompanyInfo {
@@ -204,6 +223,115 @@ export interface ScrapeQueueItem {
   parentUrl?: string;
   retries: number;
   status: 'pending' | 'processing' | 'completed' | 'failed';
+  addedAt?: Date;
+  processedAt?: Date;
+  error?: string;
+}
+
+// Production-ready types
+export interface RetryConfig {
+  maxAttempts: number;
+  initialDelay: number;
+  maxDelay: number;
+  backoffFactor: number;
+}
+
+export interface RateLimitConfig {
+  requests: number;
+  period: number;
+  adaptiveBackoff?: boolean;
+  respectCrawlDelay?: boolean;
+}
+
+export interface BrowserConfig {
+  useHeadless: boolean;
+  waitForSelector?: string;
+  executeScript?: string;
+  viewport?: { width: number; height: number };
+  timeout?: number;
+}
+
+export interface CrawlConfig {
+  strategy: 'breadth' | 'depth' | 'smart' | 'targeted';
+  maxPages: number;
+  maxDepth: number;
+  concurrent: number;
+  timeout: number;
+  startUrl?: string;
+
+  filters: {
+    sameDomainOnly: boolean;
+    includePatterns: string[];
+    excludePatterns: string[];
+    contentTypes?: string[];
+  };
+
+  rateLimit?: RateLimitConfig;
+  browser?: BrowserConfig;
+  retry?: RetryConfig;
+
+  export?: {
+    format: 'csv' | 'json' | 'excel';
+    realtime: boolean;
+    webhook?: string;
+  };
+}
+
+export interface QueueStatus {
+  pending: number;
+  processing: number;
+  completed: number;
+  failed: number;
+  totalUrls: number;
+  averageProcessingTime: number;
+  estimatedTimeRemaining: number;
+}
+
+export interface WorkerStatus {
+  id: string;
+  status: 'idle' | 'busy' | 'error';
+  currentUrl?: string;
+  processedCount: number;
+  errorCount: number;
+  startTime: Date;
+  lastActivity: Date;
+}
+
+export interface DashboardMetrics {
+  throughput: number;
+  successRate: number;
+  avgLatency: number;
+  queueDepth: number;
+  activeWorkers: number;
+  memoryUsage: number;
+  errorRate: number;
+  totalPages: number;
+  totalLeads: number;
+}
+
+export interface ExportOptions {
+  format: 'csv' | 'json' | 'excel' | 'xml';
+  fields?: string[];
+  customMapping?: Record<string, string>;
+  includeMetadata?: boolean;
+  compression?: boolean;
+}
+
+export interface WebhookConfig {
+  url: string;
+  events: string[];
+  headers?: Record<string, string>;
+  retryPolicy?: {
+    maxAttempts: number;
+    backoff: 'linear' | 'exponential';
+  };
+}
+
+export interface ValidationRule {
+  field: string;
+  type: 'required' | 'email' | 'phone' | 'url' | 'regex';
+  pattern?: string;
+  message?: string;
 }
 
 // API Response types

@@ -285,7 +285,7 @@ export function All({
 
       {/* Table */}
       <div>
-        <div className="rounded-lg overflow-hidden">
+        <div className="rounded-lg overflow-hidden border">
           <Table>
           <TableHeader className="bg-foreground">
             <TableRow className="hover:bg-foreground border-b h-14">

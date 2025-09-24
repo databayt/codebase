@@ -66,14 +66,16 @@ interface CardsMetricProps {
 export function CardsMetric({ dictionary }: CardsMetricProps) {
   return (
     <Card className="shadow-none border">
-      <CardHeader>
-        <CardTitle>{dictionary?.cards?.metric?.title || "Exercise Minutes"}</CardTitle>
-        <CardDescription>
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base font-semibold">
+          {dictionary?.cards?.metric?.title || "Exercise Minutes"}
+        </CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
           {dictionary?.cards?.metric?.description || "Your exercise minutes are ahead of where you normally are."}
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-4">
-        <ChartContainer config={chartConfig} className="w-full md:h-[200px]">
+        <ChartContainer config={chartConfig} className="w-full h-[200px]">
           <LineChart
             data={data}
             margin={{
