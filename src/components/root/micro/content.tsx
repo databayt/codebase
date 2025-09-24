@@ -14,7 +14,7 @@ export default function MicroContent({ dictionary, params }: MicroContentProps) 
         <>
             <Hero dictionary={dictionary} params={params} />
             <MicroTabs dictionary={dictionary} />
-            <MicrosPage />
+            <MicrosPage lang={params.lang} />
 
         </>
     );

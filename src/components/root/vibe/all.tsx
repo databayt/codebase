@@ -1,6 +1,7 @@
 import Card from "@/components/atom/card"
 import { vibes } from "./config"
 import { RulesIcon, PromptsIcon, TwitterIcon, MCPVibeIcon, CursorVibeIcon, ExtensionsIcon } from "@/components/atom/icons"
+import type { Locale } from '@/components/local/config'
 
 const iconMap = {
   RulesIcon,
@@ -11,7 +12,11 @@ const iconMap = {
   ExtensionsIcon,
 }
 
-export default function VibesPage() {
+interface VibesPageProps {
+  lang?: Locale
+}
+
+export default function VibesPage({ lang = 'en' }: VibesPageProps) {
   return (
     <div className="grid grid-cols-1 gap-4 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {vibes.map((vibe) => {
@@ -23,7 +28,7 @@ export default function VibesPage() {
             title={vibe.title}
             description={vibe.description}
             icon={IconComponent ? <IconComponent className={vibe.iconFill ? "fill-current" : ""} /> : null}
-            href={vibe.href}
+            href={`/${lang}${vibe.href}`}
           />
         )
       })}

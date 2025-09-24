@@ -1,6 +1,7 @@
 import Card from "@/components/atom/card"
 import { blocks } from "./config"
 import { StarterKit, OnboardingIcon, NotificationIcon, MDXIcon, ShieldIcon, StripeIcon } from "@/components/atom/icons"
+import type { Locale } from '@/components/local/config'
 
 const iconMap = {
   StarterKit,
@@ -11,7 +12,11 @@ const iconMap = {
   StripeIcon,
 }
 
-export default function BlocksPage() {
+interface BlocksPageProps {
+  lang?: Locale
+}
+
+export default function BlocksPage({ lang = 'en' }: BlocksPageProps) {
   return (
     <div className="grid grid-cols-1 gap-4 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {blocks.map((block) => {
@@ -23,7 +28,7 @@ export default function BlocksPage() {
             title={block.title}
             description={block.description}
             icon={IconComponent ? <IconComponent className={block.iconFill ? "fill-current" : ""} /> : null}
-            href={block.href}
+            href={`/${lang}${block.href}`}
           />
         )
       })}

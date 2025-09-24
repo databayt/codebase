@@ -14,7 +14,7 @@ export default function VibeContent({ dictionary, params }: VibeContentProps) {
         <>
             <Hero dictionary={dictionary} params={params} />
             <VibeTabs dictionary={dictionary} />
-            <VibesPage />
+            <VibesPage lang={params.lang} />
 
         </>
     );

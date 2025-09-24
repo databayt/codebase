@@ -14,7 +14,7 @@ export default function BlockContent({ dictionary, params }: BlockContentProps) 
         <>
             <Hero dictionary={dictionary} params={params} />
             <BlockTabs dictionary={dictionary} />
-            <BlocksPage />
+            <BlocksPage lang={params.lang} />
 
         </>
     );

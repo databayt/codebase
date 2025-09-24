@@ -15,6 +15,7 @@ import {
   DashboardIcon,
   LogbookIcon
 } from "@/components/atom/icons"
+import type { Locale } from '@/components/local/config'
 
 const iconMap = {
   MathIcon,
@@ -32,7 +33,11 @@ const iconMap = {
   LogbookIcon,
 }
 
-export default function MicrosPage() {
+interface MicrosPageProps {
+  lang?: Locale
+}
+
+export default function MicrosPage({ lang = 'en' }: MicrosPageProps) {
   return (
     <div className="grid grid-cols-1 gap-4 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {micros.map((micro) => {
@@ -44,7 +49,7 @@ export default function MicrosPage() {
             title={micro.title}
             description={micro.description}
             icon={IconComponent ? <IconComponent className={micro.iconFill ? "fill-current" : ""} /> : null}
-            href={micro.href}
+            href={`/${lang}${micro.href}`}
           />
         )
       })}
