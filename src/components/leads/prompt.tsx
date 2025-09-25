@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import AgentHeading from '@/components/atom/agent-heading';
 import { AIResponseDisplay } from '@/components/atom/ai-response-display';
@@ -21,7 +21,8 @@ import {
   PromptInputTextarea,
   type PromptInputMessage
 } from '@/components/atom/prompt-input';
-import { PlusIcon, AttachIcon, VoiceIcon, SendUpIcon, ModelIcon, AILogoIcon, AIBrainIcon } from '@/components/atom/icons';
+import { PlusIcon, AttachIcon, VoiceIcon, SendUpIcon, AILogoIcon, AIBrainIcon } from '@/components/atom/icons';
+import { RefreshCw } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -29,18 +30,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-export default function LeadsPrompt() {
+interface LeadsPromptProps {
+  onLeadsCreated?: (count: number) => void;
+}
+
+export default function LeadsPrompt({ onLeadsCreated }: LeadsPromptProps) {
   const [prompt, setPrompt] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedModel, setSelectedModel] = useState<'groq' | 'claude'>('groq');
   const [hasInteracted, setHasInteracted] = useState(false);
   const [aiResponse, setAiResponse] = useState('');
   const [aiReasoning, setAiReasoning] = useState('');
+  const [leadsGenerated, setLeadsGenerated] = useState(0);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const { toast } = useToast();
 
   console.log('🎯 [LeadsPrompt] Component rendered');
   console.log('🤖 [LeadsPrompt] Selected model:', selectedModel);
+
+  const handleRefresh = () => {
+    // Trigger parent to refresh leads data
+    if (onLeadsCreated) {
+      onLeadsCreated(leadsGenerated);
+    }
+    // Refresh the page
+    window.location.reload();
+  };
 
   const handleSubmit = async (message: PromptInputMessage) => {
     console.log('📥 [LeadsPrompt.handleSubmit] Called with message:', {
@@ -80,26 +98,17 @@ export default function LeadsPrompt() {
       // Process text prompt for AI lead generation
       if (message.text?.trim()) {
         console.log('📝 [LeadsPrompt.handleSubmit] Processing text input');
-        console.log('📝 [LeadsPrompt.handleSubmit] Text content (first 200 chars):', message.text.substring(0, 200));
         toast({
           title: 'Processing',
           description: 'Extracting leads from text...',
         });
 
-        console.log('📦 [LeadsPrompt.handleSubmit] Importing extractLeadsFromText action...');
         const { extractLeadsFromText } = await import('./action');
-
-        console.log('🔄 [LeadsPrompt.handleSubmit] Calling extractLeadsFromText with params:', {
-          textLength: message.text.length,
-          source: 'web',
-          model: selectedModel,
-          options: { autoScore: true, autoEnrich: false, deduplication: true }
-        });
 
         const result = await extractLeadsFromText({
           rawText: message.text,
-          source: 'web', // Use lowercase value expected by validation schema
-          model: selectedModel, // Pass the selected model
+          source: 'web',
+          model: selectedModel,
           options: {
             autoScore: true,
             autoEnrich: false,
@@ -107,17 +116,10 @@ export default function LeadsPrompt() {
           }
         });
 
-        console.log('📤 [LeadsPrompt.handleSubmit] Text extraction result:', {
-          success: result.success,
-          error: result.error,
-          leadsCount: result.data?.leads?.length || 0,
-          leads: result.data?.leads || []
-        });
-
         if (result.success && result.data) {
           const extractedCount = result.data.leads?.length || 0;
           leadsCreated += extractedCount;
-          console.log(`✅ [LeadsPrompt.handleSubmit] Successfully extracted ${extractedCount} leads from text`);
+          setLeadsGenerated(extractedCount);
 
           // Format AI response
           const leadsList = result.data.leads?.map((lead: any, idx: number) =>
@@ -131,15 +133,16 @@ Successfully extracted **${extractedCount} leads** from your input.
 ### Extracted Leads:
 ${leadsList || 'No leads found'}
 
-### Next Steps:
-- Review the extracted leads in the table below
-- Edit any information as needed
-- Export the leads or continue adding more`);
+### Actions Available:
+- Click **Refresh Table** below to view the new leads
+- Continue adding more leads using the input
+- Export leads when ready`);
 
-          toast({
-            title: 'Success',
-            description: `Extracted ${extractedCount} leads from text`,
-          });
+          // Notify parent component about new leads
+          if (onLeadsCreated) {
+            onLeadsCreated(extractedCount);
+          }
+
         } else {
           console.error('❌ [LeadsPrompt.handleSubmit] Text extraction failed:', result.error);
           setAiResponse(`## Extraction Failed
@@ -159,11 +162,6 @@ ${result.error || 'Unknown error occurred'}
       // Process file uploads for CSV import
       if (message.files?.length) {
         console.log('📁 [LeadsPrompt.handleSubmit] Processing', message.files.length, 'file(s)');
-        console.log('📁 [LeadsPrompt.handleSubmit] File details:', message.files.map(f => ({
-          filename: f.filename,
-          mediaType: f.mediaType,
-          url: f.url?.substring(0, 50) + '...'
-        })));
         toast({
           title: 'Importing',
           description: `Processing ${message.files.length} file(s)...`,
@@ -171,27 +169,17 @@ ${result.error || 'Unknown error occurred'}
 
         for (let i = 0; i < message.files.length; i++) {
           const file = message.files[i];
-          console.log(`📄 [LeadsPrompt.handleSubmit] Processing file ${i + 1}/${message.files.length}:`, {
-            filename: file.filename,
-            type: file.mediaType,
-            urlLength: file.url?.length || 0
-          });
-
-          // Read file content
-          console.log(`🌐 [LeadsPrompt.handleSubmit] Fetching file content from URL...`);
           const response = await fetch(file.url!);
           const text = await response.text();
-          console.log(`📄 [LeadsPrompt.handleSubmit] File content received:`, {
-            contentLength: text.length,
-            preview: text.substring(0, 200),
-            linesCount: text.split('\n').length
-          });
 
-          // Parse CSV and create leads
-          console.log(`🔄 [LeadsPrompt.handleSubmit] Calling processCSVContent for file: ${file.filename}`);
           const imported = await processCSVContent(text);
-          console.log(`✅ [LeadsPrompt.handleSubmit] Imported ${imported} leads from ${file.filename}`);
           leadsCreated += imported;
+        }
+
+        setLeadsGenerated(prev => prev + leadsCreated);
+
+        if (onLeadsCreated) {
+          onLeadsCreated(leadsCreated);
         }
       }
 
@@ -200,15 +188,12 @@ ${result.error || 'Unknown error occurred'}
       if (leadsCreated > 0) {
         toast({
           title: 'Success!',
-          description: `Successfully imported ${leadsCreated} new leads`,
+          description: `Successfully imported ${leadsCreated} new leads. Click "Refresh Table" to view them.`,
+          duration: 5000,
         });
 
-        console.log('🔄 [LeadsPrompt.handleSubmit] Refreshing page in 1 second to show new leads...');
-        // Refresh the page to show new leads
-        setTimeout(() => {
-          console.log('🔄 [LeadsPrompt.handleSubmit] Executing page reload...');
-          window.location.reload();
-        }, 1000);
+        // Don't auto-refresh - wait for user action
+        console.log('✋ [LeadsPrompt.handleSubmit] Waiting for user action to refresh...');
       } else {
         console.log('⚠️ [LeadsPrompt.handleSubmit] No leads were created');
         if (!aiResponse) {
@@ -224,46 +209,36 @@ No valid leads could be extracted from your input.
       }
     } catch (error) {
       console.error('❌ [LeadsPrompt.handleSubmit] Error processing prompt:', error);
-      console.error('❌ [LeadsPrompt.handleSubmit] Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+      setAiResponse(`## Error Occurred
+
+An error occurred while processing your request. Please try again.`);
     } finally {
       console.log('🏁 [LeadsPrompt.handleSubmit] Cleanup: resetting processing state');
       setIsProcessing(false);
+      // Clear the input after processing
       setPrompt('');
+      // Reset the textarea value directly
+      const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+      if (textarea) {
+        textarea.value = '';
+      }
     }
   };
 
   // Helper function to process CSV content
   const processCSVContent = async (csvText: string): Promise<number> => {
-    console.log('🔍 [LeadsPrompt.processCSVContent] Starting CSV processing...');
-    console.log('🔍 [LeadsPrompt.processCSVContent] Input text length:', csvText.length);
-    console.log('📦 [LeadsPrompt.processCSVContent] Importing createLead action...');
     const { createLead } = await import('./action');
 
     const lines = csvText.split('\n').filter(line => line.trim());
-    console.log(`📊 [LeadsPrompt.processCSVContent] Found ${lines.length} non-empty lines in CSV`);
-
-    if (lines.length === 0) {
-      console.log('⚠️ [LeadsPrompt.processCSVContent] No lines found in CSV, aborting');
-      return 0;
-    }
+    if (lines.length === 0) return 0;
 
     const headers = lines[0].toLowerCase().split(',').map(h => h.trim());
-    console.log('📋 [LeadsPrompt.processCSVContent] CSV Headers:', headers);
-    console.log('📋 [LeadsPrompt.processCSVContent] Header count:', headers.length);
-
     let created = 0;
-    let errors = 0;
 
     for (let i = 1; i < lines.length; i++) {
-      console.log(`📝 [LeadsPrompt.processCSVContent] Processing line ${i}/${lines.length - 1}`);
       const values = lines[i].split(',').map(v => v.trim());
 
-      console.log(`📝 [LeadsPrompt.processCSVContent] Line ${i} values:`, values);
-
-      if (values.length !== headers.length) {
-        console.log(`⚠️ [LeadsPrompt.processCSVContent] Skipping line ${i + 1}: column count mismatch (expected ${headers.length}, got ${values.length})`);
-        continue;
-      }
+      if (values.length !== headers.length) continue;
 
       const leadData: any = {};
       headers.forEach((header, index) => {
@@ -272,64 +247,25 @@ No valid leads could be extracted from your input.
         if (header === 'company') leadData.company = values[index];
         if (header === 'phone') leadData.phone = values[index];
         if (header === 'website') leadData.website = values[index];
-        // Skip LinkedIn field - removed from import
-        // if (header === 'linkedin') leadData.linkedinUrl = values[index];
       });
 
-      console.log(`📝 [LeadsPrompt.processCSVContent] Extracted lead data for line ${i}:`, leadData);
-
       if (leadData.name || leadData.email) {
-        leadData.status = 'NEW'; // Uppercase for Prisma enum
-        leadData.source = 'IMPORT'; // Uppercase for Prisma enum
-        leadData.score = Math.floor(Math.random() * 30) + 70; // Random score 70-100
-
-        console.log(`💾 [LeadsPrompt.processCSVContent] Calling createLead for: ${leadData.name || leadData.email}`);
-        console.log(`💾 [LeadsPrompt.processCSVContent] Lead data to create:`, leadData);
+        leadData.status = 'NEW';
+        leadData.source = 'IMPORT';
+        leadData.score = Math.floor(Math.random() * 30) + 70;
 
         const result = await createLead(leadData);
-
-        console.log(`💾 [LeadsPrompt.processCSVContent] createLead result:`, {
-          success: result.success,
-          error: result.error,
-          leadId: result.data?.id
-        });
-
-        if (result.success) {
-          created++;
-          console.log(`✅ [LeadsPrompt.processCSVContent] Lead created successfully:`, {
-            id: result.data?.id,
-            name: leadData.name,
-            email: leadData.email,
-            totalCreated: created
-          });
-        } else {
-          errors++;
-          console.error(`❌ [LeadsPrompt.processCSVContent] Failed to create lead:`, {
-            name: leadData.name,
-            email: leadData.email,
-            error: result.error,
-            totalErrors: errors
-          });
-        }
-      } else {
-        console.log(`⚠️ [LeadsPrompt.processCSVContent] Skipping line ${i + 1}: no name or email found`);
-        console.log(`⚠️ [LeadsPrompt.processCSVContent] Line data was:`, leadData);
+        if (result.success) created++;
       }
     }
 
-    console.log(`📊 [LeadsPrompt.processCSVContent] CSV Processing Complete:`, {
-      totalLines: lines.length - 1,
-      created: created,
-      errors: errors,
-      skipped: (lines.length - 1) - created - errors
-    });
     return created;
   };
 
   return (
-    <section className="h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/20" suppressHydrationWarning>
-      <div className="container max-w-4xl px-4" suppressHydrationWarning>
-        <div className="flex flex-col items-center text-center space-y-8">
+    <section className="h-screen flex flex-col bg-gradient-to-b from-background to-muted/20" suppressHydrationWarning>
+      <div className="flex-1 flex flex-col items-center justify-center container max-w-4xl px-4 mx-auto" suppressHydrationWarning>
+        <div className="flex flex-col items-center text-center flex-1 w-full justify-center">
           {!hasInteracted && (
             <AgentHeading
               title="Lead Agent"
@@ -339,41 +275,140 @@ No valid leads could be extracted from your input.
           )}
 
           {hasInteracted && (
-            <div className="w-full max-w-3xl">
+            <div
+              id="ai-response-container"
+              className={cn(
+                "w-full max-w-3xl space-y-4 overflow-y-auto overflow-x-hidden rounded-lg relative flex-1",
+                isInputFocused ? "max-h-[200px]" : "max-h-[500px]"
+              )}
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: 'rgba(155, 155, 155, 0.2) transparent',
+              }}
+            >
+              <style jsx>{`
+                div::-webkit-scrollbar {
+                  width: 6px;
+                }
+                div::-webkit-scrollbar-track {
+                  background: transparent;
+                }
+                div::-webkit-scrollbar-thumb {
+                  background-color: rgba(155, 155, 155, 0.3);
+                  border-radius: 3px;
+                  border: transparent;
+                }
+                div::-webkit-scrollbar-thumb:hover {
+                  background-color: rgba(155, 155, 155, 0.5);
+                }
+              `}</style>
               <AIResponseDisplay
                 response={aiResponse}
                 reasoning={aiReasoning}
                 isStreaming={isProcessing}
                 showReasoning={!!aiReasoning}
-                className="mb-8"
+                className="mb-4 pr-3"
+                streamDelay={10}
               />
+
+              {leadsGenerated > 0 && !isProcessing && (
+                <div className="flex justify-center gap-4">
+                  <Button
+                    onClick={handleRefresh}
+                    className="gap-2"
+                    size="lg"
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                    Refresh Table ({leadsGenerated} new leads)
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setHasInteracted(false);
+                      setAiResponse('');
+                      setAiReasoning('');
+                      setLeadsGenerated(0);
+                    }}
+                  >
+                    Start New
+                  </Button>
+                </div>
+              )}
             </div>
           )}
 
           <div className="w-full max-w-3xl relative">
             <PromptInput
               onSubmit={handleSubmit}
-              className="group flex flex-col gap-2 p-3 w-full rounded-[1.75rem] border border-muted-foreground/10 bg-muted text-base shadow-sm transition-all duration-150 ease-in-out focus-within:border-foreground/20 hover:border-foreground/10 focus-within:hover:border-foreground/20"
+              className={cn(
+                "group flex gap-2 w-full rounded-[1.75rem] border border-muted-foreground/10 bg-muted text-base shadow-sm transition-all duration-300 ease-in-out focus-within:border-foreground/20 hover:border-foreground/10 focus-within:hover:border-foreground/20",
+                hasInteracted && !isInputFocused ? "h-14 items-center p-2" : "flex-col p-3"
+              )}
               multiple
               accept="text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.csv"
               maxFiles={5}
               maxFileSize={5 * 1024 * 1024}
             >
-              <div className="relative flex flex-1 items-center">
+              <div className={cn(
+                "relative flex items-center",
+                hasInteracted && !isInputFocused ? "flex-1 gap-2" : "flex-1"
+              )}>
+                {hasInteracted && !isInputFocused && (
+                  <PromptInputActionMenu>
+                    <PromptInputActionMenuTrigger className="h-8 w-8 rounded-full hover:bg-blue-100 p-0">
+                      <PlusIcon className="h-5 w-5" />
+                    </PromptInputActionMenuTrigger>
+                    <PromptInputActionMenuContent>
+                      <PromptInputActionAddAttachments label="Upload CSV or Excel file" />
+                    </PromptInputActionMenuContent>
+                  </PromptInputActionMenu>
+                )}
+
                 <PromptInputAttachments>
                   {(attachment) => (
                     <PromptInputAttachment data={attachment} />
                   )}
                 </PromptInputAttachments>
+
                 <PromptInputTextarea
+                  value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="Describe your target audience..."
-                  className="flex w-full rounded-md !px-0 -ml-4 py-2 ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 resize-none text-[16px] leading-snug max-h-[200px] bg-transparent focus:bg-transparent flex-1"
-                  style={{ minHeight: '80px', height: '80px' }}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
+                  placeholder={hasInteracted && !isInputFocused ? "Add more leads..." : "Describe your target audience..."}
+                  className={cn(
+                    "flex w-full rounded-md ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 resize-none text-[16px] bg-transparent focus:bg-transparent flex-1",
+                    hasInteracted && !isInputFocused
+                      ? "!px-2 py-0 leading-[40px] max-h-[40px]"
+                      : "!px-0 -ml-4 py-2 leading-snug max-h-[200px]"
+                  )}
+                  style={hasInteracted && !isInputFocused ? { height: '40px' } : { minHeight: '80px', height: '80px' }}
                 />
+
+                {hasInteracted && !isInputFocused && (
+                  <div className="flex items-center gap-1">
+                    <PromptInputButton
+                      className="h-8 w-8 rounded-full hover:bg-blue-100"
+                      onClick={() => console.log('Voice input activated')}
+                    >
+                      <VoiceIcon className="h-5 w-5" />
+                    </PromptInputButton>
+
+                    <PromptInputSubmit
+                      disabled={!prompt.trim() && !isProcessing}
+                      status={isProcessing ? 'streaming' : 'ready'}
+                      className="h-8 w-8 rounded-full"
+                      variant="default"
+                      size="icon"
+                    >
+                      <SendUpIcon className="h-5 w-5" />
+                    </PromptInputSubmit>
+                  </div>
+                )}
               </div>
-              <div className="flex gap-1 flex-wrap items-center">
-                <PromptInputActionMenu>
+              {(!hasInteracted || isInputFocused) && (
+                <div className="flex gap-1 flex-wrap items-center">
+                  <PromptInputActionMenu>
                   <PromptInputActionMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-100 ease-in-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-muted hover:bg-blue-100 hover:border-transparent gap-1.5 h-8 w-8 rounded-full p-0 text-muted-foreground hover:text-foreground">
                     <PlusIcon className="shrink-0 h-5 w-5 text-muted-foreground" />
                   </PromptInputActionMenuTrigger>
@@ -396,7 +431,6 @@ No valid leads could be extracted from your input.
                     size="sm"
                   >
                     <div className="flex items-center gap-1.5">
-                      {/* <ModelIcon className="shrink-0 h-4 w-4" /> */}
                       <SelectValue />
                     </div>
                   </SelectTrigger>
@@ -437,6 +471,8 @@ No valid leads could be extracted from your input.
                   </div>
                 </div>
               </div>
+              )}
+
               <input
                 id="file-upload"
                 className="hidden"
@@ -459,7 +495,6 @@ No valid leads could be extracted from your input.
               />
             </PromptInput>
           </div>
-
         </div>
       </div>
     </section>

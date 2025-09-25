@@ -28,7 +28,15 @@ export const publicRoutes = [
   "/ar/service",
   "/ar/chatbot",
   "/ar/docs",
-  "/ar/table"
+  "/ar/table",
+  // Blocks routes (UI showcases)
+  "/standalone-chat-block",
+  "/emails",
+  "/leads",
+  "/scraper",
+  "/upwork",
+  "/test-import",
+  "/test-leads"
 ];
 
 /**

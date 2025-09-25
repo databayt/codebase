@@ -3,7 +3,9 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(pnpm dev:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm lint:*)"
     ],
     "deny": [],
     "ask": []

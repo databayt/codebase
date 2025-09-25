@@ -4,6 +4,7 @@ export interface MicroItem {
   description: string
   icon: string
   iconFill?: boolean
+  iconSize?: string
   href: string
 }
 
@@ -13,6 +14,7 @@ export const micros: MicroItem[] = [
     title: "Math",
     description: "Automate calculations and formula processing.",
     icon: "MathIcon",
+    iconSize: "w-10 h-10",
     href: "/math",
   },
   {
@@ -71,6 +73,7 @@ export const micros: MicroItem[] = [
     title: "Timesheet",
     description: "Automate time tracking and attendance management.",
     icon: "TimesheetIcon",
+    iconSize: "w-7 h-7",
     href: "/timesheet",
   },
   {
@@ -85,6 +88,7 @@ export const micros: MicroItem[] = [
     title: "Proposal",
     description: "Auto generate proposal and document.",
     icon: "ProposalIcon",
+    iconSize: "w-7 h-7",
     href: "/proposal",
   },
   {

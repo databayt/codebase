@@ -49,6 +49,7 @@ export default function MicrosPage({ lang = 'en' }: MicrosPageProps) {
             title={micro.title}
             description={micro.description}
             icon={IconComponent ? <IconComponent className={micro.iconFill ? "fill-current" : ""} /> : null}
+            iconSize={micro.iconSize}
             href={`/${lang}${micro.href}`}
           />
         )

@@ -57,7 +57,7 @@
 - [x] Add validation for registry entries
 - [x] Restructure template system to flat structure
 - [x] Fix getRegistryItem to read from JSON
-- [ ] Implement isolated fullscreen view route (/view/[template])
+- [x] Implement isolated fullscreen view route (/view/[template])
 - [ ] Create automated testing for templates
 - [ ] Set up preview image generation
 

@@ -199,7 +199,7 @@ function TemplateViewerToolbar() {
                             asChild
                             title="Open in New Tab"
                         >
-                            <Link href={`/templates/${item.name}`} target="_blank">
+                            <Link href={`/view/${item.name}`} target="_blank">
                                 <span className="sr-only">Open in New Tab</span>
                                 <Fullscreen className="h-3.5 w-3.5" />
                             </Link>

@@ -8,9 +8,10 @@ interface CardProps {
   icon: ReactNode
   href: string
   className?: string
+  iconSize?: string
 }
 
-export default function Card({ id, title, description, icon, href, className = "" }: CardProps) {
+export default function Card({ id, title, description, icon, href, className = "", iconSize = "w-8 h-8" }: CardProps) {
   return (
     <Link
       key={id}
@@ -18,7 +19,7 @@ export default function Card({ id, title, description, icon, href, className = "
       className={`relative overflow-hidden rounded-lg border bg-background p-2 transition-[border-color] hover:border-primary hover:text-current ${className}`}
     >
       <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-        <div className="w-8 h-8">{icon}</div>
+        <div className={iconSize}>{icon}</div>
         <div className="space-y-2">
           <h4 className="hover:text-current">
             {title}

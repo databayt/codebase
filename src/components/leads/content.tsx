@@ -40,7 +40,10 @@ export default function LeadsContent() {
     selectedLeads,
     setSelectedLeads,
     refreshLeads,
-  } = useLeads();
+  } = useLeads({
+    autoRefresh: true,
+    refreshInterval: 5000, // Refresh every 5 seconds for real-time updates
+  });
 
   console.log('🎯 [LeadsContent] Component rendered with:', {
     leadsCount: leads.length,
@@ -71,9 +74,14 @@ export default function LeadsContent() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
+  const handleLeadsCreated = (count: number) => {
+    console.log(`📊 [LeadsContent] ${count} new leads created, refreshing...`);
+    refreshLeads();
+  };
+
   return (
     <>
-      <LeadsPrompt />
+      <LeadsPrompt onLeadsCreated={handleLeadsCreated} />
       <div id="leads-content" className="flex flex-col gap-6 p-6" suppressHydrationWarning>
         {/* Header Section */}
         <PageHeader
