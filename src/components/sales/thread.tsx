@@ -17,9 +17,9 @@ import {
   RefreshCwIcon,
   Square,
 } from "lucide-react";
-import type { FC } from "react";
 import { ThreadSelector } from "./thread-selector";
 import { ModelPicker } from "./ModelPicker";
+import type { FC } from "react";
 
 import {
   ComposerAddAttachment,

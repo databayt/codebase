@@ -12,88 +12,33 @@ Be friendly and professional. If you're not sure about something, say so.`;
 
 // Helper to get the model based on selection
 function getModel(modelName: string) {
-  console.log(`[Chat API] ============================================`);
-  console.log(`[Chat API] Requested model: ${modelName}`);
-  console.log(`[Chat API] Environment check:`);
-  console.log(`[Chat API]   GROQ_API_KEY: ${process.env.GROQ_API_KEY ? 'SET (length: ' + process.env.GROQ_API_KEY.length + ')' : 'NOT SET'}`);
-  console.log(`[Chat API]   ANTHROPIC_API_KEY: ${process.env.ANTHROPIC_API_KEY ? 'SET (length: ' + process.env.ANTHROPIC_API_KEY.length + ')' : 'NOT SET'}`);
-  console.log(`[Chat API] ============================================`);
-
   // Claude models
   if (modelName.startsWith("claude")) {
     if (!process.env.ANTHROPIC_API_KEY) {
-      console.error(`[Chat API] ERROR: ANTHROPIC_API_KEY not configured`);
       throw new Error("ANTHROPIC_API_KEY not configured");
     }
-    console.log(`[Chat API] Using Claude model: ${modelName}`);
     return anthropic(modelName);
   }
 
   // Default to Groq
   if (!process.env.GROQ_API_KEY) {
-    console.error(`[Chat API] ERROR: GROQ_API_KEY not configured`);
     throw new Error("GROQ_API_KEY not configured");
   }
-  console.log(`[Chat API] Using Groq model: ${modelName}`);
   return groq(modelName);
 }
 
 export async function POST(request: Request) {
-  const startTime = Date.now();
-  console.log(`\n[Chat API] ============================================`);
-  console.log(`[Chat API] NEW REQUEST at ${new Date().toISOString()}`);
-  console.log(`[Chat API] ============================================`);
-
   try {
-    // Log request headers
-    const headers = Object.fromEntries(request.headers.entries());
-    console.log("[Chat API] Request headers:", {
-      'content-type': headers['content-type'],
-      'user-agent': headers['user-agent'],
-      'origin': headers['origin'],
-      'referer': headers['referer']
-    });
-
-    // TEMPORARILY SKIP AUTH FOR DEBUGGING
+    // Optional: Get user for authentication context
     // const user = await currentUser();
-    // console.log(`[Chat API] User: ${user ? user.name : 'anonymous'}`);
-    const user = null; // Bypass auth temporarily
-    console.log("[Chat API] AUTH BYPASSED FOR DEBUGGING");
 
     // Parse request body
-    console.log("[Chat API] Parsing request body...");
     const body = await request.json();
-    console.log("[Chat API] Request body structure:", {
-      hasMessages: !!body.messages,
-      messageCount: body.messages?.length,
-      model: body.model,
-      firstMessage: body.messages?.[0] ? {
-        role: body.messages[0].role,
-        contentLength: typeof body.messages[0].content === 'string' ? body.messages[0].content.length : 'not a string',
-        contentPreview: typeof body.messages[0].content === 'string' ? body.messages[0].content.substring(0, 100) : body.messages[0].content
-      } : null
-    });
-
     const { messages, model = "llama-3.3-70b-versatile" } = body;
 
     if (!messages || !Array.isArray(messages)) {
-      console.error("[Chat API] ERROR: Invalid messages format:", {
-        messages,
-        isArray: Array.isArray(messages),
-        type: typeof messages
-      });
       return new Response("Invalid messages format", { status: 400 });
     }
-
-    console.log(`[Chat API] Processing ${messages.length} messages with model: ${model}`);
-    console.log(`[Chat API] Messages details:`, messages.map((m: any, i: number) => ({
-      index: i,
-      role: m.role,
-      contentType: typeof m.content,
-      contentLength: typeof m.content === 'string' ? m.content.length : 'N/A'
-    })));
-
-    console.log(`[Chat API] Creating stream with model...`);
 
     // Stream the response
     const result = await streamText({
@@ -161,28 +106,11 @@ export async function POST(request: Request) {
           },
         },
       },
-      // Track usage if user is authenticated
-      metadata: user ? { userId: user.id, userName: user.name } : undefined,
     });
 
-    console.log("[Chat API] Stream created successfully");
-    console.log(`[Chat API] Request processing time: ${Date.now() - startTime}ms`);
-    console.log("[Chat API] Returning streaming response...");
-
     // Return the streaming response in assistant-ui compatible format
-    const response = result.toUIMessageStreamResponse();
-    console.log("[Chat API] Response created (UI format), sending to client...");
-    return response;
+    return result.toUIMessageStreamResponse();
   } catch (error) {
-    const errorTime = Date.now() - startTime;
-    console.error(`[Chat API] ============================================`);
-    console.error(`[Chat API] ERROR OCCURRED after ${errorTime}ms`);
-    console.error("[Chat API] Error details:", error);
-    console.error(`[Chat API] Error type:`, error instanceof Error ? error.constructor.name : typeof error);
-    console.error(`[Chat API] Error message:`, error instanceof Error ? error.message : String(error));
-    console.error(`[Chat API] Error stack:`, error instanceof Error ? error.stack : 'No stack trace');
-    console.error(`[Chat API] ============================================`);
-
     if (error instanceof Error) {
       // Check for rate limiting
       if (error.message.includes("rate limit")) {

@@ -87,11 +87,12 @@ export const ModelPicker: FC = () => {
   };
 
   return (
-    <Select value={selectedModel} onValueChange={handleModelChange}>
-      <SelectTrigger className="h-8 w-[180px]" size="sm">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent className="">
+    <div className="flex flex-col gap-1">
+      <Select value={selectedModel} onValueChange={handleModelChange}>
+        <SelectTrigger className="max-w-[300px]">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent className="">
           <div className="px-2 py-1 text-xs font-medium text-muted-foreground">Groq Models</div>
           {groqModels.map((model) => (
             <SelectItem key={model.value} value={model.value}>
@@ -120,5 +121,6 @@ export const ModelPicker: FC = () => {
           ))}
         </SelectContent>
       </Select>
+    </div>
   );
 };
