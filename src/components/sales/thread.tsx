@@ -12,6 +12,8 @@ import {
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
   CopyIcon,
   PencilIcon,
   RefreshCwIcon,
@@ -20,7 +22,7 @@ import {
 import { VoiceIcon } from "@/components/atom/icons";
 import { ThreadSelector } from "./thread-selector";
 import { ModelPicker } from "./ModelPicker";
-import type { FC } from "react";
+import { type FC, useState, useRef, useEffect } from "react";
 
 import {
   ComposerAddAttachment,
@@ -45,7 +47,10 @@ export const Thread: FC = () => {
             ["--thread-max-width" as string]: "44rem",
           }}
         >
-          <ThreadPrimitive.Viewport className="aui-thread-viewport relative flex flex-1 flex-col overflow-x-auto overflow-y-scroll px-4">
+          <ThreadPrimitive.Viewport
+            className="aui-thread-viewport no-scrollbar relative flex flex-1 flex-col overflow-x-auto overflow-y-auto px-4 scroll-smooth"
+          >
+            <ThreadScrollToTop />
             <ThreadWelcome />
 
             <ThreadPrimitive.Messages
@@ -66,15 +71,51 @@ export const Thread: FC = () => {
   );
 };
 
+const ThreadScrollToTop: FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const viewport = document.querySelector('.aui-thread-viewport');
+    if (!viewport) return;
+
+    const handleScroll = () => {
+      setIsVisible(viewport.scrollTop > 100);
+    };
+
+    viewport.addEventListener('scroll', handleScroll);
+    return () => viewport.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    const viewport = document.querySelector('.aui-thread-viewport');
+    viewport?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="sticky top-2 z-50 flex justify-center pointer-events-none">
+      <TooltipIconButton
+        tooltip="Scroll to top"
+        variant="outline"
+        className="pointer-events-auto h-8 w-8 rounded-full bg-background/95 backdrop-blur-sm border-muted-foreground/20 shadow-sm hover:bg-accent"
+        onClick={scrollToTop}
+      >
+        <ChevronUpIcon className="size-4" />
+      </TooltipIconButton>
+    </div>
+  );
+};
+
 const ThreadScrollToBottom: FC = () => {
   return (
     <ThreadPrimitive.ScrollToBottom asChild>
       <TooltipIconButton
         tooltip="Scroll to bottom"
         variant="outline"
-        className="aui-thread-scroll-to-bottom absolute -top-12 z-10 self-center rounded-full p-4 disabled:invisible dark:bg-background dark:hover:bg-accent"
+        className="aui-thread-scroll-to-bottom absolute -top-14 z-50 self-center h-8 w-8 rounded-full bg-background/95 backdrop-blur-sm border-muted-foreground/20 shadow-sm hover:bg-accent disabled:invisible"
       >
-        <ArrowDownIcon />
+        <ChevronDownIcon className="size-4" />
       </TooltipIconButton>
     </ThreadPrimitive.ScrollToBottom>
   );

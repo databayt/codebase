@@ -42,4 +42,37 @@ body {
   scrollbar-width: none; /* Hides scrollbar in Firefox */
 }
 
- 
+/* Chat viewport custom scrollbar */
+.chat-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background: oklch(from var(--muted-foreground) l c h / 0.2);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.chat-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: oklch(from var(--muted-foreground) l c h / 0.3);
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: oklch(from var(--muted-foreground) l c h / 0.4);
+}
+
+/* Firefox scrollbar for chat */
+.chat-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(from var(--muted-foreground) l c h / 0.2) transparent;
+}
+
+.chat-scrollbar:hover {
+  scrollbar-color: oklch(from var(--muted-foreground) l c h / 0.3) transparent;
+}
+
