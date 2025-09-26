@@ -16,6 +16,7 @@ import {
   PencilIcon,
   RefreshCwIcon,
   Square,
+  Mic,
 } from "lucide-react";
 import type { FC } from "react";
 import { ThreadSelector } from "./thread-selector";
@@ -191,19 +192,31 @@ const ComposerAction: FC = () => {
       </div>
 
       <ThreadPrimitive.If running={false}>
-        <ComposerPrimitive.Send asChild>
+        <div className="flex items-center gap-2">
           <TooltipIconButton
-            tooltip="Send message"
+            tooltip="Voice input"
             side="bottom"
-            type="submit"
-            variant="default"
+            variant="outline"
             size="icon"
-            className="aui-composer-send size-[34px] rounded-full p-1"
-            aria-label="Send message"
+            className="h-8 w-8 rounded-full bg-background border-border hover:bg-blue-100 hover:border-transparent dark:hover:bg-blue-950 transition-colors"
+            aria-label="Voice input"
           >
-            <ArrowUpIcon className="aui-composer-send-icon size-5" />
+            <Mic className="size-3.5" />
           </TooltipIconButton>
-        </ComposerPrimitive.Send>
+          <ComposerPrimitive.Send asChild>
+            <TooltipIconButton
+              tooltip="Send message"
+              side="bottom"
+              type="submit"
+              variant="default"
+              size="icon"
+              className="aui-composer-send size-[34px] rounded-full p-1"
+              aria-label="Send message"
+            >
+              <ArrowUpIcon className="aui-composer-send-icon size-5" />
+            </TooltipIconButton>
+          </ComposerPrimitive.Send>
+        </div>
       </ThreadPrimitive.If>
 
       <ThreadPrimitive.If running>

@@ -1,14 +1,7 @@
 "use client";
-import {} from "@radix-ui/react-select";
-import Image from "next/image";
 import { type FC, useState } from "react";
-import anthropic from "./providers/anthropic.svg";
-import fireworks from "./providers/fireworks.svg";
-import google from "./providers/google.svg";
-import deepseek from "./providers/deepseek.svg";
-import meta from "./providers/meta.svg";
-import mistral from "./providers/mistral.svg";
-import openai from "./providers/openai.svg";
+import { Claude } from "@/components/atom/icons";
+import { Bot } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -18,60 +11,21 @@ import {
 } from "../ui/select";
 import { useThreadRuntime } from "@assistant-ui/react";
 
-// Groq models (using Meta icon for Llama models)
-const groqModels = [
+// Simplified model options
+const models = [
   {
-    name: "Llama 3.3 70B",
+    name: "Groq",
     value: "llama-3.3-70b-versatile",
-    icon: meta,
-    provider: "groq",
+    icon: Bot, // Using Bot icon for Groq since there's no specific Groq icon
   },
   {
-    name: "Llama 3.2 90B",
-    value: "llama-3.2-90b-text-preview",
-    icon: meta,
-    provider: "groq",
-  },
-  {
-    name: "Mixtral 8x7B",
-    value: "mixtral-8x7b-32768",
-    icon: mistral,
-    provider: "groq",
-  },
-  {
-    name: "Gemma 2 9B",
-    value: "gemma2-9b-it",
-    icon: google,
-    provider: "groq",
-  },
-];
-
-// Claude models
-const claudeModels = [
-  {
-    name: "Claude 3.5 Sonnet",
+    name: "Claude",
     value: "claude-3-5-sonnet-20241022",
-    icon: anthropic,
-    provider: "claude",
-  },
-  {
-    name: "Claude 3.5 Haiku",
-    value: "claude-3-5-haiku-20241022",
-    icon: anthropic,
-    provider: "claude",
-  },
-  {
-    name: "Claude 3 Opus",
-    value: "claude-3-opus-20240229",
-    icon: anthropic,
-    provider: "claude",
+    icon: Claude,
   },
 ];
-
-// Combine all models
-const allModels = [...groqModels, ...claudeModels];
 export const ModelPicker: FC = () => {
-  const [selectedModel, setSelectedModel] = useState(groqModels[0]?.value ?? "");
+  const [selectedModel, setSelectedModel] = useState(models[0]?.value ?? "");
   const threadRuntime = useThreadRuntime();
 
   // Handle model change
@@ -86,39 +40,30 @@ export const ModelPicker: FC = () => {
     }
   };
 
+  const selectedModelData = models.find(m => m.value === selectedModel);
+
   return (
     <Select value={selectedModel} onValueChange={handleModelChange}>
-      <SelectTrigger className="h-8 w-[180px]" size="sm">
-        <SelectValue />
+      <SelectTrigger className="h-8 w-[100px] rounded-full bg-background border-border hover:bg-blue-100 hover:border-transparent dark:hover:bg-blue-950 transition-colors" size="sm">
+        <SelectValue>
+          {selectedModelData && (
+            <span className="flex items-center gap-1.5">
+              <selectedModelData.icon className="size-3.5" />
+              <span>{selectedModelData.name}</span>
+            </span>
+          )}
+        </SelectValue>
       </SelectTrigger>
-      <SelectContent className="">
-          <div className="px-2 py-1 text-xs font-medium text-muted-foreground">Groq Models</div>
-          {groqModels.map((model) => (
-            <SelectItem key={model.value} value={model.value}>
-              <span className="flex items-center gap-2">
-                <Image
-                  src={model.icon}
-                  alt={model.name}
-                  className="inline size-4"
-                />
-                <span>{model.name}</span>
-              </span>
-            </SelectItem>
-          ))}
-          <div className="px-2 py-1 text-xs font-medium text-muted-foreground mt-2">Claude Models</div>
-          {claudeModels.map((model) => (
-            <SelectItem key={model.value} value={model.value}>
-              <span className="flex items-center gap-2">
-                <Image
-                  src={model.icon}
-                  alt={model.name}
-                  className="inline size-4"
-                />
-                <span>{model.name}</span>
-              </span>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <SelectContent>
+        {models.map((model) => (
+          <SelectItem key={model.value} value={model.value}>
+            <span className="flex items-center gap-2">
+              <model.icon className="size-3.5" />
+              <span>{model.name}</span>
+            </span>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };

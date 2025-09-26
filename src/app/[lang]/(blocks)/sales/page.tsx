@@ -1,6 +1,6 @@
 "use client";
 
-import { Shadcn } from "@/components/chatgpt/Shadcn";
+import { Shadcn } from "@/components/sales/Shadcn";
 import { DocsRuntimeProvider } from "./DocsRuntimeProvider";
 import { Providers } from "./providers";
 

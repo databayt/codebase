@@ -1,14 +1,6 @@
 "use client";
-import {} from "@radix-ui/react-select";
-import Image from "next/image";
 import { type FC, useState } from "react";
-import anthropic from "./providers/anthropic.svg";
-import fireworks from "./providers/fireworks.svg";
-import google from "./providers/google.svg";
-import deepseek from "./providers/deepseek.svg";
-import meta from "./providers/meta.svg";
-import mistral from "./providers/mistral.svg";
-import openai from "./providers/openai.svg";
+import { AILogoIcon, AIBrainIcon } from "@/components/atom/icons";
 import {
   Select,
   SelectContent,
@@ -16,111 +8,57 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useThreadRuntime } from "@assistant-ui/react";
 
-// Groq models (using Meta icon for Llama models)
-const groqModels = [
-  {
-    name: "Llama 3.3 70B",
-    value: "llama-3.3-70b-versatile",
-    icon: meta,
-    provider: "groq",
-  },
-  {
-    name: "Llama 3.2 90B",
-    value: "llama-3.2-90b-text-preview",
-    icon: meta,
-    provider: "groq",
-  },
-  {
-    name: "Mixtral 8x7B",
-    value: "mixtral-8x7b-32768",
-    icon: mistral,
-    provider: "groq",
-  },
-  {
-    name: "Gemma 2 9B",
-    value: "gemma2-9b-it",
-    icon: google,
-    provider: "groq",
-  },
-];
-
-// Claude models
-const claudeModels = [
-  {
-    name: "Claude 3.5 Sonnet",
-    value: "claude-3-5-sonnet-20241022",
-    icon: anthropic,
-    provider: "claude",
-  },
-  {
-    name: "Claude 3.5 Haiku",
-    value: "claude-3-5-haiku-20241022",
-    icon: anthropic,
-    provider: "claude",
-  },
-  {
-    name: "Claude 3 Opus",
-    value: "claude-3-opus-20240229",
-    icon: anthropic,
-    provider: "claude",
-  },
-];
-
-// Combine all models
-const allModels = [...groqModels, ...claudeModels];
 export const ModelPicker: FC = () => {
-  const [selectedModel, setSelectedModel] = useState(groqModels[0]?.value ?? "");
-  const threadRuntime = useThreadRuntime();
+  const [selectedModel, setSelectedModel] = useState<'groq' | 'claude'>('groq');
 
   // Handle model change
-  const handleModelChange = (value: string) => {
+  const handleModelChange = (value: 'groq' | 'claude') => {
     setSelectedModel(value);
 
     // Store selected model in localStorage for the runtime to use
     if (typeof window !== 'undefined') {
-      localStorage.setItem('selectedModel', value);
+      const modelValue = value === 'groq' ? 'llama-3.3-70b-versatile' : 'claude-3-5-sonnet-20241022';
+      localStorage.setItem('selectedModel', modelValue);
       // Dispatch custom event to notify runtime
       window.dispatchEvent(new Event('modelChanged'));
     }
   };
 
   return (
-    <div className="flex flex-col gap-1">
-      <Select value={selectedModel} onValueChange={handleModelChange}>
-        <SelectTrigger className="max-w-[300px]">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent className="">
-          <div className="px-2 py-1 text-xs font-medium text-muted-foreground">Groq Models</div>
-          {groqModels.map((model) => (
-            <SelectItem key={model.value} value={model.value}>
-              <span className="flex items-center gap-2">
-                <Image
-                  src={model.icon}
-                  alt={model.name}
-                  className="inline size-4"
-                />
-                <span>{model.name}</span>
-              </span>
-            </SelectItem>
-          ))}
-          <div className="px-2 py-1 text-xs font-medium text-muted-foreground mt-2">Claude Models</div>
-          {claudeModels.map((model) => (
-            <SelectItem key={model.value} value={model.value}>
-              <span className="flex items-center gap-2">
-                <Image
-                  src={model.icon}
-                  alt={model.name}
-                  className="inline size-4"
-                />
-                <span>{model.name}</span>
-              </span>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+    <Select value={selectedModel} onValueChange={(value) => handleModelChange(value as 'groq' | 'claude')}>
+      <SelectTrigger
+        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-100 ease-in-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-muted hover:bg-blue-100 hover:border-transparent h-8 gap-1.5 rounded-full px-2.5 text-muted-foreground hover:text-foreground w-auto min-w-[100px]"
+        size="sm"
+      >
+        <div className="flex items-center gap-1.5">
+          {selectedModel === 'groq' ? (
+            <>
+              <AILogoIcon className="h-4 w-4" />
+              <span>Groq</span>
+            </>
+          ) : (
+            <>
+              <AIBrainIcon className="h-4 w-4" />
+              <span>Claude</span>
+            </>
+          )}
+        </div>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="groq">
+          <div className="flex items-center gap-2">
+            <AILogoIcon className="h-4 w-4" />
+            <span>Groq</span>
+          </div>
+        </SelectItem>
+        <SelectItem value="claude">
+          <div className="flex items-center gap-2">
+            <AIBrainIcon className="h-4 w-4" />
+            <span>Claude</span>
+          </div>
+        </SelectItem>
+      </SelectContent>
+    </Select>
   );
 };

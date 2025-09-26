@@ -17,6 +17,7 @@ import {
   RefreshCwIcon,
   Square,
 } from "lucide-react";
+import { VoiceIcon } from "@/components/atom/icons";
 import { ThreadSelector } from "./thread-selector";
 import { ModelPicker } from "./ModelPicker";
 import type { FC } from "react";
@@ -110,7 +111,8 @@ const ThreadWelcome: FC = () => {
 };
 
 const ThreadWelcomeSuggestions: FC = () => {
-  return (
+  return null; // Commented out for now - will activate later
+  /*
     <div className="aui-thread-welcome-suggestions grid w-full gap-2 @md:grid-cols-2">
       {[
         {
@@ -154,7 +156,7 @@ const ThreadWelcomeSuggestions: FC = () => {
         </m.div>
       ))}
     </div>
-  );
+  */
 };
 
 const Composer: FC = () => {
@@ -191,19 +193,31 @@ const ComposerAction: FC = () => {
       </div>
 
       <ThreadPrimitive.If running={false}>
-        <ComposerPrimitive.Send asChild>
+        <div className="flex items-center gap-2">
           <TooltipIconButton
-            tooltip="Send message"
+            tooltip="Voice input"
             side="bottom"
-            type="submit"
-            variant="default"
+            variant="outline"
             size="icon"
-            className="aui-composer-send size-[34px] rounded-full p-1"
-            aria-label="Send message"
+            className="h-8 w-8 rounded-full bg-muted border-border hover:bg-blue-100 hover:border-transparent dark:hover:bg-blue-950 transition-colors"
+            aria-label="Voice input"
           >
-            <ArrowUpIcon className="aui-composer-send-icon size-5" />
+            <VoiceIcon className="size-3.5" />
           </TooltipIconButton>
-        </ComposerPrimitive.Send>
+          <ComposerPrimitive.Send asChild>
+            <TooltipIconButton
+              tooltip="Send message"
+              side="bottom"
+              type="submit"
+              variant="default"
+              size="icon"
+              className="aui-composer-send h-8 w-8 rounded-full"
+              aria-label="Send message"
+            >
+              <ArrowUpIcon className="aui-composer-send-icon size-3.5" />
+            </TooltipIconButton>
+          </ComposerPrimitive.Send>
+        </div>
       </ThreadPrimitive.If>
 
       <ThreadPrimitive.If running>
@@ -212,10 +226,10 @@ const ComposerAction: FC = () => {
             type="button"
             variant="default"
             size="icon"
-            className="aui-composer-cancel size-[34px] rounded-full border border-muted-foreground/60 hover:bg-primary/75 dark:border-muted-foreground/90"
+            className="aui-composer-cancel h-8 w-8 rounded-full border border-muted-foreground/60 hover:bg-primary/75 dark:border-muted-foreground/90"
             aria-label="Stop generating"
           >
-            <Square className="aui-composer-cancel-icon size-3.5 fill-white dark:fill-black" />
+            <Square className="aui-composer-cancel-icon size-3 fill-white dark:fill-black" />
           </Button>
         </ComposerPrimitive.Cancel>
       </ThreadPrimitive.If>

@@ -65,11 +65,11 @@ export const Shadcn = () => {
   const topStyle = "border-b";
 
   return (
-    <div className="grid h-full w-full grid-rows-[auto_1fr]">
-      <div className={cn(sideStyle, topStyle)}>
+    <div className="h-full w-full">
+      {/* <div className={cn(sideStyle, topStyle)}>
         <Header />
-      </div>
-      <div className="overflow-hidden bg-background">
+      </div> */}
+      <div className="h-full overflow-hidden bg-background">
         <Thread />
       </div>
     </div>

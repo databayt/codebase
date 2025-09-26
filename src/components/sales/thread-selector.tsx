@@ -38,10 +38,12 @@ export const ThreadSelector: FC = () => {
     <ThreadListPrimitive.Root>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="h-8 gap-1">
-            <MessageSquare className="size-3.5" />
+          <Button
+            variant="outline"
+            size="sm"
+            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-100 ease-in-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-muted hover:bg-blue-100 hover:border-transparent h-8 gap-1.5 rounded-full px-2.5 text-muted-foreground hover:text-foreground w-auto"
+          >
             <span>Threads</span>
-            <ChevronDown className="size-3.5" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-56">

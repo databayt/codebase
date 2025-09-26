@@ -355,7 +355,7 @@ An error occurred while processing your request. Please try again.`);
               )}>
                 {hasInteracted && !isInputFocused && (
                   <PromptInputActionMenu>
-                    <PromptInputActionMenuTrigger className="h-8 w-8 rounded-full hover:bg-blue-100 p-0">
+                    <PromptInputActionMenuTrigger className="h-8 w-8 rounded-full bg-muted hover:bg-blue-100 p-0">
                       <PlusIcon className="h-5 w-5" />
                     </PromptInputActionMenuTrigger>
                     <PromptInputActionMenuContent>
@@ -388,7 +388,7 @@ An error occurred while processing your request. Please try again.`);
                 {hasInteracted && !isInputFocused && (
                   <div className="flex items-center gap-1">
                     <PromptInputButton
-                      className="h-8 w-8 rounded-full hover:bg-blue-100"
+                      className="h-8 w-8 rounded-full bg-muted hover:bg-blue-100"
                       onClick={() => console.log('Voice input activated')}
                     >
                       <VoiceIcon className="h-5 w-5" />
