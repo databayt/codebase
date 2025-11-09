@@ -37,6 +37,16 @@ export function MainNav({ dictionary }: MainNavProps) {
           <h6>{dictionary?.navigation?.docs || "Docs"}</h6>
         </Link>
         <Link
+          href="/atom"
+          className={cn(
+            pathname?.startsWith("/atom")
+              ? "text-foreground"
+              : ""
+          )}
+        >
+          <h6>{dictionary?.navigation?.atoms || "Atoms"}</h6>
+        </Link>
+        <Link
           href="/docs/components"
           className={cn(
             pathname?.startsWith("/docs/components") &&
@@ -45,7 +55,7 @@ export function MainNav({ dictionary }: MainNavProps) {
               : ""
           )}
         >
-          <h6>{dictionary?.navigation?.atoms || "Atoms"}</h6>
+          <h6>{dictionary?.navigation?.components || "Components"}</h6>
         </Link>
         <Link
           href="/templates"

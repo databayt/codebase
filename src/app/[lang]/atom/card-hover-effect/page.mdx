@@ -1,0 +1,301 @@
+import { HoverEffect } from "@/components/atom/card-hover-effect"
+import { ComponentSource } from "@/components/docs/component-source"
+
+# Card Hover Effect
+
+An interactive card grid with smooth hover animations. Features a subtle background effect that follows your cursor, perfect for feature showcases, service listings, or portfolio items.
+
+## Preview
+
+<div className="w-full my-8 border rounded-lg p-4 bg-background">
+  <HoverEffect
+    items={[
+      {
+        title: "Real-time Collaboration",
+        description: "Work together with your team in real-time with live cursors and presence.",
+        link: "#",
+      },
+      {
+        title: "Advanced Analytics",
+        description: "Get insights into your data with powerful analytics and reporting tools.",
+        link: "#",
+      },
+      {
+        title: "Seamless Integration",
+        description: "Connect with your favorite tools and services with our extensive API.",
+        link: "#",
+      },
+    ]}
+  />
+</div>
+
+## Installation
+
+### Install dependencies
+
+```bash
+pnpm add framer-motion
+```
+
+### Copy the component code
+
+<ComponentSource
+  fileName="components/atom/card-hover-effect.tsx"
+  language="tsx"
+  code={`"use client";
+
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+
+export const HoverEffect = ({
+  items,
+  className,
+}: {
+  items: {
+    title: string;
+    description: string;
+    link: string;
+    image?: string;
+  }[];
+  className?: string;
+}) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10",
+        className
+      )}
+    >
+      {items.map((item, idx) => (
+        <a
+          href={item?.link}
+          key={item?.link}
+          className="relative group block p-2 h-full w-full"
+          onMouseEnter={() => setHoveredIndex(idx)}
+          onMouseLeave={() => setHoveredIndex(null)}
+        >
+          <AnimatePresence>
+            {hoveredIndex === idx && (
+              <motion.span
+                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block rounded-3xl"
+                layoutId="hoverBackground"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.15 },
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: 0.15, delay: 0.2 },
+                }}
+              />
+            )}
+          </AnimatePresence>
+          <Card>
+            <CardTitle>{item.title}</CardTitle>
+            <CardDescription>{item.description}</CardDescription>
+          </Card>
+        </a>
+      ))}
+    </div>
+  );
+};
+
+export const Card = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <div
+      className={cn(
+        "rounded-2xl h-full w-full p-4 overflow-hidden bg-background border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        className
+      )}
+    >
+      <div className="relative z-50">
+        <div className="p-4">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+export const CardTitle = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <h4 className={cn("text-foreground font-bold tracking-wide mt-4", className)}>
+      {children}
+    </h4>
+  );
+};
+
+export const CardDescription = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <p
+      className={cn(
+        "mt-8 text-muted-foreground tracking-wide leading-relaxed text-sm",
+        className
+      )}
+    >
+      {children}
+    </p>
+  );
+};`}
+/>
+
+## Usage
+
+```tsx
+import { HoverEffect } from "@/components/atom/card-hover-effect"
+
+export default function Example() {
+  const items = [
+    {
+      title: "Feature One",
+      description: "Description of your first feature",
+      link: "/feature-one",
+    },
+    {
+      title: "Feature Two",
+      description: "Description of your second feature",
+      link: "/feature-two",
+    },
+  ]
+
+  return <HoverEffect items={items} />
+}
+```
+
+## Examples
+
+### Two Columns
+
+<div className="w-full my-8 border rounded-lg p-4 bg-background">
+  <HoverEffect
+    className="grid-cols-1 md:grid-cols-2"
+    items={[
+      {
+        title: "Design System",
+        description: "Build consistent user interfaces with our comprehensive design system.",
+        link: "#",
+      },
+      {
+        title: "Component Library",
+        description: "Access a rich collection of pre-built, customizable components.",
+        link: "#",
+      },
+    ]}
+  />
+</div>
+
+```tsx
+<HoverEffect
+  className="grid-cols-1 md:grid-cols-2"
+  items={items}
+/>
+```
+
+### Services Showcase
+
+<div className="w-full my-8 border rounded-lg p-4 bg-background">
+  <HoverEffect
+    items={[
+      {
+        title: "Web Development",
+        description: "Create fast, responsive websites with modern technologies and best practices.",
+        link: "#",
+      },
+      {
+        title: "Mobile Apps",
+        description: "Build native-quality mobile applications for iOS and Android platforms.",
+        link: "#",
+      },
+      {
+        title: "Cloud Solutions",
+        description: "Deploy scalable cloud infrastructure with automated deployment pipelines.",
+        link: "#",
+      },
+      {
+        title: "UI/UX Design",
+        description: "Design beautiful interfaces that users love with data-driven insights.",
+        link: "#",
+      },
+      {
+        title: "SEO Optimization",
+        description: "Improve your search rankings and drive organic traffic to your site.",
+        link: "#",
+      },
+      {
+        title: "Technical Support",
+        description: "Get 24/7 technical support from our team of experienced engineers.",
+        link: "#",
+      },
+    ]}
+  />
+</div>
+
+```tsx
+<HoverEffect
+  items={[
+    {
+      title: "Web Development",
+      description: "Create fast, responsive websites...",
+      link: "/services/web",
+    },
+    // ... more items
+  ]}
+/>
+```
+
+## Props
+
+### HoverEffect
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `Array<{title: string, description: string, link: string, image?: string}>` | - | Array of card items to display |
+| `className` | `string` | - | Additional CSS classes for the grid container |
+
+### Card, CardTitle, CardDescription
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to display |
+| `className` | `string` | - | Additional CSS classes |
+
+## Use Cases
+
+- **Feature Showcases**: Highlight product features or capabilities
+- **Service Listings**: Display services offered by your business
+- **Portfolio Items**: Show case studies or projects
+- **Team Members**: Present team members with hover interactions
+- **Product Categories**: Navigate between different product types
+- **Resource Links**: Create an engaging resource directory
+
+## Technical Details
+
+The component uses Framer Motion's `AnimatePresence` and `layoutId` to create a smooth, shared layout animation effect. The hover background follows the cursor between cards, creating a fluid and polished interaction. The animation respects `prefers-reduced-motion` settings for accessibility.
+
+## Accessibility
+
+- Semantic HTML with `<a>` tags for proper link behavior
+- Keyboard navigation support
+- Focus states for interactive elements
+- Works with screen readers
+- Respects reduced motion preferences

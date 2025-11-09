@@ -1,0 +1,237 @@
+import { ProgressiveBlur } from "@/components/atom/progressive-blur"
+import { ComponentSource } from "@/components/docs/component-source"
+
+# Progressive Blur
+
+A directional blur effect that progressively blurs content from one direction. Perfect for creating depth, focus effects, or elegant content fade-outs.
+
+## Preview
+
+<div className="w-full my-8 space-y-8">
+  <div className="relative h-64 border rounded-lg overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+    <div className="text-white text-4xl font-bold">Content Behind Blur</div>
+    <ProgressiveBlur direction="bottom" blurLayers={10} blurIntensity={0.5} className="absolute inset-0" />
+  </div>
+</div>
+
+## Installation
+
+### Install dependencies
+
+```bash
+pnpm add framer-motion
+```
+
+### Copy the component code
+
+<ComponentSource
+  fileName="components/atom/progressive-blur.tsx"
+  language="tsx"
+  code={`'use client';
+import { cn } from '@/lib/utils';
+import { HTMLMotionProps, motion } from 'framer-motion';
+
+export const GRADIENT_ANGLES = {
+  top: 0,
+  right: 90,
+  bottom: 180,
+  left: 270,
+};
+
+export type ProgressiveBlurProps = {
+  direction?: keyof typeof GRADIENT_ANGLES;
+  blurLayers?: number;
+  className?: string;
+  blurIntensity?: number;
+} & HTMLMotionProps<'div'>;
+
+export function ProgressiveBlur({
+  direction = 'bottom',
+  blurLayers = 8,
+  className,
+  blurIntensity = 0.25,
+  ...props
+}: ProgressiveBlurProps) {
+  const layers = Math.max(blurLayers, 2);
+  const segmentSize = 1 / (blurLayers + 1);
+
+  return (
+    <div className={cn('relative', className)}>
+      {Array.from({ length: layers }).map((_, index) => {
+        const angle = GRADIENT_ANGLES[direction];
+        const gradientStops = [
+          index * segmentSize,
+          (index + 1) * segmentSize,
+          (index + 2) * segmentSize,
+          (index + 3) * segmentSize,
+        ].map(
+          (pos, posIndex) =>
+            \`rgba(255, 255, 255, \${posIndex === 1 || posIndex === 2 ? 1 : 0}) \${pos * 100}%\`
+        );
+
+        const gradient = \`linear-gradient(\${angle}deg, \${gradientStops.join(
+          ', '
+        )})\`;
+
+        return (
+          <motion.div
+            key={index}
+            className='pointer-events-none absolute inset-0 rounded-[inherit]'
+            style={{
+              maskImage: gradient,
+              WebkitMaskImage: gradient,
+              backdropFilter: \`blur(\${index * blurIntensity}px)\`,
+            }}
+            {...props}
+          />
+        );
+      })}
+    </div>
+  );
+}`}
+/>
+
+## Usage
+
+```tsx
+import { ProgressiveBlur } from "@/components/atom/progressive-blur"
+
+export default function Example() {
+  return (
+    <div className="relative h-96 bg-gradient-to-r from-pink-500 to-orange-500">
+      <ProgressiveBlur direction="bottom" blurLayers={8} />
+    </div>
+  )
+}
+```
+
+## Examples
+
+### Blur from Top
+
+<div className="w-full my-8">
+  <div className="relative h-48 border rounded-lg overflow-hidden bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center">
+    <div className="text-white text-2xl font-bold">Top Blur Effect</div>
+    <ProgressiveBlur direction="top" blurLayers={8} blurIntensity={0.4} className="absolute inset-0" />
+  </div>
+</div>
+
+```tsx
+<ProgressiveBlur direction="top" blurLayers={8} blurIntensity={0.4} />
+```
+
+### Blur from Left
+
+<div className="w-full my-8">
+  <div className="relative h-48 border rounded-lg overflow-hidden bg-gradient-to-r from-red-500 to-pink-500 flex items-center justify-center">
+    <div className="text-white text-2xl font-bold">Left Blur Effect</div>
+    <ProgressiveBlur direction="left" blurLayers={10} blurIntensity={0.3} className="absolute inset-0" />
+  </div>
+</div>
+
+```tsx
+<ProgressiveBlur direction="left" blurLayers={10} blurIntensity={0.3} />
+```
+
+### Blur from Right
+
+<div className="w-full my-8">
+  <div className="relative h-48 border rounded-lg overflow-hidden bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center justify-center">
+    <div className="text-white text-2xl font-bold">Right Blur Effect</div>
+    <ProgressiveBlur direction="right" blurLayers={8} blurIntensity={0.35} className="absolute inset-0" />
+  </div>
+</div>
+
+```tsx
+<ProgressiveBlur direction="right" blurLayers={8} blurIntensity={0.35} />
+```
+
+### High Intensity Blur
+
+<div className="w-full my-8">
+  <div className="relative h-48 border rounded-lg overflow-hidden bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center">
+    <div className="text-white text-2xl font-bold">Intense Blur</div>
+    <ProgressiveBlur direction="bottom" blurLayers={12} blurIntensity={0.8} className="absolute inset-0" />
+  </div>
+</div>
+
+```tsx
+<ProgressiveBlur direction="bottom" blurLayers={12} blurIntensity={0.8} />
+```
+
+### Text Overlay with Blur
+
+<div className="w-full my-8">
+  <div className="relative h-64 border rounded-lg overflow-hidden">
+    <img
+      src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop"
+      alt="Landscape"
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 flex flex-col justify-end p-8">
+      <h3 className="text-white text-3xl font-bold mb-2">Mountain Vista</h3>
+      <p className="text-white/90">Experience the beauty of nature</p>
+    </div>
+    <ProgressiveBlur direction="bottom" blurLayers={10} blurIntensity={0.4} className="absolute inset-0" />
+  </div>
+</div>
+
+```tsx
+<div className="relative h-64">
+  <img src="/image.jpg" alt="..." className="w-full h-full object-cover" />
+  <div className="absolute inset-0 flex flex-col justify-end p-8">
+    <h3 className="text-white text-3xl font-bold">Title</h3>
+    <p className="text-white/90">Description</p>
+  </div>
+  <ProgressiveBlur direction="bottom" blurLayers={10} blurIntensity={0.4} />
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Direction of blur progression |
+| `blurLayers` | `number` | `8` | Number of blur layers (more = smoother) |
+| `blurIntensity` | `number` | `0.25` | Intensity multiplier for blur effect |
+| `className` | `string` | - | Additional CSS classes |
+
+## Use Cases
+
+- **Image Overlays**: Create focus on text over images
+- **Content Fade-outs**: Gracefully fade content at edges
+- **Card Depth Effects**: Add depth to card components
+- **Modal Backgrounds**: Blur content behind modals
+- **Reading Focus**: Reduce distraction at content edges
+- **Gallery Effects**: Create artistic blur transitions
+- **Video Overlays**: Blur video backgrounds for text readability
+
+## Technical Details
+
+The component creates multiple layers of backdrop blur with gradient masks, each layer having progressively stronger blur. This creates a smooth transition from sharp to blurred content.
+
+The blur direction is controlled via CSS linear gradients at different angles (0° for top, 90° for right, 180° for bottom, 270° for left).
+
+## Performance
+
+The component uses `backdrop-filter` which is GPU-accelerated. However, multiple blur layers can be intensive on lower-end devices. Consider:
+
+- Using fewer `blurLayers` (4-6) for mobile devices
+- Reducing `blurIntensity` for better performance
+- Testing on target devices
+
+## Browser Support
+
+Works in all modern browsers that support `backdrop-filter`:
+- Chrome 76+
+- Safari 9+
+- Firefox 103+
+- Edge 79+
+
+## Tips
+
+- Start with 8 blur layers for most use cases
+- Adjust `blurIntensity` between 0.2-0.5 for subtle effects
+- Use `direction="bottom"` for text overlays on images
+- Combine with gradients for richer visual effects
+- Test readability of overlaid text

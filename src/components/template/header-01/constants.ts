@@ -38,11 +38,15 @@ export const docsConfig: DocsConfig = {
             href: "/docs",
         },
         {
+            title: "Atoms",
+            href: "/atom",
+        },
+        {
             title: "Components",
             href: "/docs/components/accordion",
         },
         {
-            title: "templates",
+            title: "Templates",
             href: "/templates",
         },
         {

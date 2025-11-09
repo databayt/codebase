@@ -1,0 +1,268 @@
+import { InfiniteSlider } from "@/components/atom/infinite-slider"
+import { ComponentSource } from "@/components/docs/component-source"
+
+# Infinite Slider
+
+An infinite auto-scrolling slider component with customizable speed and direction. Perfect for logo carousels, testimonial sliders, and continuous content feeds.
+
+## Preview
+
+<div className="w-full my-8 border rounded-lg p-8 bg-background">
+  <InfiniteSlider speed={50} gap={16}>
+    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">1</div>
+    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">2</div>
+    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">3</div>
+    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">4</div>
+    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">5</div>
+  </InfiniteSlider>
+</div>
+
+## Installation
+
+### Install dependencies
+
+```bash
+pnpm add framer-motion react-use-measure
+```
+
+### Copy the component code
+
+<ComponentSource
+  fileName="components/atom/infinite-slider.tsx"
+  language="tsx"
+  code={`'use client';
+import { cn } from '@/lib/utils';
+import { useMotionValue, animate, motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import useMeasure from 'react-use-measure';
+
+export type InfiniteSliderProps = {
+  children: React.ReactNode;
+  gap?: number;
+  speed?: number;
+  speedOnHover?: number;
+  direction?: 'horizontal' | 'vertical';
+  reverse?: boolean;
+  className?: string;
+};
+
+export function InfiniteSlider({
+  children,
+  gap = 16,
+  speed = 100,
+  speedOnHover,
+  direction = 'horizontal',
+  reverse = false,
+  className,
+}: InfiniteSliderProps) {
+  const [currentSpeed, setCurrentSpeed] = useState(speed);
+  const [ref, { width, height }] = useMeasure();
+  const translation = useMotionValue(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    let controls;
+    const size = direction === 'horizontal' ? width : height;
+    const contentSize = size + gap;
+    const from = reverse ? -contentSize / 2 : 0;
+    const to = reverse ? 0 : -contentSize / 2;
+
+    const distanceToTravel = Math.abs(to - from);
+    const duration = distanceToTravel / currentSpeed;
+
+    if (isTransitioning) {
+      const remainingDistance = Math.abs(translation.get() - to);
+      const transitionDuration = remainingDistance / currentSpeed;
+
+      controls = animate(translation, [translation.get(), to], {
+        ease: 'linear',
+        duration: transitionDuration,
+        onComplete: () => {
+          setIsTransitioning(false);
+          setKey((prevKey) => prevKey + 1);
+        },
+      });
+    } else {
+      controls = animate(translation, [from, to], {
+        ease: 'linear',
+        duration: duration,
+        repeat: Infinity,
+        repeatType: 'loop',
+        repeatDelay: 0,
+        onRepeat: () => {
+          translation.set(from);
+        },
+      });
+    }
+
+    return controls?.stop;
+  }, [
+    key,
+    translation,
+    currentSpeed,
+    width,
+    height,
+    gap,
+    isTransitioning,
+    direction,
+    reverse,
+  ]);
+
+  const hoverProps = speedOnHover
+    ? {
+        onHoverStart: () => {
+          setIsTransitioning(true);
+          setCurrentSpeed(speedOnHover);
+        },
+        onHoverEnd: () => {
+          setIsTransitioning(true);
+          setCurrentSpeed(speed);
+        },
+      }
+    : {};
+
+  return (
+    <div className={cn('overflow-hidden', className)}>
+      <motion.div
+        className='flex w-max'
+        style={{
+          ...(direction === 'horizontal'
+            ? { x: translation }
+            : { y: translation }),
+          gap: \`\${gap}px\`,
+          flexDirection: direction === 'horizontal' ? 'row' : 'column',
+        }}
+        ref={ref}
+        {...hoverProps}
+      >
+        {children}
+        {children}
+      </motion.div>
+    </div>
+  );
+}`}
+/>
+
+## Usage
+
+```tsx
+import { InfiniteSlider } from "@/components/atom/infinite-slider"
+
+export default function Example() {
+  return (
+    <InfiniteSlider speed={100}>
+      <div className="w-32 h-32 bg-primary rounded-lg">Item 1</div>
+      <div className="w-32 h-32 bg-primary rounded-lg">Item 2</div>
+      <div className="w-32 h-32 bg-primary rounded-lg">Item 3</div>
+    </InfiniteSlider>
+  )
+}
+```
+
+## Examples
+
+### Reverse Direction
+
+<div className="w-full my-8 border rounded-lg p-8 bg-background">
+  <InfiniteSlider speed={50} reverse={true}>
+    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
+    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
+    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
+    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
+  </InfiniteSlider>
+</div>
+
+```tsx
+<InfiniteSlider speed={50} reverse={true}>
+  {/* Your content */}
+</InfiniteSlider>
+```
+
+### With Hover Speed Change
+
+<div className="w-full my-8 border rounded-lg p-8 bg-background">
+  <InfiniteSlider speed={50} speedOnHover={10}>
+    <div className="w-40 h-24 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-semibold">Hover me!</div>
+    <div className="w-40 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-semibold">Hover me!</div>
+    <div className="w-40 h-24 bg-gradient-to-r from-pink-500 to-red-500 rounded-lg flex items-center justify-center text-white font-semibold">Hover me!</div>
+  </InfiniteSlider>
+</div>
+
+```tsx
+<InfiniteSlider speed={50} speedOnHover={10}>
+  {/* Slows down on hover */}
+</InfiniteSlider>
+```
+
+### Faster Speed
+
+<div className="w-full my-8 border rounded-lg p-8 bg-background">
+  <InfiniteSlider speed={150} gap={24}>
+    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">🚀</div>
+    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">⚡</div>
+    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">💨</div>
+    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">🔥</div>
+  </InfiniteSlider>
+</div>
+
+```tsx
+<InfiniteSlider speed={150} gap={24}>
+  {/* Faster animation */}
+</InfiniteSlider>
+```
+
+### Logo Carousel Example
+
+<div className="w-full my-8 border rounded-lg p-8 bg-background">
+  <InfiniteSlider speed={40} gap={48}>
+    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
+      <span className="text-lg font-bold">Company 1</span>
+    </div>
+    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
+      <span className="text-lg font-bold">Company 2</span>
+    </div>
+    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
+      <span className="text-lg font-bold">Company 3</span>
+    </div>
+    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
+      <span className="text-lg font-bold">Company 4</span>
+    </div>
+    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
+      <span className="text-lg font-bold">Company 5</span>
+    </div>
+  </InfiniteSlider>
+</div>
+
+```tsx
+<InfiniteSlider speed={40} gap={48}>
+  <img src="/logo1.png" alt="Company 1" />
+  <img src="/logo2.png" alt="Company 2" />
+  <img src="/logo3.png" alt="Company 3" />
+</InfiniteSlider>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to scroll (automatically duplicated) |
+| `gap` | `number` | `16` | Gap between items in pixels |
+| `speed` | `number` | `100` | Scroll speed in pixels per second |
+| `speedOnHover` | `number` | - | Optional scroll speed when hovered |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Scroll direction |
+| `reverse` | `boolean` | `false` | Reverse scroll direction |
+| `className` | `string` | - | Additional CSS classes |
+
+## Use Cases
+
+- **Logo Carousels**: Display partner or client logos in a continuous loop
+- **Testimonial Sliders**: Show customer testimonials seamlessly
+- **Feature Showcases**: Highlight product features or benefits
+- **Social Proof**: Display user avatars or statistics
+- **Content Feeds**: Create engaging infinite content streams
+- **Banner Announcements**: Scrolling announcement or news ticker
+
+## Technical Details
+
+The component uses `framer-motion` for smooth animations and `react-use-measure` to calculate dimensions. It automatically duplicates children to create the infinite effect and handles hover interactions smoothly with transition states.
