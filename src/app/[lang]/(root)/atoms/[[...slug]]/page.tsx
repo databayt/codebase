@@ -1,49 +1,26 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import {
-  getAllAtomSlugs,
-  findAtomNeighbours,
-  getAtomMetadata,
-  extractToc
-} from "@/lib/atoms-utils"
-import { getMDXComponent } from "@/lib/atoms-mdx"
+import { atomsSource } from "@/lib/source"
 import { Button } from "@/components/ui/button"
 import { DocsTableOfContents } from "@/components/docs/toc"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { atomsConfig } from "@/components/template/sidebar-01/atoms-config"
+import { DocsCopyPage } from "@/components/docs-copy-page"
+import { useMDXComponents } from "@/../mdx-components"
+import { AtomPreview } from "@/components/docs/atom-preview"
+import { ComponentPreview } from "@/components/docs/component-preview"
+import type { Metadata } from "next"
 
 export const runtime = "nodejs"
 
-const allAtoms = atomsConfig.sidebarNav.flatMap(section => section.items)
-const categories = Array.from(new Set(allAtoms.map(() => "Component"))).length
-
 export async function generateStaticParams() {
-  const atoms = getAllAtomSlugs()
-  return [
-    { slug: undefined }, // For the landing page
-    ...atoms.map(atom => ({
-      slug: atom.slug,
-    }))
-  ]
+  return atomsSource.generateParams()
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }): Promise<Metadata> {
   const { slug } = await params
+  const page = atomsSource.getPage(slug)
 
-  // Use introduction for empty slug
-  const effectiveSlug = !slug || slug.length === 0 ? ['introduction'] : slug
-
-  const metadata = await getAtomMetadata(effectiveSlug)
-
-  if (!metadata) {
+  if (!page) {
     return {
       title: "Atom Not Found",
       description: "The requested atom could not be found.",
@@ -51,12 +28,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
   }
 
   return {
-    title: metadata.title,
-    description: metadata.description,
-    keywords: metadata.tags,
+    title: page.data.title,
+    description: page.data.description,
     openGraph: {
-      title: metadata.title,
-      description: metadata.description,
+      title: page.data.title,
+      description: page.data.description,
       type: "article",
     },
   }
@@ -65,38 +41,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
 export default async function AtomPage({ params }: { params: Promise<{ slug?: string[], lang: string }> }) {
   const { slug, lang } = await params
 
-  // When slug is empty or undefined, load introduction.mdx
-  const effectiveSlug = !slug || slug.length === 0 ? ['introduction'] : slug
+  // Get page from fumadocs
+  const page = atomsSource.getPage(slug)
 
-  // Individual atom page
-  const atomPath = effectiveSlug.join('/')
-  const atomHref = `/atoms/${atomPath}`
-
-  // For introduction page, adjust the href for navigation
-  const displayHref = atomPath === 'introduction' ? '/atoms' : atomHref
-
-  // Get metadata
-  const metadata = await getAtomMetadata(effectiveSlug)
-
-  if (!metadata) {
+  if (!page) {
     notFound()
   }
 
-  // Get navigation
-  const { previous, next } = findAtomNeighbours(displayHref)
+  // Find previous and next pages
+  const neighbour = atomsSource.pageTree.find((item: any) => item.url === page.url)
+  const pageIndex = atomsSource.pages.findIndex((p: any) => p.url === page.url)
+  const previous = pageIndex > 0 ? atomsSource.pages[pageIndex - 1] : null
+  const next = pageIndex < atomsSource.pages.length - 1 ? atomsSource.pages[pageIndex + 1] : null
 
-  // Extract ToC
-  const toc = extractToc(metadata.content)
+  // Get MDX components
+  const mdxComponents = useMDXComponents({
+    AtomPreview,
+    ComponentPreview,
+  })
 
-  // Get content component from static imports
-  const AtomContent = getMDXComponent(atomPath)
-
-  if (!AtomContent) {
-    console.error(`No MDX component found for: ${atomPath}`)
-    notFound()
-  }
-
-  const frontmatter = metadata.frontmatter
+  // Full page URL for copy page component
+  const pageUrl = `https://cb.databayt.org/en${page.url}`
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
@@ -106,11 +71,12 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
           {/* Header */}
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between gap-4">
                 <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
-                  {metadata.title}
+                  {page.data.title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
+                  <DocsCopyPage page={page.data.exports.default || ""} url={pageUrl} />
                   {previous && (
                     <Button
                       variant="secondary"
@@ -118,7 +84,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
                       className="extend-touch-target ml-auto size-8 shadow-none md:size-7"
                       asChild
                     >
-                      <Link href={previous.href}>
+                      <Link href={previous.url}>
                         <ArrowLeft />
                         <span className="sr-only">Previous</span>
                       </Link>
@@ -131,7 +97,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
                       className="extend-touch-target size-8 shadow-none md:size-7"
                       asChild
                     >
-                      <Link href={next.href}>
+                      <Link href={next.url}>
                         <span className="sr-only">Next</span>
                         <ArrowRight />
                       </Link>
@@ -139,36 +105,17 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
                   )}
                 </div>
               </div>
-              {metadata.description && (
+              {page.data.description && (
                 <p className="text-muted-foreground text-[1.05rem] text-balance sm:text-base">
-                  {metadata.description}
+                  {page.data.description}
                 </p>
               )}
             </div>
-
-            {/* Category & Tags */}
-            {(metadata.category || metadata.tags.length > 0) && (
-              <div className="flex items-center gap-2 pt-2">
-                {metadata.category && (
-                  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                    {metadata.category}
-                  </span>
-                )}
-                {metadata.tags.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary/10 text-primary hover:bg-primary/20"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Content */}
           <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-            <AtomContent />
+            <page.data.exports.default components={mdxComponents} />
           </div>
         </div>
 
@@ -181,8 +128,8 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
               asChild
               className="shadow-none"
             >
-              <Link href={previous.href}>
-                <ArrowLeft /> {previous.title}
+              <Link href={previous.url}>
+                <ArrowLeft /> {previous.data.title}
               </Link>
             </Button>
           )}
@@ -193,8 +140,8 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
               className="ml-auto shadow-none"
               asChild
             >
-              <Link href={next.href}>
-                {next.title} <ArrowRight />
+              <Link href={next.url}>
+                {next.data.title} <ArrowRight />
               </Link>
             </Button>
           )}
@@ -204,9 +151,9 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
       {/* Table of Contents Sidebar */}
       <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
         <div className="h-(--top-spacing) shrink-0" />
-        {toc.length > 0 && (
+        {page.data.toc && page.data.toc.length > 0 && (
           <div className="no-scrollbar overflow-y-auto px-8">
-            <DocsTableOfContents toc={toc} />
+            <DocsTableOfContents toc={page.data.toc} />
             <div className="h-12" />
           </div>
         )}
