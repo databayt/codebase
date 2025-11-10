@@ -7,95 +7,55 @@ import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarHeader,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar
 } from "@/components/ui/sidebar"
 
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { atomsConfig } from "./atoms-config"
-
-// Flatten the sidebar navigation to a single list
-function flattenSidebarNav(items: typeof atomsConfig.sidebarNav) {
-  const flatItems: Array<{
-    title: string
-    href: string
-    isActive?: boolean
-  }> = []
-
-  items.forEach((section) => {
-    section.items.forEach((item) => {
-      if (item.href) {
-        flatItems.push({
-          title: item.title,
-          href: item.href,
-        })
-      }
-      // Add sub-items if they exist
-      if (item.items && item.items.length > 0) {
-        item.items.forEach((subItem) => {
-          if (subItem.href) {
-            flatItems.push({
-              title: subItem.title,
-              href: subItem.href,
-            })
-          }
-        })
-      }
-    })
-  })
-
-  return flatItems
-}
 
 export function AtomsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
-  const { setOpenMobile } = useSidebar()
-  const flatNavItems = React.useMemo(() => flattenSidebarNav(atomsConfig.sidebarNav), [])
-
-  const handleLinkClick = React.useCallback(() => {
-    setOpenMobile(false)
-  }, [setOpenMobile])
 
   return (
     <Sidebar
+      className="sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--footer-height)-4rem)] overscroll-none bg-transparent lg:flex"
+      collapsible="none"
       {...props}
-      className="w-56 "
     >
-      <SidebarHeader className=" ">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/atom" className="flex items-center" onClick={handleLinkClick}>
-                <div className="flex flex-col leading-none">
-                  <span className="text-base font-semibold text-foreground -ml-1">Atoms</span>
-                </div>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent className="border-0 bg-transparent">
-        <ScrollArea className="h-full">
-          <SidebarGroup className="p-2">
-            <SidebarMenu className="space-y-1">
-              {flatNavItems.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild isActive={isActive} size="default">
-                      <Link href={item.href} onClick={handleLinkClick}>
-                        {item.title}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                )
-              })}
-            </SidebarMenu>
+      <SidebarContent className="no-scrollbar overflow-x-hidden px-2">
+        <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
+        {atomsConfig.sidebarNav.map((section) => (
+          <SidebarGroup key={section.title}>
+            <SidebarGroupLabel className="text-muted-foreground font-medium">
+              {section.title}
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="gap-0.5">
+                {section.items.map((item) => {
+                  const isActive = pathname === item.href
+                  return (
+                    <SidebarMenuItem key={item.href}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className="data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
+                      >
+                        <Link href={item.href}>
+                          <span className="absolute inset-0 flex w-(--sidebar-width) bg-transparent" />
+                          {item.title}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
           </SidebarGroup>
-        </ScrollArea>
+        ))}
+        <div className="from-background via-background/80 to-background/50 sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t blur-xs" />
       </SidebarContent>
     </Sidebar>
   )
