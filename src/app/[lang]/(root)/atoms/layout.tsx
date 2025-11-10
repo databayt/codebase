@@ -1,6 +1,6 @@
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AtomsSidebar } from "@/components/template/sidebar-01/atoms-content"
-import "../../globals.css"
+import "../../../globals.css"
 
 interface AtomsLayoutProps {
     children: React.ReactNode
