@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { atomsSource } from "@/lib/source"
+import { findNeighbour } from "fumadocs-core/page-tree"
 import { Button } from "@/components/ui/button"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { DocsCopyPage } from "@/components/docs-copy-page"
@@ -48,10 +49,12 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
     notFound()
   }
 
-  // Find previous and next pages
-  const pageIndex = atomsSource.pages.findIndex((p: any) => p.url === page.url)
-  const previous = pageIndex > 0 ? atomsSource.pages[pageIndex - 1] : null
-  const next = pageIndex < atomsSource.pages.length - 1 ? atomsSource.pages[pageIndex + 1] : null
+  // Find previous and next pages using fumadocs utility
+  const neighbours = findNeighbour(atomsSource.pageTree, page.url)
+  const allPages = atomsSource.getPages()
+
+  const previous = neighbours.previous ? allPages.find((p: any) => p.url === neighbours.previous?.url) : null
+  const next = neighbours.next ? allPages.find((p: any) => p.url === neighbours.next?.url) : null
 
   // Get MDX components
   const mdxComponents = useMDXComponents({
