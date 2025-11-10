@@ -17,7 +17,10 @@ export function getAllAtomSlugs() {
 
   // Get all MDX files in the content/atoms directory
   const files = fs.readdirSync(contentDir)
-  const mdxFiles = files.filter(file => file.endsWith('.mdx'))
+  const mdxFiles = files.filter(file =>
+    file.endsWith('.mdx') &&
+    file !== 'infinite-slider.mdx' // Temporarily exclude infinite-slider
+  )
 
   return mdxFiles.map(file => {
     const slug = file.replace('.mdx', '').split('/')
