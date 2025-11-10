@@ -1,14 +1,12 @@
-// Static imports for all MDX files
-// This is required because dynamic imports with variables don't work in Next.js build
+// Static content components for atoms pages
+// Using plain React components instead of MDX to avoid compilation issues
 
-import IntroductionMDX from '@/content/atoms/introduction.mdx'
-// import InfiniteSliderMDX from '@/content/atoms/infinite-slider.mdx' // Temporarily disabled
+import { IntroductionContent } from './atoms-content'
 
-export const mdxComponents: Record<string, any> = {
-  'introduction': IntroductionMDX,
-  // 'infinite-slider': InfiniteSliderMDX, // Temporarily disabled
+export const contentComponents: Record<string, any> = {
+  'introduction': IntroductionContent,
 }
 
 export function getMDXComponent(slug: string) {
-  return mdxComponents[slug]
+  return contentComponents[slug]
 }
