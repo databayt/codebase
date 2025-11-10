@@ -25,7 +25,7 @@ export function AtomsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="no-scrollbar overflow-x-hidden px-2">
+      <SidebarContent className="no-scrollbar overflow-x-hidden">
         <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
         {atomsConfig.sidebarNav.map((section) => (
           <SidebarGroup key={section.title}>
