@@ -6,9 +6,6 @@ import { findNeighbour } from "fumadocs-core/page-tree"
 import { Button } from "@/components/ui/button"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { DocsCopyPage } from "@/components/docs-copy-page"
-import { useMDXComponents } from "@/../mdx-components"
-import { AtomPreview } from "@/components/docs/atom-preview"
-import { ComponentPreview } from "@/components/docs/component-preview"
 import type { Metadata } from "next"
 
 export const runtime = "nodejs"
@@ -56,14 +53,11 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   const previous = neighbours.previous ? allPages.find((p: any) => p.url === neighbours.previous?.url) : null
   const next = neighbours.next ? allPages.find((p: any) => p.url === neighbours.next?.url) : null
 
-  // Get MDX components
-  const mdxComponents = useMDXComponents({
-    AtomPreview,
-    ComponentPreview,
-  })
-
   // Full page URL for copy page component
   const pageUrl = `https://cb.databayt.org/en${page.url}`
+
+  // Get the MDX Content component
+  const MDXContent = page.data.default
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
@@ -117,7 +111,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
 
           {/* Content */}
           <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-            <page.data.default components={mdxComponents} />
+            <MDXContent />
           </div>
         </div>
 
