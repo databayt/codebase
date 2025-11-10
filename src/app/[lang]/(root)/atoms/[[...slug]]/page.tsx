@@ -84,22 +84,16 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   // Extract ToC
   const toc = extractToc(metadata.content)
 
-  // Dynamic import of MDX component from content directory
-  let AtomContent
-  let frontmatter = metadata.frontmatter
+  // Get MDX component from static imports
+  const { getMDXComponent } = await import('@/lib/atoms-mdx')
+  const AtomContent = getMDXComponent(atomPath)
 
-  try {
-    // Try to import from content/atoms/ directory
-    const mdxModule = await import(`@/content/atoms/${atomPath}.mdx`)
-    AtomContent = mdxModule.default
-    // Override with MDX exported frontmatter if it exists
-    if (mdxModule.frontmatter) {
-      frontmatter = { ...frontmatter, ...mdxModule.frontmatter }
-    }
-  } catch (error) {
-    console.error(`Failed to load atom: ${atomPath}`, error)
+  if (!AtomContent) {
+    console.error(`No MDX component found for: ${atomPath}`)
     notFound()
   }
+
+  const frontmatter = metadata.frontmatter
 
   // For introduction page, adjust the href for navigation
   const displayHref = atomPath === 'introduction' ? '/atoms' : atomHref
