@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { atomsSource } from "@/lib/source"
 import { findNeighbour } from "fumadocs-core/page-tree"
+import { DocsBody } from "fumadocs-ui/page"
 import { Button } from "@/components/ui/button"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { DocsCopyPage } from "@/components/docs-copy-page"
@@ -56,9 +57,6 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   // Full page URL for copy page component
   const pageUrl = `https://cb.databayt.org/en${page.url}`
 
-  // Get the MDX Content component
-  const MDXContent = page.data.default
-
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
       <div className="flex min-w-0 flex-1 flex-col">
@@ -110,9 +108,9 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
           </div>
 
           {/* Content */}
-          <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-            <MDXContent />
-          </div>
+          <DocsBody>
+            {page.data.body}
+          </DocsBody>
         </div>
 
         {/* Footer Navigation */}
