@@ -76,7 +76,7 @@ export const atomsConfig: AtomsConfig = {
       items: [
         { title: "Gradient Animation", href: "/atoms/gradient-animation", items: [] },
         { title: "Infinite Cards", href: "/atoms/infinite-cards", items: [] },
-        { title: "Infinite Slider", href: "/atoms/infinite-slider", items: [] },
+        // { title: "Infinite Slider", href: "/atoms/infinite-slider", items: [] }, // Temporarily disabled
         { title: "Loading", href: "/atoms/loading", items: [] },
         { title: "Simple Marquee", href: "/atoms/simple-marquee", items: [] },
       ],
