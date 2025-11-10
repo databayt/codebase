@@ -8,24 +8,7 @@ updatedAt: 2024-11-09
 featured: true
 ---
 
-import { InfiniteSlider } from "@/components/atom/infinite-slider"
-import { ComponentSource } from "@/components/docs/component-source"
-
-# Infinite Slider
-
 An infinite auto-scrolling slider component with customizable speed and direction. Perfect for logo carousels, testimonial sliders, and continuous content feeds.
-
-## Preview
-
-<div className="w-full my-8 border rounded-lg p-8 bg-background">
-  <InfiniteSlider speed={50} gap={16}>
-    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">1</div>
-    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">2</div>
-    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">3</div>
-    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">4</div>
-    <div className="w-32 h-32 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-semibold">5</div>
-  </InfiniteSlider>
-</div>
 
 ## Installation
 
@@ -37,10 +20,10 @@ pnpm add framer-motion react-use-measure
 
 ### Copy the component code
 
-<ComponentSource
-  fileName="components/atom/infinite-slider.tsx"
-  language="tsx"
-  code={`'use client';
+Create a file at `components/atom/infinite-slider.tsx`:
+
+```tsx
+'use client';
 import { cn } from '@/lib/utils';
 import { useMotionValue, animate, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -140,7 +123,7 @@ export function InfiniteSlider({
           ...(direction === 'horizontal'
             ? { x: translation }
             : { y: translation }),
-          gap: \`\${gap}px\`,
+          gap: `${gap}px`,
           flexDirection: direction === 'horizontal' ? 'row' : 'column',
         }}
         ref={ref}
@@ -151,8 +134,8 @@ export function InfiniteSlider({
       </motion.div>
     </div>
   );
-}`}
-/>
+}
+```
 
 ## Usage
 
@@ -174,15 +157,6 @@ export default function Example() {
 
 ### Reverse Direction
 
-<div className="w-full my-8 border rounded-lg p-8 bg-background">
-  <InfiniteSlider speed={50} reverse={true}>
-    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
-    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
-    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
-    <div className="w-32 h-32 bg-secondary rounded-lg flex items-center justify-center text-secondary-foreground">→</div>
-  </InfiniteSlider>
-</div>
-
 ```tsx
 <InfiniteSlider speed={50} reverse={true}>
   {/* Your content */}
@@ -190,14 +164,6 @@ export default function Example() {
 ```
 
 ### With Hover Speed Change
-
-<div className="w-full my-8 border rounded-lg p-8 bg-background">
-  <InfiniteSlider speed={50} speedOnHover={10}>
-    <div className="w-40 h-24 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-semibold">Hover me!</div>
-    <div className="w-40 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-semibold">Hover me!</div>
-    <div className="w-40 h-24 bg-gradient-to-r from-pink-500 to-red-500 rounded-lg flex items-center justify-center text-white font-semibold">Hover me!</div>
-  </InfiniteSlider>
-</div>
 
 ```tsx
 <InfiniteSlider speed={50} speedOnHover={10}>
