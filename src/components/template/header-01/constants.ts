@@ -39,7 +39,7 @@ export const docsConfig: DocsConfig = {
         },
         {
             title: "Atoms",
-            href: "/atom",
+            href: "/atoms",
         },
         {
             title: "Components",

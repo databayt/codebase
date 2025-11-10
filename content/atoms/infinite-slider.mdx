@@ -1,3 +1,13 @@
+---
+title: Infinite Slider
+description: An infinite auto-scrolling slider component with customizable speed and direction.
+category: Animation
+tags: [slider, animation, carousel, framer-motion]
+publishedAt: 2024-11-09
+updatedAt: 2024-11-09
+featured: true
+---
+
 import { InfiniteSlider } from "@/components/atom/infinite-slider"
 import { ComponentSource } from "@/components/docs/component-source"
 
@@ -195,53 +205,6 @@ export default function Example() {
 </InfiniteSlider>
 ```
 
-### Faster Speed
-
-<div className="w-full my-8 border rounded-lg p-8 bg-background">
-  <InfiniteSlider speed={150} gap={24}>
-    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">🚀</div>
-    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">⚡</div>
-    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">💨</div>
-    <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white">🔥</div>
-  </InfiniteSlider>
-</div>
-
-```tsx
-<InfiniteSlider speed={150} gap={24}>
-  {/* Faster animation */}
-</InfiniteSlider>
-```
-
-### Logo Carousel Example
-
-<div className="w-full my-8 border rounded-lg p-8 bg-background">
-  <InfiniteSlider speed={40} gap={48}>
-    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
-      <span className="text-lg font-bold">Company 1</span>
-    </div>
-    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
-      <span className="text-lg font-bold">Company 2</span>
-    </div>
-    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
-      <span className="text-lg font-bold">Company 3</span>
-    </div>
-    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
-      <span className="text-lg font-bold">Company 4</span>
-    </div>
-    <div className="flex items-center justify-center h-16 px-8 bg-muted rounded-md">
-      <span className="text-lg font-bold">Company 5</span>
-    </div>
-  </InfiniteSlider>
-</div>
-
-```tsx
-<InfiniteSlider speed={40} gap={48}>
-  <img src="/logo1.png" alt="Company 1" />
-  <img src="/logo2.png" alt="Company 2" />
-  <img src="/logo3.png" alt="Company 3" />
-</InfiniteSlider>
-```
-
 ## Props
 
 | Prop | Type | Default | Description |
@@ -262,7 +225,3 @@ export default function Example() {
 - **Social Proof**: Display user avatars or statistics
 - **Content Feeds**: Create engaging infinite content streams
 - **Banner Announcements**: Scrolling announcement or news ticker
-
-## Technical Details
-
-The component uses `framer-motion` for smooth animations and `react-use-measure` to calculate dimensions. It automatically duplicates children to create the infinite effect and handles hover interactions smoothly with transition states.

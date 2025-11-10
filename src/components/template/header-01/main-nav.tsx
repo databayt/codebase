@@ -37,9 +37,9 @@ export function MainNav({ dictionary }: MainNavProps) {
           <h6>{dictionary?.navigation?.docs || "Docs"}</h6>
         </Link>
         <Link
-          href="/atom"
+          href="/atoms"
           className={cn(
-            pathname?.startsWith("/atom")
+            pathname?.startsWith("/atoms")
               ? "text-foreground"
               : ""
           )}
