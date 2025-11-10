@@ -7,6 +7,7 @@ import {
   getAtomMetadata,
   extractToc
 } from "@/lib/atoms-utils"
+import { getMDXComponent } from "@/lib/atoms-mdx"
 import { Button } from "@/components/ui/button"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import {
@@ -84,8 +85,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   // Extract ToC
   const toc = extractToc(metadata.content)
 
-  // Get MDX component from static imports
-  const { getMDXComponent } = await import('@/lib/atoms-mdx')
+  // Get content component from static imports
   const AtomContent = getMDXComponent(atomPath)
 
   if (!AtomContent) {
