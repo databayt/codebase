@@ -72,6 +72,9 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   const atomPath = effectiveSlug.join('/')
   const atomHref = `/atoms/${atomPath}`
 
+  // For introduction page, adjust the href for navigation
+  const displayHref = atomPath === 'introduction' ? '/atoms' : atomHref
+
   // Get metadata
   const metadata = await getAtomMetadata(effectiveSlug)
 
@@ -94,9 +97,6 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   }
 
   const frontmatter = metadata.frontmatter
-
-  // For introduction page, adjust the href for navigation
-  const displayHref = atomPath === 'introduction' ? '/atoms' : atomHref
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
