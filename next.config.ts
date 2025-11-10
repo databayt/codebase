@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createMDX from '@next/mdx'
+import path from 'path'
 
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
@@ -22,6 +23,15 @@ const nextConfig: NextConfig = {
   // Use custom build ID to avoid conflicts
   generateBuildId: async () => {
     return 'build-' + Date.now();
+  },
+
+  // Webpack configuration for .source path
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@/.source': path.resolve(__dirname, '.source'),
+    }
+    return config
   },
 };
 

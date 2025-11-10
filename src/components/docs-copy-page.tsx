@@ -1,6 +1,6 @@
 "use client"
 
-import { IconCheck, IconChevronDown, IconCopy } from "@tabler/icons-react"
+import { Check as IconCheck, ChevronDown as IconChevronDown, Copy as IconCopy } from "lucide-react"
 
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import { Button } from "@/components/ui/button"
