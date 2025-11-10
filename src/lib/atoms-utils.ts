@@ -5,15 +5,35 @@ import matter from "gray-matter"
 
 /**
  * Get all atom slugs from the atoms configuration
+ * Only returns atoms that have corresponding MDX files
  */
 export function getAllAtomSlugs() {
-  return atomsConfig.sidebarNav.flatMap(section =>
-    section.items.map(item => ({
-      slug: item.href.replace('/atoms/', '').split('/'),
-      title: item.title,
-      href: item.href,
-    }))
-  )
+  const contentDir = path.join(process.cwd(), 'content/atoms')
+
+  // If content directory doesn't exist, return empty array
+  if (!fs.existsSync(contentDir)) {
+    return []
+  }
+
+  // Get all MDX files in the content/atoms directory
+  const files = fs.readdirSync(contentDir)
+  const mdxFiles = files.filter(file => file.endsWith('.mdx'))
+
+  return mdxFiles.map(file => {
+    const slug = file.replace('.mdx', '').split('/')
+    const href = `/atoms/${slug.join('/')}`
+
+    // Find the corresponding config item to get the title
+    const configItem = atomsConfig.sidebarNav
+      .flatMap(s => s.items)
+      .find(item => item.href === href)
+
+    return {
+      slug,
+      title: configItem?.title || slug.join(' '),
+      href,
+    }
+  })
 }
 
 /**

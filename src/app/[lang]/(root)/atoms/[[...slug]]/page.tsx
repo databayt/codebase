@@ -27,7 +27,7 @@ const categories = Array.from(new Set(allAtoms.map(() => "Component"))).length
 export async function generateStaticParams() {
   const atoms = getAllAtomSlugs()
   return [
-    { slug: [] }, // For the landing page
+    { slug: undefined }, // For the landing page
     ...atoms.map(atom => ({
       slug: atom.slug,
     }))
