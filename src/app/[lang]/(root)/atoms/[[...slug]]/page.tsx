@@ -49,7 +49,6 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   }
 
   // Find previous and next pages
-  const neighbour = atomsSource.pageTree.find((item: any) => item.url === page.url)
   const pageIndex = atomsSource.pages.findIndex((p: any) => p.url === page.url)
   const previous = pageIndex > 0 ? atomsSource.pages[pageIndex - 1] : null
   const next = pageIndex < atomsSource.pages.length - 1 ? atomsSource.pages[pageIndex + 1] : null
