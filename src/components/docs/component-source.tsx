@@ -2,21 +2,21 @@ import * as React from "react"
 import { highlightCode } from "@/lib/highlight-code"
 import { cn } from "@/lib/utils"
 import { CopyButton } from "@/components/docs/copy-button"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Button } from "@/components/ui/button"
-import { ChevronDown } from "lucide-react"
+import { CodeCollapsibleWrapper } from "@/components/docs/code-collapsible-wrapper"
 
 interface ComponentSourceProps extends React.HTMLAttributes<HTMLDivElement> {
   code?: string
   language?: string
   fileName?: string
+  title?: string
   collapsible?: boolean
 }
 
 export async function ComponentSource({
   code,
-  language = "tsx",
+  language,
   fileName,
+  title,
   collapsible = true,
   className,
   ...props
@@ -25,7 +25,7 @@ export async function ComponentSource({
     return null
   }
 
-  const lang = language ?? fileName?.split(".").pop() ?? "tsx"
+  const lang = language ?? title?.split(".").pop() ?? "tsx"
   const highlightedCode = await highlightCode(code, lang)
 
   if (!collapsible) {
@@ -35,33 +35,21 @@ export async function ComponentSource({
           code={code}
           highlightedCode={highlightedCode}
           language={lang}
-          fileName={fileName}
+          title={title}
         />
       </div>
     )
   }
 
   return (
-    <Collapsible defaultOpen={!collapsible} className={cn("relative", className)} {...props}>
-      <div className="flex items-center justify-between p-4 border-t">
-        <h4 className="text-sm font-medium">Code</h4>
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm" className="gap-2">
-            <span className="data-[state=open]:hidden">View</span>
-            <span className="hidden data-[state=open]:inline">Hide</span> code
-            <ChevronDown className="h-4 w-4 transition-transform [[data-state=open]>&]:rotate-180" />
-          </Button>
-        </CollapsibleTrigger>
-      </div>
-      <CollapsibleContent>
-        <ComponentCode
-          code={code}
-          highlightedCode={highlightedCode}
-          language={lang}
-          fileName={fileName}
-        />
-      </CollapsibleContent>
-    </Collapsible>
+    <CodeCollapsibleWrapper className={className}>
+      <ComponentCode
+        code={code}
+        highlightedCode={highlightedCode}
+        language={lang}
+        title={title}
+      />
+    </CodeCollapsibleWrapper>
   )
 }
 
@@ -69,22 +57,22 @@ function ComponentCode({
   code,
   highlightedCode,
   language,
-  fileName,
+  title,
 }: {
   code: string
   highlightedCode: string
   language: string
-  fileName: string | undefined
+  title: string | undefined
 }) {
   return (
     <figure data-rehype-pretty-code-figure="" className="[&>pre]:max-h-96">
-      {fileName && (
+      {title && (
         <figcaption
           data-rehype-pretty-code-title=""
           className="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70"
           data-language={language}
         >
-          {fileName}
+          {title}
         </figcaption>
       )}
       <CopyButton value={code} />
