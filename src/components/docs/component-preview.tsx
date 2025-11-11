@@ -7,6 +7,7 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "start" | "end"
   hideCode?: boolean
   chromeLessOnMobile?: boolean
+  code?: string
 }
 
 export function ComponentPreview({
@@ -15,6 +16,7 @@ export function ComponentPreview({
   align = "center",
   hideCode = false,
   chromeLessOnMobile = false,
+  code,
   ...props
 }: ComponentPreviewProps) {
   return (
@@ -35,6 +37,16 @@ export function ComponentPreview({
         >
           {children}
         </div>
+        {!hideCode && code && (
+          <div
+            data-slot="code"
+            className="overflow-hidden [&_[data-rehype-pretty-code-figure]]:!m-0 [&_[data-rehype-pretty-code-figure]]:rounded-t-none [&_[data-rehype-pretty-code-figure]]:border-t [&_pre]:max-h-[400px]"
+          >
+            <pre className="overflow-auto p-4 text-sm max-h-[400px] m-0 rounded-t-none border-t">
+              <code className="language-tsx">{code}</code>
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   )
