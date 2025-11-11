@@ -34,7 +34,7 @@ export function AtomsSidebar({
     >
       <SidebarContent className="no-scrollbar overflow-x-hidden">
         <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
-        <SidebarGroup>
+        <SidebarGroup className="px-0">
           <SidebarGroupContent>
             <SidebarMenu>
               {ATOMS_LINKS.map(({ name, href }) => {
