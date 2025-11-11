@@ -28,6 +28,7 @@ export const transformers = [
           node.properties["__bun__"] = raw.replace("npx", "bunx --bun")
         }
 
+        // npm create.
         if (raw.startsWith("npm create")) {
           node.properties["__npm__"] = raw
           node.properties["__yarn__"] = raw.replace("npm create", "yarn create")
@@ -35,6 +36,7 @@ export const transformers = [
           node.properties["__bun__"] = raw.replace("npm create", "bun create")
         }
 
+        // npx.
         if (raw.startsWith("npx")) {
           node.properties["__npm__"] = raw
           node.properties["__yarn__"] = raw.replace("npx", "yarn")
@@ -42,6 +44,7 @@ export const transformers = [
           node.properties["__bun__"] = raw.replace("npx", "bunx --bun")
         }
 
+        // npm run.
         if (raw.startsWith("npm run")) {
           node.properties["__npm__"] = raw
           node.properties["__yarn__"] = raw.replace("npm run", "yarn")
