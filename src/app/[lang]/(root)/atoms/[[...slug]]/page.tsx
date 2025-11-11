@@ -1,125 +1,100 @@
-import { notFound } from "next/navigation"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { atomsSource } from "@/lib/source"
 import { findNeighbour } from "fumadocs-core/page-tree"
-import { DocsBody } from "fumadocs-ui/page"
-import { Button } from "@/components/ui/button"
-import { DocsTableOfContents } from "@/components/docs/toc"
-import { DocsCopyPage } from "@/components/docs-copy-page"
 import type { Metadata } from "next"
+import { atomsSource } from "@/lib/source"
+import { DocsCopyPage } from "@/components/docs-copy-page"
+import { DocsTableOfContents } from "@/components/docs/toc"
+import { Button } from "@/components/ui/button"
 
-export const runtime = "nodejs"
+export const revalidate = false
+export const dynamic = "force-static"
+export const dynamicParams = false
 
-export async function generateStaticParams() {
-  try {
-    const params = atomsSource.generateParams()
-    // Ensure we return an array
-    return Array.isArray(params) ? params : []
-  } catch (error) {
-    console.error("Error generating static params:", error)
-    return []
-  }
+export function generateStaticParams() {
+  return atomsSource.generateParams()
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }): Promise<Metadata> {
-  try {
-    const { slug } = await params
-    const page = atomsSource.getPage(slug)
+export async function generateMetadata(props: {
+  params: Promise<{ slug?: string[] }>
+}): Promise<Metadata> {
+  const params = await props.params
+  const page = atomsSource.getPage(params.slug)
 
-    if (!page || !page.data) {
-      return {
-        title: "Atom Not Found",
-        description: "The requested atom could not be found.",
-      }
-    }
-
-    const title = page.data.title || "Atom"
-    const description = page.data.description || ""
-
-    const metadata: Metadata = {
-      title,
-      description,
-    }
-
-    if (title && description) {
-      metadata.openGraph = {
-        title,
-        description,
-        type: "article",
-      }
-    }
-
-    return metadata
-  } catch (error) {
-    console.error("Error generating metadata:", error)
-    return {
-      title: "Atom",
-      description: "",
-    }
-  }
-}
-
-export default async function AtomPage({ params }: { params: Promise<{ slug?: string[], lang: string }> }) {
-  const { slug, lang } = await params
-
-  // Get page from fumadocs
-  const page = atomsSource.getPage(slug)
-
-  if (!page || !page.data) {
+  if (!page) {
     notFound()
   }
 
-  // Find previous and next pages using fumadocs utility
+  const doc = page.data
+
+  if (!doc.title || !doc.description) {
+    notFound()
+  }
+
+  return {
+    title: doc.title,
+    description: doc.description,
+    openGraph: {
+      title: doc.title,
+      description: doc.description,
+      type: "article",
+      url: `https://cb.databayt.org${page.url}`,
+    },
+  }
+}
+
+export default async function AtomPage(props: {
+  params: Promise<{ slug?: string[] }>
+}) {
+  const params = await props.params
+  const page = atomsSource.getPage(params.slug)
+
+  if (!page) {
+    notFound()
+  }
+
+  const doc = page.data
+  const MDX = doc.body
   const neighbours = findNeighbour(atomsSource.pageTree, page.url)
-  const allPages = atomsSource.getPages()
 
-  const previous = neighbours.previous ? allPages.find((p: any) => p.url === neighbours.previous?.url) : null
-  const next = neighbours.next ? allPages.find((p: any) => p.url === neighbours.next?.url) : null
-
-  // Full page URL for copy page component
-  const pageUrl = `https://cb.databayt.org/en${page.url}`
-
-  // Ensure we have title and body
-  const title = page.data.title || "Atom"
-  const description = page.data.description
-  const body = page.data.body
+  const raw = await page.data.getText("raw")
+  const pageUrl = `https://cb.databayt.org${page.url}`
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
         <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300">
-          {/* Header */}
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between">
                 <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
-                  {title}
+                  {doc.title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
-                  <DocsCopyPage page={""} url={pageUrl} />
-                  {previous && (
+                  <DocsCopyPage page={raw} url={pageUrl} />
+                  {neighbours.previous && (
                     <Button
                       variant="secondary"
                       size="icon"
                       className="extend-touch-target ml-auto size-8 shadow-none md:size-7"
                       asChild
                     >
-                      <Link href={previous.url}>
+                      <Link href={neighbours.previous.url}>
                         <ArrowLeft />
                         <span className="sr-only">Previous</span>
                       </Link>
                     </Button>
                   )}
-                  {next && (
+                  {neighbours.next && (
                     <Button
                       variant="secondary"
                       size="icon"
                       className="extend-touch-target size-8 shadow-none md:size-7"
                       asChild
                     >
-                      <Link href={next.url}>
+                      <Link href={neighbours.next.url}>
                         <span className="sr-only">Next</span>
                         <ArrowRight />
                       </Link>
@@ -127,60 +102,52 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
                   )}
                 </div>
               </div>
-              {description && (
+              {doc.description && (
                 <p className="text-muted-foreground text-[1.05rem] text-balance sm:text-base">
-                  {description}
+                  {doc.description}
                 </p>
               )}
             </div>
           </div>
-
-          {/* Content */}
-          {body && (
-            <DocsBody>
-              {body}
-            </DocsBody>
-          )}
+          <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
+            <MDX />
+          </div>
         </div>
-
-        {/* Footer Navigation */}
         <div className="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
-          {previous && previous.data && (
+          {neighbours.previous && (
             <Button
               variant="secondary"
               size="sm"
               asChild
               className="shadow-none"
             >
-              <Link href={previous.url}>
-                <ArrowLeft /> {previous.data.title || "Previous"}
+              <Link href={neighbours.previous.url}>
+                <ArrowLeft /> {neighbours.previous.name}
               </Link>
             </Button>
           )}
-          {next && next.data && (
+          {neighbours.next && (
             <Button
               variant="secondary"
               size="sm"
               className="ml-auto shadow-none"
               asChild
             >
-              <Link href={next.url}>
-                {next.data.title || "Next"} <ArrowRight />
+              <Link href={neighbours.next.url}>
+                {neighbours.next.name} <ArrowRight />
               </Link>
             </Button>
           )}
         </div>
       </div>
-
-      {/* Table of Contents Sidebar */}
       <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
         <div className="h-(--top-spacing) shrink-0" />
-        {page.data.toc && Array.isArray(page.data.toc) && page.data.toc.length > 0 && (
+        {doc.toc?.length ? (
           <div className="no-scrollbar overflow-y-auto px-8">
-            <DocsTableOfContents toc={page.data.toc} />
+            <DocsTableOfContents toc={doc.toc} />
             <div className="h-12" />
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   )

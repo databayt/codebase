@@ -1,5 +1,6 @@
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
-import { AtomsSidebar } from "@/components/template/sidebar-01/atoms-content"
+import { atomsSource } from "@/lib/source"
+import { AtomsSidebar } from "@/components/docs/atoms-sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import "../../../globals.css"
 
 interface AtomsLayoutProps {
@@ -9,19 +10,12 @@ interface AtomsLayoutProps {
 
 export default async function AtomsLayout({ children, params }: AtomsLayoutProps) {
     const { lang } = await params
+
     return (
-        <div dir="ltr" lang="en" className="font-inter">
-            <SidebarProvider>
-                <AtomsSidebar />
-                <SidebarInset className="flex-1">
-                    <div className="flex flex-1 flex-col">
-                        <div className="layout-container w-full">
-                            <main className="relative py-6 lg:gap-10 lg:pt-3 lg:pb-8">
-                                {children}
-                            </main>
-                        </div>
-                    </div>
-                </SidebarInset>
+        <div className="container-wrapper flex flex-1 flex-col px-2" dir="ltr" lang="en">
+            <SidebarProvider className="3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                <AtomsSidebar tree={atomsSource.pageTree} />
+                <div className="h-full w-full">{children}</div>
             </SidebarProvider>
         </div>
     )

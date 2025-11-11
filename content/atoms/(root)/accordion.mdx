@@ -1,0 +1,212 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content. Built with Radix UI Accordion primitive.
+category: Interactive
+tags: [accordion, collapse, disclosure, radix-ui]
+publishedAt: 2025-11-11
+featured: true
+---
+
+## Overview
+
+The Accordion atom provides an accessible way to display collapsible content sections. It's built on top of the Radix UI Accordion primitive and styled with Tailwind CSS.
+
+## Installation
+
+### Dependencies
+
+First, ensure you have the accordion component from shadcn/ui:
+
+```bash
+npx shadcn@latest add accordion
+```
+
+Or install the Radix UI primitive directly:
+
+```bash
+pnpm add @radix-ui/react-accordion
+```
+
+### Component Code
+
+The accordion atom uses the shadcn/ui accordion component. If you haven't added it yet, here's the basic structure:
+
+```tsx title="components/ui/accordion.tsx"
+import * as React from "react"
+import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import { ChevronDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+const Accordion = AccordionPrimitive.Root
+
+const AccordionItem = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={cn("border-b", className)}
+    {...props}
+  />
+))
+
+const AccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+))
+
+const AccordionContent = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    {...props}
+  >
+    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+  </AccordionPrimitive.Content>
+))
+
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+```
+
+## Usage
+
+### Basic Example
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+export default function AccordionDemo() {
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles that can be customized.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It uses CSS transitions for smooth open/close animations.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+### Multiple Items Open
+
+```tsx
+<Accordion type="multiple" className="w-full">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>First Section</AccordionTrigger>
+    <AccordionContent>
+      Content for the first section.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Second Section</AccordionTrigger>
+    <AccordionContent>
+      Content for the second section.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## API Reference
+
+### Accordion
+
+The root component that manages the accordion state.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"single" \| "multiple"` | - | Whether a single or multiple items can be opened at once |
+| `collapsible` | `boolean` | `false` | When type is "single", allows closing all items |
+| `defaultValue` | `string \| string[]` | - | The default active item(s) |
+| `value` | `string \| string[]` | - | Controlled active item(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | - | Callback when active item changes |
+
+### AccordionItem
+
+A single item in the accordion.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `value` | `string` | Unique identifier for the item |
+| `disabled` | `boolean` | Whether the item is disabled |
+
+### AccordionTrigger
+
+The button that toggles the accordion item.
+
+Inherits all button props.
+
+### AccordionContent
+
+The collapsible content area.
+
+Inherits all div props.
+
+## Accessibility
+
+The Accordion component follows the WAI-ARIA Accordion pattern:
+
+- Uses proper ARIA attributes for screen readers
+- Keyboard navigation with Arrow keys
+- Focus management
+- Semantic HTML structure
+
+## Customization
+
+You can customize the accordion by modifying the Tailwind classes:
+
+```tsx
+<Accordion type="single" collapsible className="w-full rounded-lg border">
+  <AccordionItem value="item-1" className="border-none">
+    <AccordionTrigger className="px-6 py-4 hover:bg-muted/50">
+      Custom Styled Trigger
+    </AccordionTrigger>
+    <AccordionContent className="px-6 text-muted-foreground">
+      Custom styled content
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Use Cases
+
+- **FAQ sections:** Display frequently asked questions
+- **Settings panels:** Organize configuration options
+- **Navigation menus:** Create collapsible navigation sections
+- **Product details:** Show/hide detailed product information
+- **Form sections:** Group related form fields
