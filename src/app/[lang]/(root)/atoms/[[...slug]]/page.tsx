@@ -62,7 +62,7 @@ export default async function AtomPage(props: {
   const pageUrl = `https://cb.databayt.org${page.url}`
 
   // Import MDX components
-  const { mdxComponents } = await import("@/../../mdx-components")
+  const { mdxComponents } = await import("../../../../../../mdx-components")
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
