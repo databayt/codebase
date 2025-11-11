@@ -9,6 +9,8 @@ import {
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { ComponentSource } from "@/components/docs/component-source"
 import { CodeTabs } from "@/components/docs/code-tabs"
+import { CodeBlockCommand } from "@/components/docs/code-block-command"
+import { CopyButton } from "@/components/docs/copy-button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 // This file is required to use MDX in `app` directory.
@@ -147,24 +149,71 @@ const mdxComponents = {
         {...props}
       />
     ),
-    pre: ({ className, ...props }) => (
-      <pre
-        className={cn(
-          "no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none",
-          className
-        )}
-        {...props}
-      />
-    ),
-    code: ({ className, ...props }) => (
-      <code
-        className={cn(
-          "bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words",
-          className
-        )}
-        {...props}
-      />
-    ),
+    pre: ({ className, children, ...props }: React.ComponentProps<"pre">) => {
+      return (
+        <pre
+          className={cn(
+            "no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none has-[[data-highlighted-line]]:px-0 has-[[data-line-numbers]]:px-0 has-[[data-slot=tabs]]:p-0",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </pre>
+      )
+    },
+    figure: ({ className, ...props }: React.ComponentProps<"figure">) => {
+      return <figure className={cn(className)} {...props} />
+    },
+    code: ({
+      className,
+      __raw__,
+      __npm__,
+      __yarn__,
+      __pnpm__,
+      __bun__,
+      ...props
+    }: React.ComponentProps<"code"> & {
+      __raw__?: string
+      __npm__?: string
+      __yarn__?: string
+      __pnpm__?: string
+      __bun__?: string
+    }) => {
+      // Inline Code.
+      if (typeof props.children === "string") {
+        return (
+          <code
+            className={cn(
+              "bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none",
+              className
+            )}
+            {...props}
+          />
+        )
+      }
+
+      // npm command.
+      const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__
+      if (isNpmCommand) {
+        return (
+          <CodeBlockCommand
+            __npm__={__npm__}
+            __yarn__={__yarn__}
+            __pnpm__={__pnpm__}
+            __bun__={__bun__}
+          />
+        )
+      }
+
+      // Default codeblock.
+      return (
+        <>
+          {__raw__ && <CopyButton value={__raw__} />}
+          <code {...props} />
+        </>
+      )
+    },
     Accordion,
     AccordionContent,
     AccordionItem,

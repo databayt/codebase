@@ -10,8 +10,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-export function copyToClipboardWithMeta(value: string) {
+export function copyToClipboardWithMeta(value: string, meta?: any) {
   navigator.clipboard.writeText(value)
+  // meta parameter is for analytics tracking (not implemented yet)
 }
 
 export function CopyButton({
