@@ -19,21 +19,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
   const { slug } = await params
   const page = atomsSource.getPage(slug)
 
-  if (!page) {
+  if (!page || !page.data) {
     return {
       title: "Atom Not Found",
       description: "The requested atom could not be found.",
     }
   }
 
+  const title = page.data.title || "Atom"
+  const description = page.data.description || ""
+
   return {
-    title: page.data.title,
-    description: page.data.description,
-    openGraph: {
-      title: page.data.title,
-      description: page.data.description,
-      type: "article",
-    },
+    title,
+    description,
+    ...(title && description && {
+      openGraph: {
+        title,
+        description,
+        type: "article",
+      },
+    }),
   }
 }
 
@@ -43,7 +48,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   // Get page from fumadocs
   const page = atomsSource.getPage(slug)
 
-  if (!page) {
+  if (!page || !page.data) {
     notFound()
   }
 
@@ -57,6 +62,11 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
   // Full page URL for copy page component
   const pageUrl = `https://cb.databayt.org/en${page.url}`
 
+  // Ensure we have title and body
+  const title = page.data.title || "Atom"
+  const description = page.data.description
+  const body = page.data.body
+
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
       <div className="flex min-w-0 flex-1 flex-col">
@@ -67,7 +77,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
             <div className="flex flex-col gap-2">
               <div className="flex items-start justify-between gap-4">
                 <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
-                  {page.data.title}
+                  {title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
                   <DocsCopyPage page={""} url={pageUrl} />
@@ -99,23 +109,25 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
                   )}
                 </div>
               </div>
-              {page.data.description && (
+              {description && (
                 <p className="text-muted-foreground text-[1.05rem] text-balance sm:text-base">
-                  {page.data.description}
+                  {description}
                 </p>
               )}
             </div>
           </div>
 
           {/* Content */}
-          <DocsBody>
-            {page.data.body}
-          </DocsBody>
+          {body && (
+            <DocsBody>
+              {body}
+            </DocsBody>
+          )}
         </div>
 
         {/* Footer Navigation */}
         <div className="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
-          {previous && (
+          {previous && previous.data && (
             <Button
               variant="secondary"
               size="sm"
@@ -123,11 +135,11 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
               className="shadow-none"
             >
               <Link href={previous.url}>
-                <ArrowLeft /> {previous.data.title}
+                <ArrowLeft /> {previous.data.title || "Previous"}
               </Link>
             </Button>
           )}
-          {next && (
+          {next && next.data && (
             <Button
               variant="secondary"
               size="sm"
@@ -135,7 +147,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
               asChild
             >
               <Link href={next.url}>
-                {next.data.title} <ArrowRight />
+                {next.data.title || "Next"} <ArrowRight />
               </Link>
             </Button>
           )}
@@ -145,7 +157,7 @@ export default async function AtomPage({ params }: { params: Promise<{ slug?: st
       {/* Table of Contents Sidebar */}
       <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
         <div className="h-(--top-spacing) shrink-0" />
-        {page.data.toc && page.data.toc.length > 0 && (
+        {page.data.toc && Array.isArray(page.data.toc) && page.data.toc.length > 0 && (
           <div className="no-scrollbar overflow-y-auto px-8">
             <DocsTableOfContents toc={page.data.toc} />
             <div className="h-12" />
