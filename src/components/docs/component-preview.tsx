@@ -39,18 +39,30 @@ export async function ComponentPreview({
         >
           {children}
         </div>
-        {!hideCode && highlightedCode && code && (
+        {!hideCode && code && (
           <div
             data-slot="code"
             className="overflow-hidden [&_[data-rehype-pretty-code-figure]]:!m-0 [&_[data-rehype-pretty-code-figure]]:rounded-t-none [&_[data-rehype-pretty-code-figure]]:border-t [&_pre]:max-h-[400px]"
           >
-            <figure data-rehype-pretty-code-figure="" className="[&>pre]:max-h-96">
-              <CopyButton value={code} />
-              <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-            </figure>
+            <ComponentCode code={code} highlightedCode={highlightedCode!} />
           </div>
         )}
       </div>
     </div>
+  )
+}
+
+function ComponentCode({
+  code,
+  highlightedCode,
+}: {
+  code: string
+  highlightedCode: string
+}) {
+  return (
+    <figure data-rehype-pretty-code-figure="" className="[&>pre]:max-h-96">
+      <CopyButton value={code} />
+      <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+    </figure>
   )
 } 
