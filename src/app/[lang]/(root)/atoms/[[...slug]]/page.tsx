@@ -1,12 +1,16 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react"
 import { findNeighbour } from "fumadocs-core/page-tree"
 import type { Metadata } from "next"
+import fm from "front-matter"
+import z from "zod"
 import { atomsSource } from "@/lib/source"
 import { DocsCopyPage } from "@/components/docs-copy-page"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { mdxComponents } from "../../../../../../mdx-components"
 
 export const revalidate = false
 export const dynamic = "force-static"
@@ -61,8 +65,17 @@ export default async function AtomPage(props: {
   const raw = await page.data.getText("raw")
   const pageUrl = `https://cb.databayt.org${page.url}`
 
-  // Import MDX components
-  const { mdxComponents } = await import("../../../../../../mdx-components")
+  const { attributes } = fm(raw)
+  const { links } = z
+    .object({
+      links: z
+        .object({
+          doc: z.string().optional(),
+          api: z.string().optional(),
+        })
+        .optional(),
+    })
+    .parse(attributes)
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
@@ -111,6 +124,24 @@ export default async function AtomPage(props: {
                 </p>
               )}
             </div>
+            {links ? (
+              <div className="flex items-center gap-2 pt-4">
+                {links?.doc && (
+                  <Badge asChild variant="secondary" className="rounded-full">
+                    <a href={links.doc} target="_blank" rel="noreferrer">
+                      Docs <ArrowUpRight className="ml-1 h-3 w-3" />
+                    </a>
+                  </Badge>
+                )}
+                {links?.api && (
+                  <Badge asChild variant="secondary" className="rounded-full">
+                    <a href={links.api} target="_blank" rel="noreferrer">
+                      API Reference <ArrowUpRight className="ml-1 h-3 w-3" />
+                    </a>
+                  </Badge>
+                )}
+              </div>
+            ) : null}
           </div>
           <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
             <MDX components={mdxComponents} />

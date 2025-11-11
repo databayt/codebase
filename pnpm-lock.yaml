@@ -188,6 +188,9 @@ importers:
       framer-motion:
         specifier: ^12.23.15
         version: 12.23.15(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      front-matter:
+        specifier: ^4.0.2
+        version: 4.0.2
       fumadocs-core:
         specifier: ^16.0.5
         version: 16.0.9(@types/react@19.2.2)(lucide-react@0.544.0(react@19.2.0))(next@16.0.0(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -3738,6 +3741,9 @@ packages:
         optional: true
       react-dom:
         optional: true
+
+  front-matter@4.0.2:
+    resolution: {integrity: sha512-I8ZuJ/qG92NWX8i5x1Y8qyj3vizhXS31OxjKDu3LKP+7/qBgfIKValiZIEwoVoJKUHlhWtYrktkxV1XsX+pPlg==}
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -9472,6 +9478,10 @@ snapshots:
     optionalDependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
+
+  front-matter@4.0.2:
+    dependencies:
+      js-yaml: 3.14.1
 
   fsevents@2.3.3:
     optional: true
