@@ -1,6 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { highlightCode } from "@/lib/highlight-code"
+import { CopyButton } from "@/components/docs/copy-button"
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "start" | "end"
@@ -38,12 +39,16 @@ export async function ComponentPreview({
         >
           {children}
         </div>
-        {!hideCode && highlightedCode && (
+        {!hideCode && highlightedCode && code && (
           <div
             data-slot="code"
             className="overflow-hidden [&_[data-rehype-pretty-code-figure]]:!m-0 [&_[data-rehype-pretty-code-figure]]:rounded-t-none [&_[data-rehype-pretty-code-figure]]:border-t [&_pre]:max-h-[400px]"
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
+          >
+            <figure data-rehype-pretty-code-figure="" className="[&>pre]:max-h-96">
+              <CopyButton value={code} />
+              <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+            </figure>
+          </div>
         )}
       </div>
     </div>

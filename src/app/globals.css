@@ -55,6 +55,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-highlight: var(--code-highlight);
+  --color-code-number: var(--code-number);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -95,6 +99,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --code: oklch(0.98 0 0);
+  --code-foreground: oklch(0.145 0 0);
+  --code-highlight: oklch(0.96 0 0);
+  --code-number: oklch(0.556 0 0);
 }
 
 .dark {
@@ -129,6 +137,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --code: oklch(0.2 0 0);
+  --code-foreground: oklch(0.708 0 0);
+  --code-highlight: oklch(0.27 0 0);
+  --code-number: oklch(0.556 0 0);
 }
 
 @layer base {
@@ -226,5 +238,63 @@
   [dir="rtl"] .rtl\:mr-auto {
     margin-right: auto;
     margin-left: 0;
+  }
+
+  /* Code block styling */
+  [data-rehype-pretty-code-figure] pre {
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    color: var(--color-code-foreground);
+  }
+
+  [data-line-numbers] {
+    display: grid;
+    min-width: 100%;
+    white-space: pre;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    counter-reset: line;
+    box-decoration-break: clone;
+  }
+
+  [data-line-numbers] [data-line]::before {
+    font-size: var(--text-sm);
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: calc(var(--spacing) * 16);
+    padding-right: calc(var(--spacing) * 6);
+    text-align: right;
+    color: var(--color-code-number);
+    background-color: var(--color-code);
+    position: sticky;
+    left: 0;
+  }
+
+  [data-line-numbers] [data-highlighted-line][data-line]::before {
+    background-color: var(--color-code-highlight);
+  }
+
+  [data-line] {
+    padding-top: calc(var(--spacing) * 0.5);
+    padding-bottom: calc(var(--spacing) * 0.5);
+    min-height: calc(var(--spacing) * 1);
+    width: 100%;
+    display: inline-block;
+  }
+
+  [data-line] span {
+    color: var(--shiki-light);
+
+    @variant dark {
+      color: var(--shiki-dark) !important;
+    }
+  }
+
+  [data-highlighted-line],
+  [data-highlighted-chars] {
+    position: relative;
+    background-color: var(--color-code-highlight);
   }
 }
