@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, Clipboard } from "lucide-react"
+import { IconCheck, IconCopy } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,7 +9,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+
+export function copyToClipboardWithMeta(value: string) {
+  navigator.clipboard.writeText(value)
+}
 
 export function CopyButton({
   value,
@@ -21,28 +24,37 @@ export function CopyButton({
   value: string
   tooltip?: string
 }) {
-  const { copyToClipboard, isCopied } = useCopyToClipboard()
+  const [hasCopied, setHasCopied] = React.useState(false)
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setHasCopied(false)
+    }, 2000)
+  }, [hasCopied])
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
           data-slot="copy-button"
-          data-copied={isCopied}
+          data-copied={hasCopied}
           size="icon"
           variant={variant}
           className={cn(
             "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
             className
           )}
-          onClick={() => copyToClipboard(value)}
+          onClick={() => {
+            copyToClipboardWithMeta(value)
+            setHasCopied(true)
+          }}
           {...props}
         >
           <span className="sr-only">Copy</span>
-          {isCopied ? <Check className="h-4 w-4" /> : <Clipboard className="h-4 w-4" />}
+          {hasCopied ? <IconCheck /> : <IconCopy />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{isCopied ? "Copied" : tooltip}</TooltipContent>
+      <TooltipContent>{hasCopied ? "Copied" : tooltip}</TooltipContent>
     </Tooltip>
   )
 }
