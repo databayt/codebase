@@ -26,9 +26,9 @@
   }
 
   /* Paragraph */
-  p {
+  /* p {
     @apply leading-6 text-muted-foreground;
-  }
+  } */
 
   /* Blockquote */
   /* blockquote {
@@ -45,9 +45,9 @@
   }
 
   /* Inline code */
-  code {
+  /* code {
     @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-  }
+  } */
 
   /* Tables */
   table {

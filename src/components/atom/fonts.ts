@@ -1,10 +1,20 @@
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Rubik } from "next/font/google"
+import {
+  Geist_Mono as FontMono,
+  Geist as FontSans,
+  Rubik,
+} from "next/font/google"
+import { cn } from "@/lib/utils"
 
-export const fontSans = GeistSans
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
-export const fontMono = GeistMono
+export const fontMono = FontMono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400"],
+})
 
 export const fontRubik = Rubik({
   subsets: ["latin", "arabic"],
@@ -12,3 +22,9 @@ export const fontRubik = Rubik({
   variable: "--font-rubik",
   display: "swap",
 })
+
+export const fontVariables = cn(
+  fontSans.variable,
+  fontMono.variable,
+  fontRubik.variable
+)

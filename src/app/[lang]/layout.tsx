@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { fontSans, fontMono, fontRubik } from "@/components/atom/fonts";
+import { fontSans, fontMono, fontRubik, fontVariables } from "@/components/atom/fonts";
 import { getDictionary } from "@/components/local/dictionaries";
 import { type Locale, localeConfig } from "@/components/local/config";
 import { ThemeProvider } from "@/components/atom/theme-provider"
+import { cn } from "@/lib/utils"
 
 export async function generateMetadata({
   params,
@@ -49,7 +50,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={lang} dir={config.dir} suppressHydrationWarning>
-            <body className={`${fontClass} antialiased`} suppressHydrationWarning>
+            <body className={cn(fontClass, fontVariables, "antialiased")} suppressHydrationWarning>
                 <ThemeProvider>
                     <div className="layout-container">
                         {children}
