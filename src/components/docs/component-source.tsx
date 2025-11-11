@@ -1,82 +1,94 @@
-"use client"
-
 import * as React from "react"
-import { Check, Clipboard } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { highlightCode } from "@/lib/highlight-code"
 import { cn } from "@/lib/utils"
+import { CopyButton } from "@/components/docs/copy-button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 
 interface ComponentSourceProps extends React.HTMLAttributes<HTMLDivElement> {
   code?: string
   language?: string
-  title?: string
+  fileName?: string
   collapsible?: boolean
 }
 
-export function ComponentSource({
+export async function ComponentSource({
   code,
   language = "tsx",
-  title,
+  fileName,
   collapsible = true,
   className,
   ...props
 }: ComponentSourceProps) {
-  const { copyToClipboard, isCopied } = useCopyToClipboard()
-  const [isOpen, setIsOpen] = React.useState(!collapsible)
-
   if (!code) {
     return null
   }
 
-  const content = (
-    <div className="relative">
-      {title && (
-        <div className="flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground border-b">
-          <span className="font-mono">{title}</span>
-        </div>
-      )}
-      <Button
-        size="icon"
-        variant="ghost"
-        className="absolute right-4 top-4 h-7 w-7 z-10"
-        onClick={() => copyToClipboard(code)}
-      >
-        {isCopied ? (
-          <Check className="h-4 w-4" />
-        ) : (
-          <Clipboard className="h-4 w-4" />
-        )}
-      </Button>
-      <pre className={cn("overflow-auto p-4 text-sm max-h-96")}>
-        <code className={`language-${language}`}>{code}</code>
-      </pre>
-    </div>
-  )
+  const lang = language ?? fileName?.split(".").pop() ?? "tsx"
+  const highlightedCode = await highlightCode(code, lang)
 
   if (!collapsible) {
     return (
       <div className={cn("relative", className)} {...props}>
-        {content}
+        <ComponentCode
+          code={code}
+          highlightedCode={highlightedCode}
+          language={lang}
+          fileName={fileName}
+        />
       </div>
     )
   }
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className={cn("relative", className)} {...props}>
+    <Collapsible defaultOpen={!collapsible} className={cn("relative", className)} {...props}>
       <div className="flex items-center justify-between p-4 border-t">
         <h4 className="text-sm font-medium">Code</h4>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="sm" className="gap-2">
-            {isOpen ? "Hide" : "View"} code
-            <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
+            <span className="data-[state=open]:hidden">View</span>
+            <span className="hidden data-[state=open]:inline">Hide</span> code
+            <ChevronDown className="h-4 w-4 transition-transform [[data-state=open]>&]:rotate-180" />
           </Button>
         </CollapsibleTrigger>
       </div>
       <CollapsibleContent>
-        {content}
+        <ComponentCode
+          code={code}
+          highlightedCode={highlightedCode}
+          language={lang}
+          fileName={fileName}
+        />
       </CollapsibleContent>
     </Collapsible>
+  )
+}
+
+function ComponentCode({
+  code,
+  highlightedCode,
+  language,
+  fileName,
+}: {
+  code: string
+  highlightedCode: string
+  language: string
+  fileName: string | undefined
+}) {
+  return (
+    <figure data-rehype-pretty-code-figure="" className="[&>pre]:max-h-96">
+      {fileName && (
+        <figcaption
+          data-rehype-pretty-code-title=""
+          className="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70"
+          data-language={language}
+        >
+          {fileName}
+        </figcaption>
+      )}
+      <CopyButton value={code} />
+      <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+    </figure>
   )
 }
