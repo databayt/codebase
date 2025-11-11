@@ -169,6 +169,8 @@
     min-height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
   }
   
   /* Safe area padding for mobile devices */
