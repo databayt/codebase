@@ -45,7 +45,7 @@ export function AtomsSidebar({
                     <SidebarMenuButton
                       asChild
                       isActive={isActive}
-                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium"
+                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-0"
                     >
                       <Link href={href}>{name}</Link>
                     </SidebarMenuButton>
