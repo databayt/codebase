@@ -12,33 +12,51 @@ import type { Metadata } from "next"
 export const runtime = "nodejs"
 
 export async function generateStaticParams() {
-  return atomsSource.generateParams()
+  try {
+    const params = atomsSource.generateParams()
+    // Ensure we return an array
+    return Array.isArray(params) ? params : []
+  } catch (error) {
+    console.error("Error generating static params:", error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }): Promise<Metadata> {
-  const { slug } = await params
-  const page = atomsSource.getPage(slug)
+  try {
+    const { slug } = await params
+    const page = atomsSource.getPage(slug)
 
-  if (!page || !page.data) {
-    return {
-      title: "Atom Not Found",
-      description: "The requested atom could not be found.",
+    if (!page || !page.data) {
+      return {
+        title: "Atom Not Found",
+        description: "The requested atom could not be found.",
+      }
     }
-  }
 
-  const title = page.data.title || "Atom"
-  const description = page.data.description || ""
+    const title = page.data.title || "Atom"
+    const description = page.data.description || ""
 
-  return {
-    title,
-    description,
-    ...(title && description && {
-      openGraph: {
+    const metadata: Metadata = {
+      title,
+      description,
+    }
+
+    if (title && description) {
+      metadata.openGraph = {
         title,
         description,
         type: "article",
-      },
-    }),
+      }
+    }
+
+    return metadata
+  } catch (error) {
+    console.error("Error generating metadata:", error)
+    return {
+      title: "Atom",
+      description: "",
+    }
   }
 }
 
