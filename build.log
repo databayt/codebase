@@ -1,0 +1,16 @@
+
+> codebase-underway@0.1.0 build D:\repo\codebase-underway
+> next build --no-lint
+
+ ⚠ Linting is disabled.
+ ⚠ `experimental.instrumentationHook` is no longer needed, because `instrumentation.js` is available by default. You can remove it from next.config.ts.
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'instrumentationHook' at "experimental"
+ ⚠     Unrecognized key(s) in object: 'telemetry'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 15.5.3
+   - Environments: .env
+   - Experiments (use with caution):
+     ⨯ instrumentationHook
+     · optimizePackageImports
+
