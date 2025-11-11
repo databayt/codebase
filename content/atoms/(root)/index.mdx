@@ -1,44 +1,77 @@
 ---
 title: Introduction
-description: A collection of beautifully-designed, accessible UI atoms built with shadcn/ui components. Copy-paste ready components for your React applications.
+description: A collection of beautifully-designed, accessible components and patterns. Built with shadcn/ui. Open Source. Open Code.
 ---
 
-**Atoms are the smallest, reusable building blocks for your React applications.**
+**This is not a component library. It is how you build your component library.**
 
-These are not traditional components from a package you install. They are copy-paste components built on top of shadcn/ui primitives that you can customize to fit your needs.
+You know how most traditional component libraries work: you install a package from NPM, import the components, and use them in your app.
 
-## What are Atoms?
+This approach works well until you need to customize a component to fit your design system or require one that isn't included in the library. **Often, you end up wrapping library components, writing workarounds to override styles, or mixing components from different libraries with incompatible APIs.**
 
-Atoms follow atomic design principles - they are the fundamental building blocks that combine shadcn/ui components with custom styling and behavior. Each atom is:
+This is what this atoms collection aims to solve. It is built around the following principles:
 
-- **Copy-Paste Ready:** Get the exact code to drop into your project
-- **Built on shadcn/ui:** Leverages the power of Radix UI primitives
-- **Fully Customizable:** Open code that you can modify to fit your design system
-- **Accessible:** Built with accessibility in mind from the ground up
-- **Modern:** Uses the latest React patterns and TypeScript
+- **Open Code:** The top layer of your component code is open for modification.
+- **Composition:** Every component uses a common, composable interface, making them predictable.
+- **Distribution:** A flat-file schema and command-line tool make it easy to distribute components.
+- **Beautiful Defaults:** Carefully chosen default styles, so you get great design out-of-the-box.
+- **AI-Ready:** Open code for LLMs to read, understand, and improve.
 
-## How to Use
+## Open Code
 
-1. Browse the atoms collection
-2. Copy the component code
-3. Paste into your project
-4. Customize as needed
+This collection hands you the actual component code. You have full control to customize and extend the components to your needs. This means:
 
-Each atom page includes:
+- **Full Transparency:** You see exactly how each component is built.
+- **Easy Customization:** Modify any part of a component to fit your design and functionality requirements.
+- **AI Integration:** Access to the code makes it straightforward for LLMs to read, understand, and even improve your components.
 
-- Live preview of the component
-- Complete source code
-- Installation instructions for dependencies
-- Usage examples
-- Customization tips
+_In a typical library, if you need to change a button's behavior, you have to override styles or wrap the component. With this approach, you simply edit the button code directly._
 
-## Philosophy
+<Accordion collapsible>
+  <AccordionItem value="faq-1" className="border-none">
+    <AccordionTrigger>
+      How do I pull upstream updates in an Open Code approach?
+    </AccordionTrigger>
+    <AccordionContent>
+      <p>
+        This collection follows a headless component architecture. This means the core
+        of your app can receive fixes by updating your dependencies, for
+        instance, radix-ui or input-otp.
+      </p>
+      <p className="mt-4">
+        The topmost layer, i.e., the one closest to your design system, is not
+        coupled with the implementation of the library. It stays open for
+        modification.
+      </p>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
 
-Atoms are designed to be:
+## Composition
 
-- **Composable:** Combine atoms to create more complex components
-- **Consistent:** Share a common design language and API
-- **Flexible:** Easy to adapt to your specific use case
-- **Maintainable:** Clear, readable code that's easy to understand
+Every component in this collection shares a common, composable interface. **If a component does not exist, we bring it in, make it composable, and adjust its style to match and work with the rest of the design system.**
 
-Start exploring atoms to build your component library from the ground up.
+_A shared, composable interface means it's predictable for both your team and LLMs. You are not learning different APIs for every new component. Even for third-party ones._
+
+## Distribution
+
+This is also a code distribution system. It defines a schema for components and a CLI to distribute them.
+
+- **Schema:** A flat-file structure that defines the components, their dependencies, and properties.
+- **CLI:** A command-line tool to distribute and install components across projects with cross-framework support.
+
+_You can use the schema to distribute your components to other projects or have AI generate completely new components based on existing schema._
+
+## Beautiful Defaults
+
+This collection comes with a large collection of components that have carefully chosen default styles. They are designed to look good on their own and to work well together as a consistent system:
+
+- **Good Out-of-the-Box:** Your UI has a clean and minimal look without extra work.
+- **Unified Design:** Components naturally fit with one another. Each component is built to match the others, keeping your UI consistent.
+- **Easily Customizable:** If you want to change something, it's simple to override and extend the defaults.
+
+## AI-Ready
+
+The design of this collection makes it easy for AI tools to work with your code. Its open code and consistent API allow AI models to read, understand, and even generate new components.
+
+_An AI model can learn how your components work and suggest improvements or even create new components that integrate with your existing design._
