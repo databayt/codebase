@@ -61,6 +61,9 @@ export default async function AtomPage(props: {
   const raw = await page.data.getText("raw")
   const pageUrl = `https://cb.databayt.org${page.url}`
 
+  // Import MDX components
+  const { mdxComponents } = await import("@/../../mdx-components")
+
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
       <div className="flex min-w-0 flex-1 flex-col">
@@ -110,7 +113,7 @@ export default async function AtomPage(props: {
             </div>
           </div>
           <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-            <MDX />
+            <MDX components={mdxComponents} />
           </div>
         </div>
         <div className="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
