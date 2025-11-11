@@ -12,8 +12,7 @@ import { CodeTabs } from "@/components/docs/code-tabs"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 // This file is required to use MDX in `app` directory.
-export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
-  return {
+const mdxComponents = {
     // Allows customizing built-in components, e.g. to add styling.
     h1: ({ className, ...props }) => (
       <h1
@@ -192,6 +191,13 @@ export function useMDXComponents(components: Record<string, React.ComponentType<
         {...props}
       />
     ),
+}
+
+export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
+  return {
+    ...mdxComponents,
     ...components,
   }
-} 
+}
+
+export { mdxComponents } 
