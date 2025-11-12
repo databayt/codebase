@@ -39,8 +39,26 @@ import { PromptInput } from "@/components/atom/prompt-input"
 import { Reasoning } from "@/components/atom/reasoning"
 import * as Icons from "@/components/atom/icons"
 import * as Fonts from "@/components/atom/fonts"
+import { CardsActivityGoal } from "@/components/atom/activity-goal"
+import { CardsReportIssue } from "@/components/atom/report-issue"
+import { CardsPaymentMethod } from "@/components/atom/payment-method"
+import { CardsShare } from "@/components/atom/share"
+import { CardsCalendar } from "@/components/atom/calendar"
+import { CardsChat } from "@/components/atom/chat"
+import { CardsCookieSettings } from "@/components/atom/cookie-settings"
+import { CardsCreateAccount } from "@/components/atom/create-account"
+import { CardsDataTable } from "@/components/atom/data-table"
+import { CardsMetric as CardsMetricSingle } from "@/components/atom/metric"
+import { CardsStats } from "@/components/atom/stats"
+import { CardsTeamMembers } from "@/components/atom/team-members"
 
 // This file is required to use MDX in `app` directory.
+
+// Create a default dictionary for MDX components that require it
+const defaultDictionary = {
+  locale: 'en',
+  cards: {},
+} as any
 const mdxComponents = {
     // Allows customizing built-in components, e.g. to add styling.
     h1: ({ className, ...props }) => (
@@ -329,6 +347,18 @@ const mdxComponents = {
     Reasoning,
     Icons,
     Fonts,
+    ActivityGoal: () => <CardsActivityGoal dictionary={defaultDictionary} />,
+    ReportIssue: () => <CardsReportIssue dictionary={defaultDictionary} />,
+    PaymentMethod: () => <CardsPaymentMethod dictionary={defaultDictionary} />,
+    Share: () => <CardsShare dictionary={defaultDictionary} />,
+    Calendar: () => <CardsCalendar dictionary={defaultDictionary} />,
+    Chat: () => <CardsChat dictionary={defaultDictionary} />,
+    CookieSettings: () => <CardsCookieSettings dictionary={defaultDictionary} />,
+    CreateAccount: () => <CardsCreateAccount dictionary={defaultDictionary} />,
+    DataTable: () => <CardsDataTable dictionary={defaultDictionary} />,
+    Metric: () => <CardsMetricSingle dictionary={defaultDictionary} />,
+    Stats: () => <CardsStats dictionary={defaultDictionary} />,
+    TeamMembers: () => <CardsTeamMembers dictionary={defaultDictionary} />,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
