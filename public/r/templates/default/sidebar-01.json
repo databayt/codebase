@@ -1,0 +1,41 @@
+{
+  "name": "sidebar-01",
+  "type": "registry:template",
+  "description": "Documentation sidebar with collapsible navigation.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "sidebar",
+    "scroll-area"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/sidebar-01/page.tsx",
+      "type": "registry:page",
+      "target": "app/sidebar/page.tsx",
+      "content": ""
+    },
+    {
+      "path": "registry/default/template/sidebar-01/content.tsx",
+      "type": "registry:component",
+      "target": "components/sidebar-nav.tsx",
+      "content": ""
+    },
+    {
+      "path": "registry/default/template/sidebar-01/config.ts",
+      "type": "registry:component",
+      "target": "config/docs.ts",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "navigation",
+    "sidebar",
+    "documentation"
+  ],
+  "meta": {
+    "iframeHeight": "1000px",
+    "container": "flex min-h-screen",
+    "mobile": "screenshot"
+  }
+}

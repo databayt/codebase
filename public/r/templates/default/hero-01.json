@@ -1,0 +1,28 @@
+{
+  "name": "hero-01",
+  "type": "registry:template",
+  "description": "A modern hero section with call-to-action buttons.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/hero-01/page.tsx",
+      "type": "registry:page",
+      "target": "app/hero/page.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "hero",
+    "marketing",
+    "landing"
+  ],
+  "meta": {
+    "iframeHeight": "700px",
+    "container": "bg-background",
+    "mobile": "component"
+  }
+}

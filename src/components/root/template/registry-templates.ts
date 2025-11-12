@@ -14,6 +14,11 @@ export const templates: Registry["items"] = [
       },
     ],
     categories: ["authentication", "login"],
+    meta: {
+      iframeHeight: "600px",
+      container: "flex min-h-screen items-center justify-center",
+      mobile: "component",
+    },
   },
   {
     name: "hero-01",
@@ -28,6 +33,11 @@ export const templates: Registry["items"] = [
       },
     ],
     categories: ["hero", "marketing", "landing"],
+    meta: {
+      iframeHeight: "700px",
+      container: "bg-background",
+      mobile: "component",
+    },
   },
   {
     name: "sidebar-01",
@@ -52,6 +62,11 @@ export const templates: Registry["items"] = [
       },
     ],
     categories: ["navigation", "sidebar", "documentation"],
+    meta: {
+      iframeHeight: "1000px",
+      container: "flex min-h-screen",
+      mobile: "screenshot",
+    },
   },
   {
     name: "header-01",

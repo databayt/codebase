@@ -1,0 +1,43 @@
+{
+  "name": "header-01",
+  "type": "registry:template",
+  "description": "Responsive header with navigation and mobile menu.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "button",
+    "navigation-menu",
+    "sheet"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/header-01/page.tsx",
+      "type": "registry:page",
+      "target": "app/header/page.tsx",
+      "content": ""
+    },
+    {
+      "path": "registry/default/template/header-01/content.tsx",
+      "type": "registry:component",
+      "target": "components/header.tsx",
+      "content": ""
+    },
+    {
+      "path": "registry/default/template/header-01/main-nav.tsx",
+      "type": "registry:component",
+      "target": "components/main-nav.tsx",
+      "content": ""
+    },
+    {
+      "path": "registry/default/template/header-01/mobile-nav.tsx",
+      "type": "registry:component",
+      "target": "components/mobile-nav.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "navigation",
+    "header"
+  ],
+  "meta": {}
+}

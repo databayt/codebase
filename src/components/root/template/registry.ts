@@ -36,7 +36,14 @@ export const registryItemSchema = z.object({
     })
     .optional(),
   cssVars: z.object({}).catchall(z.any()).optional(),
-  meta: z.object({}).catchall(z.any()).optional(),
+  meta: z
+    .object({
+      iframeHeight: z.string().optional(), // e.g., "800px", "1000px"
+      container: z.string().optional(), // e.g., "bg-surface min-h-svh"
+      mobile: z.enum(["component", "screenshot"]).optional(), // Mobile rendering strategy
+    })
+    .catchall(z.any())
+    .optional(),
   docs: z.string().optional(),
   categories: z.array(z.string()).optional(),
 })

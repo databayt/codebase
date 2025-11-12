@@ -11,6 +11,7 @@ import {
     Folder,
     Fullscreen,
     Monitor,
+    RotateCw,
     Smartphone,
     Tablet,
     Terminal,
@@ -67,6 +68,8 @@ type TemplateViewerContext = {
         highlightedContent: string
     })[]
         | null
+    iframeKey?: number
+    setIframeKey?: React.Dispatch<React.SetStateAction<number>>
 }
 
 const TemplateViewerContext = React.createContext<TemplateViewerContext | null>(null)
@@ -94,6 +97,7 @@ function TemplateViewerProvider({
         TemplateViewerContext["activeFile"]
     >(highlightedFiles?.[0].target ?? null)
     const resizablePanelRef = React.useRef<ImperativePanelHandle>(null)
+    const [iframeKey, setIframeKey] = React.useState(0)
 
     return (
         <TemplateViewerContext.Provider
@@ -108,6 +112,8 @@ function TemplateViewerProvider({
                 setActiveFile,
                 tree,
                 highlightedFiles,
+                iframeKey,
+                setIframeKey,
             }}
         >
             <div
@@ -127,7 +133,7 @@ function TemplateViewerProvider({
 }
 
 function TemplateViewerToolbar() {
-    const { setView, item, resizablePanelRef, style } = useTemplateViewer()
+    const { setView, item, resizablePanelRef, style, setIframeKey } = useTemplateViewer()
     const { copyToClipboard, isCopied } = useCopyToClipboard()
 
     return (
@@ -165,6 +171,7 @@ function TemplateViewerToolbar() {
                         type="single"
                         defaultValue="100"
                         onValueChange={(value) => {
+                            setView("preview")
                             if (resizablePanelRef?.current) {
                                 resizablePanelRef.current.resize(parseInt(value))
                             }
@@ -199,10 +206,25 @@ function TemplateViewerToolbar() {
                             asChild
                             title="Open in New Tab"
                         >
-                            <Link href={`/view/${item.name}`} target="_blank">
+                            <Link href={`/en/view/templates/${item.name}`} target="_blank">
                                 <span className="sr-only">Open in New Tab</span>
                                 <Fullscreen className="h-3.5 w-3.5" />
                             </Link>
+                        </Button>
+                        <Separator orientation="vertical" className="h-4" />
+                        <Button
+                            size="icon"
+                            variant="ghost"
+                            className="h-[22px] w-[22px] rounded-sm p-0"
+                            onClick={() => {
+                                if (setIframeKey) {
+                                    setIframeKey((prev) => prev + 1)
+                                }
+                            }}
+                            title="Refresh Preview"
+                        >
+                            <RotateCw className="h-3.5 w-3.5" />
+                            <span className="sr-only">Refresh</span>
                         </Button>
                     </ToggleGroup>
                 </div>
@@ -233,22 +255,22 @@ function TemplateViewerToolbar() {
     )
 }
 
-function TemplateViewerView() {
-    const { item, style, resizablePanelRef } = useTemplateViewer()
-    const [Component, setComponent] = React.useState<React.ComponentType | null>(null)
+function TemplateViewerIframe() {
+    const { item, iframeKey } = useTemplateViewer()
 
-    React.useEffect(() => {
-        // Dynamically import the component from the registry
-        import("@/__registry__").then(mod => {
-            const registryComponent = mod.Index?.["default"]?.[item.name]?.component
-            if (registryComponent) {
-                // The component is already wrapped in React.lazy, so just set it
-                setComponent(() => registryComponent)
-            }
-        }).catch(() => {
-            console.error(`Failed to load template: ${item.name}`)
-        })
-    }, [item.name])
+    return (
+        <iframe
+            key={iframeKey}
+            src={`/en/view/templates/${item.name}`}
+            height={item.meta?.iframeHeight ?? 800}
+            loading="lazy"
+            className="w-full bg-background no-scrollbar relative z-20"
+        />
+    )
+}
+
+function TemplateViewerView() {
+    const { resizablePanelRef } = useTemplateViewer()
 
     return (
         <div className="group-data-[view=code]/template-view-wrapper:hidden md:h-[--height]">
@@ -256,25 +278,11 @@ function TemplateViewerView() {
                 <ResizablePanelGroup direction="horizontal" className="relative z-10">
                     <ResizablePanel
                         ref={resizablePanelRef}
-                        className="relative aspect-[4/2.5] rounded-xl border bg-background md:aspect-auto overflow-auto"
+                        className="relative aspect-[4/2.5] rounded-xl border bg-background md:aspect-auto overflow-hidden"
                         defaultSize={100}
                         minSize={30}
                     >
-                        <div className="relative z-20 w-full min-h-[400px] md:min-h-[--height] p-6">
-                            {Component ? (
-                                <React.Suspense fallback={
-                                    <div className="flex h-[400px] items-center justify-center text-muted-foreground">
-                                        Loading template...
-                                    </div>
-                                }>
-                                    <Component />
-                                </React.Suspense>
-                            ) : (
-                                <div className="flex h-[400px] items-center justify-center text-muted-foreground">
-                                    Loading component...
-                                </div>
-                            )}
-                        </div>
+                        <TemplateViewerIframe />
                     </ResizablePanel>
                     <ResizableHandle className="relative hidden w-3 bg-transparent p-0 after:absolute after:right-0 after:top-1/2 after:h-8 after:w-[6px] after:-translate-y-1/2 after:translate-x-[-1px] after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
                     <ResizablePanel defaultSize={0} minSize={0} />

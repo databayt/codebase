@@ -1,0 +1,27 @@
+{
+  "name": "footer-01",
+  "type": "registry:template",
+  "description": "Simple footer with links and copyright.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/default/template/footer-01/page.tsx",
+      "type": "registry:page",
+      "target": "app/footer/page.tsx",
+      "content": ""
+    },
+    {
+      "path": "registry/default/template/footer-01/content.tsx",
+      "type": "registry:component",
+      "target": "components/footer.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "navigation",
+    "footer"
+  ],
+  "meta": {}
+}

@@ -10,7 +10,8 @@
     "lint": "next lint",
     "postinstall": "prisma generate && fumadocs-mdx",
     "build:registry": "tsx scripts/build-registry.mts",
-    "registry:build": "tsx scripts/build-registry.mts"
+    "registry:build": "tsx scripts/build-registry.mts",
+    "build:templates": "tsx scripts/build-template-registry.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.17",

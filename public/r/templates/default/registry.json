@@ -1,0 +1,151 @@
+{
+  "name": "default",
+  "items": [
+    {
+      "name": "login-01",
+      "type": "registry:template",
+      "description": "A simple login form with email and password fields.",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "template/login-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/login/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px",
+        "container": "flex min-h-screen items-center justify-center",
+        "mobile": "component"
+      },
+      "categories": [
+        "authentication",
+        "login"
+      ]
+    },
+    {
+      "name": "hero-01",
+      "type": "registry:template",
+      "description": "A modern hero section with call-to-action buttons.",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "template/hero-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "700px",
+        "container": "bg-background",
+        "mobile": "component"
+      },
+      "categories": [
+        "hero",
+        "marketing",
+        "landing"
+      ]
+    },
+    {
+      "name": "sidebar-01",
+      "type": "registry:template",
+      "description": "Documentation sidebar with collapsible navigation.",
+      "registryDependencies": [
+        "sidebar",
+        "scroll-area"
+      ],
+      "files": [
+        {
+          "path": "template/sidebar-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar/page.tsx"
+        },
+        {
+          "path": "template/sidebar-01/content.tsx",
+          "type": "registry:component",
+          "target": "components/sidebar-nav.tsx"
+        },
+        {
+          "path": "template/sidebar-01/config.ts",
+          "type": "registry:component",
+          "target": "config/docs.ts"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "1000px",
+        "container": "flex min-h-screen",
+        "mobile": "screenshot"
+      },
+      "categories": [
+        "navigation",
+        "sidebar",
+        "documentation"
+      ]
+    },
+    {
+      "name": "header-01",
+      "type": "registry:template",
+      "description": "Responsive header with navigation and mobile menu.",
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "template/header-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/header/page.tsx"
+        },
+        {
+          "path": "template/header-01/content.tsx",
+          "type": "registry:component",
+          "target": "components/header.tsx"
+        },
+        {
+          "path": "template/header-01/main-nav.tsx",
+          "type": "registry:component",
+          "target": "components/main-nav.tsx"
+        },
+        {
+          "path": "template/header-01/mobile-nav.tsx",
+          "type": "registry:component",
+          "target": "components/mobile-nav.tsx"
+        }
+      ],
+      "categories": [
+        "navigation",
+        "header"
+      ]
+    },
+    {
+      "name": "footer-01",
+      "type": "registry:template",
+      "description": "Simple footer with links and copyright.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "template/footer-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer/page.tsx"
+        },
+        {
+          "path": "template/footer-01/content.tsx",
+          "type": "registry:component",
+          "target": "components/footer.tsx"
+        }
+      ],
+      "categories": [
+        "navigation",
+        "footer"
+      ]
+    }
+  ]
+}

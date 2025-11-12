@@ -1,0 +1,49 @@
+[
+  {
+    "name": "login-01",
+    "description": "A simple login form with email and password fields.",
+    "categories": [
+      "authentication",
+      "login"
+    ],
+    "type": "registry:template"
+  },
+  {
+    "name": "hero-01",
+    "description": "A modern hero section with call-to-action buttons.",
+    "categories": [
+      "hero",
+      "marketing",
+      "landing"
+    ],
+    "type": "registry:template"
+  },
+  {
+    "name": "sidebar-01",
+    "description": "Documentation sidebar with collapsible navigation.",
+    "categories": [
+      "navigation",
+      "sidebar",
+      "documentation"
+    ],
+    "type": "registry:template"
+  },
+  {
+    "name": "header-01",
+    "description": "Responsive header with navigation and mobile menu.",
+    "categories": [
+      "navigation",
+      "header"
+    ],
+    "type": "registry:template"
+  },
+  {
+    "name": "footer-01",
+    "description": "Simple footer with links and copyright.",
+    "categories": [
+      "navigation",
+      "footer"
+    ],
+    "type": "registry:template"
+  }
+]

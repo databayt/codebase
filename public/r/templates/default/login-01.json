@@ -1,0 +1,30 @@
+{
+  "name": "login-01",
+  "type": "registry:template",
+  "description": "A simple login form with email and password fields.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "button",
+    "card",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/login-01/page.tsx",
+      "type": "registry:page",
+      "target": "app/login/page.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "authentication",
+    "login"
+  ],
+  "meta": {
+    "iframeHeight": "600px",
+    "container": "flex min-h-screen items-center justify-center",
+    "mobile": "component"
+  }
+}
