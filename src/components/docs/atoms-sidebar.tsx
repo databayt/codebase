@@ -17,6 +17,22 @@ import {
 // Flat list of links without sections
 const ATOMS_LINKS = [
   { name: "Introduction", href: "/atoms" },
+
+  // Card Components
+  { name: "Activity Goal", href: "/atoms/activity-goal" },
+  { name: "Calendar", href: "/atoms/calendar" },
+  { name: "Chat", href: "/atoms/chat" },
+  { name: "Cookie Settings", href: "/atoms/cookie-settings" },
+  { name: "Create Account", href: "/atoms/create-account" },
+  { name: "Data Table", href: "/atoms/data-table" },
+  { name: "Metric", href: "/atoms/metric" },
+  { name: "Payment Method", href: "/atoms/payment-method" },
+  { name: "Report Issue", href: "/atoms/report-issue" },
+  { name: "Share", href: "/atoms/share" },
+  { name: "Stats", href: "/atoms/stats" },
+  { name: "Team Members", href: "/atoms/team-members" },
+
+  // Other Atoms
   { name: "Accordion", href: "/atoms/accordion" },
 ]
 
