@@ -6,7 +6,7 @@ import Link from "next/link"
 import { DocsSidebar } from "@/components/template/sidebar-01/content"
 import { DocsThemeSwitcher } from "@/components/docs/docs-theme-switcher"
 import { DocsTableOfContents } from "@/components/docs/toc"
-import "../../globals.css"
+import "../../../globals.css"
 interface DocsLayoutProps {
     children: React.ReactNode
     params: Promise<{ lang: string }>
