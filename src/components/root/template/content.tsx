@@ -14,10 +14,21 @@ interface TemplateContentProps {
 }
 
 export default function TemplateContent({ dictionary, params }: TemplateContentProps) {
+    // Extract only the serializable strings for client components
+    const templateLabels = {
+        hero: dictionary?.template?.hero,
+        landing: dictionary?.template?.landing,
+        dashboard: dictionary?.template?.dashboard,
+        ecommerce: dictionary?.template?.ecommerce,
+        blog: dictionary?.template?.blog,
+        portfolio: dictionary?.template?.portfolio,
+        components: dictionary?.template?.components,
+    };
+
     return (
         <>
             <Hero dictionary={dictionary} params={params} />
-            <TemplateTabs dictionary={dictionary} />
+            <TemplateTabs templateLabels={templateLabels} />
 
             <div>
                 {FEATURED_TEMPLATES.map((template) => (

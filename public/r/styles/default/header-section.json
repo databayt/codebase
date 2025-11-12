@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-section",
+  "description": "Reusable header section component",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/header-section.tsx",
+      "content": "interface HeaderSectionProps {\n  label?: string;\n  title: string;\n  subtitle?: string;\n}\n\nexport function HeaderSection({ label, title, subtitle }: HeaderSectionProps) {\n  return (\n    <div className=\"flex flex-col items-center text-center\">\n      {label ? (\n        <div className=\"text-gradient_indigo-purple mb-4\">\n          {label}\n        </div>\n      ) : null}\n      <h2 className=\"font-heading\">\n        {title}\n      </h2>\n      {subtitle ? (\n        <p className=\"mt-6 text-balance lead\">\n          {subtitle}\n        </p>\n      ) : null}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/header-section.tsx"
+    }
+  ],
+  "categories": [
+    "layout",
+    "navigation"
+  ]
+}

@@ -1,0 +1,86 @@
+---
+title: "Page Header"
+description: "Consistent page header with breadcrumbs"
+component: true
+categories: ["layout", "navigation"]
+
+
+---
+
+# Page Header
+
+Consistent page header with breadcrumbs
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add page-header
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/page-header.tsx**
+
+```tsx title="components/atom/page-header.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PageHeader } from "@/components/atom/page-header"
+
+export default function Example() {
+  return (
+    {/* Component preview would go here */}
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="page-header-demo">
+  {/* Component preview would go here */}
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

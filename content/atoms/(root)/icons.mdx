@@ -1,0 +1,91 @@
+---
+title: "Icons"
+description: "Comprehensive icon library"
+component: true
+categories: ["ui", "utility"]
+dependencies: ["lucide-react"]
+
+---
+
+# Icons
+
+Comprehensive icon library
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add icons
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+
+```bash
+npm install lucide-react
+```
+
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/icons.tsx**
+
+```tsx title="components/atom/icons.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Icons } from "@/components/atom/icons"
+
+export default function Example() {
+  return (
+    {/* Component preview would go here */}
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="icons-demo">
+  {/* Component preview would go here */}
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+- Requires external dependencies: lucide-react
+

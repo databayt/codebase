@@ -12,6 +12,33 @@ import { CodeTabs } from "@/components/docs/code-tabs"
 import { CodeBlockCommand } from "@/components/docs/code-block-command"
 import { CopyButton } from "@/components/docs/copy-button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+// Atom components
+import { InfiniteMovingCards } from "@/components/atom/simple-marquee"
+import { Response } from "@/components/atom/response"
+import { Sortable } from "@/components/atom/sortable"
+import { StickyScroll } from "@/components/atom/sticky-scroll"
+import { ThemeProvider } from "@/components/atom/theme-provider"
+import { InfiniteSlider } from "@/components/atom/infinite-slider"
+import { InfiniteMovingCards as InfiniteCards } from "@/components/atom/infinite-cards"
+import { ProgressiveBlur } from "@/components/atom/progressive-blur"
+import { Faceted } from "@/components/atom/faceted"
+import ExpandButton from "@/components/atom/expand-button"
+import { HeaderSection } from "@/components/atom/header-section"
+import { PageActions } from "@/components/atom/page-actions"
+import { PageHeader } from "@/components/atom/page-header"
+import { TabsNav } from "@/components/atom/tabs"
+import { Announcement } from "@/components/atom/announcement"
+import Loading from "@/components/atom/loading"
+import { TwoButtons } from "@/components/atom/two-buttons"
+import AgentHeading from "@/components/atom/agent-heading"
+import { GradientAnimation } from "@/components/atom/gradient-animation"
+import { CardHoverEffect } from "@/components/atom/card-hover-effect"
+import Card from "@/components/atom/card"
+import { CardsMetric } from "@/components/atom/cards-metric"
+import { PromptInput } from "@/components/atom/prompt-input"
+import { Reasoning } from "@/components/atom/reasoning"
+import * as Icons from "@/components/atom/icons"
+import * as Fonts from "@/components/atom/fonts"
 
 // This file is required to use MDX in `app` directory.
 const mdxComponents = {
@@ -275,6 +302,33 @@ const mdxComponents = {
         {...props}
       />
     ),
+    // Atom components
+    SimpleMarquee: InfiniteMovingCards,
+    Response,
+    Sortable,
+    StickyScroll,
+    ThemeProvider,
+    InfiniteSlider,
+    InfiniteCards,
+    ProgressiveBlur,
+    Faceted,
+    ExpandButton,
+    HeaderSection,
+    PageActions,
+    PageHeader,
+    TabsNav,
+    Announcement,
+    Loading,
+    TwoButtons,
+    AgentHeading,
+    GradientAnimation,
+    CardHoverEffect,
+    Card,
+    CardsMetric,
+    PromptInput,
+    Reasoning,
+    Icons,
+    Fonts,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {

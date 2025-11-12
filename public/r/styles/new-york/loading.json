@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "loading",
+  "description": "Loading spinner and skeleton components",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/loading.tsx",
+      "content": "import React from \"react\";\r\n\r\ninterface LoadingProps {\r\n  fullScreen?: boolean;\r\n  size?: 'sm' | 'md' | 'lg';\r\n  text?: string;\r\n}\r\n\r\nconst Loading: React.FC<LoadingProps> = ({ \r\n  fullScreen = true, \r\n  size = 'md',\r\n  text \r\n}) => {\r\n  const sizeClasses = {\r\n    sm: 'w-6 h-6',\r\n    md: 'w-9 h-9',\r\n    lg: 'w-12 h-12'\r\n  };\r\n\r\n  const spinner = (\r\n    <div className=\"flex flex-col items-center\">\r\n      <div className={`${sizeClasses[size]} border-2 border-foreground/20 border-t-foreground rounded-full animate-spin`}></div>\r\n      {text && (\r\n        <p className=\"mt-2 text-sm text-muted-foreground\">{text}</p>\r\n      )}\r\n    </div>\r\n  );\r\n\r\n  if (fullScreen) {\r\n    return (\r\n      <div className=\"fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm\">\r\n        {spinner}\r\n      </div>\r\n    );\r\n  }\r\n\r\n  return spinner;\r\n};\r\n\r\nexport default Loading; ",
+      "type": "registry:component",
+      "target": "components/loading.tsx"
+    }
+  ],
+  "categories": [
+    "ui",
+    "feedback"
+  ]
+}

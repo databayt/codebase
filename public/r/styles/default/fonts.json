@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fonts",
+  "description": "Font configuration utilities",
+  "type": "registry:lib",
+  "dependencies": [
+    "next/font/google"
+  ],
+  "files": [
+    {
+      "path": "components/atom/fonts.ts",
+      "content": "import {\n  Geist_Mono as FontMono,\n  Geist as FontSans,\n  Rubik,\n} from \"next/font/google\"\nimport { cn } from \"@/lib/utils\"\n\nexport const fontSans = FontSans({\n  subsets: [\"latin\"],\n  variable: \"--font-sans\",\n})\n\nexport const fontMono = FontMono({\n  subsets: [\"latin\"],\n  variable: \"--font-mono\",\n  weight: [\"400\"],\n})\n\nexport const fontRubik = Rubik({\n  subsets: [\"latin\", \"arabic\"],\n  weight: [\"300\", \"400\", \"500\", \"600\", \"700\", \"800\", \"900\"],\n  variable: \"--font-rubik\",\n  display: \"swap\",\n})\n\nexport const fontVariables = cn(\n  fontSans.variable,\n  fontMono.variable,\n  fontRubik.variable\n)\n",
+      "type": "registry:component",
+      "target": "components/fonts.ts"
+    }
+  ],
+  "categories": [
+    "ui",
+    "utility"
+  ]
+}

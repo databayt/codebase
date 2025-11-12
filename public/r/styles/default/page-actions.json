@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-actions",
+  "description": "Page-level action buttons container",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/atom/page-actions.tsx",
+      "content": "import React from \"react\"\r\nimport Link from \"next/link\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { ArrowRight, LucideIcon } from \"lucide-react\"\r\nimport { cn } from \"@/lib/utils\"\r\n\r\nexport interface ActionButton {\r\n  label: string\r\n  href: string\r\n  variant?: \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\"\r\n  icon?: LucideIcon\r\n  iconPosition?: \"left\" | \"right\"\r\n  external?: boolean\r\n}\r\n\r\ninterface PageActionsProps {\r\n  actions: ActionButton[]\r\n  className?: string\r\n}\r\n\r\nexport function PageActions({ actions, className }: PageActionsProps) {\r\n  return (\r\n    <div className={cn(\"flex flex-wrap gap-4\", className)}>\r\n      {actions.map((action, index) => {\r\n        const Icon = action.icon\r\n        const iconElement = Icon && (\r\n          <Icon\r\n            className={cn(\r\n              \"h-4 w-4\",\r\n              action.iconPosition === \"left\" ? \"mr-2\" : \"ml-2\"\r\n            )}\r\n          />\r\n        )\r\n\r\n        return (\r\n          <Button\r\n            key={index}\r\n            variant={action.variant || (index === 0 ? \"default\" : \"outline\")}\r\n            asChild\r\n          >\r\n            <Link\r\n              href={action.href}\r\n              target={action.external ? \"_blank\" : undefined}\r\n              rel={action.external ? \"noopener noreferrer\" : undefined}\r\n            >\r\n              {action.iconPosition === \"left\" && iconElement}\r\n              {action.label}\r\n              {action.iconPosition !== \"left\" && iconElement}\r\n            </Link>\r\n          </Button>\r\n        )\r\n      })}\r\n    </div>\r\n  )\r\n}\r\n\r\n// Preset configurations for common use cases\r\nexport const commonActions = {\r\n  getStarted: (locale: string): ActionButton => ({\r\n    label: \"Get Started\",\r\n    href: `/${locale}/docs`,\r\n    icon: ArrowRight,\r\n    iconPosition: \"right\",\r\n  }),\r\n\r\n  documentation: (locale: string): ActionButton => ({\r\n    label: \"Documentation\",\r\n    href: `/${locale}/docs`,\r\n    variant: \"ghost\",\r\n  }),\r\n\r\n  github: (url: string): ActionButton => ({\r\n    label: \"View on GitHub\",\r\n    href: url,\r\n    variant: \"outline\",\r\n    external: true,\r\n  }),\r\n}",
+      "type": "registry:component",
+      "target": "components/page-actions.tsx"
+    }
+  ],
+  "categories": [
+    "layout",
+    "navigation"
+  ]
+}

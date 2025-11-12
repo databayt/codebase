@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "expand-button",
+  "description": "Expandable button with reveal animation",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/atom/expand-button.tsx",
+      "content": "import React from 'react';\r\nimport Link from 'next/link';\r\nimport { cn } from '@/lib/utils';\r\n\r\ninterface ExpandButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\r\n  variant?: 'default' | 'outline' | 'white';\r\n  children: React.ReactNode;\r\n  className?: string;\r\n  href?: string;\r\n}\r\n\r\nconst ExpandButton = ({ \r\n  variant = 'default', \r\n  children, \r\n  className,\r\n  href,\r\n  ...props \r\n}: ExpandButtonProps) => {\r\n  const baseClasses = \"rounded-2xl w-72 md:w-auto px-6 py-3 md:py-2 font-semibold transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-3xl hover:shadow-[4px_4px_0px_theme(colors.muted.foreground)] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none\";\r\n  \r\n  const variantClasses = {\r\n    default: \"bg-emerald-700 text-background\",\r\n    outline: \"border border-foreground text-foreground\",\r\n    white: \"bg-background text-foreground border-2 border-background w-auto\"\r\n  };\r\n\r\n  if (href) {\r\n    return (\r\n      <Link \r\n        href={href}\r\n        className={cn(baseClasses, variantClasses[variant], className)}\r\n      >\r\n        {children}\r\n      </Link>\r\n    );\r\n  }\r\n\r\n  return (\r\n    <button \r\n      className={cn(baseClasses, variantClasses[variant], className)}\r\n      {...props}\r\n    >\r\n      {children}\r\n    </button>\r\n  );\r\n};\r\n\r\nexport default ExpandButton;",
+      "type": "registry:component",
+      "target": "components/expand-button.tsx"
+    }
+  ],
+  "categories": [
+    "interactive",
+    "ui"
+  ]
+}

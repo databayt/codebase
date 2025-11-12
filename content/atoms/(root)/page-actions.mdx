@@ -1,0 +1,86 @@
+---
+title: "Page Actions"
+description: "Page-level action buttons container"
+component: true
+categories: ["layout", "navigation"]
+
+registryDependencies: ["button"]
+---
+
+# Page Actions
+
+Page-level action buttons container
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add page-actions
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/page-actions.tsx**
+
+```tsx title="components/atom/page-actions.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PageActions } from "@/components/atom/page-actions"
+
+export default function Example() {
+  return (
+    {/* Component preview would go here */}
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="page-actions-demo">
+  {/* Component preview would go here */}
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

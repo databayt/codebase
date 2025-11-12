@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cards-metric",
+  "description": "Metric display cards with statistics",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "card"
+  ],
+  "files": [
+    {
+      "path": "components/atom/cards-metric.tsx",
+      "content": "\"use client\"\n\nimport { Line, LineChart } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport {\n  ChartConfig,\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n} from \"@/components/ui/chart\"\n\nconst data = [\n  {\n    average: 400,\n    today: 240,\n  },\n  {\n    average: 300,\n    today: 139,\n  },\n  {\n    average: 200,\n    today: 980,\n  },\n  {\n    average: 278,\n    today: 390,\n  },\n  {\n    average: 189,\n    today: 480,\n  },\n  {\n    average: 239,\n    today: 380,\n  },\n  {\n    average: 349,\n    today: 430,\n  },\n]\n\nconst chartConfig = {\n  today: {\n    label: \"Today\",\n    color: \"hsl(var(--chart-1))\",\n  },\n  average: {\n    label: \"Average\",\n    color: \"hsl(var(--chart-2))\",\n  },\n} satisfies ChartConfig\n\nexport function CardsMetric() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Exercise Minutes</CardTitle>\n        <CardDescription>\n          Your exercise minutes are ahead of where you normally are.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"pb-4\">\n        <ChartContainer config={chartConfig} className=\"w-full h-[200px]\">\n          <LineChart\n            data={data}\n            margin={{\n              top: 5,\n              right: 10,\n              left: 10,\n              bottom: 0,\n            }}\n            width={400}\n            height={200}\n          >\n            <Line\n              type=\"monotone\"\n              strokeWidth={2}\n              dataKey=\"average\"\n              stroke=\"var(--color-average)\"\n              strokeOpacity={0.5}\n              activeDot={{\n                r: 6,\n                fill: \"var(--color-average)\",\n              }}\n            />\n            <Line\n              type=\"monotone\"\n              dataKey=\"today\"\n              strokeWidth={2}\n              stroke=\"var(--color-today)\"\n              activeDot={{\n                r: 8,\n                style: { fill: \"var(--color-today)\" },\n              }}\n            />\n            <ChartTooltip content={<ChartTooltipContent />} />\n          </LineChart>\n        </ChartContainer>\n      </CardContent>\n    </Card>\n  )\n}",
+      "type": "registry:component",
+      "target": "components/cards-metric.tsx"
+    }
+  ],
+  "categories": [
+    "display",
+    "data"
+  ]
+}

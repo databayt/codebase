@@ -1,1 +1,37 @@
-{"title": "Get Started", "pages": ["index", "accordion"]}
+{
+  "title": "Atoms",
+  "pages": [
+    "index",
+    "agent-heading",
+    "ai-prompt-input",
+    "ai-response-display",
+    "ai-status-indicator",
+    "ai-streaming-text",
+    "announcement",
+    "card",
+    "card-hover-effect",
+    "cards-metric",
+    "expand-button",
+    "faceted",
+    "fonts",
+    "gradient-animation",
+    "header-section",
+    "icons",
+    "infinite-cards",
+    "infinite-slider",
+    "loading",
+    "modal-system",
+    "page-actions",
+    "page-header",
+    "progressive-blur",
+    "prompt-input",
+    "reasoning",
+    "response",
+    "simple-marquee",
+    "sortable",
+    "sticky-scroll",
+    "tabs",
+    "theme-provider",
+    "two-buttons"
+  ]
+}

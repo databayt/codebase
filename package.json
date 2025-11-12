@@ -11,7 +11,10 @@
     "postinstall": "prisma generate && fumadocs-mdx",
     "build:registry": "tsx scripts/build-registry.mts",
     "registry:build": "tsx scripts/build-registry.mts",
-    "build:templates": "tsx scripts/build-template-registry.ts"
+    "build:templates": "tsx scripts/build-template-registry.ts",
+    "generate:docs": "tsx scripts/generate-atom-docs.mts",
+    "sync:shadcn": "tsx scripts/sync-shadcn.mts",
+    "codebase": "tsx scripts/cli.mts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.17",

@@ -5,6 +5,7 @@ export interface RegistryCategory {
 }
 
 export const registryCategories: RegistryCategory[] = [
+  // Template Categories
   {
     name: "Sidebar",
     slug: "sidebar",
@@ -43,6 +44,68 @@ export const registryCategories: RegistryCategory[] = [
   {
     name: "Tables",
     slug: "tables",
+    hidden: false
+  },
+
+  // Atom Categories
+  {
+    name: "AI",
+    slug: "ai",
+    hidden: false
+  },
+  {
+    name: "Display",
+    slug: "display",
+    hidden: false
+  },
+  {
+    name: "Animation",
+    slug: "animation",
+    hidden: false
+  },
+  {
+    name: "Interactive",
+    slug: "interactive",
+    hidden: false
+  },
+  {
+    name: "Layout",
+    slug: "layout",
+    hidden: false
+  },
+  {
+    name: "Navigation",
+    slug: "navigation",
+    hidden: false
+  },
+  {
+    name: "Modal",
+    slug: "modal",
+    hidden: false
+  },
+  {
+    name: "Dialog",
+    slug: "dialog",
+    hidden: false
+  },
+  {
+    name: "UI",
+    slug: "ui",
+    hidden: false
+  },
+  {
+    name: "Feedback",
+    slug: "feedback",
+    hidden: false
+  },
+  {
+    name: "Data",
+    slug: "data",
+    hidden: false
+  },
+  {
+    name: "Utility",
+    slug: "utility",
     hidden: false
   }
 ]

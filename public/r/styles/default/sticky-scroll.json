@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sticky-scroll",
+  "description": "Sticky scroll reveal animation",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/sticky-scroll.tsx",
+      "content": "\"use client\";\r\n\r\nimport { useRef, useEffect, useState } from \"react\";\r\nimport { motion, useScroll, useTransform } from \"framer-motion\";\r\n\r\ninterface StickyScrollProps {\r\n  content: {\r\n    title: string;\r\n    description: string;\r\n    content?: React.ReactNode;\r\n  }[];\r\n  contentClassName?: string;\r\n}\r\n\r\nexport const StickyScroll = ({ content, contentClassName }: StickyScrollProps) => {\r\n  const [activeCard, setActiveCard] = useState(0);\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n  const { scrollYProgress } = useScroll({\r\n    target: containerRef,\r\n    offset: [\"start start\", \"end end\"],\r\n  });\r\n\r\n  const cardLength = content.length;\r\n\r\n  useEffect(() => {\r\n    const unsubscribe = scrollYProgress.on(\"change\", (latest) => {\r\n      const cardsBreakpoints = content.map((_, index) => index / cardLength);\r\n      const active = cardsBreakpoints.findIndex((breakpoint) => breakpoint > latest) - 1;\r\n      setActiveCard(active >= 0 ? active : cardLength - 1);\r\n    });\r\n\r\n    return () => unsubscribe();\r\n  }, [scrollYProgress, cardLength, content.length]);\r\n\r\n  const backgroundColors = [\r\n    \"from-red-500/20 to-orange-500/20\",\r\n    \"from-orange-500/20 to-yellow-500/20\",\r\n    \"from-yellow-500/20 to-green-500/20\",\r\n    \"from-green-500/20 to-blue-500/20\",\r\n    \"from-blue-500/20 to-purple-500/20\",\r\n    \"from-purple-500/20 to-pink-500/20\",\r\n  ];\r\n\r\n  return (\r\n    <div\r\n      ref={containerRef}\r\n      className=\"relative flex h-screen w-full items-center justify-center overflow-hidden rounded-md bg-neutral-950 antialiased\"\r\n    >\r\n      <div className=\"mx-auto flex w-full max-w-7xl flex-col items-center justify-center\">\r\n        <div className=\"grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12\">\r\n          <div className=\"flex h-[60vh] w-full items-center justify-center\">\r\n            <div className=\"relative h-full w-full overflow-hidden rounded-md\">\r\n              <motion.div\r\n                className=\"sticky top-0 flex h-full w-full items-center justify-center\"\r\n                style={{\r\n                  background: `linear-gradient(to bottom, ${backgroundColors[activeCard % backgroundColors.length]})`,\r\n                }}\r\n              >\r\n                <div className=\"relative z-10 text-center\">\r\n                  <h2 className=\"text-4xl font-bold text-white md:text-6xl\">\r\n                    {content[activeCard]?.title}\r\n                  </h2>\r\n                  <p className=\"mt-4 text-lg text-neutral-300 md:text-xl\">\r\n                    {content[activeCard]?.description}\r\n                  </p>\r\n                </div>\r\n              </motion.div>\r\n            </div>\r\n          </div>\r\n          <div className=\"flex h-[60vh] w-full items-center justify-center\">\r\n            <div className=\"w-full max-w-md\">\r\n              {content[activeCard]?.content && (\r\n                <div className={contentClassName}>\r\n                  {content[activeCard].content}\r\n                </div>\r\n              )}\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n",
+      "type": "registry:component",
+      "target": "components/sticky-scroll.tsx"
+    }
+  ],
+  "categories": [
+    "animation",
+    "display"
+  ]
+}

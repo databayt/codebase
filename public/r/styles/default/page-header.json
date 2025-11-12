@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-header",
+  "description": "Consistent page header with breadcrumbs",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/page-header.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\nimport React from \"react\"\n\ninterface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {\n  heading?: string | React.ReactNode\n  description?: string | React.ReactNode\n  actions?: React.ReactNode\n  announcement?: React.ReactNode\n  headingClassName?: string\n  descriptionClassName?: string\n  actionsClassName?: string\n  announcementClassName?: string\n}\n\nexport function PageHeader({\n  className,\n  heading,\n  description,\n  actions,\n  announcement,\n  headingClassName,\n  descriptionClassName,\n  actionsClassName,\n  announcementClassName,\n  children,\n  ...props\n}: PageHeaderProps) {\n  return (\n    <section className={cn(className)} {...props}>\n      <div className=\"flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12\">\n        {announcement && (\n          <div className={cn(announcementClassName)}>\n            {announcement}\n          </div>\n        )}\n        {heading && (\n          <h2\n            className={cn(\n              headingClassName\n            )}\n          >\n            {heading}\n          </h2>\n        )}\n        {description && (\n          <p\n            className={cn(\n              \"max-w-2xl text-balance text-base font-light text-foreground leading-7 sm:text-lg \",\n              descriptionClassName\n            )}\n          >\n            {description}\n          </p>\n        )}\n        {actions && (\n          <div\n            className={cn(\n              \"flex w-full items-center justify-start gap-2 pt-2\",\n              actionsClassName\n            )}\n          >\n            {actions}\n          </div>\n        )}\n        {children}\n      </div>\n    </section>\n  )\n}",
+      "type": "registry:component",
+      "target": "components/page-header.tsx"
+    }
+  ],
+  "categories": [
+    "layout",
+    "navigation"
+  ]
+}

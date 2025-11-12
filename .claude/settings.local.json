@@ -15,7 +15,11 @@
       "Bash(git push)",
       "Bash(find:*)",
       "Bash(git commit:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(pnpm build:registry:*)",
+      "Bash(tsx scripts/generate-atom-docs.mts:*)",
+      "Bash(pnpm codebase:*)",
+      "Bash(pnpm fumadocs-mdx:*)"
     ],
     "deny": [],
     "ask": []

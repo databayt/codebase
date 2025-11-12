@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-provider",
+  "description": "Theme provider wrapper component",
+  "type": "registry:atom",
+  "dependencies": [
+    "next-themes"
+  ],
+  "files": [
+    {
+      "path": "components/atom/theme-provider.tsx",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\";\r\n\r\nexport function ThemeProvider({ children }: { children: React.ReactNode }) {\r\n  const [mounted, setMounted] = React.useState(false);\r\n\r\n  React.useEffect(() => {\r\n    setMounted(true);\r\n  }, []);\r\n\r\n  if (!mounted) {\r\n    return <>{children}</>;\r\n  }\r\n\r\n  return (\r\n    <NextThemesProvider\r\n      attribute=\"class\"\r\n      defaultTheme=\"system\"\r\n      enableSystem\r\n      disableTransitionOnChange\r\n    >\r\n      {children}\r\n    </NextThemesProvider>\r\n  );\r\n} ",
+      "type": "registry:component",
+      "target": "components/theme-provider.tsx"
+    }
+  ],
+  "categories": [
+    "ui",
+    "utility"
+  ]
+}

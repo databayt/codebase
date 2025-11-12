@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-streaming-text",
+  "description": "Streaming text animation for AI responses",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/ai/ai-streaming-text.tsx",
+      "content": "'use client';\n\nimport { useEffect, useState } from 'react';\nimport { cn } from '@/lib/utils';\n\ninterface AiStreamingTextProps {\n  stream?: ReadableStream<string> | null;\n  text?: string;\n  className?: string;\n  showCursor?: boolean;\n  cursorChar?: string;\n  onComplete?: (finalText: string) => void;\n  speed?: 'instant' | 'fast' | 'normal' | 'slow';\n}\n\nexport function AiStreamingText({\n  stream,\n  text: initialText = '',\n  className,\n  showCursor = true,\n  cursorChar = '▊',\n  onComplete,\n  speed = 'normal'\n}: AiStreamingTextProps) {\n  const [displayText, setDisplayText] = useState(initialText);\n  const [isStreaming, setIsStreaming] = useState(false);\n  const [isComplete, setIsComplete] = useState(false);\n\n  // Handle streaming from ReadableStream\n  useEffect(() => {\n    if (!stream) return;\n\n    setIsStreaming(true);\n    setDisplayText('');\n\n    const reader = stream.getReader();\n    const decoder = new TextDecoder();\n    let accumulatedText = '';\n\n    async function read() {\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            setIsStreaming(false);\n            setIsComplete(true);\n            onComplete?.(accumulatedText);\n            break;\n          }\n\n          const chunk = decoder.decode(value as unknown as ArrayBuffer, { stream: true });\n          accumulatedText += chunk;\n          setDisplayText(accumulatedText);\n        }\n      } catch (error) {\n        console.error('Stream reading error:', error);\n        setIsStreaming(false);\n        setIsComplete(true);\n      }\n    }\n\n    read();\n\n    return () => {\n      reader.releaseLock();\n    };\n  }, [stream, onComplete]);\n\n  // Handle static text with typing effect\n  useEffect(() => {\n    if (!initialText || stream) return;\n\n    const speeds = {\n      instant: 0,\n      fast: 10,\n      normal: 30,\n      slow: 50\n    };\n\n    const delay = speeds[speed];\n\n    if (delay === 0) {\n      setDisplayText(initialText);\n      setIsComplete(true);\n      onComplete?.(initialText);\n      return;\n    }\n\n    setIsStreaming(true);\n    let currentIndex = 0;\n    const text = initialText;\n    setDisplayText('');\n\n    const interval = setInterval(() => {\n      if (currentIndex < text.length) {\n        setDisplayText((prev) => prev + text[currentIndex]);\n        currentIndex++;\n      } else {\n        clearInterval(interval);\n        setIsStreaming(false);\n        setIsComplete(true);\n        onComplete?.(text);\n      }\n    }, delay);\n\n    return () => clearInterval(interval);\n  }, [initialText, speed, stream, onComplete]);\n\n  return (\n    <div className={cn('relative', className)}>\n      <span className=\"whitespace-pre-wrap\">{displayText}</span>\n      {showCursor && isStreaming && (\n        <span className=\"animate-pulse text-primary\">{cursorChar}</span>\n      )}\n    </div>\n  );\n}",
+      "type": "registry:component",
+      "target": "components/ai/ai-streaming-text.tsx"
+    }
+  ],
+  "categories": [
+    "ai",
+    "display"
+  ]
+}

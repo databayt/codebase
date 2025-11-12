@@ -1,46 +1,55 @@
 "use client"
 
 import { TabsNav } from "@/components/atom/tabs"
-import type { getDictionary } from "@/components/local/dictionaries"
 
-interface TemplateTabsProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+interface TemplateLabels {
+  hero?: string;
+  landing?: string;
+  dashboard?: string;
+  ecommerce?: string;
+  blog?: string;
+  portfolio?: string;
+  components?: string;
 }
 
-export default function TemplateTabs({ dictionary }: TemplateTabsProps) {
+interface TemplateTabsProps {
+  templateLabels?: TemplateLabels;
+}
+
+export default function TemplateTabs({ templateLabels }: TemplateTabsProps) {
   const examples = [
     {
-      name: dictionary?.template?.hero || "Hero",
+      name: templateLabels?.hero || "Hero",
       href: "/templates/hero",
       code: "https://github.com/shadcn/ui/tree/main/apps/www/app/(app)/examples/hero-templates",
       hidden: false,
     },
     {
-      name: dictionary?.template?.landing || "Landing",
+      name: templateLabels?.landing || "Landing",
       href: "/templates/landing",
       code: "https://github.com/shadcn/ui/tree/main/apps/www/app/(app)/examples/landing-templates",
       hidden: false,
     },
     {
-      name: dictionary?.template?.dashboard || "Dashboard",
+      name: templateLabels?.dashboard || "Dashboard",
       href: "/templates/dashboard",
       code: "https://github.com/shadcn/ui/tree/main/apps/www/app/(app)/examples/dashboard-templates",
       hidden: false,
     },
     {
-      name: dictionary?.template?.ecommerce || "E-commerce",
+      name: templateLabels?.ecommerce || "E-commerce",
       href: "/templates/ecommerce",
       code: "https://github.com/shadcn/ui/tree/main/apps/www/app/(app)/examples/ecommerce-templates",
       hidden: false,
     },
     {
-      name: dictionary?.template?.blog || "Blog",
+      name: templateLabels?.blog || "Blog",
       href: "/templates/blog",
       code: "https://github.com/shadcn/ui/tree/main/apps/www/app/(app)/examples/blog-templates",
       hidden: false,
     },
     {
-      name: dictionary?.template?.portfolio || "Portfolio",
+      name: templateLabels?.portfolio || "Portfolio",
       href: "/templates/portfolio",
       code: "https://github.com/shadcn/ui/tree/main/apps/www/app/(app)/examples/portfolio-templates",
       hidden: false,
@@ -48,7 +57,7 @@ export default function TemplateTabs({ dictionary }: TemplateTabsProps) {
   ]
 
   const defaultTab = {
-    name: dictionary?.template?.components || "Template Components",
+    name: templateLabels?.components || "Template Components",
     href: "/templates",
     code: "",
     hidden: false,

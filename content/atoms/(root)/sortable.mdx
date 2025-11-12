@@ -1,0 +1,91 @@
+---
+title: "Sortable"
+description: "Drag-and-drop sortable list component"
+component: true
+categories: ["interactive", "form"]
+dependencies: ["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities"]
+
+---
+
+# Sortable
+
+Drag-and-drop sortable list component
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add sortable
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+
+```bash
+npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+```
+
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/sortable.tsx**
+
+```tsx title="components/atom/sortable.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Sortable } from "@/components/atom/sortable"
+
+export default function Example() {
+  return (
+  {/* Component preview would go here */}
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="sortable-demo" hideCode>
+{/* Component preview would go here */}
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+- Requires external dependencies: @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities
+

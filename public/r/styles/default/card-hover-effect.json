@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-hover-effect",
+  "description": "Card with animated hover effects and transitions",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/card-hover-effect.tsx",
+      "content": "\"use client\";\r\n\r\nimport { cn } from \"@/lib/utils\";\r\nimport { AnimatePresence, motion } from \"framer-motion\";\r\nimport { useState } from \"react\";\r\n\r\nexport const HoverEffect = ({\r\n  items,\r\n  className,\r\n}: {\r\n  items: {\r\n    title: string;\r\n    description: string;\r\n    link: string;\r\n    image?: string;\r\n  }[];\r\n  className?: string;\r\n}) => {\r\n  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);\r\n\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10\",\r\n        className\r\n      )}\r\n    >\r\n      {items.map((item, idx) => (\r\n        <a\r\n          href={item?.link}\r\n          key={item?.link}\r\n          className=\"relative group block p-2 h-full w-full\"\r\n          onMouseEnter={() => setHoveredIndex(idx)}\r\n          onMouseLeave={() => setHoveredIndex(null)}\r\n        >\r\n          <AnimatePresence>\r\n            {hoveredIndex === idx && (\r\n              <motion.span\r\n                className=\"absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block rounded-3xl\"\r\n                layoutId=\"hoverBackground\"\r\n                initial={{ opacity: 0 }}\r\n                animate={{\r\n                  opacity: 1,\r\n                  transition: { duration: 0.15 },\r\n                }}\r\n                exit={{\r\n                  opacity: 0,\r\n                  transition: { duration: 0.15, delay: 0.2 },\r\n                }}\r\n              />\r\n            )}\r\n          </AnimatePresence>\r\n          <Card>\r\n            <CardTitle>{item.title}</CardTitle>\r\n            <CardDescription>{item.description}</CardDescription>\r\n          </Card>\r\n        </a>\r\n      ))}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport const Card = ({\r\n  className,\r\n  children,\r\n}: {\r\n  className?: string;\r\n  children: React.ReactNode;\r\n}) => {\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"rounded-2xl h-full w-full p-4 overflow-hidden bg-background border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20\",\r\n        className\r\n      )}\r\n    >\r\n      <div className=\"relative z-50\">\r\n        <div className=\"p-4\">{children}</div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport const CardTitle = ({\r\n  className,\r\n  children,\r\n}: {\r\n  className?: string;\r\n  children: React.ReactNode;\r\n}) => {\r\n  return (\r\n    <h4 className={cn(\"text-foreground font-bold tracking-wide mt-4\", className)}>\r\n      {children}\r\n    </h4>\r\n  );\r\n};\r\n\r\nexport const CardDescription = ({\r\n  className,\r\n  children,\r\n}: {\r\n  className?: string;\r\n  children: React.ReactNode;\r\n}) => {\r\n  return (\r\n    <p\r\n      className={cn(\r\n        \"mt-8 text-muted-foreground tracking-wide leading-relaxed text-sm\",\r\n        className\r\n      )}\r\n    >\r\n      {children}\r\n    </p>\r\n  );\r\n};",
+      "type": "registry:component",
+      "target": "components/card-hover-effect.tsx"
+    }
+  ],
+  "categories": [
+    "display",
+    "animation"
+  ]
+}

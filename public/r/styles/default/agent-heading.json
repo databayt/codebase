@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "agent-heading",
+  "description": "Agent conversation heading component",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/agent-heading.tsx",
+      "content": "'use client';\n\ninterface AgentHeadingProps {\n  title: string;\n  scrollTarget?: string;\n  scrollText?: string;\n}\n\nexport default function AgentHeading({\n  title,\n  scrollTarget = 'content',\n  scrollText = 'explore existing data'\n}: AgentHeadingProps) {\n  return (\n    <div className=\"space-y-4\">\n      <h1>\n        {title}\n      </h1>\n      <p className=\"text-lg text-muted-foreground\">\n        Process data, or{' '}\n        <button\n          onClick={() => {\n            document.getElementById(scrollTarget)?.scrollIntoView({\n              behavior: 'smooth'\n            });\n          }}\n          className=\"text-primary hover:underline inline\"\n        >\n          {scrollText} →\n        </button>\n      </p>\n    </div>\n  );\n}",
+      "type": "registry:component",
+      "target": "components/agent-heading.tsx"
+    }
+  ],
+  "categories": [
+    "ui",
+    "display"
+  ]
+}

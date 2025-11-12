@@ -3,6 +3,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 import { templates } from "../src/registry/registry-templates"
 import { registryCategories } from "../src/registry/registry-categories"
+import { atoms } from "../src/registry/default/atoms/_registry"
 import type { RegistryItemSchema } from "../src/registry/schema"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -64,12 +65,14 @@ async function buildRegistry() {
     "new-york": {}
   }
 
+  // Build templates registry
   for (const style of ["default", "new-york"]) {
     for (const template of templates) {
       // Create lazy-loaded component mapping
       registryIndex[style][template.name] = {
         name: template.name,
         description: template.description,
+        type: template.type,
         component: `React.lazy(() => import("@/registry/${style}/templates/${template.name}/page"))`,
         files: template.files.map(f => `registry/${style}/${f.path}`),
         dependencies: template.dependencies || [],
@@ -78,6 +81,22 @@ async function buildRegistry() {
         meta: template.meta || {}
       }
     }
+  }
+
+  // Build atoms registry (only for default style since atoms are not style-specific)
+  for (const atom of atoms) {
+    registryIndex["default"][atom.name] = {
+      name: atom.name,
+      description: atom.description,
+      type: atom.type,
+      files: atom.files?.map(f => f.path) || [],
+      dependencies: atom.dependencies || [],
+      registryDependencies: atom.registryDependencies || [],
+      categories: atom.categories || [],
+      meta: atom.meta || {}
+    }
+    // Copy atoms to new-york style as well
+    registryIndex["new-york"][atom.name] = registryIndex["default"][atom.name]
   }
 
   const indexContent = `import React from "react"
@@ -98,6 +117,7 @@ async function buildStyleJSONs() {
     const styleDir = path.join(PUBLIC_REGISTRY_PATH, "styles", style)
     await ensureDir(styleDir)
 
+    // Build template JSONs
     for (const template of templates) {
       const files = []
 
@@ -133,6 +153,44 @@ async function buildStyleJSONs() {
         JSON.stringify(registryItem, null, 2)
       )
       console.log(`  Created ${style}/${template.name}.json`)
+    }
+
+    // Build atom JSONs (atoms are in src/components/atom/ not in registry/)
+    for (const atom of atoms) {
+      const files = []
+
+      for (const file of atom.files || []) {
+        const filePath = path.join(PROJECT_ROOT, "src", file.path)
+
+        if (await fileExists(filePath)) {
+          const content = await fs.readFile(filePath, "utf-8")
+
+          files.push({
+            path: file.path,
+            content: content,
+            type: file.type || "registry:component",
+            target: file.target || `components/${file.path.replace("components/atom/", "")}`
+          })
+        }
+      }
+
+      const registryItem: RegistryItemSchema = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: atom.name,
+        description: atom.description,
+        type: atom.type,
+        dependencies: atom.dependencies,
+        registryDependencies: atom.registryDependencies,
+        files: files,
+        categories: atom.categories,
+        meta: atom.meta
+      }
+
+      await fs.writeFile(
+        path.join(styleDir, `${atom.name}.json`),
+        JSON.stringify(registryItem, null, 2)
+      )
+      console.log(`  Created ${style}/${atom.name}.json`)
     }
   }
 }

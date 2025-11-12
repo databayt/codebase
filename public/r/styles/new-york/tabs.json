@@ -1,12 +1,21 @@
 {
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tabs",
-  "type": "registry:ui",
+  "description": "Enhanced tabs component with animations",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "tabs"
+  ],
   "files": [
     {
-      "path": "ui/tabs.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Tabs({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Root>) {\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      className={cn(\"flex flex-col gap-2\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction TabsList({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.List>) {\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      className={cn(\n        \"bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TabsTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {\n  return (\n    <TabsPrimitive.Trigger\n      data-slot=\"tabs-trigger\"\n      className={cn(\n        \"data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TabsContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof TabsPrimitive.Content>) {\n  return (\n    <TabsPrimitive.Content\n      data-slot=\"tabs-content\"\n      className={cn(\"flex-1 outline-none\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
-      "type": "registry:ui",
-      "target": ""
+      "path": "components/atom/tabs.tsx",
+      "content": "\"use client\"\n\nimport Link from \"next/link\"\nimport { usePathname } from \"next/navigation\"\n\nimport { cn } from \"@/lib/utils\"\nimport { ScrollArea, ScrollBar } from \"@/components/ui/scroll-area\"\n\nexport interface TabItem {\n  name: string\n  href: string\n  code?: string\n  hidden?: boolean\n}\n\ninterface TabsNavProps extends React.HTMLAttributes<HTMLDivElement> {\n  tabs: TabItem[]\n  defaultTab?: TabItem\n}\n\nexport function TabsNav({ tabs, defaultTab, className, ...props }: TabsNavProps) {\n  const pathname = usePathname()\n\n  return (\n    <div className=\"relative\">\n      <ScrollArea className=\"max-w-[600px] lg:max-w-none\">\n        <nav className={cn(\"flex items-center gap-2 rtl:flex-row-reverse\", className)} {...props}>\n          {defaultTab && (\n            <TabLink\n              tab={defaultTab}\n              isActive={pathname === defaultTab.href}\n            />\n          )}\n          {tabs.map((tab) => (\n            <TabLink\n              key={tab.href}\n              tab={tab}\n              isActive={pathname?.startsWith(tab.href) ?? false}\n            />\n          ))}\n        </nav>\n        <ScrollBar orientation=\"horizontal\" className=\"invisible\" />\n      </ScrollArea>\n    </div>\n  )\n}\n\nfunction TabLink({\n  tab,\n  isActive,\n}: {\n  tab: TabItem\n  isActive: boolean\n}) {\n  if (tab.hidden) {\n    return null\n  }\n\n  return (\n    <Link\n      href={tab.href}\n      key={tab.href}\n      className=\"flex h-7 items-center justify-center rounded-full px-4 text-center transition-colors hover:text-primary data-[active=true]:bg-muted data-[active=true]:text-primary\"\n      data-active={isActive}\n    >\n      <h6>{tab.name}</h6>\n    </Link>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/tabs.tsx"
     }
+  ],
+  "categories": [
+    "navigation",
+    "ui"
   ]
 }

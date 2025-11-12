@@ -12,7 +12,7 @@ import { TemplateViewer } from "./template-viewer"
 
 export async function TemplateDisplay({ name, style = "default" }: { name: string; style?: string }) {
     // Try to get from template registry first, fallback to general registry
-    const item = await getCachedTemplateItem(name, style) || await getCachedRegistryItem(name)
+    const item = await getTemplate(name, style) || await getRegistryItem(name)
 
     if (!item?.files) {
         return null
@@ -23,18 +23,19 @@ export async function TemplateDisplay({ name, style = "default" }: { name: strin
         getCachedHighlightedFiles(item.files),
     ])
 
+    // Serialize to ensure no functions are passed to client components
+    const serializedItem = JSON.parse(JSON.stringify(item))
+    const serializedTree = JSON.parse(JSON.stringify(tree))
+    const serializedFiles = JSON.parse(JSON.stringify(highlightedFiles))
+
     return (
-        <TemplateViewer item={item} tree={tree} highlightedFiles={highlightedFiles} />
+        <TemplateViewer
+            item={serializedItem}
+            tree={serializedTree}
+            highlightedFiles={serializedFiles}
+        />
     )
 }
-
-const getCachedTemplateItem = React.cache(async (name: string, style: string) => {
-    return await getTemplate(name, style)
-})
-
-const getCachedRegistryItem = React.cache(async (name: string) => {
-    return await getRegistryItem(name)
-})
 
 const getCachedFileTree = React.cache(
     async (files: Array<{ path: string; target?: string }>) => {
