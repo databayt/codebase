@@ -42,10 +42,6 @@ export const docsConfig: DocsConfig = {
             href: "/atoms",
         },
         {
-            title: "Components",
-            href: "/docs/components/accordion",
-        },
-        {
             title: "Templates",
             href: "/templates",
         },
