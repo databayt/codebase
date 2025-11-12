@@ -145,7 +145,7 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
               </SelectTrigger>
               <SelectContent>
                 {Array.from({ length: 10 }, (_, i) => (
-                  <SelectItem key={i} value={`${new Date().getFullYear() + i}`}>
+                  <SelectItem key={i} value={String(new Date().getFullYear() + i)}>
                     {new Date().getFullYear() + i}
                   </SelectItem>
                 ))}
@@ -165,7 +165,7 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
   )
 }`}
 >
-  <CardsPaymentMethod />
+  <PaymentMethod />
 </ComponentPreview>
 
 ## Installation
@@ -332,7 +332,7 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
               </SelectTrigger>
               <SelectContent>
                 {Array.from({ length: 10 }, (_, i) => (
-                  <SelectItem key={i} value={`${new Date().getFullYear() + i}`}>
+                  <SelectItem key={i} value={String(new Date().getFullYear() + i)}>
                     {new Date().getFullYear() + i}
                   </SelectItem>
                 ))}

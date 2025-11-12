@@ -23,12 +23,12 @@ import {
 } from "@/components/ui/select"
 
 interface CardsPaymentMethodProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }
 
 export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
   return (
-    <Card className="shadow-none border" dir={dictionary.locale === 'ar' ? 'rtl' : 'ltr'}>
+    <Card className="shadow-none border" dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
       <CardHeader>
         <CardTitle>Payment Method</CardTitle>
         <CardDescription>

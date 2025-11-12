@@ -170,7 +170,7 @@ export const columns: ColumnDef<Payment>[] = [
 ]
 
 interface CardsDataTableProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }
 
 export function CardsDataTable({ dictionary }: CardsDataTableProps) {
@@ -202,7 +202,7 @@ export function CardsDataTable({ dictionary }: CardsDataTableProps) {
   })
 
   return (
-    <Card className="shadow-none border" dir={dictionary.locale === 'ar' ? 'rtl' : 'ltr'}>
+    <Card className="shadow-none border" dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
       <CardHeader>
         <CardTitle className="text-xl">Payments</CardTitle>
         <CardDescription>Manage your payments.</CardDescription>

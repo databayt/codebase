@@ -24,14 +24,14 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 
 interface CardsReportIssueProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }
 
 export function CardsReportIssue({ dictionary }: CardsReportIssueProps) {
   const id = React.useId()
 
   return (
-    <Card className="shadow-none border" dir={dictionary.locale === 'ar' ? 'rtl' : 'ltr'}>
+    <Card className="shadow-none border" dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
       <CardHeader>
         <CardTitle>Report an issue</CardTitle>
         <CardDescription>

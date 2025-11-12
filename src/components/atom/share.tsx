@@ -26,12 +26,12 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 interface CardsShareProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }
 
 export function CardsShare({ dictionary }: CardsShareProps) {
   return (
-    <Card className="shadow-none border" dir={dictionary.locale === 'ar' ? 'rtl' : 'ltr'}>
+    <Card className="shadow-none border" dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
       <CardHeader className="pb-3">
         <CardTitle>{dictionary?.cards?.share?.title || "Share this document"}</CardTitle>
         <CardDescription>
