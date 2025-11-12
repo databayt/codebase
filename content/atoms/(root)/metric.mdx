@@ -1,86 +1,287 @@
 ---
-title: "Metric"
-description: "Metric display card with progress indicator"
+title: Metric
+description: A metric display card with progress indicator and statistics.
 component: true
-categories: ["data", "display"]
-
-registryDependencies: ["card", "progress"]
 ---
 
-# Metric
+<ComponentPreview
+  code={`"use client"
 
-Metric display card with progress indicator
+import { Line, LineChart } from "recharts"
+import type { getDictionary } from "@/components/local/dictionaries"
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+
+const data = [
+  {
+    average: 400,
+    today: 240,
+  },
+  {
+    average: 300,
+    today: 139,
+  },
+  {
+    average: 200,
+    today: 980,
+  },
+  {
+    average: 278,
+    today: 390,
+  },
+  {
+    average: 189,
+    today: 480,
+  },
+  {
+    average: 239,
+    today: 380,
+  },
+  {
+    average: 349,
+    today: 430,
+  },
+]
+
+const chartConfig = {
+  today: {
+    label: "Today",
+    color: "hsl(var(--primary))",
+  },
+  average: {
+    label: "Average",
+    color: "hsl(var(--primary))",
+  },
+} satisfies ChartConfig
+
+interface CardsMetricProps {
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export function CardsMetric({ dictionary }: CardsMetricProps) {
+  return (
+    <Card className="shadow-none border">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base font-semibold">
+          {dictionary?.cards?.metric?.title || "Exercise Minutes"}
+        </CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
+          {dictionary?.cards?.metric?.description || "Your exercise minutes are ahead of where you normally are."}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pb-4">
+        <ChartContainer config={chartConfig} className="w-full h-[200px]">
+          <LineChart
+            data={data}
+            margin={{
+              top: 5,
+              right: 10,
+              left: 10,
+              bottom: 0,
+            }}
+          >
+            <Line
+              type="monotone"
+              strokeWidth={2}
+              dataKey="average"
+              stroke="var(--color-average)"
+              strokeOpacity={0.5}
+              activeDot={{
+                r: 6,
+                fill: "var(--color-average)",
+              }}
+            />
+            <Line
+              type="monotone"
+              dataKey="today"
+              strokeWidth={2}
+              stroke="var(--color-today)"
+              activeDot={{
+                r: 8,
+                style: { fill: "var(--color-today)" },
+              }}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  )
+}`}
+>
+  <CardsMetric />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
 
 ```bash
 npx codebase add metric
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource
+  code={`"use client"
 
+import { Line, LineChart } from "recharts"
+import type { getDictionary } from "@/components/local/dictionaries"
 
-**components/atom/metric.tsx**
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
 
-```tsx title="components/atom/metric.tsx"
-// Component code will be populated from registry
-```
+const data = [
+  {
+    average: 400,
+    today: 240,
+  },
+  {
+    average: 300,
+    today: 139,
+  },
+  {
+    average: 200,
+    today: 980,
+  },
+  {
+    average: 278,
+    today: 390,
+  },
+  {
+    average: 189,
+    today: 480,
+  },
+  {
+    average: 239,
+    today: 380,
+  },
+  {
+    average: 349,
+    today: 430,
+  },
+]
 
+const chartConfig = {
+  today: {
+    label: "Today",
+    color: "hsl(var(--primary))",
+  },
+  average: {
+    label: "Average",
+    color: "hsl(var(--primary))",
+  },
+} satisfies ChartConfig
 
-  </TabsContent>
-</Tabs>
+interface CardsMetricProps {
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export function CardsMetric({ dictionary }: CardsMetricProps) {
+  return (
+    <Card className="shadow-none border">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base font-semibold">
+          {dictionary?.cards?.metric?.title || "Exercise Minutes"}
+        </CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
+          {dictionary?.cards?.metric?.description || "Your exercise minutes are ahead of where you normally are."}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pb-4">
+        <ChartContainer config={chartConfig} className="w-full h-[200px]">
+          <LineChart
+            data={data}
+            margin={{
+              top: 5,
+              right: 10,
+              left: 10,
+              bottom: 0,
+            }}
+          >
+            <Line
+              type="monotone"
+              strokeWidth={2}
+              dataKey="average"
+              stroke="var(--color-average)"
+              strokeOpacity={0.5}
+              activeDot={{
+                r: 6,
+                fill: "var(--color-average)",
+              }}
+            />
+            <Line
+              type="monotone"
+              dataKey="today"
+              strokeWidth={2}
+              stroke="var(--color-today)"
+              activeDot={{
+                r: 8,
+                style: { fill: "var(--color-today)" },
+              }}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  )
+}`}
+  title="components/atom/metric.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
-```tsx
-import { Metric } from "@/components/atom/metric"
-
-export default function Example() {
-  return (
-    <Metric />
-  )
-}
+```tsx showLineNumbers
+import { CardsMetric } from "@/components/atom/metric"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="metric-demo">
-  <Metric />
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx showLineNumbers
+export default function Page() {
+  return <CardsMetric />
+}
+```

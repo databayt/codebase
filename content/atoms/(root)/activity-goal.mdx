@@ -1,91 +1,265 @@
 ---
-title: "Activity Goal"
-description: "Activity goal tracking card with chart visualization"
+title: Activity Goal
+description: A card component for tracking and setting daily activity goals with an interactive chart visualization.
 component: true
-categories: ["display", "data"]
-dependencies: ["recharts"]
-registryDependencies: ["button", "card", "chart"]
 ---
 
-# Activity Goal
+<ComponentPreview
+  code={`"use client"
 
-Activity goal tracking card with chart visualization
+import * as React from "react"
+import { Minus, Plus } from "lucide-react"
+import { Bar, BarChart } from "recharts"
+
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+
+const data = [
+  { goal: 400 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 239 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 349 },
+]
+
+const chartConfig = {
+  goal: {
+    label: "Goal",
+    color: "hsl(var(--primary))",
+  },
+} satisfies ChartConfig
+
+export function ActivityGoalDemo() {
+  const [goal, setGoal] = React.useState(350)
+
+  function onClick(adjustment: number) {
+    setGoal(Math.max(200, Math.min(400, goal + adjustment)))
+  }
+
+  return (
+    <Card className="shadow-none border">
+      <CardHeader className="pb-4 space-y-1">
+        <CardTitle className="text-base font-semibold">Move Goal</CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
+          Set your daily activity goal.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pb-2">
+        <div className="flex items-center justify-center space-x-2">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 shrink-0 rounded-full"
+            onClick={() => onClick(-10)}
+            disabled={goal <= 200}
+          >
+            <Minus />
+            <span className="sr-only">Decrease</span>
+          </Button>
+          <div className="flex-1 text-center">
+            <div className="text-5xl font-bold tracking-tighter">{goal}</div>
+            <div className="text-[0.70rem] uppercase text-muted-foreground">
+              Calories/day
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 shrink-0 rounded-full"
+            onClick={() => onClick(10)}
+            disabled={goal >= 400}
+          >
+            <Plus />
+            <span className="sr-only">Increase</span>
+          </Button>
+        </div>
+        <div className="my-3 h-[60px]">
+          <ChartContainer
+            config={chartConfig}
+            className="aspect-auto h-full w-full"
+          >
+            <BarChart data={data}>
+              <Bar dataKey="goal" radius={4} fill="var(--color-goal)" />
+            </BarChart>
+          </ChartContainer>
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full">Set Goal</Button>
+      </CardFooter>
+    </Card>
+  )
+}`}
+>
+  <CardsActivityGoal />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
 
 ```bash
 npx codebase add activity-goal
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
+<Steps>
+
+<Step>Install the following dependencies:</Step>
 
 ```bash
 npm install recharts
 ```
 
+<Step>Copy and paste the following code into your project.</Step>
 
-### Copy component code
+<ComponentSource
+  code={`"use client"
 
-Copy and paste the following code into your project:
+import * as React from "react"
+import { Minus, Plus } from "lucide-react"
+import { Bar, BarChart } from "recharts"
 
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
-**components/atom/activity-goal.tsx**
+const data = [
+  { goal: 400 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 239 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 349 },
+]
 
-```tsx title="components/atom/activity-goal.tsx"
-// Component code will be populated from registry
-```
+const chartConfig = {
+  goal: {
+    label: "Goal",
+    color: "hsl(var(--primary))",
+  },
+} satisfies ChartConfig
 
+export function CardsActivityGoal() {
+  const [goal, setGoal] = React.useState(350)
 
-  </TabsContent>
-</Tabs>
+  function onClick(adjustment: number) {
+    setGoal(Math.max(200, Math.min(400, goal + adjustment)))
+  }
+
+  return (
+    <Card className="shadow-none border">
+      <CardHeader className="pb-4 space-y-1">
+        <CardTitle className="text-base font-semibold">Move Goal</CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
+          Set your daily activity goal.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pb-2">
+        <div className="flex items-center justify-center space-x-2">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 shrink-0 rounded-full"
+            onClick={() => onClick(-10)}
+            disabled={goal <= 200}
+          >
+            <Minus />
+            <span className="sr-only">Decrease</span>
+          </Button>
+          <div className="flex-1 text-center">
+            <div className="text-5xl font-bold tracking-tighter">{goal}</div>
+            <div className="text-[0.70rem] uppercase text-muted-foreground">
+              Calories/day
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 shrink-0 rounded-full"
+            onClick={() => onClick(10)}
+            disabled={goal >= 400}
+          >
+            <Plus />
+            <span className="sr-only">Increase</span>
+          </Button>
+        </div>
+        <div className="my-3 h-[60px]">
+          <ChartContainer
+            config={chartConfig}
+            className="aspect-auto h-full w-full"
+          >
+            <BarChart data={data}>
+              <Bar dataKey="goal" radius={4} fill="var(--color-goal)" />
+            </BarChart>
+          </ChartContainer>
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full">Set Goal</Button>
+      </CardFooter>
+    </Card>
+  )
+}`}
+  title="components/atom/activity-goal.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
-```tsx
-import { ActivityGoal } from "@/components/atom/activity-goal"
-
-export default function Example() {
-  return (
-    <ActivityGoal />
-  )
-}
+```tsx showLineNumbers
+import { CardsActivityGoal } from "@/components/atom/activity-goal"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="activity-goal-demo">
-  <ActivityGoal />
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Requires external dependencies: recharts
-
+```tsx showLineNumbers
+export default function Page() {
+  return <CardsActivityGoal />
+}
+```

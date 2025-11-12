@@ -1,86 +1,187 @@
 ---
-title: "Create Account"
-description: "Account creation form card"
+title: Create Account
+description: An account creation form card with input fields and validation.
 component: true
-categories: ["form", "authentication"]
-
-registryDependencies: ["card", "button", "input", "label"]
 ---
 
-# Create Account
+<ComponentPreview
+  code={`"use client"
 
-Account creation form card
+import { Icons } from "@/components/atom/icons"
+import type { getDictionary } from "@/components/local/dictionaries"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+interface CardsCreateAccountProps {
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export function CardsCreateAccount({ dictionary }: CardsCreateAccountProps) {
+  return (
+    <Card className="shadow-none border">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl">{dictionary?.cards?.createAccount?.title || "Create an account"}</CardTitle>
+        <CardDescription>
+          {dictionary?.cards?.createAccount?.description || "Enter your email below to create your account"}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <div className="grid grid-cols-2 gap-6 rtl:space-x-reverse">
+          <Button variant="outline">
+            <Icons.gitHub />
+            {dictionary?.cards?.createAccount?.github || "GitHub"}
+          </Button>
+          <Button variant="outline">
+            <Icons.google />
+            {dictionary?.cards?.createAccount?.google || "Google"}
+          </Button>
+        </div>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-card px-2 text-muted-foreground">
+              {dictionary?.cards?.createAccount?.orContinue || "Or continue with"}
+            </span>
+          </div>
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="email">{dictionary?.cards?.createAccount?.email || "Email"}</Label>
+          <Input id="email" type="email" placeholder={dictionary?.cards?.createAccount?.emailPlaceholder || "m@example.com"} />
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="password">{dictionary?.cards?.createAccount?.password || "Password"}</Label>
+          <Input id="password" type="password" />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full">{dictionary?.cards?.createAccount?.createButton || "Create account"}</Button>
+      </CardFooter>
+    </Card>
+  )
+}`}
+>
+  <CardsCreateAccount />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
 
 ```bash
 npx codebase add create-account
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource
+  code={`"use client"
 
+import { Icons } from "@/components/atom/icons"
+import type { getDictionary } from "@/components/local/dictionaries"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
-**components/atom/create-account.tsx**
+interface CardsCreateAccountProps {
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+}
 
-```tsx title="components/atom/create-account.tsx"
-// Component code will be populated from registry
-```
+export function CardsCreateAccount({ dictionary }: CardsCreateAccountProps) {
+  return (
+    <Card className="shadow-none border">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl">{dictionary?.cards?.createAccount?.title || "Create an account"}</CardTitle>
+        <CardDescription>
+          {dictionary?.cards?.createAccount?.description || "Enter your email below to create your account"}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <div className="grid grid-cols-2 gap-6 rtl:space-x-reverse">
+          <Button variant="outline">
+            <Icons.gitHub />
+            {dictionary?.cards?.createAccount?.github || "GitHub"}
+          </Button>
+          <Button variant="outline">
+            <Icons.google />
+            {dictionary?.cards?.createAccount?.google || "Google"}
+          </Button>
+        </div>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-card px-2 text-muted-foreground">
+              {dictionary?.cards?.createAccount?.orContinue || "Or continue with"}
+            </span>
+          </div>
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="email">{dictionary?.cards?.createAccount?.email || "Email"}</Label>
+          <Input id="email" type="email" placeholder={dictionary?.cards?.createAccount?.emailPlaceholder || "m@example.com"} />
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="password">{dictionary?.cards?.createAccount?.password || "Password"}</Label>
+          <Input id="password" type="password" />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full">{dictionary?.cards?.createAccount?.createButton || "Create account"}</Button>
+      </CardFooter>
+    </Card>
+  )
+}`}
+  title="components/atom/create-account.tsx"
+/>
 
+<Step>Update the import paths to match your project setup.</Step>
 
-  </TabsContent>
-</Tabs>
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
-```tsx
-import { CreateAccount } from "@/components/atom/create-account"
-
-export default function Example() {
-  return (
-    <CreateAccount />
-  )
-}
+```tsx showLineNumbers
+import { CardsCreateAccount } from "@/components/atom/create-account"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="create-account-demo">
-  <CreateAccount />
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx showLineNumbers
+export default function Page() {
+  return <CardsCreateAccount />
+}
+```

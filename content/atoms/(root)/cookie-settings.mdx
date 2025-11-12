@@ -1,86 +1,187 @@
 ---
-title: "Cookie Settings"
-description: "Cookie consent and settings management card"
+title: Cookie Settings
+description: A cookie consent and settings management card with toggle switches.
 component: true
-categories: ["form", "ui"]
-
-registryDependencies: ["card", "switch", "button"]
 ---
 
-# Cookie Settings
+<ComponentPreview
+  code={`"use client"
 
-Cookie consent and settings management card
+import { Button } from "@/components/ui/button"
+import type { getDictionary } from "@/components/local/dictionaries"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
+
+interface CardsCookieSettingsProps {
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export function CardsCookieSettings({ dictionary }: CardsCookieSettingsProps) {
+  return (
+    <Card className="shadow-none border">
+      <CardHeader>
+        <CardTitle>{dictionary?.cards?.cookieSettings?.title || "Cookie Settings"}</CardTitle>
+        <CardDescription>{dictionary?.cards?.cookieSettings?.description || "Manage your cookie settings here."}</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-6">
+        <div className="flex items-center justify-between space-x-4 rtl:space-x-reverse">
+          <Label htmlFor="necessary" className="flex flex-col space-y-1">
+            <span>Strictly Necessary</span>
+            <span className="text-xs font-normal leading-snug text-muted-foreground">
+              These cookies are essential in order to use the website and use
+              its features.
+            </span>
+          </Label>
+          <Switch id="necessary" defaultChecked aria-label="Necessary" />
+        </div>
+        <div className="flex items-center justify-between space-x-4 rtl:space-x-reverse">
+          <Label htmlFor="functional" className="flex flex-col space-y-1">
+            <span>Functional Cookies</span>
+            <span className="text-xs font-normal leading-snug text-muted-foreground">
+              These cookies allow the website to provide personalized
+              functionality.
+            </span>
+          </Label>
+          <Switch id="functional" aria-label="Functional" />
+        </div>
+        <div className="flex items-center justify-between space-x-4 rtl:space-x-reverse">
+          <Label htmlFor="performance" className="flex flex-col space-y-1">
+            <span>Performance Cookies</span>
+            <span className="text-xs font-normal leading-snug text-muted-foreground">
+              These cookies help to improve the performance of the website.
+            </span>
+          </Label>
+          <Switch id="performance" aria-label="Performance" />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button variant="outline" className="w-full">
+          Save preferences
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}`}
+>
+  <CardsCookieSettings />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
 
 ```bash
 npx codebase add cookie-settings
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource
+  code={`"use client"
 
+import { Button } from "@/components/ui/button"
+import type { getDictionary } from "@/components/local/dictionaries"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
-**components/atom/cookie-settings.tsx**
+interface CardsCookieSettingsProps {
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+}
 
-```tsx title="components/atom/cookie-settings.tsx"
-// Component code will be populated from registry
-```
+export function CardsCookieSettings({ dictionary }: CardsCookieSettingsProps) {
+  return (
+    <Card className="shadow-none border">
+      <CardHeader>
+        <CardTitle>{dictionary?.cards?.cookieSettings?.title || "Cookie Settings"}</CardTitle>
+        <CardDescription>{dictionary?.cards?.cookieSettings?.description || "Manage your cookie settings here."}</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-6">
+        <div className="flex items-center justify-between space-x-4 rtl:space-x-reverse">
+          <Label htmlFor="necessary" className="flex flex-col space-y-1">
+            <span>Strictly Necessary</span>
+            <span className="text-xs font-normal leading-snug text-muted-foreground">
+              These cookies are essential in order to use the website and use
+              its features.
+            </span>
+          </Label>
+          <Switch id="necessary" defaultChecked aria-label="Necessary" />
+        </div>
+        <div className="flex items-center justify-between space-x-4 rtl:space-x-reverse">
+          <Label htmlFor="functional" className="flex flex-col space-y-1">
+            <span>Functional Cookies</span>
+            <span className="text-xs font-normal leading-snug text-muted-foreground">
+              These cookies allow the website to provide personalized
+              functionality.
+            </span>
+          </Label>
+          <Switch id="functional" aria-label="Functional" />
+        </div>
+        <div className="flex items-center justify-between space-x-4 rtl:space-x-reverse">
+          <Label htmlFor="performance" className="flex flex-col space-y-1">
+            <span>Performance Cookies</span>
+            <span className="text-xs font-normal leading-snug text-muted-foreground">
+              These cookies help to improve the performance of the website.
+            </span>
+          </Label>
+          <Switch id="performance" aria-label="Performance" />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button variant="outline" className="w-full">
+          Save preferences
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}`}
+  title="components/atom/cookie-settings.tsx"
+/>
 
+<Step>Update the import paths to match your project setup.</Step>
 
-  </TabsContent>
-</Tabs>
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
-```tsx
-import { CookieSettings } from "@/components/atom/cookie-settings"
-
-export default function Example() {
-  return (
-    <CookieSettings />
-  )
-}
+```tsx showLineNumbers
+import { CardsCookieSettings } from "@/components/atom/cookie-settings"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="cookie-settings-demo">
-  <CookieSettings />
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx showLineNumbers
+export default function Page() {
+  return <CardsCookieSettings />
+}
+```
