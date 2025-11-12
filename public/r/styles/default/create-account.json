@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "create-account",
+  "description": "Account creation form card",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "card",
+    "button",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "components/atom/create-account.tsx",
+      "content": "\"use client\"\n\nimport { Icons } from \"@/components/atom/icons\"\nimport type { getDictionary } from \"@/components/local/dictionaries\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\n\ninterface CardsCreateAccountProps {\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\n}\n\nexport function CardsCreateAccount({ dictionary }: CardsCreateAccountProps) {\n  return (\n    <Card className=\"shadow-none border\">\n      <CardHeader className=\"space-y-1\">\n        <CardTitle className=\"text-2xl\">{dictionary?.cards?.createAccount?.title || \"Create an account\"}</CardTitle>\n        <CardDescription>\n          {dictionary?.cards?.createAccount?.description || \"Enter your email below to create your account\"}\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"grid gap-4\">\n        <div className=\"grid grid-cols-2 gap-6 rtl:space-x-reverse\">\n          <Button variant=\"outline\">\n            <Icons.gitHub />\n            {dictionary?.cards?.createAccount?.github || \"GitHub\"}\n          </Button>\n          <Button variant=\"outline\">\n            <Icons.google />\n            {dictionary?.cards?.createAccount?.google || \"Google\"}\n          </Button>\n        </div>\n        <div className=\"relative\">\n          <div className=\"absolute inset-0 flex items-center\">\n            <span className=\"w-full border-t\" />\n          </div>\n          <div className=\"relative flex justify-center text-xs uppercase\">\n            <span className=\"bg-card px-2 text-muted-foreground\">\n              {dictionary?.cards?.createAccount?.orContinue || \"Or continue with\"}\n            </span>\n          </div>\n        </div>\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"email\">{dictionary?.cards?.createAccount?.email || \"Email\"}</Label>\n          <Input id=\"email\" type=\"email\" placeholder={dictionary?.cards?.createAccount?.emailPlaceholder || \"m@example.com\"} />\n        </div>\n        <div className=\"grid gap-2\">\n          <Label htmlFor=\"password\">{dictionary?.cards?.createAccount?.password || \"Password\"}</Label>\n          <Input id=\"password\" type=\"password\" />\n        </div>\n      </CardContent>\n      <CardFooter>\n        <Button className=\"w-full\">{dictionary?.cards?.createAccount?.createButton || \"Create account\"}</Button>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/create-account.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "authentication"
+  ]
+}

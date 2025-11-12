@@ -158,6 +158,244 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
+    "activity-goal": {
+      "name": "activity-goal",
+      "description": "Activity goal tracking card with chart visualization",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/activity-goal.tsx"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "chart"
+      ],
+      "categories": [
+        "display",
+        "data"
+      ],
+      "meta": {}
+    },
+    "calendar": {
+      "name": "calendar",
+      "description": "Interactive calendar card component",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/calendar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "calendar"
+      ],
+      "categories": [
+        "display",
+        "interactive"
+      ],
+      "meta": {}
+    },
+    "chat": {
+      "name": "chat",
+      "description": "Chat interface card with message history",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/chat.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "avatar",
+        "input",
+        "button"
+      ],
+      "categories": [
+        "display",
+        "interactive"
+      ],
+      "meta": {}
+    },
+    "cookie-settings": {
+      "name": "cookie-settings",
+      "description": "Cookie consent and settings management card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/cookie-settings.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "switch",
+        "button"
+      ],
+      "categories": [
+        "form",
+        "ui"
+      ],
+      "meta": {}
+    },
+    "create-account": {
+      "name": "create-account",
+      "description": "Account creation form card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/create-account.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "meta": {}
+    },
+    "data-table": {
+      "name": "data-table",
+      "description": "Data table card with sorting and filtering",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/data-table.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "table"
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "meta": {}
+    },
+    "metric": {
+      "name": "metric",
+      "description": "Metric display card with progress indicator",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/metric.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "progress"
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "meta": {}
+    },
+    "payment-method": {
+      "name": "payment-method",
+      "description": "Payment method selection and management card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/payment-method.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label",
+        "radio-group",
+        "select"
+      ],
+      "categories": [
+        "form",
+        "ui"
+      ],
+      "meta": {}
+    },
+    "report-issue": {
+      "name": "report-issue",
+      "description": "Issue reporting form card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/report-issue.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label",
+        "select",
+        "textarea"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "share": {
+      "name": "share",
+      "description": "Social sharing card with multiple platforms",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/share.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "separator"
+      ],
+      "categories": [
+        "ui",
+        "interactive"
+      ],
+      "meta": {}
+    },
+    "stats": {
+      "name": "stats",
+      "description": "Statistics overview card with multiple metrics",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/stats.tsx"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "card",
+        "chart"
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "meta": {}
+    },
+    "team-members": {
+      "name": "team-members",
+      "description": "Team members management card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/team-members.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "select",
+        "avatar"
+      ],
+      "categories": [
+        "display",
+        "form"
+      ],
+      "meta": {}
+    },
     "ai-prompt-input": {
       "name": "ai-prompt-input",
       "description": "AI-powered prompt input component with suggestions and completions",
@@ -826,6 +1064,244 @@ export const Index: Record<string, any> = {
       "meta": {
         "iframeHeight": "600px"
       }
+    },
+    "activity-goal": {
+      "name": "activity-goal",
+      "description": "Activity goal tracking card with chart visualization",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/activity-goal.tsx"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "chart"
+      ],
+      "categories": [
+        "display",
+        "data"
+      ],
+      "meta": {}
+    },
+    "calendar": {
+      "name": "calendar",
+      "description": "Interactive calendar card component",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/calendar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "calendar"
+      ],
+      "categories": [
+        "display",
+        "interactive"
+      ],
+      "meta": {}
+    },
+    "chat": {
+      "name": "chat",
+      "description": "Chat interface card with message history",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/chat.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "avatar",
+        "input",
+        "button"
+      ],
+      "categories": [
+        "display",
+        "interactive"
+      ],
+      "meta": {}
+    },
+    "cookie-settings": {
+      "name": "cookie-settings",
+      "description": "Cookie consent and settings management card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/cookie-settings.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "switch",
+        "button"
+      ],
+      "categories": [
+        "form",
+        "ui"
+      ],
+      "meta": {}
+    },
+    "create-account": {
+      "name": "create-account",
+      "description": "Account creation form card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/create-account.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "meta": {}
+    },
+    "data-table": {
+      "name": "data-table",
+      "description": "Data table card with sorting and filtering",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/data-table.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "table"
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "meta": {}
+    },
+    "metric": {
+      "name": "metric",
+      "description": "Metric display card with progress indicator",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/metric.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "progress"
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "meta": {}
+    },
+    "payment-method": {
+      "name": "payment-method",
+      "description": "Payment method selection and management card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/payment-method.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label",
+        "radio-group",
+        "select"
+      ],
+      "categories": [
+        "form",
+        "ui"
+      ],
+      "meta": {}
+    },
+    "report-issue": {
+      "name": "report-issue",
+      "description": "Issue reporting form card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/report-issue.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label",
+        "select",
+        "textarea"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "share": {
+      "name": "share",
+      "description": "Social sharing card with multiple platforms",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/share.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "separator"
+      ],
+      "categories": [
+        "ui",
+        "interactive"
+      ],
+      "meta": {}
+    },
+    "stats": {
+      "name": "stats",
+      "description": "Statistics overview card with multiple metrics",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/stats.tsx"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "card",
+        "chart"
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "meta": {}
+    },
+    "team-members": {
+      "name": "team-members",
+      "description": "Team members management card",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/team-members.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "select",
+        "avatar"
+      ],
+      "categories": [
+        "display",
+        "form"
+      ],
+      "meta": {}
     },
     "ai-prompt-input": {
       "name": "ai-prompt-input",

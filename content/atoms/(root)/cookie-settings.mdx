@@ -1,0 +1,86 @@
+---
+title: "Cookie Settings"
+description: "Cookie consent and settings management card"
+component: true
+categories: ["form", "ui"]
+
+registryDependencies: ["card", "switch", "button"]
+---
+
+# Cookie Settings
+
+Cookie consent and settings management card
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add cookie-settings
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/cookie-settings.tsx**
+
+```tsx title="components/atom/cookie-settings.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { CookieSettings } from "@/components/atom/cookie-settings"
+
+export default function Example() {
+  return (
+    <CookieSettings />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="cookie-settings-demo">
+  <CookieSettings />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

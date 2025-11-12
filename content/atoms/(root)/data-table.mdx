@@ -1,0 +1,86 @@
+---
+title: "Data Table"
+description: "Data table card with sorting and filtering"
+component: true
+categories: ["data", "display"]
+
+registryDependencies: ["card", "table"]
+---
+
+# Data Table
+
+Data table card with sorting and filtering
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add data-table
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/data-table.tsx**
+
+```tsx title="components/atom/data-table.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { DataTable } from "@/components/atom/data-table"
+
+export default function Example() {
+  return (
+    <DataTable />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="data-table-demo">
+  <DataTable />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

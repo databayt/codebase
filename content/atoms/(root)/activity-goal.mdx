@@ -1,0 +1,91 @@
+---
+title: "Activity Goal"
+description: "Activity goal tracking card with chart visualization"
+component: true
+categories: ["display", "data"]
+dependencies: ["recharts"]
+registryDependencies: ["button", "card", "chart"]
+---
+
+# Activity Goal
+
+Activity goal tracking card with chart visualization
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add activity-goal
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+
+```bash
+npm install recharts
+```
+
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/activity-goal.tsx**
+
+```tsx title="components/atom/activity-goal.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ActivityGoal } from "@/components/atom/activity-goal"
+
+export default function Example() {
+  return (
+    <ActivityGoal />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="activity-goal-demo">
+  <ActivityGoal />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+- Requires external dependencies: recharts
+

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats",
+  "description": "Statistics overview card with multiple metrics",
+  "type": "registry:atom",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "card",
+    "chart"
+  ],
+  "files": [
+    {
+      "path": "components/atom/stats.tsx",
+      "content": "\"use client\"\n\nimport { Bar, BarChart, Line, LineChart } from \"recharts\"\n\nimport {\n  Card,\n  CardContent,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { ChartConfig, ChartContainer } from \"@/components/ui/chart\"\nimport { Icons } from \"@/components/atom/icons\"\nimport type { getDictionary } from \"@/components/local/dictionaries\"\n\nconst data = [\n  {\n    revenue: 10400,\n    subscription: 240,\n  },\n  {\n    revenue: 14405,\n    subscription: 300,\n  },\n  {\n    revenue: 9400,\n    subscription: 200,\n  },\n  {\n    revenue: 8200,\n    subscription: 278,\n  },\n  {\n    revenue: 7000,\n    subscription: 189,\n  },\n  {\n    revenue: 9600,\n    subscription: 239,\n  },\n  {\n    revenue: 11244,\n    subscription: 278,\n  },\n  {\n    revenue: 26475,\n    subscription: 189,\n  },\n]\n\nconst chartConfig = {\n  revenue: {\n    label: \"Revenue\",\n    color: \"hsl(var(--primary))\",\n  },\n  subscription: {\n    label: \"Subscriptions\",\n    color: \"hsl(var(--primary))\",\n  },\n} satisfies ChartConfig\n\ninterface CardsStatsProps {\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\n}\n\nexport function CardsStats({ dictionary }: CardsStatsProps) {\n  return (\n    <div className=\"grid gap-4 sm:grid-cols-2 xl:grid-cols-2 rtl:space-x-reverse\">\n      <Card className=\"shadow-none border\">\n        <CardHeader className=\"flex flex-row items-center justify-between space-y-0 pb-2\">\n          <CardTitle className=\"text-sm font-normal\">{dictionary?.cards?.stats?.totalRevenue || \"Total Revenue\"}</CardTitle>\n          <Icons.dollarSign className=\"h-4 w-4 text-muted-foreground\" />\n        </CardHeader>\n        <CardContent className=\"pb-0\">\n          <div className=\"text-2xl font-bold\">{dictionary?.cards?.stats?.revenueAmount || \"$15,231.89\"}</div>\n          <p className=\"text-xs text-muted-foreground\">\n            {dictionary?.cards?.stats?.revenueGrowth || \"+20.1% from last month\"}\n          </p>\n          <ChartContainer config={chartConfig} className=\"h-[80px] w-full\">\n            <LineChart\n              data={data}\n              margin={{\n                top: 5,\n                right: 10,\n                left: 10,\n                bottom: 0,\n              }}\n            >\n              <Line\n                type=\"monotone\"\n                strokeWidth={2}\n                dataKey=\"revenue\"\n                stroke=\"var(--color-revenue)\"\n                activeDot={{\n                  r: 6,\n                }}\n              />\n            </LineChart>\n          </ChartContainer>\n        </CardContent>\n      </Card>\n      <Card className=\"shadow-none border\">\n        <CardHeader className=\"flex flex-row items-center justify-between space-y-0 pb-2\">\n          <CardTitle className=\"text-sm font-normal\">{dictionary?.cards?.stats?.subscriptions || \"Subscriptions\"}</CardTitle>\n          <Icons.users className=\"h-4 w-4 text-muted-foreground\" />\n        </CardHeader>\n        <CardContent>\n          <div className=\"text-2xl font-bold\">{dictionary?.cards?.stats?.subscriptionCount || \"+2350\"}</div>\n          <p className=\"text-xs text-muted-foreground\">\n            {dictionary?.cards?.stats?.subscriptionGrowth || \"+180.1% from last month\"}\n          </p>\n          <ChartContainer config={chartConfig} className=\"mt-2 h-[80px] w-full\">\n            <BarChart data={data}>\n              <Bar\n                dataKey=\"subscription\"\n                fill=\"var(--color-subscription)\"\n                radius={4}\n              />\n            </BarChart>\n          </ChartContainer>\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/stats.tsx"
+    }
+  ],
+  "categories": [
+    "data",
+    "display"
+  ]
+}

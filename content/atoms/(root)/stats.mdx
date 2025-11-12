@@ -1,0 +1,91 @@
+---
+title: "Stats"
+description: "Statistics overview card with multiple metrics"
+component: true
+categories: ["data", "display"]
+dependencies: ["recharts"]
+registryDependencies: ["card", "chart"]
+---
+
+# Stats
+
+Statistics overview card with multiple metrics
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add stats
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+
+```bash
+npm install recharts
+```
+
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/stats.tsx**
+
+```tsx title="components/atom/stats.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Stats } from "@/components/atom/stats"
+
+export default function Example() {
+  return (
+    <Stats />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="stats-demo">
+  <Stats />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+- Requires external dependencies: recharts
+

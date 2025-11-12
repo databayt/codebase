@@ -1,6 +1,166 @@
 import { Registry } from "@/components/root/template/registry"
 
 export const atoms: Registry["items"] = [
+  // Card Components (from root/cards)
+  {
+    name: "activity-goal",
+    type: "registry:atom",
+    description: "Activity goal tracking card with chart visualization",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/activity-goal.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["recharts"],
+    registryDependencies: ["button", "card", "chart"],
+  },
+  {
+    name: "calendar",
+    type: "registry:atom",
+    description: "Interactive calendar card component",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/calendar.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "calendar"],
+  },
+  {
+    name: "chat",
+    type: "registry:atom",
+    description: "Chat interface card with message history",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/chat.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "avatar", "input", "button"],
+  },
+  {
+    name: "cookie-settings",
+    type: "registry:atom",
+    description: "Cookie consent and settings management card",
+    categories: ["form", "ui"],
+    files: [
+      {
+        path: "components/atom/cookie-settings.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "switch", "button"],
+  },
+  {
+    name: "create-account",
+    type: "registry:atom",
+    description: "Account creation form card",
+    categories: ["form", "authentication"],
+    files: [
+      {
+        path: "components/atom/create-account.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "button", "input", "label"],
+  },
+  {
+    name: "data-table",
+    type: "registry:atom",
+    description: "Data table card with sorting and filtering",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/data-table.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "table"],
+  },
+  {
+    name: "metric",
+    type: "registry:atom",
+    description: "Metric display card with progress indicator",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/metric.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "progress"],
+  },
+  {
+    name: "payment-method",
+    type: "registry:atom",
+    description: "Payment method selection and management card",
+    categories: ["form", "ui"],
+    files: [
+      {
+        path: "components/atom/payment-method.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "button", "input", "label", "radio-group", "select"],
+  },
+  {
+    name: "report-issue",
+    type: "registry:atom",
+    description: "Issue reporting form card",
+    categories: ["form"],
+    files: [
+      {
+        path: "components/atom/report-issue.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "button", "input", "label", "select", "textarea"],
+  },
+  {
+    name: "share",
+    type: "registry:atom",
+    description: "Social sharing card with multiple platforms",
+    categories: ["ui", "interactive"],
+    files: [
+      {
+        path: "components/atom/share.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "button", "input", "separator"],
+  },
+  {
+    name: "stats",
+    type: "registry:atom",
+    description: "Statistics overview card with multiple metrics",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/stats.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["recharts"],
+    registryDependencies: ["card", "chart"],
+  },
+  {
+    name: "team-members",
+    type: "registry:atom",
+    description: "Team members management card",
+    categories: ["display", "form"],
+    files: [
+      {
+        path: "components/atom/team-members.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["card", "button", "input", "select", "avatar"],
+  },
+
   // AI Category
   {
     name: "ai-prompt-input",

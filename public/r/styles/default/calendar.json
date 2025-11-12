@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calendar",
+  "description": "Interactive calendar card component",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "card",
+    "calendar"
+  ],
+  "files": [
+    {
+      "path": "components/atom/calendar.tsx",
+      "content": "\"use client\"\n\nimport { addDays } from \"date-fns\"\nimport type { getDictionary } from \"@/components/local/dictionaries\"\n\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Card, CardContent } from \"@/components/ui/card\"\n\nconst start = new Date(2023, 5, 5)\n\ninterface CardsCalendarProps {\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\n}\n\nexport function CardsCalendar({ dictionary }: CardsCalendarProps) {\n  return (\n    <Card className=\"w-[255px] shadow-none border rtl:text-right\">\n      <CardContent className=\"p-0\">\n        <Calendar\n          numberOfMonths={1}\n          mode=\"range\"\n          defaultMonth={start}\n          selected={{\n            from: start,\n            to: addDays(start, 8),\n          }}\n          className=\"w-fit mx-auto [&_.rdp]:w-auto [&_.rdp-caption]:py-0.5 [&_.rdp-head_th]:text-[10px] [&_.rdp-head_th]:font-normal [&_.rdp-head_th]:h-5 [&_.rdp-head_th]:p-0 [&_.rdp-head_th]:w-7 [&_.rdp-head_row]:h-5 [&_.rdp-day]:h-7 [&_.rdp-day]:w-7 [&_.rdp-day]:text-xs [&_.rdp-months]:space-y-0 [&_.rdp-month]:space-y-0 [&_hr]:hidden [&_.rdp-caption_label]:text-[13px] [&_.rdp-nav]:space-x-0 [&_.rdp-nav_button]:h-6 [&_.rdp-nav_button]:w-6 [&_.rdp-dropdown]:text-xs [&_.rdp-dropdown_month]:text-xs [&_.rdp-dropdown_year]:text-xs [&_.rdp-vhidden]:hidden [&_.rdp-tbody]:space-y-0 [&_.rdp-table]:w-auto [&_.rdp-cell]:p-0 [&_.rdp-cell]:text-center [&_td]:p-0 [&_th]:p-0 [&_tr]:border-0 [&_.rdp-row]:border-0\"\n        />\n      </CardContent>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/calendar.tsx"
+    }
+  ],
+  "categories": [
+    "display",
+    "interactive"
+  ]
+}

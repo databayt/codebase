@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "activity-goal",
+  "description": "Activity goal tracking card with chart visualization",
+  "type": "registry:atom",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "chart"
+  ],
+  "files": [
+    {
+      "path": "components/atom/activity-goal.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Minus, Plus } from \"lucide-react\"\nimport { Bar, BarChart } from \"recharts\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { ChartConfig, ChartContainer } from \"@/components/ui/chart\"\nimport type { getDictionary } from \"@/components/local/dictionaries\"\n\nconst data = [\n  {\n    goal: 400,\n  },\n  {\n    goal: 300,\n  },\n  {\n    goal: 200,\n  },\n  {\n    goal: 300,\n  },\n  {\n    goal: 200,\n  },\n  {\n    goal: 278,\n  },\n  {\n    goal: 189,\n  },\n  {\n    goal: 239,\n  },\n  {\n    goal: 300,\n  },\n  {\n    goal: 200,\n  },\n  {\n    goal: 278,\n  },\n  {\n    goal: 189,\n  },\n  {\n    goal: 349,\n  },\n]\n\nconst chartConfig = {\n  goal: {\n    label: \"Goal\",\n    color: \"hsl(var(--primary))\",\n  },\n} satisfies ChartConfig\n\ninterface CardsActivityGoalProps {\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\n}\n\nexport function CardsActivityGoal({ dictionary }: CardsActivityGoalProps) {\n  const [goal, setGoal] = React.useState(350)\n\n  function onClick(adjustment: number) {\n    setGoal(Math.max(200, Math.min(400, goal + adjustment)))\n  }\n\n  return (\n    <Card className=\"shadow-none border\">\n      <CardHeader className=\"pb-4 space-y-1\">\n        <CardTitle className=\"text-base font-semibold\">\n          {dictionary?.cards?.activityGoal?.moveGoal || \"Move Goal\"}\n        </CardTitle>\n        <CardDescription className=\"text-sm text-muted-foreground\">\n          Set your daily activity goal.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"pb-2\">\n        <div className=\"flex items-center justify-center space-x-2\">\n          <Button\n            variant=\"outline\"\n            size=\"icon\"\n            className=\"h-8 w-8 shrink-0 rounded-full\"\n            onClick={() => onClick(-10)}\n            disabled={goal <= 200}\n          >\n            <Minus />\n            <span className=\"sr-only\">Decrease</span>\n          </Button>\n          <div className=\"flex-1 text-center\">\n            <div className=\"text-5xl font-bold tracking-tighter\">{goal}</div>\n            <div className=\"text-[0.70rem] uppercase text-muted-foreground\">\n              {dictionary?.cards?.activityGoal?.calories || \"Calories\"}/day\n            </div>\n          </div>\n          <Button\n            variant=\"outline\"\n            size=\"icon\"\n            className=\"h-8 w-8 shrink-0 rounded-full\"\n            onClick={() => onClick(10)}\n            disabled={goal >= 400}\n          >\n            <Plus />\n            <span className=\"sr-only\">Increase</span>\n          </Button>\n        </div>\n        <div className=\"my-3 h-[60px]\">\n          <ChartContainer\n            config={chartConfig}\n            className=\"aspect-auto h-full w-full\"\n          >\n            <BarChart data={data}>\n              <Bar dataKey=\"goal\" radius={4} fill=\"var(--color-goal)\" />\n            </BarChart>\n          </ChartContainer>\n        </div>\n      </CardContent>\n      <CardFooter>\n        <Button className=\"w-full\">{dictionary?.cards?.activityGoal?.goal || \"Set Goal\"}</Button>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/activity-goal.tsx"
+    }
+  ],
+  "categories": [
+    "display",
+    "data"
+  ]
+}

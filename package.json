@@ -135,6 +135,7 @@
     "prisma": "^6.16.2",
     "rehype-pretty-code": "^0.14.1",
     "rimraf": "^6.0.1",
+    "shadcn": "^3.5.0",
     "tailwindcss": "^4",
     "ts-morph": "^27.0.0",
     "tsx": "^4.20.5",

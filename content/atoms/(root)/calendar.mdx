@@ -1,0 +1,86 @@
+---
+title: "Calendar"
+description: "Interactive calendar card component"
+component: true
+categories: ["display", "interactive"]
+
+registryDependencies: ["card", "calendar"]
+---
+
+# Calendar
+
+Interactive calendar card component
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add calendar
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/calendar.tsx**
+
+```tsx title="components/atom/calendar.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Calendar } from "@/components/atom/calendar"
+
+export default function Example() {
+  return (
+    <Calendar />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="calendar-demo">
+  <Calendar />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

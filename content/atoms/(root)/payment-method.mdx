@@ -1,0 +1,86 @@
+---
+title: "Payment Method"
+description: "Payment method selection and management card"
+component: true
+categories: ["form", "ui"]
+
+registryDependencies: ["card", "button", "input", "label", "radio-group", "select"]
+---
+
+# Payment Method
+
+Payment method selection and management card
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add payment-method
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/payment-method.tsx**
+
+```tsx title="components/atom/payment-method.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PaymentMethod } from "@/components/atom/payment-method"
+
+export default function Example() {
+  return (
+    <PaymentMethod />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="payment-method-demo">
+  <PaymentMethod />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

@@ -1,0 +1,86 @@
+---
+title: "Team Members"
+description: "Team members management card"
+component: true
+categories: ["display", "form"]
+
+registryDependencies: ["card", "button", "input", "select", "avatar"]
+---
+
+# Team Members
+
+Team members management card
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add team-members
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/team-members.tsx**
+
+```tsx title="components/atom/team-members.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { TeamMembers } from "@/components/atom/team-members"
+
+export default function Example() {
+  return (
+    <TeamMembers />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="team-members-demo">
+  <TeamMembers />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+

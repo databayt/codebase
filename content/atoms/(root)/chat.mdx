@@ -1,0 +1,86 @@
+---
+title: "Chat"
+description: "Chat interface card with message history"
+component: true
+categories: ["display", "interactive"]
+
+registryDependencies: ["card", "avatar", "input", "button"]
+---
+
+# Chat
+
+Chat interface card with message history
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add chat
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+
+**components/atom/chat.tsx**
+
+```tsx title="components/atom/chat.tsx"
+// Component code will be populated from registry
+```
+
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Chat } from "@/components/atom/chat"
+
+export default function Example() {
+  return (
+    <Chat />
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="chat-demo">
+  <Chat />
+</ComponentPreview>
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Child elements |
+
+## Accessibility
+
+- Follows WAI-ARIA design patterns
+- Keyboard navigable
+- Screen reader friendly
+
+## Notes
+
+
