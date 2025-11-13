@@ -79,7 +79,7 @@ export function DocsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
       </SidebarHeader>
       <SidebarContent className="border-0 bg-transparent">
         <ScrollArea className="h-full">
-          <SidebarGroup className="p-2">
+          <SidebarGroup className="">
             <SidebarMenu className="space-y-1">
               {flatNavItems.map((item) => {
                 const isActive = pathname === item.href

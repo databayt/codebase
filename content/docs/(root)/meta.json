@@ -1,4 +1,34 @@
 {
   "title": "Documentation",
-  "pages": ["index"]
+  "pages": [
+    "index",
+    "installation",
+    "architecture",
+    "pattern",
+    "stack",
+    "structure",
+    "roadmap",
+    "changelog",
+    "issues",
+    "claude-code",
+    "vibe-coding",
+    "authantication",
+    "internationalization",
+    "domain",
+    "table",
+    "dashboard",
+    "onboarding",
+    "eslint",
+    "prettier",
+    "contribute",
+    "community",
+    "code-of-conduct",
+    "accordion",
+    "button",
+    "card",
+    "typography",
+    "docs-factory",
+    "atoms-factory",
+    "templates-factory"
+  ]
 }

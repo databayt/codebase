@@ -1,10 +1,6 @@
 {
   "title": "Documentation",
   "pages": [
-    "getting-started",
-    "components",
-    "operations",
-    "contribute",
-    "business"
+    "(root)"
   ]
 }

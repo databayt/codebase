@@ -39,7 +39,7 @@ export const docsConfig: DocsConfig = {
   ],
   sidebarNav: [
     {
-      title: "Getting Started",
+      title: "",  // Remove section title
       items: [
         {
           title: "Introduction",
@@ -47,23 +47,18 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "Requirements",
-          href: "/docs/requeriments",
+          title: "Installation",
+          href: "/docs/installation",
           items: [],
         },
         {
-          title: "Roadmap",
-          href: "/docs/roadmap",
+          title: "Requirements",
+          href: "/docs/requirements",
           items: [],
         },
         {
           title: "Architecture",
           href: "/docs/architecture",
-          items: [],
-        },
-        {
-          title: "Arrangements",
-          href: "/docs/arrangements",
           items: [],
         },
         {
@@ -77,31 +72,15 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "Database",
-          href: "/docs/database",
-          items: [],
-        },
-        // {
-        //   title: "Add School",
-        //   href: "/docs/add-school",
-        //   items: [],
-        // },
-        // {
-        //   title: "Milestones",
-        //   href: "/docs/milestones",
-        //   items: [],
-        // },
-        {
-          title: "Awesome registry",
-          href: "/docs/awesome-registry",
+          title: "Structure",
+          href: "/docs/structure",
           items: [],
         },
         {
-          title: "Inspiration",
-          href: "/docs/inspiration",
+          title: "Roadmap",
+          href: "/docs/roadmap",
           items: [],
         },
-        // Issues page can be added later if needed
         {
           title: "Changelog",
           href: "/docs/changelog",
@@ -112,43 +91,86 @@ export const docsConfig: DocsConfig = {
           href: "/docs/issues",
           items: [],
         },
-        // Optional sections can be re-added later if needed
-      ],
-    },
-    // {
-    //   title: "Community",
-    //   items: [
-    //     {
-    //       title: "Community",
-    //       href: "/docs/community",
-    //       items: [],
-    //     },
-    //     {
-    //       title: "Code of Conduct",
-    //       href: "/docs/code-of-conduct",
-    //       items: [],
-    //     },
-    //   ],
-    // },
-    {
-      title: "Contribute",
-      items: [
-        // { title: "Contribute", href: "/docs/contribute", items: [] },
-        // { title: "First PR Guide", href: "/docs/contribute/first-pr", items: [] },
-        { title: "ESLint", href: "/docs/eslint", items: [] },
-        { title: "Prettier", href: "/docs/prettier", items: [] },
-      ],
-    },
-    {
-      title: "Operations",
-      items: [
-        { title: "Domain & Subdomain", href: "/docs/domain", items: [] },
-        { title: "Internationalization", href: "/docs/local", items: [] },
-        { title: "Authentication", href: "/docs/authantication", items: [] },
-        { title: "Onboarding", href: "/docs/onboarding", items: [] },
-        { title: "Dashboard", href: "/docs/dashboard", items: [] },
-        { title: "Table", href: "/docs/table", items: [] },
-       
+        {
+          title: "Claude Code",
+          href: "/docs/claude-code",
+          items: [],
+        },
+        {
+          title: "Vibe Coding",
+          href: "/docs/vibe-coding",
+          items: [],
+        },
+        {
+          title: "Authentication",
+          href: "/docs/authentication",
+          items: [],
+        },
+        {
+          title: "Internationalization",
+          href: "/docs/internationalization",
+          items: [],
+        },
+        {
+          title: "Domain",
+          href: "/docs/domain",
+          items: [],
+        },
+        {
+          title: "Table",
+          href: "/docs/table",
+          items: [],
+        },
+        {
+          title: "Dashboard",
+          href: "/docs/dashboard",
+          items: [],
+        },
+        {
+          title: "Onboarding",
+          href: "/docs/onboarding",
+          items: [],
+        },
+        {
+          title: "ESLint",
+          href: "/docs/eslint",
+          items: [],
+        },
+        {
+          title: "Prettier",
+          href: "/docs/prettier",
+          items: [],
+        },
+        {
+          title: "Contributing",
+          href: "/docs/contributing",
+          items: [],
+        },
+        {
+          title: "Community",
+          href: "/docs/community",
+          items: [],
+        },
+        {
+          title: "Code of Conduct",
+          href: "/docs/code-of-conduct",
+          items: [],
+        },
+        {
+          title: "Docs Factory",
+          href: "/docs/docs-factory",
+          items: [],
+        },
+        {
+          title: "Atoms Factory",
+          href: "/docs/atoms-factory",
+          items: [],
+        },
+        {
+          title: "Templates Factory",
+          href: "/docs/templates-factory",
+          items: [],
+        },
       ],
     },
     // {
