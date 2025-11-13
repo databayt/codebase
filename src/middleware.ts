@@ -103,7 +103,11 @@ export default async function middleware(request: NextRequest) {
     }
 
     const isApiAuthRoute = pathname.startsWith(apiAuthPrefix)
-    const isPublicRoute = publicRoutes.includes(pathname)
+    const isPublicRoute = publicRoutes.includes(pathname) ||
+                         pathname.startsWith('/docs') ||
+                         pathname.startsWith('/atoms') ||
+                         pathname === '/docs' ||
+                         pathname === '/atoms'
     const isAuthRoute = authRoutes.includes(pathname)
 
     // Check if the route is in the platform directory

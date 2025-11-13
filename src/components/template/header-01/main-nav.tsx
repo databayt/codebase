@@ -27,9 +27,9 @@ export function MainNav({ dictionary }: MainNavProps) {
       </Link>
       <nav className="flex items-center gap-6 xl:gap-8">
         <Link
-          href="/docs/installation"
+          href="/docs"
           className={cn(
-            pathname === "/docs/installation"
+            pathname?.startsWith("/docs")
               ? "text-foreground"
               : ""
           )}
