@@ -39,138 +39,35 @@ export const docsConfig: DocsConfig = {
   ],
   sidebarNav: [
     {
-      title: "",  // Remove section title
+      title: "",  // No section title for flat structure
       items: [
-        {
-          title: "Introduction",
-          href: "/docs",
-          items: [],
-        },
-        {
-          title: "Installation",
-          href: "/docs/installation",
-          items: [],
-        },
-        {
-          title: "Requirements",
-          href: "/docs/requirements",
-          items: [],
-        },
-        {
-          title: "Architecture",
-          href: "/docs/architecture",
-          items: [],
-        },
-        {
-          title: "Pattern",
-          href: "/docs/pattern",
-          items: [],
-        },
-        {
-          title: "Stack",
-          href: "/docs/stack",
-          items: [],
-        },
-        {
-          title: "Structure",
-          href: "/docs/structure",
-          items: [],
-        },
-        {
-          title: "Roadmap",
-          href: "/docs/roadmap",
-          items: [],
-        },
-        {
-          title: "Changelog",
-          href: "/docs/changelog",
-          items: [],
-        },
-        {
-          title: "Issues",
-          href: "/docs/issues",
-          items: [],
-        },
-        {
-          title: "Claude Code",
-          href: "/docs/claude-code",
-          items: [],
-        },
-        {
-          title: "Vibe Coding",
-          href: "/docs/vibe-coding",
-          items: [],
-        },
-        {
-          title: "Authentication",
-          href: "/docs/authentication",
-          items: [],
-        },
-        {
-          title: "Internationalization",
-          href: "/docs/internationalization",
-          items: [],
-        },
-        {
-          title: "Domain",
-          href: "/docs/domain",
-          items: [],
-        },
-        {
-          title: "Table",
-          href: "/docs/table",
-          items: [],
-        },
-        {
-          title: "Dashboard",
-          href: "/docs/dashboard",
-          items: [],
-        },
-        {
-          title: "Onboarding",
-          href: "/docs/onboarding",
-          items: [],
-        },
-        {
-          title: "ESLint",
-          href: "/docs/eslint",
-          items: [],
-        },
-        {
-          title: "Prettier",
-          href: "/docs/prettier",
-          items: [],
-        },
-        {
-          title: "Contributing",
-          href: "/docs/contributing",
-          items: [],
-        },
-        {
-          title: "Community",
-          href: "/docs/community",
-          items: [],
-        },
-        {
-          title: "Code of Conduct",
-          href: "/docs/code-of-conduct",
-          items: [],
-        },
-        {
-          title: "Docs Factory",
-          href: "/docs/docs-factory",
-          items: [],
-        },
-        {
-          title: "Atoms Factory",
-          href: "/docs/atoms-factory",
-          items: [],
-        },
-        {
-          title: "Templates Factory",
-          href: "/docs/templates-factory",
-          items: [],
-        },
+        { title: "Introduction", href: "/docs", items: [] },
+        { title: "Installation", href: "/docs/installation", items: [] },
+        { title: "Architecture", href: "/docs/architecture", items: [] },
+        { title: "Pattern", href: "/docs/pattern", items: [] },
+        { title: "Stack", href: "/docs/stack", items: [] },
+        { title: "Structure", href: "/docs/structure", items: [] },
+        { title: "Roadmap", href: "/docs/roadmap", items: [] },
+        { title: "Changelog", href: "/docs/changelog", items: [] },
+        { title: "Issues", href: "/docs/issues", items: [] },
+        { title: "Claude Code", href: "/docs/claude-code", items: [] },
+        { title: "Vibe Coding", href: "/docs/vibe-coding", items: [] },
+        { title: "Authentication", href: "/docs/authantication", items: [] },
+        { title: "Internationalization", href: "/docs/internationalization", items: [] },
+        { title: "Domain", href: "/docs/domain", items: [] },
+        { title: "Table", href: "/docs/table", items: [] },
+        { title: "Onboarding", href: "/docs/onboarding", items: [] },
+        { title: "ESLint", href: "/docs/eslint", items: [] },
+        { title: "Prettier", href: "/docs/prettier", items: [] },
+        { title: "Community", href: "/docs/community", items: [] },
+        { title: "Code of Conduct", href: "/docs/code-of-conduct", items: [] },
+        { title: "Accordion", href: "/docs/accordion", items: [] },
+        { title: "Button", href: "/docs/button", items: [] },
+        { title: "Card", href: "/docs/card", items: [] },
+        { title: "Typography", href: "/docs/typography", items: [] },
+        { title: "Docs Factory", href: "/docs/docs-factory", items: [] },
+        { title: "Atoms Factory", href: "/docs/atoms-factory", items: [] },
+        { title: "Templates Factory", href: "/docs/templates-factory", items: [] },
       ],
     },
     // {
