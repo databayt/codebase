@@ -59,7 +59,7 @@ export function DocsSidebar({
     >
       <SidebarContent className="no-scrollbar overflow-x-hidden">
         <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
-        <SidebarGroup className="px-0">
+        <SidebarGroup className="p-0">
           <SidebarGroupContent>
             <SidebarMenu>
               {DOCS_LINKS.map(({ name, href }) => {
@@ -70,7 +70,7 @@ export function DocsSidebar({
                     <SidebarMenuButton
                       asChild
                       isActive={isActive}
-                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-0"
+                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-2"
                     >
                       <Link href={href}>{name}</Link>
                     </SidebarMenuButton>
