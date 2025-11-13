@@ -13,7 +13,7 @@ export default function Hero({ dictionary, params }: HeroProps) {
     return (
         <PageHeader
             announcement={<Announcement dictionary={dictionary} />}
-            heading={dictionary.vibepage?.heading || "Vibe Coding Made Easy"}
+            heading={dictionary.vibepage?.heading || "Vibe coding made easy"}
             description={dictionary.vibepage?.description || "Awesome vibes for your coding experience. Utilize into your apps. Works with all AI Agents. Open Source. Free forever."}
             actions={
                 <TwoButtons

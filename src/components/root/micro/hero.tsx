@@ -13,7 +13,7 @@ export default function Hero({ dictionary, params }: HeroProps) {
     return (
         <PageHeader
             announcement={<Announcement dictionary={dictionary} />}
-            heading={dictionary.micropage?.heading || "Micro Services for the Web"}
+            heading={dictionary.micropage?.heading || "Minimal modular micro servers"}
             description={dictionary.micropage?.description || "Clean, modern building blocks. Copy and paste into your apps. Works with all React frameworks. Open Source. Free forever."}
             actions={
                 <TwoButtons

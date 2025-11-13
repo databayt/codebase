@@ -47,17 +47,6 @@ export function MainNav({ dictionary }: MainNavProps) {
           <h6>{dictionary?.navigation?.atoms || "Atoms"}</h6>
         </Link>
         <Link
-          href="/docs/components"
-          className={cn(
-            pathname?.startsWith("/docs/components") &&
-              !pathname?.startsWith("/docs/component/chart")
-              ? "text-foreground"
-              : ""
-          )}
-        >
-          <h6>{dictionary?.navigation?.components || "Components"}</h6>
-        </Link>
-        <Link
           href="/templates"
           className={cn(
             pathname?.startsWith("/templates")
