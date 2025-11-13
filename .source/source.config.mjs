@@ -70,10 +70,14 @@ var source_config_default = defineConfig({
     }
   }
 });
+var docs = defineDocs({
+  dir: "content/docs"
+});
 var atoms = defineDocs({
   dir: "content/atoms"
 });
 export {
   atoms,
-  source_config_default as default
+  source_config_default as default,
+  docs
 };

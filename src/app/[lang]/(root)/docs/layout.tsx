@@ -1,12 +1,8 @@
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
-import { Home, Search } from "lucide-react"
-import Link from "next/link"
-import { DocsSidebar } from "@/components/template/sidebar-01/content"
-import { DocsThemeSwitcher } from "@/components/docs/docs-theme-switcher"
-import { DocsTableOfContents } from "@/components/docs/toc"
+import { docsSource } from "@/lib/source"
+import { DocsSidebar } from "@/components/docs/docs-sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import "../../../globals.css"
+
 interface DocsLayoutProps {
     children: React.ReactNode
     params: Promise<{ lang: string }>
@@ -14,40 +10,15 @@ interface DocsLayoutProps {
 
 export default async function DocsLayout({ children, params }: DocsLayoutProps) {
     const { lang } = await params
-    // Docs are always in English, regardless of the lang parameter
-    // This ensures documentation remains consistent and accessible
+
     return (
         <div dir="ltr" lang="en" className="font-inter">
-            <SidebarProvider>
-                <DocsSidebar />
-                <SidebarInset className="flex-1">
-                    <header className="flex h-14 shrink-0 items-center gap-2 px-4">
-                        <SidebarTrigger className="size-7" />
-                        <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
-                        <Button variant="ghost" size="icon" className="size-7" asChild>
-                            <Link href={`/${lang}`}>
-                                <Home className="h-4 w-4" />
-                            </Link>
-                        </Button>
-                        <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
-                        <Button variant="ghost" size="icon" className="size-7">
-                            <Search className="h-4 w-4" />
-                        </Button>
-                        <Separator orientation="vertical" className="data-[orientation=vertical]:h-4" />
-                        <DocsThemeSwitcher />
-                    </header>
-                    <div className="flex flex-1 flex-col">
-                        <div className="layout-container w-full">
-                            <main className="relative py-6 lg:gap-10 lg:pt-3 lg:pb-8">
-                                <div className="w-full min-w-0 max-w-[52rem]">
-                                    {children}
-                                </div>
-                                <DocsTableOfContents />
-                            </main>
-                        </div>
-                    </div>
-                </SidebarInset>
-            </SidebarProvider>
+            <div className="container-wrapper flex flex-1 flex-col px-2">
+                <SidebarProvider className="3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <DocsSidebar tree={docsSource.pageTree} />
+                    <div className="h-full w-full">{children}</div>
+                </SidebarProvider>
+            </div>
         </div>
     )
 } 

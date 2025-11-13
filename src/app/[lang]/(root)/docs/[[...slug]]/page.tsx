@@ -5,26 +5,26 @@ import { findNeighbour } from "fumadocs-core/page-tree"
 import type { Metadata } from "next"
 import fm from "front-matter"
 import z from "zod"
-import { atomsSource } from "@/lib/source"
-import { DocsCopyPage } from "@/components/docs-copy-page"
+import { docsSource } from "@/lib/source"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { mdxComponents } from "@/mdx-components"
 
+export const runtime = "nodejs";
 export const revalidate = false
 export const dynamic = "force-static"
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return atomsSource.generateParams()
+  return docsSource.generateParams()
 }
 
 export async function generateMetadata(props: {
   params: Promise<{ slug?: string[] }>
 }): Promise<Metadata> {
   const params = await props.params
-  const page = atomsSource.getPage(params.slug)
+  const page = docsSource.getPage(params.slug)
 
   if (!page) {
     notFound()
@@ -48,11 +48,11 @@ export async function generateMetadata(props: {
   }
 }
 
-export default async function AtomPage(props: {
-  params: Promise<{ slug?: string[] }>
+export default async function DocsPage(props: {
+  params: Promise<{ slug?: string[]; lang: string }>
 }) {
   const params = await props.params
-  const page = atomsSource.getPage(params.slug)
+  const page = docsSource.getPage(params.slug)
 
   if (!page) {
     notFound()
@@ -60,7 +60,7 @@ export default async function AtomPage(props: {
 
   const doc = page.data
   const MDX = doc.body
-  const neighbours = findNeighbour(atomsSource.pageTree, page.url)
+  const neighbours = findNeighbour(docsSource.pageTree, page.url)
 
   const raw = await page.data.exports?.getText?.("raw") || ""
   const pageUrl = `https://cb.databayt.org${page.url}`
@@ -75,7 +75,7 @@ export default async function AtomPage(props: {
         })
         .optional(),
     })
-    .parse(attributes)
+    .parse(attributes || {})
 
   return (
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
@@ -89,7 +89,6 @@ export default async function AtomPage(props: {
                   {doc.title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
-                  <DocsCopyPage page={raw} url={pageUrl} />
                   {neighbours.previous && (
                     <Button
                       variant="secondary"

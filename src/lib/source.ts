@@ -1,5 +1,10 @@
-import { atoms } from "@/.source"
+import { docs, atoms } from "@/.source"
 import { loader } from "fumadocs-core/source"
+
+export const docsSource = loader({
+  baseUrl: "/docs",
+  source: docs.toFumadocsSource(),
+})
 
 export const atomsSource = loader({
   baseUrl: "/atoms",

@@ -1,0 +1,20 @@
+{
+  "title": "Getting Started",
+  "pages": [
+    "index",
+    "installation",
+    "architecture",
+    "pattern",
+    "stack",
+    "structure",
+    "roadmap",
+    "changelog",
+    "issues",
+    "awesome-shadcn",
+    "claude-code",
+    "vibe-coding",
+    "benchmark",
+    "localhost",
+    "prompt"
+  ]
+}
