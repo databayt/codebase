@@ -2,96 +2,54 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { PageTree } from "fumadocs-core/server"
+
+import type { docsSource } from "@/lib/source"
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Top-level section navigation
-const TOP_LEVEL_SECTIONS = [
-  { name: "Get Started", href: "/docs" },
-  { name: "Components", href: "/docs/components" },
-  { name: "Operations", href: "/docs/operations" },
-  { name: "Contribute", href: "/docs/contribute" },
-  { name: "Business", href: "/docs/business" },
+// Flat list of links without sections - exactly like atoms sidebar
+const DOCS_LINKS = [
+  { name: "Introduction", href: "/docs" },
+  { name: "Installation", href: "/docs/installation" },
+  { name: "Architecture", href: "/docs/architecture" },
+  { name: "Pattern", href: "/docs/pattern" },
+  { name: "Stack", href: "/docs/stack" },
+  { name: "Structure", href: "/docs/structure" },
+  { name: "Roadmap", href: "/docs/roadmap" },
+  { name: "Changelog", href: "/docs/changelog" },
+  { name: "Issues", href: "/docs/issues" },
+  { name: "Claude Code", href: "/docs/claude-code" },
+  { name: "Vibe Coding", href: "/docs/vibe-coding" },
+  { name: "Authentication", href: "/docs/authantication" },
+  { name: "Internationalization", href: "/docs/internationalization" },
+  { name: "Domain", href: "/docs/domain" },
+  { name: "Table", href: "/docs/table" },
+  { name: "Onboarding", href: "/docs/onboarding" },
+  { name: "ESLint", href: "/docs/eslint" },
+  { name: "Prettier", href: "/docs/prettier" },
+  { name: "Community", href: "/docs/community" },
+  { name: "Code of Conduct", href: "/docs/code-of-conduct" },
+  { name: "Accordion", href: "/docs/accordion" },
+  { name: "Button", href: "/docs/button" },
+  { name: "Card", href: "/docs/card" },
+  { name: "Typography", href: "/docs/typography" },
+  { name: "Docs Factory", href: "/docs/docs-factory" },
+  { name: "Atoms Factory", href: "/docs/atoms-factory" },
+  { name: "Templates Factory", href: "/docs/templates-factory" },
 ]
 
-const EXCLUDED_SECTIONS: string[] = [] // Add any sections to exclude
-const EXCLUDED_PAGES: string[] = [] // Add any pages to exclude
-
-interface DocsSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  tree: PageTree
-}
-
-export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
+export function DocsSidebar({
+  tree,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { tree: typeof docsSource.pageTree }) {
   const pathname = usePathname()
-
-  // Function to render page tree items recursively
-  const renderPageTree = (items: typeof tree.children, level = 0) => {
-    return items.map((item) => {
-      if (EXCLUDED_SECTIONS.includes(item.type === 'folder' ? item.$id ?? "" : "")) {
-        return null
-      }
-
-      if (item.type === 'folder') {
-        return (
-          <SidebarGroup key={item.$id}>
-            <SidebarGroupLabel className="text-muted-foreground font-medium">
-              {item.name}
-            </SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu className="gap-0.5">
-                {item.children.map((page) => {
-                  if (page.type === 'page' && !EXCLUDED_PAGES.includes(page.url)) {
-                    return (
-                      <SidebarMenuItem key={page.url}>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={page.url === pathname}
-                          className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium"
-                        >
-                          <Link href={page.url}>{page.name}</Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    )
-                  }
-                  if (page.type === 'folder') {
-                    // Handle nested folders if needed
-                    return renderPageTree([page], level + 1)
-                  }
-                  return null
-                })}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )
-      }
-
-      if (item.type === 'page' && !EXCLUDED_PAGES.includes(item.url)) {
-        // Root-level pages
-        return (
-          <SidebarMenuItem key={item.url}>
-            <SidebarMenuButton
-              asChild
-              isActive={item.url === pathname}
-              className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium"
-            >
-              <Link href={item.url}>{item.name}</Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        )
-      }
-
-      return null
-    })
-  }
 
   return (
     <Sidebar
@@ -99,38 +57,29 @@ export function DocsSidebar({ tree, ...props }: DocsSidebarProps) {
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="no-scrollbar overflow-x-hidden px-2">
+      <SidebarContent className="no-scrollbar overflow-x-hidden">
         <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
-
-        {/* Top-level sections navigation */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground font-medium">
-            Sections
-          </SidebarGroupLabel>
+        <SidebarGroup className="px-0">
           <SidebarGroupContent>
             <SidebarMenu>
-              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
-                <SidebarMenuItem key={name}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={
-                      href === "/docs"
-                        ? pathname === href || pathname === "/en/docs" || pathname === "/ar/docs"
-                        : pathname.startsWith(href) || pathname.startsWith(`/en${href}`) || pathname.startsWith(`/ar${href}`)
-                    }
-                    className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium"
-                  >
-                    <Link href={href}>{name}</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {DOCS_LINKS.map(({ name, href }) => {
+                const isActive = pathname === href
+
+                return (
+                  <SidebarMenuItem key={href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-0"
+                    >
+                      <Link href={href}>{name}</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                )
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        {/* Dynamic page tree sections */}
-        {renderPageTree(tree.children)}
-
         <div className="from-background via-background/80 to-background/50 sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t blur-xs" />
       </SidebarContent>
     </Sidebar>
