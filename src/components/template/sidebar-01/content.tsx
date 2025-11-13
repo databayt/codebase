@@ -7,95 +7,76 @@ import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarHeader,
+  SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar
 } from "@/components/ui/sidebar"
 
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { docsConfig } from "./config"
-
-// Flatten the sidebar navigation to a single list
-function flattenSidebarNav(items: typeof docsConfig.sidebarNav) {
-  const flatItems: Array<{
-    title: string
-    href: string
-    isActive?: boolean
-  }> = []
-
-  items.forEach((section) => {
-    section.items.forEach((item) => {
-      if (item.href) {
-        flatItems.push({
-          title: item.title,
-          href: item.href,
-        })
-      }
-      // Add sub-items if they exist
-      if (item.items && item.items.length > 0) {
-        item.items.forEach((subItem) => {
-          if (subItem.href) {
-            flatItems.push({
-              title: subItem.title,
-              href: subItem.href,
-            })
-          }
-        })
-      }
-    })
-  })
-
-  return flatItems
-}
+// Flat list of links without sections - exactly like atoms sidebar
+const DOCS_LINKS = [
+  { name: "Introduction", href: "/docs" },
+  { name: "Installation", href: "/docs/installation" },
+  { name: "Architecture", href: "/docs/architecture" },
+  { name: "Pattern", href: "/docs/pattern" },
+  { name: "Stack", href: "/docs/stack" },
+  { name: "Structure", href: "/docs/structure" },
+  { name: "Roadmap", href: "/docs/roadmap" },
+  { name: "Changelog", href: "/docs/changelog" },
+  { name: "Issues", href: "/docs/issues" },
+  { name: "Claude Code", href: "/docs/claude-code" },
+  { name: "Vibe Coding", href: "/docs/vibe-coding" },
+  { name: "Authentication", href: "/docs/authantication" },
+  { name: "Internationalization", href: "/docs/internationalization" },
+  { name: "Domain", href: "/docs/domain" },
+  { name: "Table", href: "/docs/table" },
+  { name: "Onboarding", href: "/docs/onboarding" },
+  { name: "ESLint", href: "/docs/eslint" },
+  { name: "Prettier", href: "/docs/prettier" },
+  { name: "Community", href: "/docs/community" },
+  { name: "Code of Conduct", href: "/docs/code-of-conduct" },
+  { name: "Accordion", href: "/docs/accordion" },
+  { name: "Button", href: "/docs/button" },
+  { name: "Card", href: "/docs/card" },
+  { name: "Typography", href: "/docs/typography" },
+  { name: "Docs Factory", href: "/docs/docs-factory" },
+  { name: "Atoms Factory", href: "/docs/atoms-factory" },
+  { name: "Templates Factory", href: "/docs/templates-factory" },
+]
 
 export function DocsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
-  const { setOpenMobile } = useSidebar()
-  const flatNavItems = React.useMemo(() => flattenSidebarNav(docsConfig.sidebarNav), [])
-
-  const handleLinkClick = React.useCallback(() => {
-    setOpenMobile(false)
-  }, [setOpenMobile])
 
   return (
-    <Sidebar 
-      {...props} 
-      className="w-56 "
+    <Sidebar
+      className="sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--footer-height)-4rem)] overscroll-none bg-transparent lg:flex"
+      collapsible="none"
+      {...props}
     >
-      <SidebarHeader className=" ">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/docs" className="flex items-center" onClick={handleLinkClick}>
-                <div className="flex flex-col leading-none">
-                  <span className="text-base font-semibold text-foreground -ml-1">Documentation</span>
-                </div>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent className="border-0 bg-transparent">
-        <ScrollArea className="h-full">
-          <SidebarGroup className="">
-            <SidebarMenu className="space-y-1">
-              {flatNavItems.map((item) => {
-                const isActive = pathname === item.href
+      <SidebarContent className="no-scrollbar overflow-x-hidden">
+        <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
+        <SidebarGroup className="px-0">
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {DOCS_LINKS.map(({ name, href }) => {
+                const isActive = pathname === href
+
                 return (
-                  <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild isActive={isActive} size="default">
-                      <Link href={item.href} onClick={handleLinkClick}>
-                        {item.title}
-                      </Link>
+                  <SidebarMenuItem key={href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-0"
+                    >
+                      <Link href={href}>{name}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
               })}
             </SidebarMenu>
-          </SidebarGroup>
-        </ScrollArea>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <div className="from-background via-background/80 to-background/50 sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t blur-xs" />
       </SidebarContent>
     </Sidebar>
   )
