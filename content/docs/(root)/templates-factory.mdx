@@ -27,14 +27,19 @@ src/components/root/template/       # Template system core
 ├── config.ts                       # Template configurations
 ├── content.tsx                     # Server component container
 ├── hero.tsx                        # Hero section with PageHeader
-├── tabs.tsx                        # Category navigation tabs
+├── templates-nav.tsx               # Navigation matching BlocksNav
 ├── all.tsx                         # Template grid display
-├── template-display.tsx            # Template display wrapper
+├── template-display.tsx            # Template display with caching
 ├── template-viewer.tsx             # Complex viewer with context
 ├── registry.ts                     # Zod schemas
 ├── registry-templates.ts           # Template definitions
-├── registry-categories.ts          # Category definitions
 └── __registry__/                   # Generated registry index
+    ├── index.tsx                   # Registry export
+    └── __templates__.json          # Template metadata
+
+src/lib/                            # Helper functions
+├── categories.ts                   # Category definitions (moved from registry)
+└── templates.ts                    # Template helper functions (getAllTemplateIds, etc.)
 
 src/components/template/            # Individual template components
 ├── hero-01/                        # Hero section template
@@ -675,25 +680,27 @@ Submit templates via:
 
 ## Migration Status
 
-### Current State vs shadcn/ui Blocks
-The templates system is currently functional but needs alignment with shadcn/ui v4 blocks implementation to ensure consistency with the shadcn ecosystem.
+### ✅ Migration Complete: Templates Now Mirror shadcn/ui Blocks
+The templates system has been successfully migrated to mirror the shadcn/ui v4 blocks implementation pattern.
 
-#### What's Working
-✅ Template display and preview system
-✅ Category-based organization
-✅ Code syntax highlighting and copying
-✅ PageHeader and TabsNav components
-✅ Responsive design with theme support
+#### Completed Migration Tasks
+✅ **Navigation**: Renamed to `templates-nav.tsx` matching BlocksNav pattern
+✅ **Categories**: Moved to `lib/categories.ts` matching blocks structure
+✅ **Helper Functions**: Created `lib/templates.ts` with `getAllTemplateIds()` and `getAllTemplates()`
+✅ **Cache Optimization**: Added React.cache() wrappers for performance
+✅ **Static Exports**: Added `dynamic = "force-static"` and `revalidate = false`
+✅ **Category Routing**: Updated `[...categories]` page to use `getAllTemplateIds()`
+✅ **Container Classes**: Added `container-wrapper`, `section-soft`, and `border-grid`
+✅ **Metadata File**: Created `__templates__.json` matching `__blocks__.json` pattern
+✅ **Imports Updated**: All imports now use new locations
 
-#### Migration Requirements
-To truly mirror shadcn/ui blocks:
-1. **Study the source**: Analyze `apps/v4/app/(app)/blocks/` implementation
-2. **Match routing patterns**: Align with exact blocks routing structure
-3. **Registry compatibility**: Ensure registry format matches blocks
-4. **Preview consistency**: Use same preview mechanisms as blocks
-5. **File organization**: Mirror blocks file and folder structure
-
-> **Important**: The migration should be based on the actual shadcn/ui v4 blocks source code, not assumptions. Each change should directly correspond to a pattern found in the blocks implementation.
+#### What's Preserved (As Requested)
+✅ Current page structure (no layout.tsx changes)
+✅ Hero component in content.tsx
+✅ PageHeader atom component
+✅ Current routing structure `[...categories]`
+✅ TemplateViewer with iframe approach
+✅ Theme system and styling
 
 ## Resources
 

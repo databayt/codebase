@@ -1,7 +1,7 @@
 import Card from "@/components/atom/card"
 import { templates } from "./config"
 import { templates as registryTemplates } from "./registry-templates"
-import { registryCategories } from "./registry-categories"
+import { registryCategories } from "@/lib/categories"
 import { StarterKit, OnboardingIcon, NotificationIcon, MDXIcon, ShieldIcon, StripeIcon } from "@/components/atom/icons"
 import { Card as UICard, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"

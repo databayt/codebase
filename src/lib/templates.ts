@@ -1,17 +1,10 @@
+"use server"
+
 import { cache } from "react"
 import { promises as fs } from "fs"
 import path from "path"
 import { z } from "zod"
 import { registryItemSchema } from "@/components/root/template/registry"
-
-// Import the generated index (will be available after build)
-let Index: Record<string, Record<string, any>> = {}
-try {
-  // @ts-ignore - Generated file
-  Index = require("@/__registry__/index").Index
-} catch {
-  // Registry not built yet
-}
 
 export type RegistryItem = z.infer<typeof registryItemSchema>
 
@@ -19,81 +12,62 @@ export interface Template extends RegistryItem {
   style?: string
 }
 
-// Cache template fetching for better performance
-export const getAllTemplateIds = cache(
-  async (
-    types: string[] = ["registry:template"],
-    categories: string[] = []
-  ): Promise<string[]> => {
-    const templateIds = new Set<string>()
+export async function getAllTemplateIds(
+  types: z.infer<typeof registryItemSchema>["type"][] = [
+    "registry:template",
+  ],
+  categories: string[] = []
+): Promise<string[]> {
+  const templates = await getAllTemplates(types, categories)
 
-    // Get templates from all styles
-    for (const style of Object.keys(Index)) {
-      for (const [name, template] of Object.entries(Index[style])) {
-        // Filter by type
-        if (types.length > 0 && !types.includes(template.type)) {
-          continue
-        }
+  return templates.map((template) => template.name)
+}
 
-        // Filter by categories
-        if (categories.length > 0) {
-          const hasCategory = categories.some((cat) =>
-            template.categories?.includes(cat)
-          )
-          if (!hasCategory) {
-            continue
-          }
-        }
+export async function getAllTemplates(
+  types: z.infer<typeof registryItemSchema>["type"][] = [
+    "registry:template",
+  ],
+  categories: string[] = []
+) {
+  const { Index } = await import("@/__registry__/index")
 
-        templateIds.add(name)
+  // Collect all templates from all styles.
+  const allTemplates: z.infer<typeof registryItemSchema>[] = []
+
+  for (const style in Index) {
+    const styleIndex = Index[style]
+    if (typeof styleIndex === "object" && styleIndex !== null) {
+      for (const itemName in styleIndex) {
+        const item = styleIndex[itemName]
+        allTemplates.push(item)
       }
     }
-
-    return Array.from(templateIds).sort()
   }
-)
 
-// Get all templates with full metadata
-export const getAllTemplates = cache(
-  async (
-    types: string[] = ["registry:template"],
-    categories: string[] = []
-  ): Promise<Template[]> => {
-    const templates: Template[] = []
+  // Validate each template.
+  const validatedTemplates = allTemplates
+    .map((template) => {
+      const result = registryItemSchema.safeParse(template)
+      return result.success ? result.data : null
+    })
+    .filter(
+      (template): template is z.infer<typeof registryItemSchema> => template !== null
+    )
 
-    // Get templates from all styles
-    for (const style of Object.keys(Index)) {
-      for (const [name, template] of Object.entries(Index[style])) {
-        // Filter by type
-        if (types.length > 0 && !types.includes(template.type)) {
-          continue
-        }
-
-        // Filter by categories
-        if (categories.length > 0) {
-          const hasCategory = categories.some((cat) =>
-            template.categories?.includes(cat)
-          )
-          if (!hasCategory) {
-            continue
-          }
-        }
-
-        templates.push({
-          ...template,
-          style,
-        })
-      }
-    }
-
-    return templates
-  }
-)
+  return validatedTemplates.filter(
+    (template) =>
+      types.includes(template.type) &&
+      (categories.length === 0 ||
+        template.categories?.some((category) => categories.includes(category)))
+  )
+}
 
 // Get a specific template by name
 export const getTemplate = cache(
-  async (name: string, style = "default"): Promise<Template | null> => {
+  async (name: string, style = "new-york"): Promise<Template | null> => {
     try {
+      const { Index } = await import("@/__registry__/index")
+
       // First try the requested style
       if (Index[style] && Index[style][name]) {
         return {
@@ -154,9 +128,9 @@ export interface FileTreeNode {
   children?: FileTreeNode[]
 }
 
-export function createFileTreeFromFiles(
+export async function createFileTreeFromFiles(
   files: Array<{ path: string; type?: string; target?: string }>
-): FileTreeNode[] {
+): Promise<FileTreeNode[]> {
   const root: { [key: string]: FileTreeNode } = {}
 
   files.forEach((file) => {

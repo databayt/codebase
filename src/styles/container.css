@@ -83,6 +83,21 @@
     @apply w-full px-4 sm:px-6 lg:px-8;
   }
 
+  /* shadcn/ui blocks pattern containers */
+  .container-wrapper {
+    @apply w-full px-4 sm:px-6 md:px-8;
+  }
+
+  /* Section soft spacing for blocks */
+  .section-soft {
+    @apply py-8 sm:py-12 lg:py-16;
+  }
+
+  /* Border grid pattern */
+  .border-grid {
+    @apply border-b border-border;
+  }
+
   /* Section container with vertical spacing */
   .container-section {
     @apply container py-12 sm:py-16 lg:py-20;

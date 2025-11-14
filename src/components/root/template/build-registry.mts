@@ -14,7 +14,7 @@ import { z } from "zod"
 
 import { registry } from "./index"
 import { baseColors, baseColorsV4 } from "./registry-base-colors"
-import { registryCategories } from "./registry-categories"
+import { registryCategories } from "@/lib/categories"
 import { colorMapping, colors } from "./registry-colors"
 import { iconLibraries, icons } from "./registry-icons"
 import { styles } from "./registry-styles"
@@ -258,11 +258,11 @@ export const Index: Record<string, any> = {
         const filePath = `registry/${style.name}/${
           typeof file === "string" ? file : file.path
         }`
-        const resolvedFilePath = path.resolve(filePath)
+        const resolvedFilePath = path.resolve(filePath).replace(/\\/g, '/')
         return typeof file === "string"
           ? `"${resolvedFilePath}"`
           : `{
-        path: "${filePath}",
+        path: "${filePath.replace(/\\/g, '/')}",
         type: "${file.type}",
         target: "${file.target ?? ""}"
       }`

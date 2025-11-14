@@ -1,0 +1,77 @@
+[
+  {
+    "name": "login-01",
+    "description": "A simple login page with email and password.",
+    "categories": ["authentication", "login"]
+  },
+  {
+    "name": "hero-01",
+    "description": "A hero section with heading, description and CTA buttons.",
+    "categories": ["hero", "landing", "marketing"]
+  },
+  {
+    "name": "sidebar-01",
+    "description": "A simple sidebar with navigation grouped by section.",
+    "categories": ["sidebar", "navigation", "dashboard"]
+  },
+  {
+    "name": "header-01",
+    "description": "A header with logo, navigation menu and user actions.",
+    "categories": ["header", "navigation"]
+  },
+  {
+    "name": "footer-01",
+    "description": "A footer with company info, links and social media.",
+    "categories": ["footer", "navigation"]
+  },
+  {
+    "name": "dashboard-01",
+    "description": "A dashboard with sidebar, charts and data table.",
+    "categories": ["dashboard"]
+  },
+  {
+    "name": "pricing-01",
+    "description": "A pricing section with multiple tiers and features.",
+    "categories": ["pricing", "marketing", "landing"]
+  },
+  {
+    "name": "testimonial-01",
+    "description": "A testimonial section with customer quotes.",
+    "categories": ["testimonial", "marketing", "landing"]
+  },
+  {
+    "name": "feature-01",
+    "description": "A feature section with icons and descriptions.",
+    "categories": ["feature", "marketing", "landing"]
+  },
+  {
+    "name": "contact-01",
+    "description": "A contact form with fields and submission.",
+    "categories": ["contact", "forms"]
+  },
+  {
+    "name": "blog-01",
+    "description": "A blog listing with cards and pagination.",
+    "categories": ["blog", "content"]
+  },
+  {
+    "name": "portfolio-01",
+    "description": "A portfolio grid with project cards.",
+    "categories": ["portfolio", "gallery"]
+  },
+  {
+    "name": "team-01",
+    "description": "A team section with member cards.",
+    "categories": ["team", "about"]
+  },
+  {
+    "name": "cta-01",
+    "description": "A call-to-action section with heading and button.",
+    "categories": ["cta", "marketing", "landing"]
+  },
+  {
+    "name": "faq-01",
+    "description": "A FAQ section with expandable questions.",
+    "categories": ["faq", "support"]
+  }
+]

@@ -1,5 +1,5 @@
 import Hero from './hero';
-import TemplateTabs from './tabs';
+import { TemplatesNav } from './templates-nav';
 import TemplatesPage from './all';
 import { FEATURED_TEMPLATES } from './config';
 import { TemplateDisplay } from './template-display';
@@ -28,7 +28,11 @@ export default function TemplateContent({ dictionary, params }: TemplateContentP
     return (
         <>
             <Hero dictionary={dictionary} params={params} />
-            <TemplateTabs templateLabels={templateLabels} />
+            <div className="py-3 border-b-[0.5px]">
+                <div className="rtl:text-right">
+                    <TemplatesNav />
+                </div>
+            </div>
 
             <div>
                 {FEATURED_TEMPLATES.map((template) => (

@@ -10,9 +10,14 @@ import {
 import { getTemplate, createFileTreeFromFiles } from "@/lib/templates"
 import { TemplateViewer } from "./template-viewer"
 
-export async function TemplateDisplay({ name, style = "default" }: { name: string; style?: string }) {
-    // Try to get from template registry first, fallback to general registry
-    const item = await getTemplate(name, style) || await getRegistryItem(name)
+export async function TemplateDisplay({
+  name,
+  styleName = "new-york"
+}: {
+  name: string
+  styleName?: string
+}) {
+    const item = await getCachedRegistryItem(name, styleName)
 
     if (!item?.files) {
         return null
@@ -33,9 +38,16 @@ export async function TemplateDisplay({ name, style = "default" }: { name: strin
             item={serializedItem}
             tree={serializedTree}
             highlightedFiles={serializedFiles}
+            styleName={styleName}
         />
     )
 }
+
+const getCachedRegistryItem = React.cache(
+    async (name: string, styleName: string) => {
+        return await getTemplate(name, styleName) || await getRegistryItem(name)
+    }
+)
 
 const getCachedFileTree = React.cache(
     async (files: Array<{ path: string; target?: string }>) => {
