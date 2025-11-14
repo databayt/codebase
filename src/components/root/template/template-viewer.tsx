@@ -137,7 +137,7 @@ function TemplateViewerToolbar() {
     const { copyToClipboard, isCopied } = useCopyToClipboard()
 
     return (
-        <div className="flex w-full items-center gap-2 pl-2 md:pr-6">
+        <div className="flex w-full items-center gap-2">
             <Tabs
                 defaultValue="preview"
                 onValueChange={(value) => setView(value as "preview" | "code")}

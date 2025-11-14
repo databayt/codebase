@@ -26,46 +26,43 @@ export function PageHeader({
   ...props
 }: PageHeaderProps) {
   return (
-    <section className={cn("border-grid", className)} {...props}>
-      <div className="container-wrapper">
-        <div className="container flex flex-col items-center gap-2 py-8 text-center md:py-16 lg:py-20 xl:gap-4">
-          {announcement && (
-            <div className={cn(announcementClassName)}>
-              {announcement}
-            </div>
-          )}
-          {heading && (
-            <h1
-              className={cn(
-                "text-primary leading-tighter max-w-2xl text-4xl font-semibold tracking-tight text-balance lg:leading-[1.1] lg:font-semibold xl:text-5xl xl:tracking-tighter",
-                headingClassName
-              )}
-            >
-              {heading}
-            </h1>
-          )}
-          {description && (
-            <p
-              className={cn(
-                "text-foreground max-w-3xl text-base text-balance sm:text-lg",
-                descriptionClassName
-              )}
-            >
-              {description}
-            </p>
-          )}
-          {actions && (
-            <div
-              className={cn(
-                "flex w-full items-center justify-center gap-2 pt-2 **:data-[slot=button]:shadow-none",
-                actionsClassName
-              )}
-            >
-              {actions}
-            </div>
-          )}
-          {children}
-        </div>
+    <section className={cn(className)} {...props}>
+      <div className="flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12">
+        {announcement && (
+          <div className={cn(announcementClassName)}>
+            {announcement}
+          </div>
+        )}
+        {heading && (
+          <h2
+            className={cn(
+              headingClassName
+            )}
+          >
+            {heading}
+          </h2>
+        )}
+        {description && (
+          <p
+            className={cn(
+              "max-w-2xl text-balance text-base font-light text-foreground leading-7 sm:text-lg ",
+              descriptionClassName
+            )}
+          >
+            {description}
+          </p>
+        )}
+        {actions && (
+          <div
+            className={cn(
+              "flex w-full items-center justify-start gap-2 pt-2",
+              actionsClassName
+            )}
+          >
+            {actions}
+          </div>
+        )}
+        {children}
       </div>
     </section>
   )
