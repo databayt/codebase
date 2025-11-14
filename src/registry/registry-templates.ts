@@ -139,55 +139,6 @@ export const templates: Registry = [
     }
   },
   {
-    name: "leads-01",
-    description: "Lead management interface with forms, cards, and analytics",
-    type: "registry:template",
-    dependencies: ["react-hook-form", "zod", "@hookform/resolvers", "@tanstack/react-table"],
-    registryDependencies: [
-      "button",
-      "card",
-      "input",
-      "label",
-      "form",
-      "table",
-      "tabs",
-      "badge",
-      "dialog",
-      "select",
-      "textarea"
-    ],
-    files: [
-      {
-        path: "templates/leads-01/page.tsx",
-        type: "registry:page"
-      },
-      {
-        path: "templates/leads-01/components/content.tsx",
-        type: "registry:component"
-      },
-      {
-        path: "templates/leads-01/components/form.tsx",
-        type: "registry:component"
-      },
-      {
-        path: "templates/leads-01/components/card.tsx",
-        type: "registry:component"
-      },
-      {
-        path: "templates/leads-01/components/all.tsx",
-        type: "registry:component"
-      },
-      {
-        path: "templates/leads-01/components/featured.tsx",
-        type: "registry:component"
-      }
-    ],
-    categories: ["dashboard"],
-    meta: {
-      iframeHeight: "900px"
-    }
-  },
-  {
     name: "hero-01",
     description: "Landing page hero section with CTA and gradient background",
     type: "registry:template",
@@ -272,58 +223,6 @@ export const templates: Registry = [
     categories: ["sidebar", "dashboard"],
     meta: {
       iframeHeight: "900px"
-    }
-  },
-  {
-    name: "login-03",
-    description: "A login page with a muted background color",
-    type: "registry:template",
-    dependencies: [],
-    registryDependencies: [
-      "button",
-      "card",
-      "input",
-      "label"
-    ],
-    files: [
-      {
-        path: "templates/login-03/page.tsx",
-        type: "registry:page"
-      },
-      {
-        path: "templates/login-03/components/login-form.tsx",
-        type: "registry:component"
-      }
-    ],
-    categories: ["authentication", "login"],
-    meta: {
-      iframeHeight: "600px"
-    }
-  },
-  {
-    name: "login-04",
-    description: "A login page with form and image",
-    type: "registry:template",
-    dependencies: [],
-    registryDependencies: [
-      "button",
-      "card",
-      "input",
-      "label"
-    ],
-    files: [
-      {
-        path: "templates/login-04/page.tsx",
-        type: "registry:page"
-      },
-      {
-        path: "templates/login-04/components/login-form.tsx",
-        type: "registry:component"
-      }
-    ],
-    categories: ["authentication", "login"],
-    meta: {
-      iframeHeight: "600px"
     }
   }
 ]

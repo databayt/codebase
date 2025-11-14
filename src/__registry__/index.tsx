@@ -106,45 +106,6 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
-    "leads-01": {
-      "name": "leads-01",
-      "description": "Lead management interface with forms, cards, and analytics",
-      "type": "registry:template",
-      "component": React.lazy(() => import("@/registry/default/templates/leads-01/page")),
-      "files": [
-        "registry/default/templates/leads-01/page.tsx",
-        "registry/default/templates/leads-01/components/content.tsx",
-        "registry/default/templates/leads-01/components/form.tsx",
-        "registry/default/templates/leads-01/components/card.tsx",
-        "registry/default/templates/leads-01/components/all.tsx",
-        "registry/default/templates/leads-01/components/featured.tsx"
-      ],
-      "dependencies": [
-        "react-hook-form",
-        "zod",
-        "@hookform/resolvers",
-        "@tanstack/react-table"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label",
-        "form",
-        "table",
-        "tabs",
-        "badge",
-        "dialog",
-        "select",
-        "textarea"
-      ],
-      "categories": [
-        "dashboard"
-      ],
-      "meta": {
-        "iframeHeight": "900px"
-      }
-    },
     "hero-01": {
       "name": "hero-01",
       "description": "Landing page hero section with CTA and gradient background",
@@ -216,54 +177,6 @@ export const Index: Record<string, any> = {
       ],
       "meta": {
         "iframeHeight": "900px"
-      }
-    },
-    "login-03": {
-      "name": "login-03",
-      "description": "A login page with a muted background color",
-      "type": "registry:template",
-      "component": React.lazy(() => import("@/registry/default/templates/login-03/page")),
-      "files": [
-        "registry/default/templates/login-03/page.tsx",
-        "registry/default/templates/login-03/components/login-form.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label"
-      ],
-      "categories": [
-        "authentication",
-        "login"
-      ],
-      "meta": {
-        "iframeHeight": "600px"
-      }
-    },
-    "login-04": {
-      "name": "login-04",
-      "description": "A login page with form and image",
-      "type": "registry:template",
-      "component": React.lazy(() => import("@/registry/default/templates/login-04/page")),
-      "files": [
-        "registry/default/templates/login-04/page.tsx",
-        "registry/default/templates/login-04/components/login-form.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label"
-      ],
-      "categories": [
-        "authentication",
-        "login"
-      ],
-      "meta": {
-        "iframeHeight": "600px"
       }
     },
     "activity-goal": {
@@ -1121,45 +1034,6 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
-    "leads-01": {
-      "name": "leads-01",
-      "description": "Lead management interface with forms, cards, and analytics",
-      "type": "registry:template",
-      "component": React.lazy(() => import("@/registry/new-york/templates/leads-01/page")),
-      "files": [
-        "registry/new-york/templates/leads-01/page.tsx",
-        "registry/new-york/templates/leads-01/components/content.tsx",
-        "registry/new-york/templates/leads-01/components/form.tsx",
-        "registry/new-york/templates/leads-01/components/card.tsx",
-        "registry/new-york/templates/leads-01/components/all.tsx",
-        "registry/new-york/templates/leads-01/components/featured.tsx"
-      ],
-      "dependencies": [
-        "react-hook-form",
-        "zod",
-        "@hookform/resolvers",
-        "@tanstack/react-table"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label",
-        "form",
-        "table",
-        "tabs",
-        "badge",
-        "dialog",
-        "select",
-        "textarea"
-      ],
-      "categories": [
-        "dashboard"
-      ],
-      "meta": {
-        "iframeHeight": "900px"
-      }
-    },
     "hero-01": {
       "name": "hero-01",
       "description": "Landing page hero section with CTA and gradient background",
@@ -1231,54 +1105,6 @@ export const Index: Record<string, any> = {
       ],
       "meta": {
         "iframeHeight": "900px"
-      }
-    },
-    "login-03": {
-      "name": "login-03",
-      "description": "A login page with a muted background color",
-      "type": "registry:template",
-      "component": React.lazy(() => import("@/registry/new-york/templates/login-03/page")),
-      "files": [
-        "registry/new-york/templates/login-03/page.tsx",
-        "registry/new-york/templates/login-03/components/login-form.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label"
-      ],
-      "categories": [
-        "authentication",
-        "login"
-      ],
-      "meta": {
-        "iframeHeight": "600px"
-      }
-    },
-    "login-04": {
-      "name": "login-04",
-      "description": "A login page with form and image",
-      "type": "registry:template",
-      "component": React.lazy(() => import("@/registry/new-york/templates/login-04/page")),
-      "files": [
-        "registry/new-york/templates/login-04/page.tsx",
-        "registry/new-york/templates/login-04/components/login-form.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label"
-      ],
-      "categories": [
-        "authentication",
-        "login"
-      ],
-      "meta": {
-        "iframeHeight": "600px"
       }
     },
     "activity-goal": {
