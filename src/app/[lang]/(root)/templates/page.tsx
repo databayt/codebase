@@ -1,7 +1,9 @@
 
-import TemplateContent from "@/components/root/template/content";
-import { getDictionary } from "@/components/local/dictionaries";
-import { type Locale } from "@/components/local/config";
+import Link from "next/link"
+
+import { TemplateDisplay } from "@/components/root/template/template-display"
+import { Button } from "@/components/ui/button"
+import { type Locale } from "@/components/local/config"
 
 export const dynamic = "force-static"
 export const revalidate = false
@@ -11,10 +13,10 @@ export const metadata = {
 }
 
 const FEATURED_TEMPLATES = [
+  "dashboard-01",
+  "sidebar-01",
   "login-01",
   "hero-01",
-  "sidebar-01",
-  "header-01",
   "footer-01",
 ]
 
@@ -24,7 +26,20 @@ interface TemplatePageProps {
 
 export default async function Templates({ params }: TemplatePageProps) {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang);
+  const activeStyle = "new-york" // You can implement getActiveStyle() if needed
 
-  return <TemplateContent dictionary={dictionary} params={{ lang }} />;
+  return (
+    <div className="flex flex-col gap-12 md:gap-24">
+      {FEATURED_TEMPLATES.map((name) => (
+        <TemplateDisplay name={name} key={name} styleName={activeStyle} />
+      ))}
+      <div className="container-wrapper">
+        <div className="container flex justify-center py-6">
+          <Button asChild variant="outline">
+            <Link href={`/${lang}/templates/sidebar`}>Browse more templates</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
 }
