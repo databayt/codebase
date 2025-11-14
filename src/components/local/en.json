@@ -94,7 +94,7 @@
     "components": "Components"
   },
   "micropage": {
-    "heading": "Micro Components",
+    "heading": "Minimal micro services",
     "description": "Small, focused components for specific tasks. Lightweight and reusable. Perfect for micro-interactions."
   },
   "micro": {
@@ -111,7 +111,7 @@
     "components": "Micro Components"
   },
   "vibepage": {
-    "heading": "Design Vibes",
+    "heading": "Vibe coding made easy",
     "description": "Beautiful design patterns and visual styles. Capture the perfect aesthetic for your project."
   },
   "vibe": {
