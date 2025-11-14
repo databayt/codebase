@@ -10,9 +10,9 @@ export function TemplatesNav() {
   const pathname = usePathname()
 
   return (
-    <div className="relative overflow-hidden">
-      <ScrollArea className="max-w-none">
-        <div className="flex items-center">
+    <div className="relative">
+      <ScrollArea className="max-w-[600px] lg:max-w-none">
+        <nav className="flex items-center gap-2 rtl:flex-row-reverse">
           <TemplatesNavLink
             category={{ name: "Featured", slug: "", hidden: false }}
             isActive={pathname === "/templates" || pathname === "/en/templates" || pathname === "/ar/templates"}
@@ -28,7 +28,7 @@ export function TemplatesNav() {
               }
             />
           ))}
-        </div>
+        </nav>
         <ScrollBar orientation="horizontal" className="invisible" />
       </ScrollArea>
     </div>
@@ -53,10 +53,10 @@ function TemplatesNavLink({
     <Link
       href={`/${lang}/templates/${category.slug}`}
       key={category.slug}
-      className="text-muted-foreground hover:text-primary data-[active=true]:text-primary flex h-7 items-center justify-center px-4 text-center text-base font-medium transition-colors"
+      className="flex h-7 items-center justify-center rounded-full px-4 text-center transition-colors hover:text-primary data-[active=true]:bg-muted data-[active=true]:text-primary"
       data-active={isActive}
     >
-      {category.name}
+      <h6>{category.name}</h6>
     </Link>
   )
 }
