@@ -4,14 +4,20 @@ export const Index: Record<string, any> = {
   "default": {
     "dashboard-01": {
       "name": "dashboard-01",
-      "description": "Analytics dashboard with sidebar navigation, data tables, and charts",
+      "description": "A dashboard with sidebar, charts and data table.",
       "type": "registry:template",
       "component": React.lazy(() => import("@/registry/default/templates/dashboard-01/page")),
       "files": [
         "registry/default/templates/dashboard-01/page.tsx",
-        "registry/default/templates/dashboard-01/components/header.tsx",
-        "registry/default/templates/dashboard-01/components/overview.tsx",
-        "registry/default/templates/dashboard-01/components/recent-sales.tsx",
+        "registry/default/templates/dashboard-01/components/app-sidebar.tsx",
+        "registry/default/templates/dashboard-01/components/chart-area-interactive.tsx",
+        "registry/default/templates/dashboard-01/components/data-table.tsx",
+        "registry/default/templates/dashboard-01/components/nav-documents.tsx",
+        "registry/default/templates/dashboard-01/components/nav-main.tsx",
+        "registry/default/templates/dashboard-01/components/nav-secondary.tsx",
+        "registry/default/templates/dashboard-01/components/nav-user.tsx",
+        "registry/default/templates/dashboard-01/components/section-cards.tsx",
+        "registry/default/templates/dashboard-01/components/site-header.tsx",
         "registry/default/templates/dashboard-01/data.json"
       ],
       "dependencies": [
@@ -1013,14 +1019,20 @@ export const Index: Record<string, any> = {
   "new-york": {
     "dashboard-01": {
       "name": "dashboard-01",
-      "description": "Analytics dashboard with sidebar navigation, data tables, and charts",
+      "description": "A dashboard with sidebar, charts and data table.",
       "type": "registry:template",
       "component": React.lazy(() => import("@/registry/new-york/templates/dashboard-01/page")),
       "files": [
         "registry/new-york/templates/dashboard-01/page.tsx",
-        "registry/new-york/templates/dashboard-01/components/header.tsx",
-        "registry/new-york/templates/dashboard-01/components/overview.tsx",
-        "registry/new-york/templates/dashboard-01/components/recent-sales.tsx",
+        "registry/new-york/templates/dashboard-01/components/app-sidebar.tsx",
+        "registry/new-york/templates/dashboard-01/components/chart-area-interactive.tsx",
+        "registry/new-york/templates/dashboard-01/components/data-table.tsx",
+        "registry/new-york/templates/dashboard-01/components/nav-documents.tsx",
+        "registry/new-york/templates/dashboard-01/components/nav-main.tsx",
+        "registry/new-york/templates/dashboard-01/components/nav-secondary.tsx",
+        "registry/new-york/templates/dashboard-01/components/nav-user.tsx",
+        "registry/new-york/templates/dashboard-01/components/section-cards.tsx",
+        "registry/new-york/templates/dashboard-01/components/site-header.tsx",
         "registry/new-york/templates/dashboard-01/data.json"
       ],
       "dependencies": [

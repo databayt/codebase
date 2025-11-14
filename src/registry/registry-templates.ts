@@ -3,7 +3,7 @@ import { Registry } from "./schema"
 export const templates: Registry = [
   {
     name: "dashboard-01",
-    description: "Analytics dashboard with sidebar navigation, data tables, and charts",
+    description: "A dashboard with sidebar, charts and data table.",
     type: "registry:template",
     dependencies: ["@tanstack/react-table", "recharts", "date-fns"],
     registryDependencies: [
@@ -27,15 +27,39 @@ export const templates: Registry = [
         type: "registry:page"
       },
       {
-        path: "templates/dashboard-01/components/header.tsx",
+        path: "templates/dashboard-01/components/app-sidebar.tsx",
         type: "registry:component"
       },
       {
-        path: "templates/dashboard-01/components/overview.tsx",
+        path: "templates/dashboard-01/components/chart-area-interactive.tsx",
         type: "registry:component"
       },
       {
-        path: "templates/dashboard-01/components/recent-sales.tsx",
+        path: "templates/dashboard-01/components/data-table.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/dashboard-01/components/nav-documents.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/dashboard-01/components/nav-main.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/dashboard-01/components/nav-secondary.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/dashboard-01/components/nav-user.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/dashboard-01/components/section-cards.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/dashboard-01/components/site-header.tsx",
         type: "registry:component"
       },
       {
