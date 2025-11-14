@@ -145,10 +145,4 @@
   }
 }
 
-@utility container {
-  @apply mx-auto max-w-[1400px] px-4 lg:px-8;
-
-  @media (width >= --theme(--breakpoint-3xl)) {
-    max-width: --theme(--breakpoint-2xl);
-  }
-}
+/* Container utility removed - using central definition from src/styles/container.css */
