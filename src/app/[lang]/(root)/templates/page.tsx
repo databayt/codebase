@@ -16,8 +16,8 @@ const FEATURED_TEMPLATES = [
   "dashboard-01",  // A dashboard with sidebar, charts and data table
   "sidebar-07",    // A sidebar that collapses to icons
   "sidebar-03",    // A sidebar with submenus
-  "login-03",      // A login page with a muted background color
-  "login-04",      // A login page with form and image
+  "sidebar-01",    // Collapsible sidebar with multi-level navigation
+  "login-01",      // Modern login form with social authentication
 ]
 
 interface TemplatePageProps {
