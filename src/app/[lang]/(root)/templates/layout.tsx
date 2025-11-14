@@ -30,8 +30,8 @@ export default async function TemplatesLayout({
   return (
     <>
       <Hero dictionary={dictionary} params={{ lang }} />
-      <div className="sticky top-16 z-40 w-full border-b bg-background">
-        <div className="container flex items-center justify-between py-4">
+      <div className="container-wrapper sticky top-16 z-40 w-full border-b bg-background scroll-mt-24">
+        <div className="container flex items-center justify-between gap-4 py-4">
           <TemplatesNav />
           <Button
             asChild
