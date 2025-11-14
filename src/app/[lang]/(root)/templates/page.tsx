@@ -13,10 +13,10 @@ export const metadata = {
 }
 
 const FEATURED_TEMPLATES = [
-  "dashboard-01",
-  "sidebar-01",
+  "sidebar-01",  // Dashboard with sidebar (closest to shadcn's dashboard-01)
   "login-01",
   "hero-01",
+  "header-01",
   "footer-01",
 ]
 
@@ -26,7 +26,7 @@ interface TemplatePageProps {
 
 export default async function Templates({ params }: TemplatePageProps) {
   const { lang } = await params;
-  const activeStyle = "new-york" // You can implement getActiveStyle() if needed
+  const activeStyle = "default" // Using default style as templates are in default folder
 
   return (
     <div className="flex flex-col gap-12 md:gap-24">

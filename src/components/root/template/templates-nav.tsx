@@ -46,9 +46,12 @@ function TemplatesNavLink({
     return null
   }
 
+  const pathname = usePathname()
+  const lang = pathname.split('/')[1] || 'en'
+
   return (
     <Link
-      href={`/templates/${category.slug}`}
+      href={`/${lang}/templates/${category.slug}`}
       key={category.slug}
       className="text-muted-foreground hover:text-primary data-[active=true]:text-primary flex h-7 items-center justify-center px-4 text-center text-base font-medium transition-colors"
       data-active={isActive}
