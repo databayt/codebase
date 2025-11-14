@@ -158,6 +158,108 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
+    "sidebar-03": {
+      "name": "sidebar-03",
+      "description": "A sidebar with submenus",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-03/page")),
+      "files": [
+        "registry/default/templates/sidebar-03/page.tsx",
+        "registry/default/templates/sidebar-03/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-07": {
+      "name": "sidebar-07",
+      "description": "A sidebar that collapses to icons",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-07/page")),
+      "files": [
+        "registry/default/templates/sidebar-07/page.tsx",
+        "registry/default/templates/sidebar-07/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-07/components/nav-main.tsx",
+        "registry/default/templates/sidebar-07/components/nav-projects.tsx",
+        "registry/default/templates/sidebar-07/components/nav-user.tsx",
+        "registry/default/templates/sidebar-07/components/team-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "login-03": {
+      "name": "login-03",
+      "description": "A login page with a muted background color",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/login-03/page")),
+      "files": [
+        "registry/default/templates/login-03/page.tsx",
+        "registry/default/templates/login-03/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "login-04": {
+      "name": "login-04",
+      "description": "A login page with form and image",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/login-04/page")),
+      "files": [
+        "registry/default/templates/login-04/page.tsx",
+        "registry/default/templates/login-04/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
     "activity-goal": {
       "name": "activity-goal",
       "description": "Activity goal tracking card with chart visualization",
@@ -1060,6 +1162,108 @@ export const Index: Record<string, any> = {
       ],
       "categories": [
         "hero"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "sidebar-03": {
+      "name": "sidebar-03",
+      "description": "A sidebar with submenus",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-03/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-03/page.tsx",
+        "registry/new-york/templates/sidebar-03/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-07": {
+      "name": "sidebar-07",
+      "description": "A sidebar that collapses to icons",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-07/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-07/page.tsx",
+        "registry/new-york/templates/sidebar-07/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-07/components/nav-main.tsx",
+        "registry/new-york/templates/sidebar-07/components/nav-projects.tsx",
+        "registry/new-york/templates/sidebar-07/components/nav-user.tsx",
+        "registry/new-york/templates/sidebar-07/components/team-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "login-03": {
+      "name": "login-03",
+      "description": "A login page with a muted background color",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/login-03/page")),
+      "files": [
+        "registry/new-york/templates/login-03/page.tsx",
+        "registry/new-york/templates/login-03/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "login-04": {
+      "name": "login-04",
+      "description": "A login page with form and image",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/login-04/page")),
+      "files": [
+        "registry/new-york/templates/login-04/page.tsx",
+        "registry/new-york/templates/login-04/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
       ],
       "meta": {
         "iframeHeight": "600px"

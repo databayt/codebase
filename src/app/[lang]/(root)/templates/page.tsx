@@ -13,11 +13,11 @@ export const metadata = {
 }
 
 const FEATURED_TEMPLATES = [
-  "sidebar-01",  // Dashboard with sidebar (closest to shadcn's dashboard-01)
-  "login-01",
-  "hero-01",
-  "header-01",
-  "footer-01",
+  "dashboard-01",  // A dashboard with sidebar, charts and data table
+  "sidebar-07",    // A sidebar that collapses to icons
+  "sidebar-03",    // A sidebar with submenus
+  "login-03",      // A login page with a muted background color
+  "login-04",      // A login page with form and image
 ]
 
 interface TemplatePageProps {

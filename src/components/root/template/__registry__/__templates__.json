@@ -5,6 +5,16 @@
     "categories": ["authentication", "login"]
   },
   {
+    "name": "login-03",
+    "description": "A login page with a muted background color.",
+    "categories": ["authentication", "login"]
+  },
+  {
+    "name": "login-04",
+    "description": "A login page with form and image.",
+    "categories": ["authentication", "login"]
+  },
+  {
     "name": "hero-01",
     "description": "A hero section with heading, description and CTA buttons.",
     "categories": ["hero", "landing", "marketing"]
@@ -13,6 +23,16 @@
     "name": "sidebar-01",
     "description": "A simple sidebar with navigation grouped by section.",
     "categories": ["sidebar", "navigation", "dashboard"]
+  },
+  {
+    "name": "sidebar-03",
+    "description": "A sidebar with submenus.",
+    "categories": ["sidebar", "dashboard"]
+  },
+  {
+    "name": "sidebar-07",
+    "description": "A sidebar that collapses to icons.",
+    "categories": ["sidebar", "dashboard"]
   },
   {
     "name": "header-01",

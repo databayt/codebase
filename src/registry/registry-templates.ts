@@ -179,5 +179,127 @@ export const templates: Registry = [
     meta: {
       iframeHeight: "600px"
     }
+  },
+  {
+    name: "sidebar-03",
+    description: "A sidebar with submenus",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible"
+    ],
+    files: [
+      {
+        path: "templates/sidebar-03/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/sidebar-03/components/app-sidebar.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["sidebar", "dashboard"],
+    meta: {
+      iframeHeight: "900px"
+    }
+  },
+  {
+    name: "sidebar-07",
+    description: "A sidebar that collapses to icons",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible",
+      "dropdown-menu",
+      "avatar"
+    ],
+    files: [
+      {
+        path: "templates/sidebar-07/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/sidebar-07/components/app-sidebar.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/sidebar-07/components/nav-main.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/sidebar-07/components/nav-projects.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/sidebar-07/components/nav-user.tsx",
+        type: "registry:component"
+      },
+      {
+        path: "templates/sidebar-07/components/team-switcher.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["sidebar", "dashboard"],
+    meta: {
+      iframeHeight: "900px"
+    }
+  },
+  {
+    name: "login-03",
+    description: "A login page with a muted background color",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "card",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/login-03/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/login-03/components/login-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "login"],
+    meta: {
+      iframeHeight: "600px"
+    }
+  },
+  {
+    name: "login-04",
+    description: "A login page with form and image",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "card",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/login-04/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/login-04/components/login-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "login"],
+    meta: {
+      iframeHeight: "600px"
+    }
   }
 ]
