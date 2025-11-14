@@ -106,8 +106,8 @@ export const Index: Record<string, any> = ${JSON.stringify(registryIndex, null, 
     .replace(/\\"/g, '"')}
 `
 
-  await ensureDir(path.join(PROJECT_ROOT, "__registry__"))
-  await fs.writeFile(path.join(PROJECT_ROOT, "__registry__", "index.tsx"), indexContent)
+  await ensureDir(path.join(PROJECT_ROOT, "src", "__registry__"))
+  await fs.writeFile(path.join(PROJECT_ROOT, "src", "__registry__", "index.tsx"), indexContent)
 }
 
 async function buildStyleJSONs() {
