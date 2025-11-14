@@ -13,7 +13,7 @@ export default function Hero({ dictionary, params }: HeroProps) {
     return (
         <PageHeader
             announcement={<Announcement dictionary={dictionary} />}
-            heading={dictionary.blockpage?.heading || "Building Blocks for the Web"}
+            heading={dictionary.blockpage?.heading || "Blocks for the Web"}
             description={dictionary.blockpage?.description || "Clean, modern building blocks. Copy and paste into your apps. Works with all React frameworks. Open Source. Open Code."}
             actions={
                 <TwoButtons
