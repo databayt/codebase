@@ -68,10 +68,24 @@ export const getTemplate = cache(
     try {
       const { Index } = await import("@/__registry__/index")
 
+      // Helper function to normalize files array
+      const normalizeFiles = (item: any) => {
+        if (!item.files || !Array.isArray(item.files)) {
+          return item
+        }
+
+        return {
+          ...item,
+          files: item.files.map((file: unknown) =>
+            typeof file === "string" ? { path: file } : file
+          ),
+        }
+      }
+
       // First try the requested style
       if (Index[style] && Index[style][name]) {
         return {
-          ...Index[style][name],
+          ...normalizeFiles(Index[style][name]),
           style,
         }
       }
@@ -80,7 +94,7 @@ export const getTemplate = cache(
       for (const s of Object.keys(Index)) {
         if (Index[s][name]) {
           return {
-            ...Index[s][name],
+            ...normalizeFiles(Index[s][name]),
             style: s,
           }
         }
