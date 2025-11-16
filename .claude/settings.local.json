@@ -19,7 +19,9 @@
       "Bash(pnpm build:registry:*)",
       "Bash(tsx scripts/generate-atom-docs.mts:*)",
       "Bash(pnpm codebase:*)",
-      "Bash(pnpm fumadocs-mdx:*)"
+      "Bash(pnpm fumadocs-mdx:*)",
+      "Bash(test:*)",
+      "Bash(nul)"
     ],
     "deny": [],
     "ask": []
