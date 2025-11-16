@@ -44,8 +44,25 @@ export async function getAllTemplates(
     }
   }
 
+  // Helper function to normalize files array
+  const normalizeFiles = (item: any) => {
+    if (!item.files || !Array.isArray(item.files)) {
+      return item
+    }
+
+    return {
+      ...item,
+      files: item.files.map((file: unknown) =>
+        typeof file === "string" ? { path: file } : file
+      ),
+    }
+  }
+
+  // Normalize files before validation
+  const normalizedTemplates = allTemplates.map(normalizeFiles)
+
   // Validate each template.
-  const validatedTemplates = allTemplates
+  const validatedTemplates = normalizedTemplates
     .map((template) => {
       const result = registryItemSchema.safeParse(template)
       return result.success ? result.data : null

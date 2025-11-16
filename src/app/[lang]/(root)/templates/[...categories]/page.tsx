@@ -25,7 +25,17 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
   const templates = await getAllTemplateIds(["registry:template"], categories)
 
   // Get active style (you may need to implement getActiveStyle or use a default)
-  const activeStyle = "new-york" // Or implement getActiveStyle() function
+  const activeStyle = "default" // Changed from "new-york" to "default"
+
+  if (templates.length === 0) {
+    return (
+      <div className="container py-8">
+        <p className="text-center text-muted-foreground">
+          No templates found in this category.
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-12 md:gap-24">

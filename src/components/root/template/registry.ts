@@ -19,9 +19,9 @@ export const registryItemTypeSchema = z.enum([
   "registry:internal",
 ])
 
-// Discriminated union - target is required for registry:file and registry:page
-export const registryItemFileSchema = z.discriminatedUnion("type", [
-  // Target is required for registry:file and registry:page
+// File schema - type and target are optional for simple path-only files
+export const registryItemFileSchema = z.union([
+  // Full schema with type and target
   z.object({
     path: z.string(),
     content: z.string().optional(),
@@ -32,6 +32,13 @@ export const registryItemFileSchema = z.discriminatedUnion("type", [
     path: z.string(),
     content: z.string().optional(),
     type: registryItemTypeSchema.exclude(["registry:file", "registry:page"]),
+    target: z.string().optional(),
+  }),
+  // Simple schema for path-only files
+  z.object({
+    path: z.string(),
+    content: z.string().optional(),
+    type: registryItemTypeSchema.optional(),
     target: z.string().optional(),
   }),
 ])
