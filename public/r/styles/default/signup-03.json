@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signup-03",
+  "description": "A signup page with a muted background color.",
+  "type": "registry:template",
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "card",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "templates/signup-03/page.tsx",
+      "content": "import { GalleryVerticalEnd } from \"lucide-react\"\r\nimport { SignupForm } from \"@/registry/default/templates/signup-03/components/signup-form\"\r\n\r\nexport default function Page() {\r\n  return (\r\n    <div className=\"bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10\">\r\n      <div className=\"flex w-full max-w-sm flex-col gap-6\">\r\n        <a href=\"#\" className=\"flex items-center gap-2 self-center font-medium\">\r\n          <div className=\"bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md\">\r\n            <GalleryVerticalEnd className=\"size-4\" />\r\n          </div>\r\n          Acme Inc.\r\n        </a>\r\n        <SignupForm />\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:page",
+      "target": "app/signup-03/page.tsx"
+    },
+    {
+      "path": "templates/signup-03/components/signup-form.tsx",
+      "content": "import Link from \"next/link\"\r\nimport { cn } from \"@/lib/utils\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport {\r\n  Card,\r\n  CardContent,\r\n  CardDescription,\r\n  CardHeader,\r\n  CardTitle,\r\n} from \"@/components/ui/card\"\r\nimport { Input } from \"@/components/ui/input\"\r\nimport { Label } from \"@/components/ui/label\"\r\n\r\nexport function SignupForm({\r\n  className,\r\n  ...props\r\n}: React.ComponentProps<\"div\">) {\r\n  return (\r\n    <div className={cn(\"flex flex-col gap-6\", className)} {...props}>\r\n      <Card>\r\n        <CardHeader className=\"text-center\">\r\n          <CardTitle className=\"text-xl\">Create your account</CardTitle>\r\n          <CardDescription>\r\n            Enter your email below to create your account\r\n          </CardDescription>\r\n        </CardHeader>\r\n        <CardContent>\r\n          <form>\r\n            <div className=\"grid gap-6\">\r\n              <div className=\"grid gap-2\">\r\n                <Label htmlFor=\"name\">Full Name</Label>\r\n                <Input id=\"name\" type=\"text\" placeholder=\"John Doe\" required />\r\n              </div>\r\n              <div className=\"grid gap-2\">\r\n                <Label htmlFor=\"email\">Email</Label>\r\n                <Input\r\n                  id=\"email\"\r\n                  type=\"email\"\r\n                  placeholder=\"m@example.com\"\r\n                  required\r\n                />\r\n              </div>\r\n              <div className=\"grid gap-2\">\r\n                <div className=\"grid grid-cols-2 gap-4\">\r\n                  <div className=\"grid gap-2\">\r\n                    <Label htmlFor=\"password\">Password</Label>\r\n                    <Input id=\"password\" type=\"password\" required />\r\n                  </div>\r\n                  <div className=\"grid gap-2\">\r\n                    <Label htmlFor=\"confirm-password\">\r\n                      Confirm Password\r\n                    </Label>\r\n                    <Input id=\"confirm-password\" type=\"password\" required />\r\n                  </div>\r\n                </div>\r\n                <p className=\"text-[0.8rem] text-muted-foreground\">\r\n                  Must be at least 8 characters long.\r\n                </p>\r\n              </div>\r\n              <Button type=\"submit\" className=\"w-full\">\r\n                Create Account\r\n              </Button>\r\n              <div className=\"text-center text-sm\">\r\n                Already have an account?{\" \"}\r\n                <Link href=\"#\" className=\"underline underline-offset-4\">\r\n                  Sign in\r\n                </Link>\r\n              </div>\r\n            </div>\r\n          </form>\r\n        </CardContent>\r\n      </Card>\r\n      <div className=\"text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary\">\r\n        By clicking continue, you agree to our <a href=\"#\">Terms of Service</a>{\" \"}\r\n        and <a href=\"#\">Privacy Policy</a>.\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:component",
+      "target": "app/signup-03/components/signup-form.tsx"
+    }
+  ],
+  "categories": [
+    "authentication",
+    "signup"
+  ],
+  "meta": {
+    "iframeHeight": "700px"
+  }
+}

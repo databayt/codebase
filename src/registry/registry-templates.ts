@@ -717,5 +717,133 @@ export const templates: Registry = [
     meta: {
       iframeHeight: "900px"
     }
+  },
+  {
+    name: "signup-01",
+    description: "A simple signup form.",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "card",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/signup-01/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/signup-01/components/signup-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "signup"],
+    meta: {
+      iframeHeight: "600px"
+    }
+  },
+  {
+    name: "signup-02",
+    description: "A two column signup page with a cover image.",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/signup-02/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/signup-02/components/signup-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "signup"],
+    meta: {
+      iframeHeight: "800px"
+    }
+  },
+  {
+    name: "signup-03",
+    description: "A signup page with a muted background color.",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "card",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/signup-03/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/signup-03/components/signup-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "signup"],
+    meta: {
+      iframeHeight: "700px"
+    }
+  },
+  {
+    name: "signup-04",
+    description: "A signup page with form and image.",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "card",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/signup-04/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/signup-04/components/signup-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "signup"],
+    meta: {
+      iframeHeight: "800px"
+    }
+  },
+  {
+    name: "signup-05",
+    description: "A simple signup form with social providers.",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "input",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/signup-05/page.tsx",
+        type: "registry:page"
+      },
+      {
+        path: "templates/signup-05/components/signup-form.tsx",
+        type: "registry:component"
+      }
+    ],
+    categories: ["authentication", "signup"],
+    meta: {
+      iframeHeight: "600px"
+    }
   }
 ]

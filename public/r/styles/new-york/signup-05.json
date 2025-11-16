@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signup-05",
+  "description": "A simple signup form with social providers.",
+  "type": "registry:template",
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "input",
+    "label"
+  ],
+  "files": [],
+  "categories": [
+    "authentication",
+    "signup"
+  ],
+  "meta": {
+    "iframeHeight": "600px"
+  }
+}

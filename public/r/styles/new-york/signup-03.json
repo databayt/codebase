@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signup-03",
+  "description": "A signup page with a muted background color.",
+  "type": "registry:template",
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "card",
+    "input",
+    "label"
+  ],
+  "files": [],
+  "categories": [
+    "authentication",
+    "signup"
+  ],
+  "meta": {
+    "iframeHeight": "700px"
+  }
+}

@@ -544,6 +544,124 @@ export const Index: Record<string, any> = {
         "iframeHeight": "900px"
       }
     },
+    "signup-01": {
+      "name": "signup-01",
+      "description": "A simple signup form.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/signup-01/page")),
+      "files": [
+        "registry/default/templates/signup-01/page.tsx",
+        "registry/default/templates/signup-01/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "signup-02": {
+      "name": "signup-02",
+      "description": "A two column signup page with a cover image.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/signup-02/page")),
+      "files": [
+        "registry/default/templates/signup-02/page.tsx",
+        "registry/default/templates/signup-02/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "signup-03": {
+      "name": "signup-03",
+      "description": "A signup page with a muted background color.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/signup-03/page")),
+      "files": [
+        "registry/default/templates/signup-03/page.tsx",
+        "registry/default/templates/signup-03/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "700px"
+      }
+    },
+    "signup-04": {
+      "name": "signup-04",
+      "description": "A signup page with form and image.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/signup-04/page")),
+      "files": [
+        "registry/default/templates/signup-04/page.tsx",
+        "registry/default/templates/signup-04/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "signup-05": {
+      "name": "signup-05",
+      "description": "A simple signup form with social providers.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/signup-05/page")),
+      "files": [
+        "registry/default/templates/signup-05/page.tsx",
+        "registry/default/templates/signup-05/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
     "activity-goal": {
       "name": "activity-goal",
       "description": "Activity goal tracking card with chart visualization",
@@ -1835,6 +1953,124 @@ export const Index: Record<string, any> = {
       ],
       "meta": {
         "iframeHeight": "900px"
+      }
+    },
+    "signup-01": {
+      "name": "signup-01",
+      "description": "A simple signup form.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/signup-01/page")),
+      "files": [
+        "registry/new-york/templates/signup-01/page.tsx",
+        "registry/new-york/templates/signup-01/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "signup-02": {
+      "name": "signup-02",
+      "description": "A two column signup page with a cover image.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/signup-02/page")),
+      "files": [
+        "registry/new-york/templates/signup-02/page.tsx",
+        "registry/new-york/templates/signup-02/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "signup-03": {
+      "name": "signup-03",
+      "description": "A signup page with a muted background color.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/signup-03/page")),
+      "files": [
+        "registry/new-york/templates/signup-03/page.tsx",
+        "registry/new-york/templates/signup-03/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "700px"
+      }
+    },
+    "signup-04": {
+      "name": "signup-04",
+      "description": "A signup page with form and image.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/signup-04/page")),
+      "files": [
+        "registry/new-york/templates/signup-04/page.tsx",
+        "registry/new-york/templates/signup-04/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "signup-05": {
+      "name": "signup-05",
+      "description": "A simple signup form with social providers.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/signup-05/page")),
+      "files": [
+        "registry/new-york/templates/signup-05/page.tsx",
+        "registry/new-york/templates/signup-05/components/signup-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
       }
     },
     "activity-goal": {
