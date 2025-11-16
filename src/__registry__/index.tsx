@@ -179,6 +179,371 @@ export const Index: Record<string, any> = {
         "iframeHeight": "900px"
       }
     },
+    "sidebar-02": {
+      "name": "sidebar-02",
+      "description": "A sidebar with collapsible sections.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-02/page")),
+      "files": [
+        "registry/default/templates/sidebar-02/page.tsx",
+        "registry/default/templates/sidebar-02/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-02/components/search-form.tsx",
+        "registry/default/templates/sidebar-02/components/version-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "dropdown-menu"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-04": {
+      "name": "sidebar-04",
+      "description": "A floating sidebar with submenus.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-04/page")),
+      "files": [
+        "registry/default/templates/sidebar-04/page.tsx",
+        "registry/default/templates/sidebar-04/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-05": {
+      "name": "sidebar-05",
+      "description": "A sidebar with collapsible submenus.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-05/page")),
+      "files": [
+        "registry/default/templates/sidebar-05/page.tsx",
+        "registry/default/templates/sidebar-05/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-05/components/search-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "collapsible"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-06": {
+      "name": "sidebar-06",
+      "description": "A sidebar with submenus as dropdowns.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-06/page")),
+      "files": [
+        "registry/default/templates/sidebar-06/page.tsx",
+        "registry/default/templates/sidebar-06/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-06/components/nav-main.tsx",
+        "registry/default/templates/sidebar-06/components/sidebar-opt-in-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "card",
+        "dropdown-menu"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-08": {
+      "name": "sidebar-08",
+      "description": "An inset sidebar with secondary navigation.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-08/page")),
+      "files": [
+        "registry/default/templates/sidebar-08/page.tsx",
+        "registry/default/templates/sidebar-08/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-08/components/nav-main.tsx",
+        "registry/default/templates/sidebar-08/components/nav-projects.tsx",
+        "registry/default/templates/sidebar-08/components/nav-secondary.tsx",
+        "registry/default/templates/sidebar-08/components/nav-user.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-09": {
+      "name": "sidebar-09",
+      "description": "Collapsible nested sidebars.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-09/page")),
+      "files": [
+        "registry/default/templates/sidebar-09/page.tsx",
+        "registry/default/templates/sidebar-09/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-09/components/nav-user.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar",
+        "switch",
+        "label"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-10": {
+      "name": "sidebar-10",
+      "description": "A sidebar in a popover.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-10/page")),
+      "files": [
+        "registry/default/templates/sidebar-10/page.tsx",
+        "registry/default/templates/sidebar-10/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-10/components/nav-actions.tsx",
+        "registry/default/templates/sidebar-10/components/nav-favorites.tsx",
+        "registry/default/templates/sidebar-10/components/nav-main.tsx",
+        "registry/default/templates/sidebar-10/components/nav-secondary.tsx",
+        "registry/default/templates/sidebar-10/components/nav-workspaces.tsx",
+        "registry/default/templates/sidebar-10/components/team-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "popover",
+        "collapsible",
+        "dropdown-menu"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-11": {
+      "name": "sidebar-11",
+      "description": "A sidebar with a collapsible file tree.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-11/page")),
+      "files": [
+        "registry/default/templates/sidebar-11/page.tsx",
+        "registry/default/templates/sidebar-11/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-12": {
+      "name": "sidebar-12",
+      "description": "A sidebar with a calendar.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-12/page")),
+      "files": [
+        "registry/default/templates/sidebar-12/page.tsx",
+        "registry/default/templates/sidebar-12/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-12/components/calendars.tsx",
+        "registry/default/templates/sidebar-12/components/date-picker.tsx",
+        "registry/default/templates/sidebar-12/components/nav-user.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "calendar",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-13": {
+      "name": "sidebar-13",
+      "description": "A sidebar in a dialog.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-13/page")),
+      "files": [
+        "registry/default/templates/sidebar-13/page.tsx",
+        "registry/default/templates/sidebar-13/components/settings-dialog.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "button",
+        "dialog"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-14": {
+      "name": "sidebar-14",
+      "description": "A sidebar on the right.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-14/page")),
+      "files": [
+        "registry/default/templates/sidebar-14/page.tsx",
+        "registry/default/templates/sidebar-14/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-15": {
+      "name": "sidebar-15",
+      "description": "A left and right sidebar.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-15/page")),
+      "files": [
+        "registry/default/templates/sidebar-15/page.tsx",
+        "registry/default/templates/sidebar-15/components/calendars.tsx",
+        "registry/default/templates/sidebar-15/components/date-picker.tsx",
+        "registry/default/templates/sidebar-15/components/nav-favorites.tsx",
+        "registry/default/templates/sidebar-15/components/nav-main.tsx",
+        "registry/default/templates/sidebar-15/components/nav-secondary.tsx",
+        "registry/default/templates/sidebar-15/components/nav-user.tsx",
+        "registry/default/templates/sidebar-15/components/nav-workspaces.tsx",
+        "registry/default/templates/sidebar-15/components/sidebar-left.tsx",
+        "registry/default/templates/sidebar-15/components/sidebar-right.tsx",
+        "registry/default/templates/sidebar-15/components/team-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "popover",
+        "collapsible",
+        "dropdown-menu",
+        "calendar",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-16": {
+      "name": "sidebar-16",
+      "description": "A sidebar with a sticky site header.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/sidebar-16/page")),
+      "files": [
+        "registry/default/templates/sidebar-16/page.tsx",
+        "registry/default/templates/sidebar-16/components/app-sidebar.tsx",
+        "registry/default/templates/sidebar-16/components/nav-main.tsx",
+        "registry/default/templates/sidebar-16/components/nav-projects.tsx",
+        "registry/default/templates/sidebar-16/components/nav-secondary.tsx",
+        "registry/default/templates/sidebar-16/components/nav-user.tsx",
+        "registry/default/templates/sidebar-16/components/search-form.tsx",
+        "registry/default/templates/sidebar-16/components/site-header.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar",
+        "button",
+        "label"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
     "activity-goal": {
       "name": "activity-goal",
       "description": "Activity goal tracking card with chart visualization",
@@ -1098,6 +1463,371 @@ export const Index: Record<string, any> = {
         "collapsible",
         "dropdown-menu",
         "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-02": {
+      "name": "sidebar-02",
+      "description": "A sidebar with collapsible sections.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-02/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-02/page.tsx",
+        "registry/new-york/templates/sidebar-02/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-02/components/search-form.tsx",
+        "registry/new-york/templates/sidebar-02/components/version-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "dropdown-menu"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-04": {
+      "name": "sidebar-04",
+      "description": "A floating sidebar with submenus.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-04/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-04/page.tsx",
+        "registry/new-york/templates/sidebar-04/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-05": {
+      "name": "sidebar-05",
+      "description": "A sidebar with collapsible submenus.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-05/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-05/page.tsx",
+        "registry/new-york/templates/sidebar-05/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-05/components/search-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "collapsible"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-06": {
+      "name": "sidebar-06",
+      "description": "A sidebar with submenus as dropdowns.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-06/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-06/page.tsx",
+        "registry/new-york/templates/sidebar-06/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-06/components/nav-main.tsx",
+        "registry/new-york/templates/sidebar-06/components/sidebar-opt-in-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "card",
+        "dropdown-menu"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-08": {
+      "name": "sidebar-08",
+      "description": "An inset sidebar with secondary navigation.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-08/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-08/page.tsx",
+        "registry/new-york/templates/sidebar-08/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-08/components/nav-main.tsx",
+        "registry/new-york/templates/sidebar-08/components/nav-projects.tsx",
+        "registry/new-york/templates/sidebar-08/components/nav-secondary.tsx",
+        "registry/new-york/templates/sidebar-08/components/nav-user.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-09": {
+      "name": "sidebar-09",
+      "description": "Collapsible nested sidebars.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-09/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-09/page.tsx",
+        "registry/new-york/templates/sidebar-09/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-09/components/nav-user.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar",
+        "switch",
+        "label"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-10": {
+      "name": "sidebar-10",
+      "description": "A sidebar in a popover.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-10/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-10/page.tsx",
+        "registry/new-york/templates/sidebar-10/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-10/components/nav-actions.tsx",
+        "registry/new-york/templates/sidebar-10/components/nav-favorites.tsx",
+        "registry/new-york/templates/sidebar-10/components/nav-main.tsx",
+        "registry/new-york/templates/sidebar-10/components/nav-secondary.tsx",
+        "registry/new-york/templates/sidebar-10/components/nav-workspaces.tsx",
+        "registry/new-york/templates/sidebar-10/components/team-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "popover",
+        "collapsible",
+        "dropdown-menu"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-11": {
+      "name": "sidebar-11",
+      "description": "A sidebar with a collapsible file tree.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-11/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-11/page.tsx",
+        "registry/new-york/templates/sidebar-11/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-12": {
+      "name": "sidebar-12",
+      "description": "A sidebar with a calendar.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-12/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-12/page.tsx",
+        "registry/new-york/templates/sidebar-12/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-12/components/calendars.tsx",
+        "registry/new-york/templates/sidebar-12/components/date-picker.tsx",
+        "registry/new-york/templates/sidebar-12/components/nav-user.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "calendar",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-13": {
+      "name": "sidebar-13",
+      "description": "A sidebar in a dialog.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-13/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-13/page.tsx",
+        "registry/new-york/templates/sidebar-13/components/settings-dialog.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "button",
+        "dialog"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-14": {
+      "name": "sidebar-14",
+      "description": "A sidebar on the right.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-14/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-14/page.tsx",
+        "registry/new-york/templates/sidebar-14/components/app-sidebar.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-15": {
+      "name": "sidebar-15",
+      "description": "A left and right sidebar.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-15/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-15/page.tsx",
+        "registry/new-york/templates/sidebar-15/components/calendars.tsx",
+        "registry/new-york/templates/sidebar-15/components/date-picker.tsx",
+        "registry/new-york/templates/sidebar-15/components/nav-favorites.tsx",
+        "registry/new-york/templates/sidebar-15/components/nav-main.tsx",
+        "registry/new-york/templates/sidebar-15/components/nav-secondary.tsx",
+        "registry/new-york/templates/sidebar-15/components/nav-user.tsx",
+        "registry/new-york/templates/sidebar-15/components/nav-workspaces.tsx",
+        "registry/new-york/templates/sidebar-15/components/sidebar-left.tsx",
+        "registry/new-york/templates/sidebar-15/components/sidebar-right.tsx",
+        "registry/new-york/templates/sidebar-15/components/team-switcher.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "popover",
+        "collapsible",
+        "dropdown-menu",
+        "calendar",
+        "avatar"
+      ],
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      }
+    },
+    "sidebar-16": {
+      "name": "sidebar-16",
+      "description": "A sidebar with a sticky site header.",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/sidebar-16/page")),
+      "files": [
+        "registry/new-york/templates/sidebar-16/page.tsx",
+        "registry/new-york/templates/sidebar-16/components/app-sidebar.tsx",
+        "registry/new-york/templates/sidebar-16/components/nav-main.tsx",
+        "registry/new-york/templates/sidebar-16/components/nav-projects.tsx",
+        "registry/new-york/templates/sidebar-16/components/nav-secondary.tsx",
+        "registry/new-york/templates/sidebar-16/components/nav-user.tsx",
+        "registry/new-york/templates/sidebar-16/components/search-form.tsx",
+        "registry/new-york/templates/sidebar-16/components/site-header.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar",
+        "button",
+        "label"
       ],
       "categories": [
         "sidebar",

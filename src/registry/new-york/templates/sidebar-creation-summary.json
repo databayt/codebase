@@ -1,0 +1,250 @@
+[
+  {
+    "number": "02",
+    "description": "A sidebar with collapsible sections.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "label",
+      "dropdown-menu"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/search-form.tsx",
+      "components/version-switcher.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "04",
+    "description": "A floating sidebar with submenus.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "05",
+    "description": "A sidebar with collapsible submenus.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "label",
+      "collapsible"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/search-form.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "06",
+    "description": "A sidebar with submenus as dropdowns.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "card",
+      "dropdown-menu"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/nav-main.tsx",
+      "components/sidebar-opt-in-form.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "08",
+    "description": "An inset sidebar with secondary navigation.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible",
+      "dropdown-menu",
+      "avatar"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/nav-main.tsx",
+      "components/nav-projects.tsx",
+      "components/nav-secondary.tsx",
+      "components/nav-user.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "09",
+    "description": "Collapsible nested sidebars.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible",
+      "dropdown-menu",
+      "avatar",
+      "switch",
+      "label"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/nav-user.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "10",
+    "description": "A sidebar in a popover.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "popover",
+      "collapsible",
+      "dropdown-menu"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/nav-actions.tsx",
+      "components/nav-favorites.tsx",
+      "components/nav-main.tsx",
+      "components/nav-secondary.tsx",
+      "components/nav-workspaces.tsx",
+      "components/team-switcher.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "11",
+    "description": "A sidebar with a collapsible file tree.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "12",
+    "description": "A sidebar with a calendar.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible",
+      "calendar",
+      "dropdown-menu",
+      "avatar"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/calendars.tsx",
+      "components/date-picker.tsx",
+      "components/nav-user.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "13",
+    "description": "A sidebar in a dialog.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "button",
+      "dialog"
+    ],
+    "files": [
+      "page.tsx",
+      "components/settings-dialog.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "14",
+    "description": "A sidebar on the right.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "15",
+    "description": "A left and right sidebar.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "popover",
+      "collapsible",
+      "dropdown-menu",
+      "calendar",
+      "avatar"
+    ],
+    "files": [
+      "page.tsx",
+      "components/calendars.tsx",
+      "components/date-picker.tsx",
+      "components/nav-favorites.tsx",
+      "components/nav-main.tsx",
+      "components/nav-secondary.tsx",
+      "components/nav-user.tsx",
+      "components/nav-workspaces.tsx",
+      "components/sidebar-left.tsx",
+      "components/sidebar-right.tsx",
+      "components/team-switcher.tsx"
+    ],
+    "success": true
+  },
+  {
+    "number": "16",
+    "description": "A sidebar with a sticky site header.",
+    "registryDependencies": [
+      "sidebar",
+      "breadcrumb",
+      "separator",
+      "collapsible",
+      "dropdown-menu",
+      "avatar",
+      "button",
+      "label"
+    ],
+    "files": [
+      "page.tsx",
+      "components/app-sidebar.tsx",
+      "components/nav-main.tsx",
+      "components/nav-projects.tsx",
+      "components/nav-secondary.tsx",
+      "components/nav-user.tsx",
+      "components/search-form.tsx",
+      "components/site-header.tsx"
+    ],
+    "success": true
+  }
+]
