@@ -68,25 +68,20 @@ export default async function ViewTemplatePage({ params }: ViewTemplatePageProps
 
   // Apply container classes from meta if specified
   const containerClasses = template.meta?.container || ""
-  const iframeHeight = template.meta?.iframeHeight || "800px"
-
-  // Set min-height based on iframe height
-  const minHeight = iframeHeight.replace("px", "")
 
   return (
-    <div
-      className={`bg-background ${containerClasses}`}
-      style={{ minHeight: `${minHeight}px` }}
-    >
-      <React.Suspense
-        fallback={
-          <div className="flex h-screen items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-          </div>
-        }
-      >
-        <Component />
-      </React.Suspense>
-    </div>
+    <>
+      <div className={containerClasses ? `bg-background ${containerClasses}` : "bg-background"}>
+        <React.Suspense
+          fallback={
+            <div className="flex h-screen items-center justify-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          }
+        >
+          <Component />
+        </React.Suspense>
+      </div>
+    </>
   )
 }

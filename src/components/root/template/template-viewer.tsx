@@ -119,7 +119,7 @@ function TemplateViewerProvider({
             <div
                 id={item.name}
                 data-view={view}
-                className="group/template-view-wrapper flex min-w-0 flex-col items-stretch gap-4"
+                className="group/template-view-wrapper flex min-w-0 scroll-mt-24 flex-col-reverse items-stretch gap-4 overflow-hidden md:flex-col"
                 style={
                     {
                         "--height": item.meta?.iframeHeight ?? "930px",
@@ -273,12 +273,13 @@ function TemplateViewerView() {
     const { resizablePanelRef } = useTemplateViewer()
 
     return (
-        <div className="group-data-[view=code]/template-view-wrapper:hidden md:h-[--height]">
-            <div className="grid w-full gap-4">
-                <ResizablePanelGroup direction="horizontal" className="relative z-10">
+        <div className="hidden group-data-[view=code]/template-view-wrapper:hidden md:h-[--height] lg:flex">
+            <div className="relative grid w-full gap-4">
+                <div className="absolute inset-0 right-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
+                <ResizablePanelGroup direction="horizontal" className="relative z-10 after:absolute after:inset-0 after:right-3 after:z-0 after:rounded-xl after:bg-surface/50">
                     <ResizablePanel
                         ref={resizablePanelRef}
-                        className="relative aspect-[4/2.5] rounded-xl border bg-background md:aspect-auto overflow-hidden"
+                        className="relative aspect-[4/2.5] overflow-hidden rounded-lg border bg-background md:aspect-auto md:rounded-xl"
                         defaultSize={100}
                         minSize={30}
                     >
