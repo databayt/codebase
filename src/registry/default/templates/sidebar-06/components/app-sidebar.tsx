@@ -1,8 +1,8 @@
 import * as React from "react"
 import { GalleryVerticalEnd } from "lucide-react"
 
-import { NavMain } from "./components/nav-main"
-import { SidebarOptInForm } from "./components/sidebar-opt-in-form"
+import { NavMain } from "./nav-main"
+import { SidebarOptInForm } from "./sidebar-opt-in-form"
 import {
   Sidebar,
   SidebarContent,
