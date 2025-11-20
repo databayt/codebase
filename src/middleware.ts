@@ -60,8 +60,8 @@ async function verifyAuth(request: NextRequest): Promise<boolean> {
   }
 }
 
-// Manual middleware without NextAuth wrapper
-export default async function middleware(request: NextRequest) {
+// Manual proxy without NextAuth wrapper
+export default async function proxy(request: NextRequest) {
   // Skip logging for asset requests
   const pathname = request.nextUrl.pathname
   const isAsset = pathname.includes('_next') || pathname.includes('favicon')
@@ -106,6 +106,11 @@ export default async function middleware(request: NextRequest) {
     const isPublicRoute = publicRoutes.includes(pathname) ||
                          pathname.startsWith('/docs') ||
                          pathname.startsWith('/atoms') ||
+                         pathname.startsWith('/templates') ||
+                         pathname.startsWith('/vibes') ||
+                         pathname.startsWith('/blocks') ||
+                         pathname.startsWith('/micros') ||
+                         pathname.startsWith('/view/templates') ||
                          pathname === '/docs' ||
                          pathname === '/atoms'
     const isAuthRoute = authRoutes.includes(pathname)
@@ -175,7 +180,7 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.next()
 
   } catch (error) {
-    console.error("🚨 [Middleware] Error:", error)
+    console.error("🚨 [Proxy] Error:", error)
     // Return a safe response to prevent crashes
     return NextResponse.next()
   }

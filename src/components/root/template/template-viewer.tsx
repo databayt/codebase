@@ -273,10 +273,10 @@ function TemplateViewerView() {
     const { resizablePanelRef } = useTemplateViewer()
 
     return (
-        <div className="hidden group-data-[view=code]/template-view-wrapper:hidden md:h-[--height] lg:flex">
-            <div className="relative grid w-full gap-4">
-                <div className="absolute inset-0 right-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
-                <ResizablePanelGroup direction="horizontal" className="relative z-10 after:absolute after:inset-0 after:right-3 after:z-0 after:rounded-xl after:bg-surface/50">
+        <div className="hidden group-data-[view=code]/template-view-wrapper:hidden md:h-[--height] lg:flex -mx-[var(--container-padding-xs)] sm:-mx-[var(--container-padding-sm)] md:-mx-[var(--container-padding-md)] lg:-mx-[var(--container-padding-lg)] xl:-mx-[var(--container-padding-xl)] w-[calc(100%+2*var(--container-padding-xs))] sm:w-[calc(100%+2*var(--container-padding-sm))] md:w-[calc(100%+2*var(--container-padding-md))] lg:w-[calc(100%+2*var(--container-padding-lg))] xl:w-[calc(100%+2*var(--container-padding-xl))]">
+            <div className="relative grid w-full gap-4 px-[var(--container-padding-xs)] sm:px-[var(--container-padding-sm)] md:px-[var(--container-padding-md)] lg:px-[var(--container-padding-lg)] xl:px-[var(--container-padding-xl)]">
+                <div className="absolute inset-0 end-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
+                <ResizablePanelGroup direction="horizontal" className="relative z-10 after:absolute after:inset-0 after:end-3 after:z-0 after:rounded-xl after:bg-surface/50">
                     <ResizablePanel
                         ref={resizablePanelRef}
                         className="relative aspect-[4/2.5] overflow-hidden rounded-lg border bg-background md:aspect-auto md:rounded-xl"
