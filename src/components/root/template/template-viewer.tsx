@@ -99,23 +99,43 @@ function TemplateViewerProvider({
     const resizablePanelRef = React.useRef<ImperativePanelHandle>(null)
     const [iframeKey, setIframeKey] = React.useState(0)
 
+    // Memoize setters to prevent context value from changing unnecessarily
+    const handleSetView = React.useCallback((newView: "code" | "preview") => {
+        setView(newView)
+    }, [])
+
+    const handleSetStyle = React.useCallback((newStyle: string) => {
+        setStyle(newStyle)
+    }, [])
+
+    const handleSetActiveFile = React.useCallback((file: string) => {
+        setActiveFile(file)
+    }, [])
+
+    const handleSetIframeKey = React.useCallback((key: React.SetStateAction<number>) => {
+        setIframeKey(key)
+    }, [])
+
+    const contextValue = React.useMemo(
+        () => ({
+            item,
+            view,
+            setView: handleSetView,
+            style,
+            setStyle: handleSetStyle,
+            resizablePanelRef,
+            activeFile,
+            setActiveFile: handleSetActiveFile,
+            tree,
+            highlightedFiles,
+            iframeKey,
+            setIframeKey: handleSetIframeKey,
+        }),
+        [item, view, handleSetView, style, handleSetStyle, activeFile, handleSetActiveFile, tree, highlightedFiles, iframeKey, handleSetIframeKey]
+    )
+
     return (
-        <TemplateViewerContext.Provider
-            value={{
-                item,
-                view,
-                setView,
-                style,
-                setStyle,
-                resizablePanelRef,
-                activeFile,
-                setActiveFile,
-                tree,
-                highlightedFiles,
-                iframeKey,
-                setIframeKey,
-            }}
-        >
+        <TemplateViewerContext.Provider value={contextValue}>
             <div
                 id={item.name}
                 data-view={view}
@@ -255,7 +275,7 @@ function TemplateViewerToolbar() {
     )
 }
 
-function TemplateViewerIframe() {
+const TemplateViewerIframe = React.memo(function TemplateViewerIframe() {
     const { item, iframeKey } = useTemplateViewer()
 
     return (
@@ -267,7 +287,7 @@ function TemplateViewerIframe() {
             className="w-full bg-background no-scrollbar relative z-20"
         />
     )
-}
+})
 
 function TemplateViewerView() {
     const { resizablePanelRef } = useTemplateViewer()
