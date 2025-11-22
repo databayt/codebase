@@ -1,216 +1,68 @@
 ---
-title: "Contributing"
-description: "Documentation for Contributing"
+title: Introduction
+description: shadcn/ui is a set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks and AI models. Open Source. Open Code.
 ---
 
-# Contributing
+**This is not a component library. It is how you build your component library.**
 
-Thanks for your interest in contributing to ui.shadcn.com. We're happy to have you here.
+You know how most traditional component libraries work: you install a package from NPM, import the components, and use them in your app.
 
-Please take a moment to review this document before submitting your first pull request. We also strongly recommend that you check for open issues and pull requests to see if someone else is working on something similar.
+This approach works well until you need to customize a component to fit your design system or require one that isn't included in the library. Often, you end up wrapping library components, writing workarounds to override styles, or mixing components from different libraries with incompatible APIs.
 
-If you need any help, feel free to reach out to [@shadcn](https://twitter.com/shadcn).
+This is what shadcn/ui aims to solve. It is built around the following principles:
 
-## About this repository
+- **Open Code:** The top layer of your component code is open for modification.
+- **Composition:** Every component uses a common, composable interface, making them predictable.
+- **Distribution:** A flat-file schema and command-line tool make it easy to distribute components.
+- **Beautiful Defaults:** Carefully chosen default styles, so you get great design out-of-the-box.
+- **AI-Ready:** Open code for LLMs to read, understand, and improve.
 
-This repository is a monorepo.
+## Open Code
 
-- We use [pnpm](https://pnpm.io) and [`workspaces`](https://pnpm.io/workspaces) for development.
-- We use [Turborepo](https://turbo.build/repo) as our build system.
-- We use [changesets](https://github.com/changesets/changesets) for managing releases.
+shadcn/ui hands you the actual component code. You have full control to customize and extend the components to your needs. This means:
 
-## Structure
+- **Full Transparency:** You see exactly how each component is built.
+- **Easy Customization:** Modify any part of a component to fit your design and functionality requirements.
+- **AI Integration:** Access to the code makes it straightforward for LLMs to read, understand, and even improve your components.
 
-This repository is structured as follows:
+In a typical library, if you need to change a button's behavior, you have to override styles or wrap the component. With shadcn/ui, you simply edit the button code directly.
 
-```
-apps
-└── www
-    ├── app
-    ├── components
-    ├── content
-    └── registry
-        ├── default
-        │   ├── example
-        │   └── ui
-        └── new-york
-            ├── example
-            └── ui
-packages
-└── cli
-```
+<Accordion collapsible>
+  <AccordionItem value="faq-1" className="border-none">
+    <AccordionTrigger>
+      How do I pull upstream updates in an Open Code approach?
+    </AccordionTrigger>
+    <AccordionContent>
+      Content about upstream updates coming soon.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
 
-| Path                  | Description                              |
-| --------------------- | ---------------------------------------- |
-| `apps/www/app`        | The Next.js application for the website. |
-| `apps/www/components` | The React components for the website.    |
-| `apps/www/content`    | The content for the website.             |
-| `apps/www/registry`   | The registry for the components.         |
-| `packages/cli`        | The `shadcn-ui` package.                 |
+## Composition
 
-## Development
+Every component in shadcn/ui shares a common, composable interface. If a component does not exist, we bring it in, make it composable, and adjust its style to match and work with the rest of the design system.
 
-### Fork this repo
+A shared, composable interface means it's predictable for both your team and LLMs. You are not learning different APIs for every new component. Even for third-party ones.
 
-You can fork this repo by clicking the fork button in the top right corner of this page.
+## Distribution
 
-### Clone on your local machine
+shadcn/ui is also a code distribution system. It defines a schema for components and a CLI to distribute them.
 
-```bash
-git clone https://github.com/your-username/ui.git
-```
+- **Schema:** A flat-file structure that defines the components, their dependencies, and properties.
+- **CLI:** A command-line tool to distribute and install components across projects with cross-framework support.
 
-### Navigate to project directory
+You can use the schema to distribute your components to other projects or have AI generate completely new components based on existing schema.
 
-```bash
-cd ui
-```
+## Beautiful Defaults
 
-### Create a new Branch
+shadcn/ui comes with a large collection of components that have carefully chosen default styles. They are designed to look good on their own and to work well together as a consistent system:
 
-```bash
-git checkout -b my-new-branch
-```
+- **Good Out-of-the-Box:** Your UI has a clean and minimal look without extra work.
+- **Unified Design:** Components naturally fit with one another. Each component is built to match the others, keeping your UI consistent.
+- **Easily Customizable:** If you want to change something, it's simple to override and extend the defaults.
 
-### Install dependencies
+## AI-Ready
 
-```bash
-pnpm install
-```
+The design of shadcn/ui makes it easy for AI tools to work with your code. Its open code and consistent API allow AI models to read, understand, and even generate new components.
 
-### Run a workspace
-
-You can use the `pnpm --filter=[WORKSPACE]` command to start the development process for a workspace.
-
-#### Examples
-
-1. To run the `ui.shadcn.com` website:
-
-```bash
-pnpm --filter=www dev
-```
-
-2. To run the `shadcn-ui` package:
-
-```bash
-pnpm --filter=shadcn-ui dev
-```
-
-## Running the CLI Locally
-
-To run the CLI locally, you can follow the workflow:
-
-1. Start by running the registry (main site) to make sure the components are up to date:
-
-   ```bash
-   pnpm www:dev
-   ```
-
-2. Run the development script for the CLI:
-
-   ```bash
-   pnpm shadcn:dev
-   ```
-
-3. In another terminal tab, test the CLI by running:
-
-   ```bash
-   pnpm shadcn
-   ```
-
-   To test the CLI in a specific app, use a command like:
-
-   ```bash
-   pnpm shadcn <init | add | ...> -c ~/Desktop/my-app
-   ```
-
-4. To run the tests for the CLI:
-
-   ```bash
-   pnpm --filter=shadcn test
-   ```
-
-This workflow ensures that you are running the most recent version of the registry and testing the CLI properly in your local environment.
-
-## Documentation
-
-The documentation for this project is located in the `www` workspace. You can run the documentation locally by running the following command:
-
-```bash
-pnpm --filter=www dev
-```
-
-Documentation is written using [MDX](https://mdxjs.com). You can find the documentation files in the `apps/www/content/docs` directory.
-
-## Components
-
-We use a registry system for developing components. You can find the source code for the components under `apps/www/registry`. The components are organized by styles.
-
-```bash
-apps
-└── www
-    └── registry
-        ├── default
-        │   ├── example
-        │   └── ui
-        └── new-york
-            ├── example
-            └── ui
-```
-
-When adding or modifying components, please ensure that:
-
-1. You make the changes for every style.
-2. You update the documentation.
-3. You run `pnpm build:registry` to update the registry.
-
-## Commit Convention
-
-Before you create a Pull Request, please check whether your commits comply with
-the commit conventions used in this repository.
-
-When you create a commit we kindly ask you to follow the convention
-`category(scope or module): message` in your commit message while using one of
-the following categories:
-
-- `feat / feature`: all changes that introduce completely new code or new
-  features
-- `fix`: changes that fix a bug (ideally you will additionally reference an
-  issue if present)
-- `refactor`: any code related change that is not a fix nor a feature
-- `docs`: changing existing or creating new documentation (i.e. README, docs for
-  usage of a lib or cli usage)
-- `build`: all changes regarding the build of the software, changes to
-  dependencies or the addition of new dependencies
-- `test`: all changes regarding tests (adding new tests or changing existing
-  ones)
-- `ci`: all changes regarding the configuration of continuous integration (i.e.
-  github actions, ci system)
-- `chore`: all changes to the repository that do not fit into any of the above
-  categories
-
-  e.g. `feat(components): add new prop to the avatar component`
-
-If you are interested in the detailed specification you can visit
-https://www.conventionalcommits.org/ or check out the
-[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
-
-## Requests for new components
-
-If you have a request for a new component, please open a discussion on GitHub. We'll be happy to help you out.
-
-## CLI
-
-The `shadcn-ui` package is a CLI for adding components to your project. You can find the documentation for the CLI [here](https://ui.shadcn.com/docs/cli).
-
-Any changes to the CLI should be made in the `packages/cli` directory. If you can, it would be great if you could add tests for your changes.
-
-## Testing
-
-Tests are written using [Vitest](https://vitest.dev). You can run all the tests from the root of the repository.
-
-```bash
-pnpm test
-```
-
-Please ensure that the tests are passing when submitting a pull request. If you're adding new features, please include tests.
+An AI model can learn how your components work and suggest improvements or even create new components that integrate with your existing design.

@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import fm from "front-matter"
 import z from "zod"
 import { docsSource } from "@/lib/source"
+import { DocsCopyPage } from "@/components/docs-copy-page"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -89,6 +90,7 @@ export default async function DocsPage(props: {
                   {doc.title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
+                  <DocsCopyPage page={raw} url={pageUrl} />
                   {neighbours.previous && (
                     <Button
                       variant="secondary"
