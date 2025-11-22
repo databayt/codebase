@@ -59,10 +59,9 @@ export function DocsSidebar({
       {...props}
     >
       <SidebarContent className="overflow-y-auto">
-        <div className="h-full pr-3">
-          <ScrollArea className="h-full w-full">
-            <div className="pb-4 pt-2">
-              <SidebarGroup className="p-0 -mx-3">
+        <ScrollArea className="h-full w-full">
+          <div className="pb-4 pt-2">
+            <SidebarGroup className="p-0">
               <SidebarGroupContent>
                 <SidebarMenu>
                   {DOCS_LINKS.map(({ name, href }) => {
@@ -73,7 +72,7 @@ export function DocsSidebar({
                         <SidebarMenuButton
                           asChild
                           isActive={isActive}
-                          className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium pl-0 pr-2"
+                          className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-2"
                         >
                           <Link href={href}>{name}</Link>
                         </SidebarMenuButton>
@@ -83,9 +82,8 @@ export function DocsSidebar({
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
-            </div>
-          </ScrollArea>
-        </div>
+          </div>
+        </ScrollArea>
       </SidebarContent>
     </Sidebar>
   )
