@@ -45,13 +45,13 @@ export function AtomsSidebar({
 
   return (
     <Sidebar
-      className="sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100vh-var(--header-height)-6rem)] bg-transparent lg:flex"
+      className="sticky top-[calc(var(--header-height)+2rem)] z-30 hidden h-[calc(100vh-var(--header-height)-4rem)] overflow-y-auto bg-transparent lg:flex"
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="overflow-hidden">
+      <SidebarContent className="overflow-y-auto">
         <ScrollArea className="h-full w-full">
-          <div className="pb-4">
+          <div className="pb-4 pt-2">
             <SidebarGroup className="p-0">
               <SidebarGroupContent>
                 <SidebarMenu>
