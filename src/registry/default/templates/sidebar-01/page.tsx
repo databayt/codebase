@@ -4,7 +4,7 @@ export default function SidebarPage() {
   return (
     <div className="flex h-screen">
       <div className="w-64 border-r bg-background">
-        <div className="p-6">
+        <div className="">
           <h2 className="text-lg font-semibold">Sidebar Navigation</h2>
         </div>
         <nav className="space-y-1 p-2">
@@ -22,7 +22,7 @@ export default function SidebarPage() {
           </a>
         </nav>
       </div>
-      <div className="flex-1 p-6">
+      <div className="flex-1 ">
         <h1 className="text-2xl font-bold">Main Content Area</h1>
         <p className="text-muted-foreground mt-2">
           This is a sidebar navigation template with collapsible menu items.

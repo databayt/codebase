@@ -60,8 +60,8 @@ async function verifyAuth(request: NextRequest): Promise<boolean> {
   }
 }
 
-// Manual proxy without NextAuth wrapper
-export default async function proxy(request: NextRequest) {
+// Manual middleware without NextAuth wrapper
+export default async function middleware(request: NextRequest) {
   // Skip logging for asset requests
   const pathname = request.nextUrl.pathname
   const isAsset = pathname.includes('_next') || pathname.includes('favicon')
@@ -132,9 +132,7 @@ export default async function proxy(request: NextRequest) {
 
     // Skip middleware for API routes
     if (isApiAuthRoute) {
-      const response = NextResponse.next()
-      response.headers.set('x-pathname', request.nextUrl.pathname)
-      return response
+      return NextResponse.next()
     }
 
     // Handle locale detection/redirection first (only if not an API route)
@@ -153,9 +151,7 @@ export default async function proxy(request: NextRequest) {
         const fullRedirectUrl = createSafeURL(redirectUrl, baseUrl)
         return NextResponse.redirect(fullRedirectUrl)
       }
-      const response = NextResponse.next()
-      response.headers.set('x-pathname', request.nextUrl.pathname)
-      return response
+      return NextResponse.next()
     }
 
     // Explicitly protect platform routes
@@ -181,16 +177,12 @@ export default async function proxy(request: NextRequest) {
       return NextResponse.redirect(fullLoginUrl)
     }
 
-    const response = NextResponse.next()
-    response.headers.set('x-pathname', request.nextUrl.pathname)
-    return response
+    return NextResponse.next()
 
   } catch (error) {
-    console.error("🚨 [Proxy] Error:", error)
+    console.error("🚨 [Middleware] Error:", error)
     // Return a safe response to prevent crashes
-    const response = NextResponse.next()
-    response.headers.set('x-pathname', request.nextUrl.pathname)
-    return response
+    return NextResponse.next()
   }
 }
 

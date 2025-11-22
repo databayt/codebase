@@ -293,8 +293,8 @@ function TemplateViewerView() {
     const { resizablePanelRef } = useTemplateViewer()
 
     return (
-        <div className="hidden group-data-[view=code]/template-view-wrapper:hidden md:h-[--height] lg:flex -mx-[var(--container-padding-xs)] sm:-mx-[var(--container-padding-sm)] md:-mx-[var(--container-padding-md)] lg:-mx-[var(--container-padding-lg)] xl:-mx-[var(--container-padding-xl)] w-[calc(100%+2*var(--container-padding-xs))] sm:w-[calc(100%+2*var(--container-padding-sm))] md:w-[calc(100%+2*var(--container-padding-md))] lg:w-[calc(100%+2*var(--container-padding-lg))] xl:w-[calc(100%+2*var(--container-padding-xl))]">
-            <div className="relative grid w-full gap-4 px-[var(--container-padding-xs)] sm:px-[var(--container-padding-sm)] md:px-[var(--container-padding-md)] lg:px-[var(--container-padding-lg)] xl:px-[var(--container-padding-xl)]">
+        <div className="group-data-[view=code]/template-view-wrapper:hidden flex md:h-[--height]">
+            <div className="relative grid w-full gap-4">
                 <div className="absolute inset-0 end-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
                 <ResizablePanelGroup direction="horizontal" className="relative z-10 after:absolute after:inset-0 after:end-3 after:z-0 after:rounded-xl after:bg-surface/50">
                     <ResizablePanel
@@ -305,7 +305,7 @@ function TemplateViewerView() {
                     >
                         <TemplateViewerIframe />
                     </ResizablePanel>
-                    <ResizableHandle className="relative hidden w-3 bg-transparent p-0 after:absolute after:right-0 after:top-1/2 after:h-8 after:w-[6px] after:-translate-y-1/2 after:translate-x-[-1px] after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
+                    <ResizableHandle className="relative hidden w-3 bg-transparent p-0 md:block cursor-col-resize hover:bg-muted/20" />
                     <ResizablePanel defaultSize={0} minSize={0} />
                 </ResizablePanelGroup>
             </div>
@@ -325,7 +325,7 @@ function TemplateViewerCode() {
     }
 
     return (
-        <div className="mr-[14px] flex overflow-hidden rounded-xl bg-zinc-950 text-white group-data-[view=preview]/template-view-wrapper:hidden md:h-[--height]">
+        <div className="group-data-[view=preview]/template-view-wrapper:hidden mr-[14px] flex overflow-hidden rounded-xl bg-zinc-950 text-white md:h-[--height]">
             <div className="w-[280px]">
                 <TemplateViewerFileTree />
             </div>

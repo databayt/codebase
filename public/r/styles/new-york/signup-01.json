@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "templates/signup-01/page.tsx",
-      "content": "import { SignupForm } from \"@/registry/new-york/templates/signup-01/components/signup-form\"\n\nexport default function Page() {\n  return (\n    <div className=\"flex min-h-svh w-full items-center justify-center p-6 md:p-10\">\n      <div className=\"w-full max-w-sm\">\n        <SignupForm />\n      </div>\n    </div>\n  )\n}\n",
+      "content": "import { SignupForm } from \"@/registry/new-york/templates/signup-01/components/signup-form\"\n\nexport default function Page() {\n  return (\n    <div className=\"flex min-h-svh w-full items-center justify-center \">\n      <div className=\"w-full max-w-sm\">\n        <SignupForm />\n      </div>\n    </div>\n  )\n}\n",
       "type": "registry:page",
       "target": "app/signup-01/page.tsx"
     },

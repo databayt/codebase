@@ -35,7 +35,7 @@ You are an expert software architect specializing in Next.js 15 applications wit
   ```
 
 **Project-Specific Tech Stack:**
-- **Framework**: Next.js 15.5.3 with App Router and Turbopack, React 19.1.0, TypeScript
+- **Framework**: Next.js 16.0.3 with App Router and Turbopack, React 19.2.0, TypeScript
 - **Database**: PostgreSQL with Prisma ORM 6.16.2, Neon for serverless
 - **Authentication**: NextAuth v5 (beta) with Prisma adapter, OAuth and credentials
 - **Styling**: Tailwind CSS v4 with OKLCH color format, custom design system

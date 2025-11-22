@@ -8,7 +8,7 @@ A Next.js 15 application with authentication, internationalization, and a compre
 ## Tech Stack
 - **Framework**: Next.js 15.5.3 with App Router and Turbopack
 - **Runtime**: React 19.1.0, supports both Edge and Node.js runtime
-- **Database**: PostgreSQL with Prisma ORM 6.16.2
+- **Database**: PostgreSQL with Prisma ORM 6.19.0 (library engine)
 - **Authentication**: NextAuth v5 (beta) with Prisma adapter
 - **Styling**: Tailwind CSS v4 with custom design system
 - **UI Components**: Radix UI primitives + custom shadcn/ui components
@@ -93,6 +93,18 @@ src/
 - Radix UI for accessible primitives
 - Custom shadcn/ui component library
 - Consistent variant system via CVA
+
+### 6. Prisma Database Configuration
+- **Version**: Prisma 6.19.0 with TypeScript-based `library` engine
+- **Multi-file schema**: Schemas split across domain-specific files
+  - `prisma/schema.prisma` - Main datasource and generator configuration
+  - `prisma/models/auth.prisma` - Authentication models (User, Account, etc.)
+  - `prisma/models/task.prisma` - Task management models
+  - `prisma/models/lead.prisma` - Lead management models
+- **Configuration**: `prisma.config.ts` points to `prisma/` directory for automatic schema loading
+- **Client initialization**: Single client exported from `src/lib/db.ts` using singleton pattern
+- **Engine type**: Uses `library` engine for 90% smaller bundle size and 3.4x faster queries
+- **Development workflow**: Using `prisma db push` for rapid prototyping (no migrations)
 
 ## Critical Files
 

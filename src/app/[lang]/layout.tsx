@@ -5,6 +5,7 @@ import { getDictionary } from "@/components/local/dictionaries";
 import { type Locale, localeConfig } from "@/components/local/config";
 import { ThemeProvider } from "@/components/atom/theme-provider"
 import { cn } from "@/lib/utils"
+import { headers } from "next/headers"
 
 export async function generateMetadata({
   params,
@@ -40,6 +41,11 @@ export default async function LocaleLayout({
 }) {
     const { lang } = await params as { lang: Locale };
 
+    // Get the pathname to check if we're in a view route
+    const headersList = await headers();
+    const pathname = headersList.get('x-pathname') || '';
+    const isViewRoute = pathname.includes('/view/templates/');
+
     // Fallback to default locale if config not found
     const config = localeConfig[lang] || localeConfig['en'];
     const isRTL = config.dir === 'rtl';
@@ -52,7 +58,7 @@ export default async function LocaleLayout({
         <html lang={lang} dir={config.dir} suppressHydrationWarning>
             <body className={cn(fontClass, fontVariables, "antialiased")} suppressHydrationWarning>
                 <ThemeProvider>
-                    <div className="layout-container">
+                    <div className={isViewRoute ? "" : "layout-container"}>
                         {children}
                     </div>
                 </ThemeProvider>

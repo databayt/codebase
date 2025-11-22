@@ -20,9 +20,10 @@ import Link from 'next/link';
 export default async function LeadDetailPage({
   params,
 }: {
-  params: { id: string; lang: string };
+  params: Promise<{ id: string; lang: string }>;
 }) {
-  const result = await getLeadById(params.id);
+  const { id, lang } = await params;
+  const result = await getLeadById(id);
 
   if (!result.success || !result.data) {
     notFound();
@@ -36,7 +37,7 @@ export default async function LeadDetailPage({
       <PageHeader
         heading={
           <div className="flex items-center gap-2">
-            <Link href={`/${params.lang}/leads`}>
+            <Link href={`/${lang}/leads`}>
               <Button variant="ghost" size="icon" className="mr-2">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
