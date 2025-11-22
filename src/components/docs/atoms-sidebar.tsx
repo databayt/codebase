@@ -50,9 +50,10 @@ export function AtomsSidebar({
       {...props}
     >
       <SidebarContent className="overflow-y-auto">
-        <ScrollArea className="h-full w-full">
-          <div className="pb-4 pt-2">
-            <SidebarGroup className="p-0">
+        <div className="h-full pr-3">
+          <ScrollArea className="h-full w-full">
+            <div className="pb-4 pt-2 pr-2">
+              <SidebarGroup className="p-0">
               <SidebarGroupContent>
                 <SidebarMenu>
                   {ATOMS_LINKS.map(({ name, href }) => {
@@ -73,8 +74,9 @@ export function AtomsSidebar({
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
-          </div>
-        </ScrollArea>
+            </div>
+          </ScrollArea>
+        </div>
       </SidebarContent>
     </Sidebar>
   )
