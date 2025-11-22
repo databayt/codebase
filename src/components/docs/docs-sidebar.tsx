@@ -61,8 +61,8 @@ export function DocsSidebar({
       <SidebarContent className="overflow-y-auto">
         <div className="h-full pr-3">
           <ScrollArea className="h-full w-full">
-            <div className="pb-4 pt-2 pr-2">
-              <SidebarGroup className="p-0">
+            <div className="pb-4 pt-2">
+              <SidebarGroup className="p-0 -mx-3">
               <SidebarGroupContent>
                 <SidebarMenu>
                   {DOCS_LINKS.map(({ name, href }) => {
