@@ -110,6 +110,7 @@ export default async function proxy(request: NextRequest) {
                          pathname.startsWith('/vibes') ||
                          pathname.startsWith('/blocks') ||
                          pathname.startsWith('/micros') ||
+                         pathname.startsWith('/community') ||
                          pathname.startsWith('/view/templates') ||
                          pathname === '/docs' ||
                          pathname === '/atoms'

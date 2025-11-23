@@ -32,6 +32,7 @@
     "@fontsource/rubik": "^5.2.8",
     "@formatjs/intl-localematcher": "^0.6.1",
     "@hookform/resolvers": "^5.2.2",
+    "@iconify/react": "^6.0.2",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^15.5.3",
