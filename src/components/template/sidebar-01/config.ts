@@ -49,6 +49,7 @@ export const docsConfig: DocsConfig = {
         { title: "Structure", href: "/docs/structure", items: [] },
         { title: "Roadmap", href: "/docs/roadmap", items: [] },
         { title: "MVP", href: "/docs/mvp", items: [] },
+        { title: "Pitch", href: "/docs/pitch", items: [] },
         { title: "Changelog", href: "/docs/changelog", items: [] },
         { title: "Issues", href: "/docs/issues", items: [] },
         { title: "Claude Code", href: "/docs/claude-code", items: [] },
