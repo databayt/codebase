@@ -18,6 +18,7 @@ import {
 // Flat list of links without sections - exactly like atoms sidebar
 const DOCS_LINKS = [
   { name: "Introduction", href: "/docs" },
+  { name: "Get Started", href: "/docs/get-started" },
   { name: "PRD", href: "/docs/prd" },
   { name: "Installation", href: "/docs/installation" },
   { name: "Architecture", href: "/docs/architecture" },
