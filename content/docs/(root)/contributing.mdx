@@ -20,26 +20,44 @@ This repository is a featured-based native nextjs.
 This repository is structured as follows:
 
 ```
-apps
-└── v4
-    ├── app
-    ├── components
-    ├── content
-    └── registry
-        └── new-york-v4
-            ├── example
-            └── ui
-packages
-└── shadcn
+src
+├── app
+│   └── [lang]
+│       ├── (marketing)
+│       ├── (operator)
+│       ├── (auth)
+│       ├── onboarding
+│       ├── s
+│       │   └── [subdomain]
+│       │       ├── (platform)
+│       │       └── (site)
+│       └── layout.tsx
+└── components
+    ├── atom
+    ├── marketing
+    ├── auth
+    ├── onboarding
+    ├── operator
+    ├── platform
+    └── site
 ```
 
-| Path                 | Description                              |
-| -------------------- | ---------------------------------------- |
-| `apps/v4/app`        | The Next.js application for the website. |
-| `apps/v4/components` | The React components for the website.    |
-| `apps/v4/content`    | The content for the website.             |
-| `apps/v4/registry`   | The registry for the components.         |
-| `packages/shadcn`    | The `shadcn` package.                    |
+| Path                              | Description                                      |
+| --------------------------------- | ------------------------------------------------ |
+| `app/[lang]/(marketing)`          | Public marketing pages.                          |
+| `app/[lang]/(operator)`           | Operator dashboard and management.               |
+| `app/[lang]/(auth)`               | Authentication pages (login, register, etc.).    |
+| `app/[lang]/onboarding`           | User onboarding flow.                            |
+| `app/[lang]/s/[subdomain]`        | Multi-tenant subdomain routing.                  |
+| `app/[lang]/s/[subdomain]/(platform)` | Tenant platform pages.                       |
+| `app/[lang]/s/[subdomain]/(site)` | Tenant public site pages.                        |
+| `components/atom`                 | Atomic design components (primitives).           |
+| `components/marketing`            | Marketing page components.                       |
+| `components/auth`                 | Authentication components.                       |
+| `components/onboarding`           | Onboarding flow components.                      |
+| `components/operator`             | Operator dashboard components.                   |
+| `components/platform`             | Platform feature components.                     |
+| `components/site`                 | Site-specific components.                        |
 
 ## Development
 
