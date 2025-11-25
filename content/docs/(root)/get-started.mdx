@@ -16,35 +16,44 @@ _See more companies at [Competitors](/docs/competitors)._
 
 ## Run Localhost
 
-Quick setup in 5 minutes:
-
+**a. Clone the repo**
 ```bash
-git clone https://github.com/databayt/hogwarts.git && cd hogwarts
+git clone https://github.com/databayt/hogwarts.git
 ```
 
+**b. Enter the folder**
+```bash
+cd hogwarts
+```
+
+**c. Install dependencies**
 ```bash
 pnpm install
 ```
 
+**d. Create environment file**
 ```bash
 cp .env.example .env
 ```
 
+**e. Generate Prisma client**
 ```bash
 pnpm prisma generate
 ```
 
+**f. Setup database**
 ```bash
 pnpm prisma migrate dev
 ```
 
+**g. Start dev server**
 ```bash
 pnpm dev
 ```
 
-**Running at:** http://localhost:3000
+Open http://localhost:3000
 
-_For detailed setup guide with database options, see [Localhost Setup](/docs/localhost)._
+_For detailed setup, see [Localhost Setup](/docs/localhost)._
 
 ## Submit a PR
 
