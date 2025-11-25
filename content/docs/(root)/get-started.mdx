@@ -83,47 +83,60 @@ _For detailed setup, see [Localhost Setup](/docs/localhost)._
 
 ## First Good PR
 
+Add your name to the blog page as your first contribution.
+
+**01. Create a new branch**
 ```bash
-git checkout -b feature/your-name
+git checkout -b feat/your-name
 ```
 
+**02. Open the file**
+
+Open `src/components/marketing/blog/content.tsx` in VS Code
+
+**03. Find the Blog text**
+
+Look for this code:
+```tsx
+<div>
+    Blog
+</div>
+```
+
+**04. Add your name below Blog**
+
+Change it to:
+```tsx
+<div>
+    Blog
+    <p>Your Name</p>
+</div>
+```
+
+**05. Save the file**
+
+Press `Ctrl + S`
+
+**06. Stage changes**
 ```bash
 git add .
 ```
 
+**07. Commit changes**
 ```bash
-git commit -m "feat: add your change"
+git commit -m "feat: add Your Name to blog"
 ```
 
+**08. Push to GitHub**
 ```bash
-git push origin feature/your-name
+git push origin feat/your-name
 ```
 
-_For full contribution guide, see [Contributing](/docs/community) (coming soon)._
+**09. Create Pull Request**
 
-## First Contribution
+Go to GitHub and click "Compare & pull request"
 
-Add your name to our contributors showcase:
-
-**1. Create a new file:** `src/app/[lang]/(marketing)/blog/contributors/YOUR-NAME.mdx`
-
-**2. Add your info:**
-
-```mdx
----
-name: Your Name
-github: your-github-username
-date: 2024-11-21
----
-
-# Your Name
-
-Hi! I'm contributing to Hogwarts because [your reason].
-```
-
-**3. Submit PR** with title: `feat: add [Your Name] to contributors`
-
-**That's it! Welcome to Hogwarts.** _Join our community of contributors building the future of school automation._
+**That's it! Welcome to Hogwarts.**
 
 ## Next Steps
 
