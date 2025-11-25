@@ -16,37 +16,50 @@ _See more companies at [Competitors](/docs/competitors)._
 
 ## Run Localhost
 
-**a. Clone the repo**
+**a. Install Node.js**
+
+Download from [nodejs.org](https://nodejs.org/) (LTS version)
+
+**b. Install pnpm**
+```bash
+npm install -g pnpm
+```
+
+**c. Install Git**
+
+Download from [git-scm.com](https://git-scm.com/downloads)
+
+**d. Clone the repo**
 ```bash
 git clone https://github.com/databayt/hogwarts.git
 ```
 
-**b. Enter the folder**
+**e. Enter the folder**
 ```bash
 cd hogwarts
 ```
 
-**c. Install dependencies**
+**f. Install dependencies**
 ```bash
 pnpm install
 ```
 
-**d. Create environment file**
+**g. Create environment file**
 ```bash
 cp .env.example .env
 ```
 
-**e. Generate Prisma client**
+**h. Generate Prisma client**
 ```bash
 pnpm prisma generate
 ```
 
-**f. Setup database**
+**i. Setup database**
 ```bash
 pnpm prisma migrate dev
 ```
 
-**g. Start dev server**
+**j. Start dev server**
 ```bash
 pnpm dev
 ```
