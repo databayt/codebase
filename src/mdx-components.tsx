@@ -51,6 +51,7 @@ import { CardsDataTable } from "@/components/atom/data-table"
 import { CardsMetric as CardsMetricSingle } from "@/components/atom/metric"
 import { CardsStats } from "@/components/atom/stats"
 import { CardsTeamMembers } from "@/components/atom/team-members"
+import { DirectoryStructure } from "@/components/docs/directory-structure"
 
 // This file is required to use MDX in `app` directory.
 
@@ -359,6 +360,7 @@ const mdxComponents = {
     Metric: () => <CardsMetricSingle dictionary={defaultDictionary} />,
     Stats: () => <CardsStats dictionary={defaultDictionary} />,
     TeamMembers: () => <CardsTeamMembers dictionary={defaultDictionary} />,
+    DirectoryStructure,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
