@@ -20,40 +20,58 @@ _See more companies at [Competitors](/docs/competitors)._
 
 Download from [code.visualstudio.com](https://code.visualstudio.com/)
 
+---
+
 **02. Install Node.js**
 
 Download from [nodejs.org](https://nodejs.org/) (LTS version)
+
+---
 
 **03. Install Git**
 
 Download from [git-scm.com](https://git-scm.com/downloads)
 
+---
+
 **04. Open VS Code**
 
 Launch VS Code, then open terminal: View → Terminal
+
+---
 
 **05. Install pnpm**
 ```text
 npm install -g pnpm
 ```
 
+---
+
 **06. Clone the repository**
 ```bash
 git clone https://github.com/databayt/hogwarts.git
 ```
 
+---
+
 **07. Open project in VS Code**
 
 File → Open Folder → select the `hogwarts` folder
+
+---
 
 **08. Open terminal in VS Code**
 
 View → Terminal
 
+---
+
 **09. Install dependencies**
 ```bash
 pnpm install
 ```
+
+---
 
 **10. Create environment file**
 
@@ -62,20 +80,28 @@ Create `.env` in root folder and paste:
 curl -o .env https://raw.githubusercontent.com/databayt/hogwarts/main/env.txt
 ```
 
+---
+
 **11. Generate Prisma client**
 ```bash
 pnpm prisma generate
 ```
+
+---
 
 **12. Setup database**
 ```bash
 pnpm prisma migrate dev
 ```
 
+---
+
 **13. Start dev server**
 ```bash
 pnpm dev
 ```
+
+---
 
 **14. Open browser**
 
@@ -92,9 +118,13 @@ Add your name to the blog page as your first contribution.
 git checkout -b feat/your-name
 ```
 
+---
+
 **02. Open the file**
 
 Open `src/components/marketing/blog/content.tsx` in VS Code
+
+---
 
 **03. Find the Blog text**
 
@@ -104,6 +134,8 @@ Look for this code:
     Blog
 </div>
 ```
+
+---
 
 **04. Add your name below Blog**
 
@@ -115,28 +147,40 @@ Change it to:
 </div>
 ```
 
+---
+
 **05. Save the file**
 
 Press `Ctrl + S`
+
+---
 
 **06. Stage changes**
 ```bash
 git add .
 ```
 
+---
+
 **07. Commit changes**
 ```bash
 git commit -m "feat: add Your Name to blog"
 ```
+
+---
 
 **08. Push to GitHub**
 ```bash
 git push origin feat/your-name
 ```
 
+---
+
 **09. Create Pull Request**
 
 Go to GitHub and click "Compare & pull request"
+
+---
 
 **That's it! Welcome to Hogwarts.**
 
