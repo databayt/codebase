@@ -3,19 +3,18 @@ title: "Get Started"
 description: "Quick start guide for contributing to the Hogwarts school automation platform"
 ---
 
-import Link from "next/link"
-
-# Get Started
-
-## 1. The Idea
+## The Idea
 
 Building a school automation platform like these real-world products:
-- [PowerSchool](https://www.powerschool.com) - $2.8B valuation, 45M students
-- [Skyward](https://www.skyward.com) - 5.7M students, 1,900+ districts
-- [Infinite Campus](https://www.infinitecampus.com) - 7.8M students, 50 US states
-- [Classter](https://www.classter.com) - 500K+ students, 40+ countries
 
-## 2. Run Localhost
+1. [OpenEduCat](https://openeducat.org/) - Open source education management
+2. [Pioneers E-School](https://pioneerseschool.com/) - Comprehensive school system
+3. [PowerSchool](https://www.powerschool.com/) - $2.8B valuation, 45M students
+4. [Infinite Campus](https://www.infinitecampus.com/) - 7.8M students, 50 US states
+
+_See more companies at [Competitors](/docs/competitors)._
+
+## Run Localhost
 
 Quick setup in 5 minutes:
 
@@ -32,7 +31,11 @@ cp .env.example .env
 ```
 
 ```bash
-pnpm prisma generate && pnpm prisma migrate dev
+pnpm prisma generate
+```
+
+```bash
+pnpm prisma migrate dev
 ```
 
 ```bash
@@ -41,41 +44,36 @@ pnpm dev
 
 **Running at:** http://localhost:3000
 
-<div className="text-sm text-muted-foreground bg-muted p-4 rounded-lg mt-4">
-  → Detailed setup guide with database options: <Link href="/docs/localhost" className="text-primary hover:underline">Localhost Setup</Link>
-</div>
+_For detailed setup guide with database options, see [Localhost Setup](/docs/localhost)._
 
-## 3. Submit a PR
+## Submit a PR
 
 ```bash
 git checkout -b feature/your-name
 ```
 
 ```bash
-git add . && git commit -m "feat: add your change"
+git add .
+```
+
+```bash
+git commit -m "feat: add your change"
 ```
 
 ```bash
 git push origin feature/your-name
 ```
 
-**Checklist:**
-- ✅ TypeScript passes (`pnpm tsc --noEmit`)
-- ✅ Tests pass (`pnpm test`)
-- ✅ Build succeeds (`pnpm build`)
-- ✅ Database queries include `schoolId`
+_For full contribution guide, see [Contributing](/docs/community) (coming soon)._
 
-<div className="text-sm text-muted-foreground bg-muted p-4 rounded-lg mt-4">
-  → Full contribution guide: <Link href="/docs/contributing" className="text-primary hover:underline">Contributing</Link> (coming soon)
-</div>
-
-## 4. First Contribution
+## First Contribution
 
 Add your name to our contributors showcase:
 
 **1. Create a new file:** `src/app/[lang]/(marketing)/blog/contributors/YOUR-NAME.mdx`
 
 **2. Add your info:**
+
 ```mdx
 ---
 name: Your Name
@@ -90,28 +88,18 @@ Hi! I'm contributing to Hogwarts because [your reason].
 
 **3. Submit PR** with title: `feat: add [Your Name] to contributors`
 
-<div className="bg-muted p-6 rounded-lg mt-8 border-l-4 border-primary">
-  <p className="font-semibold text-lg mb-2">🎉 That's it! Welcome to Hogwarts</p>
-  <p className="text-sm text-muted-foreground">Join our community of contributors building the future of school automation.</p>
-</div>
+**That's it! Welcome to Hogwarts.** _Join our community of contributors building the future of school automation._
 
 ## Next Steps
 
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-  <div className="p-6 border rounded-lg">
-    <h4 className="font-semibold mb-2">Explore the Docs</h4>
-    <div className="text-sm text-muted-foreground space-y-2">
-      <div>• <Link href="/docs" className="text-primary hover:underline">Introduction</Link></div>
-      <div>• <Link href="/docs/architecture" className="text-primary hover:underline">Architecture</Link></div>
-      <div>• <Link href="/docs/prd" className="text-primary hover:underline">Product Requirements</Link></div>
-    </div>
-  </div>
-  <div className="p-6 border rounded-lg">
-    <h4 className="font-semibold mb-2">Join the Community</h4>
-    <div className="text-sm text-muted-foreground space-y-2">
-      <div>• Browse open issues on GitHub</div>
-      <div>• Join our Discord server</div>
-      <div>• Check out the project roadmap</div>
-    </div>
-  </div>
-</div>
+### Explore the Docs
+
+- [Introduction](/docs) - Project overview
+- [Architecture](/docs/architecture) - System design
+- [Product Requirements](/docs/prd) - Full PRD
+
+### Join the Community
+
+- Browse open issues on GitHub
+- Join our Discord server
+- Check out the project roadmap
