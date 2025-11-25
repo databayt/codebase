@@ -16,66 +16,66 @@ _See more companies at [Competitors](/docs/competitors)._
 
 ## Run Localhost
 
-**a. Install VS Code**
+**01. Install VS Code**
 
 Download from [code.visualstudio.com](https://code.visualstudio.com/)
 
-**b. Install Node.js**
+**02. Install Node.js**
 
 Download from [nodejs.org](https://nodejs.org/) (LTS version)
 
-**c. Install Git**
+**03. Install Git**
 
 Download from [git-scm.com](https://git-scm.com/downloads)
 
-**d. Open VS Code**
+**04. Open VS Code**
 
-Launch VS Code, then open the terminal: `Ctrl + `` (backtick) or View → Terminal
+Launch VS Code, then open terminal: View → Terminal
 
-**e. Install pnpm**
+**05. Install pnpm**
 ```bash
 npm install -g pnpm
 ```
 
-**f. Clone the repo**
+**06. Clone the repo**
 ```bash
 git clone https://github.com/databayt/hogwarts.git
 ```
 
-**g. Open project in VS Code**
+**07. Open project in VS Code**
 
 File → Open Folder → select the `hogwarts` folder
 
-**h. Open terminal in VS Code**
+**08. Open terminal in VS Code**
 
-`Ctrl + `` (backtick) or View → Terminal
+View → Terminal
 
-**i. Install dependencies**
+**09. Install dependencies**
 ```bash
 pnpm install
 ```
 
-**j. Create environment file**
+**10. Create environment file**
 ```bash
 cp .env.example .env
 ```
 
-**k. Generate Prisma client**
+**11. Generate Prisma client**
 ```bash
 pnpm prisma generate
 ```
 
-**l. Setup database**
+**12. Setup database**
 ```bash
 pnpm prisma migrate dev
 ```
 
-**m. Start dev server**
+**13. Start dev server**
 ```bash
 pnpm dev
 ```
 
-**n. Open browser**
+**14. Open browser**
 
 Go to http://localhost:3000
 
