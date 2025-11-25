@@ -56,21 +56,21 @@ Multi-tenant architecture, subdomain routing, and core technical setup for a sca
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Multi-tenant database schema with schoolId scoping <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] Subdomain routing (school.databayt.org) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-200 rounded">70%</span>
-- [ ] Next.js 15 + React 19 + Prisma 6 configured <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] CI/CD pipeline with automated tests <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Error monitoring (Sentry) operational <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Internationalization (Arabic/English) functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] Development/staging/production environments <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-200 rounded">70%</span>
-- [ ] Database singleton pattern implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] Testing infrastructure (Vitest, Playwright) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Multi-tenant test suite with isolation verification <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Middleware for subdomain rewriting <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-200 rounded">70%</span>
-- [ ] Tenant context helper functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Environment configuration type-safe <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-200 rounded">docs</span>
-- [ ] Tailwind CSS 4 with RTL/LTR support <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] Layout structure with font configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
+- Multi-tenant database schema with schoolId scoping <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-700 dark:text-purple-400 rounded font-medium">prisma</span>
+- Subdomain routing (school.databayt.org) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">middleware</span>
+- Next.js 15 + React 19 + Prisma 6 configured <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- CI/CD pipeline with automated tests <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-cyan-500/20 text-cyan-700 dark:text-cyan-400 rounded font-medium">devops</span>
+- Error monitoring (Sentry) operational <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-cyan-500/20 text-cyan-700 dark:text-cyan-400 rounded font-medium">monitoring</span>
+- Internationalization (Arabic/English) functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-pink-500/20 text-pink-700 dark:text-pink-400 rounded font-medium">i18n</span>
+- Development/staging/production environments <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-cyan-500/20 text-cyan-700 dark:text-cyan-400 rounded font-medium">devops</span>
+- Database singleton pattern implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-700 dark:text-purple-400 rounded font-medium">prisma</span>
+- Testing infrastructure (Vitest, Playwright) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-teal-500/20 text-teal-700 dark:text-teal-400 rounded font-medium">testing</span>
+- Multi-tenant test suite with isolation verification <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-teal-500/20 text-teal-700 dark:text-teal-400 rounded font-medium">testing</span>
+- Middleware for subdomain rewriting <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">middleware</span>
+- Tenant context helper functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">core</span>
+- Environment configuration type-safe <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 rounded font-medium">docs</span>
+- Tailwind CSS 4 with RTL/LTR support <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-pink-500/20 text-pink-700 dark:text-pink-400 rounded font-medium">styling</span>
+- Layout structure with font configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-pink-500/20 text-pink-700 dark:text-pink-400 rounded font-medium">styling</span>
 
 ---
 
@@ -84,24 +84,24 @@ User management, role-based access control, and secure authentication flows.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] NextAuth v5 configured with JWT strategy <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] Email/password auth with bcrypt hashing <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] OAuth providers (Google, Facebook) working <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-200 rounded">70%</span>
-- [ ] Two-factor authentication (2FA) functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] DEVELOPER role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] ADMIN role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] TEACHER role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] STUDENT role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] GUARDIAN role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] ACCOUNTANT role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] STAFF role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] USER role (default) implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] Role-based access control enforced on routes <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-200 rounded">70%</span>
-- [ ] Password reset flow complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200 rounded">bug</span>
-- [ ] Session management with auto-renewal <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-200 rounded">close</span>
-- [ ] User profile management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-200 rounded">70%</span>
-- [ ] User invitation system <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Audit logging for sensitive operations <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- NextAuth v5 configured with JWT strategy <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">auth</span>
+- Email/password auth with bcrypt hashing <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">auth</span>
+- OAuth providers (Google, Facebook) working <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">auth</span>
+- Two-factor authentication (2FA) functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">security</span>
+- DEVELOPER role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- ADMIN role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- TEACHER role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- STUDENT role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- GUARDIAN role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- ACCOUNTANT role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- STAFF role implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- USER role (default) implemented <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-violet-500/20 text-violet-700 dark:text-violet-400 rounded font-medium">rbac</span>
+- Role-based access control enforced on routes <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">middleware</span>
+- Password reset flow complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-red-500/20 text-red-700 dark:text-red-400 rounded font-medium">bug</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">auth</span>
+- Session management with auto-renewal <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded font-medium">auth</span>
+- User profile management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- User invitation system <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">enhancement</span>
+- Audit logging for sensitive operations <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">security</span>
 
 ---
 
@@ -115,18 +115,18 @@ School profile, academic structure, branding, and settings.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] School profile creation and management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] School information display <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Academic year setup with start/end dates <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Term/period configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Year level/grade configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Department management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] School branding (logo upload) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Color picker for school colors <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Timezone configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] School settings page functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] School setup wizard for onboarding <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Logo preview and management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- School profile creation and management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">priority</span>
+- School information display <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Academic year setup with start/end dates <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-700 dark:text-purple-400 rounded font-medium">prisma</span>
+- Term/period configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Year level/grade configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Department management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- School branding (logo upload) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-sky-500/20 text-sky-700 dark:text-sky-400 rounded font-medium">upload</span>
+- Color picker for school colors <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-pink-500/20 text-pink-700 dark:text-pink-400 rounded font-medium">styling</span>
+- Timezone configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- School settings page functional <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- School setup wizard for onboarding <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">priority</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ux</span>
+- Logo preview and management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-sky-500/20 text-sky-700 dark:text-sky-400 rounded font-medium">upload</span>
 
 ---
 
@@ -140,26 +140,26 @@ Student lifecycle from enrollment to graduation with comprehensive profiles.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Student enrollment form working <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Student profile page structure (7 tabs) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Personal information tab complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Academic information tab complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Health records tab complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Documents tab with upload capability <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Achievements tab with tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Disciplinary records tab <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Fees tab with payment history <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Student search functionality <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Advanced filtering system <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Guardian relationships and linking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Document upload and management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Photo upload and display <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Batch operations (bulk actions) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Student export (individual) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Student export (bulk CSV) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Status transitions (enrolled/transferred/graduated) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Previous education records <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Emergency contact management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- Student enrollment form working <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Student profile page structure (7 tabs) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Personal information tab complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span>
+- Academic information tab complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Health records tab complete <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Documents tab with upload capability <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-sky-500/20 text-sky-700 dark:text-sky-400 rounded font-medium">upload</span>
+- Achievements tab with tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Disciplinary records tab <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Fees tab with payment history <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-amber-500/20 text-amber-700 dark:text-amber-400 rounded font-medium">finance</span>
+- Student search functionality <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">table</span>
+- Advanced filtering system <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">table</span>
+- Guardian relationships and linking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-700 dark:text-purple-400 rounded font-medium">prisma</span>
+- Document upload and management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-sky-500/20 text-sky-700 dark:text-sky-400 rounded font-medium">upload</span>
+- Photo upload and display <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-sky-500/20 text-sky-700 dark:text-sky-400 rounded font-medium">upload</span>
+- Batch operations (bulk actions) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">enhancement</span>
+- Student export (individual) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
+- Student export (bulk CSV) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
+- Status transitions (enrolled/transferred/graduated) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Previous education records <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Emergency contact management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
 
 ---
 
@@ -173,24 +173,24 @@ Subjects, classes, teachers, parents, and staff records.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Subject catalog creation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Subject management (CRUD operations) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Class creation with details <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Class capacity management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Student enrollment in classes <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Student-class conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Teacher assignment to classes <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Teacher-subject allocation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Teacher profile creation form <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Teacher profile display page <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Qualifications management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Parent/guardian profile management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Staff profile creation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Department assignment <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Class sections management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Class roster export <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Resource sharing within class <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Class analytics dashboard <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- Subject catalog creation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Subject management (CRUD operations) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Class creation with details <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Class capacity management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Student enrollment in classes <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-purple-500/20 text-purple-700 dark:text-purple-400 rounded font-medium">prisma</span>
+- Student-class conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Teacher assignment to classes <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span>
+- Teacher-subject allocation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span>
+- Teacher profile creation form <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Teacher profile display page <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Qualifications management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Parent/guardian profile management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Staff profile creation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Department assignment <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Class sections management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Class roster export <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
+- Resource sharing within class <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Class analytics dashboard <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
 
 ---
 
@@ -204,18 +204,18 @@ Daily attendance tracking, reports, and absence management.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Daily attendance marking interface <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Attendance status options (present/absent/late/excused) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Bulk attendance marking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Attendance reports by class <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Attendance reports by student <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Monthly attendance summary <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Absence notification to parents <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Late arrival tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Attendance trends analytics <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Export attendance data <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Teacher attendance tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Leave request integration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- Daily attendance marking interface <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Attendance status options (present/absent/late/excused) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- Bulk attendance marking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span>
+- Attendance reports by class <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
+- Attendance reports by student <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
+- Monthly attendance summary <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Absence notification to parents <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-lime-500/20 text-lime-700 dark:text-lime-400 rounded font-medium">notification</span>
+- Late arrival tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- Attendance trends analytics <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
+- Export attendance data <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
+- Teacher attendance tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Leave request integration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
 
 ---
 
@@ -229,21 +229,21 @@ Exam scheduling, grading, results, and report cards.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Exam creation and scheduling <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Exam type configuration (midterm/final/quiz) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Grade entry interface <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Grade scale configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Result calculation (weighted averages) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Report card generation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Report card templates <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Result publication workflow <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Parent result notification <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Class performance analytics <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Subject-wise performance reports <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Grade history tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Exam room allocation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Exam schedule conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Result export (PDF/CSV) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- Exam creation and scheduling <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">crud</span>
+- Exam type configuration (midterm/final/quiz) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Grade entry interface <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Grade scale configuration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Result calculation (weighted averages) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Report card generation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">priority</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
+- Report card templates <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Result publication workflow <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Parent result notification <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-lime-500/20 text-lime-700 dark:text-lime-400 rounded font-medium">notification</span>
+- Class performance analytics <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
+- Subject-wise performance reports <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
+- Grade history tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Exam room allocation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Exam schedule conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Result export (PDF/CSV) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
 
 ---
 
@@ -257,18 +257,18 @@ Class scheduling, period management, and conflict detection.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Visual timetable builder <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Drag-and-drop scheduling <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Period-wise scheduling <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Break management in schedule <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Room allocation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Teacher conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Room conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Student conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Teacher timetable view <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Class timetable view <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Room timetable view <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Timetable export (PDF/print) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- Visual timetable builder <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Drag-and-drop scheduling <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ux</span>
+- Period-wise scheduling <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- Break management in schedule <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span>
+- Room allocation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span>
+- Teacher conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-teal-500/20 text-teal-700 dark:text-teal-400 rounded font-medium">validation</span>
+- Room conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-teal-500/20 text-teal-700 dark:text-teal-400 rounded font-medium">validation</span>
+- Student conflict detection <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Teacher timetable view <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- Class timetable view <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- Room timetable view <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-green-500/20 text-green-700 dark:text-green-400 rounded font-medium">done</span>
+- Timetable export (PDF/print) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 rounded font-medium">in progress</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-fuchsia-500/20 text-fuchsia-700 dark:text-fuchsia-400 rounded font-medium">export</span>
 
 ---
 
@@ -282,13 +282,13 @@ Application processing, enrollment workflow, and registration management.
   <a href="#" className="px-2 py-1 text-xs bg-muted rounded hover:bg-muted/80">issue</a>
 </div>
 
-- [ ] Online application form <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200 rounded">hot</span>
-- [ ] Application status tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Document upload for applications <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Application review workflow <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Admission decision (accept/reject/waitlist) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Enrollment confirmation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Fee payment integration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Admission reports <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Bulk application import <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
-- [ ] Application deadline management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200 rounded">open</span>
+- Online application form <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-orange-500/20 text-orange-700 dark:text-orange-400 rounded font-medium">priority</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded font-medium">ui</span>
+- Application status tracking <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Document upload for applications <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-sky-500/20 text-sky-700 dark:text-sky-400 rounded font-medium">upload</span>
+- Application review workflow <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Admission decision (accept/reject/waitlist) <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Enrollment confirmation <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Fee payment integration <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-amber-500/20 text-amber-700 dark:text-amber-400 rounded font-medium">finance</span>
+- Admission reports <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span> <span className="ml-1 px-1.5 py-0.5 text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded font-medium">analytics</span>
+- Bulk application import <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
+- Application deadline management <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-500/20 text-gray-700 dark:text-gray-400 rounded font-medium">backlog</span>
