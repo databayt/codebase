@@ -26,7 +26,7 @@ Our architecture is engineered from the ground up for reusability, modularity, a
 Every URL route produces **two directories**: one in `app/` for routing and layouts, one in `components/` for all feature logic. This 1:1 mapping means if you know the URL, you instantly know where to find both the page and its components.
 
 For example, the route `/abc` creates:
-- `app/[lang]/abc/` — page.tsx, layout.tsx, loading.tsx
+- `app/[lang]/abc/` — page.tsx, layout.tsx
 - `components/abc/` — content.tsx, actions.ts, form.tsx, validation.ts, type.ts, hooks, etc.
 
 This predictable structure eliminates guesswork. New features follow the same pattern. Refactoring is straightforward. AI tools understand it instantly.
