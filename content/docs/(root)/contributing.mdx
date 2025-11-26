@@ -23,104 +23,10 @@ This repository is structured as follows:
 
 ## Development
 
-### Fork this repo
+For detailed setup instructions, please refer to:
 
-You can fork this repo by clicking the fork button in the top right corner of this page.
-
-### Clone on your local machine
-
-```bash
-git clone https://github.com/databayt/hogwarts.git
-```
-
-### Navigate to project directory
-
-```bash
-cd ui
-```
-
-### Create a new Branch
-
-```bash
-git checkout -b my-new-branch
-```
-
-### Install dependencies
-
-```bash
-pnpm install
-```
-
-### Run a workspace
-
-You can use the `pnpm --filter=[WORKSPACE]` command to start the development process for a workspace.
-
-#### Examples
-
-1. To run the `ui.shadcn.com` website:
-
-```bash
-pnpm --filter=v4 dev
-```
-
-2. To run the `shadcn` package:
-
-```bash
-pnpm --filter=shadcn dev
-```
-
-## Running the CLI Locally
-
-To run the CLI locally, you can follow the workflow:
-
-1. Start by running the dev server:
-
-   ```bash
-   pnpm dev
-   ```
-
-2. In another terminal tab, test the CLI by running:
-
-   ```bash
-   pnpm shadcn
-   ```
-
-   To test the CLI in a specific app, use a command like:
-
-   ```bash
-   pnpm shadcn <init | add | ...> -c ~/Desktop/my-app
-   ```
-
-This workflow ensures that you are running the most recent version of the registry and testing the CLI properly in your local environment.
-
-## Documentation
-
-The documentation for this project is located in the `v4` workspace. You can run the documentation locally by running the following command:
-
-```bash
-pnpm --filter=v4 dev
-```
-
-Documentation is written using [MDX](https://mdxjs.com). You can find the documentation files in the `apps/v4/content/docs` directory.
-
-## Components
-
-We use a registry system for developing components. You can find the source code for the components under `apps/v4/registry`. The components are organized by styles.
-
-```bash
-apps
-└── v4
-    └── registry
-        └── new-york-v4
-            ├── example
-            └── ui
-```
-
-When adding or modifying components, please ensure that:
-
-1. You make the changes for every style.
-2. You update the documentation.
-3. You run `pnpm registry:build` to update the registry.
+- [Get Started](/docs/get-started) — Overview and prerequisites
+- [Localhost](/docs/localhost) — Step-by-step local development guide
 
 ## Commit Convention
 

@@ -88,14 +88,19 @@ export function DirectoryStructure({ className }: DirectoryStructureProps) {
         description: "React components",
         children: [
           {
-            name: "atom/",
+            name: "ui/",
             type: "directory",
-            description: "Atomic UI components"
+            description: "shadcn/ui components"
           },
           {
-            name: "marketing/",
+            name: "atom/",
             type: "directory",
-            description: "Entry point 01: SaaS marketing"
+            description: "Complex components (2+ shadcn combined)"
+          },
+          {
+            name: "template/",
+            type: "directory",
+            description: "Full sections (header, hero, footer)"
           },
           {
             name: "auth/",
@@ -108,19 +113,24 @@ export function DirectoryStructure({ className }: DirectoryStructureProps) {
             description: "Onboarding flow components"
           },
           {
+            name: "marketing/",
+            type: "directory",
+            description: "Entry point 01: SaaS marketing"
+          },
+          {
             name: "operator/",
             type: "directory",
             description: "Entry point 02: SaaS dashboard"
           },
           {
-            name: "platform/",
-            type: "directory",
-            description: "Entry point 04: School dashboard"
-          },
-          {
             name: "site/",
             type: "directory",
             description: "Entry point 03: School marketing"
+          },
+          {
+            name: "platform/",
+            type: "directory",
+            description: "Entry point 04: School dashboard"
           }
         ]
       }
