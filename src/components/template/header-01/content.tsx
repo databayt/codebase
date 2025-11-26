@@ -19,7 +19,7 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
         <header className="border-grid sticky top-0 z-50 w-full border-b-[0.5px] bg-background">
             <div className="flex h-14 items-center gap-2 md:gap-4">
                     <MainNav dictionary={dictionary} />
-                    <MobileNav dictionary={dictionary} />
+                    <MobileNav dictionary={dictionary} className="flex md:hidden" />
                     <div className="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
                         <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
                             <CommandMenu dictionary={dictionary} />

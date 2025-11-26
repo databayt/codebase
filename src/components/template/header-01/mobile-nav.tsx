@@ -4,117 +4,124 @@ import * as React from "react"
 import Link, { LinkProps } from "next/link"
 import { useRouter } from "next/navigation"
 
-import { docsConfig } from "./constants"
 import { cn } from "@/lib/utils"
-import { useMetaColor } from "@/hooks/use-meta-color"
 import { Button } from "@/components/ui/button"
 import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import type { getDictionary } from "@/components/local/dictionaries"
+
+const MAIN_NAV_ITEMS = [
+  { href: "/docs", label: "Docs" },
+  { href: "/atoms", label: "Atoms" },
+  { href: "/templates", label: "Templates" },
+  { href: "/blocks", label: "Blocks" },
+  { href: "/micros", label: "Micros" },
+  { href: "/vibes", label: "Vibes" },
+]
+
+const DOCS_LINKS = [
+  { name: "Introduction", href: "/docs" },
+  { name: "Pitch", href: "/docs/pitch" },
+  { name: "MVP", href: "/docs/mvp" },
+  { name: "PRD", href: "/docs/prd" },
+  { name: "Get Started", href: "/docs/get-started" },
+  { name: "Architecture", href: "/docs/architecture" },
+  { name: "Structure", href: "/docs/structure" },
+  { name: "Pattern", href: "/docs/pattern" },
+  { name: "Stack", href: "/docs/stack" },
+  { name: "Database", href: "/docs/database" },
+  { name: "Localhost", href: "/docs/localhost" },
+  { name: "Contributing", href: "/docs/contributing" },
+  { name: "Shared Economy", href: "/docs/shared-economy" },
+  { name: "Competitors", href: "/docs/competitors" },
+  { name: "Inspiration", href: "/docs/inspiration" },
+  { name: "Demo", href: "/docs/demo" },
+]
 
 interface MobileNavProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  className?: string
 }
 
-export function MobileNav({ dictionary }: MobileNavProps) {
+export function MobileNav({ dictionary, className }: MobileNavProps) {
   const [open, setOpen] = React.useState(false)
-  const { setMetaColor, metaColor } = useMetaColor()
-
-  const onOpenChange = React.useCallback(
-    (open: boolean) => {
-      setOpen(open)
-      setMetaColor(open ? "#09090b" : metaColor)
-    },
-    [setMetaColor, metaColor]
-  )
 
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} direction="bottom">
-      <DrawerTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="h-8 w-full gap-4 px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          className={cn(
+            "extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
+            className
+          )}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="!size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 9h16.5m-16.5 6.75h16.5"
-            />
-          </svg>
-          <span className="sr-only">{dictionary?.navigation?.toggleMenu || "Toggle Menu"}</span>
-          <p className="flex h-8 flex-1 items-center justify-between rounded-md border bg-muted/50 px-2 text-sm text-muted-foreground shadow-none">
-            {dictionary?.header?.searchPlaceholder || "Search documentation..."}
-          </p>
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent className="max-h-[80svh] p-0">
-        <div className="overflow-auto p-6">
-          {/* Main Navigation */}
-          <div className="flex flex-col space-y-3">
-            {docsConfig.mainNav?.map(
-              (item) =>
-                item.href && (
-                  <MobileLink
-                    key={item.href}
-                    href={item.href}
-                    onOpenChange={setOpen}
-                  >
-                    {item.title}
-                  </MobileLink>
-                )
-            )}
+          <div className="relative flex h-8 w-4 items-center justify-center">
+            <div className="relative size-4">
+              <span
+                className={cn(
+                  "bg-foreground absolute left-0 block h-0.5 w-4 transition-all duration-100",
+                  open ? "top-[0.4rem] -rotate-45" : "top-1"
+                )}
+              />
+              <span
+                className={cn(
+                  "bg-foreground absolute left-0 block h-0.5 w-4 transition-all duration-100",
+                  open ? "top-[0.4rem] rotate-45" : "top-2.5"
+                )}
+              />
+            </div>
+            <span className="sr-only">{dictionary?.navigation?.toggleMenu || "Toggle Menu"}</span>
           </div>
-          {/* Sidebar Navigation */}
-          <div className="flex flex-col space-y-2">
-            {docsConfig.sidebarNav.map((item, index) => (
-              <div key={index} className="flex flex-col gap-3 pt-6">
-                <h4 className="font-medium text-sm text-muted-foreground">{item.title}</h4>
-                {item?.items?.length &&
-                  item.items.map((subItem) => (
-                    <React.Fragment key={subItem.href}>
-                      {!subItem.disabled &&
-                        (subItem.href ? (
-                          <MobileLink
-                            href={subItem.href}
-                            onOpenChange={setOpen}
-                            className="opacity-80"
-                          >
-                            {subItem.title}
-                            {subItem.label && (
-                              <small className="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 leading-none text-[#000000] no-underline group-hover:no-underline">
-                                {subItem.label}
-                              </small>
-                            )}
-                          </MobileLink>
-                        ) : (
-                          subItem.title
-                        ))}
-                    </React.Fragment>
-                  ))}
-              </div>
-            ))}
+          <span className="flex h-8 items-center text-lg leading-none font-medium">
+            Menu
+          </span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent
+        className="bg-background/90 no-scrollbar h-[var(--radix-popper-available-height)] w-[var(--radix-popper-available-width)] overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        align="start"
+        side="bottom"
+        alignOffset={-16}
+        sideOffset={14}
+      >
+        <div className="flex flex-col gap-12 overflow-auto px-6 py-6">
+          {/* Main Navigation */}
+          <div className="flex flex-col gap-4">
+            <div className="text-muted-foreground text-sm font-medium">
+              Menu
+            </div>
+            <div className="flex flex-col gap-3">
+              <MobileLink href="/" onOpenChange={setOpen}>
+                Home
+              </MobileLink>
+              {MAIN_NAV_ITEMS.map((item) => (
+                <MobileLink key={item.href} href={item.href} onOpenChange={setOpen}>
+                  {item.label}
+                </MobileLink>
+              ))}
+            </div>
+          </div>
+          {/* Documentation Links */}
+          <div className="flex flex-col gap-4">
+            <div className="text-muted-foreground text-sm font-medium">
+              Documentation
+            </div>
+            <div className="flex flex-col gap-3">
+              {DOCS_LINKS.map(({ name, href }) => (
+                <MobileLink key={href} href={href} onOpenChange={setOpen}>
+                  {name}
+                </MobileLink>
+              ))}
+            </div>
           </div>
         </div>
-      </DrawerContent>
-    </Drawer>
+      </PopoverContent>
+    </Popover>
   )
-}
-
-interface MobileLinkProps extends LinkProps {
-  onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
-  className?: string
 }
 
 function MobileLink({
@@ -123,7 +130,11 @@ function MobileLink({
   className,
   children,
   ...props
-}: MobileLinkProps) {
+}: LinkProps & {
+  onOpenChange?: (open: boolean) => void
+  children: React.ReactNode
+  className?: string
+}) {
   const router = useRouter()
   return (
     <Link
@@ -132,7 +143,7 @@ function MobileLink({
         router.push(href.toString())
         onOpenChange?.(false)
       }}
-      className={cn("text-[1.15rem]", className)}
+      className={cn("text-2xl font-medium", className)}
       {...props}
     >
       {children}
