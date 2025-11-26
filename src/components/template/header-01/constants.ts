@@ -34,7 +34,7 @@ export const docsConfig: DocsConfig = {
             href: "/",
         },
         {
-            title: "Documentation",
+            title: "Docs",
             href: "/docs",
         },
         {
@@ -46,16 +46,16 @@ export const docsConfig: DocsConfig = {
             href: "/templates",
         },
         {
-            title: "Charts",
-            href: "/charts",
+            title: "Blocks",
+            href: "/blocks",
         },
         {
-            title: "Themes",
-            href: "/themes",
+            title: "Micros",
+            href: "/micros",
         },
         {
-            title: "Colors",
-            href: "/colors",
+            title: "Vibes",
+            href: "/vibes",
         },
     ],
     sidebarNav: [

@@ -32,7 +32,7 @@ export function MobileNav({ dictionary }: MobileNavProps) {
   )
 
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
+    <Drawer open={open} onOpenChange={onOpenChange} direction="bottom">
       <DrawerTrigger asChild>
         <Button
           variant="ghost"
@@ -60,6 +60,7 @@ export function MobileNav({ dictionary }: MobileNavProps) {
       </DrawerTrigger>
       <DrawerContent className="max-h-[80svh] p-0">
         <div className="overflow-auto p-6">
+          {/* Main Navigation */}
           <div className="flex flex-col space-y-3">
             {docsConfig.mainNav?.map(
               (item) =>
@@ -74,29 +75,30 @@ export function MobileNav({ dictionary }: MobileNavProps) {
                 )
             )}
           </div>
+          {/* Sidebar Navigation */}
           <div className="flex flex-col space-y-2">
             {docsConfig.sidebarNav.map((item, index) => (
-              <div key={index} className="flex flex-col gap-4 pt-6">
-                <h4>{item.title}</h4>
+              <div key={index} className="flex flex-col gap-3 pt-6">
+                <h4 className="font-medium text-sm text-muted-foreground">{item.title}</h4>
                 {item?.items?.length &&
-                  item.items.map((item) => (
-                    <React.Fragment key={item.href}>
-                      {!item.disabled &&
-                        (item.href ? (
+                  item.items.map((subItem) => (
+                    <React.Fragment key={subItem.href}>
+                      {!subItem.disabled &&
+                        (subItem.href ? (
                           <MobileLink
-                            href={item.href}
+                            href={subItem.href}
                             onOpenChange={setOpen}
                             className="opacity-80"
                           >
-                            {item.title}
-                            {item.label && (
+                            {subItem.title}
+                            {subItem.label && (
                               <small className="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 leading-none text-[#000000] no-underline group-hover:no-underline">
-                                {item.label}
+                                {subItem.label}
                               </small>
                             )}
                           </MobileLink>
                         ) : (
-                          item.title
+                          subItem.title
                         ))}
                     </React.Fragment>
                   ))}
