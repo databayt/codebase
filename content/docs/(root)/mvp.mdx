@@ -48,7 +48,10 @@ The MVP is organized into **9 core epics** that establish the foundation of our 
 
 ## Epic 01: Infrastructure
 
-Multi-tenant architecture, subdomain routing, and core technical setup for a scalable SaaS platform.
+Build the scalable foundation for a multi-tenant SaaS platform with subdomain-based routing (school.databayt.org).
+Implement Next.js 15 middleware for tenant detection, i18n routing (Arabic RTL/English LTR), and JWT session context injection.
+Engineer Prisma 6 multi-tenant isolation where every query is scoped by schoolId with unique constraints preventing cross-tenant data leakage.
+Master CI/CD pipelines, Sentry error monitoring, and environment configuration with TypeScript-safe env variables.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">15 stories</span>
@@ -77,7 +80,10 @@ Multi-tenant architecture, subdomain routing, and core technical setup for a sca
 
 ## Epic 02: Authentication
 
-User management, role-based access control, and secure authentication flows.
+Design a sophisticated JWT-based auth system with 8 granular roles (DEVELOPER, ADMIN, TEACHER, STUDENT, GUARDIAN, ACCOUNTANT, STAFF, USER).
+Integrate NextAuth v5 with Prisma adapter, bcryptjs credential auth, and OAuth providers (Google, GitHub) with subdomain-aware callbacks.
+Implement role-based access control (RBAC) where JWT tokens carry schoolId and role for automatic route guarding via middleware.
+Build password reset flows, two-factor authentication, session management with auto-renewal, and audit logging for sensitive operations.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">18 stories</span>
@@ -109,7 +115,10 @@ User management, role-based access control, and secure authentication flows.
 
 ## Epic 03: Configuration
 
-School profile, academic structure, branding, and settings.
+Enable schools to customize their platform with whitelabel branding, custom domains, and academic structure configuration.
+Create admin settings for school profile (name, logo, timezone), academic hierarchy (years > terms > periods), and grade levels.
+Implement SchoolBranding model with OKLCH color customization, CSS variable injection for theme switching, and logo upload management.
+Support RTL UI mirroring for Arabic-primary schools with locale-aware datetime formatting and school setup wizard for onboarding.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">12 stories</span>
@@ -135,7 +144,10 @@ School profile, academic structure, branding, and settings.
 
 ## Epic 04: Student
 
-Student lifecycle from enrollment to graduation with comprehensive profiles.
+Build comprehensive student lifecycle management from enrollment to graduation with 100+ profile fields and 7-tab interface.
+Design StudentGuardian junction models supporting multiple guardian types (Parent, Uncle, Teacher) with two-way access control.
+Implement CSV bulk import/export with validation, class assignment workflows, and status transitions (ACTIVE/SUSPENDED/GRADUATED).
+Create advanced filtering, search functionality, document upload, photo management, and batch operations for bulk actions.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">20 stories</span>
@@ -169,7 +181,10 @@ Student lifecycle from enrollment to graduation with comprehensive profiles.
 
 ## Epic 05: Listings
 
-Subjects, classes, teachers, parents, and staff records.
+Manage integrated course catalog with subjects organized by departments, classes with capacity management, and curriculum prerequisites.
+Build teacher profiles with qualifications, certifications, experience records, department assignments, and subject expertise mapping.
+Implement parent/guardian records linked to students via relationship types, staff profiles, and workload balancing for teachers.
+Create server actions for CRUD operations, TanStack Table with sorting/filtering/pagination, and class roster export functionality.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">18 stories</span>
@@ -201,7 +216,10 @@ Subjects, classes, teachers, parents, and staff records.
 
 ## Epic 06: Attendance
 
-Daily attendance tracking, reports, and absence management.
+Implement flexible attendance systems from simple daily marking to advanced biometric, QR-code, and geofencing-based tracking.
+Build core Attendance model with Present/Absent/Late/Excused status codes, bulk marking interface, and real-time sync via SWR.
+Create analytics dashboard with attendance trends, method usage charts, day-wise patterns, heatmaps, and exportable CSV reports.
+Design policy framework with grace periods, thresholds, automated parent notifications, and teacher attendance tracking.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">12 stories</span>
@@ -227,7 +245,10 @@ Daily attendance tracking, reports, and absence management.
 
 ## Epic 07: Exam
 
-Exam scheduling, grading, results, and report cards.
+Build enterprise-grade exam workflows with multi-type scheduling (MIDTERM/FINAL/QUIZ/PRACTICAL) and reusable question bank (QBank).
+Implement 6 question types (MCQ, T/F, Essay, Short Answer, Fill-Blank, Matching) with Bloom's taxonomy and difficulty balancing.
+Create grade entry interface with configurable grade scales, weighted averages, GPA calculation, and class rank generation.
+Generate beautiful PDF report cards in multiple templates (Classic/Modern/Minimal), with parent notification and result publication workflow.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">15 stories</span>
@@ -256,7 +277,10 @@ Exam scheduling, grading, results, and report cards.
 
 ## Epic 08: Timetable
 
-Class scheduling, period management, and conflict detection.
+Create conflict-free weekly schedules using drag-and-drop visual builder with flexible school calendars (Sun-Thu or Mon-Fri).
+Implement real-time multi-layer conflict detection preventing teacher double-booking, classroom overlaps, and student conflicts.
+Build dual-view interface switching between class and teacher perspectives with role-based permissions and comprehensive audit logging.
+Generate print-ready A4 timetables with RTL/LTR support, period configuration, break management, and room allocation tracking.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">12 stories</span>
@@ -282,7 +306,10 @@ Class scheduling, period management, and conflict detection.
 
 ## Epic 09: Admission
 
-Application processing, enrollment workflow, and registration management.
+Manage complete admission lifecycle: campaign creation, online applications, document uploads, and eligibility verification.
+Build comprehensive application review with status transitions (DRAFT > SUBMITTED > UNDER_REVIEW > SELECTED/REJECTED > ADMITTED).
+Implement automated merit list generation with custom weighting (academics + entrance test + category reservations) and seat allocation.
+Create waitlist management, fee payment integration, automatic conversion to student records, and admission analytics reporting.
 
 <div className="flex gap-2 mt-4 mb-4 not-prose">
   <span className="px-2 py-1 text-xs bg-muted rounded">10 stories</span>
