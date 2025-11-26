@@ -21,25 +21,15 @@ Our architecture is engineered from the ground up for reusability, modularity, a
 - **Foundation Layer**: Radix UI → shadcn/ui → shadcn Ecosystem
 - **Building Blocks**: UI → Atoms → Templates → Blocks → Micro → Apps
 
-## Mirror-Pattern Architecture
+## Mirror-Pattern
 
-### Philosophy: URL-to-Directory Mapping
+Every URL route produces **two directories**: one in `app/` for routing and layouts, one in `components/` for all feature logic. This 1:1 mapping means if you know the URL, you instantly know where to find both the page and its components.
 
-Every URL route has a corresponding, mirrored directory structure for its component logic. If you can see a URL, you know exactly where to find its code.
+For example, the route `/leads` creates:
+- `app/[lang]/leads/` — page.tsx, layout.tsx, loading.tsx
+- `components/leads/` — content.tsx, actions.ts, form.tsx, validation.ts, type.ts, hooks, etc.
 
-```text
-src/
-  app/                    # Next.js App Router (Routing & Layouts)
-    [lang]/               # i18n support
-      abc/                # URL route: /abc
-  components/             # Component Logic (Mirrors app structure)
-    abc/                  # Mirrors app/[lang]/abc/
-    atom/                 # Atomic UI components
-    template/             # Reusable layout templates
-    ui/                   # Base UI components (shadcn/ui)
-```
-
-### Directory Structure
+This predictable structure eliminates guesswork. New features follow the same pattern. Refactoring is straightforward. AI tools understand it instantly.
 
 <Structure />
 
