@@ -58,7 +58,7 @@ The K-12 education sector operates under unique constraints:
 
 ## TL;DR
 
-SaaS B2B multi-tenant school management system. Next.js 16 + React 19 + TypeScript + Prisma + PostgreSQL. 200+ functional requirements across 12 epics. FERPA/GDPR compliant. Arabic-first with RTL support.
+SaaS B2B multi-tenant school management system. Next.js 16 + React 19 + TypeScript + Prisma + PostgreSQL. 9 core epics. FERPA/GDPR compliant. Arabic-first with RTL support.
 
 ---
 
@@ -94,36 +94,60 @@ Success is measured by genuine transformation of educational operations and stak
 
 ---
 
-## Product Scope
+## MVP Scope
 
-### MVP (Months 1-12)
+A school can enroll students, manage classes, track attendance, grade assignments, collect fees, and communicate with parents—all within a single platform.
 
-Core administrative functionality that makes schools operational from day one:
+See [MVP](/docs/mvp) for detailed epic breakdown with story-level tracking.
 
-- Multi-tenant architecture with subdomain-based school isolation
-- 8-role RBAC system (Developer, Admin, Teacher, Student, Guardian, Accountant, Staff, User)
-- OAuth authentication (Google, Facebook) + email/password + 2FA
-- Complete student management (enrollment, profiles, health records, achievements)
-- Teacher & staff management (qualifications, workload, departments)
-- Subject & class management with timetable builder
-- Attendance system (daily, period-wise, QR code check-in)
-- Assessment & grading (assignments, gradebook, report cards)
-- Fee management (structures, invoicing, payment tracking)
-- Communication (announcements, parent portal, email notifications)
-- Basic reporting & analytics
-- Arabic/English bilingual support (RTL/LTR)
-- Mobile-responsive design
-
-**MVP Success Criteria:** A school can enroll students, manage classes, track attendance, grade assignments, collect fees, and communicate with parents—all within a single platform.
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 not-prose">
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Infrastructure</h3>
+    <p className="text-sm text-muted-foreground">Multi-tenant architecture, subdomain routing, and core technical setup.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Authentication</h3>
+    <p className="text-sm text-muted-foreground">User management, role-based access control, and secure auth flows.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Configuration</h3>
+    <p className="text-sm text-muted-foreground">School profile, academic structure, branding, and settings.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Student</h3>
+    <p className="text-sm text-muted-foreground">Student lifecycle from enrollment to graduation with profiles.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Listings</h3>
+    <p className="text-sm text-muted-foreground">Subjects, classes, teachers, parents, and staff records.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Attendance</h3>
+    <p className="text-sm text-muted-foreground">Daily attendance tracking, reports, and absence management.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Exam</h3>
+    <p className="text-sm text-muted-foreground">Exam scheduling, grading, results, and report cards.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Timetable</h3>
+    <p className="text-sm text-muted-foreground">Class scheduling, period management, and conflict detection.</p>
+  </div>
+  <div className="border rounded-lg p-6">
+    <h3 className="text-base font-medium mb-2">Admission</h3>
+    <p className="text-sm text-muted-foreground">Application processing, enrollment workflow, and registration management.</p>
+  </div>
+</div>
 
 ---
 
-### Growth Phase (Months 13-24)
+## Growth Phase
+
+Post-MVP features that expand capabilities and market reach:
 
 - AI-powered predictive analytics
 - Digital classroom & LMS
 - Comprehensive finance module (double-entry bookkeeping, payroll)
-- Examination management
 - Library management
 - Native mobile applications (React Native)
 - Internationalization expansion (French, Spanish, Hindi, Mandarin)
@@ -131,7 +155,9 @@ Core administrative functionality that makes schools operational from day one:
 
 ---
 
-### Vision (Year 3+)
+## Vision
+
+Long-term features that position Hogwarts as the definitive education platform:
 
 - AI Teaching Assistant
 - Personalized learning paths
@@ -156,7 +182,7 @@ Core administrative functionality that makes schools operational from day one:
 
 **Architecture:**
 
-- Multi-tenant (subdomain-based): `school.domain.com` → `/[lang]/s/school/...`
+- Multi-tenant (subdomain-based): `school.databayt.org` → `/[lang]/s/school/...`
 - Every model has `schoolId` - strict data isolation
 - RBAC: 8 roles (Developer, Admin, Teacher, Student, Guardian, Accountant, Staff, User)
 - Stateless serverless functions (Vercel)
@@ -191,72 +217,6 @@ Preview:      tenant---branch.vercel.app → /[lang]/s/tenant/...
 Development:  subdomain.localhost:3000 → /[lang]/s/subdomain/...
 Custom:       www.theirschool.com (CNAME) → Hogwarts platform
 ```
-
----
-
-## Core Features (MVP)
-
-### Authentication & Users (FR-001 to FR-020)
-
-- Email/password + OAuth (Google, GitHub, Facebook)
-- 2FA (TOTP), password reset, email verification
-- Role-based access control (8 roles)
-- Session management (JWT, 24h expiry)
-
-### Student Management (FR-021 to FR-040)
-
-- Enrollment, profiles, health records, achievements
-- Guardian links, class enrollment, status transitions
-- Document upload, photo management
-- Batch operations, CSV import/export
-
-### Teacher & Staff (FR-041 to FR-060)
-
-- Profile, qualifications, departments, workload
-- Class assignments, timetable, leave management
-- Communication with guardians
-
-### Classes & Subjects (FR-061 to FR-080)
-
-- Subject/class creation, student/teacher assignment
-- Timetable builder, capacity limits, sections
-- Gradebook, attendance sheet, resources
-
-### Attendance (FR-081 to FR-100)
-
-- Daily + period-wise marking
-- Status types: Present, Absent, Late, Excused
-- QR code check-in, bulk operations
-- Reporting (student/class/school level)
-
-### Additional Modules (TBD)
-
-- Assessment & Grading (FR-101 to FR-130)
-- Fee Management (FR-131 to FR-160)
-- Finance Module (FR-161 to FR-200)
-- Communication (FR-201 to FR-230)
-- Analytics (FR-231 to FR-260)
-- Admin Settings (FR-261 to FR-300)
-
-See [Epic Breakdown](/docs/epics) for detailed stories.
-
----
-
-## Functional Requirements Summary
-
-| ID Range | Epic | Status | Priority |
-|----------|------|--------|----------|
-| FR-001 to FR-020 | Authentication & User Management | In Progress | P0 |
-| FR-021 to FR-040 | Student Management | In Progress | P0 |
-| FR-041 to FR-060 | Teacher & Staff Management | Planned | P0 |
-| FR-061 to FR-080 | Classes & Subjects | Planned | P0 |
-| FR-081 to FR-100 | Attendance System | Planned | P0 |
-| FR-101 to FR-130 | Assessment & Grading | TBD | P1 |
-| FR-131 to FR-160 | Fee Management | TBD | P1 |
-| FR-161 to FR-200 | Finance Module | TBD | P2 |
-| FR-201 to FR-230 | Communication | TBD | P1 |
-| FR-231 to FR-260 | Reporting & Analytics | TBD | P2 |
-| FR-261 to FR-300 | Administration & Settings | TBD | P1 |
 
 ---
 
@@ -405,25 +365,6 @@ See [Epic Breakdown](/docs/epics) for detailed stories.
 
 ---
 
-## Implementation Epics
-
-1. **Foundation & Auth** (FR-001 to FR-020)
-2. **School Config** (year levels, departments)
-3. **Student Management** (FR-021 to FR-040)
-4. **Teacher & Staff** (FR-041 to FR-060)
-5. **Classes & Subjects** (FR-061 to FR-080)
-6. **Attendance** (FR-081 to FR-100)
-7. **Assessment** (FR-101 to FR-130) - TBD
-8. **Fees** (FR-131 to FR-160) - TBD
-9. **Finance** (FR-161 to FR-200) - TBD
-10. **Communication** (FR-201 to FR-230) - TBD
-11. **Analytics** (FR-231 to FR-260) - TBD
-12. **Admin** (FR-261 to FR-300) - TBD
-
-See [Epic Breakdown](/docs/epics) for detailed stories.
-
----
-
 ## Development Approach
 
 **Agile Methodology:**
@@ -490,10 +431,9 @@ See [Epic Breakdown](/docs/epics) for detailed stories.
 
 ## References
 
+- [MVP](/docs/mvp) - Detailed epic breakdown with story tracking
 - [Architecture](/docs/architecture)
-- [Epic Breakdown](/docs/epics)
 - [Pattern Documentation](/docs/pattern)
-- [MVP](/docs/mvp)
 
 ---
 
