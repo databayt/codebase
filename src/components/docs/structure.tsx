@@ -22,100 +22,18 @@ export function Structure({ className }: StructureProps) {
       {
         name: "app/",
         type: "directory",
-        description: "Next.js App Router",
+        description: "Next.js App Router (Routing & Layouts)",
         children: [
-          {
-            name: "api/",
-            type: "directory",
-            description: "API routes",
-            children: [
-              { name: "auth/", type: "directory", description: "Authentication endpoints" },
-              { name: "classes/", type: "directory", description: "Class management" },
-              { name: "students/", type: "directory", description: "Student endpoints" },
-              { name: "teachers/", type: "directory", description: "Teacher endpoints" },
-              { name: "timetable/", type: "directory", description: "Timetable API" },
-              { name: "webhooks/", type: "directory", description: "External webhooks" }
-            ]
-          },
           {
             name: "[lang]/",
             type: "directory",
-            description: "Internationalized routes",
+            description: "i18n support",
             children: [
               {
-                name: "(auth)/",
+                name: "abc/",
                 type: "directory",
-                description: "Authentication pages",
-                children: [
-                  { name: "login/", type: "directory" },
-                  { name: "join/", type: "directory" },
-                  { name: "reset/", type: "directory" },
-                  { name: "new-verification/", type: "directory" }
-                ]
-              },
-              {
-                name: "(marketing)/",
-                type: "directory",
-                description: "Entry point 01: SaaS marketing",
-                children: [
-                  { name: "blog/", type: "directory" },
-                  { name: "docs/", type: "directory" },
-                  { name: "features/", type: "directory" }
-                ]
-              },
-              {
-                name: "(operator)/",
-                type: "directory",
-                description: "Entry point 02: SaaS dashboard",
-                children: [
-                  { name: "dashboard/", type: "directory" },
-                  { name: "analytics/", type: "directory" },
-                  { name: "billing/", type: "directory" },
-                  { name: "tenants/", type: "directory" },
-                  { name: "domains/", type: "directory" }
-                ]
-              },
-              {
-                name: "onboarding/",
-                type: "directory",
-                description: "User onboarding flow"
-              },
-              {
-                name: "s/",
-                type: "directory",
-                description: "Multi-tenant routing",
-                children: [
-                  {
-                    name: "[subdomain]/",
-                    type: "directory",
-                    description: "Tenant-specific routes",
-                    children: [
-                      {
-                        name: "(site)/",
-                        type: "directory",
-                        description: "Entry point 03: School marketing"
-                      },
-                      {
-                        name: "(platform)/",
-                        type: "directory",
-                        description: "Entry point 04: School dashboard",
-                        children: [
-                          { name: "dashboard/", type: "directory" },
-                          { name: "attendance/", type: "directory" },
-                          { name: "classes/", type: "directory" },
-                          { name: "students/", type: "directory" },
-                          { name: "teachers/", type: "directory" },
-                          { name: "exams/", type: "directory" },
-                          { name: "timetable/", type: "directory" },
-                          { name: "billing/", type: "directory" },
-                          { name: "admin/", type: "directory" }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              },
-              { name: "layout.tsx", type: "file", description: "Root layout component" }
+                description: "URL route: /abc"
+              }
             ]
           }
         ]
@@ -123,69 +41,43 @@ export function Structure({ className }: StructureProps) {
       {
         name: "components/",
         type: "directory",
-        description: "React components (mirrors app/)",
+        description: "Component Logic (Mirrors app structure)",
         children: [
-          { name: "ui/", type: "directory", description: "shadcn/ui primitives" },
+          {
+            name: "abc/",
+            type: "directory",
+            description: "Mirrors app/[lang]/abc/",
+            children: [
+              { name: "content.tsx", type: "file", description: "Page UI: headings, sections, layout" },
+              { name: "actions.ts", type: "file", description: "Server actions: validate, mutate" },
+              { name: "config.ts", type: "file", description: "Enums, option lists, defaults" },
+              { name: "validation.ts", type: "file", description: "Zod schemas & refinements" },
+              { name: "type.ts", type: "file", description: "Domain and UI types" },
+              { name: "form.tsx", type: "file", description: "Typed forms (RHF)" },
+              { name: "card.tsx", type: "file", description: "KPIs, summaries, quick actions" },
+              { name: "all.tsx", type: "file", description: "List view with table, filters" },
+              { name: "detail.tsx", type: "file", description: "Detail view with sections" },
+              { name: "column.tsx", type: "file", description: "Table column builders" },
+              { name: "use-abc.ts", type: "file", description: "Feature hooks" }
+            ]
+          },
           {
             name: "atom/",
             type: "directory",
-            description: "Complex components (2+ shadcn)",
-            children: [
-              { name: "modal/", type: "directory" },
-              { name: "lab/", type: "directory" }
-            ]
+            description: "Atomic UI components"
           },
           {
             name: "template/",
             type: "directory",
-            description: "Full sections",
-            children: [
-              { name: "marketing-header/", type: "directory" },
-              { name: "marketing-footer/", type: "directory" },
-              { name: "dashboard-header/", type: "directory" },
-              { name: "dashboard-sidebar/", type: "directory" },
-              { name: "platform-header/", type: "directory" },
-              { name: "platform-sidebar/", type: "directory" }
-            ]
+            description: "Reusable layout templates"
           },
-          { name: "auth/", type: "directory", description: "Authentication components" },
-          { name: "onboarding/", type: "directory", description: "Onboarding components" },
-          { name: "marketing/", type: "directory", description: "Entry point 01 components" },
           {
-            name: "operator/",
+            name: "ui/",
             type: "directory",
-            description: "Entry point 02 components",
-            children: [
-              { name: "dashboard/", type: "directory" },
-              { name: "analytics/", type: "directory" },
-              { name: "billing/", type: "directory" },
-              { name: "tenants/", type: "directory" }
-            ]
-          },
-          { name: "site/", type: "directory", description: "Entry point 03 components" },
-          {
-            name: "platform/",
-            type: "directory",
-            description: "Entry point 04 components",
-            children: [
-              { name: "dashboard/", type: "directory" },
-              { name: "attendance/", type: "directory" },
-              { name: "classes/", type: "directory" },
-              { name: "students/", type: "directory" },
-              { name: "teachers/", type: "directory" },
-              { name: "exams/", type: "directory" },
-              { name: "timetable/", type: "directory" },
-              { name: "billing/", type: "directory" },
-              { name: "admin/", type: "directory" }
-            ]
+            description: "Base UI components (shadcn/ui)"
           }
         ]
-      },
-      { name: "lib/", type: "directory", description: "Shared utilities" },
-      { name: "hooks/", type: "directory", description: "Custom React hooks" },
-      { name: "store/", type: "directory", description: "State management" },
-      { name: "styles/", type: "directory", description: "CSS/styling" },
-      { name: "types/", type: "directory", description: "TypeScript definitions" }
+      }
     ]
   }
 
