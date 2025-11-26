@@ -64,27 +64,7 @@ const students = await prisma.student.findMany()
 
 The Prisma directory follows a well-organized structure that supports both development and production scenarios with clear separation of concerns.
 
-```
-prisma/
-├── schema.prisma        — Main configuration with datasource and generator
-├── models/              — Schema files organized by domain (8 domains)
-│   ├── school.prisma    — School, SchoolYear, Period, Term, YearLevel
-│   ├── staff.prisma     — Teacher, Department, TeacherDepartment
-│   ├── students.prisma  — Student, Guardian, StudentGuardian
-│   ├── subjects.prisma  — Subject, Class, StudentClass, ScoreRange
-│   ├── classrooms.prisma — Classroom, ClassroomType
-│   ├── assessments.prisma — Assignment, AssignmentSubmission
-│   ├── attendance.prisma — Attendance with status tracking
-│   └── auth.prisma      — User, Account, tokens, 2FA
-├── generator/           — Database seeding scripts
-│   ├── seed.ts          — Simple seeding for basic data
-│   ├── multi-seed.ts    — Multi-school seeding orchestrator
-│   └── seed-selector.ts — Advanced seed selection options
-├── migrations/          — Auto-generated migration files
-│   └── migration_lock.toml — Migration provider lock
-├── README.md            — Database documentation and guide
-└── ISSUE.md             — Known issues and troubleshooting
-```
+<PrismaStructure />
 
 ## Schema Tables
 

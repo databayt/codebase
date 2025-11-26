@@ -53,6 +53,7 @@ import { CardsStats } from "@/components/atom/stats"
 import { CardsTeamMembers } from "@/components/atom/team-members"
 import { DirectoryStructure } from "@/components/docs/directory-structure"
 import { Structure } from "@/components/docs/structure"
+import { PrismaStructure } from "@/components/docs/prisma-structure"
 
 // This file is required to use MDX in `app` directory.
 
@@ -363,6 +364,7 @@ const mdxComponents = {
     TeamMembers: () => <CardsTeamMembers dictionary={defaultDictionary} />,
     DirectoryStructure,
     Structure,
+    PrismaStructure,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
