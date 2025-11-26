@@ -3,12 +3,6 @@ title: PRD
 description: Product Requirements Document for Hogwarts School Automation Platform
 ---
 
-# PRD - Product Requirements Document
-
-**Author:** Product Team | **Date:** January 2024 | **Version:** 1.0
-
----
-
 ## Executive Summary
 
 The global education sector manages over 2 million schools serving 1.5 billion students, yet 78% still rely on paper-based or fragmented digital systems. This inefficiency costs the industry $12B annually in wasted administrative processes, with each administrator losing 40 hours monthly to manual tasks. Meanwhile, 65% of parents express dissatisfaction with school communication, and manual attendance/grade tracking suffers from a 23% error rate.
@@ -56,9 +50,9 @@ The K-12 education sector operates under unique constraints:
 
 ---
 
-## TL;DR
+## Too Long; Didn't Read
 
-SaaS B2B multi-tenant school management system. Next.js 16 + React 19 + TypeScript + Prisma + PostgreSQL. 9 core epics. FERPA/GDPR compliant. Arabic-first with RTL support.
+SaaS B2B multi-tenant school management system. Next.js 16 + React 19 + TypeScript + Prisma + PostgreSQL. A school can enroll students, manage classes, track attendance, grade assignments, collect fees, and communicate with parents—all within a single platform.
 
 ---
 
@@ -173,12 +167,17 @@ Long-term features that position Hogwarts as the definitive education platform:
 
 **Stack:**
 
-- Frontend: Next.js 16 (App Router, Turbopack), React 19, TypeScript
-- Backend: Next.js API Routes, Edge Runtime compatible
-- Database: PostgreSQL + Prisma 6 (library engine)
-- Auth: NextAuth v5 (OAuth + credentials + 2FA)
-- Styling: Tailwind CSS v4, shadcn/ui components
-- i18n: Custom implementation (en, ar with RTL)
+<div className="flex flex-wrap gap-2 mt-4 mb-6 not-prose">
+  <span className="px-2 py-1 text-xs bg-muted rounded">Next.js</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">React</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">TypeScript</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">Prisma</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">PostgreSQL</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">NextAuth</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">Tailwind CSS</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">shadcn/ui</span>
+  <span className="px-2 py-1 text-xs bg-muted rounded">Vercel</span>
+</div>
 
 **Architecture:**
 
@@ -222,16 +221,16 @@ Custom:       www.theirschool.com (CNAME) → Hogwarts platform
 
 ## Role-Based Access Control
 
-| Role | Access Level | Key Permissions |
-|------|--------------|-----------------|
-| DEVELOPER | Platform Admin | Access all schools, platform configuration, monitoring |
-| ADMIN | School Administrator | Full access within school, manage users, financial oversight |
-| TEACHER | Instructor | Manage assigned classes, grade assignments, mark attendance |
-| STUDENT | Learner | View own grades, attendance, assignments, submit work |
-| GUARDIAN | Parent | View linked students' data, pay fees, receive notifications |
-| ACCOUNTANT | Financial | Manage finances, generate reports (no academic data) |
-| STAFF | Non-teaching | Limited operational module access |
-| USER | Default | Minimal access, pending role assignment |
+| Role | Key Permissions |
+|------|-----------------|
+| DEVELOPER | Access all schools, platform configuration, monitoring |
+| ADMIN | Full access within school, manage users, financial oversight |
+| TEACHER | Manage assigned classes, grade assignments, mark attendance |
+| STUDENT | View own grades, attendance, assignments, submit work |
+| GUARDIAN | View linked students' data, pay fees, receive notifications |
+| ACCOUNTANT | Manage finances, generate reports (no academic data) |
+| STAFF | Limited operational module access |
+| USER | Minimal access, pending role assignment |
 
 **Permission Matrix:**
 
