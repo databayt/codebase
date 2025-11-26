@@ -1,15 +1,15 @@
 ---
 title: "Pattern"
-description: "Documentation for Pattern"
+description: "The ancient art of code spells woven through every project"
 ---
 
-## Patterns
+## Patterns are magic, they are everywhere
 
-**Consistency** is the foundation of maintainable code. At Databayt, we follow established patterns that ensure our codebase remains scalable, readable, and collaborative. Every pattern serves a purpose — from atomic components to server actions, from naming conventions to file organization.
+In the realm of code, patterns are the ancient spells that transform chaos into order. They are not mere conventions—they are the invisible threads that weave through every function, every component, every line of thoughtful code. Like magic passed down through generations of wizards, these patterns carry the wisdom of countless projects, distilled into principles that transcend any single codebase.
 
-We believe in **atomic design principles** where small, reusable components compose into larger, more complex systems. This isn't just about React components; it's a philosophy that extends to functions, hooks, utilities, and entire application architecture.
+**Consistency** is the foundation—the first law of magical codecraft. At its heart lies a truth every master developer knows: great software is not written, it is composed. Small incantations combine into greater spells. Atoms become molecules. Components become systems. This is the philosophy of **atomic design**, and it extends far beyond React—into functions, hooks, utilities, and the very architecture of your application.
 
-The patterns documented here emerge from real-world usage across our [open source repositories](https://github.com/abdout/databayt), tested in production environments, and refined through community feedback. Every decision prioritizes developer experience, type safety, and long-term maintainability.
+These patterns emerge from the crucible of production—battle-tested across [open source repositories](https://github.com/abdout/databayt), refined through community wisdom, and proven in the fires of real-world deployment. They serve one purpose: to ensure that any developer who enters this codebase finds not confusion, but clarity.
 
 ## Naming Conventions
 
@@ -124,6 +124,70 @@ export function Card({ children, className, ...props }: CardProps) {
 Card.Header = CardHeader
 Card.Content = CardContent
 Card.Footer = CardFooter
+```
+
+## Mirror Pattern Architecture
+
+The mirror pattern ensures every feature follows a consistent, predictable structure. Each feature directory contains the same file types, making navigation intuitive and reducing cognitive load.
+
+### Feature Structure
+```
+components/<feature>/
+├── content.tsx      # Main UI composition (server component)
+├── actions.ts       # Server actions (mutations, CRUD)
+├── validation.ts    # Zod schemas for data validation
+├── types.ts         # TypeScript types & interfaces
+├── form.tsx         # Form components (client)
+├── table.tsx        # Data table (client)
+├── column.tsx       # Column definitions (client)
+├── use-<feature>.ts # Custom React hooks
+├── config.ts        # Enums, options, defaults
+└── README.md        # Feature documentation
+```
+
+### Why Mirror Pattern Works
+- **Predictability**: Every feature follows the same structure
+- **Discoverability**: Know exactly where to find validation, actions, or types
+- **Scalability**: New features follow the established template
+- **Collaboration**: Any developer can jump into any feature immediately
+
+## Multi-Tenant Architecture
+
+For applications serving multiple organizations, tenant isolation is not optional—it is sacred law.
+
+### The Golden Rule
+```typescript
+// Every database query MUST include tenant scope
+await db.student.findMany({
+  where: { schoolId, yearLevel: "10" }  // schoolId = tenant isolation
+})
+
+// NEVER query without tenant scope
+await db.student.findMany({
+  where: { yearLevel: "10" }  // DANGEROUS: breaks isolation
+})
+```
+
+### Server Action Pattern
+```typescript
+"use server"
+
+export async function createStudent(formData: FormData) {
+  // 1. Authenticate and extract schoolId from session
+  const session = await auth()
+  const schoolId = session?.user?.schoolId
+
+  // 2. Validate input
+  const data = studentSchema.parse(Object.fromEntries(formData))
+
+  // 3. Execute with tenant scope (CRITICAL)
+  await db.student.create({
+    data: { ...data, schoolId }
+  })
+
+  // 4. Always revalidate or redirect
+  revalidatePath('/students')
+}
 ```
 
 ## TypeScript Patterns
