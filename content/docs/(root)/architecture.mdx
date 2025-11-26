@@ -112,3 +112,9 @@ Watch out for these common mistakes:
 - Hardcoded values instead of using `config.ts`
 - Direct database queries instead of using `actions.ts` patterns
 
+## A Typical Interaction
+
+1. A user interacts with a component from `form.tsx` on the Next.js frontend, triggering a Server Action from `actions.ts`
+2. The request payload is validated by a Zod schema from `validation.ts`
+3. The serverless function uses the type-safe Prisma client to query Neon, using interfaces from `type.ts`
+4. The result is **streamed** back and managed by a hook from `use-abc.ts`, efficiently updating the UI
