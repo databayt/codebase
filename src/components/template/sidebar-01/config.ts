@@ -42,7 +42,7 @@ export const docsConfig: DocsConfig = {
       title: "",  // No section title for flat structure
       items: [
         { title: "Introduction", href: "/docs", items: [] },
-        { title: "Pitch", href: "/docs/pitch", items: [] },
+        { title: "Pitch Deck", href: "/docs/pitch", items: [] },
         { title: "MVP", href: "/docs/mvp", items: [] },
         { title: "PRD", href: "/docs/prd", items: [] },
         { title: "Get Started", href: "/docs/installation", items: [] },
