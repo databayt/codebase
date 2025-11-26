@@ -60,7 +60,7 @@ export const docsConfig: DocsConfig = {
     ],
     sidebarNav: [
         {
-            title: "Getting Started",
+            title: "Documentation",
             items: [
                 {
                     title: "Introduction",
@@ -68,410 +68,78 @@ export const docsConfig: DocsConfig = {
                     items: [],
                 },
                 {
-                    title: "Installation",
-                    href: "/docs/installation",
+                    title: "Pitch",
+                    href: "/docs/pitch",
                     items: [],
                 },
                 {
-                    title: "components.json",
-                    href: "/docs/components-json",
+                    title: "MVP",
+                    href: "/docs/mvp",
                     items: [],
                 },
                 {
-                    title: "Theming",
-                    href: "/docs/theming",
+                    title: "PRD",
+                    href: "/docs/prd",
                     items: [],
                 },
                 {
-                    title: "Dark mode",
-                    href: "/docs/dark-mode",
+                    title: "Get Started",
+                    href: "/docs/get-started",
                     items: [],
                 },
                 {
-                    title: "CLI",
-                    href: "/docs/cli",
+                    title: "Architecture",
+                    href: "/docs/architecture",
                     items: [],
                 },
                 {
-                    title: "Monorepo",
-                    href: "/docs/monorepo",
+                    title: "Structure",
+                    href: "/docs/structure",
                     items: [],
                 },
                 {
-                    title: "Tailwind v4",
-                    href: "/docs/tailwind-v4",
+                    title: "Pattern",
+                    href: "/docs/pattern",
                     items: [],
-                    label: "New",
                 },
                 {
-                    title: "Next.js 15 + React 19",
-                    href: "/docs/react-19",
+                    title: "Stack",
+                    href: "/docs/stack",
                     items: [],
                 },
                 {
-                    title: "Typography",
-                    href: "/docs/components/typography",
+                    title: "Database",
+                    href: "/docs/database",
                     items: [],
                 },
                 {
-                    title: "Open in v0",
-                    href: "/docs/v0",
+                    title: "Localhost",
+                    href: "/docs/localhost",
                     items: [],
                 },
                 {
-                    title: "templates",
-                    href: "/docs/templates",
+                    title: "Contributing",
+                    href: "/docs/contributing",
                     items: [],
                 },
                 {
-                    title: "Figma",
-                    href: "/docs/figma",
+                    title: "Shared Economy",
+                    href: "/docs/shared-economy",
                     items: [],
                 },
                 {
-                    title: "Changelog",
-                    href: "/docs/changelog",
+                    title: "Competitors",
+                    href: "/docs/competitors",
                     items: [],
                 },
-            ],
-        },
-        {
-            title: "Installation",
-            items: [
                 {
-                    title: "Next.js",
-                    href: "/docs/installation/next",
+                    title: "Inspiration",
+                    href: "/docs/inspiration",
                     items: [],
                 },
                 {
-                    title: "Vite",
-                    href: "/docs/installation/vite",
-                    items: [],
-                },
-                {
-                    title: "Laravel",
-                    href: "/docs/installation/laravel",
-                    items: [],
-                },
-                {
-                    title: "React Router",
-                    href: "/docs/installation/react-router",
-                    items: [],
-                },
-                {
-                    title: "Remix",
-                    href: "/docs/installation/remix",
-                    items: [],
-                },
-                {
-                    title: "Astro",
-                    href: "/docs/installation/astro",
-                    items: [],
-                },
-                {
-                    title: "Tanstack Start",
-                    href: "/docs/installation/tanstack",
-                    items: [],
-                },
-                {
-                    title: "Tanstack Router",
-                    href: "/docs/installation/tanstack-router",
-                    items: [],
-                },
-                {
-                    title: "Manual",
-                    href: "/docs/installation/manual",
-                    items: [],
-                },
-            ],
-        },
-        {
-            title: "Components",
-            items: [
-                {
-                    title: "Accordion",
-                    href: "/docs/components/accordion",
-                    items: [],
-                },
-                {
-                    title: "Alert",
-                    href: "/docs/components/alert",
-                    items: [],
-                },
-                {
-                    title: "Alert Dialog",
-                    href: "/docs/components/alert-dialog",
-                    items: [],
-                },
-                {
-                    title: "Aspect Ratio",
-                    href: "/docs/components/aspect-ratio",
-                    items: [],
-                },
-                {
-                    title: "Avatar",
-                    href: "/docs/components/avatar",
-                    items: [],
-                },
-                {
-                    title: "Badge",
-                    href: "/docs/components/badge",
-                    items: [],
-                },
-                {
-                    title: "Breadcrumb",
-                    href: "/docs/components/breadcrumb",
-                    items: [],
-                },
-                {
-                    title: "Button",
-                    href: "/docs/components/button",
-                    items: [],
-                },
-                {
-                    title: "Calendar",
-                    href: "/docs/components/calendar",
-                    items: [],
-                },
-                {
-                    title: "Card",
-                    href: "/docs/components/card",
-                    items: [],
-                },
-                {
-                    title: "Carousel",
-                    href: "/docs/components/carousel",
-                    items: [],
-                },
-                {
-                    title: "Chart",
-                    href: "/docs/components/chart",
-                    items: [],
-                },
-                {
-                    title: "Checkbox",
-                    href: "/docs/components/checkbox",
-                    items: [],
-                },
-                {
-                    title: "Collapsible",
-                    href: "/docs/components/collapsible",
-                    items: [],
-                },
-                {
-                    title: "Combobox",
-                    href: "/docs/components/combobox",
-                    items: [],
-                },
-                {
-                    title: "Command",
-                    href: "/docs/components/command",
-                    items: [],
-                },
-                {
-                    title: "Context Menu",
-                    href: "/docs/components/context-menu",
-                    items: [],
-                },
-                {
-                    title: "Data Table",
-                    href: "/docs/components/data-table",
-                    items: [],
-                },
-                {
-                    title: "Date Picker",
-                    href: "/docs/components/date-picker",
-                    items: [],
-                },
-                {
-                    title: "Dialog",
-                    href: "/docs/components/dialog",
-                    items: [],
-                },
-                {
-                    title: "Drawer",
-                    href: "/docs/components/drawer",
-                    items: [],
-                },
-                {
-                    title: "Dropdown Menu",
-                    href: "/docs/components/dropdown-menu",
-                    items: [],
-                },
-                {
-                    title: "Form",
-                    href: "/docs/components/form",
-                    items: [],
-                },
-                {
-                    title: "Hover Card",
-                    href: "/docs/components/hover-card",
-                    items: [],
-                },
-                {
-                    title: "Input",
-                    href: "/docs/components/input",
-                    items: [],
-                },
-                {
-                    title: "Input OTP",
-                    href: "/docs/components/input-otp",
-                    items: [],
-                },
-                {
-                    title: "Label",
-                    href: "/docs/components/label",
-                    items: [],
-                },
-                {
-                    title: "Menubar",
-                    href: "/docs/components/menubar",
-                    items: [],
-                },
-                {
-                    title: "Navigation Menu",
-                    href: "/docs/components/navigation-menu",
-                    items: [],
-                },
-                {
-                    title: "Pagination",
-                    href: "/docs/components/pagination",
-                    items: [],
-                },
-                {
-                    title: "Popover",
-                    href: "/docs/components/popover",
-                    items: [],
-                },
-                {
-                    title: "Progress",
-                    href: "/docs/components/progress",
-                    items: [],
-                },
-                {
-                    title: "Radio Group",
-                    href: "/docs/components/radio-group",
-                    items: [],
-                },
-                {
-                    title: "Resizable",
-                    href: "/docs/components/resizable",
-                    items: [],
-                },
-                {
-                    title: "Scroll Area",
-                    href: "/docs/components/scroll-area",
-                    items: [],
-                },
-                {
-                    title: "Select",
-                    href: "/docs/components/select",
-                    items: [],
-                },
-                {
-                    title: "Separator",
-                    href: "/docs/components/separator",
-                    items: [],
-                },
-                {
-                    title: "Sheet",
-                    href: "/docs/components/sheet",
-                    items: [],
-                },
-                {
-                    title: "Sidebar",
-                    href: "/docs/components/sidebar",
-                    items: [],
-                },
-                {
-                    title: "Skeleton",
-                    href: "/docs/components/skeleton",
-                    items: [],
-                },
-                {
-                    title: "Slider",
-                    href: "/docs/components/slider",
-                    items: [],
-                },
-                {
-                    title: "Sonner",
-                    href: "/docs/components/sonner",
-                    items: [],
-                },
-                {
-                    title: "Switch",
-                    href: "/docs/components/switch",
-                    items: [],
-                },
-                {
-                    title: "Table",
-                    href: "/docs/components/table",
-                    items: [],
-                },
-                {
-                    title: "Tabs",
-                    href: "/docs/components/tabs",
-                    items: [],
-                },
-                {
-                    title: "Textarea",
-                    href: "/docs/components/textarea",
-                    items: [],
-                },
-                {
-                    title: "Toast",
-                    href: "/docs/components/toast",
-                    items: [],
-                },
-                {
-                    title: "Toggle",
-                    href: "/docs/components/toggle",
-                    items: [],
-                },
-                {
-                    title: "Toggle Group",
-                    href: "/docs/components/toggle-group",
-                    items: [],
-                },
-                {
-                    title: "Tooltip",
-                    href: "/docs/components/tooltip",
-                    items: [],
-                },
-            ],
-        },
-        {
-            title: "Registry",
-            label: "New",
-            items: [
-                {
-                    title: "Introduction",
-                    href: "/docs/registry",
-                    items: [],
-                },
-                {
-                    title: "Getting Started",
-                    href: "/docs/registry/getting-started",
-                    items: [],
-                },
-                {
-                    title: "Open in v0",
-                    href: "/docs/registry/open-in-v0",
-                    items: [],
-                },
-                {
-                    title: "FAQ",
-                    href: "/docs/registry/faq",
-                    items: [],
-                },
-                {
-                    title: "registry.json",
-                    href: "/docs/registry/registry-json",
-                    items: [],
-                },
-                {
-                    title: "registry-item.json",
-                    href: "/docs/registry/registry-item-json",
+                    title: "Demo",
+                    href: "/docs/demo",
                     items: [],
                 },
             ],
