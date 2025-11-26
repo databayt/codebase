@@ -1,8 +1,260 @@
 ---
 title: Demo
-description: See the project in action
+description: See Hogwarts school management platform in action - live demo against MVP scope
 ---
 
-# Demo
+Experience the platform through our live demo environment. Each epic below links to working features you can test right now.
 
-Demo documentation coming soon.
+<div className="flex gap-2 mt-4 mb-6 not-prose">
+  <a href="https://demo.databayt.org" target="_blank" className="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90">Live Demo</a>
+  <span className="px-2 py-1.5 text-xs bg-muted rounded">demo@databayt.org / demo123</span>
+</div>
+
+---
+
+## Infrastructure
+
+Multi-tenant architecture where each school gets isolated data on its own subdomain.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Try It</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Visit demo.databayt.org (demo tenant)</li>
+      <li>Switch between Arabic/English</li>
+      <li>Notice RTL layout in Arabic mode</li>
+      <li>Check responsive design on mobile</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Subdomain-based routing</li>
+      <li>Isolated school data</li>
+      <li>i18n with RTL support</li>
+      <li>Tailwind CSS 4 theming</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Authentication
+
+Secure login with multiple providers and role-based access control.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Demo Accounts</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li><strong>Admin:</strong> admin@demo.databayt.org / admin123</li>
+      <li><strong>Teacher:</strong> teacher@demo.databayt.org / teacher123</li>
+      <li><strong>Student:</strong> student@demo.databayt.org / student123</li>
+      <li><strong>Parent:</strong> parent@demo.databayt.org / parent123</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>NextAuth v5 with JWT sessions</li>
+      <li>Role-based dashboard views</li>
+      <li>Protected routes per role</li>
+      <li>Session auto-renewal</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Students
+
+Full student lifecycle management with enrollment, profiles, and guardian links.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Try It</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Browse student list with search</li>
+      <li>Add a new student</li>
+      <li>View student profile tabs</li>
+      <li>Export students to CSV</li>
+      <li>Link guardians to students</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Data table with pagination</li>
+      <li>Advanced filtering system</li>
+      <li>Multi-tab profile layout</li>
+      <li>Bulk CSV export</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Listings
+
+Manage subjects, classes, teachers, and parents with full CRUD operations.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Try It</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Create subjects (Math, Science, etc.)</li>
+      <li>Create classes (Grade 1A, 1B)</li>
+      <li>Add teachers with qualifications</li>
+      <li>Assign teachers to classes</li>
+      <li>Enroll students in classes</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Subject catalog management</li>
+      <li>Class-teacher relationships</li>
+      <li>Student enrollment flow</li>
+      <li>Parent profile management</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Attendance
+
+Daily attendance tracking with status options and analytics.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Try It</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Select a class and date</li>
+      <li>Mark students present/absent/late</li>
+      <li>View attendance reports</li>
+      <li>Check attendance trends</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Daily marking interface</li>
+      <li>Status options (present/absent/late/excused)</li>
+      <li>Class attendance reports</li>
+      <li>Late arrival tracking</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Timetable
+
+Visual schedule builder with drag-and-drop and conflict detection.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Try It</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Open the timetable builder</li>
+      <li>Drag subjects into time slots</li>
+      <li>See conflict warnings</li>
+      <li>Switch between class/teacher views</li>
+      <li>Print the schedule</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Drag-and-drop scheduling</li>
+      <li>Teacher conflict detection</li>
+      <li>Room conflict detection</li>
+      <li>Multiple view modes</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Exams
+
+Exam scheduling, grading, and result management.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">Try It</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Create a new exam</li>
+      <li>Set subject, class, and date</li>
+      <li>Enter student grades</li>
+      <li>View grade distribution</li>
+    </ul>
+  </div>
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">What You'll See</h4>
+    <ul className="text-sm text-muted-foreground space-y-1">
+      <li>Exam creation workflow</li>
+      <li>Grade entry interface</li>
+      <li>Result calculation</li>
+      <li>Gradebook overview</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Role-Based Views
+
+Each role sees a different dashboard and has different permissions.
+
+| Role | Dashboard | Permissions |
+|------|-----------|-------------|
+| **Admin** | Full school overview | Create, read, update, delete all entities |
+| **Teacher** | Assigned classes | Mark attendance, grade assignments, view students |
+| **Student** | Personal schedule | View grades, attendance, submit assignments |
+| **Guardian** | Children overview | View linked children's data (read-only) |
+| **Staff** | Limited admin | Basic CRUD on assigned entities |
+| **Accountant** | Finance focus | Billing and invoices only |
+
+---
+
+## Quick Tour
+
+<div className="grid grid-cols-1 gap-4 mt-4 not-prose">
+  <div className="border rounded-lg p-4">
+    <h4 className="text-sm font-medium mb-2">5-Minute Walkthrough</h4>
+    <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
+      <li>Login as Admin at demo.databayt.org</li>
+      <li>Navigate to Students → Add a test student</li>
+      <li>Go to Classes → Create Grade 1A</li>
+      <li>Assign your student to the class</li>
+      <li>Open Timetable → Build a weekly schedule</li>
+      <li>Go to Attendance → Mark today's attendance</li>
+      <li>Create an Exam → Enter some grades</li>
+      <li>Switch to Arabic to see RTL layout</li>
+    </ol>
+  </div>
+</div>
+
+---
+
+## Demo Limitations
+
+The demo environment resets every 24 hours. Some features are disabled:
+
+- Email notifications (no actual emails sent)
+- File uploads (limited to 1MB)
+- User creation (cannot create new accounts)
+- School settings (locked to demo configuration)
+
+---
+
+## Feedback
+
+Found a bug or have a feature request?
+
+<div className="flex gap-2 mt-4 not-prose">
+  <a href="https://github.com/databayt/hogwarts/issues/new" target="_blank" className="px-3 py-1.5 text-sm bg-muted rounded hover:bg-muted/80">Report Issue</a>
+  <a href="https://discord.gg/databayt" target="_blank" className="px-3 py-1.5 text-sm bg-muted rounded hover:bg-muted/80">Join Discord</a>
+</div>
