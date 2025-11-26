@@ -95,7 +95,7 @@ export function DirectoryStructure({ className }: DirectoryStructureProps) {
           {
             name: "marketing/",
             type: "directory",
-            description: "Marketing page components"
+            description: "Entry point 01: SaaS marketing"
           },
           {
             name: "auth/",
@@ -110,17 +110,17 @@ export function DirectoryStructure({ className }: DirectoryStructureProps) {
           {
             name: "operator/",
             type: "directory",
-            description: "Operator dashboard components"
+            description: "Entry point 02: SaaS dashboard"
           },
           {
             name: "platform/",
             type: "directory",
-            description: "Platform feature components"
+            description: "Entry point 04: School dashboard"
           },
           {
             name: "site/",
             type: "directory",
-            description: "Site-specific components"
+            description: "Entry point 03: School marketing"
           }
         ]
       }
