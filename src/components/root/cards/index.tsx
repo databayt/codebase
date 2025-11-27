@@ -1,16 +1,10 @@
 // Re-export from atom for backward compatibility
 import { CardsActivityGoal } from "@/components/atom/activity-goal"
 import { CardsCalendar } from "@/components/atom/calendar"
-import { CardsChat } from "@/components/atom/chat-demo"
-import { CardsCookieSettings } from "@/components/atom/cookie-settings"
-import { CardsCreateAccount } from "@/components/atom/create-account"
-import { CardsDataTable } from "@/components/atom/data-table-demo"
 import { CardsMetric } from "@/components/atom/metric"
-import { CardsPaymentMethod } from "@/components/atom/payment-method"
 import { CardsReportIssue } from "@/components/atom/report-issue"
 import { CardsShare } from "@/components/atom/share"
 import { CardsStats } from "@/components/atom/stats"
-import { CardsTeamMembers } from "@/components/atom/team-members-demo"
 import type { getDictionary } from "@/components/local/dictionaries"
 
 interface CardsDemoProps {
@@ -33,16 +27,10 @@ export function CardsDemo({ dictionary }: CardsDemoProps) {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
           <div className="space-y-4 xl:space-y-4">
-            <CardsTeamMembers dictionary={dictionary} />
-            <CardsCookieSettings dictionary={dictionary} />
-            <CardsPaymentMethod dictionary={dictionary} />
+            <CardsReportIssue dictionary={dictionary} />
           </div>
           <div className="space-y-4 xl:space-y-4">
-            <CardsChat dictionary={dictionary} />
-            <CardsCreateAccount dictionary={dictionary} />
-            <div className="hidden xl:block">
-              <CardsReportIssue dictionary={dictionary} />
-            </div>
+            <CardsShare dictionary={dictionary} />
           </div>
         </div>
       </div>
@@ -55,13 +43,6 @@ export function CardsDemo({ dictionary }: CardsDemoProps) {
           <div className="pt-3 sm:col-span-2 xl:pt-3">
             <CardsMetric dictionary={dictionary} />
           </div>
-        </div>
-        <div className="hidden md:block">
-          <CardsDataTable dictionary={dictionary} />
-        </div>
-        <CardsShare dictionary={dictionary} />
-        <div className="xl:hidden">
-          <CardsReportIssue dictionary={dictionary} />
         </div>
       </div>
     </div>

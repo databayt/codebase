@@ -43,45 +43,6 @@ export const atoms: Registry["items"] = [
     registryDependencies: ["card", "avatar", "input", "button"],
   },
   {
-    name: "chat-demo",
-    type: "registry:atom",
-    description: "Demo chat interface with user picker dialog",
-    categories: ["display", "interactive"],
-    files: [
-      {
-        path: "components/atom/chat-demo.tsx",
-        type: "registry:component",
-      },
-    ],
-    registryDependencies: ["chat", "avatar", "button", "command", "dialog", "tooltip"],
-  },
-  {
-    name: "cookie-settings",
-    type: "registry:atom",
-    description: "Cookie consent and settings management card",
-    categories: ["form", "ui"],
-    files: [
-      {
-        path: "components/atom/cookie-settings.tsx",
-        type: "registry:component",
-      },
-    ],
-    registryDependencies: ["card", "switch", "button"],
-  },
-  {
-    name: "create-account",
-    type: "registry:atom",
-    description: "Account creation form card",
-    categories: ["form", "authentication"],
-    files: [
-      {
-        path: "components/atom/create-account.tsx",
-        type: "registry:component",
-      },
-    ],
-    registryDependencies: ["card", "button", "input", "label"],
-  },
-  {
     name: "data-table",
     type: "registry:atom",
     description: "Composable data table primitives with sorting, filtering, and pagination",
@@ -96,20 +57,6 @@ export const atoms: Registry["items"] = [
     registryDependencies: ["card", "table", "button", "input", "dropdown-menu"],
   },
   {
-    name: "data-table-demo",
-    type: "registry:atom",
-    description: "Demo data table with payment data and actions",
-    categories: ["data", "display"],
-    files: [
-      {
-        path: "components/atom/data-table-demo.tsx",
-        type: "registry:component",
-      },
-    ],
-    dependencies: ["@tanstack/react-table"],
-    registryDependencies: ["data-table", "checkbox", "dropdown-menu"],
-  },
-  {
     name: "metric",
     type: "registry:atom",
     description: "Metric display card with progress indicator",
@@ -121,19 +68,6 @@ export const atoms: Registry["items"] = [
       },
     ],
     registryDependencies: ["card", "progress"],
-  },
-  {
-    name: "payment-method",
-    type: "registry:atom",
-    description: "Payment method selection and management card",
-    categories: ["form", "ui"],
-    files: [
-      {
-        path: "components/atom/payment-method.tsx",
-        type: "registry:component",
-      },
-    ],
-    registryDependencies: ["card", "button", "input", "label", "radio-group", "select"],
   },
   {
     name: "report-issue",
@@ -187,19 +121,6 @@ export const atoms: Registry["items"] = [
       },
     ],
     registryDependencies: ["card", "button", "avatar", "popover", "command"],
-  },
-  {
-    name: "team-members-demo",
-    type: "registry:atom",
-    description: "Demo team members card with role selection",
-    categories: ["display", "form"],
-    files: [
-      {
-        path: "components/atom/team-members-demo.tsx",
-        type: "registry:component",
-      },
-    ],
-    registryDependencies: ["team-member"],
   },
 
   // AI Category
@@ -404,6 +325,96 @@ export const atoms: Registry["items"] = [
   },
 
   // Form / Interactive Category
+  {
+    name: "oauth-button",
+    type: "registry:atom",
+    description: "Single OAuth button with provider icon",
+    categories: ["form", "authentication"],
+    files: [
+      {
+        path: "components/atom/oauth-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["button", "icons"],
+  },
+  {
+    name: "oauth-button-group",
+    type: "registry:atom",
+    description: "Grid of OAuth buttons for multiple providers",
+    categories: ["form", "authentication"],
+    files: [
+      {
+        path: "components/atom/oauth-button-group.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["oauth-button"],
+  },
+  {
+    name: "divider-with-text",
+    type: "registry:atom",
+    description: "Horizontal divider with centered text label",
+    categories: ["ui", "layout"],
+    files: [
+      {
+        path: "components/atom/divider-with-text.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "user-info-card",
+    type: "registry:atom",
+    description: "User avatar with name and email display",
+    categories: ["display", "user"],
+    files: [
+      {
+        path: "components/atom/user-info-card.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["avatar"],
+  },
+  {
+    name: "settings-toggle-row",
+    type: "registry:atom",
+    description: "Settings row with label, description, and toggle switch",
+    categories: ["form", "settings"],
+    files: [
+      {
+        path: "components/atom/settings-toggle-row.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["switch", "label"],
+  },
+  {
+    name: "form-field",
+    type: "registry:atom",
+    description: "Form field primitives with label and input",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/form-field.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["input", "label"],
+  },
+  {
+    name: "payment-method-selector",
+    type: "registry:atom",
+    description: "Payment method radio selector with icons",
+    categories: ["form", "payment"],
+    files: [
+      {
+        path: "components/atom/payment-method-selector.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["radio-group", "label", "icons"],
+  },
   {
     name: "faceted",
     type: "registry:atom",
