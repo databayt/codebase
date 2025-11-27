@@ -65,8 +65,8 @@ export function DocsSidebar({
 
   return (
     <Sidebar
-      className="bg-transparent"
-      collapsible="offcanvas"
+      className="sticky top-[calc(var(--header-height)+2rem)] z-30 hidden h-[calc(100vh-var(--header-height)-4rem)] overflow-y-auto bg-transparent lg:flex"
+      collapsible="none"
       {...props}
     >
       <SidebarContent className="overflow-y-auto gap-0">
