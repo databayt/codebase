@@ -83,7 +83,35 @@
     @apply w-full px-4 sm:px-6 lg:px-8;
   }
 
-  /* shadcn/ui blocks pattern containers - moved to globals.css as @utility */
+  /* shadcn/ui blocks pattern container-wrapper */
+  .container-wrapper {
+    @apply mx-auto w-full;
+    padding-inline: var(--container-padding-xs);
+  }
+
+  @media (min-width: 640px) {
+    .container-wrapper {
+      padding-inline: var(--container-padding-sm);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container-wrapper {
+      padding-inline: var(--container-padding-md);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-wrapper {
+      padding-inline: var(--container-padding-lg);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-wrapper {
+      padding-inline: var(--container-padding-xl);
+    }
+  }
 
   /* Section soft spacing for blocks */
   .section-soft {

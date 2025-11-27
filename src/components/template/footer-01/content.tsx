@@ -7,7 +7,7 @@ interface SiteFooterProps {
 
 export function SiteFooter({ dictionary }: SiteFooterProps) {
   return (
-    <footer className="border-grid border-t py-6 md:py-0">
+    <footer className="group-has-[.docs-nav]/body:pb-20 group-has-[.docs-nav]/body:sm:pb-0 border-grid border-t py-6 md:py-0">
       <div className="w-full">
         <div className="py-4 px-0 mx-0">
           <div className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left rtl:md:text-right px-0 mx-0">
