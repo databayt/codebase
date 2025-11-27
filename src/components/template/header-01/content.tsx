@@ -6,8 +6,9 @@ import { Icons } from "@/components/atom/icons"
 import { MainNav } from "./main-nav"
 import { MobileNav } from "./mobile-nav"
 import { ModeSwitcher } from "./mode-switcher"
-import { LangSwitcher } from "./lang-switcher"
+import { GitHubLink } from "./github-link"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import type { getDictionary } from "@/components/local/dictionaries"
 
 interface SiteHeaderProps {
@@ -16,34 +17,33 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ dictionary }: SiteHeaderProps) {
     return (
-        <header className="border-grid sticky top-0 z-50 w-full border-b-[0.5px] bg-background">
-            <div className="container-wrapper px-6">
-                <div className="flex h-14 items-center gap-2 md:gap-4">
-                    <MainNav dictionary={dictionary} />
-                    <MobileNav dictionary={dictionary} className="flex md:hidden" />
-                    <div className="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
+        <header className="bg-background sticky top-0 z-50 w-full">
+            <div className="container-wrapper 3xl:fixed:px-0 px-6">
+                <div className="3xl:fixed:container flex h-(--header-height) items-center **:data-[slot=separator]:!h-4">
+                    <MobileNav dictionary={dictionary} className="flex lg:hidden" />
+                    <Button
+                        asChild
+                        variant="ghost"
+                        size="icon"
+                        className="hidden size-8 lg:flex"
+                    >
+                        <Link href="/">
+                            <Icons.logo className="size-5" />
+                            <span className="sr-only">{siteConfig.name}</span>
+                        </Link>
+                    </Button>
+                    <MainNav dictionary={dictionary} className="hidden lg:flex" />
+                    <div className="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
                         <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
                             <CommandMenu dictionary={dictionary} />
                         </div>
-                        <nav className="flex items-center gap-0.5">
-                            <Button
-                                asChild
-                                variant="ghost"
-                                size="icon"
-                                className="h-8 w-8 px-0"
-                            >
-                                <Link
-                                    href={siteConfig.links.github}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <Icons.gitHub className="h-4 w-4" />
-                                    <span className="sr-only">{dictionary?.header?.github || "GitHub"}</span>
-                                </Link>
-                            </Button>
-                            <LangSwitcher />
-                            <ModeSwitcher />
-                        </nav>
+                        <Separator
+                            orientation="vertical"
+                            className="ml-2 hidden lg:block"
+                        />
+                        <GitHubLink />
+                        <Separator orientation="vertical" />
+                        <ModeSwitcher />
                     </div>
                 </div>
             </div>

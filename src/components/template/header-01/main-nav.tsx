@@ -3,29 +3,19 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { siteConfig } from "./constants"
 import { cn } from "@/lib/utils"
-import { Icons } from "@/components/atom/icons"
 import type { getDictionary } from "@/components/local/dictionaries"
 
 interface MainNavProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  className?: string
 }
 
-export function MainNav({ dictionary }: MainNavProps) {
+export function MainNav({ dictionary, className }: MainNavProps) {
   const pathname = usePathname()
 
   return (
-    <div className="me-4 hidden md:flex">
-      <Link href="/" className="me-4 flex items-center gap-2 text-foreground lg:me-6">
-        <div className="-mt-[2px]">
-          <Icons.logo className="h-6 w-6" />
-        </div>
-        <h5 className="hidden lg:inline-block">
-          {dictionary?.common?.brandName || siteConfig.name}
-        </h5>
-      </Link>
-      <nav className="flex items-center gap-6 xl:gap-8">
+    <nav className={cn("flex items-center gap-4 text-sm xl:gap-6", className)}>
         <Link
           href="/docs"
           className={cn(
@@ -89,41 +79,6 @@ export function MainNav({ dictionary }: MainNavProps) {
         >
           <h6>{dictionary?.navigation?.vibes || "Vibes"}</h6>
         </Link>
-        {/* <Link
-          href="/charts"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/docs/component/chart") ||
-              pathname?.startsWith("/charts")
-              ? "text-foreground"
-              : "text-foreground/80"
-          )}
-        >
-          Charts
-        </Link>
-        <Link
-          href="/themes"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/themes")
-              ? "text-foreground"
-              : "text-foreground/80"
-          )}
-        >
-          Themes
-        </Link>
-        <Link
-          href="/colors"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/colors")
-              ? "text-foreground"
-              : "text-foreground/80"
-          )}
-        >
-          Colors
-        </Link> */}
-      </nav>
-    </div>
+    </nav>
   )
 }
