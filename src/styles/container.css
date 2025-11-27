@@ -85,7 +85,7 @@
 
   /* shadcn/ui blocks pattern containers */
   .container-wrapper {
-    @apply w-full px-2 mx-auto;
+    @apply w-full mx-auto;
   }
 
   /* Section soft spacing for blocks */
