@@ -1,12 +1,12 @@
 "use client"
 
 import * as React from "react"
-import type { getDictionary } from "@/components/local/dictionaries"
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
+  type Table as TableType,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -14,8 +14,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -24,14 +25,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -44,142 +41,39 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
-  },
-]
-
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+// Context
+interface DataTableContextValue<TData> {
+  table: TableType<TData>
+  columns: ColumnDef<TData, unknown>[]
 }
 
-export const columns: ColumnDef<Payment>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+const DataTableContext = React.createContext<DataTableContextValue<unknown> | null>(null)
 
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
-]
-
-interface CardsDataTableProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+export function useDataTableContext<TData>() {
+  const context = React.useContext(DataTableContext) as DataTableContextValue<TData> | null
+  if (!context) {
+    throw new Error("useDataTableContext must be used within a DataTable component")
+  }
+  return context
 }
 
-export function CardsDataTable({ dictionary }: CardsDataTableProps) {
+// Root Component
+export interface DataTableProps<TData, TValue> extends React.ComponentProps<typeof Card> {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+  children?: React.ReactNode
+}
+
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  children,
+  className,
+  ...props
+}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
@@ -201,130 +95,280 @@ export function CardsDataTable({ dictionary }: CardsDataTableProps) {
     },
   })
 
-  return (
-    <Card className="shadow-none border" dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
-      <CardHeader>
-        <CardTitle className="text-xl">Payments</CardTitle>
-        <CardDescription>Manage your payments.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="mb-4 flex items-center gap-4">
-          <Input
-            placeholder="Filter emails..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  )
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        <div className="overflow-hidden rounded-md border">
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead
-                        key={header.id}
-                        className="[&:has([role=checkbox])]:pl-3"
-                      >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </TableHead>
-                    )
-                  })}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        key={cell.id}
-                        className="[&:has([role=checkbox])]:pl-3"
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-        <div className="flex items-center justify-end space-x-2 pt-4">
-          <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
-          </div>
-          <div className="space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              Next
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+  const contextValue = React.useMemo<DataTableContextValue<TData>>(
+    () => ({
+      table,
+      columns: columns as ColumnDef<TData, unknown>[],
+    }),
+    [table, columns]
   )
+
+  return (
+    <DataTableContext.Provider value={contextValue as DataTableContextValue<unknown>}>
+      <Card
+        data-slot="data-table"
+        className={cn("shadow-none border", className)}
+        {...props}
+      >
+        {children}
+      </Card>
+    </DataTableContext.Provider>
+  )
+}
+
+// Header Component
+export interface DataTableHeaderProps extends React.ComponentProps<typeof CardHeader> {
+  title?: string
+  description?: string
+}
+
+export function DataTableHeader({
+  title,
+  description,
+  children,
+  className,
+  ...props
+}: DataTableHeaderProps) {
+  return (
+    <CardHeader data-slot="data-table-header" className={className} {...props}>
+      {title && <CardTitle className="text-xl">{title}</CardTitle>}
+      {description && <CardDescription>{description}</CardDescription>}
+      {children}
+    </CardHeader>
+  )
+}
+
+// Content Wrapper
+export interface DataTableContentProps extends React.ComponentProps<typeof CardContent> {}
+
+export function DataTableContent({
+  children,
+  className,
+  ...props
+}: DataTableContentProps) {
+  return (
+    <CardContent data-slot="data-table-content" className={className} {...props}>
+      {children}
+    </CardContent>
+  )
+}
+
+// Toolbar Component
+export interface DataTableToolbarProps extends React.ComponentProps<"div"> {
+  filterColumn?: string
+  filterPlaceholder?: string
+  showColumnToggle?: boolean
+}
+
+export function DataTableToolbar({
+  filterColumn,
+  filterPlaceholder = "Filter...",
+  showColumnToggle = true,
+  children,
+  className,
+  ...props
+}: DataTableToolbarProps) {
+  const { table } = useDataTableContext()
+
+  return (
+    <div
+      data-slot="data-table-toolbar"
+      className={cn("mb-4 flex items-center gap-4", className)}
+      {...props}
+    >
+      {filterColumn && (
+        <Input
+          placeholder={filterPlaceholder}
+          value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn(filterColumn)?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+      )}
+      {children}
+      {showColumnToggle && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Columns <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
+    </div>
+  )
+}
+
+// Body Component
+export interface DataTableBodyProps extends React.ComponentProps<"div"> {
+  emptyMessage?: string
+}
+
+export function DataTableBody({
+  emptyMessage = "No results.",
+  className,
+  ...props
+}: DataTableBodyProps) {
+  const { table, columns } = useDataTableContext()
+
+  return (
+    <div
+      data-slot="data-table-body"
+      className={cn("overflow-hidden rounded-md border", className)}
+      {...props}
+    >
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <TableHead
+                  key={header.id}
+                  className="[&:has([role=checkbox])]:pl-3"
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell
+                    key={cell.id}
+                    className="[&:has([role=checkbox])]:pl-3"
+                  >
+                    {flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell
+                colSpan={columns.length}
+                className="h-24 text-center"
+              >
+                {emptyMessage}
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
+// Pagination Component
+export interface DataTablePaginationProps extends React.ComponentProps<"div"> {
+  showSelected?: boolean
+}
+
+export function DataTablePagination({
+  showSelected = true,
+  className,
+  ...props
+}: DataTablePaginationProps) {
+  const { table } = useDataTableContext()
+
+  return (
+    <div
+      data-slot="data-table-pagination"
+      className={cn("flex items-center justify-end space-x-2 pt-4", className)}
+      {...props}
+    >
+      {showSelected && (
+        <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+      )}
+      <div className="space-x-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+// Column Header Helper (for sortable columns)
+export interface DataTableColumnHeaderProps<TData, TValue>
+  extends React.ComponentProps<typeof Button> {
+  column: import("@tanstack/react-table").Column<TData, TValue>
+  title: string
+}
+
+export function DataTableColumnHeader<TData, TValue>({
+  column,
+  title,
+  className,
+  ...props
+}: DataTableColumnHeaderProps<TData, TValue>) {
+  return (
+    <Button
+      data-slot="data-table-column-header"
+      variant="ghost"
+      onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      className={className}
+      {...props}
+    >
+      {title}
+      <ArrowUpDown />
+    </Button>
+  )
+}
+
+// Export all components
+export {
+  DataTable as DataTableRoot,
+  DataTableHeader,
+  DataTableContent,
+  DataTableToolbar,
+  DataTableBody,
+  DataTablePagination,
+  DataTableColumnHeader,
 }

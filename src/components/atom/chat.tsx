@@ -1,10 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { Check, Plus, Send } from "lucide-react"
+import { Send } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import type { getDictionary } from "@/components/local/dictionaries"
 import {
   Avatar,
   AvatarFallback,
@@ -17,251 +16,257 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 
-const users = [
-  {
-    name: "Olivia Martin",
-    email: "m@example.com",
-    avatar: "/avatars/01.png",
-  },
-  {
-    name: "Isabella Nguyen",
-    email: "isabella.nguyen@email.com",
-    avatar: "/avatars/03.png",
-  },
-  {
-    name: "Emma Wilson",
-    email: "emma@example.com",
-    avatar: "/avatars/05.png",
-  },
-  {
-    name: "Jackson Lee",
-    email: "lee@example.com",
-    avatar: "/avatars/02.png",
-  },
-  {
-    name: "William Kim",
-    email: "will@email.com",
-    avatar: "/avatars/04.png",
-  },
-] as const
-
-type User = (typeof users)[number]
-
-interface CardsChatProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+// Types
+export interface ChatMessage {
+  id?: string
+  role: "user" | "agent" | "system"
+  content: string
+  timestamp?: Date
 }
 
-export function CardsChat({ dictionary }: CardsChatProps) {
-  const [open, setOpen] = React.useState(false)
-  const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
+export interface ChatUser {
+  name: string
+  email?: string
+  avatar?: string
+}
 
-  const [messages, setMessages] = React.useState([
-    {
-      role: "agent",
-      content: "Hi, how can I help you today?",
+// Context
+interface ChatContextValue {
+  messages: ChatMessage[]
+  addMessage: (message: Omit<ChatMessage, "id">) => void
+  clearMessages: () => void
+  user?: ChatUser
+}
+
+const ChatContext = React.createContext<ChatContextValue | null>(null)
+
+export function useChatContext() {
+  const context = React.useContext(ChatContext)
+  if (!context) {
+    throw new Error("useChatContext must be used within a Chat component")
+  }
+  return context
+}
+
+// Root Component
+export interface ChatProps extends React.ComponentProps<typeof Card> {
+  messages?: ChatMessage[]
+  onMessagesChange?: (messages: ChatMessage[]) => void
+  user?: ChatUser
+  children?: React.ReactNode
+}
+
+export function Chat({
+  messages: messagesProp,
+  onMessagesChange,
+  user,
+  children,
+  className,
+  ...props
+}: ChatProps) {
+  const [internalMessages, setInternalMessages] = React.useState<ChatMessage[]>(
+    messagesProp ?? []
+  )
+
+  const messages = messagesProp ?? internalMessages
+
+  const addMessage = React.useCallback(
+    (message: Omit<ChatMessage, "id">) => {
+      const newMessage: ChatMessage = {
+        ...message,
+        id: crypto.randomUUID(),
+        timestamp: new Date(),
+      }
+      if (onMessagesChange) {
+        onMessagesChange([...messages, newMessage])
+      } else {
+        setInternalMessages((prev) => [...prev, newMessage])
+      }
     },
-    {
-      role: "user",
-      content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: "agent",
-      content: "What seems to be the problem?",
-    },
-    {
-      role: "user",
-      content: "I can't log in.",
-    },
-  ])
+    [messages, onMessagesChange]
+  )
+
+  const clearMessages = React.useCallback(() => {
+    if (onMessagesChange) {
+      onMessagesChange([])
+    } else {
+      setInternalMessages([])
+    }
+  }, [onMessagesChange])
+
+  const contextValue = React.useMemo<ChatContextValue>(
+    () => ({
+      messages,
+      addMessage,
+      clearMessages,
+      user,
+    }),
+    [messages, addMessage, clearMessages, user]
+  )
+
+  return (
+    <ChatContext.Provider value={contextValue}>
+      <Card
+        data-slot="chat"
+        className={cn("shadow-none border", className)}
+        {...props}
+      >
+        {children}
+      </Card>
+    </ChatContext.Provider>
+  )
+}
+
+// Header Component
+export interface ChatHeaderProps extends React.ComponentProps<typeof CardHeader> {
+  user?: ChatUser
+  actions?: React.ReactNode
+}
+
+export function ChatHeader({
+  user,
+  actions,
+  children,
+  className,
+  ...props
+}: ChatHeaderProps) {
+  return (
+    <CardHeader
+      data-slot="chat-header"
+      className={cn("flex flex-row items-center", className)}
+      {...props}
+    >
+      {user ? (
+        <div className="flex items-center space-x-4">
+          <Avatar>
+            <AvatarImage src={user.avatar} alt={user.name} />
+            <AvatarFallback>
+              {user.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="text-sm font-medium leading-none">{user.name}</p>
+            {user.email && (
+              <p className="text-sm text-muted-foreground">{user.email}</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        children
+      )}
+      {actions && <div className="ml-auto">{actions}</div>}
+    </CardHeader>
+  )
+}
+
+// Messages Container
+export interface ChatMessagesProps extends React.ComponentProps<typeof CardContent> {}
+
+export function ChatMessages({
+  children,
+  className,
+  ...props
+}: ChatMessagesProps) {
+  const { messages } = useChatContext()
+
+  return (
+    <CardContent data-slot="chat-messages" className={className} {...props}>
+      <div className="space-y-4">
+        {children ??
+          messages.map((message, index) => (
+            <ChatMessage key={message.id ?? index} message={message} />
+          ))}
+      </div>
+    </CardContent>
+  )
+}
+
+// Single Message
+export interface ChatMessageProps extends React.ComponentProps<"div"> {
+  message: ChatMessage
+}
+
+export function ChatMessage({ message, className, ...props }: ChatMessageProps) {
+  return (
+    <div
+      data-slot="chat-message"
+      data-role={message.role}
+      className={cn(
+        "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
+        message.role === "user"
+          ? "ml-auto bg-primary text-primary-foreground"
+          : "bg-muted",
+        className
+      )}
+      {...props}
+    >
+      {message.content}
+    </div>
+  )
+}
+
+// Input Component
+export interface ChatInputProps extends React.ComponentProps<typeof CardFooter> {
+  placeholder?: string
+  onSend?: (message: string) => void
+}
+
+export function ChatInput({
+  placeholder = "Type your message...",
+  onSend,
+  className,
+  ...props
+}: ChatInputProps) {
+  const { addMessage } = useChatContext()
   const [input, setInput] = React.useState("")
   const inputLength = input.trim().length
 
-  return (
-    <>
-      <Card className="shadow-none border">
-        <CardHeader className="flex flex-row items-center">
-          <div className="flex items-center space-x-4">
-            <Avatar>
-              <AvatarImage src="/avatars/01.png" alt="Image" />
-              <AvatarFallback>OM</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-sm font-medium leading-none">Sofia Davis</p>
-              <p className="text-sm text-muted-foreground">m@example.com</p>
-            </div>
-          </div>
-          <TooltipProvider delayDuration={0}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="ml-auto rounded-full"
-                  onClick={() => setOpen(true)}
-                >
-                  <Plus />
-                  <span className="sr-only">New message</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent sideOffset={10}>New message</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                  message.role === "user"
-                    ? "ml-auto bg-primary text-primary-foreground"
-                    : "bg-muted"
-                )}
-              >
-                {message.content}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-        <CardFooter>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault()
-              if (inputLength === 0) return
-              setMessages([
-                ...messages,
-                {
-                  role: "user",
-                  content: input,
-                },
-              ])
-              setInput("")
-            }}
-            className="flex w-full items-center space-x-2"
-          >
-            <Input
-              id="message"
-              placeholder={dictionary?.cards?.chat?.sendMessage || "Type your message..."}
-              className="flex-1"
-              autoComplete="off"
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-            />
-            <Button type="submit" size="icon" disabled={inputLength === 0}>
-              <Send />
-              <span className="sr-only">Send</span>
-            </Button>
-          </form>
-        </CardFooter>
-      </Card>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="gap-0 p-0 outline-none">
-          <DialogHeader className="px-4 pb-4 pt-5">
-            <DialogTitle>New message</DialogTitle>
-            <DialogDescription>
-              Invite a user to this thread. This will create a new group
-              message.
-            </DialogDescription>
-          </DialogHeader>
-          <Command className="overflow-hidden rounded-t-none border-t bg-transparent">
-            <CommandInput placeholder="Search user..." />
-            <CommandList>
-              <CommandEmpty>No users found.</CommandEmpty>
-              <CommandGroup className="p-2">
-                {users.map((user) => (
-                  <CommandItem
-                    key={user.email}
-                    className="flex items-center px-2"
-                    onSelect={() => {
-                      if (selectedUsers.includes(user)) {
-                        return setSelectedUsers(
-                          selectedUsers.filter(
-                            (selectedUser) => selectedUser !== user
-                          )
-                        )
-                      }
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    if (inputLength === 0) return
 
-                      return setSelectedUsers(
-                        [...users].filter((u) =>
-                          [...selectedUsers, user].includes(u)
-                        )
-                      )
-                    }}
-                  >
-                    <Avatar>
-                      <AvatarImage src={user.avatar} alt="Image" />
-                      <AvatarFallback>{user.name[0]}</AvatarFallback>
-                    </Avatar>
-                    <div className="ml-2">
-                      <p className="text-sm font-medium leading-none">
-                        {user.name}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {user.email}
-                      </p>
-                    </div>
-                    {selectedUsers.includes(user) ? (
-                      <Check className="ml-auto flex h-5 w-5 text-primary" />
-                    ) : null}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-          <DialogFooter className="flex items-center border-t p-4 sm:justify-between">
-            {selectedUsers.length > 0 ? (
-              <div className="flex -space-x-2 overflow-hidden">
-                {selectedUsers.map((user) => (
-                  <Avatar
-                    key={user.email}
-                    className="inline-block border-2 border-background"
-                  >
-                    <AvatarImage src={user.avatar} />
-                    <AvatarFallback>{user.name[0]}</AvatarFallback>
-                  </Avatar>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                Select users to add to this thread.
-              </p>
-            )}
-            <Button
-              disabled={selectedUsers.length < 2}
-              onClick={() => {
-                setOpen(false)
-              }}
-            >
-              Continue
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </>
+    if (onSend) {
+      onSend(input)
+    } else {
+      addMessage({
+        role: "user",
+        content: input,
+      })
+    }
+    setInput("")
+  }
+
+  return (
+    <CardFooter data-slot="chat-input" className={className} {...props}>
+      <form onSubmit={handleSubmit} className="flex w-full items-center space-x-2">
+        <Input
+          id="message"
+          placeholder={placeholder}
+          className="flex-1"
+          autoComplete="off"
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
+        <Button type="submit" size="icon" disabled={inputLength === 0}>
+          <Send />
+          <span className="sr-only">Send</span>
+        </Button>
+      </form>
+    </CardFooter>
   )
+}
+
+// Export all components
+export {
+  Chat as ChatRoot,
+  ChatHeader,
+  ChatMessages,
+  ChatMessage,
+  ChatInput,
 }

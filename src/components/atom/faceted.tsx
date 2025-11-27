@@ -258,6 +258,7 @@ function FacetedItem(props: FacetedItemProps) {
 
   return (
     <CommandItem
+      data-slot="faceted-item"
       aria-selected={isSelected}
       data-selected={isSelected}
       className={cn("gap-2", className)}
@@ -279,7 +280,9 @@ function FacetedItem(props: FacetedItemProps) {
   );
 }
 
-const FacetedSeparator = CommandSeparator;
+function FacetedSeparator(props: React.ComponentProps<typeof CommandSeparator>) {
+  return <CommandSeparator data-slot="faceted-separator" {...props} />;
+}
 
 export {
   Faceted,

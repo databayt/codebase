@@ -286,6 +286,7 @@ function SortableRoot<T>(props: SortableRootProps<T>) {
       value={contextValue as SortableRootContextValue<unknown>}
     >
       <DndContext
+        data-slot="sortable"
         collisionDetection={collisionDetection ?? config.collisionDetection}
         modifiers={modifiers ?? config.modifiers}
         sensors={sensors}
@@ -559,6 +560,7 @@ function SortableOverlay(props: SortableOverlayProps) {
 
   return ReactDOM.createPortal(
     <DragOverlay
+      data-slot="sortable-overlay"
       dropAnimation={dropAnimation}
       modifiers={context.modifiers}
       className={cn(!context.flatCursor && "cursor-grabbing")}
