@@ -31,14 +31,14 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
 
     return (
         <header className="bg-background sticky top-0 z-50 w-full">
-            <div className="container-wrapper 3xl:fixed:px-0 px-6">
+            <div className="container-wrapper 3xl:fixed:px-0">
                 <div className="3xl:fixed:container flex h-(--header-height) items-center **:data-[slot=separator]:!h-4">
                     <MobileNav
                         tree={pageTree}
                         items={NAV_ITEMS}
                         className="flex lg:hidden"
                     />
-                    <Link href="/" className="hidden items-center gap-2 lg:flex">
+                    <Link href="/" className="hidden items-center gap-2 lg:flex mr-4">
                         <Icons.logo className="size-5" />
                         <span className="font-bold">{siteConfig.name}</span>
                     </Link>
