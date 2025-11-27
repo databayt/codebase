@@ -84,6 +84,7 @@ export function PromptInputAttachment({
 
     return (
         <div
+            data-slot="prompt-input-attachment"
             className={cn('group relative h-14 w-14 rounded-md border', className)}
             key={data.id}
             {...props}
