@@ -38,7 +38,7 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
                         items={NAV_ITEMS}
                         className="flex lg:hidden"
                     />
-                    <Link href="/" className="hidden items-center gap-2 lg:flex mr-4">
+                    <Link href="/" className="hidden items-center gap-1.5 lg:flex mr-6">
                         <Icons.logo className="size-5" />
                         <span className="font-bold">{siteConfig.name}</span>
                     </Link>
