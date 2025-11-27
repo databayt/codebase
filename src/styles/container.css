@@ -83,10 +83,7 @@
     @apply w-full px-4 sm:px-6 lg:px-8;
   }
 
-  /* shadcn/ui blocks pattern containers */
-  .container-wrapper {
-    @apply w-full mx-auto;
-  }
+  /* shadcn/ui blocks pattern containers - moved to globals.css as @utility */
 
   /* Section soft spacing for blocks */
   .section-soft {
