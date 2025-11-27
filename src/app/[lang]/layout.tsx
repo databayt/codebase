@@ -56,7 +56,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={lang} dir={config.dir} suppressHydrationWarning>
-            <body className={cn(fontClass, fontVariables, "antialiased")} suppressHydrationWarning>
+            <body className={cn(fontClass, fontVariables, "group/body overscroll-none antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]")} suppressHydrationWarning>
                 <ThemeProvider>
                     <div className={isViewRoute ? "" : "layout-container"}>
                         {children}

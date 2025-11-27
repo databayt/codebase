@@ -379,21 +379,22 @@
   }
 }
 
-/* Touch target expansion utility for mobile accessibility */
-@layer utilities {
-  .extend-touch-target {
-    position: relative;
-  }
-
+/* v4 utilities */
+@utility extend-touch-target {
   @media (pointer: coarse) {
-    .extend-touch-target {
-      touch-action: manipulation;
-    }
+    @apply relative touch-manipulation after:absolute after:-inset-2;
+  }
+}
 
-    .extend-touch-target::after {
-      content: "";
-      position: absolute;
-      inset: -0.5rem;
-    }
+@utility border-grid {
+  @apply border-border/50 dark:border-border;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
