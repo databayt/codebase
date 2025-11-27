@@ -13,7 +13,7 @@ export default async function DocsLayout({ children, params }: DocsLayoutProps) 
 
     return (
         <div
-            className="container-wrapper flex flex-1 flex-col"
+            className="container-wrapper flex flex-1 flex-col px-2"
             dir="ltr"
             lang="en"
             style={{

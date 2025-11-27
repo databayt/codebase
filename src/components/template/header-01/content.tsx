@@ -17,7 +17,8 @@ interface SiteHeaderProps {
 export function SiteHeader({ dictionary }: SiteHeaderProps) {
     return (
         <header className="border-grid sticky top-0 z-50 w-full border-b-[0.5px] bg-background">
-            <div className="flex h-14 items-center gap-2 md:gap-4">
+            <div className="container-wrapper px-6">
+                <div className="flex h-14 items-center gap-2 md:gap-4">
                     <MainNav dictionary={dictionary} />
                     <MobileNav dictionary={dictionary} className="flex md:hidden" />
                     <div className="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
@@ -44,6 +45,7 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
                             <ModeSwitcher />
                         </nav>
                     </div>
+                </div>
             </div>
         </header>
     )
