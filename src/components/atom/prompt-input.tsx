@@ -147,6 +147,7 @@ export function PromptInputAttachments({
 
     return (
         <div
+            data-slot="prompt-input-attachments"
             aria-live="polite"
             className={cn(
                 'overflow-hidden transition-[height] duration-200 ease-out',
@@ -178,6 +179,7 @@ export const PromptInputActionAddAttachments = ({
 
     return (
         <DropdownMenuItem
+            data-slot="prompt-input-action-add-attachments"
             {...props}
             onSelect={(e) => {
                 e.preventDefault();
@@ -434,6 +436,7 @@ export const PromptInput = ({
                 type="file"
             />
             <form
+                data-slot="prompt-input"
                 className={cn(
                     'w-full overflow-hidden rounded-xl border bg-background shadow-sm',
                     className,
@@ -451,7 +454,7 @@ export const PromptInputBody = ({
                                     className,
                                     ...props
                                 }: PromptInputBodyProps) => (
-    <div className={cn(className, 'flex flex-col')} {...props} />
+    <div data-slot="prompt-input-body" className={cn(className, 'flex flex-col')} {...props} />
 );
 
 export type PromptInputTextareaProps = ComponentProps<typeof Textarea>;
@@ -485,6 +488,7 @@ export const PromptInputTextarea = ({
 
     return (
         <Textarea
+            data-slot="prompt-input-textarea"
             className={cn(
                 'w-full resize-none rounded-none border-none shadow-none outline-none ring-0',
                 'field-sizing-content bg-transparent dark:bg-transparent',
@@ -510,6 +514,7 @@ export const PromptInputToolbar = ({
                                        ...props
                                    }: PromptInputToolbarProps) => (
     <div
+        data-slot="prompt-input-toolbar"
         className={cn('flex items-center justify-between p-1', className)}
         {...props}
     />
@@ -522,6 +527,7 @@ export const PromptInputTools = ({
                                      ...props
                                  }: PromptInputToolsProps) => (
     <div
+        data-slot="prompt-input-tools"
         className={cn(
             'flex items-center gap-1',
             '[&_button:first-child]:rounded-bl-xl',
@@ -544,6 +550,7 @@ export const PromptInputButton = ({
 
     return (
         <Button
+            data-slot="prompt-input-button"
             className={cn(
                 'shrink-0 gap-1.5 rounded-lg',
                 variant === 'ghost' && 'text-muted-foreground',
@@ -560,7 +567,7 @@ export const PromptInputButton = ({
 
 export type PromptInputActionMenuProps = ComponentProps<typeof DropdownMenu>;
 export const PromptInputActionMenu = (props: PromptInputActionMenuProps) => (
-    <DropdownMenu {...props} />
+    <DropdownMenu data-slot="prompt-input-action-menu" {...props} />
 );
 
 export type PromptInputActionMenuTriggerProps = ComponentProps<
@@ -571,7 +578,7 @@ export const PromptInputActionMenuTrigger = ({
                                                  children,
                                                  ...props
                                              }: PromptInputActionMenuTriggerProps) => (
-    <DropdownMenuTrigger asChild>
+    <DropdownMenuTrigger asChild data-slot="prompt-input-action-menu-trigger">
         <PromptInputButton className={className} {...props}>
             {children ?? <PlusIcon className="size-4" />}
         </PromptInputButton>
@@ -585,7 +592,7 @@ export const PromptInputActionMenuContent = ({
                                                  className,
                                                  ...props
                                              }: PromptInputActionMenuContentProps) => (
-    <DropdownMenuContent align="start" className={cn(className)} {...props} />
+    <DropdownMenuContent data-slot="prompt-input-action-menu-content" align="start" className={cn(className)} {...props} />
 );
 
 export type PromptInputActionMenuItemProps = ComponentProps<
@@ -595,7 +602,7 @@ export const PromptInputActionMenuItem = ({
                                               className,
                                               ...props
                                           }: PromptInputActionMenuItemProps) => (
-    <DropdownMenuItem className={cn(className)} {...props} />
+    <DropdownMenuItem data-slot="prompt-input-action-menu-item" className={cn(className)} {...props} />
 );
 
 // Note: Actions that perform side-effects (like opening a file dialog)
@@ -625,6 +632,7 @@ export const PromptInputSubmit = ({
 
     return (
         <Button
+            data-slot="prompt-input-submit"
             className={cn('gap-1.5 rounded-lg', className)}
             size={size}
             type="submit"
@@ -639,7 +647,7 @@ export const PromptInputSubmit = ({
 export type PromptInputModelSelectProps = ComponentProps<typeof Select>;
 
 export const PromptInputModelSelect = (props: PromptInputModelSelectProps) => (
-    <Select {...props} />
+    <Select data-slot="prompt-input-model-select" {...props} />
 );
 
 export type PromptInputModelSelectTriggerProps = ComponentProps<
@@ -651,6 +659,7 @@ export const PromptInputModelSelectTrigger = ({
                                                   ...props
                                               }: PromptInputModelSelectTriggerProps) => (
     <SelectTrigger
+        data-slot="prompt-input-model-select-trigger"
         className={cn(
             'border-none bg-transparent font-medium text-muted-foreground shadow-none transition-colors',
             'hover:bg-accent hover:text-foreground [&[aria-expanded="true"]]:bg-accent [&[aria-expanded="true"]]:text-foreground',
@@ -668,7 +677,7 @@ export const PromptInputModelSelectContent = ({
                                                   className,
                                                   ...props
                                               }: PromptInputModelSelectContentProps) => (
-    <SelectContent className={cn(className)} {...props} />
+    <SelectContent data-slot="prompt-input-model-select-content" className={cn(className)} {...props} />
 );
 
 export type PromptInputModelSelectItemProps = ComponentProps<typeof SelectItem>;
@@ -677,7 +686,7 @@ export const PromptInputModelSelectItem = ({
                                                className,
                                                ...props
                                            }: PromptInputModelSelectItemProps) => (
-    <SelectItem className={cn(className)} {...props} />
+    <SelectItem data-slot="prompt-input-model-select-item" className={cn(className)} {...props} />
 );
 
 export type PromptInputModelSelectValueProps = ComponentProps<
@@ -688,5 +697,5 @@ export const PromptInputModelSelectValue = ({
                                                 className,
                                                 ...props
                                             }: PromptInputModelSelectValueProps) => (
-    <SelectValue className={cn(className)} {...props} />
+    <SelectValue data-slot="prompt-input-model-select-value" className={cn(className)} {...props} />
 );

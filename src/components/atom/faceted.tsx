@@ -107,7 +107,7 @@ function Faceted<Multiple extends boolean = false>(
 
   return (
     <FacetedContext.Provider value={contextValue}>
-      <Popover open={open} onOpenChange={onOpenChange} {...facetedProps}>
+      <Popover data-slot="faceted" open={open} onOpenChange={onOpenChange} {...facetedProps}>
         {children}
       </Popover>
     </FacetedContext.Provider>
@@ -119,6 +119,7 @@ function FacetedTrigger(props: React.ComponentProps<typeof PopoverTrigger>) {
 
   return (
     <PopoverTrigger
+      data-slot="faceted-trigger"
       {...triggerProps}
       className={cn("justify-between text-left", className)}
     >
@@ -160,6 +161,7 @@ function FacetedBadgeList(props: FacetedBadgeListProps) {
   if (!values || values.length === 0) {
     return (
       <div
+        data-slot="faceted-badge-list"
         {...badgeListProps}
         className="flex w-full items-center gap-1 text-muted-foreground"
       >
@@ -171,6 +173,7 @@ function FacetedBadgeList(props: FacetedBadgeListProps) {
 
   return (
     <div
+      data-slot="faceted-badge-list"
       {...badgeListProps}
       className={cn("flex flex-wrap items-center gap-1", className)}
     >
@@ -201,6 +204,7 @@ function FacetedContent(props: React.ComponentProps<typeof PopoverContent>) {
 
   return (
     <PopoverContent
+      data-slot="faceted-content"
       {...contentProps}
       align="start"
       className={cn(
@@ -213,13 +217,21 @@ function FacetedContent(props: React.ComponentProps<typeof PopoverContent>) {
   );
 }
 
-const FacetedInput = CommandInput;
+function FacetedInput(props: React.ComponentProps<typeof CommandInput>) {
+  return <CommandInput data-slot="faceted-input" {...props} />;
+}
 
-const FacetedList = CommandList;
+function FacetedList(props: React.ComponentProps<typeof CommandList>) {
+  return <CommandList data-slot="faceted-list" {...props} />;
+}
 
-const FacetedEmpty = CommandEmpty;
+function FacetedEmpty(props: React.ComponentProps<typeof CommandEmpty>) {
+  return <CommandEmpty data-slot="faceted-empty" {...props} />;
+}
 
-const FacetedGroup = CommandGroup;
+function FacetedGroup(props: React.ComponentProps<typeof CommandGroup>) {
+  return <CommandGroup data-slot="faceted-group" {...props} />;
+}
 
 interface FacetedItemProps extends React.ComponentProps<typeof CommandItem> {
   value: string;
