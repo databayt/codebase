@@ -3,7 +3,7 @@
 @layer components {
   /* CSS Custom Properties for consistent spacing */
   :root {
-    --container-padding-xs: 0.75rem;   /* 12px */
+    --container-padding-xs: 0.5rem;    /* 8px */
     --container-padding-sm: 1rem;      /* 16px */
     --container-padding-md: 1.5rem;    /* 24px */
     --container-padding-lg: 2rem;      /* 32px */
