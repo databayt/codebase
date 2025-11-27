@@ -233,3 +233,4 @@ GITHUB_CLIENT_SECRET=
 - Documentation lives in MDX files under `src/app/[lang]/docs/`
 - Authentication state available via hooks and server utilities
 - Support both English and Arabic in all user-facing features
+- **Always push changes to remote after committing** - never leave commits unpushed
