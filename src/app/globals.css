@@ -211,8 +211,7 @@
     body {
       touch-action: manipulation;
       overscroll-behavior-y: none;
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+      /* Removed transform: translate3d(0,0,0) - it breaks position:fixed for modals/sheets */
     }
 
     /* Support Radix scroll lock for mobile sidebar */
