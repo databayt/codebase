@@ -706,12 +706,49 @@ export function CardsDataTable({ dictionary }: CardsDataTableProps) {
 
 ## Usage
 
+### Demo Component
+
 ```tsx showLineNumbers
-import { CardsDataTable } from "@/components/atom/data-table"
+import { CardsDataTable } from "@/components/atom/data-table-demo"
 ```
 
 ```tsx showLineNumbers
 export default function Page() {
-  return <DataTable />
+  return <CardsDataTable />
+}
+```
+
+### Composable Primitives
+
+```tsx showLineNumbers
+import {
+  DataTable,
+  DataTableHeader,
+  DataTableContent,
+  DataTableToolbar,
+  DataTableBody,
+  DataTablePagination,
+  DataTableColumnHeader,
+} from "@/components/atom/data-table"
+```
+
+```tsx showLineNumbers
+export default function Page() {
+  return (
+    <DataTable columns={columns} data={data}>
+      <DataTableHeader
+        title="Payments"
+        description="Manage your payments."
+      />
+      <DataTableContent>
+        <DataTableToolbar
+          filterColumn="email"
+          filterPlaceholder="Filter emails..."
+        />
+        <DataTableBody />
+        <DataTablePagination />
+      </DataTableContent>
+    </DataTable>
+  )
 }
 ```

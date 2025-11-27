@@ -32,7 +32,7 @@ export const atoms: Registry["items"] = [
   {
     name: "chat",
     type: "registry:atom",
-    description: "Chat interface card with message history",
+    description: "Composable chat primitives with context-based state management",
     categories: ["display", "interactive"],
     files: [
       {
@@ -41,6 +41,19 @@ export const atoms: Registry["items"] = [
       },
     ],
     registryDependencies: ["card", "avatar", "input", "button"],
+  },
+  {
+    name: "chat-demo",
+    type: "registry:atom",
+    description: "Demo chat interface with user picker dialog",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/chat-demo.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["chat", "avatar", "button", "command", "dialog", "tooltip"],
   },
   {
     name: "cookie-settings",
@@ -71,7 +84,7 @@ export const atoms: Registry["items"] = [
   {
     name: "data-table",
     type: "registry:atom",
-    description: "Data table card with sorting and filtering",
+    description: "Composable data table primitives with sorting, filtering, and pagination",
     categories: ["data", "display"],
     files: [
       {
@@ -79,7 +92,22 @@ export const atoms: Registry["items"] = [
         type: "registry:component",
       },
     ],
-    registryDependencies: ["card", "table"],
+    dependencies: ["@tanstack/react-table"],
+    registryDependencies: ["card", "table", "button", "input", "dropdown-menu"],
+  },
+  {
+    name: "data-table-demo",
+    type: "registry:atom",
+    description: "Demo data table with payment data and actions",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/data-table-demo.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["@tanstack/react-table"],
+    registryDependencies: ["data-table", "checkbox", "dropdown-menu"],
   },
   {
     name: "metric",
@@ -148,17 +176,30 @@ export const atoms: Registry["items"] = [
     registryDependencies: ["card", "chart"],
   },
   {
-    name: "team-members",
+    name: "team-member",
     type: "registry:atom",
-    description: "Team members management card",
+    description: "Composable team member primitives with role management",
     categories: ["display", "form"],
     files: [
       {
-        path: "components/atom/team-members.tsx",
+        path: "components/atom/team-member.tsx",
         type: "registry:component",
       },
     ],
-    registryDependencies: ["card", "button", "input", "select", "avatar"],
+    registryDependencies: ["card", "button", "avatar", "popover", "command"],
+  },
+  {
+    name: "team-members-demo",
+    type: "registry:atom",
+    description: "Demo team members card with role selection",
+    categories: ["display", "form"],
+    files: [
+      {
+        path: "components/atom/team-members-demo.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["team-member"],
   },
 
   // AI Category

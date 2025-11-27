@@ -580,12 +580,40 @@ export function CardsChat({ dictionary }: CardsChatProps) {
 
 ## Usage
 
+### Demo Component
+
 ```tsx showLineNumbers
-import { CardsChat } from "@/components/atom/chat"
+import { CardsChat } from "@/components/atom/chat-demo"
 ```
 
 ```tsx showLineNumbers
 export default function Page() {
-  return <Chat />
+  return <CardsChat />
+}
+```
+
+### Composable Primitives
+
+```tsx showLineNumbers
+import {
+  Chat,
+  ChatHeader,
+  ChatMessages,
+  ChatInput,
+  useChatContext,
+} from "@/components/atom/chat"
+```
+
+```tsx showLineNumbers
+export default function Page() {
+  const [messages, setMessages] = useState([])
+
+  return (
+    <Chat messages={messages} onMessagesChange={setMessages}>
+      <ChatHeader user={currentUser} />
+      <ChatMessages />
+      <ChatInput placeholder="Type your message..." />
+    </Chat>
+  )
 }
 ```

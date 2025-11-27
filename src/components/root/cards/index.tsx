@@ -1,16 +1,16 @@
 // Re-export from atom for backward compatibility
 import { CardsActivityGoal } from "@/components/atom/activity-goal"
 import { CardsCalendar } from "@/components/atom/calendar"
-import { CardsChat } from "@/components/atom/chat"
+import { CardsChat } from "@/components/atom/chat-demo"
 import { CardsCookieSettings } from "@/components/atom/cookie-settings"
 import { CardsCreateAccount } from "@/components/atom/create-account"
-import { CardsDataTable } from "@/components/atom/data-table"
+import { CardsDataTable } from "@/components/atom/data-table-demo"
 import { CardsMetric } from "@/components/atom/metric"
 import { CardsPaymentMethod } from "@/components/atom/payment-method"
 import { CardsReportIssue } from "@/components/atom/report-issue"
 import { CardsShare } from "@/components/atom/share"
 import { CardsStats } from "@/components/atom/stats"
-import { CardsTeamMembers } from "@/components/atom/team-members"
+import { CardsTeamMembers } from "@/components/atom/team-members-demo"
 import type { getDictionary } from "@/components/local/dictionaries"
 
 interface CardsDemoProps {

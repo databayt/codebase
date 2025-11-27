@@ -468,12 +468,49 @@ export function CardsTeamMembers({ dictionary }: CardsTeamMembersProps) {
 
 ## Usage
 
+### Demo Component
+
 ```tsx showLineNumbers
-import { CardsTeamMembers } from "@/components/atom/team-members"
+import { CardsTeamMembers } from "@/components/atom/team-members-demo"
 ```
 
 ```tsx showLineNumbers
 export default function Page() {
-  return <TeamMembers />
+  return <CardsTeamMembers />
+}
+```
+
+### Composable Primitives
+
+```tsx showLineNumbers
+import {
+  TeamMembers,
+  TeamMemberItem,
+  TeamMemberInfo,
+  TeamMemberRoleSelect,
+  defaultRoles,
+} from "@/components/atom/team-member"
+```
+
+```tsx showLineNumbers
+export default function Page() {
+  const [members, setMembers] = useState(initialMembers)
+
+  return (
+    <TeamMembers
+      members={members}
+      onRoleChange={(memberId, roleId) => {
+        setMembers((prev) =>
+          prev.map((m) => (m.id === memberId ? { ...m, role: roleId } : m))
+        )
+      }}
+      title="Team Members"
+      description="Invite your team members to collaborate."
+    >
+      {members.map((member) => (
+        <TeamMemberItem key={member.id} member={member} />
+      ))}
+    </TeamMembers>
+  )
 }
 ```
