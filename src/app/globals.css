@@ -209,10 +209,17 @@
     }
     
     body {
-      touch-action: pan-y;
+      touch-action: manipulation;
       overscroll-behavior-y: none;
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
+    }
+
+    /* Support Radix scroll lock for mobile sidebar */
+    body[data-scroll-locked] {
+      touch-action: none !important;
+      overflow: hidden !important;
+      overscroll-behavior: contain !important;
     }
     
     main {
