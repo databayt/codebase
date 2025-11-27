@@ -378,3 +378,22 @@
     font-size: 0.8rem;
   }
 }
+
+/* Touch target expansion utility for mobile accessibility */
+@layer utilities {
+  .extend-touch-target {
+    position: relative;
+  }
+
+  @media (pointer: coarse) {
+    .extend-touch-target {
+      touch-action: manipulation;
+    }
+
+    .extend-touch-target::after {
+      content: "";
+      position: absolute;
+      inset: -0.5rem;
+    }
+  }
+}
