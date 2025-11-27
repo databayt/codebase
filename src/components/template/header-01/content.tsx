@@ -38,17 +38,10 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
                         items={NAV_ITEMS}
                         className="flex lg:hidden"
                     />
-                    <Button
-                        asChild
-                        variant="ghost"
-                        size="icon"
-                        className="hidden size-8 lg:flex"
-                    >
-                        <Link href="/">
-                            <Icons.logo className="size-5" />
-                            <span className="sr-only">{siteConfig.name}</span>
-                        </Link>
-                    </Button>
+                    <Link href="/" className="hidden items-center gap-2 lg:flex">
+                        <Icons.logo className="size-5" />
+                        <span className="font-bold">{siteConfig.name}</span>
+                    </Link>
                     <MainNav dictionary={dictionary} className="hidden lg:flex" />
                     <div className="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
                         <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
