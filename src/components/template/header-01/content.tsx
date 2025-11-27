@@ -7,6 +7,7 @@ import { Icons } from "@/components/atom/icons"
 import { MainNav } from "./main-nav"
 import { MobileNav } from "./mobile-nav"
 import { ModeSwitcher } from "./mode-switcher"
+import { LangSwitcher } from "./lang-switcher"
 import { GitHubLink } from "./github-link"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -59,6 +60,7 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
                         />
                         <GitHubLink />
                         <Separator orientation="vertical" />
+                        <LangSwitcher />
                         <ModeSwitcher />
                     </div>
                 </div>

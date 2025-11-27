@@ -12,18 +12,10 @@ export default async function AtomsLayout({ children, params }: AtomsLayoutProps
     const { lang } = await params
 
     return (
-        <div
-            className="container-wrapper flex flex-1 flex-col px-2"
-            dir="ltr"
-            lang="en"
-            style={{
-                "--header-height": "3.5rem", // 56px - height of the header (h-14)
-                "--footer-height": "0px", // We'll use a different approach for footer
-            } as React.CSSProperties}
-        >
-            <SidebarProvider className="3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 pb-24 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+        <div className="container-wrapper flex flex-1 flex-col px-2">
+            <SidebarProvider className="3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
                 <AtomsSidebar tree={atomsSource.pageTree} />
-                <div className="h-full w-full pb-8">{children}</div>
+                <div className="h-full w-full">{children}</div>
             </SidebarProvider>
         </div>
     )
