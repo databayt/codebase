@@ -21,7 +21,9 @@
       "Bash(pnpm codebase:*)",
       "Bash(pnpm fumadocs-mdx:*)",
       "Bash(test:*)",
-      "Bash(nul)"
+      "Bash(nul)",
+      "Bash(for file in \"D:\\repo\\codebase-underway\\src\\components\\atom\"/*.tsx)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
