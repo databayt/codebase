@@ -4,6 +4,7 @@ import * as React from "react"
 import Link, { LinkProps } from "next/link"
 import { useRouter } from "next/navigation"
 
+import { docsSource } from "@/lib/source"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,9 +12,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import type { getDictionary } from "@/components/local/dictionaries"
 
-const MAIN_NAV_ITEMS = [
+const TOP_LEVEL_SECTIONS = [
+  { name: "Get Started", href: "/docs" },
+  { name: "Architecture", href: "/docs/architecture" },
+  { name: "Database", href: "/docs/database" },
+  { name: "Contributing", href: "/docs/contributing" },
+]
+
+const NAV_ITEMS = [
   { href: "/docs", label: "Docs" },
   { href: "/atoms", label: "Atoms" },
   { href: "/templates", label: "Templates" },
@@ -22,31 +29,15 @@ const MAIN_NAV_ITEMS = [
   { href: "/vibes", label: "Vibes" },
 ]
 
-const DOCS_LINKS = [
-  { name: "Introduction", href: "/docs" },
-  { name: "Pitch", href: "/docs/pitch" },
-  { name: "MVP", href: "/docs/mvp" },
-  { name: "PRD", href: "/docs/prd" },
-  { name: "Get Started", href: "/docs/get-started" },
-  { name: "Architecture", href: "/docs/architecture" },
-  { name: "Structure", href: "/docs/structure" },
-  { name: "Pattern", href: "/docs/pattern" },
-  { name: "Stack", href: "/docs/stack" },
-  { name: "Database", href: "/docs/database" },
-  { name: "Localhost", href: "/docs/localhost" },
-  { name: "Contributing", href: "/docs/contributing" },
-  { name: "Shared Economy", href: "/docs/shared-economy" },
-  { name: "Competitors", href: "/docs/competitors" },
-  { name: "Inspiration", href: "/docs/inspiration" },
-  { name: "Demo", href: "/docs/demo" },
-]
-
-interface MobileNavProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+export function MobileNav({
+  tree,
+  items = NAV_ITEMS,
+  className,
+}: {
+  tree?: typeof docsSource.pageTree
+  items?: { href: string; label: string }[]
   className?: string
-}
-
-export function MobileNav({ dictionary, className }: MobileNavProps) {
+}) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -74,7 +65,7 @@ export function MobileNav({ dictionary, className }: MobileNavProps) {
                 )}
               />
             </div>
-            <span className="sr-only">{dictionary?.navigation?.toggleMenu || "Toggle Menu"}</span>
+            <span className="sr-only">Toggle Menu</span>
           </div>
           <span className="flex h-8 items-center text-lg leading-none font-medium">
             Menu
@@ -82,14 +73,13 @@ export function MobileNav({ dictionary, className }: MobileNavProps) {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="bg-background/90 no-scrollbar h-[var(--radix-popper-available-height)] w-[var(--radix-popper-available-width)] overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        className="bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
         align="start"
         side="bottom"
         alignOffset={-16}
         sideOffset={14}
       >
         <div className="flex flex-col gap-12 overflow-auto px-6 py-6">
-          {/* Main Navigation */}
           <div className="flex flex-col gap-4">
             <div className="text-muted-foreground text-sm font-medium">
               Menu
@@ -98,26 +88,58 @@ export function MobileNav({ dictionary, className }: MobileNavProps) {
               <MobileLink href="/" onOpenChange={setOpen}>
                 Home
               </MobileLink>
-              {MAIN_NAV_ITEMS.map((item) => (
-                <MobileLink key={item.href} href={item.href} onOpenChange={setOpen}>
+              {items.map((item, index) => (
+                <MobileLink key={index} href={item.href} onOpenChange={setOpen}>
                   {item.label}
                 </MobileLink>
               ))}
             </div>
           </div>
-          {/* Documentation Links */}
           <div className="flex flex-col gap-4">
             <div className="text-muted-foreground text-sm font-medium">
-              Documentation
+              Sections
             </div>
             <div className="flex flex-col gap-3">
-              {DOCS_LINKS.map(({ name, href }) => (
-                <MobileLink key={href} href={href} onOpenChange={setOpen}>
+              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                <MobileLink key={name} href={href} onOpenChange={setOpen}>
                   {name}
                 </MobileLink>
               ))}
             </div>
           </div>
+          {tree?.children && (
+            <div className="flex flex-col gap-8">
+              {tree.children.map((group, index) => {
+                if (group.type === "folder") {
+                  return (
+                    <div key={index} className="flex flex-col gap-4">
+                      <div className="text-muted-foreground text-sm font-medium">
+                        {group.name}
+                      </div>
+                      <div className="flex flex-col gap-3">
+                        {group.children.map((item) => {
+                          if (item.type === "page") {
+                            return (
+                              <MobileLink
+                                key={`${item.url}-${index}`}
+                                href={item.url}
+                                onOpenChange={setOpen}
+                                className="flex items-center gap-2"
+                              >
+                                {item.name}
+                              </MobileLink>
+                            )
+                          }
+                          return null
+                        })}
+                      </div>
+                    </div>
+                  )
+                }
+                return null
+              })}
+            </div>
+          )}
         </div>
       </PopoverContent>
     </Popover>
