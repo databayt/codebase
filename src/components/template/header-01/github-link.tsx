@@ -20,7 +20,7 @@ export function GitHubLink() {
 }
 
 async function StarsCount() {
-  const data = await fetch("https://api.github.com/repos/shadcn-ui/ui", {
+  const data = await fetch("https://api.github.com/repos/databayt/hogwarts", {
     next: { revalidate: 86400 },
   })
   const json = await data.json()
