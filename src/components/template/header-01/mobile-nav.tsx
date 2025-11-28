@@ -4,7 +4,7 @@ import * as React from "react"
 import Link, { LinkProps } from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 
-import { docsSource, atomsSource } from "@/lib/source"
+import { docsConfig } from "./constants"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -35,11 +35,9 @@ export function MobileNav({
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
-  // Determine which tree to show based on current route
+  // Determine which section to show based on current route
   const isDocsRoute = pathname?.includes('/docs')
-  const isAtomsRoute = pathname?.includes('/atoms')
-  const tree = isAtomsRoute ? atomsSource.pageTree : isDocsRoute ? docsSource.pageTree : null
-  const sectionTitle = isAtomsRoute ? "Atoms" : isDocsRoute ? "Documentation" : null
+  const sectionTitle = isDocsRoute ? "Documentation" : null
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -96,42 +94,23 @@ export function MobileNav({
               ))}
             </div>
           </div>
-          {tree && sectionTitle && (
+          {isDocsRoute && sectionTitle && (
             <div className="flex flex-col gap-4">
               <div className="text-muted-foreground text-sm font-medium">
                 {sectionTitle}
               </div>
               <div className="flex flex-col gap-3">
-                {tree.children.map((item, index) => {
-                  if (item.type === "page") {
-                    return (
-                      <MobileLink
-                        key={`${item.url}-${index}`}
-                        href={item.url}
-                        onOpenChange={setOpen}
-                      >
-                        {item.name}
-                      </MobileLink>
-                    )
-                  }
-                  if (item.type === "folder") {
-                    return item.children.map((child) => {
-                      if (child.type === "page") {
-                        return (
-                          <MobileLink
-                            key={`${child.url}-${index}`}
-                            href={child.url}
-                            onOpenChange={setOpen}
-                          >
-                            {child.name}
-                          </MobileLink>
-                        )
-                      }
-                      return null
-                    })
-                  }
-                  return null
-                })}
+                {docsConfig.sidebarNav.map((group) =>
+                  group.items.map((item) => (
+                    <MobileLink
+                      key={item.href}
+                      href={item.href}
+                      onOpenChange={setOpen}
+                    >
+                      {item.title}
+                    </MobileLink>
+                  ))
+                )}
               </div>
             </div>
           )}
