@@ -17,20 +17,29 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import type { getDictionary } from "@/components/local/dictionaries"
+
+type Dictionary = Awaited<ReturnType<typeof getDictionary>>
 
 export function CodeBlockCommand({
   __npm__,
   __yarn__,
   __pnpm__,
   __bun__,
+  dictionary,
 }: React.ComponentProps<"pre"> & {
   __npm__?: string
   __yarn__?: string
   __pnpm__?: string
   __bun__?: string
+  dictionary?: Dictionary
 }) {
   const [config, setConfig] = useConfig()
   const [hasCopied, setHasCopied] = React.useState(false)
+
+  const copyText = dictionary?.docs?.copy || "Copy"
+  const copiedText = dictionary?.docs?.copied || "Copied"
+  const copyToClipboardText = dictionary?.docs?.copyToClipboard || "Copy to Clipboard"
 
   React.useEffect(() => {
     if (hasCopied) {
@@ -119,15 +128,15 @@ export function CodeBlockCommand({
             data-slot="copy-button"
             size="icon"
             variant="ghost"
-            className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
+            className="absolute top-2 end-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
             onClick={copyCommand}
           >
-            <span className="sr-only">Copy</span>
+            <span className="sr-only">{copyText}</span>
             {hasCopied ? <IconCheck /> : <IconCopy />}
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          {hasCopied ? "Copied" : "Copy to Clipboard"}
+          {hasCopied ? copiedText : copyToClipboardText}
         </TooltipContent>
       </Tooltip>
     </div>

@@ -1,91 +1,57 @@
 ---
-title: "Icons"
-description: "Comprehensive icon library"
+title: Icons
+description: Comprehensive icon library.
 component: true
-categories: ["ui", "utility"]
-dependencies: ["lucide-react"]
-
 ---
 
-# Icons
-
-Comprehensive icon library
+<ComponentPreview className="mb-4">
+  <Icons />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add icons
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
+<Steps>
+
+<Step>Install the following dependencies:</Step>
 
 ```bash
 npm install lucide-react
 ```
 
+<Step>Copy and paste the following code into your project.</Step>
 
-### Copy component code
+<ComponentSource name="icons" title="components/atom/icons.tsx" />
 
-Copy and paste the following code into your project:
+<Step>Update the import paths to match your project setup.</Step>
 
+</Steps>
 
-**components/atom/icons.tsx**
+</TabsContent>
 
-```tsx title="components/atom/icons.tsx"
-// Component code will be populated from registry
-```
-
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { Icons } from "@/components/atom/icons"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="icons-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Requires external dependencies: lucide-react
-
+```tsx
+<Icons.spinner className="h-4 w-4 animate-spin" />
+```

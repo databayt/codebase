@@ -1,87 +1,51 @@
 ---
-title: "Ai Response Display"
-description: "Display AI responses with markdown and code highlighting"
+title: AI Response Display
+description: Display AI responses with markdown and code highlighting.
 component: true
-categories: ["ai", "display"]
-
-registryDependencies: ["card"]
 ---
 
-# Ai Response Display
-
-Display AI responses with markdown and code highlighting
+<ComponentPreview className="mb-4">
+  <AiResponseDisplay />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add ai-response-display
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="ai-response-display" title="components/atom/ai-response-display.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/ai-response-display.tsx**
+</Steps>
 
-```tsx title="components/atom/ai-response-display.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { AiResponseDisplay } from "@/components/atom/ai-response-display"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="ai-response-display-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- This component is optimized for AI interactions
-
+```tsx
+<AiResponseDisplay />
+```

@@ -1,87 +1,51 @@
 ---
-title: "Prompt Input"
-description: "Advanced prompt input with keyboard shortcuts and suggestions"
+title: Prompt Input
+description: Advanced prompt input with keyboard shortcuts and suggestions.
 component: true
-categories: ["ai", "form"]
-
-registryDependencies: ["button", "textarea"]
 ---
 
-# Prompt Input
-
-Advanced prompt input with keyboard shortcuts and suggestions
+<ComponentPreview className="mb-4">
+  <PromptInput />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add prompt-input
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="prompt-input" title="components/atom/prompt-input.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/prompt-input.tsx**
+</Steps>
 
-```tsx title="components/atom/prompt-input.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { PromptInput } from "@/components/atom/prompt-input"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="prompt-input-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- This component is optimized for AI interactions
-
+```tsx
+<PromptInput />
+```

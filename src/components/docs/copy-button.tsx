@@ -9,6 +9,9 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import type { getDictionary } from "@/components/local/dictionaries"
+
+type Dictionary = Awaited<ReturnType<typeof getDictionary>>
 
 export function copyToClipboardWithMeta(value: string, meta?: any) {
   navigator.clipboard.writeText(value)
@@ -19,13 +22,17 @@ export function CopyButton({
   value,
   className,
   variant = "ghost",
-  tooltip = "Copy to Clipboard",
+  dictionary,
   ...props
 }: React.ComponentProps<typeof Button> & {
   value: string
-  tooltip?: string
+  dictionary?: Dictionary
 }) {
   const [hasCopied, setHasCopied] = React.useState(false)
+
+  const copyText = dictionary?.docs?.copy || "Copy"
+  const copiedText = dictionary?.docs?.copied || "Copied"
+  const copyToClipboardText = dictionary?.docs?.copyToClipboard || "Copy to Clipboard"
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -42,7 +49,7 @@ export function CopyButton({
           size="icon"
           variant={variant}
           className={cn(
-            "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
+            "bg-code absolute top-3 end-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
             className
           )}
           onClick={() => {
@@ -51,11 +58,11 @@ export function CopyButton({
           }}
           {...props}
         >
-          <span className="sr-only">Copy</span>
+          <span className="sr-only">{copyText}</span>
           {hasCopied ? <IconCheck /> : <IconCopy />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{hasCopied ? "Copied" : tooltip}</TooltipContent>
+      <TooltipContent>{hasCopied ? copiedText : copyToClipboardText}</TooltipContent>
     </Tooltip>
   )
 }

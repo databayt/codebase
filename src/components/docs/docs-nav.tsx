@@ -4,16 +4,22 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
+import type { getDictionary } from "@/components/local/dictionaries"
 
-export function DocsNav() {
+type Dictionary = Awaited<ReturnType<typeof getDictionary>>
+
+export function DocsNav({ dictionary, lang }: { dictionary?: Dictionary; lang?: string }) {
   const pathname = usePathname()
+  const prefix = lang ? `/${lang}` : ""
 
   // Generate breadcrumbs from pathname
   const pathSegments = pathname.split("/").filter(Boolean)
-  const breadcrumbs = pathSegments.map((segment, index) => {
-    const href = "/" + pathSegments.slice(0, index + 1).join("/")
-    const isLast = index === pathSegments.length - 1
-    
+  // Filter out language segment if present
+  const filteredSegments = lang ? pathSegments.filter(seg => seg !== lang) : pathSegments
+  const breadcrumbs = filteredSegments.map((segment, index) => {
+    const href = prefix + "/" + filteredSegments.slice(0, index + 1).join("/")
+    const isLast = index === filteredSegments.length - 1
+
     // Format segment name
     const name = segment
       .split("-")
@@ -29,21 +35,23 @@ export function DocsNav() {
 
   if (breadcrumbs.length <= 1) return null
 
+  const docsText = dictionary?.navigation?.docs || "Docs"
+
   return (
-    <div className="mb-4 flex items-center space-x-1 text-sm text-muted-foreground">
+    <div className="mb-4 flex items-center gap-1 text-sm text-muted-foreground">
       <Link
-        href="/docs"
+        href={`${prefix}/docs`}
         className="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground"
       >
-        Docs
+        {docsText}
       </Link>
       {breadcrumbs.slice(1).map((breadcrumb) => (
-        <div key={breadcrumb.href} className="flex items-center">
-          <span className="mx-1">/</span>
+        <div key={breadcrumb.href} className="flex items-center gap-1">
+          <span>/</span>
           <Link
             href={breadcrumb.href}
             className={cn(
-              "ml-1 overflow-hidden text-ellipsis whitespace-nowrap",
+              "overflow-hidden text-ellipsis whitespace-nowrap",
               breadcrumb.isLast
                 ? "text-foreground"
                 : "hover:text-foreground"

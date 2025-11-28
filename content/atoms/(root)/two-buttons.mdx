@@ -1,86 +1,51 @@
 ---
-title: "Two Buttons"
-description: "Dual button group component"
+title: Two Buttons
+description: Dual button group component.
 component: true
-categories: ["ui", "interactive"]
-
-registryDependencies: ["button"]
 ---
 
-# Two Buttons
-
-Dual button group component
+<ComponentPreview className="mb-4">
+  <TwoButtons />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add two-buttons
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="two-buttons" title="components/atom/two-buttons.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/two-buttons.tsx**
+</Steps>
 
-```tsx title="components/atom/two-buttons.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { TwoButtons } from "@/components/atom/two-buttons"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="two-buttons-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx
+<TwoButtons />
+```

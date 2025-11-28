@@ -1,86 +1,51 @@
 ---
-title: "Cards Metric"
-description: "Metric display cards with statistics"
+title: Cards Metric
+description: Metric display cards with statistics.
 component: true
-categories: ["display", "data"]
-
-registryDependencies: ["card"]
 ---
 
-# Cards Metric
-
-Metric display cards with statistics
+<ComponentPreview className="mb-4">
+  <CardsMetric />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add cards-metric
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="cards-metric" title="components/atom/cards-metric.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/cards-metric.tsx**
+</Steps>
 
-```tsx title="components/atom/cards-metric.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { CardsMetric } from "@/components/atom/cards-metric"
-
-export default function Example() {
-  return (
-  {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="cards-metric-demo" hideCode>
-{/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx
+<CardsMetric />
+```

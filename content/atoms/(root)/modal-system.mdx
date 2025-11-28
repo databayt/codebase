@@ -1,135 +1,51 @@
 ---
-title: "Modal System"
-description: "Complete modal system with carousel and steps"
+title: Modal System
+description: Complete modal system with carousel and steps.
 component: true
-categories: ["modal", "dialog"]
-
-registryDependencies: ["dialog", "button"]
 ---
 
-# Modal System
-
-Complete modal system with carousel and steps
+<ComponentPreview className="mb-4">
+  <ModalSystem />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add modal-system
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="modal-system" title="components/atom/modal-system.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/modal/carousel.tsx**
+</Steps>
 
-```tsx title="components/atom/modal/carousel.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-**components/atom/modal/context.tsx**
-
-```tsx title="components/atom/modal/context.tsx"
-// Component code will be populated from registry
-```
-
-
-**components/atom/modal/indicator.tsx**
-
-```tsx title="components/atom/modal/indicator.tsx"
-// Component code will be populated from registry
-```
-
-
-**components/atom/modal/modal.tsx**
-
-```tsx title="components/atom/modal/modal.tsx"
-// Component code will be populated from registry
-```
-
-
-**components/atom/modal/route-modal.tsx**
-
-```tsx title="components/atom/modal/route-modal.tsx"
-// Component code will be populated from registry
-```
-
-
-**components/atom/modal/step.ts**
-
-```tsx title="components/atom/modal/step.ts"
-// Component code will be populated from registry
-```
-
-
-**components/atom/modal/type.ts**
-
-```tsx title="components/atom/modal/type.ts"
-// Component code will be populated from registry
-```
-
-
-**components/atom/modal/ui.tsx**
-
-```tsx title="components/atom/modal/ui.tsx"
-// Component code will be populated from registry
-```
-
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { ModalSystem } from "@/components/atom/modal-system"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="modal-system-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx
+<ModalSystem />
+```

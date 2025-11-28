@@ -1,87 +1,51 @@
 ---
-title: "Ai Streaming Text"
-description: "Streaming text animation for AI responses"
+title: AI Streaming Text
+description: Streaming text animation for AI responses.
 component: true
-categories: ["ai", "display"]
-
-
 ---
 
-# Ai Streaming Text
-
-Streaming text animation for AI responses
+<ComponentPreview className="mb-4">
+  <AiStreamingText />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add ai-streaming-text
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="ai-streaming-text" title="components/atom/ai-streaming-text.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/ai/ai-streaming-text.tsx**
+</Steps>
 
-```tsx title="components/atom/ai/ai-streaming-text.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { AiStreamingText } from "@/components/atom/ai-streaming-text"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="ai-streaming-text-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- This component is optimized for AI interactions
-
+```tsx
+<AiStreamingText />
+```

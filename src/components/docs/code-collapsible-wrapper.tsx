@@ -10,13 +10,19 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { Separator } from "@/components/ui/separator"
+import type { getDictionary } from "@/components/local/dictionaries"
+
+type Dictionary = Awaited<ReturnType<typeof getDictionary>>
 
 export function CodeCollapsibleWrapper({
   className,
   children,
+  dictionary,
   ...props
-}: React.ComponentProps<typeof Collapsible>) {
+}: React.ComponentProps<typeof Collapsible> & { dictionary?: Dictionary }) {
   const [isOpened, setIsOpened] = React.useState(false)
+  const expandText = dictionary?.docs?.expand || "Expand"
+  const collapseText = dictionary?.docs?.collapse || "Collapse"
 
   return (
     <Collapsible
@@ -26,13 +32,13 @@ export function CodeCollapsibleWrapper({
       {...props}
     >
       <CollapsibleTrigger asChild>
-        <div className="absolute top-1.5 right-9 z-10 flex items-center">
+        <div className="absolute top-1.5 end-9 z-10 flex items-center">
           <Button
             variant="ghost"
             size="sm"
             className="text-muted-foreground h-7 rounded-md px-2"
           >
-            {isOpened ? "Collapse" : "Expand"}
+            {isOpened ? collapseText : expandText}
           </Button>
           <Separator orientation="vertical" className="mx-1.5 !h-4" />
         </div>
@@ -44,7 +50,7 @@ export function CodeCollapsibleWrapper({
         {children}
       </CollapsibleContent>
       <CollapsibleTrigger className="from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-20 items-center justify-center rounded-b-lg bg-gradient-to-b text-sm group-data-[state=open]/collapsible:hidden">
-        {isOpened ? "Collapse" : "Expand"}
+        {isOpened ? collapseText : expandText}
       </CollapsibleTrigger>
     </Collapsible>
   )

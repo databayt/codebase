@@ -1,91 +1,57 @@
 ---
-title: "Theme Provider"
-description: "Theme provider wrapper component"
+title: Theme Provider
+description: Theme provider wrapper component.
 component: true
-categories: ["ui", "utility"]
-dependencies: ["next-themes"]
-
 ---
 
-# Theme Provider
-
-Theme provider wrapper component
+<ComponentPreview className="mb-4">
+  <ThemeProvider />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add theme-provider
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
+<Steps>
+
+<Step>Install the following dependencies:</Step>
 
 ```bash
 npm install next-themes
 ```
 
+<Step>Copy and paste the following code into your project.</Step>
 
-### Copy component code
+<ComponentSource name="theme-provider" title="components/atom/theme-provider.tsx" />
 
-Copy and paste the following code into your project:
+<Step>Update the import paths to match your project setup.</Step>
 
+</Steps>
 
-**components/atom/theme-provider.tsx**
+</TabsContent>
 
-```tsx title="components/atom/theme-provider.tsx"
-// Component code will be populated from registry
-```
-
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { ThemeProvider } from "@/components/atom/theme-provider"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="theme-provider-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Requires external dependencies: next-themes
-
+```tsx
+<ThemeProvider />
+```

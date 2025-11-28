@@ -1,91 +1,53 @@
 ---
-title: "Fonts"
-description: "Font configuration utilities"
+title: Fonts
+description: Font configuration utilities.
 component: true
-categories: ["ui", "utility"]
-dependencies: ["next/font/google"]
-
 ---
 
-# Fonts
-
-Font configuration utilities
+<ComponentPreview className="mb-4">
+  <Fonts />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add fonts
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
+<Steps>
 
-```bash
-npm install next/font/google
-```
+<Step>Copy and paste the following code into your project.</Step>
 
+<ComponentSource name="fonts" title="components/atom/fonts.ts" />
 
-### Copy component code
+<Step>Update the import paths to match your project setup.</Step>
 
-Copy and paste the following code into your project:
+</Steps>
 
+</TabsContent>
 
-**components/atom/fonts.ts**
-
-```tsx title="components/atom/fonts.ts"
-// Component code will be populated from registry
-```
-
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
-import { Fonts } from "@/components/atom/fonts"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
+import { fontSans, fontMono } from "@/components/atom/fonts"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="fonts-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Requires external dependencies: next/font/google
-
+```tsx
+<body className={fontSans.className}>
+  {children}
+</body>
+```

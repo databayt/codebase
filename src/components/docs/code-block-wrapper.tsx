@@ -3,18 +3,24 @@
 import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import type { getDictionary } from "@/components/local/dictionaries"
+
+type Dictionary = Awaited<ReturnType<typeof getDictionary>>
 
 interface CodeBlockWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   expandButtonTitle?: string
+  dictionary?: Dictionary
 }
 
 export function CodeBlockWrapper({
-  expandButtonTitle = "View Code",
+  expandButtonTitle,
   className,
   children,
+  dictionary,
   ...props
 }: CodeBlockWrapperProps) {
   const [isOpened, setIsOpened] = React.useState(false)
+  const viewCodeText = expandButtonTitle || dictionary?.docs?.viewCode || "View Code"
 
   return (
     <div className={cn("relative", className)} {...props}>
@@ -32,7 +38,7 @@ export function CodeBlockWrapper({
           onClick={() => setIsOpened(!isOpened)}
           className="h-8 text-xs"
         >
-          {expandButtonTitle}
+          {viewCodeText}
         </Button>
       </div>
     </div>

@@ -15,7 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 // Atom components
 import { InfiniteMovingCards } from "@/components/atom/simple-marquee"
 import { Response } from "@/components/atom/response"
-import { Sortable } from "@/components/atom/sortable"
+import { SortablePreview } from "@/components/atom/sortable-preview"
 import { StickyScroll } from "@/components/atom/sticky-scroll"
 import { ThemeProvider } from "@/components/atom/theme-provider"
 import { InfiniteSlider } from "@/components/atom/infinite-slider"
@@ -24,21 +24,21 @@ import { ProgressiveBlur } from "@/components/atom/progressive-blur"
 import { Faceted } from "@/components/atom/faceted"
 import ExpandButton from "@/components/atom/expand-button"
 import { HeaderSection } from "@/components/atom/header-section"
-import { PageActions } from "@/components/atom/page-actions"
+import { PageActionsPreview } from "@/components/atom/page-actions-preview"
 import { PageHeader } from "@/components/atom/page-header"
 import { TabsNav } from "@/components/atom/tabs"
 import { Announcement } from "@/components/atom/announcement"
 import Loading from "@/components/atom/loading"
-import { TwoButtons } from "@/components/atom/two-buttons"
+import { TwoButtonsPreview } from "@/components/atom/two-buttons-preview"
 import AgentHeading from "@/components/atom/agent-heading"
 import { GradientAnimation } from "@/components/atom/gradient-animation"
 import { CardHoverEffect } from "@/components/atom/card-hover-effect"
-import Card from "@/components/atom/card"
+import { CardPreview } from "@/components/atom/card-preview"
 import { CardsMetric } from "@/components/atom/cards-metric"
 import { PromptInput } from "@/components/atom/prompt-input"
 import { Reasoning } from "@/components/atom/reasoning"
-import * as Icons from "@/components/atom/icons"
-import * as Fonts from "@/components/atom/fonts"
+import { IconsPreview } from "@/components/atom/icons-preview"
+import { FontsPreview } from "@/components/atom/fonts-preview"
 import { CardsActivityGoal } from "@/components/atom/activity-goal"
 import { CardsReportIssue } from "@/components/atom/report-issue"
 import { CardsShare } from "@/components/atom/share"
@@ -56,6 +56,14 @@ import { PaymentMethodSelector } from "@/components/atom/payment-method-selector
 import { DirectoryStructure } from "@/components/docs/directory-structure"
 import { Structure } from "@/components/docs/structure"
 import { PrismaStructure } from "@/components/docs/prisma-structure"
+// AI components
+import {
+  AiPromptInputPreview,
+  AiStatusIndicatorPreview,
+  AiStreamingTextPreview,
+} from "@/components/atom/ai-previews"
+import { AIResponseDisplay } from "@/components/atom/ai-response-display"
+import { ModalSystem } from "@/components/atom/modal-system"
 
 // This file is required to use MDX in `app` directory.
 
@@ -328,7 +336,7 @@ const mdxComponents = {
     // Atom components
     SimpleMarquee: InfiniteMovingCards,
     Response,
-    Sortable,
+    Sortable: SortablePreview,
     StickyScroll,
     ThemeProvider,
     InfiniteSlider,
@@ -337,21 +345,21 @@ const mdxComponents = {
     Faceted,
     ExpandButton,
     HeaderSection,
-    PageActions,
+    PageActions: PageActionsPreview,
     PageHeader,
     TabsNav,
     Announcement,
     Loading,
-    TwoButtons,
+    TwoButtons: TwoButtonsPreview,
     AgentHeading,
     GradientAnimation,
     CardHoverEffect,
-    Card,
+    Card: CardPreview,
     CardsMetric,
     PromptInput,
     Reasoning,
-    Icons,
-    Fonts,
+    Icons: IconsPreview,
+    Fonts: FontsPreview,
     ActivityGoal: () => <CardsActivityGoal dictionary={defaultDictionary} />,
     ReportIssue: () => <CardsReportIssue dictionary={defaultDictionary} />,
     Share: () => <CardsShare dictionary={defaultDictionary} />,
@@ -370,6 +378,12 @@ const mdxComponents = {
     DirectoryStructure,
     Structure,
     PrismaStructure,
+    // AI components
+    AiPromptInput: AiPromptInputPreview,
+    AiStatusIndicator: AiStatusIndicatorPreview,
+    AiStreamingText: AiStreamingTextPreview,
+    AiResponseDisplay: AIResponseDisplay,
+    ModalSystem,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
