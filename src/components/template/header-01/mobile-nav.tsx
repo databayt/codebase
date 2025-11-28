@@ -37,7 +37,9 @@ export function MobileNav({
 
   // Determine which section to show based on current route
   const isDocsRoute = pathname?.includes('/docs')
-  const sectionTitle = isDocsRoute ? "Documentation" : null
+  const isAtomsRoute = pathname?.includes('/atoms')
+  const sectionTitle = isDocsRoute ? "Documentation" : isAtomsRoute ? "Atoms" : null
+  const sectionNav = isDocsRoute ? docsConfig.sidebarNav : isAtomsRoute ? docsConfig.atomsNav : null
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -94,13 +96,13 @@ export function MobileNav({
               ))}
             </div>
           </div>
-          {isDocsRoute && sectionTitle && (
+          {sectionNav && sectionTitle && (
             <div className="flex flex-col gap-4">
               <div className="text-muted-foreground text-sm font-medium">
                 {sectionTitle}
               </div>
               <div className="flex flex-col gap-3">
-                {docsConfig.sidebarNav.map((group) =>
+                {sectionNav.map((group) =>
                   group.items.map((item) => (
                     <MobileLink
                       key={item.href}

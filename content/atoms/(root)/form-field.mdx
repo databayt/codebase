@@ -1,46 +1,46 @@
 ---
-title: "Form Field"
-description: "Form field primitives with label and input components"
+title: Form Field
+description: Form field primitives with label and input components.
 component: true
-categories: ["form"]
 ---
 
-# Form Field
-
-Form field primitives with label and input components.
+<ComponentPreview className="mb-4">
+  <div className="w-full max-w-sm">
+    <FormFieldText label="Email" type="email" placeholder="m@example.com" />
+  </div>
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add form-field
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="form-field" title="components/atom/form-field.tsx" />
 
-**components/atom/form-field.tsx**
+<Step>Update the import paths to match your project setup.</Step>
 
-```tsx title="components/atom/form-field.tsx"
-// Component code will be populated from registry
-```
+</Steps>
 
-  </TabsContent>
-</Tabs>
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
@@ -48,131 +48,22 @@ Copy and paste the following code into your project:
 import { FormField, FormFieldText } from "@/components/atom/form-field"
 ```
 
+```tsx
+<FormFieldText label="Email" type="email" placeholder="m@example.com" />
+```
+
 ## Examples
 
-### FormFieldText - Basic
+### Form
 
-<ComponentPreview>
-  <div className="w-full max-w-sm">
-    <FormFieldText
-      label="Email"
-      type="email"
-      placeholder="m@example.com"
-    />
-  </div>
-</ComponentPreview>
-
-```tsx
-<FormFieldText
-  label="Email"
-  type="email"
-  placeholder="m@example.com"
-/>
-```
-
-### Password Field
-
-<ComponentPreview>
-  <div className="w-full max-w-sm">
-    <FormFieldText
-      label="Password"
-      type="password"
-      placeholder="Enter your password"
-    />
-  </div>
-</ComponentPreview>
-
-```tsx
-<FormFieldText
-  label="Password"
-  type="password"
-  placeholder="Enter your password"
-/>
-```
-
-### Complete Form
-
-<ComponentPreview>
+<ComponentPreview className="mb-4">
   <div className="w-full max-w-sm space-y-4">
-    <FormFieldText
-      label="Full Name"
-      placeholder="John Doe"
-    />
-    <FormFieldText
-      label="Email"
-      type="email"
-      placeholder="john@example.com"
-    />
-    <FormFieldText
-      label="Password"
-      type="password"
-      placeholder="••••••••"
-    />
+    <FormFieldText label="Name" placeholder="John Doe" />
+    <FormFieldText label="Email" type="email" placeholder="john@example.com" />
   </div>
 </ComponentPreview>
 
 ```tsx
-<div className="space-y-4">
-  <FormFieldText
-    label="Full Name"
-    placeholder="John Doe"
-  />
-  <FormFieldText
-    label="Email"
-    type="email"
-    placeholder="john@example.com"
-  />
-  <FormFieldText
-    label="Password"
-    type="password"
-    placeholder="••••••••"
-  />
-</div>
+<FormFieldText label="Name" placeholder="John Doe" />
+<FormFieldText label="Email" type="email" placeholder="john@example.com" />
 ```
-
-### FormField Wrapper (Custom Input)
-
-<ComponentPreview>
-  <div className="w-full max-w-sm">
-    <FormField label="Custom Field" id="custom">
-      <input
-        id="custom"
-        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-        placeholder="Custom input"
-      />
-    </FormField>
-  </div>
-</ComponentPreview>
-
-```tsx
-<FormField label="Custom Field" id="custom">
-  <input id="custom" className="..." placeholder="Custom input" />
-</FormField>
-```
-
-## API Reference
-
-### FormFieldText Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | required | Field label text |
-| `type` | `string` | `"text"` | Input type (text, email, password, etc.) |
-| `placeholder` | `string` | - | Placeholder text |
-| `className` | `string` | - | Additional CSS classes |
-
-### FormField Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | required | Field label text |
-| `id` | `string` | - | Input ID for label association |
-| `children` | `ReactNode` | required | Input element |
-| `className` | `string` | - | Additional CSS classes |
-
-## Accessibility
-
-- Proper label-input association via id/htmlFor
-- Keyboard navigable
-- Screen reader friendly
-- Focus visible states

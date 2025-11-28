@@ -1,87 +1,64 @@
 ---
-title: "Infinite Slider"
-description: "Infinite auto-scrolling slider with smooth animations"
+title: Infinite Slider
+description: Infinite auto-scrolling slider with smooth animations.
 component: true
-categories: ["animation", "display"]
-
-
 ---
 
-# Infinite Slider
-
-Infinite auto-scrolling slider with smooth animations
+<ComponentPreview className="mb-4">
+  <InfiniteSlider>
+    <div className="flex gap-4">
+      <div className="h-20 w-32 rounded bg-muted flex items-center justify-center">1</div>
+      <div className="h-20 w-32 rounded bg-muted flex items-center justify-center">2</div>
+      <div className="h-20 w-32 rounded bg-muted flex items-center justify-center">3</div>
+      <div className="h-20 w-32 rounded bg-muted flex items-center justify-center">4</div>
+    </div>
+  </InfiniteSlider>
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add infinite-slider
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="infinite-slider" title="components/atom/infinite-slider.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/infinite-slider.tsx**
+</Steps>
 
-```tsx title="components/atom/infinite-slider.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { InfiniteSlider } from "@/components/atom/infinite-slider"
-
-export default function Example() {
-  return (
-  {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="infinite-slider-demo" hideCode>
-{/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Includes smooth animations and transitions
-
+```tsx
+<InfiniteSlider>
+  <div className="flex gap-4">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+  </div>
+</InfiniteSlider>
+```

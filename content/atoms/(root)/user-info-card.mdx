@@ -1,46 +1,44 @@
 ---
-title: "User Info Card"
-description: "A compact user display with avatar, name, and email"
+title: User Info Card
+description: A compact user display with avatar, name, and email.
 component: true
-categories: ["display", "user"]
 ---
 
-# User Info Card
-
-A compact user display with avatar, name, and email.
+<ComponentPreview className="mb-4">
+  <UserInfoCard name="John Doe" email="john@example.com" />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add user-info-card
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="user-info-card" title="components/atom/user-info-card.tsx" />
 
-**components/atom/user-info-card.tsx**
+<Step>Update the import paths to match your project setup.</Step>
 
-```tsx title="components/atom/user-info-card.tsx"
-// Component code will be populated from registry
-```
+</Steps>
 
-  </TabsContent>
-</Tabs>
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
@@ -48,27 +46,15 @@ Copy and paste the following code into your project:
 import { UserInfoCard } from "@/components/atom/user-info-card"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview>
-  <UserInfoCard
-    name="John Doe"
-    email="john@example.com"
-  />
-</ComponentPreview>
-
 ```tsx
-<UserInfoCard
-  name="John Doe"
-  email="john@example.com"
-/>
+<UserInfoCard name="John Doe" email="john@example.com" />
 ```
+
+## Examples
 
 ### With Avatar
 
-<ComponentPreview>
+<ComponentPreview className="mb-4">
   <UserInfoCard
     name="Jane Smith"
     email="jane@example.com"
@@ -83,59 +69,3 @@ import { UserInfoCard } from "@/components/atom/user-info-card"
   avatar="https://github.com/shadcn.png"
 />
 ```
-
-### With Role
-
-<ComponentPreview>
-  <UserInfoCard
-    name="Admin User"
-    email="admin@example.com"
-    role="Administrator"
-  />
-</ComponentPreview>
-
-```tsx
-<UserInfoCard
-  name="Admin User"
-  email="admin@example.com"
-  role="Administrator"
-/>
-```
-
-### Complete Example
-
-<ComponentPreview>
-  <UserInfoCard
-    name="Sarah Connor"
-    email="sarah@skynet.com"
-    avatar="https://github.com/shadcn.png"
-    role="Team Lead"
-  />
-</ComponentPreview>
-
-```tsx
-<UserInfoCard
-  name="Sarah Connor"
-  email="sarah@skynet.com"
-  avatar="https://github.com/shadcn.png"
-  role="Team Lead"
-/>
-```
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `name` | `string` | required | User's display name |
-| `email` | `string` | required | User's email address |
-| `avatar` | `string` | - | Avatar image URL |
-| `role` | `string` | - | Optional role/title |
-| `className` | `string` | - | Additional CSS classes |
-
-## Accessibility
-
-- Avatar has proper alt text
-- Email is displayed as text, not link
-- Proper text hierarchy for screen readers

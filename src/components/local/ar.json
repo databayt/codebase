@@ -203,7 +203,21 @@
       "competitors": "المنافسون",
       "inspiration": "الإلهام",
       "demo": "العرض التجريبي"
-    }
+    },
+    "copyPage": "نسخ الصفحة",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "copyToClipboard": "نسخ إلى الحافظة",
+    "onThisPage": "في هذه الصفحة",
+    "preview": "معاينة",
+    "code": "الكود",
+    "viewCode": "عرض الكود",
+    "expand": "توسيع",
+    "collapse": "طي",
+    "viewAsMarkdown": "عرض كماركداون",
+    "openInV0": "فتح في v0",
+    "openInChatGPT": "فتح في ChatGPT",
+    "openInClaude": "فتح في Claude"
   },
   "header": {
     "github": "جيت هاب",

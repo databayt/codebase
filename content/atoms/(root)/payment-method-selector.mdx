@@ -1,46 +1,46 @@
 ---
-title: "Payment Method Selector"
-description: "A payment method radio selector with icons"
+title: Payment Method Selector
+description: A payment method radio selector with icons.
 component: true
-categories: ["form", "payment"]
 ---
 
-# Payment Method Selector
-
-A payment method radio selector with icons.
+<ComponentPreview className="mb-4">
+  <div className="w-full max-w-md">
+    <PaymentMethodSelector />
+  </div>
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add payment-method-selector
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="payment-method-selector" title="components/atom/payment-method-selector.tsx" />
 
-**components/atom/payment-method-selector.tsx**
+<Step>Update the import paths to match your project setup.</Step>
 
-```tsx title="components/atom/payment-method-selector.tsx"
-// Component code will be populated from registry
-```
+</Steps>
 
-  </TabsContent>
-</Tabs>
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
@@ -48,59 +48,15 @@ Copy and paste the following code into your project:
 import { PaymentMethodSelector } from "@/components/atom/payment-method-selector"
 ```
 
-## Examples
-
-### Default (All Methods)
-
-<ComponentPreview>
-  <div className="w-full max-w-md">
-    <PaymentMethodSelector />
-  </div>
-</ComponentPreview>
-
 ```tsx
 <PaymentMethodSelector />
 ```
 
-### Card Selected
+## Examples
 
-<ComponentPreview>
-  <div className="w-full max-w-md">
-    <PaymentMethodSelector value="card" />
-  </div>
-</ComponentPreview>
+### Two Methods
 
-```tsx
-<PaymentMethodSelector value="card" />
-```
-
-### PayPal Selected
-
-<ComponentPreview>
-  <div className="w-full max-w-md">
-    <PaymentMethodSelector value="paypal" />
-  </div>
-</ComponentPreview>
-
-```tsx
-<PaymentMethodSelector value="paypal" />
-```
-
-### Apple Pay Selected
-
-<ComponentPreview>
-  <div className="w-full max-w-md">
-    <PaymentMethodSelector value="apple" />
-  </div>
-</ComponentPreview>
-
-```tsx
-<PaymentMethodSelector value="apple" />
-```
-
-### Two Methods Only
-
-<ComponentPreview>
+<ComponentPreview className="mb-4">
   <div className="w-full max-w-md">
     <PaymentMethodSelector methods={["card", "paypal"]} />
   </div>
@@ -109,21 +65,3 @@ import { PaymentMethodSelector } from "@/components/atom/payment-method-selector
 ```tsx
 <PaymentMethodSelector methods={["card", "paypal"]} />
 ```
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `"card" \| "paypal" \| "apple"` | `"card"` | Selected payment method |
-| `onValueChange` | `(method: PaymentMethod) => void` | - | Selection change handler |
-| `methods` | `PaymentMethod[]` | `["card", "paypal", "apple"]` | Available payment methods |
-| `className` | `string` | - | Additional CSS classes |
-
-## Accessibility
-
-- Uses radio group pattern for single selection
-- Keyboard navigable with arrow keys
-- Clear visual selection state
-- Screen reader announces selected payment method

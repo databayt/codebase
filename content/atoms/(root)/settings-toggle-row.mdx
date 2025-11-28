@@ -1,65 +1,52 @@
 ---
-title: "Settings Toggle Row"
-description: "A settings row with label, description, and toggle switch"
+title: Settings Toggle Row
+description: A settings row with label, description, and toggle switch.
 component: true
-categories: ["form", "settings"]
 ---
 
-# Settings Toggle Row
-
-A settings row with label, description, and toggle switch.
+<ComponentPreview className="mb-4">
+  <div className="w-full max-w-md">
+    <SettingsToggleRow label="Notifications" description="Receive email notifications" />
+  </div>
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add settings-toggle-row
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="settings-toggle-row" title="components/atom/settings-toggle-row.tsx" />
 
-**components/atom/settings-toggle-row.tsx**
+<Step>Update the import paths to match your project setup.</Step>
 
-```tsx title="components/atom/settings-toggle-row.tsx"
-// Component code will be populated from registry
-```
+</Steps>
 
-  </TabsContent>
-</Tabs>
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { SettingsToggleRow } from "@/components/atom/settings-toggle-row"
 ```
-
-## Examples
-
-### Default
-
-<ComponentPreview>
-  <div className="w-full max-w-md">
-    <SettingsToggleRow
-      label="Notifications"
-      description="Receive email notifications"
-    />
-  </div>
-</ComponentPreview>
 
 ```tsx
 <SettingsToggleRow
@@ -68,80 +55,18 @@ import { SettingsToggleRow } from "@/components/atom/settings-toggle-row"
 />
 ```
 
-### Checked State
-
-<ComponentPreview>
-  <div className="w-full max-w-md">
-    <SettingsToggleRow
-      label="Dark Mode"
-      description="Enable dark theme"
-      defaultChecked={true}
-    />
-  </div>
-</ComponentPreview>
-
-```tsx
-<SettingsToggleRow
-  label="Dark Mode"
-  description="Enable dark theme"
-  defaultChecked={true}
-/>
-```
+## Examples
 
 ### Multiple Settings
 
-<ComponentPreview>
+<ComponentPreview className="mb-4">
   <div className="w-full max-w-md space-y-4">
-    <SettingsToggleRow
-      label="Email Notifications"
-      description="Receive updates via email"
-      defaultChecked={true}
-    />
-    <SettingsToggleRow
-      label="Push Notifications"
-      description="Receive push notifications on your device"
-    />
-    <SettingsToggleRow
-      label="Marketing Emails"
-      description="Receive promotional content and offers"
-    />
+    <SettingsToggleRow label="Email" description="Receive updates" defaultChecked />
+    <SettingsToggleRow label="Push" description="Mobile notifications" />
   </div>
 </ComponentPreview>
 
 ```tsx
-<div className="space-y-4">
-  <SettingsToggleRow
-    label="Email Notifications"
-    description="Receive updates via email"
-    defaultChecked={true}
-  />
-  <SettingsToggleRow
-    label="Push Notifications"
-    description="Receive push notifications on your device"
-  />
-  <SettingsToggleRow
-    label="Marketing Emails"
-    description="Receive promotional content and offers"
-  />
-</div>
+<SettingsToggleRow label="Email" description="Receive updates" defaultChecked />
+<SettingsToggleRow label="Push" description="Mobile notifications" />
 ```
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | required | Main label text |
-| `description` | `string` | - | Secondary description text |
-| `checked` | `boolean` | - | Controlled checked state |
-| `defaultChecked` | `boolean` | `false` | Initial checked state |
-| `onCheckedChange` | `(checked: boolean) => void` | - | Change handler |
-| `className` | `string` | - | Additional CSS classes |
-
-## Accessibility
-
-- Uses proper label association
-- Switch is keyboard navigable
-- Proper focus states
-- Screen reader friendly with label and description
