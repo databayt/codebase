@@ -1,0 +1,57 @@
+---
+title: Labeled Textarea
+description: A textarea field with an associated label.
+component: true
+---
+
+<ComponentPreview className="mb-4">
+  <LabeledTextarea
+    label="Description"
+    placeholder="Enter a description..."
+  />
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add labeled-textarea
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="labeled-textarea" title="components/atom/labeled-textarea.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { LabeledTextarea } from "@/components/atom/labeled-textarea"
+```
+
+```tsx
+<LabeledTextarea
+  label="Description"
+  placeholder="Enter a description..."
+/>
+```

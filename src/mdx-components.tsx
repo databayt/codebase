@@ -53,6 +53,12 @@ import { UserInfoCard } from "@/components/atom/user-info-card"
 import { SettingsToggleRow } from "@/components/atom/settings-toggle-row"
 import { FormField, FormFieldText } from "@/components/atom/form-field"
 import { PaymentMethodSelector } from "@/components/atom/payment-method-selector"
+// Form atoms
+import { LabeledSelect } from "@/components/atom/labeled-select"
+import { LabeledInput } from "@/components/atom/labeled-input"
+import { LabeledTextarea } from "@/components/atom/labeled-textarea"
+import { CardForm } from "@/components/atom/card-form"
+import { ButtonGroup } from "@/components/atom/button-group"
 import { DirectoryStructure } from "@/components/docs/directory-structure"
 import { Structure } from "@/components/docs/structure"
 import { PrismaStructure } from "@/components/docs/prisma-structure"
@@ -384,6 +390,12 @@ const mdxComponents = {
     AiStreamingText: AiStreamingTextPreview,
     AiResponseDisplay: AIResponseDisplay,
     ModalSystem,
+    // Form atoms
+    LabeledSelect,
+    LabeledInput,
+    LabeledTextarea,
+    CardForm,
+    ButtonGroup,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {

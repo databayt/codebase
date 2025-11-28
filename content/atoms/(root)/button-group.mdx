@@ -1,0 +1,63 @@
+---
+title: Button Group
+description: A pair of primary and secondary action buttons.
+component: true
+---
+
+<ComponentPreview className="mb-4">
+  <ButtonGroup primaryLabel="Save" secondaryLabel="Cancel" />
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add button-group
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="button-group" title="components/atom/button-group.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ButtonGroup } from "@/components/atom/button-group"
+```
+
+```tsx
+<ButtonGroup primaryLabel="Save" secondaryLabel="Cancel" />
+```
+
+## Examples
+
+### With Loading State
+
+<ComponentPreview className="mb-4">
+  <ButtonGroup primaryLabel="Submit" secondaryLabel="Cancel" loading />
+</ComponentPreview>
+
+```tsx
+<ButtonGroup primaryLabel="Submit" loading />
+```

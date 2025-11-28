@@ -1,0 +1,64 @@
+---
+title: Card Form
+description: A card wrapper for form content with title, description, and footer.
+component: true
+---
+
+<ComponentPreview className="mb-4">
+  <CardForm
+    title="Contact Us"
+    description="Fill out the form below."
+    footer={<ButtonGroup primaryLabel="Send" secondaryLabel="Cancel" />}
+  >
+    <LabeledInput label="Name" placeholder="Your name" />
+    <LabeledInput label="Email" type="email" placeholder="your@email.com" />
+  </CardForm>
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add card-form
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="card-form" title="components/atom/card-form.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { CardForm } from "@/components/atom/card-form"
+```
+
+```tsx
+<CardForm
+  title="Contact Us"
+  description="Fill out the form below."
+  footer={<ButtonGroup />}
+>
+  <LabeledInput label="Name" placeholder="Your name" />
+</CardForm>
+```

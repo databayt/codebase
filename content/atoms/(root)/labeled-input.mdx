@@ -1,0 +1,59 @@
+---
+title: Labeled Input
+description: An input field with an associated label.
+component: true
+---
+
+<ComponentPreview className="mb-4">
+  <LabeledInput
+    label="Email"
+    type="email"
+    placeholder="Enter your email"
+  />
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add labeled-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="labeled-input" title="components/atom/labeled-input.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { LabeledInput } from "@/components/atom/labeled-input"
+```
+
+```tsx
+<LabeledInput
+  label="Email"
+  type="email"
+  placeholder="Enter your email"
+/>
+```
