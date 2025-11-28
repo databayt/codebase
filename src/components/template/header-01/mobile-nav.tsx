@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import type { getDictionary } from "@/components/local/dictionaries"
 
 const TOP_LEVEL_SECTIONS = [
   { name: "Get Started", href: "/docs" },
@@ -33,10 +34,12 @@ export function MobileNav({
   tree,
   items = NAV_ITEMS,
   className,
+  dictionary,
 }: {
   tree?: typeof docsSource.pageTree
   items?: { href: string; label: string }[]
   className?: string
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }) {
   const [open, setOpen] = React.useState(false)
 
@@ -65,10 +68,10 @@ export function MobileNav({
                 )}
               />
             </div>
-            <span className="sr-only">Toggle Menu</span>
+            <span className="sr-only">{dictionary?.navigation?.toggleMenu || "Toggle Menu"}</span>
           </div>
           <span className="flex h-8 items-center text-lg leading-none font-medium">
-            Menu
+            {dictionary?.navigation?.menu || "Menu"}
           </span>
         </Button>
       </PopoverTrigger>
@@ -82,11 +85,11 @@ export function MobileNav({
         <div className="flex flex-col gap-12 overflow-auto px-8 py-6">
           <div className="flex flex-col gap-4">
             <div className="text-muted-foreground text-sm font-medium">
-              Menu
+              {dictionary?.navigation?.menu || "Menu"}
             </div>
             <div className="flex flex-col gap-3">
               <MobileLink href="/" onOpenChange={setOpen}>
-                Home
+                {dictionary?.common?.home || "Home"}
               </MobileLink>
               {items.map((item, index) => (
                 <MobileLink key={index} href={item.href} onOpenChange={setOpen}>
@@ -97,7 +100,7 @@ export function MobileNav({
           </div>
           <div className="flex flex-col gap-4">
             <div className="text-muted-foreground text-sm font-medium">
-              Sections
+              {dictionary?.navigation?.docs || "Sections"}
             </div>
             <div className="flex flex-col gap-3">
               {TOP_LEVEL_SECTIONS.map(({ name, href }) => (

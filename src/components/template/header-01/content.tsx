@@ -37,19 +37,20 @@ export function SiteHeader({ dictionary }: SiteHeaderProps) {
                         tree={pageTree}
                         items={NAV_ITEMS}
                         className="flex lg:hidden"
+                        dictionary={dictionary}
                     />
-                    <Link href="/" className="hidden items-center gap-1.5 lg:flex mr-6">
+                    <Link href="/" className="hidden items-center gap-1.5 lg:flex me-6">
                         <Icons.logo className="size-5" />
-                        <span className="font-bold">{siteConfig.name}</span>
+                        <span className="font-bold">{dictionary?.common?.brandName || siteConfig.name}</span>
                     </Link>
                     <MainNav dictionary={dictionary} className="hidden lg:flex" />
-                    <div className="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                    <div className="ms-auto flex items-center gap-2 md:flex-1 md:justify-end">
                         <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
                             <CommandMenu dictionary={dictionary} />
                         </div>
                         <Separator
                             orientation="vertical"
-                            className="ml-2 hidden lg:block"
+                            className="ms-2 hidden lg:block"
                         />
                         <GitHubLink />
                         <Separator orientation="vertical" />

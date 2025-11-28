@@ -64,11 +64,11 @@ export function DocsSidebar({
 
   return (
     <Sidebar
-      className="sticky top-[calc(var(--header-height)+2rem)] z-30 hidden h-[calc(100vh-var(--header-height)-4rem)] overflow-y-auto no-scrollbar bg-transparent lg:flex"
+      className="sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--footer-height)-4rem)] overscroll-none bg-transparent lg:flex"
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="overflow-y-auto gap-0">
+      <SidebarContent className="no-scrollbar overflow-x-hidden">
         <div className="pb-4 pt-2 pl-0">
           <SidebarGroup className="p-0">
             <SidebarGroupContent>

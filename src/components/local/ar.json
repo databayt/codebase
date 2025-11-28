@@ -178,7 +178,7 @@
     "menu": "قائمة",
     "close": "إغلاق",
     "toggleMenu": "تبديل قائمة",
-    "docs": "توثيق",
+    "docs": "دوكمنتيشن",
     "atoms": "عناصر",
     "templates": "قوالب",
     "blocks": "كتل",
@@ -190,7 +190,7 @@
     "toggleTheme": "تبديل المظهر",
     "switchLanguage": "تبديل اللغة",
     "search": "بحث...",
-    "searchPlaceholder": "ابحث في التوثيق..."
+    "searchPlaceholder": "ابحث في الدوكمنتيشن..."
   },
   "announcement": {
     "tailwindV4": "ابدأ مع تيلويند الإصدار 4",
