@@ -1,86 +1,51 @@
 ---
-title: "Loading"
-description: "Loading spinner and skeleton components"
+title: Loading
+description: Loading spinner and skeleton components.
 component: true
-categories: ["ui", "feedback"]
-
-
 ---
 
-# Loading
-
-Loading spinner and skeleton components
+<ComponentPreview className="mb-4">
+  <Loading />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add loading
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="loading" title="components/atom/loading.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/loading.tsx**
+</Steps>
 
-```tsx title="components/atom/loading.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
-import { Loading } from "@/components/atom/loading"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
+import Loading from "@/components/atom/loading"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="loading-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-
+```tsx
+<Loading />
+```

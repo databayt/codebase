@@ -1,87 +1,58 @@
 ---
-title: "Card Hover Effect"
-description: "Card with animated hover effects and transitions"
+title: Card Hover Effect
+description: Card with animated hover effects and transitions.
 component: true
-categories: ["display", "animation"]
-
-
 ---
 
-# Card Hover Effect
-
-Card with animated hover effects and transitions
+<ComponentPreview className="mb-4">
+  <CardHoverEffect
+    items={[
+      { title: "Card 1", description: "Description", link: "#" },
+      { title: "Card 2", description: "Description", link: "#" },
+    ]}
+  />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add card-hover-effect
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="card-hover-effect" title="components/atom/card-hover-effect.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/card-hover-effect.tsx**
+</Steps>
 
-```tsx title="components/atom/card-hover-effect.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { CardHoverEffect } from "@/components/atom/card-hover-effect"
-
-export default function Example() {
-  return (
-  {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="card-hover-effect-demo" hideCode>
-{/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Includes smooth animations and transitions
-
+```tsx
+<CardHoverEffect
+  items={[{ title: "Title", description: "Description", link: "/link" }]}
+/>
+```

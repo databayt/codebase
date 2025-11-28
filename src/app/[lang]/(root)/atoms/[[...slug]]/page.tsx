@@ -11,6 +11,8 @@ import { DocsTableOfContents } from "@/components/docs/toc"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { mdxComponents } from "@/mdx-components"
+import { getDictionary } from "@/components/local/dictionaries"
+import type { Locale } from "@/components/local/config"
 
 export const revalidate = false
 export const dynamic = "force-static"
@@ -49,10 +51,11 @@ export async function generateMetadata(props: {
 }
 
 export default async function AtomPage(props: {
-  params: Promise<{ slug?: string[] }>
+  params: Promise<{ slug?: string[]; lang: string }>
 }) {
   const params = await props.params
   const page = atomsSource.getPage(params.slug)
+  const dictionary = await getDictionary((params.lang || "en") as Locale)
 
   if (!page) {
     notFound()
@@ -81,7 +84,7 @@ export default async function AtomPage(props: {
     <div className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
-        <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col gap-8 px-1 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300">
+        <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col gap-8 px-2.5 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
               <div className="flex items-start justify-between">
@@ -89,12 +92,12 @@ export default async function AtomPage(props: {
                   {doc.title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
-                  <DocsCopyPage page={raw} url={pageUrl} />
+                  <DocsCopyPage page={raw} url={pageUrl} dictionary={dictionary} />
                   {neighbours.previous && (
                     <Button
                       variant="secondary"
                       size="icon"
-                      className="extend-touch-target ml-auto size-8 shadow-none md:size-7"
+                      className="extend-touch-target ms-auto size-8 shadow-none md:size-7"
                       asChild
                     >
                       <Link href={neighbours.previous.url}>
@@ -129,14 +132,14 @@ export default async function AtomPage(props: {
                 {links?.doc && (
                   <Badge asChild variant="secondary" className="rounded-full">
                     <a href={links.doc} target="_blank" rel="noreferrer">
-                      Docs <ArrowUpRight className="ml-1 h-3 w-3" />
+                      Docs <ArrowUpRight className="ms-1 h-3 w-3" />
                     </a>
                   </Badge>
                 )}
                 {links?.api && (
                   <Badge asChild variant="secondary" className="rounded-full">
                     <a href={links.api} target="_blank" rel="noreferrer">
-                      API Reference <ArrowUpRight className="ml-1 h-3 w-3" />
+                      API Reference <ArrowUpRight className="ms-1 h-3 w-3" />
                     </a>
                   </Badge>
                 )}
@@ -164,7 +167,7 @@ export default async function AtomPage(props: {
             <Button
               variant="secondary"
               size="sm"
-              className="ml-auto shadow-none"
+              className="ms-auto shadow-none"
               asChild
             >
               <Link href={neighbours.next.url}>

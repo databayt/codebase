@@ -1,87 +1,56 @@
 ---
-title: "Simple Marquee"
-description: "Simple auto-scrolling marquee component"
+title: Simple Marquee
+description: Simple auto-scrolling marquee component.
 component: true
-categories: ["animation", "display"]
-
-
 ---
 
-# Simple Marquee
-
-Simple auto-scrolling marquee component
+<ComponentPreview className="mb-4">
+  <SimpleMarquee
+    items={[
+      { quote: "Item 1", name: "Name", title: "Title" },
+      { quote: "Item 2", name: "Name", title: "Title" },
+    ]}
+  />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add simple-marquee
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="simple-marquee" title="components/atom/simple-marquee.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/simple-marquee.tsx**
+</Steps>
 
-```tsx title="components/atom/simple-marquee.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
-import { SimpleMarquee } from "@/components/atom/simple-marquee"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
+import { InfiniteMovingCards } from "@/components/atom/simple-marquee"
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="simple-marquee-demo" hideCode>
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Includes smooth animations and transitions
-
+```tsx
+<InfiniteMovingCards items={[{ quote: "Text", name: "Name", title: "Title" }]} />
+```

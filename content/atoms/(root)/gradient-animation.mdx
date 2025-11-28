@@ -1,87 +1,51 @@
 ---
-title: "Gradient Animation"
-description: "Animated gradient background effect"
+title: Gradient Animation
+description: Animated gradient background effect.
 component: true
-categories: ["animation", "display"]
-
-
 ---
 
-# Gradient Animation
-
-Animated gradient background effect
+<ComponentPreview className="mb-4">
+  <GradientAnimation className="h-32 w-full rounded-lg" />
+</ComponentPreview>
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx codebase add gradient-animation
 ```
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-*No external dependencies required.*
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="gradient-animation" title="components/atom/gradient-animation.tsx" />
 
+<Step>Update the import paths to match your project setup.</Step>
 
-**components/atom/gradient-animation.tsx**
+</Steps>
 
-```tsx title="components/atom/gradient-animation.tsx"
-// Component code will be populated from registry
-```
+</TabsContent>
 
-
-  </TabsContent>
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { GradientAnimation } from "@/components/atom/gradient-animation"
-
-export default function Example() {
-  return (
-    {/* Component preview would go here */}
-  )
-}
 ```
 
-## Examples
-
-### Default
-
-<ComponentPreview name="gradient-animation-demo">
-  {/* Component preview would go here */}
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `React.ReactNode` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-- Includes smooth animations and transitions
-
+```tsx
+<GradientAnimation className="h-32 w-full rounded-lg" />
+```
