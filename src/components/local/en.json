@@ -50,6 +50,26 @@
     "micros": "Micros",
     "vibes": "Vibes"
   },
+  "docs": {
+    "sidebar": {
+      "introduction": "Introduction",
+      "pitch": "Pitch",
+      "mvp": "MVP",
+      "prd": "PRD",
+      "getStarted": "Get Started",
+      "architecture": "Architecture",
+      "structure": "Structure",
+      "pattern": "Pattern",
+      "stack": "Stack",
+      "database": "Database",
+      "localhost": "Localhost",
+      "contributing": "Contributing",
+      "sharedEconomy": "Shared Economy",
+      "competitors": "Competitors",
+      "inspiration": "Inspiration",
+      "demo": "Demo"
+    }
+  },
   "header": {
     "github": "GitHub",
     "toggleTheme": "Toggle theme",

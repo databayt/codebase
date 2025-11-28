@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import type { docsSource } from "@/lib/source"
+import type { getDictionary } from "@/components/local/dictionaries"
 import {
   Sidebar,
   SidebarContent,
@@ -14,53 +15,38 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Flat list of links without sections - exactly like atoms sidebar
+// Configuration with translation keys and fallback names
 const DOCS_LINKS = [
-  { name: "Introduction", href: "/docs" },
-  { name: "Pitch", href: "/docs/pitch" },
-  { name: "MVP", href: "/docs/mvp" },
-  { name: "PRD", href: "/docs/prd" },
-  { name: "Get Started", href: "/docs/get-started" },
-  { name: "Architecture", href: "/docs/architecture" },
-  { name: "Structure", href: "/docs/structure" },
-  { name: "Pattern", href: "/docs/pattern" },
-  { name: "Stack", href: "/docs/stack" },
-  { name: "Database", href: "/docs/database" },
-  { name: "Localhost", href: "/docs/localhost" },
-  { name: "Contributing", href: "/docs/contributing" },
-  { name: "Shared Economy", href: "/docs/shared-economy" },
-  { name: "Competitors", href: "/docs/competitors" },
-  { name: "Inspiration", href: "/docs/inspiration" },
-  { name: "Demo", href: "/docs/demo" },
-  // { name: "Installation", href: "/docs/installation" },
-  // { name: "Roadmap", href: "/docs/roadmap" },
-  // { name: "Changelog", href: "/docs/changelog" },
-  // { name: "Issues", href: "/docs/issues" },
-  // { name: "Claude Code", href: "/docs/claude-code" },
-  // { name: "Vibe Coding", href: "/docs/vibe-coding" },
-  // { name: "Authentication", href: "/docs/authantication" },
-  // { name: "Internationalization", href: "/docs/internationalization" },
-  // { name: "Domain", href: "/docs/domain" },
-  // { name: "Table", href: "/docs/table" },
-  // { name: "Onboarding", href: "/docs/onboarding" },
-  // { name: "ESLint", href: "/docs/eslint" },
-  // { name: "Prettier", href: "/docs/prettier" },
-  // { name: "Community", href: "/docs/community" },
-  // { name: "Code of Conduct", href: "/docs/code-of-conduct" },
-  // { name: "Accordion", href: "/docs/accordion" },
-  // { name: "Button", href: "/docs/button" },
-  // { name: "Card", href: "/docs/card" },
-  // { name: "Typography", href: "/docs/typography" },
-  // { name: "Docs Factory", href: "/docs/docs-factory" },
-  // { name: "Atoms Factory", href: "/docs/atoms-factory" },
-  // { name: "Templates Factory", href: "/docs/templates-factory" },
-]
+  { key: "introduction", href: "/docs", fallback: "Introduction" },
+  { key: "pitch", href: "/docs/pitch", fallback: "Pitch" },
+  { key: "mvp", href: "/docs/mvp", fallback: "MVP" },
+  { key: "prd", href: "/docs/prd", fallback: "PRD" },
+  { key: "getStarted", href: "/docs/get-started", fallback: "Get Started" },
+  { key: "architecture", href: "/docs/architecture", fallback: "Architecture" },
+  { key: "structure", href: "/docs/structure", fallback: "Structure" },
+  { key: "pattern", href: "/docs/pattern", fallback: "Pattern" },
+  { key: "stack", href: "/docs/stack", fallback: "Stack" },
+  { key: "database", href: "/docs/database", fallback: "Database" },
+  { key: "localhost", href: "/docs/localhost", fallback: "Localhost" },
+  { key: "contributing", href: "/docs/contributing", fallback: "Contributing" },
+  { key: "sharedEconomy", href: "/docs/shared-economy", fallback: "Shared Economy" },
+  { key: "competitors", href: "/docs/competitors", fallback: "Competitors" },
+  { key: "inspiration", href: "/docs/inspiration", fallback: "Inspiration" },
+  { key: "demo", href: "/docs/demo", fallback: "Demo" },
+] as const
 
 export function DocsSidebar({
   tree,
+  dictionary,
+  lang,
   ...props
-}: React.ComponentProps<typeof Sidebar> & { tree: typeof docsSource.pageTree }) {
+}: React.ComponentProps<typeof Sidebar> & {
+  tree: typeof docsSource.pageTree
+  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  lang?: string
+}) {
   const pathname = usePathname()
+  const prefix = lang ? `/${lang}` : ""
 
   return (
     <Sidebar
@@ -73,8 +59,10 @@ export function DocsSidebar({
           <SidebarGroup className="p-0">
             <SidebarGroupContent>
               <SidebarMenu>
-                {DOCS_LINKS.map(({ name, href }) => {
-                  const isActive = pathname === href
+                {DOCS_LINKS.map(({ key, href, fallback }) => {
+                  const fullHref = `${prefix}${href}`
+                  const isActive = pathname === fullHref || pathname === href
+                  const name = dictionary?.docs?.sidebar?.[key as keyof typeof dictionary.docs.sidebar] || fallback
 
                   return (
                     <SidebarMenuItem key={href}>
@@ -83,7 +71,7 @@ export function DocsSidebar({
                         isActive={isActive}
                         className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium p-0"
                       >
-                        <Link href={href} className="block w-full">{name}</Link>
+                        <Link href={fullHref} className="block w-full">{name}</Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   )
