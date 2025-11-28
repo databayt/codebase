@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import { docsSource } from "@/lib/source"
 import { siteConfig } from "./constants"
 import { CommandMenu } from "./command-menu"
 import { Icons } from "@/components/atom/icons"
@@ -27,14 +26,11 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ dictionary }: SiteHeaderProps) {
-    const pageTree = docsSource.pageTree
-
     return (
         <header className="bg-background sticky top-0 z-50 w-full">
             <div className="container-wrapper px-4 lg:px-0">
                 <div className="3xl:fixed:container flex h-(--header-height) items-center **:data-[slot=separator]:!h-4">
                     <MobileNav
-                        tree={pageTree}
                         items={NAV_ITEMS}
                         className="flex lg:hidden"
                         dictionary={dictionary}

@@ -185,6 +185,26 @@
     "micros": "مايكرو",
     "vibes": "فايب"
   },
+  "docs": {
+    "sidebar": {
+      "introduction": "مقدمة",
+      "pitch": "العرض التقديمي",
+      "mvp": "المنتج الأولي",
+      "prd": "وثيقة المتطلبات",
+      "getStarted": "البداية",
+      "architecture": "الهيكلية",
+      "structure": "البنية",
+      "pattern": "الأنماط",
+      "stack": "التقنيات",
+      "database": "قاعدة البيانات",
+      "localhost": "التشغيل المحلي",
+      "contributing": "المساهمة",
+      "sharedEconomy": "الاقتصاد التشاركي",
+      "competitors": "المنافسون",
+      "inspiration": "الإلهام",
+      "demo": "العرض التجريبي"
+    }
+  },
   "header": {
     "github": "جيت هاب",
     "toggleTheme": "تبديل المظهر",

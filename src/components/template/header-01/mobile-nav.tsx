@@ -2,9 +2,9 @@
 
 import * as React from "react"
 import Link, { LinkProps } from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
-import { docsSource } from "@/lib/source"
+import { docsSource, atomsSource } from "@/lib/source"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -13,13 +13,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import type { getDictionary } from "@/components/local/dictionaries"
-
-const TOP_LEVEL_SECTIONS = [
-  { name: "Get Started", href: "/docs" },
-  { name: "Architecture", href: "/docs/architecture" },
-  { name: "Database", href: "/docs/database" },
-  { name: "Contributing", href: "/docs/contributing" },
-]
 
 const NAV_ITEMS = [
   { href: "/docs", label: "Docs" },
@@ -31,17 +24,22 @@ const NAV_ITEMS = [
 ]
 
 export function MobileNav({
-  tree,
   items = NAV_ITEMS,
   className,
   dictionary,
 }: {
-  tree?: typeof docsSource.pageTree
   items?: { href: string; label: string }[]
   className?: string
   dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }) {
   const [open, setOpen] = React.useState(false)
+  const pathname = usePathname()
+
+  // Determine which tree to show based on current route
+  const isDocsRoute = pathname?.includes('/docs')
+  const isAtomsRoute = pathname?.includes('/atoms')
+  const tree = isAtomsRoute ? atomsSource.pageTree : isDocsRoute ? docsSource.pageTree : null
+  const sectionTitle = isAtomsRoute ? "Atoms" : isDocsRoute ? "Documentation" : null
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -98,49 +96,43 @@ export function MobileNav({
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="text-muted-foreground text-sm font-medium">
-              {dictionary?.navigation?.docs || "Sections"}
-            </div>
-            <div className="flex flex-col gap-3">
-              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
-                <MobileLink key={name} href={href} onOpenChange={setOpen}>
-                  {name}
-                </MobileLink>
-              ))}
-            </div>
-          </div>
-          {tree?.children && (
-            <div className="flex flex-col gap-8">
-              {tree.children.map((group, index) => {
-                if (group.type === "folder") {
-                  return (
-                    <div key={index} className="flex flex-col gap-4">
-                      <div className="text-muted-foreground text-sm font-medium">
-                        {group.name}
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        {group.children.map((item) => {
-                          if (item.type === "page") {
-                            return (
-                              <MobileLink
-                                key={`${item.url}-${index}`}
-                                href={item.url}
-                                onOpenChange={setOpen}
-                                className="flex items-center gap-2"
-                              >
-                                {item.name}
-                              </MobileLink>
-                            )
-                          }
-                          return null
-                        })}
-                      </div>
-                    </div>
-                  )
-                }
-                return null
-              })}
+          {tree && sectionTitle && (
+            <div className="flex flex-col gap-4">
+              <div className="text-muted-foreground text-sm font-medium">
+                {sectionTitle}
+              </div>
+              <div className="flex flex-col gap-3">
+                {tree.children.map((item, index) => {
+                  if (item.type === "page") {
+                    return (
+                      <MobileLink
+                        key={`${item.url}-${index}`}
+                        href={item.url}
+                        onOpenChange={setOpen}
+                      >
+                        {item.name}
+                      </MobileLink>
+                    )
+                  }
+                  if (item.type === "folder") {
+                    return item.children.map((child) => {
+                      if (child.type === "page") {
+                        return (
+                          <MobileLink
+                            key={`${child.url}-${index}`}
+                            href={child.url}
+                            onOpenChange={setOpen}
+                          >
+                            {child.name}
+                          </MobileLink>
+                        )
+                      }
+                      return null
+                    })
+                  }
+                  return null
+                })}
+              </div>
             </div>
           )}
         </div>
