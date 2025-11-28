@@ -15,44 +15,34 @@ import { searchParamsCache } from "@/components/tablecn/lib/validations";
 export const runtime = "nodejs";
 
 interface DataTablePageProps {
-  params: Promise<{ lang: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default function DataTablePage(props: DataTablePageProps) {
   return (
     <Shell>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold tracking-tight">Data Table</h1>
-          <p className="text-muted-foreground">
-            Server-side data table with advanced filtering, sorting, and
-            pagination.
-          </p>
-        </div>
-        <Suspense
-          fallback={
-            <DataTableSkeleton
-              columnCount={7}
-              filterCount={2}
-              cellWidths={[
-                "10rem",
-                "30rem",
-                "10rem",
-                "10rem",
-                "6rem",
-                "6rem",
-                "6rem",
-              ]}
-              shrinkZero
-            />
-          }
-        >
-          <FeatureFlagsProvider>
-            <TasksTableWrapper {...props} />
-          </FeatureFlagsProvider>
-        </Suspense>
-      </div>
+      <Suspense
+        fallback={
+          <DataTableSkeleton
+            columnCount={7}
+            filterCount={2}
+            cellWidths={[
+              "10rem",
+              "30rem",
+              "10rem",
+              "10rem",
+              "6rem",
+              "6rem",
+              "6rem",
+            ]}
+            shrinkZero
+          />
+        }
+      >
+        <FeatureFlagsProvider>
+          <TasksTableWrapper {...props} />
+        </FeatureFlagsProvider>
+      </Suspense>
     </Shell>
   );
 }
