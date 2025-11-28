@@ -80,7 +80,7 @@ export function MobileNav({
         alignOffset={-16}
         sideOffset={14}
       >
-        <div className="flex flex-col gap-12 overflow-auto px-8 py-6">
+        <div className="flex flex-col gap-12 overflow-auto px-responsive py-6">
           <div className="flex flex-col gap-4">
             <div className="text-muted-foreground text-sm font-medium">
               {dictionary?.navigation?.menu || "Menu"}

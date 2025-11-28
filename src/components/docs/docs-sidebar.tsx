@@ -69,7 +69,7 @@ export function DocsSidebar({
                       <SidebarMenuButton
                         asChild
                         isActive={isActive}
-                        className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium p-0"
+                        className="relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium p-0"
                       >
                         <Link href={fullHref} className="block w-full">{name}</Link>
                       </SidebarMenuButton>

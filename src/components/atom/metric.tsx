@@ -1,6 +1,6 @@
 "use client"
 
-import { Line, LineChart } from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
 import type { getDictionary } from "@/components/local/dictionaries"
 
 import {
@@ -21,41 +21,48 @@ const data = [
   {
     average: 400,
     today: 240,
+    day: "Mon",
   },
   {
     average: 300,
     today: 139,
+    day: "Tue",
   },
   {
     average: 200,
     today: 980,
+    day: "Wed",
   },
   {
     average: 278,
     today: 390,
+    day: "Thu",
   },
   {
     average: 189,
     today: 480,
+    day: "Fri",
   },
   {
     average: 239,
     today: 380,
+    day: "Sat",
   },
   {
     average: 349,
     today: 430,
+    day: "Sun",
   },
 ]
 
 const chartConfig = {
   today: {
     label: "Today",
-    color: "hsl(var(--primary))",
+    color: "var(--primary)",
   },
   average: {
     label: "Average",
-    color: "hsl(var(--primary))",
+    color: "var(--primary)",
   },
 } satisfies ChartConfig
 
@@ -77,33 +84,46 @@ export function CardsMetric({ dictionary }: CardsMetricProps) {
       <CardContent className="pb-4">
         <ChartContainer config={chartConfig} className="w-full h-[200px]">
           <LineChart
+            accessibilityLayer
             data={data}
             margin={{
               top: 5,
               right: 10,
-              left: 10,
+              left: 16,
               bottom: 0,
             }}
           >
-            <Line
-              type="monotone"
-              strokeWidth={2}
-              dataKey="average"
-              stroke="var(--color-average)"
-              strokeOpacity={0.5}
-              activeDot={{
-                r: 6,
-                fill: "var(--color-average)",
-              }}
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="day"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
             />
             <Line
               type="monotone"
               dataKey="today"
               strokeWidth={2}
               stroke="var(--color-today)"
+              dot={{
+                fill: "var(--color-today)",
+              }}
               activeDot={{
-                r: 8,
-                style: { fill: "var(--color-today)" },
+                r: 5,
+              }}
+            />
+            <Line
+              type="monotone"
+              strokeWidth={2}
+              dataKey="average"
+              stroke="var(--color-average)"
+              strokeOpacity={0.5}
+              dot={{
+                fill: "var(--color-average)",
+                opacity: 0.5,
+              }}
+              activeDot={{
+                r: 5,
               }}
             />
             <ChartTooltip content={<ChartTooltipContent />} />
