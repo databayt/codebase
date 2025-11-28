@@ -1,8 +1,46 @@
 ---
-title: User Info Card
-description: A compact user display with avatar, name, and email.
+title: "User Info Card"
+description: "A compact user display with avatar, name, and email"
 component: true
+categories: ["display", "user"]
 ---
+
+# User Info Card
+
+A compact user display with avatar, name, and email.
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add user-info-card
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+**components/atom/user-info-card.tsx**
+
+```tsx title="components/atom/user-info-card.tsx"
+// Component code will be populated from registry
+```
+
+  </TabsContent>
+</Tabs>
 
 ## Usage
 
@@ -10,15 +48,83 @@ component: true
 import { UserInfoCard } from "@/components/atom/user-info-card"
 ```
 
+## Examples
+
+### Default
+
+<ComponentPreview>
+  <UserInfoCard
+    name="John Doe"
+    email="john@example.com"
+  />
+</ComponentPreview>
+
 ```tsx
 <UserInfoCard
   name="John Doe"
   email="john@example.com"
-  avatar="/avatars/01.png"
 />
 ```
 
-## Props
+### With Avatar
+
+<ComponentPreview>
+  <UserInfoCard
+    name="Jane Smith"
+    email="jane@example.com"
+    avatar="https://github.com/shadcn.png"
+  />
+</ComponentPreview>
+
+```tsx
+<UserInfoCard
+  name="Jane Smith"
+  email="jane@example.com"
+  avatar="https://github.com/shadcn.png"
+/>
+```
+
+### With Role
+
+<ComponentPreview>
+  <UserInfoCard
+    name="Admin User"
+    email="admin@example.com"
+    role="Administrator"
+  />
+</ComponentPreview>
+
+```tsx
+<UserInfoCard
+  name="Admin User"
+  email="admin@example.com"
+  role="Administrator"
+/>
+```
+
+### Complete Example
+
+<ComponentPreview>
+  <UserInfoCard
+    name="Sarah Connor"
+    email="sarah@skynet.com"
+    avatar="https://github.com/shadcn.png"
+    role="Team Lead"
+  />
+</ComponentPreview>
+
+```tsx
+<UserInfoCard
+  name="Sarah Connor"
+  email="sarah@skynet.com"
+  avatar="https://github.com/shadcn.png"
+  role="Team Lead"
+/>
+```
+
+## API Reference
+
+### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -26,3 +132,10 @@ import { UserInfoCard } from "@/components/atom/user-info-card"
 | `email` | `string` | required | User's email address |
 | `avatar` | `string` | - | Avatar image URL |
 | `role` | `string` | - | Optional role/title |
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Avatar has proper alt text
+- Email is displayed as text, not link
+- Proper text hierarchy for screen readers

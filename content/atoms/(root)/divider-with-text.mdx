@@ -1,8 +1,46 @@
 ---
-title: Divider With Text
-description: A horizontal divider with centered text label.
+title: "Divider With Text"
+description: "A horizontal divider with centered text label"
 component: true
+categories: ["layout", "display"]
 ---
+
+# Divider With Text
+
+A horizontal divider with centered text label, commonly used in authentication forms.
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add divider-with-text
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+**components/atom/divider-with-text.tsx**
+
+```tsx title="components/atom/divider-with-text.tsx"
+// Component code will be populated from registry
+```
+
+  </TabsContent>
+</Tabs>
 
 ## Usage
 
@@ -10,13 +48,61 @@ component: true
 import { DividerWithText } from "@/components/atom/divider-with-text"
 ```
 
+## Examples
+
+### Default
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <DividerWithText />
+  </div>
+</ComponentPreview>
+
 ```tsx
-<DividerWithText text="Or continue with" />
+<DividerWithText />
 ```
 
-## Props
+### Custom Text
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <DividerWithText text="Or" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<DividerWithText text="Or" />
+```
+
+### In Context
+
+<ComponentPreview>
+  <div className="w-full max-w-sm space-y-4">
+    <div className="h-10 rounded-md border bg-muted/50 flex items-center justify-center text-sm text-muted-foreground">Email form</div>
+    <DividerWithText text="Or continue with" />
+    <div className="h-10 rounded-md border bg-muted/50 flex items-center justify-center text-sm text-muted-foreground">OAuth buttons</div>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="space-y-4">
+  {/* Email form */}
+  <DividerWithText text="Or continue with" />
+  {/* OAuth buttons */}
+</div>
+```
+
+## API Reference
+
+### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `text` | `string` | `"Or continue with"` | Text to display in center |
 | `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic separator role
+- Text is properly centered and readable
+- Works with all text sizes

@@ -9,6 +9,7 @@ export interface SettingsToggleRowProps extends React.ComponentProps<"div"> {
   label: string
   description?: string
   checked?: boolean
+  defaultChecked?: boolean
   onCheckedChange?: (checked: boolean) => void
   id?: string
 }
@@ -17,6 +18,7 @@ export function SettingsToggleRow({
   label,
   description,
   checked,
+  defaultChecked,
   onCheckedChange,
   id,
   className,
@@ -38,7 +40,12 @@ export function SettingsToggleRow({
           <p className="text-sm text-muted-foreground">{description}</p>
         )}
       </div>
-      <Switch id={switchId} checked={checked} onCheckedChange={onCheckedChange} />
+      <Switch
+        id={switchId}
+        checked={checked}
+        defaultChecked={defaultChecked}
+        onCheckedChange={onCheckedChange}
+      />
     </div>
   )
 }

@@ -1,8 +1,46 @@
 ---
-title: Settings Toggle Row
-description: A settings row with label, description, and toggle switch.
+title: "Settings Toggle Row"
+description: "A settings row with label, description, and toggle switch"
 component: true
+categories: ["form", "settings"]
 ---
+
+# Settings Toggle Row
+
+A settings row with label, description, and toggle switch.
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add settings-toggle-row
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+**components/atom/settings-toggle-row.tsx**
+
+```tsx title="components/atom/settings-toggle-row.tsx"
+// Component code will be populated from registry
+```
+
+  </TabsContent>
+</Tabs>
 
 ## Usage
 
@@ -10,20 +48,100 @@ component: true
 import { SettingsToggleRow } from "@/components/atom/settings-toggle-row"
 ```
 
+## Examples
+
+### Default
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <SettingsToggleRow
+      label="Notifications"
+      description="Receive email notifications"
+    />
+  </div>
+</ComponentPreview>
+
 ```tsx
 <SettingsToggleRow
   label="Notifications"
   description="Receive email notifications"
-  checked={true}
-  onCheckedChange={(checked) => console.log(checked)}
 />
 ```
 
-## Props
+### Checked State
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <SettingsToggleRow
+      label="Dark Mode"
+      description="Enable dark theme"
+      defaultChecked={true}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<SettingsToggleRow
+  label="Dark Mode"
+  description="Enable dark theme"
+  defaultChecked={true}
+/>
+```
+
+### Multiple Settings
+
+<ComponentPreview>
+  <div className="w-full max-w-md space-y-4">
+    <SettingsToggleRow
+      label="Email Notifications"
+      description="Receive updates via email"
+      defaultChecked={true}
+    />
+    <SettingsToggleRow
+      label="Push Notifications"
+      description="Receive push notifications on your device"
+    />
+    <SettingsToggleRow
+      label="Marketing Emails"
+      description="Receive promotional content and offers"
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="space-y-4">
+  <SettingsToggleRow
+    label="Email Notifications"
+    description="Receive updates via email"
+    defaultChecked={true}
+  />
+  <SettingsToggleRow
+    label="Push Notifications"
+    description="Receive push notifications on your device"
+  />
+  <SettingsToggleRow
+    label="Marketing Emails"
+    description="Receive promotional content and offers"
+  />
+</div>
+```
+
+## API Reference
+
+### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `label` | `string` | required | Main label text |
-| `description` | `string` | - | Secondary description |
-| `checked` | `boolean` | - | Toggle state |
-| `onCheckedChange` | `(checked) => void` | - | Change handler |
+| `description` | `string` | - | Secondary description text |
+| `checked` | `boolean` | - | Controlled checked state |
+| `defaultChecked` | `boolean` | `false` | Initial checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Change handler |
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Uses proper label association
+- Switch is keyboard navigable
+- Proper focus states
+- Screen reader friendly with label and description

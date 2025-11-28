@@ -1,8 +1,46 @@
 ---
-title: OAuth Button
-description: A single OAuth button with provider icon for authentication flows.
+title: "OAuth Button"
+description: "A single OAuth button with provider icon for authentication flows"
 component: true
+categories: ["authentication", "form"]
 ---
+
+# OAuth Button
+
+A single OAuth button with provider icon for authentication flows.
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add oauth-button
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+**components/atom/oauth-button.tsx**
+
+```tsx title="components/atom/oauth-button.tsx"
+// Component code will be populated from registry
+```
+
+  </TabsContent>
+</Tabs>
 
 ## Usage
 
@@ -10,17 +48,82 @@ component: true
 import { OAuthButton } from "@/components/atom/oauth-button"
 ```
 
+## Examples
+
+### Default
+
+<ComponentPreview>
+  <OAuthButton provider="github" />
+</ComponentPreview>
+
 ```tsx
 <OAuthButton provider="github" />
+```
+
+### Google Provider
+
+<ComponentPreview>
+  <OAuthButton provider="google" />
+</ComponentPreview>
+
+```tsx
 <OAuthButton provider="google" />
+```
+
+### Apple Provider
+
+<ComponentPreview>
+  <OAuthButton provider="apple" />
+</ComponentPreview>
+
+```tsx
 <OAuthButton provider="apple" />
+```
+
+### PayPal Provider
+
+<ComponentPreview>
+  <OAuthButton provider="paypal" />
+</ComponentPreview>
+
+```tsx
 <OAuthButton provider="paypal" />
 ```
 
-## Props
+### All Providers
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-sm">
+    <OAuthButton provider="github" />
+    <OAuthButton provider="google" />
+    <OAuthButton provider="apple" />
+    <OAuthButton provider="paypal" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-2 w-full max-w-sm">
+  <OAuthButton provider="github" />
+  <OAuthButton provider="google" />
+  <OAuthButton provider="apple" />
+  <OAuthButton provider="paypal" />
+</div>
+```
+
+## API Reference
+
+### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `provider` | `"github" \| "google" \| "apple" \| "paypal"` | required | The OAuth provider |
 | `label` | `string` | Provider name | Custom button label |
 | `variant` | `ButtonVariant` | `"outline"` | Button variant |
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic button element
+- Includes provider icon with proper aria labels
+- Keyboard navigable
+- Focus visible states

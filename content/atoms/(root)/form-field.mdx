@@ -1,8 +1,46 @@
 ---
-title: Form Field
-description: Form field primitives with label and input components.
+title: "Form Field"
+description: "Form field primitives with label and input components"
 component: true
+categories: ["form"]
 ---
+
+# Form Field
+
+Form field primitives with label and input components.
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add form-field
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+**components/atom/form-field.tsx**
+
+```tsx title="components/atom/form-field.tsx"
+// Component code will be populated from registry
+```
+
+  </TabsContent>
+</Tabs>
 
 ## Usage
 
@@ -10,7 +48,19 @@ component: true
 import { FormField, FormFieldText } from "@/components/atom/form-field"
 ```
 
-### FormFieldText
+## Examples
+
+### FormFieldText - Basic
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <FormFieldText
+      label="Email"
+      type="email"
+      placeholder="m@example.com"
+    />
+  </div>
+</ComponentPreview>
 
 ```tsx
 <FormFieldText
@@ -20,28 +70,109 @@ import { FormField, FormFieldText } from "@/components/atom/form-field"
 />
 ```
 
-### FormField (wrapper)
+### Password Field
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <FormFieldText
+      label="Password"
+      type="password"
+      placeholder="Enter your password"
+    />
+  </div>
+</ComponentPreview>
 
 ```tsx
-<FormField label="Custom Input" id="custom">
-  <YourCustomInput id="custom" />
+<FormFieldText
+  label="Password"
+  type="password"
+  placeholder="Enter your password"
+/>
+```
+
+### Complete Form
+
+<ComponentPreview>
+  <div className="w-full max-w-sm space-y-4">
+    <FormFieldText
+      label="Full Name"
+      placeholder="John Doe"
+    />
+    <FormFieldText
+      label="Email"
+      type="email"
+      placeholder="john@example.com"
+    />
+    <FormFieldText
+      label="Password"
+      type="password"
+      placeholder="••••••••"
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="space-y-4">
+  <FormFieldText
+    label="Full Name"
+    placeholder="John Doe"
+  />
+  <FormFieldText
+    label="Email"
+    type="email"
+    placeholder="john@example.com"
+  />
+  <FormFieldText
+    label="Password"
+    type="password"
+    placeholder="••••••••"
+  />
+</div>
+```
+
+### FormField Wrapper (Custom Input)
+
+<ComponentPreview>
+  <div className="w-full max-w-sm">
+    <FormField label="Custom Field" id="custom">
+      <input
+        id="custom"
+        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        placeholder="Custom input"
+      />
+    </FormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+<FormField label="Custom Field" id="custom">
+  <input id="custom" className="..." placeholder="Custom input" />
 </FormField>
 ```
 
-## Props
+## API Reference
 
-### FormFieldText
+### FormFieldText Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `label` | `string` | required | Field label |
-| `type` | `string` | `"text"` | Input type |
+| `label` | `string` | required | Field label text |
+| `type` | `string` | `"text"` | Input type (text, email, password, etc.) |
 | `placeholder` | `string` | - | Placeholder text |
+| `className` | `string` | - | Additional CSS classes |
 
-### FormField
+### FormField Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `label` | `string` | required | Field label |
+| `label` | `string` | required | Field label text |
 | `id` | `string` | - | Input ID for label association |
 | `children` | `ReactNode` | required | Input element |
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Proper label-input association via id/htmlFor
+- Keyboard navigable
+- Screen reader friendly
+- Focus visible states

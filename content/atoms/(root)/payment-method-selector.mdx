@@ -1,8 +1,46 @@
 ---
-title: Payment Method Selector
-description: A payment method radio selector with icons.
+title: "Payment Method Selector"
+description: "A payment method radio selector with icons"
 component: true
+categories: ["form", "payment"]
 ---
+
+# Payment Method Selector
+
+A payment method radio selector with icons.
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
+
+```bash
+npx codebase add payment-method-selector
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+### Install dependencies
+
+*No external dependencies required.*
+
+### Copy component code
+
+Copy and paste the following code into your project:
+
+**components/atom/payment-method-selector.tsx**
+
+```tsx title="components/atom/payment-method-selector.tsx"
+// Component code will be populated from registry
+```
+
+  </TabsContent>
+</Tabs>
 
 ## Usage
 
@@ -10,18 +48,82 @@ component: true
 import { PaymentMethodSelector } from "@/components/atom/payment-method-selector"
 ```
 
+## Examples
+
+### Default (All Methods)
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <PaymentMethodSelector />
+  </div>
+</ComponentPreview>
+
 ```tsx
-<PaymentMethodSelector
-  value="card"
-  onValueChange={(method) => console.log(method)}
-  methods={["card", "paypal", "apple"]}
-/>
+<PaymentMethodSelector />
 ```
 
-## Props
+### Card Selected
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <PaymentMethodSelector value="card" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<PaymentMethodSelector value="card" />
+```
+
+### PayPal Selected
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <PaymentMethodSelector value="paypal" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<PaymentMethodSelector value="paypal" />
+```
+
+### Apple Pay Selected
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <PaymentMethodSelector value="apple" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<PaymentMethodSelector value="apple" />
+```
+
+### Two Methods Only
+
+<ComponentPreview>
+  <div className="w-full max-w-md">
+    <PaymentMethodSelector methods={["card", "paypal"]} />
+  </div>
+</ComponentPreview>
+
+```tsx
+<PaymentMethodSelector methods={["card", "paypal"]} />
+```
+
+## API Reference
+
+### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `value` | `"card" \| "paypal" \| "apple"` | `"card"` | Selected method |
-| `onValueChange` | `(method) => void` | - | Selection handler |
-| `methods` | `PaymentMethod[]` | `["card", "paypal", "apple"]` | Available methods |
+| `value` | `"card" \| "paypal" \| "apple"` | `"card"` | Selected payment method |
+| `onValueChange` | `(method: PaymentMethod) => void` | - | Selection change handler |
+| `methods` | `PaymentMethod[]` | `["card", "paypal", "apple"]` | Available payment methods |
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Uses radio group pattern for single selection
+- Keyboard navigable with arrow keys
+- Clear visual selection state
+- Screen reader announces selected payment method
