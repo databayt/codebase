@@ -27,6 +27,10 @@ export const docs = defineDocs({
   dir: 'content/docs',
 });
 
+export const docsArabic = defineDocs({
+  dir: 'content/docs-ar',
+});
+
 export const atoms = defineDocs({
   dir: 'content/atoms',
 });

@@ -24,7 +24,8 @@
       "Bash(nul)",
       "Bash(for file in \"D:\\repo\\codebase-underway\\src\\components\\atom\"/*.tsx)",
       "Bash(done)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(xargs cat:*)"
     ],
     "deny": [],
     "ask": []

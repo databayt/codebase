@@ -102,7 +102,7 @@ export default async function AtomPage(props: {
                     >
                       <Link href={neighbours.previous.url}>
                         <ArrowLeft />
-                        <span className="sr-only">Previous</span>
+                        <span className="sr-only">{dictionary?.common?.previous || "Previous"}</span>
                       </Link>
                     </Button>
                   )}
@@ -114,7 +114,7 @@ export default async function AtomPage(props: {
                       asChild
                     >
                       <Link href={neighbours.next.url}>
-                        <span className="sr-only">Next</span>
+                        <span className="sr-only">{dictionary?.common?.next || "Next"}</span>
                         <ArrowRight />
                       </Link>
                     </Button>

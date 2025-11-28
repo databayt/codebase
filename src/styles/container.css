@@ -3,7 +3,7 @@
 @layer components {
   /* CSS Custom Properties for consistent spacing */
   :root {
-    --container-padding-xs: 0.5rem;    /* 8px */
+    --container-padding-xs: 0.75rem;   /* 12px */
     --container-padding-sm: 1rem;      /* 16px */
     --container-padding-md: 1.5rem;    /* 24px */
     --container-padding-lg: 2rem;      /* 32px */
@@ -87,6 +87,11 @@
   .container-wrapper {
     @apply mx-auto w-full;
     padding-inline: var(--container-padding-xs);
+  }
+
+  /* Remove padding when nested inside layout-container to avoid double padding */
+  .layout-container .container-wrapper {
+    padding-inline: 0;
   }
 
   @media (min-width: 640px) {

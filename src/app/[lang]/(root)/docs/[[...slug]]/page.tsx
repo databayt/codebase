@@ -5,7 +5,7 @@ import { findNeighbour } from "fumadocs-core/page-tree"
 import type { Metadata } from "next"
 import fm from "front-matter"
 import z from "zod"
-import { docsSource } from "@/lib/source"
+import { docsSource, docsArabicSource } from "@/lib/source"
 import { DocsCopyPage } from "@/components/docs-copy-page"
 import { DocsTableOfContents } from "@/components/docs/toc"
 import { Button } from "@/components/ui/button"
@@ -20,14 +20,17 @@ export const dynamic = "force-static"
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return docsSource.generateParams()
+  const enParams = docsSource.generateParams().map((p) => ({ ...p, lang: "en" }))
+  const arParams = docsArabicSource.generateParams().map((p) => ({ ...p, lang: "ar" }))
+  return [...enParams, ...arParams]
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug?: string[] }>
+  params: Promise<{ slug?: string[]; lang: string }>
 }): Promise<Metadata> {
   const params = await props.params
-  const page = docsSource.getPage(params.slug)
+  const source = params.lang === "ar" ? docsArabicSource : docsSource
+  const page = source.getPage(params.slug)
 
   if (!page) {
     notFound()
@@ -55,7 +58,8 @@ export default async function DocsPage(props: {
   params: Promise<{ slug?: string[]; lang: string }>
 }) {
   const params = await props.params
-  const page = docsSource.getPage(params.slug)
+  const source = params.lang === "ar" ? docsArabicSource : docsSource
+  const page = source.getPage(params.slug)
   const dictionary = await getDictionary(params.lang as Locale)
 
   if (!page) {
@@ -64,7 +68,7 @@ export default async function DocsPage(props: {
 
   const doc = page.data
   const MDX = doc.body
-  const neighbours = findNeighbour(docsSource.pageTree, page.url)
+  const neighbours = findNeighbour(source.pageTree, page.url)
 
   const raw = await page.data.exports?.getText?.("raw") || ""
   const pageUrl = `https://cb.databayt.org${page.url}`
@@ -103,7 +107,7 @@ export default async function DocsPage(props: {
                     >
                       <Link href={neighbours.previous.url}>
                         <ArrowLeft />
-                        <span className="sr-only">Previous</span>
+                        <span className="sr-only">{dictionary?.common?.previous || "Previous"}</span>
                       </Link>
                     </Button>
                   )}
@@ -115,7 +119,7 @@ export default async function DocsPage(props: {
                       asChild
                     >
                       <Link href={neighbours.next.url}>
-                        <span className="sr-only">Next</span>
+                        <span className="sr-only">{dictionary?.common?.next || "Next"}</span>
                         <ArrowRight />
                       </Link>
                     </Button>

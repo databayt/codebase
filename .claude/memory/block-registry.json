@@ -1,0 +1,102 @@
+{
+  "$schema": "block-registry-schema",
+  "description": "Track all blocks in the codebase, their status, sources, and metadata",
+  "lastUpdated": "2024-11-28T00:00:00Z",
+  "blocks": [
+    {
+      "id": "starter",
+      "name": "Starter Kit",
+      "path": "src/components/root/block",
+      "route": "/blocks/starter",
+      "category": "getting-started",
+      "status": "active",
+      "source": "custom",
+      "dependencies": ["button", "card"],
+      "version": "1.0.0",
+      "i18nStatus": "complete",
+      "rtlStatus": "complete",
+      "addedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "onboarding",
+      "name": "Onboarding",
+      "path": "src/components/root/block",
+      "route": "/blocks/onboarding",
+      "category": "getting-started",
+      "status": "active",
+      "source": "custom",
+      "dependencies": ["button", "card", "progress"],
+      "version": "1.0.0",
+      "i18nStatus": "complete",
+      "rtlStatus": "complete",
+      "addedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "categories": {
+    "auth": {
+      "icon": "ShieldIcon",
+      "description": "Authentication blocks (login, register, forgot-password)",
+      "count": 0
+    },
+    "dashboard": {
+      "icon": "LayoutDashboard",
+      "description": "Dashboard and analytics blocks",
+      "count": 0
+    },
+    "forms": {
+      "icon": "FormInput",
+      "description": "Form components and patterns",
+      "count": 0
+    },
+    "marketing": {
+      "icon": "Megaphone",
+      "description": "Marketing pages (hero, features, pricing)",
+      "count": 0
+    },
+    "table": {
+      "icon": "Table",
+      "description": "Data table blocks",
+      "count": 0
+    },
+    "stripe": {
+      "icon": "CreditCard",
+      "description": "Stripe payment and subscription blocks",
+      "count": 0
+    },
+    "getting-started": {
+      "icon": "Rocket",
+      "description": "Starter and onboarding blocks",
+      "count": 2
+    }
+  },
+  "sources": {
+    "shadcn": {
+      "name": "shadcn/ui",
+      "url": "https://ui.shadcn.com",
+      "localPath": "C:\\Users\\pc\\Downloads\\ui-main\\ui-main\\apps\\v4",
+      "type": "registry"
+    },
+    "magicui": {
+      "name": "Magic UI",
+      "url": "https://magicui.design",
+      "type": "registry"
+    },
+    "aceternity": {
+      "name": "Aceternity UI",
+      "url": "https://ui.aceternity.com",
+      "type": "registry"
+    },
+    "github": {
+      "name": "GitHub",
+      "url": "https://github.com",
+      "type": "repository"
+    }
+  },
+  "stats": {
+    "totalBlocks": 2,
+    "activeBlocks": 2,
+    "draftBlocks": 0,
+    "deprecatedBlocks": 0,
+    "lastBlockAdded": "starter"
+  }
+}
