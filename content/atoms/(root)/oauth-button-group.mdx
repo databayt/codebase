@@ -1,0 +1,26 @@
+---
+title: OAuth Button Group
+description: A grid of OAuth buttons for multiple authentication providers.
+component: true
+---
+
+## Usage
+
+```tsx
+import { OAuthButtonGroup } from "@/components/atom/oauth-button-group"
+```
+
+```tsx
+<OAuthButtonGroup
+  providers={["github", "google"]}
+  onProviderClick={(provider) => console.log(provider)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `providers` | `OAuthProvider[]` | required | Array of providers to display |
+| `labels` | `Record<Provider, string>` | - | Custom labels per provider |
+| `onProviderClick` | `(provider) => void` | - | Click handler |

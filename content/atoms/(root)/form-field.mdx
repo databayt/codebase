@@ -1,0 +1,47 @@
+---
+title: Form Field
+description: Form field primitives with label and input components.
+component: true
+---
+
+## Usage
+
+```tsx
+import { FormField, FormFieldText } from "@/components/atom/form-field"
+```
+
+### FormFieldText
+
+```tsx
+<FormFieldText
+  label="Email"
+  type="email"
+  placeholder="m@example.com"
+/>
+```
+
+### FormField (wrapper)
+
+```tsx
+<FormField label="Custom Input" id="custom">
+  <YourCustomInput id="custom" />
+</FormField>
+```
+
+## Props
+
+### FormFieldText
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | required | Field label |
+| `type` | `string` | `"text"` | Input type |
+| `placeholder` | `string` | - | Placeholder text |
+
+### FormField
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | required | Field label |
+| `id` | `string` | - | Input ID for label association |
+| `children` | `ReactNode` | required | Input element |

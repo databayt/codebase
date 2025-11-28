@@ -1,0 +1,29 @@
+---
+title: Settings Toggle Row
+description: A settings row with label, description, and toggle switch.
+component: true
+---
+
+## Usage
+
+```tsx
+import { SettingsToggleRow } from "@/components/atom/settings-toggle-row"
+```
+
+```tsx
+<SettingsToggleRow
+  label="Notifications"
+  description="Receive email notifications"
+  checked={true}
+  onCheckedChange={(checked) => console.log(checked)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | required | Main label text |
+| `description` | `string` | - | Secondary description |
+| `checked` | `boolean` | - | Toggle state |
+| `onCheckedChange` | `(checked) => void` | - | Change handler |

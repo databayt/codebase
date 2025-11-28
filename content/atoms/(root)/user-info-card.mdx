@@ -1,0 +1,28 @@
+---
+title: User Info Card
+description: A compact user display with avatar, name, and email.
+component: true
+---
+
+## Usage
+
+```tsx
+import { UserInfoCard } from "@/components/atom/user-info-card"
+```
+
+```tsx
+<UserInfoCard
+  name="John Doe"
+  email="john@example.com"
+  avatar="/avatars/01.png"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | required | User's display name |
+| `email` | `string` | required | User's email address |
+| `avatar` | `string` | - | Avatar image URL |
+| `role` | `string` | - | Optional role/title |

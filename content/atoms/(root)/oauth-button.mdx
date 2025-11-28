@@ -1,0 +1,26 @@
+---
+title: OAuth Button
+description: A single OAuth button with provider icon for authentication flows.
+component: true
+---
+
+## Usage
+
+```tsx
+import { OAuthButton } from "@/components/atom/oauth-button"
+```
+
+```tsx
+<OAuthButton provider="github" />
+<OAuthButton provider="google" />
+<OAuthButton provider="apple" />
+<OAuthButton provider="paypal" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `provider` | `"github" \| "google" \| "apple" \| "paypal"` | required | The OAuth provider |
+| `label` | `string` | Provider name | Custom button label |
+| `variant` | `ButtonVariant` | `"outline"` | Button variant |

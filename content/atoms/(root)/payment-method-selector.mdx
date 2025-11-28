@@ -1,0 +1,27 @@
+---
+title: Payment Method Selector
+description: A payment method radio selector with icons.
+component: true
+---
+
+## Usage
+
+```tsx
+import { PaymentMethodSelector } from "@/components/atom/payment-method-selector"
+```
+
+```tsx
+<PaymentMethodSelector
+  value="card"
+  onValueChange={(method) => console.log(method)}
+  methods={["card", "paypal", "apple"]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `"card" \| "paypal" \| "apple"` | `"card"` | Selected method |
+| `onValueChange` | `(method) => void` | - | Selection handler |
+| `methods` | `PaymentMethod[]` | `["card", "paypal", "apple"]` | Available methods |
