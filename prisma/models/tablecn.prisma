@@ -1,0 +1,35 @@
+// TableCN Block Models
+// This file contains models for the tablecn data table/grid showcase
+
+model TablecnTask {
+  id             String              @id @default(cuid())
+  code           String              @unique
+  title          String
+  status         TablecnTaskStatus   @default(todo)
+  label          TablecnTaskLabel    @default(feature)
+  priority       TablecnTaskPriority @default(medium)
+  estimatedHours Float?
+  archived       Boolean             @default(false)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
+enum TablecnTaskStatus {
+  todo
+  in_progress
+  done
+  canceled
+}
+
+enum TablecnTaskLabel {
+  bug
+  feature
+  enhancement
+  documentation
+}
+
+enum TablecnTaskPriority {
+  low
+  medium
+  high
+}
