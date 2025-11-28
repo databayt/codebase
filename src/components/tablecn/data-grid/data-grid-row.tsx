@@ -4,7 +4,7 @@ import { useDirection } from "@radix-ui/react-direction";
 import { flexRender, type Row } from "@tanstack/react-table";
 import type { Virtualizer } from "@tanstack/react-virtual";
 import * as React from "react";
-import { useComposedRefs } from "@/lib/compose-refs";
+import { useComposedRefs } from "@/components/tablecn/lib/compose-refs";
 import { getCommonPinningStyles, getRowHeightValue } from "@/components/tablecn/lib/data-grid";
 import { cn } from "@/lib/utils";
 import type { CellPosition, RowHeightValue } from "@/components/tablecn/types/data-grid";

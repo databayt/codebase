@@ -1207,5 +1207,90 @@
       "billing": "Billing",
       "billingDesc": "Can view, comment and manage billing."
     }
+  },
+  "tablecn": {
+    "title": "TableCN",
+    "description": "A comprehensive data table and data grid system built on TanStack React Table with server-side pagination, sorting, filtering, and virtualized grid support.",
+    "totalTasks": "Total Tasks",
+    "seedTasks": "Seed Tasks",
+    "dataTable": {
+      "title": "Data Table",
+      "description": "Server-side data table with advanced filtering, sorting, and pagination.",
+      "features": {
+        "pagination": "Server-side pagination",
+        "sorting": "Multi-column sorting",
+        "filtering": "Advanced filtering (text, select, date range)",
+        "visibility": "Column visibility toggle",
+        "selection": "Row selection with bulk actions",
+        "urlState": "URL state synchronization",
+        "export": "Export to CSV"
+      }
+    },
+    "dataGrid": {
+      "title": "Data Grid",
+      "description": "Client-side virtualized data grid with inline editing and keyboard navigation.",
+      "features": {
+        "virtualScroll": "Virtual scrolling for large datasets",
+        "inlineEdit": "Inline cell editing",
+        "keyboard": "Keyboard navigation (arrow keys, tab)",
+        "copyPaste": "Copy/paste support",
+        "contextMenu": "Context menu actions",
+        "resize": "Column resizing and reordering",
+        "rowHeight": "Row height customization"
+      }
+    },
+    "task": {
+      "title": "Task",
+      "code": "Code",
+      "status": "Status",
+      "label": "Label",
+      "priority": "Priority",
+      "estimatedHours": "Est. Hours",
+      "createdAt": "Created At",
+      "actions": "Actions"
+    },
+    "status": {
+      "todo": "Todo",
+      "in_progress": "In Progress",
+      "done": "Done",
+      "canceled": "Canceled"
+    },
+    "label": {
+      "bug": "Bug",
+      "feature": "Feature",
+      "enhancement": "Enhancement",
+      "documentation": "Documentation"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "export": "Export",
+      "updateStatus": "Update Status",
+      "updatePriority": "Update Priority"
+    },
+    "dialogs": {
+      "deleteTitle": "Are you absolutely sure?",
+      "deleteDescription": "This action cannot be undone. This will permanently delete your task(s) from our servers.",
+      "updateTitle": "Update task",
+      "updateDescription": "Update the task details and save the changes"
+    },
+    "filters": {
+      "searchTitles": "Search titles...",
+      "advancedFilters": "Advanced filters",
+      "commandFilters": "Command filters"
+    },
+    "messages": {
+      "taskCreated": "Task created successfully",
+      "taskUpdated": "Task updated successfully",
+      "tasksUpdated": "Tasks updated",
+      "taskDeleted": "Task deleted successfully",
+      "tasksDeleted": "Tasks deleted",
+      "tasksSeeded": "Tasks seeded successfully"
+    }
   }
 }

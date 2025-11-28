@@ -2,7 +2,7 @@
 
 import type { Cell, Table } from "@tanstack/react-table";
 import * as React from "react";
-import { useComposedRefs } from "@/lib/compose-refs";
+import { useComposedRefs } from "@/components/tablecn/lib/compose-refs";
 import { getCellKey } from "@/components/tablecn/lib/data-grid";
 import { cn } from "@/lib/utils";
 
