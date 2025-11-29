@@ -1,10 +1,14 @@
 import * as React from "react"
+import fs from "node:fs/promises"
+import path from "node:path"
 import { highlightCode } from "@/lib/highlight-code"
 import { cn } from "@/lib/utils"
 import { CopyButton } from "@/components/docs/copy-button"
 import { CodeCollapsibleWrapper } from "@/components/docs/code-collapsible-wrapper"
+import { AtomsIndex } from "@/registry/atoms-index"
 
 interface ComponentSourceProps extends React.HTMLAttributes<HTMLDivElement> {
+  name?: string
   code?: string
   language?: string
   fileName?: string
@@ -13,7 +17,8 @@ interface ComponentSourceProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export async function ComponentSource({
-  code,
+  name,
+  code: codeProp,
   language,
   fileName,
   title,
@@ -21,6 +26,25 @@ export async function ComponentSource({
   className,
   ...props
 }: ComponentSourceProps) {
+  let code = codeProp
+
+  // If name provided, fetch from registry
+  if (name && !code) {
+    const item = AtomsIndex[name]
+    if (item?.files?.[0]) {
+      const filePath = path.join(process.cwd(), item.files[0].path)
+      try {
+        code = await fs.readFile(filePath, "utf-8")
+        // Transform imports for user consumption
+        code = code
+          .replace(/^"use client"\s*\n?/m, "")
+          .replace(/\/\* eslint-disable \*\/\s*\n?/g, "")
+      } catch (error) {
+        console.error(`Failed to read file: ${filePath}`, error)
+      }
+    }
+  }
+
   if (!code) {
     return null
   }
