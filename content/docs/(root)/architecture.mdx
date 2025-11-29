@@ -26,8 +26,8 @@ Our architecture is engineered from the ground up for reusability, modularity, a
 Every URL route produces **two directories**: one in `app/` for routing and layouts, one in `components/` for all feature logic. This 1:1 mapping means if you know the URL, you instantly know where to find both the page and its components.
 
 For example, the route `/abc` creates:
-- `app/[lang]/abc/` — page.tsx, layout.tsx
-- `components/abc/` — content.tsx, actions.ts, form.tsx, validation.ts, type.ts, use-abc.ts, etc.
+- `app/[lang]/abc/` — `page.tsx`, `layout.tsx`
+- `components/abc/` — `content.tsx`, `actions.ts`, `form.tsx`, `validation.ts`, `types.ts`, `use-abc.ts`, `README.md`, `ISSUE.md`, etc.
 
 This predictable structure eliminates guesswork. New features follow the same pattern. Refactoring is straightforward. AI tools understand it instantly.
 
@@ -55,7 +55,7 @@ Each feature directory follows these naming conventions:
 | `actions.ts` | Server actions & API calls: validate, scope tenant, mutate |
 | `config.ts` | Enums, option lists, labels, defaults for the feature |
 | `validation.ts` | Zod schemas & refinements; parse and infer types |
-| `type.ts` | Domain and UI types; generic helpers for forms/tables |
+| `types.ts` | Domain and UI types; generic helpers for forms/tables |
 | `form.tsx` | Typed forms (RHF) with resolvers and submit handling |
 | `card.tsx` | Card components for KPIs, summaries, quick actions |
 | `all.tsx` | List view with table, filters, pagination |
@@ -116,5 +116,5 @@ Watch out for these common mistakes:
 
 1. A user interacts with a component from `form.tsx` on the Next.js frontend, triggering a Server Action from `actions.ts`
 2. The request payload is validated by a Zod schema from `validation.ts`
-3. The serverless function uses the type-safe Prisma client to query Neon, using interfaces from `type.ts`
+3. The serverless function uses the type-safe Prisma client to query Neon, using interfaces from `types.ts`
 4. The result is **streamed** back and managed by a hook from `use-abc.ts`, efficiently updating the UI

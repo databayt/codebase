@@ -22,7 +22,7 @@ export function SiteFooter({ dictionary }: SiteFooterProps) {
             </a>
             . {dictionary?.footer?.poweredBy || "Built by"}{" "}
             <a
-              href={siteConfig.links.twitter}
+              href={siteConfig.links.databayt}
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"

@@ -32,7 +32,11 @@ export function Structure({ className }: StructureProps) {
               {
                 name: "abc/",
                 type: "directory",
-                description: "URL route: /abc"
+                description: "URL route: /abc",
+                children: [
+                  { name: "page.tsx", type: "file", description: "Route entry point" },
+                  { name: "layout.tsx", type: "file", description: "Route layout" }
+                ]
               }
             ]
           }
@@ -52,13 +56,15 @@ export function Structure({ className }: StructureProps) {
               { name: "actions.ts", type: "file", description: "Server actions: validate, mutate" },
               { name: "config.ts", type: "file", description: "Enums, option lists, defaults" },
               { name: "validation.ts", type: "file", description: "Zod schemas & refinements" },
-              { name: "type.ts", type: "file", description: "Domain and UI types" },
+              { name: "types.ts", type: "file", description: "Domain and UI types" },
               { name: "form.tsx", type: "file", description: "Typed forms (RHF)" },
               { name: "card.tsx", type: "file", description: "KPIs, summaries, quick actions" },
               { name: "all.tsx", type: "file", description: "List view with table, filters" },
               { name: "detail.tsx", type: "file", description: "Detail view with sections" },
               { name: "column.tsx", type: "file", description: "Table column builders" },
-              { name: "use-abc.ts", type: "file", description: "Feature hooks" }
+              { name: "use-abc.ts", type: "file", description: "Feature hooks" },
+              { name: "README.md", type: "file", description: "Feature purpose, APIs, decisions" },
+              { name: "ISSUE.md", type: "file", description: "Known issues and follow-ups" }
             ]
           },
           {

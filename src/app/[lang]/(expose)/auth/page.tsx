@@ -2,7 +2,14 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
 
-const Auth = () => {
+interface AuthPageProps {
+  params: Promise<{
+    lang: string;
+  }>;
+}
+
+const Auth = async ({ params }: AuthPageProps) => {
+  const { lang } = await params;
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="space-y-4 text-center">
@@ -24,10 +31,10 @@ const Auth = () => {
           An authentication and authorization block. 
         </p>
         <div className="flex items-center justify-center space-x-4 pt-4">
-          <Link href="/auth/login">
+          <Link href={`/${lang}/login`}>
             <Button className='w-20' variant="outline">Login</Button>
           </Link>
-          <Link href="/auth/join">
+          <Link href={`/${lang}/join`}>
             <Button  className='w-20'>Join</Button>
           </Link>
         </div>

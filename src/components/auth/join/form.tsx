@@ -4,6 +4,7 @@ import * as z from "zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
@@ -30,6 +31,8 @@ export const RegisterForm = ({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) => {
+  const params = useParams();
+  const lang = params.lang || "en";
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -137,7 +140,7 @@ export const RegisterForm = ({
               </div>
 
               <div className="text-center text-sm">
-                <Link href="/auth/login" className="hover:underline underline-offset-4">
+                <Link href={`/${lang}/login`} className="hover:underline underline-offset-4">
                   Already have an account?
                 </Link>
               </div>

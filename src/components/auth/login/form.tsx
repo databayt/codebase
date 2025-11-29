@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -37,6 +37,8 @@ export const LoginForm = ({
   ...props
 }: LoginFormProps) => {
   const searchParams = useSearchParams();
+  const params = useParams();
+  const lang = params.lang || "en";
   const callbackUrl = searchParams.get("callbackUrl");
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
     ? dictionary?.auth?.errors?.emailInUseProvider || "Email already in use with different provider!"
@@ -153,7 +155,7 @@ export const LoginForm = ({
                               <label className="flex justify-between items-center">
                                 <p className="text-sm">{dictionary?.auth?.password || "Password"}</p>
                                 <Link
-                                  href="/reset"
+                                  href={`/${lang}/reset`}
                                   className="text-sm font-normal text-muted-foreground hover:text-foreground"
                                 >
                                   {dictionary?.auth?.forgotPassword || "Forgot password?"}
@@ -188,7 +190,7 @@ export const LoginForm = ({
               <div className="text-center text-sm">
                 {dictionary?.auth?.dontHaveAccount || "Don't have an account?"}
                 {" "}
-                <Link href="/register" className="text-primary hover:underline">
+                <Link href={`/${lang}/join`} className="text-primary hover:underline">
                   {dictionary?.auth?.signUp || "Sign Up"}
                 </Link>
               </div>
