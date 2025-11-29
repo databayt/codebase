@@ -1,12 +1,45 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Volume2, VolumeX } from "lucide-react";
 
 export function StoryVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isInView, setIsInView] = useState(false);
+
+  // Intersection Observer for auto mute/unmute based on visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.5 } // Trigger when 50% of video is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto mute/unmute based on visibility
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        // Unmute when in view
+        videoRef.current.muted = false;
+        setIsMuted(false);
+      } else {
+        // Mute when out of view
+        videoRef.current.muted = true;
+        setIsMuted(true);
+      }
+    }
+  }, [isInView]);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -16,7 +49,10 @@ export function StoryVideo() {
   };
 
   return (
-    <div className="mt-8 mb-8 relative aspect-video w-full max-w-3xl mx-auto rounded-sm overflow-hidden bg-black/5">
+    <div
+      ref={containerRef}
+      className="mt-8 mb-8 relative aspect-video w-full max-w-3xl mx-auto rounded-sm overflow-hidden bg-black/5"
+    >
       <video
         ref={videoRef}
         className="w-full h-full object-cover"
