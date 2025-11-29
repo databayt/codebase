@@ -11,11 +11,10 @@ interface MicroContentProps {
 
 export default function MicroContent({ dictionary, params }: MicroContentProps) {
     return (
-        <>
+        <div className="px-responsive lg:px-0">
             <Hero dictionary={dictionary} params={params} />
             <MicroTabs dictionary={dictionary} />
             <MicrosPage lang={params.lang} />
-
-        </>
+        </div>
     );
 }

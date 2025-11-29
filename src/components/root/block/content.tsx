@@ -11,11 +11,10 @@ interface BlockContentProps {
 
 export default function BlockContent({ dictionary, params }: BlockContentProps) {
     return (
-        <>
+        <div className="px-responsive lg:px-0">
             <Hero dictionary={dictionary} params={params} />
             <BlockTabs dictionary={dictionary} />
             <BlocksPage lang={params.lang} />
-
-        </>
+        </div>
     );
 }

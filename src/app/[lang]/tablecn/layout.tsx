@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type * as React from "react";
 import { SiteHeader } from "@/components/tablecn/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const runtime = "nodejs";
 
@@ -18,10 +20,14 @@ interface TablecnLayoutProps {
 
 export default async function TablecnLayout({ children }: TablecnLayoutProps) {
   return (
-    <div className="relative flex min-h-screen flex-col">
-      <SiteHeader />
-      <main className="flex-1">{children}</main>
+    <TooltipProvider delayDuration={120}>
+      <NuqsAdapter>
+        <div className="relative flex min-h-screen flex-col">
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+        </div>
+      </NuqsAdapter>
       <Toaster />
-    </div>
+    </TooltipProvider>
   );
 }

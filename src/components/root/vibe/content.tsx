@@ -11,11 +11,10 @@ interface VibeContentProps {
 
 export default function VibeContent({ dictionary, params }: VibeContentProps) {
     return (
-        <>
+        <div className="px-responsive lg:px-0">
             <Hero dictionary={dictionary} params={params} />
             <VibeTabs dictionary={dictionary} />
             <VibesPage lang={params.lang} />
-
-        </>
+        </div>
     );
 }

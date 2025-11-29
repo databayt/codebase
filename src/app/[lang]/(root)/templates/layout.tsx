@@ -28,12 +28,12 @@ export default async function TemplatesLayout({
   return (
     <>
       <Hero dictionary={dictionary} params={{ lang }} />
-      <div className="py-3 border-b-[0.5px]">
+      <div className="py-3 border-b-[0.5px] px-responsive lg:px-0">
         <div className="rtl:text-right">
           <TemplatesNav />
         </div>
       </div>
-      <div className="section-soft flex-1 md:py-12">
+      <div className="section-soft flex-1 md:py-12 px-responsive lg:px-0">
         <div className="w-full">{children}</div>
       </div>
     </>
