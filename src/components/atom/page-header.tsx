@@ -27,7 +27,7 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <section className={cn(className)} {...props}>
-      <div className="flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12">
+      <div className="flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12 px-4 md:px-0">
         {announcement && (
           <div className={cn(announcementClassName)}>
             {announcement}

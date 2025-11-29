@@ -72,7 +72,7 @@ export function FeatureFlagsProvider({ children }: FeatureFlagsProviderProps) {
 
   return (
     <FeatureFlagsContext.Provider value={contextValue}>
-      <div className="w-full overflow-x-auto p-1">
+      <div className="w-full overflow-x-auto">
         <ToggleGroup
           type="single"
           variant="outline"
