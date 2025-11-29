@@ -158,17 +158,17 @@ const mdxComponents = {
       <strong className={cn("font-medium", className)} {...props} />
     ),
     ul: ({ className, ...props }) => (
-      <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+      <ul className={cn("my-6 ms-6 list-disc", className)} {...props} />
     ),
     ol: ({ className, ...props }) => (
-      <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+      <ol className={cn("my-6 ms-6 list-decimal", className)} {...props} />
     ),
     li: ({ className, ...props }) => (
       <li className={cn("mt-2", className)} {...props} />
     ),
     blockquote: ({ className, ...props }) => (
       <blockquote
-        className={cn("mt-6 border-l-2 pl-6 italic", className)}
+        className={cn("mt-6 border-s-2 ps-6 italic", className)}
         {...props}
       />
     ),
@@ -198,7 +198,7 @@ const mdxComponents = {
     th: ({ className, ...props }) => (
       <th
         className={cn(
-          "px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+          "px-4 py-2 text-start font-bold [&[align=center]]:text-center [&[align=right]]:text-right rtl:[&[align=right]]:text-left",
           className
         )}
         {...props}
@@ -207,7 +207,7 @@ const mdxComponents = {
     td: ({ className, ...props }) => (
       <td
         className={cn(
-          "px-4 py-2 text-left whitespace-nowrap [&[align=center]]:text-center [&[align=right]]:text-right",
+          "px-4 py-2 text-start whitespace-nowrap [&[align=center]]:text-center [&[align=right]]:text-right rtl:[&[align=right]]:text-left",
           className
         )}
         {...props}
