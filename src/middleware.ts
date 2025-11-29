@@ -112,8 +112,10 @@ export default async function proxy(request: NextRequest) {
                          pathname.startsWith('/micros') ||
                          pathname.startsWith('/community') ||
                          pathname.startsWith('/view/templates') ||
+                         pathname.startsWith('/tablecn') ||
                          pathname === '/docs' ||
-                         pathname === '/atoms'
+                         pathname === '/atoms' ||
+                         pathname === '/tablecn'
     const isAuthRoute = authRoutes.includes(pathname)
 
     // Check if the route is in the platform directory

@@ -29,6 +29,7 @@ export const publicRoutes = [
   "/en/micros",
   "/en/atoms",
   "/en/community",
+  "/en/tablecn",
   "/ar",
   "/ar/pricing",
   "/ar/about",
@@ -43,6 +44,7 @@ export const publicRoutes = [
   "/ar/micros",
   "/ar/atoms",
   "/ar/community",
+  "/ar/tablecn",
   // Base routes (non-internationalized)
   "/docs",
   "/templates",
@@ -52,6 +54,7 @@ export const publicRoutes = [
   "/micros",
   "/atoms",
   "/community",
+  "/tablecn",
   // Blocks routes (UI showcases)
   "/standalone-chat-block",
   "/emails",
