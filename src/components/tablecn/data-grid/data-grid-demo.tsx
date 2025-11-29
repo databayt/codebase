@@ -191,7 +191,7 @@ function DataGridDemoImpl({
   });
 
   return (
-    <div className="container flex flex-col gap-4 py-4">
+    <div className="mx-auto w-full max-w-[1280px] flex flex-col gap-4 py-4">
       <div
         role="toolbar"
         aria-orientation="horizontal"
