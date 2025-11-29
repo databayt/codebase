@@ -70,6 +70,7 @@ import {
 } from "@/components/atom/ai-previews"
 import { AIResponseDisplay } from "@/components/atom/ai-response-display"
 import { ModalSystem } from "@/components/atom/modal-system"
+import { StoryVideo } from "@/components/docs/story-video"
 
 // This file is required to use MDX in `app` directory.
 
@@ -396,6 +397,7 @@ const mdxComponents = {
     LabeledTextarea,
     CardForm,
     ButtonGroup,
+    StoryVideo,
 }
 
 export function useMDXComponents(components: Record<string, React.ComponentType<any>>): Record<string, React.ComponentType<any>> {
