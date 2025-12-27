@@ -35,7 +35,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { UserRole } from "@prisma/client";
+// Mirror of Prisma UserRole enum for client-side usage
+const UserRole = {
+  ADMIN: "ADMIN",
+  USER: "USER",
+} as const;
 import { useCurrentUser } from "@/components/auth/use-current-user";
 import { SettingsSchema } from "@/components/auth/validation";
 import { settings } from "@/components/auth/setting/action";
