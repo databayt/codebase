@@ -2,235 +2,184 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-A Next.js 15 application with authentication, internationalization, and a comprehensive documentation system. The project uses the App Router, Edge Runtime compatibility, and modern React patterns.
+## Core Philosophy
+
+**This codebase is heavily inspired by and deeply appreciates shadcn/ui.**
+
+We monitor shadcn/ui updates and align our patterns accordingly. The ecosystem—registry system, directory structure, component architecture—follows shadcn conventions. However, we have our own enterprise-level architecture that extends beyond a simple component library.
+
+### shadcn/ui Relationship
+
+| What We Do | shadcn/ui Equivalent | Notes |
+|------------|---------------------|-------|
+| **UI** | shadcn/ui primitives | Radix-based, copied directly |
+| **Atoms** | shadcn UI components | 2+ primitives combined, same pattern |
+| **Templates** | **shadcn Blocks** | Full-page layouts, sections |
+| **Blocks** | *Beyond shadcn* | UI with logic (tables, forms, data-driven) |
+| **Micro** | *Beyond shadcn* | Mini micro-services |
+| **Apps** | *Beyond shadcn* | Complete applications |
+
+**Key distinction**: Our "Templates" = shadcn "Blocks". Our "Blocks" are something else entirely—reusable UI with embedded business logic.
+
+### Legacy shadcn Patterns
+
+We preserve some older shadcn/ui patterns that we love, even as shadcn has updated their homepage:
+- **PageHeader** component - Our hero/heading pattern
+- **PageActions** - Action button layouts
+- A few other UI atoms from earlier shadcn versions
+
+These are intentionally kept as they work well for our use cases.
+
+### Four Pillars
+
+1. **Follow shadcn patterns** - Always check [ui.shadcn.com](https://ui.shadcn.com) for reference
+2. **Component hierarchy** - Understand UI → Atoms → Templates → Blocks → Micro progression
+3. **Registry system** - Use shadcn-style registry for component distribution
+4. **Mirror-pattern** - Every URL route maps 1:1 to `app/` and `components/` directories
 
 ## Tech Stack
-- **Framework**: Next.js 15.5.3 with App Router and Turbopack
-- **Runtime**: React 19.1.0, supports both Edge and Node.js runtime
+
+- **Framework**: Next.js 16.1.1 with App Router (Turbopack default)
+- **Runtime**: React 19.2.3, Node.js runtime only (Edge deprecated in Next.js 16)
 - **Database**: PostgreSQL with Prisma ORM 6.19.0 (library engine)
 - **Authentication**: NextAuth v5 (beta) with Prisma adapter
-- **Styling**: Tailwind CSS v4 with custom design system
-- **UI Components**: Radix UI primitives + custom shadcn/ui components
-- **Internationalization**: Custom i18n with Arabic (RTL) support
-- **Documentation**: MDX with custom components
-- **AI Integration**: Vercel AI SDK with Groq provider
+- **Styling**: Tailwind CSS v4 with OKLCH color tokens
+- **UI Components**: Radix UI primitives + shadcn/ui
+- **Internationalization**: Custom i18n (English, Arabic RTL)
+- **Documentation**: Fumadocs MDX
+- **AI Integration**: Vercel AI SDK (Anthropic, Groq, OpenAI)
 
-## Available Commands
+## Commands
+
 ```bash
-pnpm dev          # Development server with Turbopack
-pnpm build        # Production build (--no-lint flag set)
-pnpm start        # Start production server
-pnpm lint         # Run ESLint
+pnpm dev              # Development server (Turbopack default)
+pnpm build            # Production build
+pnpm lint             # ESLint
+pnpm build:registry   # Build component registry
+pnpm generate:docs    # Generate atom documentation
+pnpm sync:shadcn      # Sync shadcn/ui components
 ```
 
-## Project Structure
-```
-src/
-├── app/[lang]/                 # Internationalized routes
-│   ├── (root)/                 # Public landing pages
-│   ├── (auth)/                 # Authentication pages
-│   ├── (expose)/               # Mixed access pages
-│   │   ├── (protected)/        # Auth-required pages
-│   │   └── (public)/           # Public pages
-│   ├── (blocks)/               # UI showcase pages
-│   └── docs/                   # Documentation system
-├── components/
-│   ├── atom/                   # Atomic design components
-│   ├── auth/                   # Authentication components
-│   ├── chatbot/                # AI chatbot system
-│   ├── docs/                   # Documentation components
-│   ├── local/                  # i18n dictionaries & config
-│   ├── root/                   # Landing page components
-│   ├── table/                  # Data table components
-│   ├── template/               # Layout templates
-│   │   ├── header-01/          # Main navigation header
-│   │   └── sidebar-01/         # Documentation sidebar
-│   └── ui/                     # shadcn/ui components
-├── hooks/                      # Custom React hooks
-├── lib/                        # Utility functions
-├── styles/                     # Additional CSS modules
-│   ├── container.css           # Responsive container system
-│   ├── typography.css          # Typography styles
-│   └── scrollbar.css           # Custom scrollbar
-├── auth.ts                     # NextAuth configuration
-├── auth.config.ts              # Auth providers config
-├── middleware.ts               # Auth & i18n middleware
-└── routes.ts                   # Route definitions
+### Prisma
+
+```bash
+pnpm prisma generate  # Generate client (runs on postinstall)
+pnpm prisma db push   # Push schema changes (development)
+pnpm prisma studio    # Database GUI
 ```
 
-## Key Architectural Decisions
+## Architecture
 
-### 1. Runtime Strategy
-- Pages use `export const runtime = "nodejs"` when requiring Prisma/bcrypt
-- Edge-compatible pages can use Edge runtime for better performance
-- Middleware forced to Node.js runtime for auth operations
+### Component Hierarchy
 
-### 2. Internationalization
-- Supported locales: English (en), Arabic (ar)
-- RTL support for Arabic
-- URL structure: `/[lang]/path`
-- Dictionaries in `src/components/local/`
-- Config in `src/components/local/config.ts`
+```
+Foundation: Radix UI → shadcn/ui → shadcn Ecosystem
+Building:   UI → Atoms → Templates → Blocks → Micro → Apps
+```
 
-### 3. Authentication Flow
-- Email/password with verification
-- OAuth providers (Google, GitHub)
-- Two-factor authentication support
-- Role-based access (USER, ADMIN)
-- Protected routes via middleware
-- Platform routes (/dashboard, /project, /task, /wallet, /daily, /resource) require auth
+- **UI** (`src/components/ui/`) - shadcn/ui primitives, 54+ components
+- **Atoms** (`src/components/atom/`) - 2+ UI primitives combined, 62+ components
+- **Templates** (`src/components/template/`) - Full-page layouts (= shadcn blocks)
+- **Blocks** - UI with logic: reusable tables, forms, data-driven components
+- **Micro** - Mini micro-services and micro-frontends
 
-### 4. Styling System
-- Tailwind CSS v4 with CSS variables
-- OKLCH color format for better color manipulation
-- Custom container system with responsive padding
-- Theme switching (light/dark) via next-themes
-- Custom design tokens in globals.css
+### Mirror-Pattern
 
-### 5. Component Architecture
-- Atomic design pattern (atom/molecule/organism)
-- Radix UI for accessible primitives
-- Custom shadcn/ui component library
-- Consistent variant system via CVA
+Every URL route produces **two directories**:
+- `app/[lang]/abc/` — `page.tsx`, `layout.tsx`
+- `components/abc/` — `content.tsx`, `actions.ts`, `form.tsx`, `validation.ts`, `types.ts`
 
-### 6. Prisma Database Configuration
-- **Version**: Prisma 6.19.0 with TypeScript-based `library` engine
-- **Multi-file schema**: Schemas split across domain-specific files
-  - `prisma/schema.prisma` - Main datasource and generator configuration
-  - `prisma/models/auth.prisma` - Authentication models (User, Account, etc.)
-  - `prisma/models/task.prisma` - Task management models
-  - `prisma/models/lead.prisma` - Lead management models
-- **Configuration**: `prisma.config.ts` points to `prisma/` directory for automatic schema loading
-- **Client initialization**: Single client exported from `src/lib/db.ts` using singleton pattern
-- **Engine type**: Uses `library` engine for 90% smaller bundle size and 3.4x faster queries
-- **Development workflow**: Using `prisma db push` for rapid prototyping (no migrations)
+### Registry System
 
-## Critical Files
+Follows shadcn registry pattern:
+- `__registry__/` - Generated component index
+- `src/registry/` - Source definitions by style (default, new-york)
+- `public/r/` - Published JSON files for CLI consumption
+- `scripts/build-registry.mts` - Registry build script
 
-### Configuration
-- `src/auth.ts` - NextAuth main configuration
-- `src/middleware.ts` - Auth & i18n routing logic
-- `src/routes.ts` - Public/private route definitions
-- `prisma/schema.prisma` - Database schema
+### Proxy (Next.js 16)
 
-### Styling
-- `src/app/globals.css` - Theme variables & Tailwind imports
-- `src/styles/container.css` - Responsive container system
-- CSS Variables use OKLCH format for colors
+**Next.js 16 renamed middleware.ts to proxy.ts**. Located at `src/proxy.ts`:
+- Authentication checks (cookie-based session verification)
+- i18n locale detection and redirection
+- Protected route enforcement
+- Node.js runtime only (Edge not supported)
 
-### Components
-- `src/components/ui/` - Core UI component library
-- `src/components/template/sidebar-01/` - Docs sidebar
-- `src/components/auth/` - Authentication system
+## Key Patterns
 
-## Development Guidelines
+### Async Request APIs (Next.js 16)
 
-### 1. Adding New Pages
-- Place in appropriate `app/[lang]/` directory
-- Add runtime export if using Prisma: `export const runtime = "nodejs"`
-- Update `src/routes.ts` for auth requirements
-- Support both en/ar locales
+All dynamic APIs must be awaited:
 
-### 2. Database Changes
-1. Update `prisma/schema.prisma`
-2. Run `pnpm prisma generate`
-3. Run `pnpm prisma db push` for development
-4. Create migration for production: `pnpm prisma migrate dev`
-
-### 3. Component Development
-- Use existing UI components from `src/components/ui/`
-- Follow atomic design principles
-- Implement with TypeScript
-- Support theme variables
-- Ensure RTL compatibility
-
-### 4. Styling Conventions
-- Use Tailwind utility classes
-- Leverage CSS variables for theming
-- Container classes: `layout-container` for responsive padding
-- Text colors: `text-muted-foreground` → `text-foreground` for hover
-- No hardcoded colors - use theme variables
-
-### 5. Authentication
-- Use `useCurrentUser()` hook for client components
-- Use `currentUser()` from `@/lib/auth` for server components
-- Protect routes in `middleware.ts`
-- Handle OAuth and credential providers
-
-## Common Patterns
-
-### Protected Page
 ```tsx
-export const runtime = "nodejs";
+export default async function Page(props: { params: Promise<{ lang: string }> }) {
+  const { lang } = await props.params;
+}
+```
+
+### Prisma in Client Components
+
+Never import `@prisma/client` in client components (breaks Turbopack):
+
+```tsx
+// ❌ Bad
+import { UserRole } from "@prisma/client";
+
+// ✅ Good - local mirror
+const UserRole = { ADMIN: "ADMIN", USER: "USER" } as const;
+```
+
+### Authentication
+
+```tsx
+// Server Component
 import { currentUser } from "@/lib/auth";
+const user = await currentUser();
 
-export default async function ProtectedPage() {
-  const user = await currentUser();
-  if (!user) redirect("/login");
-  // Page content
-}
-```
-
-### Client Component with Auth
-```tsx
-"use client";
+// Client Component
 import { useCurrentUser } from "@/components/auth/use-current-user";
-
-export default function Component() {
-  const user = useCurrentUser();
-  // Component logic
-}
+const user = useCurrentUser();
 ```
 
-### Internationalized Route
-```tsx
-import { getDictionary } from "@/components/local/dictionaries";
+## Configuration Files
 
-export default async function Page({ params }: { params: { lang: string } }) {
-  const dict = await getDictionary(params.lang);
-  // Use translations
-}
-```
+| File | Purpose |
+|------|---------|
+| `src/proxy.ts` | Auth & i18n routing |
+| `src/routes.ts` | Route protection rules |
+| `src/auth.ts` | NextAuth configuration |
+| `next.config.ts` | Next.js + MDX config |
+| `prisma.config.ts` | Prisma directory config |
 
 ## Environment Variables
-Required environment variables:
+
+Required:
 ```env
-DATABASE_URL=           # PostgreSQL connection string
-AUTH_SECRET=           # NextAuth secret (generate with: openssl rand -hex 32)
-NEXTAUTH_URL=          # Application URL
+DATABASE_URL=          # PostgreSQL (Neon)
+AUTH_SECRET=           # openssl rand -hex 32
+NEXTAUTH_URL=          # Production URL
 ```
 
-Optional for OAuth:
+OAuth (optional):
 ```env
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
+FACEBOOK_CLIENT_ID=
+FACEBOOK_CLIENT_SECRET=
 ```
 
-## Known Issues & Workarounds
-1. TypeScript build errors ignored via `ignoreBuildErrors: true` in next.config
-2. Prisma requires Node.js runtime (not Edge compatible)
-3. Middleware must use Node.js runtime for auth operations
+## Vibe Coding
 
-## Testing & Quality
-- ESLint configured for Next.js best practices
-- Prettier for consistent formatting
-- No test framework currently configured
+This codebase supports **Vibe Coding**—AI-powered development where you describe what you want in natural language and AI handles implementation details. See `/docs/vibe-coding` for prompting techniques and best practices.
 
-## Deployment Considerations
-1. Set all required environment variables
-2. Run database migrations: `pnpm prisma migrate deploy`
-3. Build with `pnpm build`
-4. Supports Vercel deployment out-of-the-box
+## Known Issues
 
-## Quick Tips for Claude Code
-- When editing sidebar styles, check `src/components/ui/sidebar.tsx` and `src/components/template/sidebar-01/`
-- Container padding is managed via `layout-container` class from `container.css`
-- Always import globals.css in layout files to ensure styles apply
-- Use `text-muted-foreground` for dimmed text, transition to `text-foreground` on hover
-- Documentation lives in MDX files under `src/app/[lang]/docs/`
-- Authentication state available via hooks and server utilities
-- Support both English and Arabic in all user-facing features
-- **Always push changes to remote after committing** - never leave commits unpushed
+1. TypeScript errors ignored via `ignoreBuildErrors: true` in next.config
+2. Prisma requires Node.js runtime (add `export const runtime = "nodejs"`)
+3. `next-auth` peer dependency warning (expects Next.js 14/15, works with 16)
+
+## Deployment
+
+Production: https://cb.databayt.org (Vercel)
+
+Always push changes to remote after committing.
