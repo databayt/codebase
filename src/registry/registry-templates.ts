@@ -845,5 +845,72 @@ export const templates: Registry = [
     meta: {
       iframeHeight: "600px"
     }
+  },
+  {
+    name: "subscription-01",
+    description: "Subscription management with plan details, billing info, and cancel/update actions",
+    type: "registry:template",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "button",
+      "card",
+      "badge",
+      "separator",
+      "dialog",
+      "radio-group",
+      "label"
+    ],
+    files: [
+      {
+        path: "templates/subscription-01/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["subscription"],
+    meta: {
+      iframeHeight: "800px"
+    }
+  },
+  {
+    name: "subscription-02",
+    description: "Invoice history table with status badges, dates, and download actions",
+    type: "registry:template",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "card",
+      "button",
+      "table",
+      "badge"
+    ],
+    files: [
+      {
+        path: "templates/subscription-02/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["subscription"],
+    meta: {
+      iframeHeight: "600px"
+    }
+  },
+  {
+    name: "subscription-03",
+    description: "Usage tracking table with token consumption and cost breakdown",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "table",
+      "card"
+    ],
+    files: [
+      {
+        path: "templates/subscription-03/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["subscription"],
+    meta: {
+      iframeHeight: "500px"
+    }
   }
 ]

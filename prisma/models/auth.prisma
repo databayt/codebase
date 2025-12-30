@@ -21,6 +21,9 @@ model User {
   assignedLeads         Lead[]                 @relation("AssignedLeads")
   leadHistory           LeadHistory[]          @relation("LeadHistoryUser")
   interactions          Interaction[]          @relation("InteractionUser")
+
+  // Invoice relationships
+  invoices              Invoice[]
 }
 
 model Account {

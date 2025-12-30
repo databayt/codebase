@@ -25,7 +25,10 @@
       "Bash(for file in \"D:\\repo\\codebase-underway\\src\\components\\atom\"/*.tsx)",
       "Bash(done)",
       "Bash(head:*)",
-      "Bash(xargs cat:*)"
+      "Bash(xargs cat:*)",
+      "Bash(xargs:*)",
+      "Bash(tree:*)",
+      "WebFetch(domain:billingsdk.com)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,29 @@
+{
+  "name": "subscription-02",
+  "type": "registry:template",
+  "description": "Invoice history table with status badges, dates, and download actions.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "card",
+    "button",
+    "table",
+    "badge"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/subscription-02/page.tsx",
+      "type": "registry:page",
+      "target": "app/invoices/page.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "subscription"
+  ],
+  "meta": {
+    "iframeHeight": "600px",
+    "container": "flex min-h-screen items-center justify-center",
+    "mobile": "component"
+  }
+}

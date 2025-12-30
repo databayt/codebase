@@ -1,0 +1,382 @@
+---
+title: "Blocks"
+description: "Reusable UI blocks with business logic - the third category after Atoms and Templates"
+---
+
+# Blocks
+
+## What are Blocks?
+
+Blocks are **UI components with integrated business logic**. Unlike Atoms (pure UI) or Templates (layouts), Blocks include:
+- Data fetching & mutations
+- Form validation & submission
+- Authentication integration
+- Database operations
+- Payment processing
+- Real-time updates
+
+## Component Hierarchy
+
+| Category | shadcn/ui Equivalent | Description |
+|----------|---------------------|-------------|
+| **UI** | shadcn/ui primitives | Radix-based, minimal |
+| **Atoms** | UI Components | 2+ primitives combined |
+| **Templates** | Blocks | Full-page layouts |
+| **Blocks** | *Beyond shadcn* | **UI + Business Logic** |
+
+## Mining Workflow
+
+Blocks are sourced from open source (60-80% complete) and adapted to our stack:
+
+```
+Open Source Repo
+      │
+      ▼
+┌─────────────────┐
+│  /block add     │  ← Fetch from source
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│   Transform     │  ← Import paths, styling conventions
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  Adapt Stack    │  ← Auth.js, Prisma/Neon, mirror-pattern
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│   Integrate     │  ← Route + Component directories
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│   Validate      │  ← TypeScript, i18n, RTL, Audit
+└─────────────────┘
+```
+
+## Using `/block` Command
+
+```bash
+# Add a new block from source
+/block github:tanstack/table
+/block shadcn:sidebar-07
+/block magicui:shimmer-button
+
+# Manage existing blocks
+/block list              # List all blocks
+/block refactor table    # Refactor block
+/block audit table       # Quality audit (100-point)
+/block update table      # Update from source
+```
+
+## Block Structure
+
+Each block follows the mirror-pattern:
+
+```
+src/app/[lang]/(root)/blocks/{name}/
+├── page.tsx               # Route entry point
+
+src/components/root/block/{name}/
+├── content.tsx            # Main composition
+├── config.ts              # Configuration
+├── types.ts               # TypeScript types
+├── actions.ts             # Server actions
+├── validation.ts          # Zod schemas
+└── README.md              # Documentation
+```
+
+## Stack Adaptation
+
+When mining blocks, we adapt:
+
+| External | Our Stack |
+|----------|-----------|
+| Clerk, Auth0 | Auth.js (NextAuth v5) |
+| MongoDB, Supabase | Prisma + Neon |
+| hex/rgb colors | OKLCH theme variables |
+| ml/mr margins | ms/me logical properties |
+
+## Available Blocks
+
+### Data Blocks
+| Block | Description | Route |
+|-------|-------------|-------|
+| **Data Table** | Advanced table with filtering, sorting, pagination | `/blocks/table` |
+
+### Authentication Blocks
+| Block | Description | Route |
+|-------|-------------|-------|
+| **Auth** | Login, register, forgot password flows | `/blocks/auth` |
+
+### Payment Blocks
+| Block | Description | Route |
+|-------|-------------|-------|
+| **Invoice** | Invoice generation and management | `/blocks/invoice` |
+
+## Quality Audit (100 points)
+
+Each block is scored on:
+
+| Category | Points | Criteria |
+|----------|--------|----------|
+| **Architecture** | 20 | Mirror-pattern, separation of concerns |
+| **Code Quality** | 20 | No `any` types, error handling |
+| **Styling** | 15 | OKLCH tokens, RTL-compatible |
+| **i18n** | 15 | Strings extracted, Arabic translations |
+| **Accessibility** | 10 | Semantic HTML, ARIA labels |
+| **Performance** | 10 | No blocking renders, lazy loading |
+| **Security** | 5 | Input sanitization, CSRF |
+| **Documentation** | 5 | README, props documented |
+
+**Grades:**
+- **A**: 90 to 100 (Production ready)
+- **B**: 80 to 89 (Minor improvements needed)
+- **C**: 70 to 79 (Usable with caveats)
+- **D**: 60 to 69 (Significant issues)
+- **F**: Below 60 (Not ready)
+
+## Block Categories
+
+| Category | Icon | Description |
+|----------|------|-------------|
+| `data` | Table | Data tables, grids, listings |
+| `auth` | Lock | Authentication flows |
+| `payment` | CreditCard | Stripe, billing, invoices |
+| `dashboard` | LayoutDashboard | Analytics, charts, metrics |
+| `forms` | FormInput | Complex form patterns |
+| `marketing` | Megaphone | Landing page sections |
+
+## Creating a New Block
+
+### From External Source
+
+```bash
+# Add block from GitHub
+/block github:example/invoice-generator
+
+# The block-processor will:
+# 1. Fetch block files
+# 2. Transform imports
+# 3. Adapt to Auth.js + Prisma
+# 4. Create mirror-pattern structure
+# 5. Add i18n support
+# 6. Run initial audit
+```
+
+### Manual Creation
+
+1. **Create route page:**
+```tsx
+// src/app/[lang]/(root)/blocks/my-block/page.tsx
+import { getDictionary } from "@/components/local/dictionaries"
+import type { Locale } from "@/components/local/config"
+import MyBlockContent from "@/components/root/block/my-block/content"
+
+interface PageProps {
+  params: Promise<{ lang: Locale }>
+}
+
+export default async function MyBlockPage({ params }: PageProps) {
+  const { lang } = await params
+  const dictionary = await getDictionary(lang)
+
+  return <MyBlockContent dictionary={dictionary} lang={lang} />
+}
+```
+
+2. **Create content component:**
+```tsx
+// src/components/root/block/my-block/content.tsx
+import type { getDictionary } from "@/components/local/dictionaries"
+import type { Locale } from "@/components/local/config"
+
+interface MyBlockContentProps {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+  lang: Locale
+}
+
+export default function MyBlockContent({ dictionary, lang }: MyBlockContentProps) {
+  return (
+    <div dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      {/* Block content */}
+    </div>
+  )
+}
+```
+
+3. **Add configuration:**
+```typescript
+// src/components/root/block/my-block/config.ts
+export const myBlockConfig = {
+  id: "my-block",
+  name: "My Block",
+  description: "Description of what this block does",
+  category: "forms",
+  version: "1.0.0",
+}
+```
+
+4. **Register in block memory:**
+```json
+// ~/.claude/memory/block.json
+{
+  "blocks": [
+    {
+      "id": "my-block",
+      "name": "My Block",
+      "source": "internal",
+      "route": "/blocks/my-block",
+      "component": "src/components/root/block/my-block",
+      "category": "forms",
+      "status": "active"
+    }
+  ]
+}
+```
+
+## Refactoring Blocks
+
+Use `/block refactor <name>` to improve existing blocks:
+
+```bash
+/block refactor table
+```
+
+This will:
+- Fix TypeScript issues (eliminate `any`)
+- Add missing i18n entries
+- Improve RTL support
+- Optimize performance
+- Add accessibility labels
+- Update documentation
+
+## Reusing Infrastructure
+
+Blocks should reuse existing codebase infrastructure:
+
+### Authentication
+```tsx
+// Use existing Auth.js integration
+import { currentUser } from "@/lib/auth"
+import { useCurrentUser } from "@/components/auth/use-current-user"
+```
+
+### Database
+```tsx
+// Use existing Prisma client
+import { db } from "@/lib/db"
+
+// Follow multi-file schema pattern
+// prisma/models/invoice.prisma
+```
+
+### UI Components
+```tsx
+// Use existing shadcn/ui components
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+
+// Use existing atoms
+import { StatCard } from "@/components/atom/stat-card"
+```
+
+### Templates
+```tsx
+// Use existing templates for layouts
+import Sidebar01 from "@/components/template/sidebar-01"
+import Header01 from "@/components/template/header-01"
+```
+
+## Best Practices
+
+### 1. Mirror-Pattern Structure
+Always create both route and component directories:
+- Route: `app/[lang]/(root)/blocks/{name}/`
+- Component: `components/root/block/{name}/`
+
+### 2. i18n First
+Extract all user-facing strings from the start:
+```tsx
+// Good
+<h1>{dictionary.blocks.invoice.title}</h1>
+
+// Bad
+<h1>Invoice Generator</h1>
+```
+
+### 3. RTL Support
+Use logical properties:
+```tsx
+// Good
+className="ms-4 me-2 text-start"
+
+// Bad
+className="ml-4 mr-2 text-left"
+```
+
+### 4. Type Safety
+No `any` types, full TypeScript coverage:
+```tsx
+// Good
+interface InvoiceItem {
+  id: string
+  description: string
+  quantity: number
+  price: number
+}
+
+// Bad
+const items: any[] = []
+```
+
+### 5. Server Actions
+Use server actions for mutations:
+```tsx
+// src/components/root/block/invoice/actions.ts
+"use server"
+
+import { db } from "@/lib/db"
+import { currentUser } from "@/lib/auth"
+
+export async function createInvoice(data: InvoiceFormData) {
+  const user = await currentUser()
+  if (!user) throw new Error("Unauthorized")
+
+  return db.invoice.create({ data: { ...data, userId: user.id } })
+}
+```
+
+## Memory & Registry
+
+Block metadata is stored in `~/.claude/memory/block.json`:
+
+```json
+{
+  "blocks": [
+    {
+      "id": "table",
+      "name": "Data Table",
+      "source": "internal:tablecn",
+      "route": "/blocks/table",
+      "component": "src/components/tablecn",
+      "category": "data",
+      "status": "active",
+      "auditScore": 85,
+      "stack": { "auth": false, "prisma": true, "i18n": true }
+    }
+  ],
+  "categories": { "data": { "icon": "Table", "count": 1 } },
+  "preferences": { "defaultAuth": "authjs", "defaultDB": "prisma-neon" }
+}
+```
+
+## Related Documentation
+
+- [Atoms Factory](/docs/atoms-factory) - UI component patterns
+- [Templates Factory](/docs/templates-factory) - Full-page layouts
+- [Authentication](/docs/authantication) - Auth.js integration
+- [Database](/docs/database) - Prisma + Neon setup

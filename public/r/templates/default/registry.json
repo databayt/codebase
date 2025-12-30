@@ -146,6 +146,85 @@
         "navigation",
         "footer"
       ]
+    },
+    {
+      "name": "subscription-01",
+      "type": "registry:template",
+      "description": "Subscription management with plan details, billing info, and cancel/update actions.",
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "separator",
+        "dialog",
+        "radio-group",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "template/subscription-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/subscription/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "800px",
+        "container": "flex min-h-screen items-center justify-center",
+        "mobile": "component"
+      },
+      "categories": [
+        "subscription"
+      ]
+    },
+    {
+      "name": "subscription-02",
+      "type": "registry:template",
+      "description": "Invoice history table with status badges, dates, and download actions.",
+      "registryDependencies": [
+        "card",
+        "button",
+        "table",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "template/subscription-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/invoices/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px",
+        "container": "flex min-h-screen items-center justify-center",
+        "mobile": "component"
+      },
+      "categories": [
+        "subscription"
+      ]
+    },
+    {
+      "name": "subscription-03",
+      "type": "registry:template",
+      "description": "Usage tracking table with token consumption and cost breakdown.",
+      "registryDependencies": [
+        "table",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "template/subscription-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/usage/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "500px",
+        "container": "flex min-h-screen items-center justify-center",
+        "mobile": "component"
+      },
+      "categories": [
+        "subscription"
+      ]
     }
   ]
 }

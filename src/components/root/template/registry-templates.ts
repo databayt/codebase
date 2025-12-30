@@ -116,6 +116,63 @@ export const templates: Registry["items"] = [
     ],
     categories: ["navigation", "footer"],
   },
+  {
+    name: "subscription-01",
+    description: "Subscription management with plan details, billing info, and cancel/update actions.",
+    type: "registry:template",
+    registryDependencies: ["button", "card", "badge", "separator", "dialog", "radio-group", "label"],
+    files: [
+      {
+        path: "template/subscription-01/page.tsx",
+        target: "app/subscription/page.tsx",
+        type: "registry:page",
+      },
+    ],
+    categories: ["subscription"],
+    meta: {
+      iframeHeight: "800px",
+      container: "flex min-h-screen items-center justify-center",
+      mobile: "component",
+    },
+  },
+  {
+    name: "subscription-02",
+    description: "Invoice history table with status badges, dates, and download actions.",
+    type: "registry:template",
+    registryDependencies: ["card", "button", "table", "badge"],
+    files: [
+      {
+        path: "template/subscription-02/page.tsx",
+        target: "app/invoices/page.tsx",
+        type: "registry:page",
+      },
+    ],
+    categories: ["subscription"],
+    meta: {
+      iframeHeight: "600px",
+      container: "flex min-h-screen items-center justify-center",
+      mobile: "component",
+    },
+  },
+  {
+    name: "subscription-03",
+    description: "Usage tracking table with token consumption and cost breakdown.",
+    type: "registry:template",
+    registryDependencies: ["table", "card"],
+    files: [
+      {
+        path: "template/subscription-03/page.tsx",
+        target: "app/usage/page.tsx",
+        type: "registry:page",
+      },
+    ],
+    categories: ["subscription"],
+    meta: {
+      iframeHeight: "500px",
+      container: "flex min-h-screen items-center justify-center",
+      mobile: "component",
+    },
+  },
 ]
 
 // Additional templates from shadcn will be added here as they are implemented

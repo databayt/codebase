@@ -1,0 +1,27 @@
+{
+  "name": "subscription-03",
+  "type": "registry:template",
+  "description": "Usage tracking table with token consumption and cost breakdown.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "table",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/subscription-03/page.tsx",
+      "type": "registry:page",
+      "target": "app/usage/page.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "subscription"
+  ],
+  "meta": {
+    "iframeHeight": "500px",
+    "container": "flex min-h-screen items-center justify-center",
+    "mobile": "component"
+  }
+}

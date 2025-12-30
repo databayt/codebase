@@ -1,0 +1,79 @@
+// Invoice Model - Business logic block for invoicing
+
+enum InvoiceStatus {
+  DRAFT
+  PENDING
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+model Invoice {
+  id            String        @id @default(cuid())
+  invoiceNumber String        @unique
+  issueDate     DateTime      @default(now())
+  dueDate       DateTime
+  currency      String        @default("USD")
+  status        InvoiceStatus @default(DRAFT)
+
+  // Parties (embedded JSON for simplicity)
+  fromName      String
+  fromEmail     String?
+  fromPhone     String?
+  fromAddress   String?
+  fromCity      String?
+  fromCountry   String?
+
+  toName        String
+  toEmail       String?
+  toPhone       String?
+  toAddress     String?
+  toCity        String?
+  toCountry     String?
+
+  // Totals
+  subtotal      Float         @default(0)
+  taxRate       Float         @default(0)
+  taxAmount     Float         @default(0)
+  discountRate  Float         @default(0)
+  discountAmount Float        @default(0)
+  shippingAmount Float        @default(0)
+  total         Float         @default(0)
+
+  // Payment
+  bankName      String?
+  accountName   String?
+  accountNumber String?
+  iban          String?
+
+  // Extras
+  notes         String?
+  terms         String?
+
+  // Metadata
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relations
+  items         InvoiceItem[]
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+
+  @@index([userId])
+  @@index([status])
+  @@index([dueDate])
+}
+
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  description String
+  quantity    Int      @default(1)
+  rate        Float    @default(0)
+  amount      Float    @default(0)
+
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId   String
+
+  @@index([invoiceId])
+}

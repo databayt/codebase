@@ -1,0 +1,32 @@
+{
+  "name": "subscription-01",
+  "type": "registry:template",
+  "description": "Subscription management with plan details, billing info, and cancel/update actions.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "button",
+    "card",
+    "badge",
+    "separator",
+    "dialog",
+    "radio-group",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "registry/default/template/subscription-01/page.tsx",
+      "type": "registry:page",
+      "target": "app/subscription/page.tsx",
+      "content": ""
+    }
+  ],
+  "categories": [
+    "subscription"
+  ],
+  "meta": {
+    "iframeHeight": "800px",
+    "container": "flex min-h-screen items-center justify-center",
+    "mobile": "component"
+  }
+}

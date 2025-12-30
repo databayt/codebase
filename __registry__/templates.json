@@ -45,5 +45,29 @@
       "footer"
     ],
     "type": "registry:template"
+  },
+  {
+    "name": "subscription-01",
+    "description": "Subscription management with plan details, billing info, and cancel/update actions.",
+    "categories": [
+      "subscription"
+    ],
+    "type": "registry:template"
+  },
+  {
+    "name": "subscription-02",
+    "description": "Invoice history table with status badges, dates, and download actions.",
+    "categories": [
+      "subscription"
+    ],
+    "type": "registry:template"
+  },
+  {
+    "name": "subscription-03",
+    "description": "Usage tracking table with token consumption and cost breakdown.",
+    "categories": [
+      "subscription"
+    ],
+    "type": "registry:template"
   }
 ]
