@@ -28,6 +28,7 @@ const DOCS_LINKS = [
   { key: "stack", href: "/docs/stack", fallback: "Stack" },
   { key: "database", href: "/docs/database", fallback: "Database" },
   { key: "localhost", href: "/docs/localhost", fallback: "Localhost" },
+  { key: "claudeCode", href: "/docs/claude-code", fallback: "Claude Code" },
   { key: "contributing", href: "/docs/contributing", fallback: "Contributing" },
   { key: "sharedEconomy", href: "/docs/shared-economy", fallback: "Shared Economy" },
   { key: "competitors", href: "/docs/competitors", fallback: "Competitors" },
