@@ -3,7 +3,7 @@ title: "Claude Code"
 description: "Manual to setup Claude Code"
 ---
 
-Get Claude Code running with the `c` alias for permission-free development.
+Setup guide for the team to replicate the exact Claude Code configuration.
 
 ## Installation
 
@@ -25,15 +25,20 @@ irm https://claude.ai/install.ps1 | iex
 claude --version
 ```
 
-## The `c` Alias
+## Shell Configuration
 
 Add to `~/.zshrc` (or `~/.bashrc`):
 
 ```bash
+export PATH="$HOME/.local/bin:$PATH"
 alias c='claude --dangerously-skip-permissions'
+export PS1="yourname/%1~ "
+
+# Claude Code bin directory
+export PATH="$HOME/.claude/bin:$PATH"
 ```
 
-Reload shell:
+Reload:
 
 ```bash
 source ~/.zshrc
@@ -49,30 +54,15 @@ c -r           # Resume last session
 
 ## User-Level Directory
 
+Create the following structure at `~/.claude/`:
+
 ```
 ~/.claude/
 ├── CLAUDE.md           # Global instructions
 ├── settings.json       # Environment & hooks
 ├── commands/           # Custom slash commands
 ├── agents/             # Custom agents
-└── bin/                # Binaries (auto-managed)
-```
-
-## CLAUDE.md (Global Instructions)
-
-Create `~/.claude/CLAUDE.md`:
-
-```markdown
-# Global Claude Code Instructions
-
-## Preferences
-- **Package Manager**: pnpm
-- **Stack**: Next.js, React, TypeScript, Tailwind
-
-## Behavior
-- Use TypeScript strict mode
-- Prefer Server Components
-- Follow atomic design patterns
+└── memory/             # Persistent memory files
 ```
 
 ## settings.json
@@ -82,7 +72,11 @@ Create `~/.claude/settings.json`:
 ```json
 {
   "env": {
-    "CODEBASE_PATH": "/path/to/your/codebase"
+    "CODEBASE_PATH": "/Users/yourname/codebase",
+    "CODEBASE_REPO": "databayt/codebase",
+    "CODEBASE_OWNER": "databayt",
+    "CODEBASE_NAME": "codebase",
+    "DEV_PORT": "3000"
   },
   "hooks": {
     "PreToolUse": [
@@ -91,7 +85,18 @@ Create `~/.claude/settings.json`:
         "hooks": [
           {
             "type": "command",
-            "command": "lsof -ti:3000 | xargs kill -9 2>/dev/null; exit 0"
+            "command": "PID=$(lsof -ti:3000 2>/dev/null); if [ ! -z \"$PID\" ]; then kill -9 $PID 2>/dev/null && echo '🔄 Killed existing process on port 3000'; sleep 1; fi; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash(pnpm dev)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sleep 3 && open -a 'Google Chrome' http://localhost:3000 &"
           }
         ]
       }
@@ -100,14 +105,175 @@ Create `~/.claude/settings.json`:
 }
 ```
 
-## Shell Configuration
+**What this does:**
+- **PreToolUse**: Kills any existing process on port 3000 before running `pnpm dev`
+- **PostToolUse**: Opens Chrome to localhost:3000 after dev server starts
 
-Complete `~/.zshrc` example:
+## CLAUDE.md (Global Instructions)
 
-```bash
-# Claude Code
-export PATH="$HOME/.claude/bin:$PATH"
-alias c='claude --dangerously-skip-permissions'
+Create `~/.claude/CLAUDE.md` with the full configuration:
+
+```markdown
+# Global Claude Code Instructions
+
+## Preferences
+
+- **Model**: Opus 4.5 (default)
+- **Package Manager**: pnpm
+- **Stack**: Next.js 15, React 19, Prisma 6, TypeScript 5, Tailwind CSS 4, shadcn/ui
+- **Languages**: Arabic (RTL default), English (LTR)
+
+---
+
+## Keyword Triggers
+
+When user mentions these keywords, reference the mapped tools:
+
+### Workflow Keywords
+
+| Keyword | Agents | Commands | MCPs |
+|---------|--------|----------|------|
+| `push` | git-github | /push | github |
+| `quick` | git-github | /quick | github |
+| `ship` | orchestrate | /ship | vercel |
+| `deploy` | - | /deploy | vercel |
+| `validate` | orchestrate | /validate | - |
+
+### Creation Keywords
+
+| Keyword | Agents | Commands | Skills | MCPs |
+|---------|--------|----------|--------|------|
+| `component` | react, shadcn | /component | - | shadcn |
+| `page` | nextjs, architecture | /page | - | - |
+| `api` | api, prisma | /api | api-designer | postgres |
+| `migration` | prisma | /migration | prisma-optimizer | postgres |
+| `ui` | shadcn, ui-factory | /ui-add, /ui-generate | ui-validator | shadcn, a11y |
+| `atom` | atom | **/atom** | - | shadcn |
+| `template` | template | **/template** | - | shadcn |
+| `block` | block | **/block** | - | shadcn |
+| `feature` | orchestrate | /component, /page | - | - |
+
+### Component Hierarchy (Unified System)
+
+**Simple naming at user level** - just one word: `atom`, `template`, `block`
+
+| Category | Agent | Skill | Memory | shadcn Equivalent |
+|----------|-------|-------|--------|-------------------|
+| **ui** | shadcn | - | - | shadcn/ui primitives |
+| **atom** | atom | /atom | atom.json | **UI Components** |
+| **template** | template | /template | template.json | **Blocks** |
+| **block** | block | /block | block.json | *Beyond shadcn* |
+
+**Pattern:**
+- `ui` → Radix-based primitives (Button, Card, Input)
+- `atom` → 2+ primitives combined (StatCard, ButtonGroup)
+- `template` → Full-page layouts (Hero, Sidebar, Login)
+- `block` → UI + business logic (Invoice, DataTable, Auth)
+
+### Testing Keywords
+
+| Keyword | Agents | Commands | Skills | MCPs |
+|---------|--------|----------|--------|------|
+| `test` | test | /test | test-generator | browser |
+| `e2e` | test | /e2e | test-generator | browser |
+| `playwright` | - | /e2e | - | browser |
+| `coverage` | test | /test | test-generator | - |
+
+### Quality Keywords
+
+| Keyword | Agents | Commands | Skills | MCPs |
+|---------|--------|----------|--------|------|
+| `review` | react-reviewer | /review | - | - |
+| `security` | security | /security-scan | security-scanner | - |
+| `optimize` | performance | /optimize | react-performance | posthog |
+| `audit` | security | /security-scan | security-scanner | - |
+
+### Build Keywords
+
+| Keyword | Agents | Commands | Skills |
+|---------|--------|----------|--------|
+| `build` | build, nextjs | /build | - |
+| `fix` | build | /fix, /fix-all | - |
+| `error` | debug | /scan-errors | - |
+
+---
+
+## Stack to Agent Mapping
+
+| Technology | Primary Agent | Secondary Agent | Skill |
+|------------|---------------|-----------------|-------|
+| **Next.js** | nextjs | architecture | - |
+| **React** | react | react-reviewer | react-performance |
+| **TypeScript** | typescript | type-safety | - |
+| **Prisma** | prisma | database-optimizer | prisma-optimizer |
+| **Tailwind** | tailwind | - | - |
+| **shadcn/ui** | shadcn | ui-factory | ui-validator |
+| **Auth** | auth | security | - |
+| **i18n** | i18n | - | dictionary-validator |
+
+---
+
+## MCP Reference
+
+| MCP | Trigger Keywords | Use Case |
+|-----|------------------|----------|
+| `browser` | test, e2e, playwright | Playwright automation |
+| `github` | push, pr, issue, github | Git operations |
+| `vercel` | deploy, ship, preview | Deployments |
+| `postgres` | prisma, query, db, migration | Database |
+| `shadcn` | ui, component, atom, template | Component registry |
+| `sentry` | error, debug, exception | Error monitoring |
+| `figma` | design, figma, assets | Design files |
+| `linear` | issue, task, linear | Issue tracking |
+| `notion` | docs, wiki, notion | Knowledge base |
+
+---
+
+## Reference Codebase
+
+Local: `/Users/yourname/codebase`
+GitHub: `databayt/codebase`
+
+**When implementing**, check codebase first:
+1. `src/` for components
+2. `__registry__/` for registry items
+3. `docs/` for documentation
+
+---
+
+## Behavior
+
+When user mentions a keyword from the trigger tables:
+
+1. **Reference the mapped agent(s)** before starting work
+2. **Use relevant MCP tools** if available
+3. **Apply skills** for validation/optimization
+4. **Suggest relevant commands** when appropriate
+
+### Examples
+
+| User Says | Tools Activated |
+|-----------|-----------------|
+| "test the login" | test agent + browser MCP + test-generator skill |
+| "push changes" | git-github agent + github MCP + /push |
+| "create button" | react + shadcn agents + shadcn MCP |
+| "fix build errors" | build agent + /fix-build |
+| "deploy to staging" | vercel MCP + /ship staging |
+
+---
+
+## Quick Command Reference
+
+| Command | Purpose |
+|---------|---------|
+| `/push` | Full deploy checklist |
+| `/quick` | Fast commit (skip build) |
+| `/deploy` | Production deploy |
+| `/build` | Smart build |
+| `/fix-all` | Auto-fix issues |
+| `/atom <name>` | Create atom component |
+| `/template <name>` | Create template |
+| `/block <source>` | Add block from source |
 ```
 
 ## Permission Flags
