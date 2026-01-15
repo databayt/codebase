@@ -1,88 +1,31 @@
----
-title: "Claude Code"
-description: "Manual to setup Claude Code"
----
+#!/bin/bash
 
-Setup guide for the team to replicate the exact Claude Code configuration.
+# Claude Code Setup Script for Team Members
+# Usage: curl -fsSL https://raw.githubusercontent.com/databayt/codebase/main/scripts/setup-claude.sh | bash
 
-## Quick Setup (One Command)
+set -e
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/databayt/codebase/main/scripts/setup-claude.sh | bash
-```
+echo "🚀 Setting up Claude Code..."
 
-This installs everything automatically. For manual setup, continue below.
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
----
-
-## Manual Installation
-
-### macOS / Linux
-
-```bash
+# 1. Install Claude Code CLI
+echo -e "${BLUE}📦 Installing Claude Code CLI...${NC}"
 curl -fsSL https://claude.ai/install.sh | sh
-```
 
-### Windows (PowerShell)
+# 2. Create ~/.claude directory structure
+echo -e "${BLUE}📁 Creating directory structure...${NC}"
+mkdir -p ~/.claude/{commands,agents,memory}
 
-```powershell
-irm https://claude.ai/install.ps1 | iex
-```
-
-### Verify
-
-```bash
-claude --version
-```
-
-## Shell Configuration
-
-Add to `~/.zshrc` (or `~/.bashrc`):
-
-```bash
-export PATH="$HOME/.local/bin:$PATH"
-alias c='claude --dangerously-skip-permissions'
-export PS1="yourname/%1~ "
-
-# Claude Code bin directory
-export PATH="$HOME/.claude/bin:$PATH"
-```
-
-Reload:
-
-```bash
-source ~/.zshrc
-```
-
-Now use `c` instead of `claude`:
-
-```bash
-c              # Start session
-c "fix bug"    # Direct prompt
-c -r           # Resume last session
-```
-
-## User-Level Directory
-
-Create the following structure at `~/.claude/`:
-
-```
-~/.claude/
-├── CLAUDE.md           # Global instructions
-├── settings.json       # Environment & hooks
-├── commands/           # Custom slash commands
-├── agents/             # Custom agents
-└── memory/             # Persistent memory files
-```
-
-## settings.json
-
-Create `~/.claude/settings.json`:
-
-```json
+# 3. Create settings.json
+echo -e "${BLUE}⚙️  Creating settings.json...${NC}"
+cat > ~/.claude/settings.json << 'EOF'
 {
   "env": {
-    "CODEBASE_PATH": "/Users/yourname/codebase",
+    "CODEBASE_PATH": "$HOME/codebase",
     "CODEBASE_REPO": "databayt/codebase",
     "CODEBASE_OWNER": "databayt",
     "CODEBASE_NAME": "codebase",
@@ -113,17 +56,11 @@ Create `~/.claude/settings.json`:
     ]
   }
 }
-```
+EOF
 
-**What this does:**
-- **PreToolUse**: Kills any existing process on port 3000 before running `pnpm dev`
-- **PostToolUse**: Opens Chrome to localhost:3000 after dev server starts
-
-## CLAUDE.md (Global Instructions)
-
-Create `~/.claude/CLAUDE.md` with the full configuration:
-
-```markdown
+# 4. Create CLAUDE.md
+echo -e "${BLUE}📝 Creating CLAUDE.md...${NC}"
+cat > ~/.claude/CLAUDE.md << 'EOF'
 # Global Claude Code Instructions
 
 ## Preferences
@@ -241,7 +178,7 @@ When user mentions these keywords, reference the mapped tools:
 
 ## Reference Codebase
 
-Local: `/Users/yourname/codebase`
+Local: `~/codebase`
 GitHub: `databayt/codebase`
 
 **When implementing**, check codebase first:
@@ -284,25 +221,49 @@ When user mentions a keyword from the trigger tables:
 | `/atom <name>` | Create atom component |
 | `/template <name>` | Create template |
 | `/block <source>` | Add block from source |
-```
+EOF
 
-## Permission Flags
+# 5. Update shell configuration
+echo -e "${BLUE}🐚 Updating shell configuration...${NC}"
 
-| Flag | Purpose |
-|------|---------|
-| `--dangerously-skip-permissions` | Skip all prompts |
-| `--allowedTools "Bash,Read,Write"` | Whitelist tools |
-| `--disallowedTools "WebFetch"` | Blacklist tools |
-| `-p "prompt"` | Direct prompt mode |
-| `-r` | Resume last session |
+SHELL_RC="$HOME/.zshrc"
+if [[ "$SHELL" == *"bash"* ]]; then
+  SHELL_RC="$HOME/.bashrc"
+fi
 
-## Global vs Project Config
+# Check if already configured
+if ! grep -q "alias c='claude --dangerously-skip-permissions'" "$SHELL_RC" 2>/dev/null; then
+  cat >> "$SHELL_RC" << 'EOF'
 
-| Location | Scope | Priority |
-|----------|-------|----------|
-| `~/.claude/CLAUDE.md` | All projects | Lower |
-| `./CLAUDE.md` | Current project | Higher |
-| `~/.claude/settings.json` | All projects | Lower |
-| `./.claude/settings.json` | Current project | Higher |
+# Claude Code Configuration
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.claude/bin:$PATH"
+alias c='claude --dangerously-skip-permissions'
+EOF
+  echo -e "${GREEN}✅ Added Claude Code config to $SHELL_RC${NC}"
+else
+  echo -e "${GREEN}✅ Shell already configured${NC}"
+fi
 
-Project config overrides global config.
+# 6. Clone codebase if not exists
+if [ ! -d "$HOME/codebase" ]; then
+  echo -e "${BLUE}📥 Cloning codebase...${NC}"
+  git clone https://github.com/databayt/codebase.git "$HOME/codebase"
+else
+  echo -e "${GREEN}✅ Codebase already exists${NC}"
+fi
+
+# Done
+echo ""
+echo -e "${GREEN}✅ Claude Code setup complete!${NC}"
+echo ""
+echo "Next steps:"
+echo "  1. Run: source $SHELL_RC"
+echo "  2. Run: c"
+echo "  3. Start coding!"
+echo ""
+echo "Commands:"
+echo "  c              - Start Claude Code session"
+echo "  c \"fix bug\"    - Direct prompt"
+echo "  c -r           - Resume last session"
+echo ""
