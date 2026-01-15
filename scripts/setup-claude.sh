@@ -5,23 +5,19 @@
 
 set -e
 
-echo "🚀 Setting up Claude Code..."
-
-# Colors
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+echo "Setting up Claude Code..."
+echo ""
 
 # 1. Install Claude Code CLI
-echo -e "${BLUE}📦 Installing Claude Code CLI...${NC}"
+echo "[1/6] Installing Claude Code CLI..."
 curl -fsSL https://claude.ai/install.sh | sh
 
 # 2. Create ~/.claude directory structure
-echo -e "${BLUE}📁 Creating directory structure...${NC}"
+echo "[2/6] Creating directory structure..."
 mkdir -p ~/.claude/{commands,agents,memory}
 
 # 3. Create settings.json
-echo -e "${BLUE}⚙️  Creating settings.json...${NC}"
+echo "[3/6] Creating settings.json..."
 cat > ~/.claude/settings.json << 'EOF'
 {
   "env": {
@@ -38,7 +34,7 @@ cat > ~/.claude/settings.json << 'EOF'
         "hooks": [
           {
             "type": "command",
-            "command": "PID=$(lsof -ti:3000 2>/dev/null); if [ ! -z \"$PID\" ]; then kill -9 $PID 2>/dev/null && echo '🔄 Killed existing process on port 3000'; sleep 1; fi; exit 0"
+            "command": "PID=$(lsof -ti:3000 2>/dev/null); if [ ! -z \"$PID\" ]; then kill -9 $PID 2>/dev/null && echo 'Killed existing process on port 3000'; sleep 1; fi; exit 0"
           }
         ]
       }
@@ -59,7 +55,7 @@ cat > ~/.claude/settings.json << 'EOF'
 EOF
 
 # 4. Create CLAUDE.md
-echo -e "${BLUE}📝 Creating CLAUDE.md...${NC}"
+echo "[4/6] Creating CLAUDE.md..."
 cat > ~/.claude/CLAUDE.md << 'EOF'
 # Global Claude Code Instructions
 
@@ -224,7 +220,7 @@ When user mentions a keyword from the trigger tables:
 EOF
 
 # 5. Update shell configuration
-echo -e "${BLUE}🐚 Updating shell configuration...${NC}"
+echo "[5/6] Updating shell configuration..."
 
 SHELL_RC="$HOME/.zshrc"
 if [[ "$SHELL" == *"bash"* ]]; then
@@ -240,27 +236,28 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.claude/bin:$PATH"
 alias c='claude --dangerously-skip-permissions'
 EOF
-  echo -e "${GREEN}✅ Added Claude Code config to $SHELL_RC${NC}"
+  echo "    Added Claude Code config to $SHELL_RC"
 else
-  echo -e "${GREEN}✅ Shell already configured${NC}"
+  echo "    Shell already configured"
 fi
 
 # 6. Clone codebase if not exists
+echo "[6/6] Checking codebase repository..."
 if [ ! -d "$HOME/codebase" ]; then
-  echo -e "${BLUE}📥 Cloning codebase...${NC}"
+  echo "    Cloning codebase..."
   git clone https://github.com/databayt/codebase.git "$HOME/codebase"
 else
-  echo -e "${GREEN}✅ Codebase already exists${NC}"
+  echo "    Codebase already exists"
 fi
 
 # Done
 echo ""
-echo -e "${GREEN}✅ Claude Code setup complete!${NC}"
+echo "Setup complete."
 echo ""
 echo "Next steps:"
 echo "  1. Run: source $SHELL_RC"
 echo "  2. Run: c"
-echo "  3. Start coding!"
+echo "  3. Start coding"
 echo ""
 echo "Commands:"
 echo "  c              - Start Claude Code session"
