@@ -1,0 +1,28 @@
+{
+  "name": "@codebase/mcp-report",
+  "version": "1.0.0",
+  "description": "MCP Server for T&C Electrical Report Automation",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "report",
+    "testing",
+    "commissioning",
+    "electrical"
+  ]
+}
