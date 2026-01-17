@@ -58,6 +58,14 @@ const InvoiceBlock = dynamic(
   { ssr: false }
 );
 
+// Report Block wrapper
+const ReportBlock = dynamic(
+  () => import("./report/content").catch(() => {
+    return { default: () => <BlockPlaceholder title="T&C Report" /> };
+  }),
+  { ssr: false }
+);
+
 // Block registry - maps block names to their metadata and components
 export const blockRegistry: Record<string, BlockEntry> = {
   table: {
@@ -82,6 +90,14 @@ export const blockRegistry: Record<string, BlockEntry> = {
     description: "Invoice generation and management with PDF export",
     category: "payment",
     component: InvoiceBlock,
+    status: "active",
+  },
+  report: {
+    id: "report",
+    title: "T&C Report",
+    description: "Electrical Testing & Commissioning reports with DOCX/PDF export",
+    category: "data",
+    component: ReportBlock,
     status: "active",
   },
 };

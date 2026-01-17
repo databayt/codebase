@@ -1,6 +1,18 @@
 import Card from "@/components/atom/card"
 import { vibes } from "./config"
-import { RulesIcon, PromptsIcon, TwitterIcon, MCPVibeIcon, CursorVibeIcon, ExtensionsIcon } from "@/components/atom/icons"
+import {
+  RulesIcon,
+  PromptsIcon,
+  TwitterIcon,
+  MCPVibeIcon,
+  CursorVibeIcon,
+  ExtensionsIcon,
+  AgentsIcon,
+  CommandsIcon,
+  SkillsIcon,
+  HooksIcon,
+  ClaudeMdIcon,
+} from "@/components/atom/icons"
 import type { Locale } from '@/components/local/config'
 
 const iconMap = {
@@ -10,6 +22,11 @@ const iconMap = {
   MCPVibeIcon,
   CursorVibeIcon,
   ExtensionsIcon,
+  AgentsIcon,
+  CommandsIcon,
+  SkillsIcon,
+  HooksIcon,
+  ClaudeMdIcon,
 }
 
 interface VibesPageProps {

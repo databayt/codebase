@@ -32,5 +32,19 @@
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "browser",
+    "vercel",
+    "sentry",
+    "figma",
+    "linear",
+    "notion",
+    "stripe",
+    "postgres-dev",
+    "airtable",
+    "clickup",
+    "shadcn"
+  ],
+  "enableAllProjectMcpServers": true
 }

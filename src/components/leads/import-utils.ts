@@ -49,16 +49,8 @@ export async function processCSVFile(
     const result = await bulkImportLeads(leads, source);
 
     if (result.success && result.data) {
-      // Show detailed notification
       toast.success(
-        <div>
-          <div className="font-medium">Import Complete!</div>
-          <div className="text-sm text-muted-foreground mt-1">
-            ✅ Imported: {result.data.imported} leads<br />
-            ⚠️ Duplicates skipped: {result.data.duplicates}<br />
-            📊 Total processed: {result.data.total}
-          </div>
-        </div>
+        `Import Complete! Imported: ${result.data.imported} leads, Duplicates skipped: ${result.data.duplicates}, Total: ${result.data.total}`
       );
 
       return {
@@ -98,13 +90,7 @@ export async function processJSONFile(
 
     if (result.success && result.data) {
       toast.success(
-        <div>
-          <div className="font-medium">JSON Import Complete!</div>
-          <div className="text-sm text-muted-foreground mt-1">
-            ✅ Imported: {result.data.imported} leads<br />
-            ⚠️ Duplicates: {result.data.duplicates}
-          </div>
-        </div>
+        `JSON Import Complete! Imported: ${result.data.imported} leads, Duplicates: ${result.data.duplicates}`
       );
 
       return {
@@ -141,13 +127,7 @@ export async function processExcelData(
 
     if (result.success && result.data) {
       toast.success(
-        <div>
-          <div className="font-medium">Excel Import Complete!</div>
-          <div className="text-sm text-muted-foreground mt-1">
-            ✅ Imported: {result.data.imported} leads<br />
-            ⚠️ Duplicates: {result.data.duplicates}
-          </div>
-        </div>
+        `Excel Import Complete! Imported: ${result.data.imported} leads, Duplicates: ${result.data.duplicates}`
       );
 
       return {

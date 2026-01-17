@@ -1,0 +1,81 @@
+// Report Model - T&C Electrical Testing & Commissioning Reports
+// For 33kV and 13.8kV substations in Saudi Arabia
+
+enum TcReportType {
+  PROTECTION_RELAY
+  TRANSFORMER
+  SWITCHGEAR
+  CABLE
+  GROUNDING
+}
+
+enum TcReportStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum TcVoltageLevel {
+  KV_33
+  KV_13_8
+}
+
+model TcReport {
+  id              String          @id @default(cuid())
+  reportNumber    String          @unique
+  reportType      TcReportType
+  status          TcReportStatus  @default(DRAFT)
+
+  // Project Information
+  projectName     String
+  projectNumber   String?
+  substationName  String
+  voltageLevel    TcVoltageLevel
+  location        String?
+
+  // Dates
+  testDate        DateTime
+  reportDate      DateTime      @default(now())
+
+  // Equipment Information
+  equipmentTag    String
+  equipmentType   String
+  manufacturer    String?
+  model           String?
+  serialNumber    String?
+
+  // Personnel
+  testedBy        String
+  reviewedBy      String?
+  approvedBy      String?
+
+  // Test Data - stored as JSON for flexibility per report type
+  testData        Json
+  testResults     Json
+
+  // Environmental Conditions
+  ambientTemp     Float?
+  humidity        Float?
+
+  // Notes
+  notes           String?
+  recommendations String?
+
+  // Revision tracking
+  revisionNumber  Int           @default(1)
+
+  // Metadata
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+
+  @@index([userId])
+  @@index([reportType])
+  @@index([status])
+  @@index([substationName])
+  @@index([testDate])
+}

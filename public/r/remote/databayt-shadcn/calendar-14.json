@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calendar-14",
+  "description": "Template from databayt-shadcn",
+  "type": "registry:template",
+  "files": [
+    {
+      "path": "templates/calendar-14/page.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Calendar } from \"@/registry/new-york-v4/ui/calendar\"\n\nexport default function Calendar14() {\n  const [date, setDate] = React.useState<Date | undefined>(\n    new Date(2025, 5, 12)\n  )\n  const bookedDates = Array.from(\n    { length: 12 },\n    (_, i) => new Date(2025, 5, 15 + i)\n  )\n\n  return (\n    <Calendar\n      mode=\"single\"\n      defaultMonth={date}\n      selected={date}\n      onSelect={setDate}\n      disabled={bookedDates}\n      modifiers={{\n        booked: bookedDates,\n      }}\n      modifiersClassNames={{\n        booked: \"[&>button]:line-through opacity-100\",\n      }}\n      className=\"rounded-lg border shadow-sm\"\n    />\n  )\n}\n",
+      "type": "registry:page"
+    }
+  ],
+  "categories": [
+    "calendar"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "meta": {
+    "iframeHeight": "400px"
+  },
+  "source": {
+    "type": "github",
+    "owner": "databayt",
+    "repo": "shadcn",
+    "branch": "main",
+    "basePath": "apps/v4/registry/new-york-v4/blocks",
+    "lastFetched": "2026-01-14T04:45:15.617Z"
+  }
+}

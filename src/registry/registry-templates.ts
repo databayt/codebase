@@ -912,5 +912,127 @@ export const templates: Registry = [
     meta: {
       iframeHeight: "500px"
     }
+  },
+  {
+    name: "header-01",
+    description: "Responsive navigation header with logo and menu links",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "navigation-menu",
+      "sheet"
+    ],
+    files: [
+      {
+        path: "templates/header-01/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["header"],
+    meta: {
+      iframeHeight: "100px"
+    }
+  },
+  {
+    name: "header-02",
+    description: "Header with dropdown navigation and user menu",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "navigation-menu",
+      "dropdown-menu",
+      "avatar"
+    ],
+    files: [
+      {
+        path: "templates/header-02/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["header"],
+    meta: {
+      iframeHeight: "100px"
+    }
+  },
+  {
+    name: "footer-01",
+    description: "Simple footer with links and copyright",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "separator"
+    ],
+    files: [
+      {
+        path: "templates/footer-01/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["footer"],
+    meta: {
+      iframeHeight: "200px"
+    }
+  },
+  {
+    name: "footer-02",
+    description: "Footer with newsletter signup and social links",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "input",
+      "separator"
+    ],
+    files: [
+      {
+        path: "templates/footer-02/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["footer"],
+    meta: {
+      iframeHeight: "300px"
+    }
+  },
+  {
+    name: "hero-02",
+    description: "Hero section with image background and overlay",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button"
+    ],
+    files: [
+      {
+        path: "templates/hero-02/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["hero"],
+    meta: {
+      iframeHeight: "600px"
+    }
+  },
+  {
+    name: "hero-03",
+    description: "Hero with split layout - content and image",
+    type: "registry:template",
+    dependencies: [],
+    registryDependencies: [
+      "button",
+      "badge"
+    ],
+    files: [
+      {
+        path: "templates/hero-03/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["hero"],
+    meta: {
+      iframeHeight: "600px"
+    }
   }
 ]

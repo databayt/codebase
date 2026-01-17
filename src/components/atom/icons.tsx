@@ -306,6 +306,36 @@ export const ExtensionsIcon = (props: IconProps) => (
     </svg>
 )
 
+export const AgentsIcon = (props: IconProps) => (
+    <svg viewBox="0 0 24 24" {...props}>
+        <path fill="currentColor" d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5A2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5"/>
+    </svg>
+)
+
+export const CommandsIcon = (props: IconProps) => (
+    <svg viewBox="0 0 24 24" {...props}>
+        <path fill="currentColor" d="M6 2a4 4 0 0 0-4 4v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2h2v4H4V6a2 2 0 0 1 2-2m10 0a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V6a4 4 0 0 0-4-4zm0 2h2v4h-2a2 2 0 0 1-2-2V6zM6 12a4 4 0 0 0-4 4v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2zm0 2h2v4H4v-2a2 2 0 0 1 2-2m10 0a2 2 0 0 0-2 2v2a4 4 0 0 0 4 4h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2zm0 2h2v4h-2a2 2 0 0 1-2-2v-2z"/>
+    </svg>
+)
+
+export const SkillsIcon = (props: IconProps) => (
+    <svg viewBox="0 0 24 24" {...props}>
+        <path fill="currentColor" d="M7 2v2h1v14a4 4 0 0 0 4 4a4 4 0 0 0 4-4V4h1V2zm4 14c-.6 0-1-.4-1-1s.4-1 1-1s1 .4 1 1s-.4 1-1 1m2-4c-.6 0-1-.4-1-1s.4-1 1-1s1 .4 1 1s-.4 1-1 1m0-4c-.6 0-1-.4-1-1s.4-1 1-1s1 .4 1 1s-.4 1-1 1"/>
+    </svg>
+)
+
+export const HooksIcon = (props: IconProps) => (
+    <svg viewBox="0 0 24 24" {...props}>
+        <path fill="currentColor" d="M15.5 5.5a2 2 0 1 0 0-4a2 2 0 0 0 0 4m-2.81 1.66L11 8.83V13H9V6h2.31a2 2 0 0 1 1.44.61l1.06 1.06a4.01 4.01 0 0 0 2.83 1.17V11a6 6 0 0 1-4.24-1.76L11 8l-3.72 3.28l1.8 1.8A2.5 2.5 0 0 1 10 15.5V22H8v-6.5a.5.5 0 0 0-.15-.35l-2.79-2.79c-.62-.63-.62-1.64 0-2.27l3.78-3.78c.63-.62 1.64-.62 2.27 0z"/>
+    </svg>
+)
+
+export const ClaudeMdIcon = (props: IconProps) => (
+    <svg viewBox="0 0 24 24" {...props}>
+        <path fill="currentColor" d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m7 1.5V9h5.5zM7 13v2h10v-2zm0 4v2h7v-2z"/>
+    </svg>
+)
+
 export const Icons = {
     logo: (props: IconProps) => (
         <svg

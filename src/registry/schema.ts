@@ -4,6 +4,15 @@ export interface RegistryFile {
   target?: string
 }
 
+export interface RegistryItemSource {
+  type: "local" | "github"
+  owner?: string
+  repo?: string
+  branch?: string
+  basePath?: string
+  lastFetched?: string
+}
+
 export interface RegistryItem {
   name: string
   description: string
@@ -16,6 +25,7 @@ export interface RegistryItem {
     iframeHeight?: string
     containerClassName?: string
   }
+  source?: RegistryItemSource
 }
 
 export type Registry = RegistryItem[]

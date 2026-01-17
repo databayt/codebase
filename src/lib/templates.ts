@@ -5,6 +5,12 @@ import { promises as fs } from "fs"
 import path from "path"
 import { z } from "zod"
 import { registryItemSchema } from "@/components/root/template/registry"
+import {
+  getCachedRemoteTemplate,
+  getCachedRemoteTemplates,
+  type RemoteTemplate
+} from "@/lib/github-registry"
+import { getEnabledSources } from "@/registry/remote-sources"
 
 export type RegistryItem = z.infer<typeof registryItemSchema>
 
@@ -133,7 +139,20 @@ export const getTemplate = cache(
           style,
         }
       } catch {
-        // JSON file doesn't exist
+        // JSON file doesn't exist, try remote sources
+      }
+
+      // Try remote sources
+      const enabledSources = getEnabledSources()
+      for (const source of enabledSources) {
+        try {
+          const remoteTemplate = await getCachedRemoteTemplate(source.name, name)
+          if (remoteTemplate) {
+            return convertRemoteToTemplate(remoteTemplate, style)
+          }
+        } catch (error) {
+          console.error(`Error fetching remote template ${name} from ${source.name}:`, error)
+        }
       }
 
       return null
@@ -143,6 +162,24 @@ export const getTemplate = cache(
     }
   }
 )
+
+function convertRemoteToTemplate(remote: RemoteTemplate, style: string): Template {
+  return {
+    name: remote.name,
+    description: remote.description,
+    type: remote.type,
+    dependencies: remote.dependencies,
+    registryDependencies: remote.registryDependencies,
+    files: remote.files.map((f) => ({
+      path: f.path,
+      type: f.type,
+    })),
+    categories: remote.categories,
+    meta: remote.meta,
+    source: remote.source,
+    style,
+  } as Template
+}
 
 // Get templates by category
 export const getTemplatesByCategory = cache(

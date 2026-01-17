@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calendar-18",
+  "description": "Template from databayt-shadcn",
+  "type": "registry:template",
+  "files": [
+    {
+      "path": "templates/calendar-18/page.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Calendar } from \"@/registry/new-york-v4/ui/calendar\"\n\nexport default function Calendar18() {\n  const [date, setDate] = React.useState<Date | undefined>(\n    new Date(2025, 5, 12)\n  )\n\n  return (\n    <Calendar\n      mode=\"single\"\n      selected={date}\n      onSelect={setDate}\n      className=\"rounded-lg border [--cell-size:--spacing(11)] md:[--cell-size:--spacing(12)]\"\n      buttonVariant=\"ghost\"\n    />\n  )\n}\n",
+      "type": "registry:page"
+    }
+  ],
+  "categories": [
+    "calendar"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "meta": {
+    "iframeHeight": "400px"
+  },
+  "source": {
+    "type": "github",
+    "owner": "databayt",
+    "repo": "shadcn",
+    "branch": "main",
+    "basePath": "apps/v4/registry/new-york-v4/blocks",
+    "lastFetched": "2026-01-14T04:45:25.137Z"
+  }
+}

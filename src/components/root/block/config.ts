@@ -43,6 +43,17 @@ export const blocks: BlockItem[] = [
     category: "payment",
     status: "active",
   },
+
+  // Data/Engineering Blocks
+  {
+    id: "report",
+    title: "T&C Report",
+    description: "Electrical Testing & Commissioning reports with DOCX/PDF export.",
+    icon: "FileTextIcon",
+    href: "/blocks/report",
+    category: "data",
+    status: "active",
+  },
   {
     id: "subscription",
     title: "Subscriptions",

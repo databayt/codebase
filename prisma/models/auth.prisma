@@ -24,6 +24,9 @@ model User {
 
   // Invoice relationships
   invoices              Invoice[]
+
+  // T&C Report relationships
+  tcReports             TcReport[]
 }
 
 model Account {

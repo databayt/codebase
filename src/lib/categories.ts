@@ -5,14 +5,19 @@ export const registryCategories = [
     hidden: false,
   },
   {
-    name: "Dashboard",
-    slug: "dashboard",
-    hidden: true,
+    name: "Hero",
+    slug: "hero",
+    hidden: false,
   },
   {
-    name: "Authentication",
-    slug: "authentication",
-    hidden: true,
+    name: "Header",
+    slug: "header",
+    hidden: false,
+  },
+  {
+    name: "Footer",
+    slug: "footer",
+    hidden: false,
   },
   {
     name: "Login",
@@ -33,6 +38,16 @@ export const registryCategories = [
     name: "Calendar",
     slug: "calendar",
     hidden: false,
+  },
+  {
+    name: "Dashboard",
+    slug: "dashboard",
+    hidden: true,
+  },
+  {
+    name: "Authentication",
+    slug: "authentication",
+    hidden: true,
   },
   {
     name: "Subscription",
