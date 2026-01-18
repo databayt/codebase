@@ -40,7 +40,7 @@ Invoke-WebRequest -Uri "$BASE_URL/mcp.json" -OutFile "$CLAUDE_DIR\mcp.json"
 
 # Download agents
 Write-Host "Downloading agents..."
-$agents = @("architecture", "atom", "block", "build", "deploy", "git-github", "i18n", "middleware", "nextjs", "pattern", "performance", "prisma", "react", "report", "shadcn", "structure", "tailwind", "template", "test", "typescript")
+$agents = @("architecture", "atom", "block", "build", "deploy", "git-github", "i18n", "middleware", "nextjs", "pattern", "performance", "prisma", "react", "report", "shadcn", "structure", "tailwind", "template", "test", "typescript", "hogwarts", "souq", "mkan", "shifa", "comment", "optimize", "semantic", "sse", "authjs")
 foreach ($agent in $agents) {
     try {
         Invoke-WebRequest -Uri "$BASE_URL/agents/$agent.md" -OutFile "$CLAUDE_DIR\agents\$agent.md" -ErrorAction SilentlyContinue
@@ -49,10 +49,28 @@ foreach ($agent in $agents) {
 
 # Download commands
 Write-Host "Downloading commands..."
-$commands = @("dev", "build", "deploy", "block", "codebase", "saas", "docs", "test", "security", "performance")
+$commands = @("dev", "build", "deploy", "block", "codebase", "saas", "docs", "test", "security", "performance", "repos", "atom", "template", "screenshot", "clone", "nextjs", "motion")
 foreach ($cmd in $commands) {
     try {
         Invoke-WebRequest -Uri "$BASE_URL/commands/$cmd.md" -OutFile "$CLAUDE_DIR\commands\$cmd.md" -ErrorAction SilentlyContinue
+    } catch {}
+}
+
+# Download memory files
+Write-Host "Downloading memory files..."
+$memoryFiles = @("atom", "template", "block", "report", "repositories")
+foreach ($mem in $memoryFiles) {
+    try {
+        Invoke-WebRequest -Uri "$BASE_URL/memory/$mem.json" -OutFile "$CLAUDE_DIR\memory\$mem.json" -ErrorAction SilentlyContinue
+    } catch {}
+}
+
+# Download scripts
+Write-Host "Downloading scripts..."
+$scripts = @("sync.sh", "sync.ps1", "sync-repos.sh", "sync-repos.ps1", "secrets.sh", "secrets.ps1")
+foreach ($script in $scripts) {
+    try {
+        Invoke-WebRequest -Uri "$BASE_URL/scripts/$script" -OutFile "$CLAUDE_DIR\scripts\$script" -ErrorAction SilentlyContinue
     } catch {}
 }
 

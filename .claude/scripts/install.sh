@@ -60,7 +60,7 @@ done
 
 # Download scripts
 echo "Downloading scripts..."
-for script in sync.sh sync.ps1 sync-repos.sh sync-repos.ps1; do
+for script in sync.sh sync.ps1 sync-repos.sh sync-repos.ps1 secrets.sh secrets.ps1; do
     curl -fsSL "$BASE_URL/scripts/$script" -o "$CLAUDE_DIR/scripts/$script" 2>/dev/null || true
 done
 chmod +x "$CLAUDE_DIR/scripts/"*.sh 2>/dev/null || true
