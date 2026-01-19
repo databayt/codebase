@@ -17,51 +17,25 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import type { getDictionary } from "@/components/local/dictionaries"
 
 const data = [
-  {
-    goal: 400,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 239,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 349,
-  },
+  { goal: 400 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 239 },
+  { goal: 300 },
+  { goal: 200 },
+  { goal: 278 },
+  { goal: 189 },
+  { goal: 349 },
 ]
 
 const chartConfig = {
   goal: {
     label: "Goal",
-    color: "hsl(var(--primary))",
+    color: "var(--chart-1)",
   },
 } satisfies ChartConfig
 
@@ -77,12 +51,12 @@ export function CardsActivityGoal({ dictionary }: CardsActivityGoalProps) {
   }
 
   return (
-    <Card className="shadow-none border">
-      <CardHeader className="pb-4 space-y-1">
-        <CardTitle className="text-base font-semibold">
+    <Card>
+      <CardHeader className="pb-4">
+        <CardTitle>
           {dictionary?.cards?.activityGoal?.moveGoal || "Move Goal"}
         </CardTitle>
-        <CardDescription className="text-sm text-muted-foreground">
+        <CardDescription>
           Set your daily activity goal.
         </CardDescription>
       </CardHeader>
@@ -120,14 +94,16 @@ export function CardsActivityGoal({ dictionary }: CardsActivityGoalProps) {
             config={chartConfig}
             className="aspect-auto h-full w-full"
           >
-            <BarChart data={data}>
+            <BarChart accessibilityLayer data={data}>
               <Bar dataKey="goal" radius={4} fill="var(--color-goal)" />
             </BarChart>
           </ChartContainer>
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">{dictionary?.cards?.activityGoal?.goal || "Set Goal"}</Button>
+        <Button className="w-full">
+          {dictionary?.cards?.activityGoal?.goal || "Set Goal"}
+        </Button>
       </CardFooter>
     </Card>
   )

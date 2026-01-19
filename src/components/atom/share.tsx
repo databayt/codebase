@@ -31,7 +31,7 @@ interface CardsShareProps {
 
 export function CardsShare({ dictionary }: CardsShareProps) {
   return (
-    <Card className="shadow-none border" dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
+    <Card dir={dictionary?.locale === 'ar' ? 'rtl' : 'ltr'}>
       <CardHeader className="pb-3">
         <CardTitle>{dictionary?.cards?.share?.title || "Share this document"}</CardTitle>
         <CardDescription>

@@ -18,51 +18,23 @@ import {
 } from "@/components/ui/chart"
 
 const data = [
-  {
-    average: 400,
-    today: 240,
-    day: "Mon",
-  },
-  {
-    average: 300,
-    today: 139,
-    day: "Tue",
-  },
-  {
-    average: 200,
-    today: 980,
-    day: "Wed",
-  },
-  {
-    average: 278,
-    today: 390,
-    day: "Thu",
-  },
-  {
-    average: 189,
-    today: 480,
-    day: "Fri",
-  },
-  {
-    average: 239,
-    today: 380,
-    day: "Sat",
-  },
-  {
-    average: 349,
-    today: 430,
-    day: "Sun",
-  },
+  { day: "Mon", average: 400, today: 240 },
+  { day: "Tue", average: 300, today: 139 },
+  { day: "Wed", average: 200, today: 980 },
+  { day: "Thu", average: 278, today: 390 },
+  { day: "Fri", average: 189, today: 480 },
+  { day: "Sat", average: 239, today: 380 },
+  { day: "Sun", average: 349, today: 430 },
 ]
 
 const chartConfig = {
   today: {
     label: "Today",
-    color: "var(--primary)",
+    color: "var(--chart-1)",
   },
   average: {
     label: "Average",
-    color: "var(--primary)",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig
 
@@ -72,26 +44,21 @@ interface CardsMetricProps {
 
 export function CardsMetric({ dictionary }: CardsMetricProps) {
   return (
-    <Card className="shadow-none border">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-base font-semibold">
+    <Card>
+      <CardHeader>
+        <CardTitle>
           {dictionary?.cards?.metric?.title || "Exercise Minutes"}
         </CardTitle>
-        <CardDescription className="text-sm text-muted-foreground">
+        <CardDescription>
           {dictionary?.cards?.metric?.description || "Your exercise minutes are ahead of where you normally are."}
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-4">
-        <ChartContainer config={chartConfig} className="w-full h-[200px]">
+        <ChartContainer config={chartConfig} className="h-[200px] w-full">
           <LineChart
             accessibilityLayer
             data={data}
-            margin={{
-              top: 5,
-              right: 10,
-              left: 16,
-              bottom: 0,
-            }}
+            margin={{ left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -100,33 +67,27 @@ export function CardsMetric({ dictionary }: CardsMetricProps) {
               axisLine={false}
               tickMargin={8}
             />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent />}
+            />
             <Line
-              type="monotone"
               dataKey="today"
-              strokeWidth={2}
+              type="monotone"
               stroke="var(--color-today)"
-              dot={{
-                fill: "var(--color-today)",
-              }}
-              activeDot={{
-                r: 5,
-              }}
+              strokeWidth={2}
+              dot={{ fill: "var(--color-today)" }}
+              activeDot={{ r: 6 }}
             />
             <Line
-              type="monotone"
-              strokeWidth={2}
               dataKey="average"
+              type="monotone"
               stroke="var(--color-average)"
+              strokeWidth={2}
               strokeOpacity={0.5}
-              dot={{
-                fill: "var(--color-average)",
-                opacity: 0.5,
-              }}
-              activeDot={{
-                r: 5,
-              }}
+              dot={{ fill: "var(--color-average)", opacity: 0.5 }}
+              activeDot={{ r: 6 }}
             />
-            <ChartTooltip content={<ChartTooltipContent />} />
           </LineChart>
         </ChartContainer>
       </CardContent>

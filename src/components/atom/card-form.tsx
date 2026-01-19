@@ -32,7 +32,7 @@ export function CardForm({
 }: CardFormProps) {
   return (
     <Card
-      className={cn("shadow-none border", className)}
+      className={cn(className)}
       dir={dir}
       data-slot="card-form"
     >
