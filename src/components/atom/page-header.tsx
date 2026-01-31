@@ -26,45 +26,43 @@ export function PageHeader({
   ...props
 }: PageHeaderProps) {
   return (
-    <section className={cn("border-grid", className)} {...props}>
-      <div className="container-wrapper">
-        <div className="container flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12">
-          {announcement && (
-            <div className={cn(announcementClassName)}>
-              {announcement}
-            </div>
-          )}
-          {heading && (
-            <h2
-              className={cn(
-                headingClassName
-              )}
-            >
-              {heading}
-            </h2>
-          )}
-          {description && (
-            <p
-              className={cn(
-                "max-w-2xl text-balance text-base font-light text-foreground leading-7 sm:text-lg",
-                descriptionClassName
-              )}
-            >
-              {description}
-            </p>
-          )}
-          {actions && (
-            <div
-              className={cn(
-                "flex w-full items-center justify-start gap-2 pt-2",
-                actionsClassName
-              )}
-            >
-              {actions}
-            </div>
-          )}
-          {children}
-        </div>
+    <section className={cn("border-grid border-b-[0.5px]", className)} {...props}>
+      <div className="flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12">
+        {announcement && (
+          <div className={cn(announcementClassName)}>
+            {announcement}
+          </div>
+        )}
+        {heading && (
+          <h2
+            className={cn(
+              headingClassName
+            )}
+          >
+            {heading}
+          </h2>
+        )}
+        {description && (
+          <p
+            className={cn(
+              "max-w-2xl text-balance text-base font-light text-foreground leading-7 sm:text-lg ",
+              descriptionClassName
+            )}
+          >
+            {description}
+          </p>
+        )}
+        {actions && (
+          <div
+            className={cn(
+              "flex w-full items-center justify-start gap-2 pt-2",
+              actionsClassName
+            )}
+          >
+            {actions}
+          </div>
+        )}
+        {children}
       </div>
     </section>
   )
