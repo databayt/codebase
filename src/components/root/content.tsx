@@ -21,8 +21,8 @@ export default function RootContent({ dictionary, params }: RootContentProps) {
         <ExamplesNav className="[&>a:first-child]:text-primary flex-1 overflow-hidden" />
         <ThemeSelector className="mr-4 hidden md:flex" />
       </PageNav>
-      <div className="container-wrapper section-soft flex-1 pb-6">
-        <div className="container overflow-hidden">
+      <div className="section-soft flex-1 pb-6">
+        <div className="overflow-hidden">
           {/* Mobile: Show dashboard image */}
           <section className="border-border/50 -mx-4 w-[160vw] overflow-hidden rounded-lg border md:hidden md:w-[150vw]">
             <Image
