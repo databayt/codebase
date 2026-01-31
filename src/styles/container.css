@@ -47,11 +47,8 @@
     }
   }
 
-  /* Standard containers with different max-widths */
-  .container {
-    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
-    max-width: var(--container-max-xl);
-  }
+  /* Note: .container is defined as @utility in globals.css to match shadcn/ui
+     Use container-xl for the old 1280px max-width behavior */
 
   .container-sm {
     @apply w-full mx-auto px-4 sm:px-6;
@@ -83,50 +80,8 @@
     @apply w-full px-4 sm:px-6 lg:px-8;
   }
 
-  /* shadcn/ui blocks pattern container-wrapper */
-  .container-wrapper {
-    @apply mx-auto w-full;
-    padding-inline: var(--container-padding-xs);
-  }
-
-  /* Remove padding when nested inside layout-container to avoid double padding */
-  .layout-container .container-wrapper {
-    padding-inline: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container-wrapper {
-      padding-inline: var(--container-padding-sm);
-    }
-  }
-
-  @media (min-width: 768px) {
-    .container-wrapper {
-      padding-inline: var(--container-padding-md);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container-wrapper {
-      padding-inline: var(--container-padding-lg);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .container-wrapper {
-      padding-inline: var(--container-padding-xl);
-    }
-  }
-
-  /* Section soft spacing for blocks */
-  .section-soft {
-    @apply py-8 sm:py-12 lg:py-16;
-  }
-
-  /* Border grid pattern */
-  .border-grid {
-    @apply border-b border-border;
-  }
+  /* Note: container-wrapper, section-soft, and border-grid are defined
+     as @utility in globals.css to match shadcn/ui exactly */
 
   /* Section container with vertical spacing */
   .container-section {
