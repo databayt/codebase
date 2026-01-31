@@ -4,7 +4,7 @@ import Hero from "./hero"
 import { ExamplesNav } from "./examples-nav"
 import { PageNav } from "./page-nav"
 import { ThemeSelector } from "./theme-selector"
-import { CardsDemo } from "./cards"
+import { RootComponents } from "./components"
 import type { getDictionary } from "@/components/local/dictionaries"
 import type { Locale } from "@/components/local/config"
 
@@ -42,9 +42,9 @@ export default function RootContent({ dictionary, params }: RootContentProps) {
               priority
             />
           </section>
-          {/* Desktop: Show interactive cards */}
+          {/* Desktop: Show interactive component demos */}
           <section className="theme-container hidden md:block">
-            <CardsDemo dictionary={dictionary} />
+            <RootComponents />
           </section>
         </div>
       </div>
