@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site"
 import type { getDictionary } from "@/components/local/dictionaries"
+import { ReportIssueButton } from "@/components/report-issue/server"
 
 interface SiteFooterProps {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>
@@ -38,7 +39,7 @@ export function SiteFooter({ dictionary }: SiteFooterProps) {
             >
               {dictionary?.footer?.github || "GitHub"}
             </a>
-            .
+            . <ReportIssueButton variant="text" />
           </div>
         </div>
       </div>
