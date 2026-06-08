@@ -1,0 +1,58 @@
+---
+title: Subscription 01
+description: Subscription management with plan details, billing info, and cancel/update actions.
+component: true
+categories: [subscription]
+---
+
+<TemplateDisplay name="subscription-01" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add subscription-01
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the registry dependencies.</Step>
+
+```bash
+npx codebase add button card badge separator dialog radio-group label
+```
+
+<Step>Copy the template files into your project.</Step>
+
+The CLI writes each file to its `target` path (e.g. `app/...`, `components/...`, `config/...`). Replace the import paths to match your project setup.
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Categories
+
+subscription
+
+## Registry Dependencies
+
+- `button`
+- `card`
+- `badge`
+- `separator`
+- `dialog`
+- `radio-group`
+- `label`

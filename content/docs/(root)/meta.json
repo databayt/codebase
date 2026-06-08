@@ -2,9 +2,6 @@
   "title": "Documentation",
   "pages": [
     "index",
-    "pitch",
-    "mvp",
-    "prd",
     "---Get Started---",
     "get-started",
     "repository",
@@ -19,7 +16,6 @@
     "localhost",
     "claude-code",
     "contributing",
-    "shared-economy",
     "competitors",
     "inspiration",
     "demo"

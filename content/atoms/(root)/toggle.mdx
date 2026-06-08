@@ -1,0 +1,49 @@
+---
+title: Toggle
+description: Toggle atom imported from databayt repos.
+component: true
+---
+
+<ComponentPreview name="toggle" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add toggle
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="toggle" title="components/atom/toggle.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Toggle } from "@/components/atom/toggle"
+```
+
+```tsx
+<Toggle />
+```

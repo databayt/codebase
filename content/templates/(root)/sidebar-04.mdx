@@ -1,0 +1,54 @@
+---
+title: Sidebar 04
+description: A floating sidebar with submenus.
+component: true
+categories: [sidebar, dashboard]
+---
+
+<TemplateDisplay name="sidebar-04" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add sidebar-04
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the registry dependencies.</Step>
+
+```bash
+npx codebase add sidebar breadcrumb separator
+```
+
+<Step>Copy the template files into your project.</Step>
+
+The CLI writes each file to its `target` path (e.g. `app/...`, `components/...`, `config/...`). Replace the import paths to match your project setup.
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Categories
+
+sidebar, dashboard
+
+## Registry Dependencies
+
+- `sidebar`
+- `breadcrumb`
+- `separator`

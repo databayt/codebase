@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion"
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { ComponentSource } from "@/components/docs/component-source"
+import { TemplateDisplay } from "@/components/root/template/template-display"
 import { CodeTabs } from "@/components/docs/code-tabs"
 import { CodeBlockCommand } from "@/components/docs/code-block-command"
 import { CopyButton } from "@/components/docs/copy-button"
@@ -285,6 +286,8 @@ const mdxComponents = {
     AccordionTrigger,
     ComponentPreview,
     ComponentSource,
+    TemplateDisplay,
+    TemplatePreview: TemplateDisplay,
     CodeTabs,
     Tabs: ({ className, ...props }: ComponentProps<typeof Tabs>) => {
       return <Tabs className={cn("relative mt-6 w-full", className)} {...props} />

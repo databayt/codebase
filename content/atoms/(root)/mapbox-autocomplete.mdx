@@ -1,0 +1,49 @@
+---
+title: Mapbox Autocomplete
+description: Mapbox Autocomplete atom imported from databayt repos.
+component: true
+---
+
+<ComponentPreview name="mapbox-autocomplete" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add mapbox-autocomplete
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="mapbox-autocomplete" title="components/atom/mapbox-autocomplete.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { MapboxAutocomplete } from "@/components/atom/mapbox-autocomplete"
+```
+
+```tsx
+<MapboxAutocomplete />
+```

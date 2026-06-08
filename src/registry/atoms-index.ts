@@ -287,4 +287,294 @@ export const AtomsIndex: Record<string, AtomEntry> = {
     component: React.lazy(() => import("@/components/atom/user-info-card")),
     files: [{ path: "src/components/atom/user-info-card.tsx", type: "registry:atom" }],
   },
+  "action-menu": {
+    name: "action-menu",
+    component: React.lazy(() => import("@/components/atom/action-menu")),
+    files: [{ path: "src/components/atom/action-menu.tsx", type: "registry:atom" }],
+  },
+  "animated-button": {
+    name: "animated-button",
+    component: React.lazy(() => import("@/components/atom/animated-button")),
+    files: [{ path: "src/components/atom/animated-button.tsx", type: "registry:atom" }],
+  },
+  "country-dropdown": {
+    name: "country-dropdown",
+    component: React.lazy(() => import("@/components/atom/country-dropdown")),
+    files: [{ path: "src/components/atom/country-dropdown.tsx", type: "registry:atom" }],
+  },
+  "empty-state": {
+    name: "empty-state",
+    component: React.lazy(() => import("@/components/atom/empty-state")),
+    files: [{ path: "src/components/atom/empty-state.tsx", type: "registry:atom" }],
+  },
+  "encrypted-text": {
+    name: "encrypted-text",
+    component: React.lazy(() => import("@/components/atom/encrypted-text")),
+    files: [{ path: "src/components/atom/encrypted-text.tsx", type: "registry:atom" }],
+  },
+  "grid-container": {
+    name: "grid-container",
+    component: React.lazy(() => import("@/components/atom/grid-container")),
+    files: [{ path: "src/components/atom/grid-container.tsx", type: "registry:atom" }],
+  },
+  "number-stepper": {
+    name: "number-stepper",
+    component: React.lazy(() => import("@/components/atom/number-stepper")),
+    files: [{ path: "src/components/atom/number-stepper.tsx", type: "registry:atom" }],
+  },
+  "page-heading": {
+    name: "page-heading",
+    component: React.lazy(() => import("@/components/atom/page-heading")),
+    files: [{ path: "src/components/atom/page-heading.tsx", type: "registry:atom" }],
+  },
+  "page-nav": {
+    name: "page-nav",
+    component: React.lazy(() => import("@/components/atom/page-nav")),
+    files: [{ path: "src/components/atom/page-nav.tsx", type: "registry:atom" }],
+  },
+  "page-title": {
+    name: "page-title",
+    component: React.lazy(() => import("@/components/atom/page-title")),
+    files: [{ path: "src/components/atom/page-title.tsx", type: "registry:atom" }],
+  },
+  "phone-input": {
+    name: "phone-input",
+    component: React.lazy(() => import("@/components/atom/phone-input")),
+    files: [{ path: "src/components/atom/phone-input.tsx", type: "registry:atom" }],
+  },
+  "search-input": {
+    name: "search-input",
+    component: React.lazy(() => import("@/components/atom/search-input")),
+    files: [{ path: "src/components/atom/search-input.tsx", type: "registry:atom" }],
+  },
+  "see-more": {
+    name: "see-more",
+    component: React.lazy(() => import("@/components/atom/see-more")),
+    files: [{ path: "src/components/atom/see-more.tsx", type: "registry:atom" }],
+  },
+  "theme": {
+    name: "theme",
+    component: React.lazy(() => import("@/components/atom/theme")),
+    files: [{ path: "src/components/atom/theme.tsx", type: "registry:atom" }],
+  },
+  "toolbar": {
+    name: "toolbar",
+    component: React.lazy(() => import("@/components/atom/toolbar")),
+    files: [{ path: "src/components/atom/toolbar.tsx", type: "registry:atom" }],
+  },
+  "toast": {
+    name: "toast",
+    component: React.lazy(() => import("@/components/atom/toast")),
+    files: [{ path: "src/components/atom/toast.tsx", type: "registry:atom" }],
+  },
+  "view-toggle": {
+    name: "view-toggle",
+    component: React.lazy(() => import("@/components/atom/view-toggle")),
+    files: [{ path: "src/components/atom/view-toggle.tsx", type: "registry:atom" }],
+  },
+  "section-heading": {
+    name: "section-heading",
+    component: React.lazy(() => import("@/components/atom/section-heading")),
+    files: [{ path: "src/components/atom/section-heading.tsx", type: "registry:atom" }],
+  },
+  "block-button": {
+    name: "block-button",
+    component: React.lazy(() => import("@/components/atom/block-button")),
+    files: [{ path: "src/components/atom/block-button.tsx", type: "registry:atom" }],
+  },
+  "brand-icons": {
+    name: "brand-icons",
+    component: React.lazy(() => import("@/components/atom/brand-icons")),
+    files: [{ path: "src/components/atom/brand-icons.tsx", type: "registry:atom" }],
+  },
+  "counter": {
+    name: "counter",
+    component: React.lazy(() => import("@/components/atom/counter")),
+    files: [{ path: "src/components/atom/counter.tsx", type: "registry:atom" }],
+  },
+  "date-picker-range": {
+    name: "date-picker-range",
+    component: React.lazy(() => import("@/components/atom/date-picker-range")),
+    files: [{ path: "src/components/atom/date-picker-range.tsx", type: "registry:atom" }],
+  },
+  "date-range-picker": {
+    name: "date-range-picker",
+    component: React.lazy(() => import("@/components/atom/date-range-picker")),
+    files: [{ path: "src/components/atom/date-range-picker.tsx", type: "registry:atom" }],
+  },
+  "expandable-card": {
+    name: "expandable-card",
+    component: React.lazy(() => import("@/components/atom/expandable-card")),
+    files: [{ path: "src/components/atom/expandable-card.tsx", type: "registry:atom" }],
+  },
+  "guest-selector": {
+    name: "guest-selector",
+    component: React.lazy(() => import("@/components/atom/guest-selector")),
+    files: [{ path: "src/components/atom/guest-selector.tsx", type: "registry:atom" }],
+  },
+  "header": {
+    name: "header",
+    component: React.lazy(() => import("@/components/atom/header")),
+    files: [{ path: "src/components/atom/header.tsx", type: "registry:atom" }],
+  },
+  "profile": {
+    name: "profile",
+    component: React.lazy(() => import("@/components/atom/profile")),
+    files: [{ path: "src/components/atom/profile.tsx", type: "registry:atom" }],
+  },
+  "search-button": {
+    name: "search-button",
+    component: React.lazy(() => import("@/components/atom/search-button")),
+    files: [{ path: "src/components/atom/search-button.tsx", type: "registry:atom" }],
+  },
+  "search-divider": {
+    name: "search-divider",
+    component: React.lazy(() => import("@/components/atom/search-divider")),
+    files: [{ path: "src/components/atom/search-divider.tsx", type: "registry:atom" }],
+  },
+  "search-dropdown": {
+    name: "search-dropdown",
+    component: React.lazy(() => import("@/components/atom/search-dropdown")),
+    files: [{ path: "src/components/atom/search-dropdown.tsx", type: "registry:atom" }],
+  },
+  "sidebar": {
+    name: "sidebar",
+    component: React.lazy(() => import("@/components/atom/sidebar")),
+    files: [{ path: "src/components/atom/sidebar.tsx", type: "registry:atom" }],
+  },
+  "toggle": {
+    name: "toggle",
+    component: React.lazy(() => import("@/components/atom/toggle")),
+    files: [{ path: "src/components/atom/toggle.tsx", type: "registry:atom" }],
+  },
+  "github-button": {
+    name: "github-button",
+    component: React.lazy(() => import("@/components/atom/github-button")),
+    files: [{ path: "src/components/atom/github-button.tsx", type: "registry:atom" }],
+  },
+  "auto-complete": {
+    name: "auto-complete",
+    component: React.lazy(() => import("@/components/atom/auto-complete")),
+    files: [{ path: "src/components/atom/auto-complete.tsx", type: "registry:atom" }],
+  },
+  "card-article": {
+    name: "card-article",
+    component: React.lazy(() => import("@/components/atom/card-article")),
+    files: [{ path: "src/components/atom/card-article.tsx", type: "registry:atom" }],
+  },
+  "confetti": {
+    name: "confetti",
+    component: React.lazy(() => import("@/components/atom/confetti")),
+    files: [{ path: "src/components/atom/confetti.tsx", type: "registry:atom" }],
+  },
+  "hierarchical-select": {
+    name: "hierarchical-select",
+    component: React.lazy(() => import("@/components/atom/hierarchical-select")),
+    files: [{ path: "src/components/atom/hierarchical-select.tsx", type: "registry:atom" }],
+  },
+  "icon": {
+    name: "icon",
+    component: React.lazy(() => import("@/components/atom/icon")),
+    files: [{ path: "src/components/atom/icon.tsx", type: "registry:atom" }],
+  },
+  "marquee": {
+    name: "marquee",
+    component: React.lazy(() => import("@/components/atom/marquee")),
+    files: [{ path: "src/components/atom/marquee.tsx", type: "registry:atom" }],
+  },
+  "month-year-picker": {
+    name: "month-year-picker",
+    component: React.lazy(() => import("@/components/atom/month-year-picker")),
+    files: [{ path: "src/components/atom/month-year-picker.tsx", type: "registry:atom" }],
+  },
+  "month-year-range": {
+    name: "month-year-range",
+    component: React.lazy(() => import("@/components/atom/month-year-range")),
+    files: [{ path: "src/components/atom/month-year-range.tsx", type: "registry:atom" }],
+  },
+  "multi-select": {
+    name: "multi-select",
+    component: React.lazy(() => import("@/components/atom/multi-select")),
+    files: [{ path: "src/components/atom/multi-select.tsx", type: "registry:atom" }],
+  },
+  "parallax-text": {
+    name: "parallax-text",
+    component: React.lazy(() => import("@/components/atom/parallax-text")),
+    files: [{ path: "src/components/atom/parallax-text.tsx", type: "registry:atom" }],
+  },
+  "title": {
+    name: "title",
+    component: React.lazy(() => import("@/components/atom/title")),
+    files: [{ path: "src/components/atom/title.tsx", type: "registry:atom" }],
+  },
+  "mapbox-autocomplete": {
+    name: "mapbox-autocomplete",
+    component: React.lazy(() => import("@/components/atom/mapbox-autocomplete")),
+    files: [{ path: "src/components/atom/mapbox-autocomplete.tsx", type: "registry:atom" }],
+  },
+  "mapbox-location-picker": {
+    name: "mapbox-location-picker",
+    component: React.lazy(() => import("@/components/atom/mapbox-location-picker")),
+    files: [{ path: "src/components/atom/mapbox-location-picker.tsx", type: "registry:atom" }],
+  },
+  "optimized-image": {
+    name: "optimized-image",
+    component: React.lazy(() => import("@/components/atom/optimized-image")),
+    files: [{ path: "src/components/atom/optimized-image.tsx", type: "registry:atom" }],
+  },
+  "property-reserve": {
+    name: "property-reserve",
+    component: React.lazy(() => import("@/components/atom/property-reserve")),
+    files: [{ path: "src/components/atom/property-reserve.tsx", type: "registry:atom" }],
+  },
+  "property-info": {
+    name: "property-info",
+    component: React.lazy(() => import("@/components/atom/property-info")),
+    files: [{ path: "src/components/atom/property-info.tsx", type: "registry:atom" }],
+  },
+  "property-header": {
+    name: "property-header",
+    component: React.lazy(() => import("@/components/atom/property-header")),
+    files: [{ path: "src/components/atom/property-header.tsx", type: "registry:atom" }],
+  },
+  "property-icons": {
+    name: "property-icons",
+    component: React.lazy(() => import("@/components/atom/property-icons")),
+    files: [{ path: "src/components/atom/property-icons.tsx", type: "registry:atom" }],
+  },
+  "property-icon": {
+    name: "property-icon",
+    component: React.lazy(() => import("@/components/atom/property-icon")),
+    files: [{ path: "src/components/atom/property-icon.tsx", type: "registry:atom" }],
+  },
+  "property-images": {
+    name: "property-images",
+    component: React.lazy(() => import("@/components/atom/property-images")),
+    files: [{ path: "src/components/atom/property-images.tsx", type: "registry:atom" }],
+  },
+  "property-gallery": {
+    name: "property-gallery",
+    component: React.lazy(() => import("@/components/atom/property-gallery")),
+    files: [{ path: "src/components/atom/property-gallery.tsx", type: "registry:atom" }],
+  },
+  "property-filter": {
+    name: "property-filter",
+    component: React.lazy(() => import("@/components/atom/property-filter")),
+    files: [{ path: "src/components/atom/property-filter.tsx", type: "registry:atom" }],
+  },
+  "property-select": {
+    name: "property-select",
+    component: React.lazy(() => import("@/components/atom/property-select")),
+    files: [{ path: "src/components/atom/property-select.tsx", type: "registry:atom" }],
+  },
+  "reviews": {
+    name: "reviews",
+    component: React.lazy(() => import("@/components/atom/reviews")),
+    files: [{ path: "src/components/atom/reviews.tsx", type: "registry:atom" }],
+  },
+  "review": {
+    name: "review",
+    component: React.lazy(() => import("@/components/atom/review")),
+    files: [{ path: "src/components/atom/review.tsx", type: "registry:atom" }],
+  },
 }

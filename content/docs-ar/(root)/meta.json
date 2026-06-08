@@ -2,9 +2,6 @@
   "title": "التوثيق",
   "pages": [
     "index",
-    "pitch",
-    "mvp",
-    "prd",
     "get-started",
     "architecture",
     "structure",
@@ -13,7 +10,6 @@
     "database",
     "localhost",
     "contributing",
-    "shared-economy",
     "competitors",
     "inspiration",
     "demo"

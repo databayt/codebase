@@ -1,0 +1,96 @@
+"use server"
+
+interface ReportIssueInput {
+  description: string
+  pageUrl: string
+  meta?: {
+    viewport?: string
+    direction?: string
+    browser?: string
+  }
+}
+
+// Optional reporter resolver — repos with auth pass () => session.user; repos without auth omit it.
+type ReporterResolver = () => Promise<{ name?: string | null; email?: string | null } | null>
+
+export async function reportIssue(
+  data: ReportIssueInput,
+  getReporter?: ReporterResolver,
+) {
+  const token = process.env.GITHUB_PERSONAL_ACCESS_TOKEN
+  const repo = process.env.GITHUB_REPO
+  if (!token) throw new Error("GITHUB_PERSONAL_ACCESS_TOKEN not configured")
+  if (!repo) throw new Error("GITHUB_REPO not configured")
+
+  const desc = data.description.trim()
+  const title = desc.length > 80 ? desc.slice(0, 77) + "..." : desc
+
+  const reporter = getReporter
+    ? await getReporter()
+        .then((u) => (u ? `${u.name ?? "User"} (${u.email ?? "unknown"})` : "Anonymous"))
+        .catch(() => "Anonymous")
+    : "Anonymous"
+
+  const body = [
+    data.description,
+    "",
+    "---",
+    "",
+    `**Page**: ${data.pageUrl}`,
+    `**Time**: ${new Date().toISOString()}`,
+    `**Reporter**: ${reporter}`,
+    data.meta?.browser && `**Browser**: ${data.meta.browser}`,
+    data.meta?.viewport && `**Viewport**: ${data.meta.viewport}`,
+    data.meta?.direction && `**Direction**: ${data.meta.direction}`,
+  ]
+    .filter(Boolean)
+    .join("\n")
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    Accept: "application/vnd.github+json",
+  }
+  const payload = { title, body, labels: ["report"] }
+
+  let response = await fetch(`https://api.github.com/repos/${repo}/issues`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload),
+  })
+
+  // Self-bootstrap: create the "report" label on 422, then retry once.
+  if (response.status === 422) {
+    await fetch(`https://api.github.com/repos/${repo}/labels`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        name: "report",
+        color: "d93f0b",
+        description: "User-reported issues",
+      }),
+    }).catch(() => {})
+
+    response = await fetch(`https://api.github.com/repos/${repo}/issues`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(payload),
+    })
+  }
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "")
+    console.error(`[report-issue] GitHub API ${response.status}: ${text}`)
+    throw new Error(`GitHub API error: ${response.status}`)
+  }
+
+  const issueData = await response.json().catch(() => null)
+  if (issueData?.comments_url) {
+    fetch(issueData.comments_url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        body: "Received. This report is queued for automated review and fix. You'll be notified here when resolved.",
+      }),
+    }).catch(() => {})
+  }
+}

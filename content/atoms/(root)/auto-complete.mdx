@@ -1,0 +1,49 @@
+---
+title: Auto Complete
+description: Auto Complete atom imported from databayt repos.
+component: true
+---
+
+<ComponentPreview name="auto-complete" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add auto-complete
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="auto-complete" title="components/atom/auto-complete.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { AutoComplete } from "@/components/atom/auto-complete"
+```
+
+```tsx
+<AutoComplete />
+```

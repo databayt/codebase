@@ -229,6 +229,28 @@ When implementing, check codebase first:
 
 ---
 
+## shadcn Mirror
+
+Our `/atoms` is a 1:1 architectural clone of shadcn's `/docs/components` — same registry schema (`registry:atom` vs `registry:ui`), same MDX page contract, same `[[...slug]]` route, same MDX components (`<ComponentPreview>`, `<ComponentSource>`, `<CodeTabs>`, `<Steps>`), same `default`/`new-york` style namespacing, same `npx codebase add` CLI, same `public/r/` JSON distribution, verbatim intro copy.
+
+**Watch shadcn upstream** for changes to how they compose / preview / register — those pattern shifts ripple into our system. New shadcn components are low priority; meta-architecture changes are high priority.
+
+See full mirror table in `/CLAUDE.md` ("Atoms ↔ shadcn Components Mirror" section).
+
+---
+
+## Templates Mirror (Partial)
+
+Our `/templates` partially mirrors shadcn's `/blocks`:
+- ✅ Registry schema (`registry:template` vs `registry:block`), `meta` (iframeHeight/container/mobile), multi-file `target` paths, per-style source folders, iframe `<TemplateViewer>`, `/view/templates/[name]` target route, category filter route, `npx codebase add` CLI
+- ❌ No `content/templates/` MDX, no `[[...slug]]/page.tsx`, no per-template install tabs, sidebar is pill-bar not vertical, only `default` style published, two competing registry sources (8 items vs 33 items), two competing build scripts
+
+To reach atoms-level parity: build the docs layer (`content/templates/*.mdx`, `[[...slug]]` route, `templates-sidebar.tsx`), reconcile the dual pipelines, publish both styles.
+
+See full table in `/CLAUDE.md` ("Templates ↔ shadcn Blocks Mirror (Partial)" section).
+
+---
+
 ## MCP Quick Reference
 
 | MCP | Trigger |

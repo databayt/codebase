@@ -1,0 +1,30 @@
+---
+title: Templates
+description: Building blocks for the web. Clean, modern templates copy-paste into your apps. Works with all React frameworks. Open Source. Free forever.
+---
+
+**Production-ready templates. Copy and paste into your apps.**
+
+Templates are full-page layouts and major UI sections — sidebars, dashboards, login flows, hero sections, and more. Each template is a complete, working composition of atoms and primitives that you can drop into your app and customize.
+
+This is the same idea as shadcn's blocks: pre-built, real-world layouts you reach for when starting a new project or feature.
+
+## How it works
+
+- **Browse** — every template ships with a live preview (iframe-driven so you see it exactly as it'll render in your app).
+- **Install** — `npx codebase add <template-slug>` writes the multi-file template into the right places in your project (`app/`, `components/`, `config/`).
+- **Customize** — the code is yours. Templates are open code, just like atoms.
+
+## What's inside a template
+
+Each template is a multi-file composition. For example, `sidebar-01` consists of:
+
+- `app/sidebar/page.tsx` — the entry route
+- `components/sidebar-nav.tsx` — the sidebar component itself
+- `config/docs.ts` — the navigation config
+
+The CLI knows where each file goes thanks to per-file `target` paths in the registry.
+
+## Categories
+
+Templates are organized by category — Sidebar, Hero, Header, Footer, Login, Signup, OTP, Calendar, Dashboard, Authentication. Use the sidebar nav to filter, or browse them all on the index.

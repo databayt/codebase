@@ -1,0 +1,49 @@
+---
+title: Encrypted Text
+description: Encrypted Text atom imported from databayt repos.
+component: true
+---
+
+<ComponentPreview name="encrypted-text" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add encrypted-text
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="encrypted-text" title="components/atom/encrypted-text.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { EncryptedText } from "@/components/atom/encrypted-text"
+```
+
+```tsx
+<EncryptedText />
+```

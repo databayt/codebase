@@ -1,0 +1,229 @@
+"use client"
+
+// Copyright (c) 2025-present databayt
+// Licensed under SSPL-1.0 -- see LICENSE for details
+import { useEffect, useState } from "react"
+import { toast } from "sonner"
+
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+
+// ============================================
+// Configuration
+// ============================================
+const CONFIG = {
+  position: "bottom-right" as const,
+  duration: {
+    success: 2000,
+    error: 4000,
+    info: 3000,
+    warning: 5000,
+    delete: 2000,
+  },
+} as const
+
+// ============================================
+// Toast Functions
+// ============================================
+export const SuccessToast = (message: string) => {
+  toast(message, {
+    duration: CONFIG.duration.success,
+    position: CONFIG.position,
+    style: {
+      background: "var(--chart-2)",
+      color: "white",
+      border: "none",
+      width: "220px",
+      maxWidth: "220px",
+    },
+  })
+}
+
+export const ErrorToast = (message: string) => {
+  toast.error(message, {
+    duration: CONFIG.duration.error,
+    position: CONFIG.position,
+    style: {
+      background: "var(--destructive)",
+      color: "var(--destructive-foreground)",
+      border: "none",
+      width: "220px",
+      maxWidth: "220px",
+    },
+  })
+}
+
+export const InfoToast = (message: string) => {
+  toast.info(message, {
+    duration: CONFIG.duration.info,
+    position: CONFIG.position,
+    style: {
+      background: "var(--primary)",
+      color: "var(--primary-foreground)",
+      border: "none",
+      width: "220px",
+      maxWidth: "220px",
+    },
+  })
+}
+
+export const WarningToast = (message: string) => {
+  toast.warning(message, {
+    duration: CONFIG.duration.warning,
+    position: CONFIG.position,
+    style: {
+      background: "var(--chart-4)",
+      color: "var(--foreground)",
+      border: "none",
+      width: "260px",
+      maxWidth: "260px",
+    },
+  })
+}
+
+export const DeleteToast = (message: string = "Deleted") => {
+  toast(message, {
+    duration: CONFIG.duration.delete,
+    position: CONFIG.position,
+    style: {
+      background: "var(--destructive)",
+      color: "var(--destructive-foreground)",
+      border: "none",
+      width: "220px",
+      maxWidth: "220px",
+    },
+  })
+}
+
+// ============================================
+// Confirm Dialog (SSR-Safe Implementation)
+// ============================================
+type ConfirmOptions = {
+  title?: string
+  description?: string
+  confirmText?: string
+  cancelText?: string
+}
+
+type ConfirmState = ConfirmOptions & {
+  open: boolean
+  resolve?: (v: boolean) => void
+}
+
+// Global state setter for confirm dialog (lazy initialized)
+let setConfirmState: ((state: ConfirmState) => void) | null = null
+
+function ConfirmDialogPortal() {
+  const [state, setState] = useState<ConfirmState>({ open: false })
+
+  useEffect(() => {
+    setConfirmState = setState
+    return () => {
+      setConfirmState = null
+    }
+  }, [])
+
+  const handleClose = () => {
+    setState((s) => ({ ...s, open: false }))
+  }
+
+  const handleCancel = () => {
+    state.resolve?.(false)
+    handleClose()
+  }
+
+  const handleConfirm = () => {
+    state.resolve?.(true)
+    handleClose()
+  }
+
+  return (
+    <Dialog
+      open={state.open}
+      onOpenChange={(open) => {
+        if (!open) handleCancel()
+      }}
+    >
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{state.title ?? "Are you sure?"}</DialogTitle>
+          {state.description && (
+            <DialogDescription>{state.description}</DialogDescription>
+          )}
+        </DialogHeader>
+        <DialogFooter>
+          <Button variant="outline" onClick={handleCancel}>
+            {state.cancelText ?? "Cancel"}
+          </Button>
+          <Button variant="destructive" onClick={handleConfirm}>
+            {state.confirmText ?? "Delete"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+// Lazy mount the dialog portal
+let portalMounted = false
+
+function ensurePortalMounted() {
+  if (typeof window === "undefined" || portalMounted) return
+
+  const id = "__confirm_dialog_root__"
+  let container = document.getElementById(id)
+
+  if (!container) {
+    container = document.createElement("div")
+    container.id = id
+    document.body.appendChild(container)
+
+    // Use React 18 createRoot via dynamic import to avoid SSR issues
+    import("react-dom/client").then(({ createRoot }) => {
+      createRoot(container!).render(<ConfirmDialogPortal />)
+    })
+  }
+
+  portalMounted = true
+}
+
+export function confirmDeleteDialog(
+  message?: string,
+  labels?: {
+    title?: string
+    description?: string
+    confirmText?: string
+    cancelText?: string
+  }
+): Promise<boolean> {
+  return new Promise((resolve) => {
+    ensurePortalMounted()
+
+    // Wait for portal to mount if needed
+    const tryOpen = () => {
+      if (setConfirmState) {
+        setConfirmState({
+          open: true,
+          title: labels?.title ?? "Delete item",
+          description:
+            labels?.description ?? message ?? "This action cannot be undone.",
+          confirmText: labels?.confirmText ?? "Delete",
+          cancelText: labels?.cancelText ?? "Cancel",
+          resolve,
+        })
+      } else {
+        // Retry after a short delay if portal not ready
+        setTimeout(tryOpen, 50)
+      }
+    }
+
+    tryOpen()
+  })
+}

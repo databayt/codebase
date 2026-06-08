@@ -1,9 +1,10 @@
 import { Metadata } from "next"
 
-import Hero from "@/components/root/template/hero"
-import { TemplatesNav } from "@/components/root/template/templates-nav"
-import { getDictionary } from "@/components/local/dictionaries"
+import { templatesSource } from "@/lib/source"
+import { TemplatesSidebar } from "@/components/docs/templates-sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import { type Locale } from "@/components/local/config"
+import "../../../globals.css"
 
 const title = "Building Blocks for the Web"
 const description = "Clean, modern building blocks. Copy and paste into your apps. Works with all React frameworks. Open Source. Free forever."
@@ -20,22 +21,13 @@ interface TemplatesLayoutProps {
 
 export default async function TemplatesLayout({
   children,
-  params,
 }: TemplatesLayoutProps) {
-  const { lang } = await params
-  const dictionary = await getDictionary(lang)
-
   return (
-    <>
-      <Hero dictionary={dictionary} params={{ lang }} />
-      <div className="py-3 border-b-[0.5px] px-responsive lg:px-0">
-        <div className="rtl:text-right">
-          <TemplatesNav />
-        </div>
-      </div>
-      <div className="section-soft flex-1 md:py-12 px-responsive lg:px-0">
-        <div className="w-full">{children}</div>
-      </div>
-    </>
+    <div className="container-wrapper flex flex-1 flex-col">
+      <SidebarProvider className="3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-responsive lg:px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+        <TemplatesSidebar tree={templatesSource.pageTree} />
+        <div className="h-full w-full">{children}</div>
+      </SidebarProvider>
+    </div>
   )
 }

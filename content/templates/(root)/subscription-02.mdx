@@ -1,0 +1,55 @@
+---
+title: Subscription 02
+description: Invoice history table with status badges, dates, and download actions.
+component: true
+categories: [subscription]
+---
+
+<TemplateDisplay name="subscription-02" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add subscription-02
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the registry dependencies.</Step>
+
+```bash
+npx codebase add card button table badge
+```
+
+<Step>Copy the template files into your project.</Step>
+
+The CLI writes each file to its `target` path (e.g. `app/...`, `components/...`, `config/...`). Replace the import paths to match your project setup.
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Categories
+
+subscription
+
+## Registry Dependencies
+
+- `card`
+- `button`
+- `table`
+- `badge`

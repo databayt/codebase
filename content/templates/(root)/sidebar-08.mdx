@@ -1,0 +1,57 @@
+---
+title: Sidebar 08
+description: An inset sidebar with secondary navigation.
+component: true
+categories: [sidebar, dashboard]
+---
+
+<TemplateDisplay name="sidebar-08" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add sidebar-08
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the registry dependencies.</Step>
+
+```bash
+npx codebase add sidebar breadcrumb separator collapsible dropdown-menu avatar
+```
+
+<Step>Copy the template files into your project.</Step>
+
+The CLI writes each file to its `target` path (e.g. `app/...`, `components/...`, `config/...`). Replace the import paths to match your project setup.
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Categories
+
+sidebar, dashboard
+
+## Registry Dependencies
+
+- `sidebar`
+- `breadcrumb`
+- `separator`
+- `collapsible`
+- `dropdown-menu`
+- `avatar`

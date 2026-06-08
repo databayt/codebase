@@ -1,0 +1,49 @@
+---
+title: Sidebar
+description: Sidebar atom imported from databayt repos.
+component: true
+---
+
+<ComponentPreview name="sidebar" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add sidebar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="sidebar" title="components/atom/sidebar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Sidebar } from "@/components/atom/sidebar"
+```
+
+```tsx
+<Sidebar />
+```

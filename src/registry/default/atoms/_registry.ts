@@ -639,4 +639,772 @@ export const atoms: Registry["items"] = [
     ],
     dependencies: ["next/font/google"],
   },
+  {
+    name: "action-menu",
+    type: "registry:atom",
+    description: "Action Menu atom imported from databayt repos.",
+    categories: ["button", "interactive"],
+    files: [
+      {
+        path: "components/atom/action-menu.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react", "next"],
+    registryDependencies: ["button", "dropdown-menu"],
+  },
+  {
+    name: "animated-button",
+    type: "registry:atom",
+    description: "Animated Button atom imported from databayt repos.",
+    categories: ["button", "interactive"],
+    files: [
+      {
+        path: "components/atom/animated-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["button"],
+  },
+  {
+    name: "country-dropdown",
+    type: "registry:atom",
+    description: "Country Dropdown atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/country-dropdown.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["country-state-city", "lucide-react", "react-circle-flags"],
+    registryDependencies: ["button", "command", "popover"],
+  },
+  {
+    name: "empty-state",
+    type: "registry:atom",
+    description: "Empty State atom imported from databayt repos.",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/empty-state.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+  },
+  {
+    name: "encrypted-text",
+    type: "registry:atom",
+    description: "Encrypted Text atom imported from databayt repos.",
+    categories: ["animation", "display"],
+    files: [
+      {
+        path: "components/atom/encrypted-text.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["motion"],
+  },
+  {
+    name: "grid-container",
+    type: "registry:atom",
+    description: "Grid Container atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/grid-container.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "number-stepper",
+    type: "registry:atom",
+    description: "Number Stepper atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/number-stepper.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "button-group", "input"],
+  },
+  {
+    name: "page-heading",
+    type: "registry:atom",
+    description: "Page Heading atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/page-heading.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "page-nav",
+    type: "registry:atom",
+    description: "Page Nav atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/page-nav.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+    registryDependencies: ["scroll-area"],
+  },
+  {
+    name: "page-title",
+    type: "registry:atom",
+    description: "Page Title atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/page-title.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "phone-input",
+    type: "registry:atom",
+    description: "Phone Input atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/phone-input.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["country-data-list", "libphonenumber-js", "lucide-react", "react-circle-flags", "zod"],
+    registryDependencies: ["command", "popover"],
+  },
+  {
+    name: "search-input",
+    type: "registry:atom",
+    description: "Search Input atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/search-input.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "input"],
+  },
+  {
+    name: "see-more",
+    type: "registry:atom",
+    description: "See More atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/see-more.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+  },
+  {
+    name: "theme",
+    type: "registry:atom",
+    description: "Theme atom imported from databayt repos.",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/theme.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next-themes"],
+  },
+  {
+    name: "toolbar",
+    type: "registry:atom",
+    description: "Toolbar atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/toolbar.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "toast",
+    type: "registry:atom",
+    description: "Toast atom imported from databayt repos.",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/toast.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["sonner"],
+    registryDependencies: ["button", "dialog"],
+  },
+  {
+    name: "view-toggle",
+    type: "registry:atom",
+    description: "View Toggle atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/view-toggle.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "tooltip"],
+  },
+  {
+    name: "section-heading",
+    type: "registry:atom",
+    description: "Section Heading atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/section-heading.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+  },
+  {
+    name: "block-button",
+    type: "registry:atom",
+    description: "Block Button atom imported from databayt repos.",
+    categories: ["button", "interactive"],
+    files: [
+      {
+        path: "components/atom/block-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+  },
+  {
+    name: "brand-icons",
+    type: "registry:atom",
+    description: "Brand Icons atom imported from databayt repos.",
+    categories: ["ui", "utility"],
+    files: [
+      {
+        path: "components/atom/brand-icons.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "counter",
+    type: "registry:atom",
+    description: "Counter atom imported from databayt repos.",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/counter.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+  },
+  {
+    name: "date-picker-range",
+    type: "registry:atom",
+    description: "Date Picker Range atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/date-picker-range.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["date-fns", "lucide-react", "react-day-picker"],
+    registryDependencies: ["button", "calendar", "popover"],
+  },
+  {
+    name: "date-range-picker",
+    type: "registry:atom",
+    description: "Date Range Picker atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/date-range-picker.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["date-fns", "react-day-picker"],
+    registryDependencies: ["calendar"],
+  },
+  {
+    name: "expandable-card",
+    type: "registry:atom",
+    description: "Expandable Card atom imported from databayt repos.",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/expandable-card.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["framer-motion", "next"],
+  },
+  {
+    name: "guest-selector",
+    type: "registry:atom",
+    description: "Guest Selector atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/guest-selector.tsx",
+        type: "registry:component",
+      },
+    ],
+    registryDependencies: ["counter"],
+  },
+  {
+    name: "header",
+    type: "registry:atom",
+    description: "Header atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/header.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "profile",
+    type: "registry:atom",
+    description: "Profile atom imported from databayt repos.",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/profile.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+  },
+  {
+    name: "search-button",
+    type: "registry:atom",
+    description: "Search Button atom imported from databayt repos.",
+    categories: ["button", "interactive"],
+    files: [
+      {
+        path: "components/atom/search-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button"],
+  },
+  {
+    name: "search-divider",
+    type: "registry:atom",
+    description: "Search Divider atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/search-divider.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "search-dropdown",
+    type: "registry:atom",
+    description: "Search Dropdown atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/search-dropdown.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "sidebar",
+    type: "registry:atom",
+    description: "Sidebar atom imported from databayt repos.",
+    categories: ["layout", "navigation"],
+    files: [
+      {
+        path: "components/atom/sidebar.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "toggle",
+    type: "registry:atom",
+    description: "Toggle atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/toggle.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["@theme-toggles/react", "next-themes"],
+  },
+  {
+    name: "github-button",
+    type: "registry:atom",
+    description: "Github Button atom imported from databayt repos.",
+    categories: ["button", "interactive"],
+    files: [
+      {
+        path: "components/atom/github-button.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+    registryDependencies: ["brand-icons"],
+  },
+  {
+    name: "auto-complete",
+    type: "registry:atom",
+    description: "Auto Complete atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/auto-complete.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["framer-motion"],
+    registryDependencies: ["command"],
+  },
+  {
+    name: "card-article",
+    type: "registry:atom",
+    description: "Card Article atom imported from databayt repos.",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/card-article.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["framer-motion", "lucide-react", "next"],
+    registryDependencies: ["context-menu"],
+  },
+  {
+    name: "confetti",
+    type: "registry:atom",
+    description: "Confetti atom imported from databayt repos.",
+    categories: ["animation", "display"],
+    files: [
+      {
+        path: "components/atom/confetti.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["canvas-confetti"],
+  },
+  {
+    name: "hierarchical-select",
+    type: "registry:atom",
+    description: "Hierarchical Select atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/hierarchical-select.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["framer-motion", "lucide-react"],
+  },
+  {
+    name: "icon",
+    type: "registry:atom",
+    description: "Icon atom imported from databayt repos.",
+    categories: ["ui", "utility"],
+    files: [
+      {
+        path: "components/atom/icon.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "marquee",
+    type: "registry:atom",
+    description: "Marquee atom imported from databayt repos.",
+    categories: ["animation", "display"],
+    files: [
+      {
+        path: "components/atom/marquee.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "month-year-picker",
+    type: "registry:atom",
+    description: "Month Year Picker atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/month-year-picker.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["date-fns", "lucide-react"],
+    registryDependencies: ["button", "popover"],
+  },
+  {
+    name: "month-year-range",
+    type: "registry:atom",
+    description: "Month Year Range atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/month-year-range.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["date-fns", "lucide-react"],
+    registryDependencies: ["button", "popover"],
+  },
+  {
+    name: "multi-select",
+    type: "registry:atom",
+    description: "Multi Select atom imported from databayt repos.",
+    categories: ["form", "input"],
+    files: [
+      {
+        path: "components/atom/multi-select.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["cmdk", "lucide-react"],
+    registryDependencies: ["badge", "command"],
+  },
+  {
+    name: "parallax-text",
+    type: "registry:atom",
+    description: "Parallax Text atom imported from databayt repos.",
+    categories: ["animation", "display"],
+    files: [
+      {
+        path: "components/atom/parallax-text.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["framer-motion"],
+  },
+  {
+    name: "title",
+    type: "registry:atom",
+    description: "Title atom imported from databayt repos.",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/title.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+  },
+  {
+    name: "mapbox-autocomplete",
+    type: "registry:atom",
+    description: "Mapbox Autocomplete atom imported from databayt repos.",
+    categories: ["input", "layout"],
+    files: [
+      {
+        path: "components/atom/mapbox-autocomplete.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["input"],
+  },
+  {
+    name: "mapbox-location-picker",
+    type: "registry:atom",
+    description: "Mapbox Location Picker atom imported from databayt repos.",
+    categories: ["input", "layout"],
+    files: [
+      {
+        path: "components/atom/mapbox-location-picker.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react", "mapbox-gl"],
+    registryDependencies: ["button", "input", "skeleton"],
+  },
+  {
+    name: "optimized-image",
+    type: "registry:atom",
+    description: "Optimized Image atom imported from databayt repos.",
+    categories: ["display", "interactive"],
+    files: [
+      {
+        path: "components/atom/optimized-image.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+  },
+  {
+    name: "property-reserve",
+    type: "registry:atom",
+    description: "Property Reserve atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-reserve.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react", "next", "react-day-picker", "sonner"],
+    registryDependencies: ["button", "popover"],
+  },
+  {
+    name: "property-info",
+    type: "registry:atom",
+    description: "Property Info atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-info.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+  },
+  {
+    name: "property-header",
+    type: "registry:atom",
+    description: "Property Header atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-header.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "icons"],
+  },
+  {
+    name: "property-icons",
+    type: "registry:atom",
+    description: "Property Icons atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-icons.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "property-icon",
+    type: "registry:atom",
+    description: "Property Icon atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-icon.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+  },
+  {
+    name: "property-images",
+    type: "registry:atom",
+    description: "Property Images atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-images.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["next"],
+    registryDependencies: ["button"],
+  },
+  {
+    name: "property-gallery",
+    type: "registry:atom",
+    description: "Property Gallery atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-gallery.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react", "next"],
+    registryDependencies: ["button", "icons"],
+  },
+  {
+    name: "property-filter",
+    type: "registry:atom",
+    description: "Property Filter atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-filter.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["badge", "button", "checkbox", "dialog", "separator", "slider"],
+  },
+  {
+    name: "property-select",
+    type: "registry:atom",
+    description: "Property Select atom imported from databayt repos.",
+    categories: ["data", "display"],
+    files: [
+      {
+        path: "components/atom/property-select.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react"],
+    registryDependencies: ["button", "popover", "select"],
+  },
+  {
+    name: "reviews",
+    type: "registry:atom",
+    description: "Reviews atom imported from databayt repos.",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/reviews.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "review",
+    type: "registry:atom",
+    description: "Review atom imported from databayt repos.",
+    categories: ["display", "data"],
+    files: [
+      {
+        path: "components/atom/review.tsx",
+        type: "registry:component",
+      },
+    ],
+    dependencies: ["lucide-react", "next"],
+    registryDependencies: ["card"],
+  },
 ]
