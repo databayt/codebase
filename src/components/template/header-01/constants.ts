@@ -55,8 +55,8 @@ export const docsConfig: DocsConfig = {
             href: "/micros",
         },
         {
-            title: "Icons",
-            href: "/icons",
+            title: "Arts",
+            href: "/arts",
         },
     ],
     sidebarNav: [

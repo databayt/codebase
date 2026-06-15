@@ -20,7 +20,7 @@ const NAV_ITEMS = [
   { href: "/templates", label: "Templates" },
   { href: "/blocks", label: "Blocks" },
   { href: "/micros", label: "Micros" },
-  { href: "/icons", label: "Icons" },
+  { href: "/arts", label: "Arts" },
 ]
 
 export function MobileNav({

@@ -19,9 +19,13 @@ export const NAMESPACE_LABELS: Record<string, string> = {
 /** Brands shown as tabs regardless of whether they have assets yet. */
 export const NAMESPACE_ORDER = ["anthropic", "airbnb", "apple", "clickview", "hogwarts"]
 
-/** Style facets — substring match on the key; only shown when assets carry the token. */
+/**
+ * Style facets — substring match on the key; only shown when assets carry the token.
+ * NOTE: "fill" is intentionally omitted — it's now a real CDN namespace
+ * (cdn.databayt.org/fill), so it already renders as a namespace tab. Keeping it
+ * here too would produce two identical "Fill" tabs.
+ */
 export const STYLE_FACETS: { id: string; label: string }[] = [
-  { id: "fill", label: "Fill" },
   { id: "outline", label: "Outline" },
   { id: "line", label: "Line" },
   { id: "light", label: "Light" },

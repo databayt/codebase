@@ -27,13 +27,19 @@ import {
   mkdirSync,
   copyFileSync,
   writeFileSync,
+  readFileSync,
   existsSync,
 } from "node:fs"
+import { createHash } from "node:crypto"
 import { join, resolve } from "node:path"
 import { homedir } from "node:os"
 
 const DRY_RUN = process.argv.includes("--dry-run")
 const ARCHIVE = process.env.CLICKVIEW_ARCHIVE || join(homedir(), "clickview")
+/** hogwarts/public holds ClickView-sourced art (courses illustrations, concept
+ *  art, subject icons) that belongs in clickview/, not the hogwarts namespace. */
+const HOGWARTS_PUBLIC =
+  process.env.HOGWARTS_PUBLIC || join(homedir(), "hogwarts", "public")
 const OUT_DIR = resolve(process.cwd(), "public/cdn/clickview")
 const MAP_OUT = resolve(process.cwd(), "src/registry/clickview-map.json")
 
@@ -139,16 +145,62 @@ if (existsSync(byUrl)) {
   }
 }
 
+// ---- hogwarts-resident ClickView art (courses illustrations + unique concept art) ----
+// ~/hogwarts/public mixes ClickView-sourced art into the product tree. Bring the genuine,
+// non-duplicated, high-quality pieces into clickview/:
+//   courses/{topic}.png       → {topic}-illustration.png  (unique topic illustrations)
+//   subjects/concepts/{c}.jpg → {c}-illustration.jpg       (only if NOT a byte-dupe of an
+//                                                           archive concept thumbnail)
+// We deliberately SKIP subjects/*.png — those are low-quality (9-26KB) subject-category
+// icons whose subjects already have high-quality concept art under concept names.
+const md5 = (p: string) => createHash("md5").update(readFileSync(p)).digest("hex")
+const thumbMd5 = new Set(
+  plans.filter((p) => /-thumbnail\./.test(p.key)).map((p) => md5(p.src))
+)
+const IMG_RE = /\.(jpe?g|png|webp)$/i
+
+const coursesDir = join(HOGWARTS_PUBLIC, "courses")
+if (existsSync(coursesDir)) {
+  for (const f of readdirSync(coursesDir)) {
+    if (!IMG_RE.test(f)) continue
+    const dot = f.lastIndexOf(".")
+    addPlan(
+      `${f.slice(0, dot)}-illustration.${f.slice(dot + 1).toLowerCase()}`,
+      join(coursesDir, f)
+    )
+  }
+}
+
+const conceptsDir = join(HOGWARTS_PUBLIC, "subjects", "concepts")
+if (existsSync(conceptsDir)) {
+  for (const f of readdirSync(conceptsDir)) {
+    if (!IMG_RE.test(f)) continue
+    const src = join(conceptsDir, f)
+    if (thumbMd5.has(md5(src))) {
+      skipped.push(`subjects/concepts/${f}  (dupe of archive concept thumbnail)`)
+      continue
+    }
+    const dot = f.lastIndexOf(".")
+    addPlan(
+      `${f.slice(0, dot)}-illustration.${f.slice(dot + 1).toLowerCase()}`,
+      src
+    )
+  }
+}
+
 // ---- execute ----
 plans.sort((a, b) => a.key.localeCompare(b.key))
-const concepts = plans.filter((p) => /-(thumbnail|banner)\./.test(p.key)).length
-const covers = plans.length - concepts
+const conceptArt = plans.filter((p) => /-(thumbnail|banner)\./.test(p.key)).length
+const illustrations = plans.filter((p) => /-illustration\./.test(p.key)).length
+const concepts = conceptArt
+const covers = plans.length - conceptArt - illustrations
 
 console.log(`${DRY_RUN ? "[DRY RUN] " : ""}ClickView archive → public/cdn/clickview/`)
 console.log(`  source : ${ARCHIVE}`)
-console.log(`  concept art : ${concepts}  (illustrations + banners)`)
-console.log(`  covers      : ${covers}`)
-console.log(`  total       : ${plans.length}`)
+console.log(`  concept art  : ${concepts}  (thumbnails + banners)`)
+console.log(`  illustrations: ${illustrations}  (hogwarts courses + unique concepts)`)
+console.log(`  covers       : ${covers}`)
+console.log(`  total        : ${plans.length}`)
 if (collisions.length) {
   console.log(`  COLLISIONS (${collisions.length}) — not staged:`)
   collisions.slice(0, 20).forEach((c) => console.log(`    ${c}`))

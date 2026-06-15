@@ -1,18 +1,18 @@
-import IconsContent from "@/components/root/icons/content";
+import ArtsContent from "@/components/root/arts/content";
 import { getDictionary } from "@/components/local/dictionaries";
 import { type Locale } from "@/components/local/config";
 
 export const metadata = {
-  title: "Icons",
+  title: "Arts",
 }
 
-interface IconsPageProps {
+interface ArtsPageProps {
   params: Promise<{ lang: Locale }>;
 }
 
-export default async function Icons({ params }: IconsPageProps) {
+export default async function Arts({ params }: ArtsPageProps) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
-  return <IconsContent dictionary={dictionary} params={{ lang }} />;
+  return <ArtsContent dictionary={dictionary} params={{ lang }} />;
 }

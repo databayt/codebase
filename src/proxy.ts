@@ -102,12 +102,20 @@ export default async function proxy(request: NextRequest) {
       pathname = pathname.replace(`/${currentLocale}`, '') || '/'
     }
 
+    // Backward-compat: the /icons showroom was renamed to /arts. Permanently
+    // redirect old links (with locale preserved) so bookmarks don't 404/bounce.
+    if (pathname === '/icons' || pathname.startsWith('/icons/')) {
+      const newPath = pathname.replace(/^\/icons/, '/arts')
+      const localized = currentLocale ? `/${currentLocale}${newPath}` : newPath
+      return NextResponse.redirect(createSafeURL(localized, baseUrl), 308)
+    }
+
     const isApiAuthRoute = pathname.startsWith(apiAuthPrefix)
     const isPublicRoute = publicRoutes.includes(pathname) ||
                          pathname.startsWith('/docs') ||
                          pathname.startsWith('/atoms') ||
                          pathname.startsWith('/templates') ||
-                         pathname.startsWith('/icons') ||
+                         pathname.startsWith('/arts') ||
                          pathname.startsWith('/cdn') ||
                          pathname.startsWith('/blocks') ||
                          pathname.startsWith('/micros') ||

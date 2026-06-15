@@ -18,7 +18,9 @@
     "codebase": "tsx scripts/cli.mts",
     "cdn:sync": "tsx scripts/cdn/sync.ts",
     "cdn:manifest": "tsx scripts/build-cdn-manifest.ts",
-    "cdn:manifest:local": "tsx scripts/cdn/build-local-manifest.ts"
+    "cdn:manifest:local": "tsx scripts/cdn/build-local-manifest.ts",
+    "cdn:stage:clickview": "tsx scripts/cdn/stage-clickview.ts",
+    "cdn:stage:hogwarts": "tsx scripts/cdn/stage-hogwarts.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.77",
@@ -102,6 +104,7 @@
     "gray-matter": "^4.0.3",
     "input-otp": "^1.4.2",
     "libphonenumber-js": "^1.12.42",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.544.0",
     "mapbox-gl": "^3.22.0",
     "motion": "^12.38.0",

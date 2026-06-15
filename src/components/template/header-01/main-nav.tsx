@@ -69,12 +69,12 @@ export function MainNav({ dictionary, className }: MainNavProps) {
           <h6>{dictionary?.navigation?.micros || "Micros"}</h6>
         </Link>
         <Link
-          href="/icons"
+          href="/arts"
           className={cn(
-            pathname?.startsWith("/icons") ? "text-foreground" : ""
+            pathname?.startsWith("/arts") ? "text-foreground" : ""
           )}
         >
-          <h6>{dictionary?.navigation?.icons || "Icons"}</h6>
+          <h6>{dictionary?.navigation?.icons || "Arts"}</h6>
         </Link>
     </nav>
   )

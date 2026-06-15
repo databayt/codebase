@@ -1,13 +1,23 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import dynamic from "next/dynamic"
 
 import { cn } from "@/lib/utils"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { isImage, type CdnAsset } from "@/lib/cdn"
 import { buildFacets } from "./config"
 
-interface IconsGalleryProps {
+// Lottie player is loaded only when a .json animation is actually rendered, so
+// lottie-web never weighs down the initial showroom bundle.
+const LottieThumb = dynamic(
+  () => import("./lottie-thumb").then((m) => m.LottieThumb),
+  { ssr: false },
+)
+
+const isLottie = (key: string) => key.toLowerCase().endsWith(".json")
+
+interface ArtsGalleryProps {
   assets: CdnAsset[]
   /** manifest.urlBase — "/cdn" for the local seed preview, else https://cdn.databayt.org */
   urlBase: string
@@ -15,7 +25,7 @@ interface IconsGalleryProps {
   domain: string
 }
 
-export default function IconsGallery({ assets, urlBase, source, domain }: IconsGalleryProps) {
+export default function ArtsGallery({ assets, urlBase, source, domain }: ArtsGalleryProps) {
   const facets = useMemo(() => buildFacets(assets), [assets])
   const counts = useMemo(
     () => Object.fromEntries(facets.map((f) => [f.id, assets.filter(f.test).length])),
@@ -96,6 +106,8 @@ export default function IconsGallery({ assets, urlBase, source, domain }: IconsG
                         loading="lazy"
                         className="max-h-full max-w-full object-contain"
                       />
+                    ) : isLottie(a.key) ? (
+                      <LottieThumb src={src} />
                     ) : (
                       <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                         {ext}
