@@ -15,7 +15,10 @@
     "build:remote-registry": "tsx scripts/fetch-remote-templates.ts",
     "generate:docs": "tsx scripts/generate-atom-docs.mts",
     "sync:shadcn": "tsx scripts/sync-shadcn.mts",
-    "codebase": "tsx scripts/cli.mts"
+    "codebase": "tsx scripts/cli.mts",
+    "cdn:sync": "tsx scripts/cdn/sync.ts",
+    "cdn:manifest": "tsx scripts/build-cdn-manifest.ts",
+    "cdn:manifest:local": "tsx scripts/cdn/build-local-manifest.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.77",
@@ -135,6 +138,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@aws-sdk/client-cloudfront": "^3.1068.0",
+    "@aws-sdk/client-s3": "^3.1068.0",
     "@eslint/eslintrc": "^3.3.5",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/adm-zip": "^0.5.8",

@@ -62,6 +62,7 @@ import { ButtonGroup } from "@/components/atom/button-group"
 import { DirectoryStructure } from "@/components/docs/directory-structure"
 import { Structure } from "@/components/docs/structure"
 import { PrismaStructure } from "@/components/docs/prisma-structure"
+import { CdnAssetsTable } from "@/components/docs/cdn-assets-table"
 // AI components
 import {
   AiPromptInputPreview,
@@ -385,6 +386,7 @@ const mdxComponents = {
     DirectoryStructure,
     Structure,
     PrismaStructure,
+    CdnAssetsTable,
     // AI components
     AiPromptInput: AiPromptInputPreview,
     AiStatusIndicator: AiStatusIndicatorPreview,

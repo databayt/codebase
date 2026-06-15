@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Id": "databayt-cdn-oac-policy",
+  "Statement": [
+    {
+      "Sid": "AllowCloudFrontServicePrincipalReadOnly",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::__BUCKET__/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceArn": "__DISTRIBUTION_ARN__"
+        }
+      }
+    },
+    {
+      "Sid": "DenyInsecureTransport",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::__BUCKET__",
+        "arn:aws:s3:::__BUCKET__/*"
+      ],
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "false"
+        }
+      }
+    }
+  ]
+}

@@ -69,15 +69,12 @@ export function MainNav({ dictionary, className }: MainNavProps) {
           <h6>{dictionary?.navigation?.micros || "Micros"}</h6>
         </Link>
         <Link
-          href="/vibes"
+          href="/icons"
           className={cn(
-            pathname?.startsWith("/docs/component/vibes") ||
-              pathname?.startsWith("/vibes")
-              ? "text-foreground"
-              : ""
+            pathname?.startsWith("/icons") ? "text-foreground" : ""
           )}
         >
-          <h6>{dictionary?.navigation?.vibes || "Vibes"}</h6>
+          <h6>{dictionary?.navigation?.icons || "Icons"}</h6>
         </Link>
     </nav>
   )

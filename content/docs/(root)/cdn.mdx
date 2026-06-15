@@ -1,0 +1,423 @@
+---
+title: "CDN"
+description: "One asset CDN for the whole org — cdn.databayt.org on AWS S3 + CloudFront. A single URL scheme, one tiny helper every repo imports, and a /icons showroom as the source of truth."
+---
+
+**One bucket, one domain, one helper — every databayt repo pulls the same assets from `cdn.databayt.org`.**
+
+We used to scatter assets across ImageKit (`ik.imagekit.io/abdout`) and Cloudinary, with each
+product hot-linking its own ad-hoc URLs. That is over. There is now exactly one origin for
+logos, icons, illustrations, animations, product media, and structured content. Every consumer
+imports the same `src/lib/cdn.ts`, sets two env vars, and gets byte-identical URL behavior.
+
+This is the authoritative reference for the URL scheme, the helper API, the showroom, and the
+migration off the legacy providers.
+
+## Assets
+
+One table per top-level path (`cdn.databayt.org/anthropic`, `/catalog`, …), each row a small art
+preview with its `name` and `slug` (provenance — filterable independently of the path). The full
+set, nothing collapsed — the [`/icons` showroom](/icons) is the visual browser.
+
+<CdnAssetsTable />
+
+## Why a unified CDN
+
+- **One source of truth.** The codebase repo's `/icons` showroom renders the live bucket. If it
+  is on the showroom, every repo can use it; if it is not, it does not exist yet.
+- **Identical helper everywhere.** `pnpm codebase add cdn` copies one file into a consuming repo.
+  Two env vars drive it, so the helper is the same in `hogwarts`, `souq`, `mkan`, `shifa`, and `kun`.
+- **No vendor lock-in, no surprise bills.** S3 storage plus CloudFront edge delivery, billed to
+  one account, on infra we control. No third-party transform quotas, no dangling provider URLs.
+- **Modern, locked-down infra.** CloudFront Origin Access Control (OAC), S3 Block Public Access
+  fully on, access granted only to the distribution via a bucket policy scoped by `aws:SourceArn`.
+
+## The URL scheme: four tiers
+
+Every asset lives under `https://cdn.databayt.org/` and is classified by its **first path
+segment**. The classifier is `tierOf(key)` in `src/lib/cdn.ts`. There are exactly four tiers:
+
+| Tier | First segment | Shape | Example URL | Helper |
+| --- | --- | --- | --- | --- |
+| **Vendor mirror** | a brand name | `BRAND/FILE` | `/anthropic/wordmark.svg` | `cdn.vendor(brand, file)` |
+| **Shared primitives** | `icons` / `illustrations` / `animations` | `NS/FILE` | `/icons/visa.svg` | `cdn.shared(ns, file)` |
+| **Product namespace** | `hogwarts` / `souq` / `mkan` / `shifa` / `kun` | `PRODUCT/PATH` | `/hogwarts/photos/campus.jpg` | `cdn.product(path)` |
+| **Content catalog** | `catalog` | `catalog/CURRICULUM/GRADE/SUBJECT/ASSET` | `/catalog/sudan/g7/math/ch1.pdf` | `cdn.catalog({...})` |
+
+Anything whose top-level segment is not a known shared, product, or content namespace is treated
+as a **vendor** mirror. That is by design: dropping `stripe/logo.svg` at the root just works and
+shows up as a vendor asset, no config change required.
+
+### 1. Vendor mirror
+
+Third-party brand assets we self-host instead of hot-linking — logos, wordmarks, payment marks,
+partner glyphs. Flat: `BRAND/FILE`. No category subfolders.
+
+```ts
+import { cdn } from "@/lib/cdn"
+
+cdn.vendor("anthropic", "wordmark.svg")
+// → https://cdn.databayt.org/anthropic/wordmark.svg
+```
+
+### 2. Shared primitives — `icons` / `illustrations` / `animations`
+
+Design primitives shared across every product. Exactly three namespaces, fixed in
+`SHARED_NAMESPACES`:
+
+- `icons` — UI glyphs, payment/brand marks used in-app (SVG).
+- `illustrations` — larger decorative art, empty states, hero graphics.
+- `animations` — Lottie JSON and animated assets.
+
+```ts
+cdn.shared("icons", "visa.svg")
+// → https://cdn.databayt.org/icons/visa.svg
+
+cdn.shared("animations", "confetti.json")
+// → https://cdn.databayt.org/animations/confetti.json
+```
+
+### 3. Product namespace — `hogwarts` / `souq` / `mkan` / `shifa` / `kun`
+
+Media owned by a single product. A repo addresses *its own* media with `cdn.product(path)`, which
+prefixes the path with that repo's `NEXT_PUBLIC_CDN_NAMESPACE`. Set the env var once and the
+product prefix is implicit forever after.
+
+```ts
+// In the hogwarts repo, with NEXT_PUBLIC_CDN_NAMESPACE=hogwarts
+cdn.product("photos/campus.jpg")
+// → https://cdn.databayt.org/hogwarts/photos/campus.jpg
+```
+
+A repo that forgets to set `NEXT_PUBLIC_CDN_NAMESPACE` will build product URLs with the namespace
+segment missing (the path hangs off the host root) and silently mis-key its own media. Setting it
+is part of the adopt-per-repo runbook below for exactly this reason.
+
+To reach *another* product's namespace (rare), use the vendor helper with the namespace as the
+first segment, or `urlForKey("souq/banners/eid.jpg")` directly.
+
+### 4. Content catalog
+
+Structured, hierarchical content — curriculum material, graded resources. One well-known root,
+`catalog`, with a fixed depth so keys stay predictable and browsable.
+
+```ts
+cdn.catalog({ curriculum: "sudan", grade: "g7", subject: "math", asset: "ch1.pdf" })
+// → https://cdn.databayt.org/catalog/sudan/g7/math/ch1.pdf
+```
+
+## Key-naming rules
+
+Keys are the public contract. Once an asset is referenced from a repo, its key is effectively
+forever, so get it flat and clean the first time.
+
+1. **Flat over nested.** Prefer `BRAND/FILE` over `BRAND/category/sub/FILE`. The four-tier scheme
+   already encodes hierarchy in the first segment; do not re-encode it in deep folders. (Catalog
+   is the one intentional exception — its depth is the hierarchy.)
+2. **Drop redundant brand prefixes.** Inside a vendor folder the path already names the brand, so
+   `anthropic/anthropic-wordmark.svg` becomes `anthropic/wordmark.svg`. The flatten step in
+   `scripts/build-cdn-manifest.ts` does exactly this (`anthropic/brand/anthropic-wordmark.svg`
+   collapses to `anthropic/wordmark.svg`).
+3. **lower-kebab-case only.** All-lowercase, words joined by `-`. No spaces, no underscores, no
+   capitals, no URL-encoding traps.
+4. **Descriptive, not numeric.** `node-constellation.svg`, not `img-04.svg`.
+5. **Keep the real extension.** `.svg`, `.png`, `.webp`, `.json`. `isImage(key)` keys off the
+   extension to decide whether the showroom renders a preview or an extension badge.
+6. **Never leak transform params.** No ImageKit `tr:` strings, no Cloudinary `w_400,f_auto`
+   segments baked into keys. The key is the object; sizing is a delivery concern.
+7. **First segment must be intentional.** Choose a known shared/product/content namespace, or a
+   deliberate vendor brand. Typos at the root silently become new vendor folders.
+
+## Catalog & ClickView
+
+`catalog/` is the one content tier with real depth — its path **is** the curriculum hierarchy, and
+every image is a pure function of the entity's slugs (no per-row stored URL). hogwarts already
+implements most of this; the scheme below is the clean, canonical shape.
+
+`catalog/<curriculum>/<subjectSlug>/[<chapterSlug>/[<lessonSlug>/]]<asset>`
+
+| Key | Asset | Form |
+| --- | --- | --- |
+| `catalog/us/us-g3-math/banner` | subject banner | **prefix** — resolver appends `-sm`/`-md`/`-lg`/`-original.webp` |
+| `catalog/us/us-g3-math/thumbnail` | subject thumbnail | prefix |
+| `catalog/us/us-g3-math/cover.jpg` | textbook cover | exact key, raw |
+| `catalog/us/us-g3-math/textbook.pdf` | textbook PDF | exact key, raw |
+| `catalog/us/us-g3-math/fractions/thumbnail` | chapter thumbnail | prefix |
+| `catalog/us/us-g3-math/fractions/adding-fractions/thumbnail` | lesson thumbnail | prefix |
+| `catalog/source-covers/JjKENb` | raw ClickView snapshot | provenance — never referenced by a row |
+
+`subjectSlug` is global and **grade-stamped** (`us-g3-math`), so there is no separate grade
+segment; `chapterSlug` and `lessonSlug` are unique only within their parent, so ancestors are
+mandatory.
+
+**Preserving the coupling.** The key is a pure function of the entity's slugs — a `catalogKey(...)`
+helper byte-identical to `cdn.catalog()` — so the image follows the entity with **no stored URL**.
+hogwarts' `Subject.thumbnail`/`banner`, `Chapter.thumbnail`, and `Lesson.thumbnail` hold the key
+prefix; `getCatalogImageUrl(key, size)` resolves it to
+`https://cdn.databayt.org/<key>-<size>.webp`.
+
+**ClickView provenance.** Lesson covers originate from ClickView
+(`img.clickviewapp.com/v2/covers/<coverId>`). The raw cover snapshots to
+`catalog/source-covers/<coverId>` (decoupled from the external CDN), then processes into the WebP
+variants; `Lesson.coverId` keeps the source id. In the manifest, every `catalog/**` asset carries
+`slug: "clickview"` (a path-prefix rule in the builder, `provenanceSlug()`), so the showroom and
+the asset tables surface a **ClickView** provenance beside the `catalog` path.
+
+## How any repo consumes the CDN
+
+Three steps, identical in every repo.
+
+**Step 1 — vendor the helper.** Copy the canonical file in (it is byte-identical across repos):
+
+```bash
+pnpm codebase add cdn
+# drops src/lib/cdn.ts into the consuming repo
+```
+
+**Step 2 — set two env vars** in the central `.env`:
+
+```bash
+NEXT_PUBLIC_CDN_DOMAIN=cdn.databayt.org
+NEXT_PUBLIC_CDN_NAMESPACE=hogwarts   # this repo's tier-3 segment: hogwarts | souq | mkan | shifa | kun
+```
+
+`NEXT_PUBLIC_CDN_DOMAIN` sets the host for every URL the helper builds. `NEXT_PUBLIC_CDN_NAMESPACE`
+is only used by `cdn.product()` to prefix this repo's own media. Both are `NEXT_PUBLIC_` so they
+inline into client bundles and the URLs are stable across server and browser.
+
+**Step 3 — import and call.** No per-call host or namespace plumbing:
+
+```tsx
+import { cdn } from "@/lib/cdn"
+
+export function PayWithVisa() {
+  return <img src={cdn.shared("icons", "visa.svg")} alt="Visa" />
+}
+
+export function CampusHero() {
+  return <img src={cdn.product("photos/campus.jpg")} alt="Campus" />
+}
+```
+
+That is the whole integration. Because the helper reads env at module load, the same source file
+resolves to the right host and product prefix in every repo with zero edits.
+
+## The `/icons` showroom — source of truth
+
+The codebase repo's `/icons` route is the canonical gallery of everything on the CDN. It is not a
+static page: it renders `src/registry/cdn-manifest.json`, so it always reflects the bucket as of
+the last manifest build.
+
+- `src/components/root/icons/content.tsx` composes the page (`hero` + `tabs` + `all`).
+- `src/components/root/icons/all.tsx` maps `manifest.assets`, resolving each key with
+  `manifest.urlBase` when set (local preview) and falling back to `urlForKey(key)` (the live CDN).
+- `isImage(key)` decides preview-vs-badge; the tier of each key comes from `tierOf(key)`.
+
+While the bucket is being seeded, the manifest carries `urlBase: "/cdn"` and the 12 seed SVGs are
+bundled in `public/cdn/anthropic/` so the showroom renders with no network dependency. Once the
+distribution serves 200s for `cdn.databayt.org`, drop `urlBase` (or point it at the CDN) and the
+same grid streams from `cdn.databayt.org`. Keep `urlBase: "/cdn"` until then — the live URLs will
+fail while the domain still resolves to nothing.
+
+### Generating the manifest
+
+`scripts/build-cdn-manifest.ts` lists the bucket and writes `src/registry/cdn-manifest.json`:
+
+```bash
+CDN_BUCKET=databayt-cdn AWS_REGION=us-east-1 \
+  AWS_ACCESS_KEY_ID=… AWS_SECRET_ACCESS_KEY=… \
+  pnpm tsx scripts/build-cdn-manifest.ts
+```
+
+Always pass `CDN_BUCKET=databayt-cdn` and `AWS_REGION=us-east-1` explicitly. The script still
+defaults `CDN_BUCKET` to the dead `hogwarts-databayt` bucket (which returns `AllAccessDisabled`)
+and defaults `AWS_REGION` to `auto` — the latter is only valid for S3-compatible endpoints like
+Tigris/R2, not for real AWS S3, which requires a concrete region.
+
+It paginates `ListObjectsV2`, skips folder placeholders, sorts keys, and stamps `generatedAt`,
+`source`, `bucket`, `domain`, and `urlBase`. Pass `--flatten-vendor` to preview the flattened
+vendor keys (`anthropic/brand/anthropic-wordmark.svg` shown as `anthropic/wordmark.svg`) before
+the bucket is actually re-keyed. The manifest type is `CdnManifest` in `src/lib/cdn.ts`:
+
+```ts
+export interface CdnManifest {
+  generatedAt: string
+  source: string
+  bucket: string
+  domain: string
+  urlBase?: string
+  assets: CdnAsset[]
+}
+```
+
+Rule of thumb: **after any upload or re-key, regenerate the manifest and commit it.** The showroom
+and the manifest move together.
+
+## Infrastructure (net-new)
+
+The old infra is dead and is not being reused. We provision fresh:
+
+| Resource | Value |
+| --- | --- |
+| S3 bucket | `databayt-cdn` (us-east-1) |
+| Distribution | new CloudFront distribution with OAC |
+| Domain | `cdn.databayt.org` (re-pointed to the new distribution) |
+| TLS cert | ACM cert for `cdn.databayt.org` in **us-east-1**, DNS-validated |
+| Access model | S3 Block Public Access fully ON; bucket policy grants the distribution only, via `aws:SourceArn` |
+
+Guardrails that are non-negotiable:
+
+- **OAC, not legacy OAI.** Origin Access Control is the current best practice; OAI is deprecated.
+- **No public ACLs, no public bucket policy, no public-read objects.** Objects are reached *only*
+  through CloudFront via OAC. Never set `public-read` on the bucket or on individual objects, and
+  never add an `s3:GetObject` `Principal: "*"` statement — the only `s3:GetObject` grant is to the
+  distribution, scoped by `aws:SourceArn` on the distribution ARN.
+- **us-east-1 omits `LocationConstraint`.** Creating the bucket in `us-east-1` must *not* pass a
+  `--create-bucket-configuration LocationConstraint=us-east-1` (the S3 API rejects it for the
+  default region). Create it plainly:
+
+  ```bash
+  aws s3api create-bucket --bucket databayt-cdn --region us-east-1
+  ```
+
+- **Cert region.** CloudFront only accepts ACM certs from `us-east-1`. A cert in any other region
+  will not attach. Request it DNS-validated and add the CNAME validation record before issuing.
+- **Re-point the domain.** `cdn.databayt.org` currently CNAMEs a dead distribution and 000s. The
+  DNS record must move to the new distribution's domain name and the alias added to the
+  distribution before TLS resolves.
+- **Immutable caching + invalidation.** Uploads set `Cache-Control: public, max-age=31536000,
+  immutable` and the correct `Content-Type`; after any re-key or overwrite, invalidate the
+  affected CloudFront paths so edges do not serve stale bytes.
+
+AWS CLI is not assumed to be installed locally — install it with `brew install awscli` (or use
+`npx`-based equivalents) before running the provisioning runbook.
+
+## Migration map: off ImageKit and Cloudinary
+
+We are decommissioning `ik.imagekit.io/abdout` (ImageKit) and the Cloudinary account. The move is
+mechanical and reversible until the final decommission step. Six phases:
+
+### 1. Inventory
+
+Enumerate every asset reference in every repo. Grep for the legacy hosts and list the distinct
+remote URLs:
+
+```bash
+# Across each repo (hogwarts, souq, mkan, shifa, kun, codebase):
+grep -rEo "https?://[^\"')]*(imagekit\.io|res\.cloudinary\.com)[^\"')]*" src \
+  | sort -u > cdn-inventory.txt
+```
+
+For each hit record: the source URL, the file it lives in, and which **tier** it belongs to
+(vendor brand, shared primitive, product media, or catalog content).
+
+### 2. Re-key
+
+Map each legacy URL to its clean CDN key, applying the key-naming rules. Strip transform params,
+flatten folders, drop redundant brand prefixes.
+
+| Legacy URL | New key | Tier |
+| --- | --- | --- |
+| `ik.imagekit.io/abdout/logos/anthropic-wordmark.svg` | `anthropic/wordmark.svg` | vendor |
+| `ik.imagekit.io/abdout/tr:w-400/icons/visa.png` | `icons/visa.png` | shared |
+| `res.cloudinary.com/abdout/image/upload/w_800,f_auto/hogwarts/campus.jpg` | `hogwarts/photos/campus.jpg` | product |
+| `res.cloudinary.com/abdout/.../sudan-g7-math-ch1.pdf` | `catalog/sudan/g7/math/ch1.pdf` | content |
+
+This table is illustrative — the real inventory must be generated per repo and reconciled before
+upload, or the call-site swaps will 404. Keep the reconciled table as the migration's
+manifest-of-record; it drives both the upload and the call-site swap.
+
+### 3. Upload via `sync.ts`
+
+Pull each source object from its legacy URL and `PutObject` it into `databayt-cdn` under the new
+key, with the right `Content-Type` and long-lived cache headers. `scripts/sync.ts` does not exist
+yet — author it as part of this migration: it reads the re-key table, downloads each legacy
+object, and uploads in batches with `Content-Type` set and `Cache-Control: public,
+max-age=31536000, immutable`, then invalidates the affected CloudFront paths.
+
+```bash
+CDN_BUCKET=databayt-cdn AWS_REGION=us-east-1 \
+  AWS_ACCESS_KEY_ID=… AWS_SECRET_ACCESS_KEY=… \
+  pnpm tsx scripts/sync.ts cdn-inventory.txt
+```
+
+Uploads are idempotent (keyed by the target key), so re-running is safe. Never bake transform
+params into the uploaded key — store the original, deliver via CloudFront. Never set the uploaded
+objects to `public-read`; they are served only through the distribution via OAC.
+
+### 4. Swap call sites
+
+Replace each legacy URL string with the helper call for its tier. This is where the inventory pays
+off — every reference is in the table:
+
+```diff
+- <img src="https://ik.imagekit.io/abdout/logos/anthropic-wordmark.svg" />
++ <img src={cdn.vendor("anthropic", "wordmark.svg")} />
+
+- <img src="https://res.cloudinary.com/abdout/.../w_800/hogwarts/campus.jpg" />
++ <img src={cdn.product("photos/campus.jpg")} />
+```
+
+Do this per repo, in small PRs, one tier at a time. After the swap, the only place the legacy hosts
+appear should be the inventory file itself.
+
+### 5. Verify
+
+- Regenerate the manifest (`CDN_BUCKET=databayt-cdn AWS_REGION=us-east-1 pnpm tsx
+  scripts/build-cdn-manifest.ts`) and confirm every migrated key shows up on the `/icons` showroom.
+- Re-run the inventory grep — it should return **zero** `imagekit.io` / `cloudinary` matches in
+  application source.
+- Spot-check a few URLs return `200` from `cdn.databayt.org` with a `Hit from cloudfront` cache
+  header and the correct `Content-Type`.
+- Run `pnpm build` per repo to catch any missed references.
+
+### 6. Decommission
+
+Once every repo is verified and shipped:
+
+- Remove ImageKit and Cloudinary SDKs, env vars, and any `next.config` `images.remotePatterns`
+  entries pointing at the legacy hosts.
+- Delete the ImageKit project and the Cloudinary account (or downgrade to free/paused).
+- Rotate any leaked legacy keys.
+- Keep `cdn-inventory.txt` and the re-key table in the codebase repo as the migration record.
+
+## Environment variables
+
+| Variable | Where | Value / purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_CDN_DOMAIN` | every consuming repo (`.env`) | `cdn.databayt.org` — host for all helper URLs |
+| `NEXT_PUBLIC_CDN_NAMESPACE` | every consuming repo (`.env`) | this repo's tier-3 segment: `hogwarts` / `souq` / `mkan` / `shifa` / `kun` — used by `cdn.product()` |
+| `CDN_BUCKET` | manifest + sync scripts | `databayt-cdn` (always pass explicitly; the script default is the dead `hogwarts-databayt`) |
+| `AWS_REGION` | manifest + sync scripts | `us-east-1` (always pass explicitly; the script default `auto` is invalid for real AWS S3) |
+| `AWS_ACCESS_KEY_ID` | manifest + sync scripts | net-new IAM key (never committed) |
+| `AWS_SECRET_ACCESS_KEY` | manifest + sync scripts | net-new IAM secret (never committed) |
+| `CDN_URL_BASE` | manifest script (optional) | override where the showroom loads assets from |
+| `AWS_ENDPOINT_URL_S3` | manifest script (optional) | custom S3-compatible endpoint; omit for real AWS S3 |
+
+No secrets are hardcoded anywhere — the helper reads only the two `NEXT_PUBLIC_` vars; AWS
+credentials live in the central `.env` and are passed to the scripts at runtime.
+
+## Adopt-per-repo runbook
+
+1. `pnpm codebase add cdn` — vendor `src/lib/cdn.ts` into the repo.
+2. Add `NEXT_PUBLIC_CDN_DOMAIN=cdn.databayt.org` and `NEXT_PUBLIC_CDN_NAMESPACE=<product>` to the
+   central `.env` (the namespace is required, or `cdn.product()` mis-keys this repo's media).
+3. Run the inventory grep; build the re-key table for this repo's tiers.
+4. `pnpm tsx scripts/sync.ts cdn-inventory.txt` to upload re-keyed objects to `databayt-cdn`.
+5. Swap call sites to `cdn.vendor` / `cdn.shared` / `cdn.product` / `cdn.catalog`, in small PRs.
+6. `CDN_BUCKET=databayt-cdn AWS_REGION=us-east-1 pnpm tsx scripts/build-cdn-manifest.ts` and
+   confirm assets on `/icons`.
+7. Verify: zero legacy matches, `200`s from CloudFront, `pnpm build` green.
+8. Remove legacy SDKs/env/`remotePatterns`; ship.
+
+## Checklist
+
+- [ ] First path segment is an intentional tier (vendor brand / shared ns / product / catalog).
+- [ ] Key is flat, lower-kebab-case, no redundant brand prefix, no transform params.
+- [ ] Helper call used (`cdn.vendor/shared/product/catalog`) — no hardcoded `cdn.databayt.org` strings.
+- [ ] `NEXT_PUBLIC_CDN_DOMAIN` and `NEXT_PUBLIC_CDN_NAMESPACE` set in the central `.env`.
+- [ ] Manifest regenerated and committed after every upload/re-key.
+- [ ] Migrated asset visible on the `/icons` showroom.
+- [ ] Inventory grep returns zero `imagekit.io` / `cloudinary` matches in source.
+- [ ] S3 Block Public Access fully on; no public ACLs and no public-read objects; bucket policy
+      scoped to the distribution via `aws:SourceArn`; OAC (not OAI); ACM cert in `us-east-1`.

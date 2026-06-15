@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-06-14",
+  "source": "seed (local preview — bundled in public/cdn until the S3 sweep)",
+  "bucket": "databayt-cdn",
+  "domain": "cdn.databayt.org",
+  "urlBase": "/cdn",
+  "assets": [
+    { "key": "anthropic/wordmark.svg" },
+    { "key": "anthropic/claude-wordmark.svg" },
+    { "key": "anthropic/starburst.svg" },
+    { "key": "anthropic/favicon.svg" },
+    { "key": "anthropic/hand-head-node.svg" },
+    { "key": "anthropic/code-magnifier.svg" },
+    { "key": "anthropic/node-constellation.svg" },
+    { "key": "anthropic/hourglass.svg" },
+    { "key": "anthropic/hand-node-pair.svg" },
+    { "key": "anthropic/node-branch.svg" },
+    { "key": "anthropic/hand-abacus.svg" },
+    { "key": "anthropic/node-constitution.svg" }
+  ]
+}

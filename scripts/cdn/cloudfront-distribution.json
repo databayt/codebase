@@ -1,0 +1,131 @@
+{
+  "//": "============================================================================",
+  "//1": "cloudfront-distribution.json — DistributionConfig template for cdn.databayt.org",
+  "//2": "",
+  "//3": "WHAT CONSUMES THIS FILE:",
+  "//4": "  This is the INNER DistributionConfig object passed via",
+  "//5": "    aws cloudfront create-distribution --distribution-config file://<rendered>",
+  "//6": "  provision-cloudfront.sh renders a temp copy (substituting the __PLACEHOLDERS__",
+  "//7": "  below with sed) and feeds THAT rendered file to create-distribution. The `//*`",
+  "//8": "  keys are JSON comments; CloudFront ignores unknown top-level keys? NO — it does",
+  "//9": "  NOT. provision-cloudfront.sh STRIPS every key whose name starts with `//` before",
+  "//a": "  calling the API (jq 'del(..)'). Treat these `//` keys as documentation only.",
+  "//b": "",
+  "//c": "PLACEHOLDERS (filled by provision-cloudfront.sh via sed):",
+  "//d": "  __OAC_ID__        -> Origin Access Control id (e.g. E2ABCDEFGHIJKL). Created or",
+  "//e": "                       found by the script; SigV4 / signing-behavior=always / s3.",
+  "//f": "  __ACM_CERT_ARN__  -> ACM certificate ARN for cdn.databayt.org. MUST be a cert in",
+  "//g": "                       us-east-1 (CloudFront only reads ACM from us-east-1).",
+  "//h": "  __CALLER_REF__    -> Idempotency token for create-distribution. The script sets a",
+  "//i": "                       stable value so an accidental double-run is rejected by AWS",
+  "//j": "                       rather than creating a duplicate distribution.",
+  "//k": "",
+  "//l": "DESIGN NOTES:",
+  "//m": "  - Origin is the S3 REST endpoint databayt-cdn.s3.us-east-1.amazonaws.com, NOT the",
+  "//n": "    website endpoint (*.s3-website-*). REST + OAC is required for a private bucket.",
+  "//o": "  - OriginAccessControlId wires the modern OAC. Legacy OriginAccessIdentity is left",
+  "//p": "    EMPTY ('') — we NEVER use the deprecated OAI.",
+  "//q": "  - S3OriginConfig.OriginAccessIdentity MUST be present-but-empty for an OAC origin.",
+  "//r": "  - CachePolicyId 658327ea-... = AWS managed 'CachingOptimized'.",
+  "//s": "  - OriginRequestPolicyId 88a5eaf4-... = AWS managed 'CORS-S3Origin' (forwards the",
+  "//t": "    Origin/Access-Control-Request-* headers so S3 returns correct CORS).",
+  "//u": "  - ResponseHeadersPolicyId 60669652-... = AWS managed 'SimpleCORS' (adds",
+  "//v": "    Access-Control-Allow-Origin to the edge response). Belt-and-suspenders with CORS-S3Origin.",
+  "//w": "  - DefaultRootObject is '' — this is an ASSET bucket, not a SPA; no index rewrite.",
+  "//x": "============================================================================",
+
+  "CallerReference": "__CALLER_REF__",
+  "Aliases": {
+    "Quantity": 1,
+    "Items": ["cdn.databayt.org"]
+  },
+  "DefaultRootObject": "",
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "s3-databayt-cdn",
+        "DomainName": "databayt-cdn.s3.us-east-1.amazonaws.com",
+        "OriginPath": "",
+        "CustomHeaders": {
+          "Quantity": 0
+        },
+        "S3OriginConfig": {
+          "//": "Empty OriginAccessIdentity REQUIRED when using OAC. Never put an OAI here.",
+          "OriginAccessIdentity": ""
+        },
+        "OriginAccessControlId": "__OAC_ID__",
+        "ConnectionAttempts": 3,
+        "ConnectionTimeout": 10,
+        "OriginShield": {
+          "Enabled": false
+        }
+      }
+    ]
+  },
+  "OriginGroups": {
+    "Quantity": 0
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "s3-databayt-cdn",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "Compress": true,
+    "AllowedMethods": {
+      "Quantity": 3,
+      "Items": ["GET", "HEAD", "OPTIONS"],
+      "CachedMethods": {
+        "Quantity": 3,
+        "Items": ["GET", "HEAD", "OPTIONS"]
+      }
+    },
+    "SmoothStreaming": false,
+    "FieldLevelEncryptionId": "",
+    "//cache": "Managed 'CachingOptimized' — long TTLs, gzip/br compression respected.",
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+    "//origin-req": "Managed 'CORS-S3Origin' — forwards CORS request headers to S3.",
+    "OriginRequestPolicyId": "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf",
+    "//resp": "Managed 'SimpleCORS' — adds Access-Control-Allow-Origin on the edge response.",
+    "ResponseHeadersPolicyId": "60669652-455b-4ae9-85a4-c4c02393f86c",
+    "LambdaFunctionAssociations": {
+      "Quantity": 0
+    },
+    "FunctionAssociations": {
+      "Quantity": 0
+    }
+  },
+  "CacheBehaviors": {
+    "Quantity": 0
+  },
+  "CustomErrorResponses": {
+    "Quantity": 0
+  },
+  "Comment": "databayt-cdn — asset CDN for cdn.databayt.org (S3 REST origin + OAC). Replaces dead d1dlwtcfl0db67.cloudfront.net.",
+  "Logging": {
+    "Enabled": false,
+    "IncludeCookies": false,
+    "Bucket": "",
+    "Prefix": ""
+  },
+  "PriceClass": "PriceClass_All",
+  "Enabled": true,
+  "ViewerCertificate": {
+    "//": "Custom ACM cert (NOT the default *.cloudfront.net cert). MUST be us-east-1.",
+    "ACMCertificateArn": "__ACM_CERT_ARN__",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021",
+    "Certificate": "__ACM_CERT_ARN__",
+    "CertificateSource": "acm",
+    "CloudFrontDefaultCertificate": false
+  },
+  "Restrictions": {
+    "GeoRestriction": {
+      "RestrictionType": "none",
+      "Quantity": 0
+    }
+  },
+  "WebACLId": "",
+  "HttpVersion": "http2and3",
+  "IsIPV6Enabled": true,
+  "ContinuousDeploymentPolicyId": "",
+  "Staging": false
+}
