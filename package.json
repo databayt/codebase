@@ -20,7 +20,8 @@
     "cdn:manifest": "tsx scripts/build-cdn-manifest.ts",
     "cdn:manifest:local": "tsx scripts/cdn/build-local-manifest.ts",
     "cdn:stage:clickview": "tsx scripts/cdn/stage-clickview.ts",
-    "cdn:stage:hogwarts": "tsx scripts/cdn/stage-hogwarts.ts"
+    "cdn:stage:hogwarts": "tsx scripts/cdn/stage-hogwarts.ts",
+    "cdn:stage:mkan": "tsx scripts/cdn/stage-mkan.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.77",

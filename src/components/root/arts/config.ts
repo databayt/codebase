@@ -14,10 +14,11 @@ export const NAMESPACE_LABELS: Record<string, string> = {
   apple: "Apple",
   clickview: "ClickView",
   hogwarts: "Hogwarts",
+  mkan: "Mkan",
 }
 
 /** Brands shown as tabs regardless of whether they have assets yet. */
-export const NAMESPACE_ORDER = ["anthropic", "airbnb", "apple", "clickview", "hogwarts"]
+export const NAMESPACE_ORDER = ["anthropic", "airbnb", "apple", "clickview", "hogwarts", "mkan"]
 
 /**
  * Style facets — substring match on the key; only shown when assets carry the token.
