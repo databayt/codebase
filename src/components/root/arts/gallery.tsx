@@ -16,6 +16,7 @@ const LottieThumb = dynamic(
 )
 
 const isLottie = (key: string) => key.toLowerCase().endsWith(".json")
+const isVideo = (key: string) => /\.(webm|mp4)$/i.test(key)
 
 interface ArtsGalleryProps {
   assets: CdnAsset[]
@@ -108,6 +109,15 @@ export default function ArtsGallery({ assets, urlBase, source, domain }: ArtsGal
                       />
                     ) : isLottie(a.key) ? (
                       <LottieThumb src={src} />
+                    ) : isVideo(a.key) ? (
+                      <video
+                        src={src}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="max-h-full max-w-full object-contain"
+                      />
                     ) : (
                       <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                         {ext}

@@ -32,9 +32,18 @@ const ICONS = {
   services: ["3d67e9a9-520a-49ee-b439-7b3a75ea814d", "2bf5d36d-e731-4465-a8ef-91abbf2ae8ce"],
 };
 
-async function fetchPng(uuid) {
-  const res = await fetch(`${BASE}/${uuid}.png`);
-  if (!res.ok) throw new Error(`${uuid}: HTTP ${res.status}`);
+// The SAME three marks also ship as transparent WebM "twirl" animations (idle +
+// selected state) — Airbnb's real motion assets, served straight from muscache.
+const ANIM_BASE = "https://a0.muscache.com/videos/search-bar-icons/webm";
+const ANIMATIONS = {
+  homes: "house-twirl", "homes-selected": "house-twirl-selected",
+  experiences: "balloon-twirl", "experiences-selected": "balloon-twirl-selected",
+  services: "consierge-twirl", "services-selected": "consierge-twirl-selected",
+};
+
+async function fetchBuf(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
 }
 
@@ -45,12 +54,16 @@ async function main() {
     const jobs = KEEP_FRAMES ? [[slug, primary], [`${slug}-2`, alt]] : [[slug, primary]];
     for (const [name, uuid] of jobs) {
       const dest = join(OUT, `${name}.png`);
-      writeFileSync(dest, await fetchPng(uuid));
+      writeFileSync(dest, await fetchBuf(`${BASE}/${uuid}.png`));
       execFileSync("sips", ["-Z", "512", dest], { stdio: "ignore" }); // downscale in place, keep alpha
       written.push(`${name}.png`);
     }
   }
-  console.log(`Staged ${written.length} Airbnb 3D nav icon(s) → ${OUT}\n  ${written.join("  ")}`);
+  for (const [name, src] of Object.entries(ANIMATIONS)) {
+    writeFileSync(join(OUT, `${name}.webm`), await fetchBuf(`${ANIM_BASE}/${src}.webm`));
+    written.push(`${name}.webm`);
+  }
+  console.log(`Staged ${written.length} Airbnb nav asset(s) → ${OUT}\n  ${written.join("  ")}`);
 }
 
 main().catch((e) => {
