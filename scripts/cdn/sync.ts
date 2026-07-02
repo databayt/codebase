@@ -46,6 +46,16 @@ const REGION = process.env.AWS_REGION || "us-east-1";
 const DISTRIBUTION_ID = process.env.DISTRIBUTION_ID || "";
 const DRY_RUN = process.argv.includes("--dry-run");
 
+/**
+ * Optional namespace filter: `--prefix=airbnb` uploads only `airbnb/**` and
+ * scopes the CloudFront invalidation to `/airbnb/*`. Omit to sweep all of
+ * public/cdn/ and invalidate `/*` (the original behaviour).
+ */
+const PREFIX = (() => {
+  const flag = process.argv.find((a) => a.startsWith("--prefix="));
+  return flag ? (flag.split("=")[1] ?? "").replace(/^\/+|\/+$/g, "") : "";
+})();
+
 /** Parse --concurrency=N defensively: NaN / <=0 must NOT silently disable uploads. */
 const CONCURRENCY = (() => {
   const flag = process.argv.find((a) => a.startsWith("--concurrency="));
@@ -137,6 +147,7 @@ async function main() {
   let skipped = 0;
   for (const absPath of walked) {
     const key = relative(PUBLIC_CDN_DIR, absPath).replace(/\\/g, "/");
+    if (PREFIX && !key.startsWith(`${PREFIX}/`)) continue;
     if (classifyExcluded(key)) {
       skipped++;
       continue;
@@ -144,6 +155,7 @@ async function main() {
     allFiles.push(absPath);
   }
   if (skipped) console.log(`Harvest rules skipped ${skipped} junk file(s).`);
+  if (PREFIX) console.log(`Prefix filter: only uploading ${PREFIX}/** .`);
 
   if (allFiles.length === 0) {
     console.log(`No files found under ${PUBLIC_CDN_DIR}. Nothing to do.`);
@@ -207,9 +219,10 @@ async function main() {
   // -------------------------------------------------------------------------
   // CloudFront invalidation (CF API region is always us-east-1)
   // -------------------------------------------------------------------------
+  const invalidationPath = PREFIX ? `/${PREFIX}/*` : "/*";
   if (!DRY_RUN && DISTRIBUTION_ID && uploaded > 0) {
     console.log(
-      `\nCreating CloudFront invalidation /* on distribution ${DISTRIBUTION_ID} …`,
+      `\nCreating CloudFront invalidation ${invalidationPath} on distribution ${DISTRIBUTION_ID} …`,
     );
     const cf = new CloudFrontClient({ region: "us-east-1" });
     try {
@@ -217,7 +230,7 @@ async function main() {
         new CreateInvalidationCommand({
           DistributionId: DISTRIBUTION_ID,
           InvalidationBatch: {
-            Paths: { Quantity: 1, Items: ["/*"] },
+            Paths: { Quantity: 1, Items: [invalidationPath] },
             CallerReference: `cdn-sync-${Date.now()}`,
           },
         }),
@@ -232,7 +245,7 @@ async function main() {
     }
   } else if (DRY_RUN && DISTRIBUTION_ID) {
     console.log(
-      `[dry-run] would create CloudFront invalidation /* on ${DISTRIBUTION_ID}`,
+      `[dry-run] would create CloudFront invalidation ${invalidationPath} on ${DISTRIBUTION_ID}`,
     );
   }
 
