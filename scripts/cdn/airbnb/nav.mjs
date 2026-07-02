@@ -35,10 +35,12 @@ const ICONS = {
 // The SAME three marks also ship as transparent WebM "twirl" animations (idle +
 // selected state) — Airbnb's real motion assets, served straight from muscache.
 const ANIM_BASE = "https://a0.muscache.com/videos/search-bar-icons/webm";
+// Each mark ships three motion states: the idle "twirl", the "selected" loop,
+// and the "twirl-selected" transition. All transparent WebM, original quality.
 const ANIMATIONS = {
-  homes: "house-twirl", "homes-selected": "house-twirl-selected",
-  experiences: "balloon-twirl", "experiences-selected": "balloon-twirl-selected",
-  services: "consierge-twirl", "services-selected": "consierge-twirl-selected",
+  "homes": "house-twirl", "homes-selected": "house-selected", "homes-twirl-selected": "house-twirl-selected",
+  "experiences": "balloon-twirl", "experiences-selected": "balloon-selected", "experiences-twirl-selected": "balloon-twirl-selected",
+  "services": "consierge-twirl", "services-selected": "consierge-selected", "services-twirl-selected": "consierge-twirl-selected",
 };
 
 async function fetchBuf(url) {
