@@ -151,6 +151,41 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/destinations/airport.png",
+      "size": 4944,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/coral-coast.png",
+      "size": 7232,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/marina.png",
+      "size": 7739,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/nearby.png",
+      "size": 4638,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/port-sudan.png",
+      "size": 8097,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/red-sea-university.png",
+      "size": 7816,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/suakin.png",
+      "size": 5628,
+      "contentType": "image/png"
+    },
+    {
       "key": "airbnb/dining-table.svg",
       "size": 349,
       "contentType": "image/svg+xml"
@@ -276,6 +311,36 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/highlights/central.svg",
+      "size": 461,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/family-friendly.svg",
+      "size": 738,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/peaceful.svg",
+      "size": 419,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/spacious.svg",
+      "size": 895,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/stylish.svg",
+      "size": 257,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/unique.svg",
+      "size": 504,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/homes-selected.webm",
       "size": 63923,
       "contentType": "video/webm"
@@ -296,9 +361,24 @@
       "contentType": "video/webm"
     },
     {
+      "key": "airbnb/host-about-place.mp4",
+      "size": 720686,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "airbnb/host-finish-setup.mp4",
+      "size": 914047,
+      "contentType": "video/mp4"
+    },
+    {
       "key": "airbnb/host-greets-you.svg",
       "size": 816,
       "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/host-stand-out.mp4",
+      "size": 674788,
+      "contentType": "video/mp4"
     },
     {
       "key": "airbnb/hot-tub.svg",
@@ -406,6 +486,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/outdoor-dining.svg",
+      "size": 731,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/outdoor-furniture.svg",
       "size": 463,
       "contentType": "image/svg+xml"
@@ -426,8 +511,18 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/piano.svg",
+      "size": 1572,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/pocket-wifi.svg",
       "size": 436,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/pool-table.svg",
+      "size": 1711,
       "contentType": "image/svg+xml"
     },
     {
@@ -11154,6 +11249,456 @@
       "key": "hogwarts/zain.png",
       "size": 32674,
       "contentType": "image/png"
+    },
+    {
+      "key": "mkan/assets/airbnb-logo.svg",
+      "size": 1900,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/badge.svg",
+      "size": 516,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Beach.svg",
+      "size": 3156,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Beauty Pools.svg",
+      "size": 4268,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Boat.svg",
+      "size": 1691,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Calque 2.svg",
+      "size": 2113,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/camera.avif",
+      "size": 38506,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "mkan/assets/Containers.svg",
+      "size": 3640,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/gift-cards.png",
+      "size": 384106,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/assets/Group.svg",
+      "size": 2950,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/help-one.png",
+      "size": 309174,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/assets/help-two.png",
+      "size": 190360,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/assets/hero.jpg",
+      "size": 902965,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/assets/Islands.svg",
+      "size": 4762,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/julia.jpg",
+      "size": 98718,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/assets/julia.png",
+      "size": 1344180,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/assets/layer1.svg",
+      "size": 10062,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Mension.svg",
+      "size": 4427,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/New.svg",
+      "size": 3096,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/place.webp",
+      "size": 40420,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "mkan/assets/publish.png",
+      "size": 396828,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/assets/rectangle-1-2.svg",
+      "size": 1127561,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/rectangle-1-3.svg",
+      "size": 1092285,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/rectangle-1.svg",
+      "size": 1017957,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/save.svg",
+      "size": 483,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/share.svg",
+      "size": 642,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/stand-out.webp",
+      "size": 55996,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "mkan/assets/star.svg",
+      "size": 360,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Trullo.svg",
+      "size": 3300,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Vector copy.svg",
+      "size": 1647,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Vector.svg",
+      "size": 1579,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/assets/Windmill.svg",
+      "size": 792,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/abu-amer.svg",
+      "size": 291,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/al-rifai.svg",
+      "size": 291,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/igbalco.svg",
+      "size": 290,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/jamal-el-din.svg",
+      "size": 296,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/marshal.svg",
+      "size": 290,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/mcv.svg",
+      "size": 286,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/musafir.svg",
+      "size": 290,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/rodeena.svg",
+      "size": 290,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/brands/transport/tirhal.svg",
+      "size": 289,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/co-hosts/find-a-cohost.png",
+      "size": 264858,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/destinations/khartoum.jpg",
+      "size": 79835,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/destinations/omdurman.jpg",
+      "size": 92169,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/destinations/port-sudan.jpg",
+      "size": 101054,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/hero.png",
+      "size": 1763584,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/hosting/bathroom.png",
+      "size": 101861,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/hosting/bedroom.png",
+      "size": 121921,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/hosting/today.png",
+      "size": 668401,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/images/default-avatar.svg",
+      "size": 235,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/images/default-property.svg",
+      "size": 689,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/images/host_waving.png",
+      "size": 153425,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/landing-call-to-action.jpg",
+      "size": 381297,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/landing-i1.png",
+      "size": 287791,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/landing-icon-calendar.png",
+      "size": 501,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/landing-icon-heart.png",
+      "size": 650,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/landing-icon-wand.png",
+      "size": 496,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/placeholder.svg",
+      "size": 403,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/property-placeholder.svg",
+      "size": 4047,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "mkan/refer/experience.png",
+      "size": 15132,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/refer/home.png",
+      "size": 18013,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/refer/service.png",
+      "size": 12347,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/stock/photo-1449824913935-59a10b8d2000.jpg",
+      "size": 407589,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1484154218962-a197022b5858.jpg",
+      "size": 185687,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1499793983690-e29da59ef1c2.jpg",
+      "size": 293458,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1502672260266-1c1ef2d93688.jpg",
+      "size": 296269,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1506905925346-21bda4d32df4.jpg",
+      "size": 228439,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1522708323590-d24dbb6b0267.jpg",
+      "size": 226151,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1534528741775-53994a69daeb.jpg",
+      "size": 275202,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1544620347-c4fd4a3d5957.jpg",
+      "size": 204423,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1545324418-cc1a3fa10c00.jpg",
+      "size": 513112,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1552321554-5fefe8c9ef14.jpg",
+      "size": 441771,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1556742049-0cfed4f6a45d.jpg",
+      "size": 201525,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1556909114-f6e7ad7d3136.jpg",
+      "size": 214289,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1558618666-fcd25c85cd64.jpg",
+      "size": 216535,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1560448204-e02f11c3d0e2.jpg",
+      "size": 231816,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1564013799919-ab600027ffc6.jpg",
+      "size": 445344,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1566073771259-6a8506099945.jpg",
+      "size": 398756,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1568605114967-8130f3a36994.jpg",
+      "size": 317382,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1570129477492-45c003edd2be.jpg",
+      "size": 523021,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1571896349842-33c89424de2d.jpg",
+      "size": 399880,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1586023492125-27b2c045efd7.jpg",
+      "size": 265133,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1600566753190-17f0baa2a6c3.jpg",
+      "size": 289474,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1600596542815-ffad4c1539a9.jpg",
+      "size": 268746,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1600607687939-ce8a6c25118c.jpg",
+      "size": 300769,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/stock/photo-1613490493576-7fde63acd811.jpg",
+      "size": 301239,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/tent.png",
+      "size": 6438,
+      "contentType": "image/png"
+    },
+    {
+      "key": "mkan/videos/hero-bg-720.mp4",
+      "size": 1480237,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "mkan/videos/hero-bg-poster.jpg",
+      "size": 57472,
+      "contentType": "image/jpeg"
+    },
+    {
+      "key": "mkan/videos/hero-bg.mp4",
+      "size": 40032202,
+      "contentType": "video/mp4"
     }
   ]
 }
