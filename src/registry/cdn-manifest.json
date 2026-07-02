@@ -192,6 +192,11 @@
     },
     {
       "key": "airbnb/experiences-selected.webm",
+      "size": 60554,
+      "contentType": "video/webm"
+    },
+    {
+      "key": "airbnb/experiences-twirl-selected.webm",
       "size": 72120,
       "contentType": "video/webm"
     },
@@ -272,6 +277,11 @@
     },
     {
       "key": "airbnb/homes-selected.webm",
+      "size": 63923,
+      "contentType": "video/webm"
+    },
+    {
+      "key": "airbnb/homes-twirl-selected.webm",
       "size": 123571,
       "contentType": "video/webm"
     },
@@ -386,6 +396,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/motion.css",
+      "size": 4196,
+      "contentType": "application/octet-stream"
+    },
+    {
       "key": "airbnb/movie-theater.svg",
       "size": 540,
       "contentType": "image/svg+xml"
@@ -492,6 +507,11 @@
     },
     {
       "key": "airbnb/services-selected.webm",
+      "size": 36926,
+      "contentType": "video/webm"
+    },
+    {
+      "key": "airbnb/services-twirl-selected.webm",
       "size": 44163,
       "contentType": "video/webm"
     },
@@ -584,6 +604,16 @@
       "key": "airbnb/waterfront.svg",
       "size": 1351,
       "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/weekly-monthly-discount-2.json",
+      "size": 14829,
+      "contentType": "application/json"
+    },
+    {
+      "key": "airbnb/weekly-monthly-discount.json",
+      "size": 21684,
+      "contentType": "application/json"
     },
     {
       "key": "airbnb/wifi.svg",
