@@ -191,9 +191,19 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/experiences-selected.webm",
+      "size": 72120,
+      "contentType": "video/webm"
+    },
+    {
       "key": "airbnb/experiences.png",
       "size": 86084,
       "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/experiences.webm",
+      "size": 69959,
+      "contentType": "video/webm"
     },
     {
       "key": "airbnb/extra-pillows-and-blankets.svg",
@@ -261,9 +271,19 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/homes-selected.webm",
+      "size": 123571,
+      "contentType": "video/webm"
+    },
+    {
       "key": "airbnb/homes.png",
       "size": 109320,
       "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/homes.webm",
+      "size": 97832,
+      "contentType": "video/webm"
     },
     {
       "key": "airbnb/host-greets-you.svg",
@@ -471,9 +491,19 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/services-selected.webm",
+      "size": 44163,
+      "contentType": "video/webm"
+    },
+    {
       "key": "airbnb/services.png",
       "size": 67814,
       "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/services.webm",
+      "size": 38299,
+      "contentType": "video/webm"
     },
     {
       "key": "airbnb/shampoo.svg",
