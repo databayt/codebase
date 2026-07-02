@@ -36,13 +36,48 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/bbq-grill.svg",
+      "size": 862,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/beach-essentials.svg",
+      "size": 666,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/beachfront.svg",
+      "size": 2412,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/bed-linens.svg",
       "size": 434,
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/bidet.svg",
+      "size": 687,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/blender.svg",
+      "size": 546,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/board-games.svg",
+      "size": 638,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/body-soap.svg",
       "size": 690,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/books-and-reading-material.svg",
+      "size": 479,
       "contentType": "image/svg+xml"
     },
     {
@@ -56,6 +91,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/ceiling-fan.svg",
+      "size": 1723,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/central-heating.svg",
       "size": 449,
       "contentType": "image/svg+xml"
@@ -63,6 +103,11 @@
     {
       "key": "airbnb/childrens-books-and-toys.svg",
       "size": 777,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/childrens-dinnerware.svg",
+      "size": 702,
       "contentType": "image/svg+xml"
     },
     {
@@ -76,8 +121,13 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/cleaning-products.svg",
+      "size": 522,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/close.svg",
-      "size": 159,
+      "size": 237,
       "contentType": "image/svg+xml"
     },
     {
@@ -111,6 +161,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/dishwasher.svg",
+      "size": 491,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/dryer.svg",
       "size": 799,
       "contentType": "image/svg+xml"
@@ -131,6 +186,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/ev-charger.svg",
+      "size": 589,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/experiences.png",
       "size": 86084,
       "contentType": "image/png"
@@ -142,7 +202,22 @@
     },
     {
       "key": "airbnb/filters.svg",
-      "size": 298,
+      "size": 376,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/fire-extinguisher.svg",
+      "size": 507,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/fire-pit.svg",
+      "size": 790,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/first-aid-kit.svg",
+      "size": 370,
       "contentType": "image/svg+xml"
     },
     {
@@ -156,13 +231,28 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/gym.svg",
+      "size": 471,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/hair-dryer.svg",
       "size": 621,
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/hammock.svg",
+      "size": 483,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/hangers.svg",
       "size": 406,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/heating.svg",
+      "size": 463,
       "contentType": "image/svg+xml"
     },
     {
@@ -196,6 +286,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/indoor-fireplace.svg",
+      "size": 779,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/instant-book.svg",
       "size": 464,
       "contentType": "image/svg+xml"
@@ -206,6 +301,16 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/keypad.svg",
+      "size": 617,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/king-bed.svg",
+      "size": 414,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/kitchen.svg",
       "size": 609,
       "contentType": "image/svg+xml"
@@ -213,6 +318,11 @@
     {
       "key": "airbnb/laundromat-nearby.svg",
       "size": 485,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/life-size-games.svg",
+      "size": 632,
       "contentType": "image/svg+xml"
     },
     {
@@ -242,12 +352,37 @@
     },
     {
       "key": "airbnb/map-settings.svg",
-      "size": 760,
+      "size": 840,
       "contentType": "image/svg+xml"
     },
     {
       "key": "airbnb/microwave.svg",
       "size": 445,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/mini-fridge.svg",
+      "size": 431,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/movie-theater.svg",
+      "size": 540,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/outdoor-furniture.svg",
+      "size": 463,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/outdoor-shower.svg",
+      "size": 804,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/oven.svg",
+      "size": 411,
       "contentType": "image/svg+xml"
     },
     {
@@ -261,13 +396,33 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/pool.svg",
+      "size": 1917,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/portable-fans.svg",
       "size": 869,
       "contentType": "image/svg+xml"
     },
     {
       "key": "airbnb/price.svg",
-      "size": 188,
+      "size": 266,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/private-entrance.svg",
+      "size": 245,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/private-patio-or-balcony.svg",
+      "size": 325,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/record-player.svg",
+      "size": 448,
       "contentType": "image/svg+xml"
     },
     {
@@ -276,18 +431,38 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/rice-maker.svg",
+      "size": 409,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/room-darkening-shades.svg",
       "size": 269,
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/safe.svg",
+      "size": 419,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/sauna.svg",
+      "size": 732,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/save.svg",
-      "size": 528,
+      "size": 606,
       "contentType": "image/svg+xml"
     },
     {
       "key": "airbnb/search.svg",
-      "size": 366,
+      "size": 460,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/security-cameras.svg",
+      "size": 464,
       "contentType": "image/svg+xml"
     },
     {
@@ -307,12 +482,12 @@
     },
     {
       "key": "airbnb/share.svg",
-      "size": 292,
+      "size": 370,
       "contentType": "image/svg+xml"
     },
     {
       "key": "airbnb/show-fullscreen-map.svg",
-      "size": 352,
+      "size": 430,
       "contentType": "image/svg+xml"
     },
     {
@@ -321,8 +496,43 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/ski-in-ski-out.svg",
+      "size": 905,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/smoke-alarm.svg",
       "size": 526,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/smoking-allowed.svg",
+      "size": 408,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/sound-system.svg",
+      "size": 510,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/star.svg",
+      "size": 359,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/stove.svg",
+      "size": 653,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/sun-loungers.svg",
+      "size": 608,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/toaster.svg",
+      "size": 623,
       "contentType": "image/svg+xml"
     },
     {
@@ -338,6 +548,11 @@
     {
       "key": "airbnb/washer.svg",
       "size": 481,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/waterfront.svg",
+      "size": 1351,
       "contentType": "image/svg+xml"
     },
     {
