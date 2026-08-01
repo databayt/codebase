@@ -4,6 +4,7 @@ import { fontSans, fontMono, fontRubik, fontVariables } from "@/components/atom/
 import { getDictionary } from "@/components/local/dictionaries";
 import { type Locale, localeConfig } from "@/components/local/config";
 import { ThemeProvider } from "@/components/atom/theme-provider"
+import { DirectionProvider } from "@/components/ui/direction"
 import { cn } from "@/lib/utils"
 import { headers } from "next/headers"
 
@@ -57,11 +58,13 @@ export default async function LocaleLayout({
     return (
         <html lang={lang} dir={config.dir} suppressHydrationWarning>
             <body className={cn(fontClass, fontVariables, "group/body overscroll-none antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]")} suppressHydrationWarning>
-                <ThemeProvider>
-                    <div className={isViewRoute ? "" : "layout-container"}>
-                        {children}
-                    </div>
-                </ThemeProvider>
+                <DirectionProvider dir={isRTL ? "rtl" : "ltr"}>
+                    <ThemeProvider>
+                        <div className={isViewRoute ? "" : "layout-container"}>
+                            {children}
+                        </div>
+                    </ThemeProvider>
+                </DirectionProvider>
             </body>
         </html>
     );
