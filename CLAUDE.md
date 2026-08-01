@@ -39,6 +39,26 @@ These are intentionally kept as they work well for our use cases.
 3. **Registry system** - Use shadcn-style registry for component distribution, aligned with the [shadcn directory](https://ui.shadcn.com/docs/directory) model (namespaced, CLI/MCP-installable)
 4. **Mirror-pattern** - Every URL route maps 1:1 to `app/` and `components/` directories
 
+## Custom Parts — DO NOT DISTURB
+
+These are deliberate divergences from shadcn/ui. Upstream syncs, refactors, and "cleanups" must never touch them. **Headline four: header, footer, page heading, homepage.**
+
+| Custom part | Files | Rule |
+|---|---|---|
+| **Header** (site chrome) | `src/components/template/header-01/` — SiteHeader, main-nav (Docs/Atoms/Templates/Blocks/Micros/Arts), mobile-nav, LangSwitcher, mode-switcher, command-menu | Never overwrite. ⚠️ Name-collides with registry item `header-01` in `src/registry/*/templates/` — registry copies are syncable; site chrome is not |
+| **Footer** (site chrome) | `src/components/template/footer-01/` — dictionary-driven credit line, embeds ReportIssueButton | Same collision warning |
+| **Page heading** | `src/components/atom/page-header.tsx` + `page-actions.tsx` — legacy shadcn PageHeader/PageActions kept intentionally (22 import sites; both files export `PageActions` with different signatures — intentional, don't "fix") | Stays registered as atoms + MDX docs |
+| **Homepage** | `src/app/[lang]/(root)/page.tsx`, `src/components/root/content.tsx`, `root/hero.tsx` (PageHeader + Announcement + TwoButtons, dictionary-driven) | `root/components/` demo grid is mirrored surface and may refresh; hero/content may not |
+
+Also protected:
+
+- **Custom files inside `ui/`**: `international-demo.tsx`, `custom-video-player.tsx`, `sortable.tsx`, `faceted.tsx` (not shadcn's — a sync must skip them); `chart.tsx` pinned to recharts 2
+- **i18n/RTL layer**: `src/components/local/*`, `src/app/[lang]/layout.tsx` (dir= + font swap), `src/app/layout.tsx` (bare-children passthrough — intentional, not a bug), `src/proxy.ts`, `src/styles/rtl.css`, `src/lib/arabic-utils.ts`, `content/docs-ar/`, the `[dir="rtl"]` block in `globals.css`
+- **Auth** (`src/auth*.ts`, `src/components/auth/`, `(auth)` routes) and **Prisma** (`prisma/models/*`, `src/lib/db.ts`)
+- **Custom registry types** `registry:atom` / `registry:template` — intentional extensions of the shadcn schema
+- **Original atoms**: two-buttons, announcement, fonts.ts (Rubik/Arabic), icons.tsx (hand-drawn brand SVGs), site-heading, modal-system + `modal/`, tabs.tsx (TabsNav), report-issue, share, the cards family
+- **Sections with no shadcn equivalent**: vibe (11 subsections), arts + CDN pipeline (`src/lib/cdn.ts`, `scripts/cdn/`, manifests), blocks (invoice/report business logic), micros, community/leads/sales/scraper/upwork/tablecn modules, AI layer, `src/styles/*`, custom docs topics, `components.json` registries map, `src/hooks/use-toast.ts` (3 live consumers)
+
 ## Tech Stack
 
 - **Framework**: Next.js 16.1.1 with App Router (Turbopack default)
@@ -79,9 +99,10 @@ Foundation: Radix UI → shadcn/ui → shadcn Ecosystem
 Building:   UI → Atoms → Templates → Blocks → Micro → Apps
 ```
 
-- **UI** (`src/components/ui/`) - shadcn/ui primitives, 54+ components
-- **Atoms** (`src/components/atom/`) - 2+ UI primitives combined, 62+ components
-- **Templates** (`src/components/template/`) - Full-page layouts (= shadcn blocks)
+- **UI** (`src/components/ui/`) - shadcn/ui primitives at 61-item upstream parity, plus 4 custom extras (see Custom Parts)
+- **Atoms** (`src/components/atom/`) - 2+ UI primitives combined; docs at `/atoms`, manifest in `src/registry/default/atoms/_registry.ts`, runtime index in `src/registry/atoms-index.ts`
+- **Templates** (`src/registry/new-york/templates/` = source, `default/` = generated) - Full-page layouts (= shadcn blocks); viewer + docs at `/templates`
+  - ⚠️ `src/components/template/` is **NOT** registry content — it is the live site chrome (SiteHeader, SiteFooter, LangSwitcher) and is protected
 - **Blocks** - UI with logic: reusable tables, forms, data-driven components
 - **Micro** - Mini micro-services and micro-frontends
 
@@ -94,10 +115,20 @@ Every URL route produces **two directories**:
 ### Registry System
 
 Follows shadcn registry pattern:
-- `__registry__/` - Generated component index
+- `src/__registry__/` - Generated component index (never edit by hand; `pnpm build:registry` regenerates)
 - `src/registry/` - Source definitions by style (default, new-york)
-- `public/r/` - Published JSON files for CLI consumption
-- `scripts/build-registry.mts` - Registry build script
+- `public/r/` - Published JSON files for CLI consumption (`/r/styles/{style}/{name}.json` + `/r/templates/{style}/`)
+- `scripts/build-registry.mts` - The single registry build script
+
+### shadcn Mirror Map
+
+| Our surface | Mirrors upstream | Sync rule |
+|---|---|---|
+| `src/components/ui/` | ui.shadcn.com primitives (**Radix lane** — upstream's Base-UI default applies to *new* projects only) | `pnpm sync:shadcn` reports drift; refresh via `shadcn add -o`; skip the 4 custom files + pinned `chart.tsx` |
+| `src/components/atom/` + `content/atoms/(root)/` | ui.shadcn.com/docs/components (docs-block pattern: ComponentPreview → Installation CodeTabs → Usage) | New atom = create → `atoms-index.ts` → `_registry.ts` (if installable) → MDX + meta.json → `pnpm build:registry` |
+| `src/registry/*/templates/` + `/templates` route | ui.shadcn.com/blocks (viewer, categories, iframe `/view/templates/[name]`) | `new-york` is the source style; `default` is generated by `build:registry`. Per-template MDX docs are our own enhancement (upstream /blocks has none) |
+| Styles `default` / `new-york` | shadcn's pre-v4 style split | Kept for URL compatibility; atoms are style-invariant (aliased) |
+| `registry:atom` / `registry:template` types | *(no upstream equivalent)* | Intentional schema extension — keep |
 
 ### Proxy (Next.js 16)
 
