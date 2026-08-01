@@ -34,3 +34,7 @@ export const docsArabic = defineDocs({
 export const atoms = defineDocs({
   dir: 'content/atoms',
 });
+
+export const templatesDocs = defineDocs({
+  dir: 'content/templates',
+});

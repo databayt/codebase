@@ -79,9 +79,13 @@ var docsArabic = defineDocs({
 var atoms = defineDocs({
   dir: "content/atoms"
 });
+var templatesDocs = defineDocs({
+  dir: "content/templates"
+});
 export {
   atoms,
   source_config_default as default,
   docs,
-  docsArabic
+  docsArabic,
+  templatesDocs
 };

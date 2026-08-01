@@ -7,9 +7,9 @@ description: "Complete guide to the templates system for full-page UI patterns a
 
 ## Overview
 
-The templates system provides full-page UI patterns and complete application layouts. The goal is to mirror shadcn/ui's blocks system implementation patterns. Templates are pre-built, production-ready page layouts that can be copied and customized for rapid application development.
+The templates system provides full-page UI patterns and complete application layouts, mirroring shadcn/ui's blocks system. Templates are pre-built, production-ready page layouts installable with `npx codebase add <name>`.
 
-> **Migration Goal**: This system is being aligned to closely follow the shadcn/ui v4 blocks implementation patterns while preserving the current PageHeader and TabsNav UI components.
+> **Reconciled 2026-08**: one registry (`src/registry/registry-templates.ts`, 36 items), one build script (`pnpm build:registry`), `new-york` as the source style with `default` generated, plus a per-template MDX docs layer at `/templates/<name>` (`content/templates/(root)/`) — an enhancement upstream /blocks does not have. The `[...categories]` route below was replaced by a hybrid `[[...slug]]` route (featured grid / category grid / MDX docs). PageHeader and TabsNav remain intentionally preserved legacy patterns.
 
 ## Current Architecture
 

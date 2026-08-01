@@ -43,6 +43,7 @@ import { ComboboxPreview } from "@/components/atom/combobox-preview"
 import { NativeSelectPreview } from "@/components/atom/native-select-preview"
 import { DirectionPreview } from "@/components/atom/direction-preview"
 import { ChatPrimitivesPreview } from "@/components/atom/chat-primitives-preview"
+import { TemplatePreview } from "@/components/docs/template-preview"
 import { CardsActivityGoal } from "@/components/atom/activity-goal"
 import { CardsReportIssue } from "@/components/atom/report-issue"
 import { CardsShare } from "@/components/atom/share"
@@ -376,6 +377,7 @@ const mdxComponents = {
     NativeSelectPreview,
     DirectionPreview,
     ChatPrimitivesPreview,
+    TemplatePreview,
     ActivityGoal: () => <CardsActivityGoal dictionary={defaultDictionary} />,
     ReportIssue: () => <CardsReportIssue dictionary={defaultDictionary} />,
     Share: () => <CardsShare dictionary={defaultDictionary} />,
