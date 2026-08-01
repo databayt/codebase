@@ -855,6 +855,83 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
+    "leads-01": {
+      "name": "leads-01",
+      "description": "Lead management board with cards, filters and capture form",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/leads-01/page")),
+      "files": [
+        "registry/default/templates/leads-01/page.tsx",
+        "registry/default/templates/leads-01/components/content.tsx",
+        "registry/default/templates/leads-01/components/all.tsx",
+        "registry/default/templates/leads-01/components/featured.tsx",
+        "registry/default/templates/leads-01/components/card.tsx",
+        "registry/default/templates/leads-01/components/form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "badge",
+        "tabs"
+      ],
+      "categories": [
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "login-03": {
+      "name": "login-03",
+      "description": "Login form with muted card layout",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/login-03/page")),
+      "files": [
+        "registry/default/templates/login-03/page.tsx",
+        "registry/default/templates/login-03/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "login-04": {
+      "name": "login-04",
+      "description": "Split login form with image panel",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/login-04/page")),
+      "files": [
+        "registry/default/templates/login-04/page.tsx",
+        "registry/default/templates/login-04/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
     "activity-goal": {
       "name": "activity-goal",
       "description": "Activity goal tracking card with chart visualization",
@@ -2620,6 +2697,83 @@ export const Index: Record<string, any> = {
       ],
       "categories": [
         "hero"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "leads-01": {
+      "name": "leads-01",
+      "description": "Lead management board with cards, filters and capture form",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/leads-01/page")),
+      "files": [
+        "registry/new-york/templates/leads-01/page.tsx",
+        "registry/new-york/templates/leads-01/components/content.tsx",
+        "registry/new-york/templates/leads-01/components/all.tsx",
+        "registry/new-york/templates/leads-01/components/featured.tsx",
+        "registry/new-york/templates/leads-01/components/card.tsx",
+        "registry/new-york/templates/leads-01/components/form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "badge",
+        "tabs"
+      ],
+      "categories": [
+        "dashboard"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "login-03": {
+      "name": "login-03",
+      "description": "Login form with muted card layout",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/login-03/page")),
+      "files": [
+        "registry/new-york/templates/login-03/page.tsx",
+        "registry/new-york/templates/login-03/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "login-04": {
+      "name": "login-04",
+      "description": "Split login form with image panel",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/login-04/page")),
+      "files": [
+        "registry/new-york/templates/login-04/page.tsx",
+        "registry/new-york/templates/login-04/components/login-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "categories": [
+        "authentication",
+        "login"
       ],
       "meta": {
         "iframeHeight": "600px"

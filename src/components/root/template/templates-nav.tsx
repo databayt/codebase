@@ -42,12 +42,12 @@ function TemplatesNavLink({
   category: { name: string; slug: string; hidden: boolean }
   isActive: boolean
 }) {
+  const pathname = usePathname()
+  const lang = pathname.split('/')[1] || 'en'
+
   if (category.hidden) {
     return null
   }
-
-  const pathname = usePathname()
-  const lang = pathname.split('/')[1] || 'en'
 
   return (
     <Link

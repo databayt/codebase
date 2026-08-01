@@ -1034,5 +1034,45 @@ export const templates: RegistryItem[] = [
     meta: {
       iframeHeight: "600px"
     }
-  }
+  },
+  {
+    name: "leads-01",
+    description: "Lead management board with cards, filters and capture form",
+    type: "registry:template",
+    registryDependencies: ["button", "card", "input", "label", "badge", "tabs"],
+    files: [
+      { path: "templates/leads-01/page.tsx", type: "registry:page" },
+      { path: "templates/leads-01/components/content.tsx", type: "registry:component" },
+      { path: "templates/leads-01/components/all.tsx", type: "registry:component" },
+      { path: "templates/leads-01/components/featured.tsx", type: "registry:component" },
+      { path: "templates/leads-01/components/card.tsx", type: "registry:component" },
+      { path: "templates/leads-01/components/form.tsx", type: "registry:component" },
+    ],
+    categories: ["dashboard"],
+    meta: { iframeHeight: "800px" },
+  },
+  {
+    name: "login-03",
+    description: "Login form with muted card layout",
+    type: "registry:template",
+    registryDependencies: ["button", "card", "input", "label"],
+    files: [
+      { path: "templates/login-03/page.tsx", type: "registry:page" },
+      { path: "templates/login-03/components/login-form.tsx", type: "registry:component" },
+    ],
+    categories: ["authentication", "login"],
+    meta: { iframeHeight: "600px" },
+  },
+  {
+    name: "login-04",
+    description: "Split login form with image panel",
+    type: "registry:template",
+    registryDependencies: ["button", "card", "input", "label"],
+    files: [
+      { path: "templates/login-04/page.tsx", type: "registry:page" },
+      { path: "templates/login-04/components/login-form.tsx", type: "registry:component" },
+    ],
+    categories: ["authentication", "login"],
+    meta: { iframeHeight: "600px" },
+  },
 ]

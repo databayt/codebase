@@ -255,11 +255,11 @@ function TemplateViewerToolbar() {
                         className="hidden h-[22px] w-auto gap-1 rounded-sm px-2 md:flex lg:w-auto"
                         size="sm"
                         onClick={() => {
-                            copyToClipboard(`npx shadcn@latest add ${item.name}`)
+                            copyToClipboard(`npx codebase add ${item.name}`)
                         }}
                     >
                         {isCopied ? <Check /> : <Terminal />}
-                        <span className="hidden lg:inline">npx shadcn add {item.name}</span>
+                        <span className="hidden lg:inline">npx codebase add {item.name}</span>
                     </Button>
                 </div>
                 {/* V0Button commented out - not needed for template system
