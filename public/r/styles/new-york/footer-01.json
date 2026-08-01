@@ -1,24 +1,24 @@
 {
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "footer-01",
+  "description": "Simple footer with links and copyright",
   "type": "registry:template",
-  "description": "Simple footer with links and copyright.",
-  "registryDependencies": [],
+  "dependencies": [],
+  "registryDependencies": [
+    "separator"
+  ],
   "files": [
     {
-      "path": "template/footer-01/page.tsx",
-      "content": "import FooterContent from \"./content\"\n\nexport default function FooterTemplate() {\n  return (\n    <div className=\"min-h-screen flex flex-col\">\n      <main className=\"flex-1 container mx-auto py-8\">\n        <h1 className=\"text-3xl font-bold mb-4\">Footer Template</h1>\n        <p className=\"text-muted-foreground mb-8\">\n          A simple footer component with links and copyright information.\n        </p>\n        <div className=\"h-64 bg-muted rounded-lg flex items-center justify-center\">\n          <p className=\"text-muted-foreground\">Page content goes here</p>\n        </div>\n      </main>\n      <FooterContent />\n    </div>\n  )\n}",
+      "path": "templates/footer-01/page.tsx",
+      "content": "import Link from \"next/link\"\nimport { Separator } from \"@/components/ui/separator\"\n\nconst footerLinks = {\n  product: [\n    { name: \"Features\", href: \"#\" },\n    { name: \"Pricing\", href: \"#\" },\n    { name: \"Templates\", href: \"#\" },\n    { name: \"Integrations\", href: \"#\" },\n  ],\n  company: [\n    { name: \"About\", href: \"#\" },\n    { name: \"Blog\", href: \"#\" },\n    { name: \"Careers\", href: \"#\" },\n    { name: \"Contact\", href: \"#\" },\n  ],\n  resources: [\n    { name: \"Documentation\", href: \"#\" },\n    { name: \"Help Center\", href: \"#\" },\n    { name: \"Community\", href: \"#\" },\n    { name: \"Status\", href: \"#\" },\n  ],\n  legal: [\n    { name: \"Privacy\", href: \"#\" },\n    { name: \"Terms\", href: \"#\" },\n    { name: \"Cookie Policy\", href: \"#\" },\n  ],\n}\n\nexport default function FooterTemplate() {\n  return (\n    <footer className=\"border-t bg-muted/40\">\n      <div className=\"mx-auto max-w-7xl px-6 py-12 lg:px-8\">\n        <div className=\"grid grid-cols-2 gap-8 md:grid-cols-4\">\n          <div>\n            <h3 className=\"text-sm font-semibold\">Product</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.product.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n          <div>\n            <h3 className=\"text-sm font-semibold\">Company</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.company.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n          <div>\n            <h3 className=\"text-sm font-semibold\">Resources</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.resources.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n          <div>\n            <h3 className=\"text-sm font-semibold\">Legal</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.legal.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n        </div>\n\n        <Separator className=\"my-8\" />\n\n        <div className=\"flex flex-col items-center justify-between gap-4 md:flex-row\">\n          <Link href=\"#\" className=\"text-xl font-bold\">\n            Logo\n          </Link>\n          <p className=\"text-sm text-muted-foreground\">\n            &copy; {new Date().getFullYear()} Company, Inc. All rights reserved.\n          </p>\n        </div>\n      </div>\n    </footer>\n  )\n}\n",
       "type": "registry:page",
-      "target": "app/footer/page.tsx"
-    },
-    {
-      "path": "template/footer-01/content.tsx",
-      "content": "import { siteConfig } from \"@/config/site\"\r\nimport type { getDictionary } from \"@/components/local/dictionaries\"\r\n\r\ninterface SiteFooterProps {\r\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\r\n}\r\n\r\nexport function SiteFooter({ dictionary }: SiteFooterProps) {\r\n  return (\r\n    <footer className=\"border-grid border-t py-6 md:py-0\">\r\n      <div className=\"w-full\">\r\n        <div className=\"py-4 px-0 mx-0\">\r\n          <div className=\"text-balance text-center text-sm leading-loose text-muted-foreground md:text-left rtl:md:text-right px-0 mx-0\">\r\n            {dictionary?.footer?.inspiredBy || \"Inspired by\"}{\" \"}\r\n            <a\r\n              href=\"https://ui.shadcn.com\"\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"font-medium underline underline-offset-4\"\r\n            >\r\n              {dictionary?.footer?.shadcn || \"Shadcn\"}\r\n            </a>\r\n            . {dictionary?.footer?.poweredBy || \"Built by\"}{\" \"}\r\n            <a\r\n              href={siteConfig.links.twitter}\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"font-medium underline underline-offset-4\"\r\n            >\r\n              {dictionary?.footer?.databayt || \"Databayt\"}\r\n            </a>\r\n            . {dictionary?.footer?.sourceCode || \"The source code is available on\"}{\" \"}\r\n            <a\r\n              href={siteConfig.links.github}\r\n              target=\"_blank\"\r\n              rel=\"noreferrer\"\r\n              className=\"font-medium underline underline-offset-4\"\r\n            >\r\n              {dictionary?.footer?.github || \"GitHub\"}\r\n            </a>\r\n            .\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </footer>\r\n  )\r\n}\r\n",
-      "type": "registry:component",
-      "target": "components/footer.tsx"
+      "target": "app/footer-01/page.tsx"
     }
   ],
   "categories": [
-    "navigation",
     "footer"
-  ]
+  ],
+  "meta": {
+    "iframeHeight": "200px"
+  }
 }

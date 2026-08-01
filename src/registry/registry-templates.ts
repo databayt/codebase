@@ -1,6 +1,6 @@
-import { Registry } from "./schema"
+import { RegistryItem } from "./schema"
 
-export const templates: Registry = [
+export const templates: RegistryItem[] = [
   {
     name: "dashboard-01",
     description: "A dashboard with sidebar, charts and data table.",

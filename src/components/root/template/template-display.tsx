@@ -1,5 +1,5 @@
 import * as React from "react"
-import { registryItemFileSchema } from "./registry"
+import { registryItemFileSchema } from "@/registry/schema"
 import { z } from "zod"
 
 import { highlightCode } from "@/lib/highlight-code"
@@ -38,7 +38,6 @@ export async function TemplateDisplay({
             item={serializedItem}
             tree={serializedTree}
             highlightedFiles={serializedFiles}
-            styleName={styleName}
         />
     )
 }

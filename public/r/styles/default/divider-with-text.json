@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "divider-with-text",
+  "description": "Horizontal divider with centered text label",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/divider-with-text.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface DividerWithTextProps extends React.ComponentProps<\"div\"> {\n  text?: string\n}\n\nexport function DividerWithText({\n  text = \"Or continue with\",\n  className,\n  ...props\n}: DividerWithTextProps) {\n  return (\n    <div data-slot=\"divider-with-text\" className={cn(\"relative\", className)} {...props}>\n      <div className=\"absolute inset-0 flex items-center\">\n        <span className=\"w-full border-t\" />\n      </div>\n      <div className=\"relative flex justify-center text-xs uppercase\">\n        <span className=\"bg-card px-2 text-muted-foreground\">{text}</span>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/divider-with-text.tsx"
+    }
+  ],
+  "categories": [
+    "ui",
+    "layout"
+  ]
+}

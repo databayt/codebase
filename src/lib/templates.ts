@@ -4,7 +4,7 @@ import { cache } from "react"
 import { promises as fs } from "fs"
 import path from "path"
 import { z } from "zod"
-import { registryItemSchema } from "@/components/root/template/registry"
+import { registryItemSchema } from "@/registry/schema"
 import {
   getCachedRemoteTemplate,
   getCachedRemoteTemplates,
@@ -37,15 +37,18 @@ export async function getAllTemplates(
 ) {
   const { Index } = await import("@/__registry__/index")
 
-  // Collect all templates from all styles.
+  // Collect templates across styles, deduped by name — each style carries the
+  // same catalog, so without this every item renders twice on list pages.
   const allTemplates: z.infer<typeof registryItemSchema>[] = []
+  const seen = new Set<string>()
 
   for (const style in Index) {
     const styleIndex = Index[style]
     if (typeof styleIndex === "object" && styleIndex !== null) {
       for (const itemName in styleIndex) {
-        const item = styleIndex[itemName]
-        allTemplates.push(item)
+        if (seen.has(itemName)) continue
+        seen.add(itemName)
+        allTemplates.push(styleIndex[itemName])
       }
     }
   }

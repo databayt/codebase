@@ -1,27 +1,24 @@
 {
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "footer-01",
+  "description": "Simple footer with links and copyright",
   "type": "registry:template",
-  "description": "Simple footer with links and copyright.",
   "dependencies": [],
-  "devDependencies": [],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "separator"
+  ],
   "files": [
     {
-      "path": "registry/default/template/footer-01/page.tsx",
+      "path": "templates/footer-01/page.tsx",
+      "content": "import Link from \"next/link\"\nimport { Separator } from \"@/components/ui/separator\"\n\nconst footerLinks = {\n  product: [\n    { name: \"Features\", href: \"#\" },\n    { name: \"Pricing\", href: \"#\" },\n    { name: \"Templates\", href: \"#\" },\n    { name: \"Integrations\", href: \"#\" },\n  ],\n  company: [\n    { name: \"About\", href: \"#\" },\n    { name: \"Blog\", href: \"#\" },\n    { name: \"Careers\", href: \"#\" },\n    { name: \"Contact\", href: \"#\" },\n  ],\n  resources: [\n    { name: \"Documentation\", href: \"#\" },\n    { name: \"Help Center\", href: \"#\" },\n    { name: \"Community\", href: \"#\" },\n    { name: \"Status\", href: \"#\" },\n  ],\n  legal: [\n    { name: \"Privacy\", href: \"#\" },\n    { name: \"Terms\", href: \"#\" },\n    { name: \"Cookie Policy\", href: \"#\" },\n  ],\n}\n\nexport default function FooterTemplate() {\n  return (\n    <footer className=\"border-t bg-muted/40\">\n      <div className=\"mx-auto max-w-7xl px-6 py-12 lg:px-8\">\n        <div className=\"grid grid-cols-2 gap-8 md:grid-cols-4\">\n          <div>\n            <h3 className=\"text-sm font-semibold\">Product</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.product.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n          <div>\n            <h3 className=\"text-sm font-semibold\">Company</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.company.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n          <div>\n            <h3 className=\"text-sm font-semibold\">Resources</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.resources.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n          <div>\n            <h3 className=\"text-sm font-semibold\">Legal</h3>\n            <ul className=\"mt-4 space-y-3\">\n              {footerLinks.legal.map((link) => (\n                <li key={link.name}>\n                  <Link\n                    href={link.href}\n                    className=\"text-sm text-muted-foreground hover:text-foreground\"\n                  >\n                    {link.name}\n                  </Link>\n                </li>\n              ))}\n            </ul>\n          </div>\n        </div>\n\n        <Separator className=\"my-8\" />\n\n        <div className=\"flex flex-col items-center justify-between gap-4 md:flex-row\">\n          <Link href=\"#\" className=\"text-xl font-bold\">\n            Logo\n          </Link>\n          <p className=\"text-sm text-muted-foreground\">\n            &copy; {new Date().getFullYear()} Company, Inc. All rights reserved.\n          </p>\n        </div>\n      </div>\n    </footer>\n  )\n}\n",
       "type": "registry:page",
-      "target": "app/footer/page.tsx",
-      "content": ""
-    },
-    {
-      "path": "registry/default/template/footer-01/content.tsx",
-      "type": "registry:component",
-      "target": "components/footer.tsx",
-      "content": ""
+      "target": "app/footer-01/page.tsx"
     }
   ],
   "categories": [
-    "navigation",
     "footer"
   ],
-  "meta": {}
+  "meta": {
+    "iframeHeight": "200px"
+  }
 }

@@ -1,6 +1,6 @@
 "use server"
 
-import { registryItemSchema } from "@/components/root/template/registry"
+import { registryItemSchema } from "@/registry/schema"
 import { z } from "zod"
 
 import { Style } from "@/components/root/template/registry-styles"

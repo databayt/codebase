@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "oauth-button",
+  "description": "Single OAuth button with provider icon",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "button",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/atom/oauth-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Icons } from \"@/components/atom/icons\"\n\nconst providerIcons = {\n  github: Icons.gitHub,\n  google: Icons.google,\n  apple: Icons.apple,\n  paypal: Icons.paypal,\n} as const\n\nexport type OAuthProvider = keyof typeof providerIcons\n\nexport interface OAuthButtonProps\n  extends Omit<React.ComponentProps<typeof Button>, \"children\"> {\n  provider: OAuthProvider\n  label?: string\n}\n\nexport function OAuthButton({\n  provider,\n  label,\n  variant = \"outline\",\n  className,\n  ...props\n}: OAuthButtonProps) {\n  const Icon = providerIcons[provider]\n  const defaultLabel = provider.charAt(0).toUpperCase() + provider.slice(1)\n\n  return (\n    <Button\n      data-slot=\"oauth-button\"\n      variant={variant}\n      className={cn(\"gap-2\", className)}\n      {...props}\n    >\n      <Icon className=\"size-4\" />\n      {label ?? defaultLabel}\n    </Button>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/oauth-button.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "authentication"
+  ]
+}

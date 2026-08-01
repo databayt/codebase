@@ -662,6 +662,199 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
+    "subscription-01": {
+      "name": "subscription-01",
+      "description": "Subscription management with plan details, billing info, and cancel/update actions",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/subscription-01/page")),
+      "files": [
+        "registry/default/templates/subscription-01/page.tsx"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "separator",
+        "dialog",
+        "radio-group",
+        "label"
+      ],
+      "categories": [
+        "subscription"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "subscription-02": {
+      "name": "subscription-02",
+      "description": "Invoice history table with status badges, dates, and download actions",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/subscription-02/page")),
+      "files": [
+        "registry/default/templates/subscription-02/page.tsx"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "card",
+        "button",
+        "table",
+        "badge"
+      ],
+      "categories": [
+        "subscription"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "subscription-03": {
+      "name": "subscription-03",
+      "description": "Usage tracking table with token consumption and cost breakdown",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/subscription-03/page")),
+      "files": [
+        "registry/default/templates/subscription-03/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "table",
+        "card"
+      ],
+      "categories": [
+        "subscription"
+      ],
+      "meta": {
+        "iframeHeight": "500px"
+      }
+    },
+    "header-01": {
+      "name": "header-01",
+      "description": "Responsive navigation header with logo and menu links",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/header-01/page")),
+      "files": [
+        "registry/default/templates/header-01/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "sheet"
+      ],
+      "categories": [
+        "header"
+      ],
+      "meta": {
+        "iframeHeight": "100px"
+      }
+    },
+    "header-02": {
+      "name": "header-02",
+      "description": "Header with dropdown navigation and user menu",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/header-02/page")),
+      "files": [
+        "registry/default/templates/header-02/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "header"
+      ],
+      "meta": {
+        "iframeHeight": "100px"
+      }
+    },
+    "footer-01": {
+      "name": "footer-01",
+      "description": "Simple footer with links and copyright",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/footer-01/page")),
+      "files": [
+        "registry/default/templates/footer-01/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "separator"
+      ],
+      "categories": [
+        "footer"
+      ],
+      "meta": {
+        "iframeHeight": "200px"
+      }
+    },
+    "footer-02": {
+      "name": "footer-02",
+      "description": "Footer with newsletter signup and social links",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/footer-02/page")),
+      "files": [
+        "registry/default/templates/footer-02/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "separator"
+      ],
+      "categories": [
+        "footer"
+      ],
+      "meta": {
+        "iframeHeight": "300px"
+      }
+    },
+    "hero-02": {
+      "name": "hero-02",
+      "description": "Hero section with image background and overlay",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/hero-02/page")),
+      "files": [
+        "registry/default/templates/hero-02/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "categories": [
+        "hero"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "hero-03": {
+      "name": "hero-03",
+      "description": "Hero with split layout - content and image",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/hero-03/page")),
+      "files": [
+        "registry/default/templates/hero-03/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "badge"
+      ],
+      "categories": [
+        "hero"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
     "activity-goal": {
       "name": "activity-goal",
       "description": "Activity goal tracking card with chart visualization",
@@ -703,7 +896,7 @@ export const Index: Record<string, any> = {
     },
     "chat": {
       "name": "chat",
-      "description": "Chat interface card with message history",
+      "description": "Composable chat primitives with context-based state management",
       "type": "registry:atom",
       "files": [
         "components/atom/chat.tsx"
@@ -721,56 +914,22 @@ export const Index: Record<string, any> = {
       ],
       "meta": {}
     },
-    "cookie-settings": {
-      "name": "cookie-settings",
-      "description": "Cookie consent and settings management card",
-      "type": "registry:atom",
-      "files": [
-        "components/atom/cookie-settings.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "card",
-        "switch",
-        "button"
-      ],
-      "categories": [
-        "form",
-        "ui"
-      ],
-      "meta": {}
-    },
-    "create-account": {
-      "name": "create-account",
-      "description": "Account creation form card",
-      "type": "registry:atom",
-      "files": [
-        "components/atom/create-account.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "card",
-        "button",
-        "input",
-        "label"
-      ],
-      "categories": [
-        "form",
-        "authentication"
-      ],
-      "meta": {}
-    },
     "data-table": {
       "name": "data-table",
-      "description": "Data table card with sorting and filtering",
+      "description": "Composable data table primitives with sorting, filtering, and pagination",
       "type": "registry:atom",
       "files": [
         "components/atom/data-table.tsx"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "@tanstack/react-table"
+      ],
       "registryDependencies": [
         "card",
-        "table"
+        "table",
+        "button",
+        "input",
+        "dropdown-menu"
       ],
       "categories": [
         "data",
@@ -793,28 +952,6 @@ export const Index: Record<string, any> = {
       "categories": [
         "data",
         "display"
-      ],
-      "meta": {}
-    },
-    "payment-method": {
-      "name": "payment-method",
-      "description": "Payment method selection and management card",
-      "type": "registry:atom",
-      "files": [
-        "components/atom/payment-method.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "card",
-        "button",
-        "input",
-        "label",
-        "radio-group",
-        "select"
-      ],
-      "categories": [
-        "form",
-        "ui"
       ],
       "meta": {}
     },
@@ -879,20 +1016,20 @@ export const Index: Record<string, any> = {
       ],
       "meta": {}
     },
-    "team-members": {
-      "name": "team-members",
-      "description": "Team members management card",
+    "team-member": {
+      "name": "team-member",
+      "description": "Composable team member primitives with role management",
       "type": "registry:atom",
       "files": [
-        "components/atom/team-members.tsx"
+        "components/atom/team-member.tsx"
       ],
       "dependencies": [],
       "registryDependencies": [
         "card",
         "button",
-        "input",
-        "select",
-        "avatar"
+        "avatar",
+        "popover",
+        "command"
       ],
       "categories": [
         "display",
@@ -1149,6 +1286,128 @@ export const Index: Record<string, any> = {
       "categories": [
         "animation",
         "display"
+      ],
+      "meta": {}
+    },
+    "oauth-button": {
+      "name": "oauth-button",
+      "description": "Single OAuth button with provider icon",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/oauth-button.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "icons"
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "meta": {}
+    },
+    "oauth-button-group": {
+      "name": "oauth-button-group",
+      "description": "Grid of OAuth buttons for multiple providers",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/oauth-button-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "oauth-button"
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "meta": {}
+    },
+    "divider-with-text": {
+      "name": "divider-with-text",
+      "description": "Horizontal divider with centered text label",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/divider-with-text.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "categories": [
+        "ui",
+        "layout"
+      ],
+      "meta": {}
+    },
+    "user-info-card": {
+      "name": "user-info-card",
+      "description": "User avatar with name and email display",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/user-info-card.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "categories": [
+        "display",
+        "user"
+      ],
+      "meta": {}
+    },
+    "settings-toggle-row": {
+      "name": "settings-toggle-row",
+      "description": "Settings row with label, description, and toggle switch",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/settings-toggle-row.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "switch",
+        "label"
+      ],
+      "categories": [
+        "form",
+        "settings"
+      ],
+      "meta": {}
+    },
+    "form-field": {
+      "name": "form-field",
+      "description": "Form field primitives with label and input",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/form-field.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "input",
+        "label"
+      ],
+      "categories": [
+        "form",
+        "input"
+      ],
+      "meta": {}
+    },
+    "payment-method-selector": {
+      "name": "payment-method-selector",
+      "description": "Payment method radio selector with icons",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/payment-method-selector.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "radio-group",
+        "label",
+        "icons"
+      ],
+      "categories": [
+        "form",
+        "payment"
       ],
       "meta": {}
     },
@@ -2073,6 +2332,199 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
+    "subscription-01": {
+      "name": "subscription-01",
+      "description": "Subscription management with plan details, billing info, and cancel/update actions",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/subscription-01/page")),
+      "files": [
+        "registry/new-york/templates/subscription-01/page.tsx"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "separator",
+        "dialog",
+        "radio-group",
+        "label"
+      ],
+      "categories": [
+        "subscription"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
+    "subscription-02": {
+      "name": "subscription-02",
+      "description": "Invoice history table with status badges, dates, and download actions",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/subscription-02/page")),
+      "files": [
+        "registry/new-york/templates/subscription-02/page.tsx"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "card",
+        "button",
+        "table",
+        "badge"
+      ],
+      "categories": [
+        "subscription"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "subscription-03": {
+      "name": "subscription-03",
+      "description": "Usage tracking table with token consumption and cost breakdown",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/subscription-03/page")),
+      "files": [
+        "registry/new-york/templates/subscription-03/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "table",
+        "card"
+      ],
+      "categories": [
+        "subscription"
+      ],
+      "meta": {
+        "iframeHeight": "500px"
+      }
+    },
+    "header-01": {
+      "name": "header-01",
+      "description": "Responsive navigation header with logo and menu links",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/header-01/page")),
+      "files": [
+        "registry/new-york/templates/header-01/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "sheet"
+      ],
+      "categories": [
+        "header"
+      ],
+      "meta": {
+        "iframeHeight": "100px"
+      }
+    },
+    "header-02": {
+      "name": "header-02",
+      "description": "Header with dropdown navigation and user menu",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/header-02/page")),
+      "files": [
+        "registry/new-york/templates/header-02/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "categories": [
+        "header"
+      ],
+      "meta": {
+        "iframeHeight": "100px"
+      }
+    },
+    "footer-01": {
+      "name": "footer-01",
+      "description": "Simple footer with links and copyright",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/footer-01/page")),
+      "files": [
+        "registry/new-york/templates/footer-01/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "separator"
+      ],
+      "categories": [
+        "footer"
+      ],
+      "meta": {
+        "iframeHeight": "200px"
+      }
+    },
+    "footer-02": {
+      "name": "footer-02",
+      "description": "Footer with newsletter signup and social links",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/footer-02/page")),
+      "files": [
+        "registry/new-york/templates/footer-02/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "input",
+        "separator"
+      ],
+      "categories": [
+        "footer"
+      ],
+      "meta": {
+        "iframeHeight": "300px"
+      }
+    },
+    "hero-02": {
+      "name": "hero-02",
+      "description": "Hero section with image background and overlay",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/hero-02/page")),
+      "files": [
+        "registry/new-york/templates/hero-02/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "categories": [
+        "hero"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
+    "hero-03": {
+      "name": "hero-03",
+      "description": "Hero with split layout - content and image",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/hero-03/page")),
+      "files": [
+        "registry/new-york/templates/hero-03/page.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "badge"
+      ],
+      "categories": [
+        "hero"
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      }
+    },
     "activity-goal": {
       "name": "activity-goal",
       "description": "Activity goal tracking card with chart visualization",
@@ -2114,7 +2566,7 @@ export const Index: Record<string, any> = {
     },
     "chat": {
       "name": "chat",
-      "description": "Chat interface card with message history",
+      "description": "Composable chat primitives with context-based state management",
       "type": "registry:atom",
       "files": [
         "components/atom/chat.tsx"
@@ -2132,56 +2584,22 @@ export const Index: Record<string, any> = {
       ],
       "meta": {}
     },
-    "cookie-settings": {
-      "name": "cookie-settings",
-      "description": "Cookie consent and settings management card",
-      "type": "registry:atom",
-      "files": [
-        "components/atom/cookie-settings.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "card",
-        "switch",
-        "button"
-      ],
-      "categories": [
-        "form",
-        "ui"
-      ],
-      "meta": {}
-    },
-    "create-account": {
-      "name": "create-account",
-      "description": "Account creation form card",
-      "type": "registry:atom",
-      "files": [
-        "components/atom/create-account.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "card",
-        "button",
-        "input",
-        "label"
-      ],
-      "categories": [
-        "form",
-        "authentication"
-      ],
-      "meta": {}
-    },
     "data-table": {
       "name": "data-table",
-      "description": "Data table card with sorting and filtering",
+      "description": "Composable data table primitives with sorting, filtering, and pagination",
       "type": "registry:atom",
       "files": [
         "components/atom/data-table.tsx"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "@tanstack/react-table"
+      ],
       "registryDependencies": [
         "card",
-        "table"
+        "table",
+        "button",
+        "input",
+        "dropdown-menu"
       ],
       "categories": [
         "data",
@@ -2204,28 +2622,6 @@ export const Index: Record<string, any> = {
       "categories": [
         "data",
         "display"
-      ],
-      "meta": {}
-    },
-    "payment-method": {
-      "name": "payment-method",
-      "description": "Payment method selection and management card",
-      "type": "registry:atom",
-      "files": [
-        "components/atom/payment-method.tsx"
-      ],
-      "dependencies": [],
-      "registryDependencies": [
-        "card",
-        "button",
-        "input",
-        "label",
-        "radio-group",
-        "select"
-      ],
-      "categories": [
-        "form",
-        "ui"
       ],
       "meta": {}
     },
@@ -2290,20 +2686,20 @@ export const Index: Record<string, any> = {
       ],
       "meta": {}
     },
-    "team-members": {
-      "name": "team-members",
-      "description": "Team members management card",
+    "team-member": {
+      "name": "team-member",
+      "description": "Composable team member primitives with role management",
       "type": "registry:atom",
       "files": [
-        "components/atom/team-members.tsx"
+        "components/atom/team-member.tsx"
       ],
       "dependencies": [],
       "registryDependencies": [
         "card",
         "button",
-        "input",
-        "select",
-        "avatar"
+        "avatar",
+        "popover",
+        "command"
       ],
       "categories": [
         "display",
@@ -2560,6 +2956,128 @@ export const Index: Record<string, any> = {
       "categories": [
         "animation",
         "display"
+      ],
+      "meta": {}
+    },
+    "oauth-button": {
+      "name": "oauth-button",
+      "description": "Single OAuth button with provider icon",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/oauth-button.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "icons"
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "meta": {}
+    },
+    "oauth-button-group": {
+      "name": "oauth-button-group",
+      "description": "Grid of OAuth buttons for multiple providers",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/oauth-button-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "oauth-button"
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "meta": {}
+    },
+    "divider-with-text": {
+      "name": "divider-with-text",
+      "description": "Horizontal divider with centered text label",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/divider-with-text.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "categories": [
+        "ui",
+        "layout"
+      ],
+      "meta": {}
+    },
+    "user-info-card": {
+      "name": "user-info-card",
+      "description": "User avatar with name and email display",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/user-info-card.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "categories": [
+        "display",
+        "user"
+      ],
+      "meta": {}
+    },
+    "settings-toggle-row": {
+      "name": "settings-toggle-row",
+      "description": "Settings row with label, description, and toggle switch",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/settings-toggle-row.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "switch",
+        "label"
+      ],
+      "categories": [
+        "form",
+        "settings"
+      ],
+      "meta": {}
+    },
+    "form-field": {
+      "name": "form-field",
+      "description": "Form field primitives with label and input",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/form-field.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "input",
+        "label"
+      ],
+      "categories": [
+        "form",
+        "input"
+      ],
+      "meta": {}
+    },
+    "payment-method-selector": {
+      "name": "payment-method-selector",
+      "description": "Payment method radio selector with icons",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/payment-method-selector.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "radio-group",
+        "label",
+        "icons"
+      ],
+      "categories": [
+        "form",
+        "payment"
       ],
       "meta": {}
     },

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-02",
+  "description": "Hero section with image background and overlay",
+  "type": "registry:template",
+  "dependencies": [],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "templates/hero-02/page.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport { ArrowRight, Play } from \"lucide-react\"\n\nexport default function HeroTemplate() {\n  return (\n    <section className=\"relative min-h-[600px] overflow-hidden\">\n      <div\n        className=\"absolute inset-0 z-0\"\n        style={{\n          backgroundImage: \"url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072')\",\n          backgroundSize: \"cover\",\n          backgroundPosition: \"center\",\n        }}\n      >\n        <div className=\"absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent\" />\n      </div>\n\n      <div className=\"relative z-10 mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8\">\n        <div className=\"max-w-2xl\">\n          <div className=\"mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-sm\">\n            <span className=\"text-sm font-medium text-white\">New Release</span>\n            <span className=\"mx-2 text-white/40\">|</span>\n            <span className=\"text-sm text-white/80\">Version 2.0 is here</span>\n          </div>\n\n          <h1 className=\"text-4xl font-bold tracking-tight text-white sm:text-6xl\">\n            Transform Your\n            <span className=\"block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent\">\n              Digital Experience\n            </span>\n          </h1>\n\n          <p className=\"mt-6 text-lg leading-8 text-gray-300\">\n            Unlock the full potential of your business with our cutting-edge\n            platform. Built for scale, designed for performance, and crafted\n            with precision.\n          </p>\n\n          <div className=\"mt-10 flex flex-wrap items-center gap-4\">\n            <Button size=\"lg\" className=\"px-8\">\n              Start Free Trial\n              <ArrowRight className=\"ml-2 h-4 w-4\" />\n            </Button>\n            <Button\n              size=\"lg\"\n              variant=\"outline\"\n              className=\"border-white/20 bg-white/10 text-white hover:bg-white/20\"\n            >\n              <Play className=\"mr-2 h-4 w-4\" />\n              Watch Demo\n            </Button>\n          </div>\n\n          <div className=\"mt-12 flex items-center gap-8\">\n            <div className=\"flex -space-x-3\">\n              {[1, 2, 3, 4, 5].map((i) => (\n                <div\n                  key={i}\n                  className=\"h-10 w-10 rounded-full border-2 border-white bg-gradient-to-br from-blue-400 to-purple-400\"\n                />\n              ))}\n            </div>\n            <div>\n              <div className=\"flex items-center gap-1\">\n                {[1, 2, 3, 4, 5].map((i) => (\n                  <svg\n                    key={i}\n                    className=\"h-5 w-5 text-yellow-400\"\n                    fill=\"currentColor\"\n                    viewBox=\"0 0 20 20\"\n                  >\n                    <path d=\"M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\" />\n                  </svg>\n                ))}\n              </div>\n              <p className=\"mt-1 text-sm text-white/80\">Trusted by 10,000+ users</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/hero-02/page.tsx"
+    }
+  ],
+  "categories": [
+    "hero"
+  ],
+  "meta": {
+    "iframeHeight": "600px"
+  }
+}

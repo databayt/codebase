@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "settings-toggle-row",
+  "description": "Settings row with label, description, and toggle switch",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "switch",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "components/atom/settings-toggle-row.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Label } from \"@/components/ui/label\"\nimport { Switch } from \"@/components/ui/switch\"\n\nexport interface SettingsToggleRowProps extends React.ComponentProps<\"div\"> {\n  label: string\n  description?: string\n  checked?: boolean\n  defaultChecked?: boolean\n  onCheckedChange?: (checked: boolean) => void\n  id?: string\n}\n\nexport function SettingsToggleRow({\n  label,\n  description,\n  checked,\n  defaultChecked,\n  onCheckedChange,\n  id,\n  className,\n  ...props\n}: SettingsToggleRowProps) {\n  const switchId = id ?? React.useId()\n\n  return (\n    <div\n      data-slot=\"settings-toggle-row\"\n      className={cn(\"flex items-center justify-between space-x-4\", className)}\n      {...props}\n    >\n      <div className=\"flex-1 space-y-0.5\">\n        <Label htmlFor={switchId} className=\"text-base\">\n          {label}\n        </Label>\n        {description && (\n          <p className=\"text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      <Switch\n        id={switchId}\n        checked={checked}\n        defaultChecked={defaultChecked}\n        onCheckedChange={onCheckedChange}\n      />\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/settings-toggle-row.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "settings"
+  ]
+}

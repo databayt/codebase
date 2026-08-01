@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-field",
+  "description": "Form field primitives with label and input",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "components/atom/form-field.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\n\nexport interface FormFieldProps extends React.ComponentProps<\"div\"> {\n  label: string\n  id?: string\n  children: React.ReactNode\n}\n\nexport function FormField({\n  label,\n  id,\n  children,\n  className,\n  ...props\n}: FormFieldProps) {\n  return (\n    <div data-slot=\"form-field\" className={cn(\"grid gap-2\", className)} {...props}>\n      <Label htmlFor={id}>{label}</Label>\n      {children}\n    </div>\n  )\n}\n\nexport interface FormFieldTextProps\n  extends Omit<React.ComponentProps<typeof Input>, \"id\"> {\n  label: string\n  id?: string\n}\n\nexport function FormFieldText({\n  label,\n  id,\n  className,\n  ...props\n}: FormFieldTextProps) {\n  const inputId = id ?? React.useId()\n\n  return (\n    <FormField label={label} id={inputId} className={className}>\n      <Input data-slot=\"form-field-input\" id={inputId} {...props} />\n    </FormField>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/form-field.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "input"
+  ]
+}

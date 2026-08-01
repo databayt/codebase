@@ -1,4 +1,4 @@
-import { Registry } from "@/components/root/template/registry"
+import { Registry } from "@/registry/schema"
 
 export const atoms: Registry["items"] = [
   // Card Components (from root/cards)

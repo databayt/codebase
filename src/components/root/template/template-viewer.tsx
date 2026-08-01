@@ -17,7 +17,7 @@ import {
     Terminal,
 } from "lucide-react"
 import { PanelImperativeHandle } from "react-resizable-panels"
-import { registryItemFileSchema, registryItemSchema } from "./registry"
+import { registryItemFileSchema, registryItemSchema } from "@/registry/schema"
 import { z } from "zod"
 
 import { trackEvent } from "@/lib/events"
@@ -61,7 +61,7 @@ type TemplateViewerContext = {
     setStyle: (style: Style["name"]) => void
     activeFile: string | null
     setActiveFile: (file: string) => void
-    resizablePanelRef: React.RefObject<PanelImperativeHandle> | null
+    resizablePanelRef: React.RefObject<PanelImperativeHandle | null> | null
     tree: ReturnType<typeof createFileTreeForRegistryItemFiles> | null
     highlightedFiles:
         | (z.infer<typeof registryItemFileSchema> & {
@@ -104,7 +104,7 @@ function TemplateViewerProvider({
         setView(newView)
     }, [])
 
-    const handleSetStyle = React.useCallback((newStyle: string) => {
+    const handleSetStyle = React.useCallback((newStyle: Style["name"]) => {
         setStyle(newStyle)
     }, [])
 

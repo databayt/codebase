@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "payment-method-selector",
+  "description": "Payment method radio selector with icons",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "radio-group",
+    "label",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/atom/payment-method-selector.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { Icons } from \"@/components/atom/icons\"\nimport { Label } from \"@/components/ui/label\"\nimport { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\"\n\nconst methodIcons = {\n  card: Icons.creditCard,\n  paypal: Icons.paypal,\n  apple: Icons.apple,\n} as const\n\nexport type PaymentMethod = keyof typeof methodIcons\n\nexport interface PaymentMethodSelectorProps extends React.ComponentProps<\"div\"> {\n  value?: PaymentMethod\n  onValueChange?: (value: PaymentMethod) => void\n  methods?: PaymentMethod[]\n}\n\nexport function PaymentMethodSelector({\n  value = \"card\",\n  onValueChange,\n  methods = [\"card\", \"paypal\", \"apple\"],\n  className,\n  ...props\n}: PaymentMethodSelectorProps) {\n  return (\n    <div data-slot=\"payment-method-selector\" className={className} {...props}>\n      <RadioGroup\n        value={value}\n        onValueChange={(v) => onValueChange?.(v as PaymentMethod)}\n        className=\"grid grid-cols-3 gap-4\"\n      >\n        {methods.map((method) => {\n          const Icon = methodIcons[method]\n          const label = method.charAt(0).toUpperCase() + method.slice(1)\n          return (\n            <div key={method}>\n              <RadioGroupItem\n                value={method}\n                id={method}\n                className=\"peer sr-only\"\n              />\n              <Label\n                htmlFor={method}\n                className={cn(\n                  \"flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4\",\n                  \"hover:bg-accent hover:text-accent-foreground\",\n                  \"peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary\"\n                )}\n              >\n                <Icon className=\"mb-3 size-6\" />\n                {label}\n              </Label>\n            </div>\n          )\n        })}\n      </RadioGroup>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/payment-method-selector.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "payment"
+  ]
+}

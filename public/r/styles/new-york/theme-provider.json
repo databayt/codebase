@@ -9,7 +9,7 @@
   "files": [
     {
       "path": "components/atom/theme-provider.tsx",
-      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\";\r\n\r\nexport function ThemeProvider({ children }: { children: React.ReactNode }) {\r\n  const [mounted, setMounted] = React.useState(false);\r\n\r\n  React.useEffect(() => {\r\n    setMounted(true);\r\n  }, []);\r\n\r\n  if (!mounted) {\r\n    return <>{children}</>;\r\n  }\r\n\r\n  return (\r\n    <NextThemesProvider\r\n      attribute=\"class\"\r\n      defaultTheme=\"system\"\r\n      enableSystem\r\n      disableTransitionOnChange\r\n    >\r\n      {children}\r\n    </NextThemesProvider>\r\n  );\r\n} ",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\";\n\nexport function ThemeProvider({ children }: { children: React.ReactNode }) {\n  const [mounted, setMounted] = React.useState(false);\n\n  React.useEffect(() => {\n    setMounted(true);\n  }, []);\n\n  if (!mounted) {\n    return <>{children}</>;\n  }\n\n  return (\n    <NextThemesProvider\n      attribute=\"class\"\n      defaultTheme=\"system\"\n      enableSystem\n      disableTransitionOnChange\n    >\n      {children}\n    </NextThemesProvider>\n  );\n} ",
       "type": "registry:component",
       "target": "components/theme-provider.tsx"
     }

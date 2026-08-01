@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "oauth-button-group",
+  "description": "Grid of OAuth buttons for multiple providers",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "oauth-button"
+  ],
+  "files": [
+    {
+      "path": "components/atom/oauth-button-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { OAuthButton, type OAuthProvider } from \"./oauth-button\"\n\nconst DEFAULT_PROVIDERS: OAuthProvider[] = [\"github\", \"google\", \"apple\", \"paypal\"]\n\nexport interface OAuthButtonGroupProps extends React.ComponentProps<\"div\"> {\n  providers?: OAuthProvider[]\n  labels?: Partial<Record<OAuthProvider, string>>\n  onProviderClick?: (provider: OAuthProvider) => void\n  columns?: 1 | 2\n}\n\nexport function OAuthButtonGroup({\n  providers = DEFAULT_PROVIDERS,\n  labels,\n  onProviderClick,\n  columns = 2,\n  className,\n  ...props\n}: OAuthButtonGroupProps) {\n  return (\n    <div\n      data-slot=\"oauth-button-group\"\n      className={cn(\n        \"grid gap-4\",\n        columns === 1 ? \"grid-cols-1\" : \"grid-cols-2\",\n        className\n      )}\n      {...props}\n    >\n      {providers.map((provider) => (\n        <OAuthButton\n          key={provider}\n          provider={provider}\n          label={labels?.[provider]}\n          onClick={() => onProviderClick?.(provider)}\n        />\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/oauth-button-group.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "authentication"
+  ]
+}

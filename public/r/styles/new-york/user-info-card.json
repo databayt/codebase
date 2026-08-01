@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "user-info-card",
+  "description": "User avatar with name and email display",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "components/atom/user-info-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport {\n  Avatar,\n  AvatarFallback,\n  AvatarImage,\n} from \"@/components/ui/avatar\"\n\nexport interface UserInfoCardProps extends React.ComponentProps<\"div\"> {\n  name: string\n  email: string\n  avatar?: string\n  role?: string\n}\n\nexport function UserInfoCard({\n  name,\n  email,\n  avatar,\n  role,\n  className,\n  ...props\n}: UserInfoCardProps) {\n  const initials = name\n    .split(\" \")\n    .map((n) => n[0])\n    .join(\"\")\n    .toUpperCase()\n\n  return (\n    <div\n      data-slot=\"user-info-card\"\n      className={cn(\"flex items-center space-x-4\", className)}\n      {...props}\n    >\n      <Avatar className=\"size-8\">\n        <AvatarImage src={avatar} alt={name} />\n        <AvatarFallback>{initials}</AvatarFallback>\n      </Avatar>\n      <div className=\"min-w-0 flex-1\">\n        <p className=\"truncate text-sm font-medium leading-none\">{name}</p>\n        <p className=\"truncate text-sm text-muted-foreground\">{email}</p>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/user-info-card.tsx"
+    }
+  ],
+  "categories": [
+    "display",
+    "user"
+  ]
+}
