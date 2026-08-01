@@ -30,7 +30,7 @@ export function AiStreamingTextPreview() {
   return (
     <AiStreamingText
       text="Hello! This is a demonstration of streaming text animation. Each character appears one by one, creating a typewriter effect."
-      speed={30}
+      speed="fast"
     />
   )
 }

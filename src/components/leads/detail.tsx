@@ -80,7 +80,7 @@ export function Detail({ lead, open, onClose, onEdit, onDelete }: DetailProps) {
       return { ...LEAD_SCORE_RANGES.HOT, variant: 'destructive' as const };
     }
     if (score >= LEAD_SCORE_RANGES.WARM.min) {
-      return { ...LEAD_SCORE_RANGES.WARM, variant: 'warning' as const };
+      return { ...LEAD_SCORE_RANGES.WARM, variant: 'outline' as const };
     }
     if (score >= LEAD_SCORE_RANGES.COOL.min) {
       return { ...LEAD_SCORE_RANGES.COOL, variant: 'default' as const };

@@ -11,13 +11,13 @@ import {
   Building,
   Mail,
   Phone,
-  Linkedin,
   MapPin,
   Sparkles,
   Download,
   Copy,
   AlertCircle,
 } from 'lucide-react';
+import { LinkedInLogoIcon } from '@radix-ui/react-icons';
 import { useLeadExtractor } from './use-scraper';
 
 export function LeadExtractor() {
@@ -239,7 +239,7 @@ Visit us at www.techcorp.com`);
                               rel="noopener noreferrer"
                               className="flex items-center gap-1 hover:underline text-primary"
                             >
-                              <Linkedin className="h-3 w-3" />
+                              <LinkedInLogoIcon className="h-3 w-3" />
                               LinkedIn
                             </a>
                           )}

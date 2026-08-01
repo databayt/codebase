@@ -145,7 +145,7 @@ export function All({
   // Get score color
   const getScoreColor = (score: number) => {
     if (score >= LEAD_SCORE_RANGES.HOT.min) return 'destructive';
-    if (score >= LEAD_SCORE_RANGES.WARM.min) return 'warning';
+    if (score >= LEAD_SCORE_RANGES.WARM.min) return 'outline';
     if (score >= LEAD_SCORE_RANGES.COOL.min) return 'default';
     return 'secondary';
   };
@@ -157,8 +157,8 @@ export function All({
       case 'CONTACTED': return 'secondary';
       case 'QUALIFIED': return 'outline';
       case 'PROPOSAL': return 'default';
-      case 'NEGOTIATION': return 'warning';
-      case 'CLOSED_WON': return 'success';
+      case 'NEGOTIATION': return 'outline';
+      case 'CLOSED_WON': return 'secondary';
       case 'CLOSED_LOST': return 'destructive';
       default: return 'default';
     }

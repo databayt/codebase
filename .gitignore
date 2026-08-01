@@ -44,3 +44,6 @@ NUL
 
 # CDN asset staging mirror — assets live in S3 (databayt-cdn), not the repo
 /public/cdn/
+
+# clone snapshots (scratch)
+.clone/

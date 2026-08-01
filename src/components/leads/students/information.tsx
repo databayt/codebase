@@ -94,7 +94,7 @@ export function InformationStep({ form, isView }: StudentFormStepProps) {
                     selected={field.value ? new Date(field.value) : undefined}
                     onSelect={(date) => field.onChange(date?.toISOString().split('T')[0])}
                     disabled={isView}
-                    initialFocus
+                    autoFocus
                   />
                 </PopoverContent>
               </Popover>

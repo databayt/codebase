@@ -178,7 +178,7 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
@@ -191,12 +191,12 @@
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }
-  
+
   /* Safe area padding for mobile devices */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
-  
+
   /* Prevent zoom on input focus for iOS */
   input[type="text"],
   input[type="email"],
@@ -206,27 +206,27 @@
   textarea {
     font-size: 16px !important;
   }
-  
+
   /* Smooth keyboard transitions */
   @supports (height: 100dvh) {
     .h-dvh {
       height: 100dvh;
     }
   }
-  
+
   /* Blinking cursor animation for mobile chat input */
   @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
   }
-  
+
   /* Mobile scroll improvements */
   @media (max-width: 768px) {
     * {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
     }
-    
+
     body {
       touch-action: manipulation;
       overscroll-behavior-y: none;
@@ -239,35 +239,35 @@
       overflow: hidden !important;
       overscroll-behavior: contain !important;
     }
-    
+
     main {
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: none;
     }
   }
-  
+
   /* RTL Support */
   [dir="rtl"] {
     text-align: right;
   }
-  
+
   [dir="rtl"] .rtl\:flex-row-reverse {
     flex-direction: row-reverse;
   }
-  
+
   [dir="rtl"] .rtl\:text-left {
     text-align: left;
   }
-  
+
   [dir="rtl"] .rtl\:text-right {
     text-align: right;
   }
-  
+
   [dir="rtl"] .rtl\:ml-auto {
     margin-left: auto;
     margin-right: 0;
   }
-  
+
   [dir="rtl"] .rtl\:mr-auto {
     margin-right: auto;
     margin-left: 0;

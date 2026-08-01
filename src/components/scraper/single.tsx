@@ -14,7 +14,6 @@ import {
   Building,
   Mail,
   Phone,
-  Linkedin,
   MapPin,
   Download,
   Copy,
@@ -24,6 +23,7 @@ import {
   Clock,
   FileText,
 } from 'lucide-react';
+import { LinkedInLogoIcon } from '@radix-ui/react-icons';
 import { usePageScraper, useLeadExtractor, usePageAnalyzer } from './use-scraper';
 import { PAGE_TYPES, LEAD_POTENTIAL_LEVELS } from './constant';
 import type { ExtractedLead } from './type';
@@ -353,7 +353,7 @@ export function SinglePageScraper() {
                                       rel="noopener noreferrer"
                                       className="flex items-center gap-1 hover:underline"
                                     >
-                                      <Linkedin className="h-3 w-3" />
+                                      <LinkedInLogoIcon className="h-3 w-3" />
                                       LinkedIn
                                     </a>
                                   )}

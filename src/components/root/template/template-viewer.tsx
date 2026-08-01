@@ -16,7 +16,7 @@ import {
     Tablet,
     Terminal,
 } from "lucide-react"
-import { ImperativePanelHandle } from "react-resizable-panels"
+import { PanelImperativeHandle } from "react-resizable-panels"
 import { registryItemFileSchema, registryItemSchema } from "./registry"
 import { z } from "zod"
 
@@ -61,7 +61,7 @@ type TemplateViewerContext = {
     setStyle: (style: Style["name"]) => void
     activeFile: string | null
     setActiveFile: (file: string) => void
-    resizablePanelRef: React.RefObject<ImperativePanelHandle> | null
+    resizablePanelRef: React.RefObject<PanelImperativeHandle> | null
     tree: ReturnType<typeof createFileTreeForRegistryItemFiles> | null
     highlightedFiles:
         | (z.infer<typeof registryItemFileSchema> & {
@@ -96,7 +96,7 @@ function TemplateViewerProvider({
     const [activeFile, setActiveFile] = React.useState<
         TemplateViewerContext["activeFile"]
     >(highlightedFiles?.[0].target ?? null)
-    const resizablePanelRef = React.useRef<ImperativePanelHandle>(null)
+    const resizablePanelRef = React.useRef<PanelImperativeHandle>(null)
     const [iframeKey, setIframeKey] = React.useState(0)
 
     // Memoize setters to prevent context value from changing unnecessarily
@@ -296,9 +296,9 @@ function TemplateViewerView() {
         <div className="group-data-[view=code]/template-view-wrapper:hidden flex md:h-[--height]">
             <div className="relative grid w-full gap-4">
                 <div className="absolute inset-0 end-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
-                <ResizablePanelGroup direction="horizontal" className="relative z-10 after:absolute after:inset-0 after:end-3 after:z-0 after:rounded-xl after:bg-surface/50">
+                <ResizablePanelGroup orientation="horizontal" className="relative z-10 after:absolute after:inset-0 after:end-3 after:z-0 after:rounded-xl after:bg-surface/50">
                     <ResizablePanel
-                        ref={resizablePanelRef}
+                        panelRef={resizablePanelRef}
                         className="relative aspect-[4/2.5] overflow-hidden rounded-lg border bg-background md:aspect-auto md:rounded-xl"
                         defaultSize={100}
                         minSize={30}
