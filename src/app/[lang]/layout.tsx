@@ -5,6 +5,7 @@ import { getDictionary } from "@/components/local/dictionaries";
 import { type Locale, localeConfig } from "@/components/local/config";
 import { ThemeProvider } from "@/components/atom/theme-provider"
 import { DirectionProvider } from "@/components/ui/direction"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 import { headers } from "next/headers"
 
@@ -60,9 +61,11 @@ export default async function LocaleLayout({
             <body className={cn(fontClass, fontVariables, "group/body overscroll-none antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]")} suppressHydrationWarning>
                 <DirectionProvider dir={isRTL ? "rtl" : "ltr"}>
                     <ThemeProvider>
-                        <div className={isViewRoute ? "" : "layout-container"}>
-                            {children}
-                        </div>
+                        <TooltipProvider>
+                            <div className={isViewRoute ? "" : "layout-container"}>
+                                {children}
+                            </div>
+                        </TooltipProvider>
                     </ThemeProvider>
                 </DirectionProvider>
             </body>

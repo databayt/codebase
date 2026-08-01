@@ -28,8 +28,8 @@ export function UpdatePlanDialog({ currentPlan, plans, onPlanChange, className, 
     const [isYearly, setIsYearly] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState<string | undefined>(undefined);
     const [isOpen, setIsOpen] = useState(false);
-    const { currentTheme, previewDarkMode } = useTheme();
-    const themeStyles = getThemeStyles(currentTheme, previewDarkMode);
+    // Vendored billingsdk theming is not wired in this repo; tokens style the dialog.
+    const themeStyles: React.CSSProperties | undefined = undefined;
 
     const getCurrentPrice = useCallback((plan: Plan) =>
         isYearly ? `${plan.yearlyPrice}` : `${plan.monthlyPrice}`, [isYearly]

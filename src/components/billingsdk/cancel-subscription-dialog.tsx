@@ -13,8 +13,6 @@ import {
 import { type Plan } from "@/lib/billingsdk-config";
 import { cn } from "@/lib/utils";
 import { X, Circle } from "lucide-react";
-import { useTheme } from "@/contexts/theme-context";
-import { getThemeStyles } from "@/lib/themes";
 
 export interface CancelSubscriptionDialogProps {
     title: string;
@@ -61,8 +59,8 @@ export function CancelSubscriptionDialog({
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { currentTheme, previewDarkMode } = useTheme();
-    const themeStyles = getThemeStyles(currentTheme, previewDarkMode);
+    // Vendored billingsdk theming is not wired in this repo; tokens style the dialog.
+    const themeStyles: React.CSSProperties | undefined = undefined;
 
     const handleContinueCancellation = () => {
         setShowConfirmation(true);
