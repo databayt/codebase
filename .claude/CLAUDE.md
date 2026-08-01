@@ -222,6 +222,11 @@ Installed globally at `~/.claude/bmad/`
 **Local:** `/Users/abdout/codebase`
 **GitHub:** `databayt/codebase`
 
+**Pattern is a core databayt value** — this repo draws heavily and deliberately from
+[shadcn/ui](https://ui.shadcn.com): directory structure, registry system, and docs pattern
+follow [ui.shadcn.com](https://ui.shadcn.com) and [ui.shadcn.com/docs/directory](https://ui.shadcn.com/docs/directory).
+Check shadcn conventions before naming, structuring, or registering any component.
+
 When implementing, check codebase first:
 1. `src/components/` for components
 2. `__registry__/` for registry items

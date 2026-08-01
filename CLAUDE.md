@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Core Philosophy
 
-**This codebase is heavily inspired by and deeply appreciates shadcn/ui.**
+**This codebase is heavily inspired by and deeply appreciates shadcn/ui. Pattern fidelity to shadcn/ui is a core databayt value.**
 
-We monitor shadcn/ui updates and align our patterns accordingly. The ecosystem—registry system, directory structure, component architecture—follows shadcn conventions. However, we have our own enterprise-level architecture that extends beyond a simple component library.
+We monitor shadcn/ui updates and align our patterns accordingly. The ecosystem—registry system, directory structure, component architecture—follows shadcn conventions and draws deliberately from [ui.shadcn.com](https://ui.shadcn.com) and its registry directory model ([ui.shadcn.com/docs/directory](https://ui.shadcn.com/docs/directory)): namespaced registries, `registry.json`/`registry-item.json` schemas, CLI/MCP installability. However, we have our own enterprise-level architecture that extends beyond a simple component library.
+
+Before naming, structuring, or registering any component, check how shadcn/ui does it first. Deviations (blocks, micro, mirror-pattern, i18n/RTL) are deliberate enterprise extensions — never casual drift from a shadcn convention we follow.
 
 ### shadcn/ui Relationship
 
@@ -34,7 +36,7 @@ These are intentionally kept as they work well for our use cases.
 
 1. **Follow shadcn patterns** - Always check [ui.shadcn.com](https://ui.shadcn.com) for reference
 2. **Component hierarchy** - Understand UI → Atoms → Templates → Blocks → Micro progression
-3. **Registry system** - Use shadcn-style registry for component distribution
+3. **Registry system** - Use shadcn-style registry for component distribution, aligned with the [shadcn directory](https://ui.shadcn.com/docs/directory) model (namespaced, CLI/MCP-installable)
 4. **Mirror-pattern** - Every URL route maps 1:1 to `app/` and `components/` directories
 
 ## Tech Stack
