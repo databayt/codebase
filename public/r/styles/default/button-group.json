@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "description": "Horizontal or vertical group of related buttons with shared styling",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/atom/button-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Button } from \"@/components/ui/button\"\ntype ButtonProps = React.ComponentProps<typeof Button>\nimport { cn } from \"@/lib/utils\"\n\nexport interface ButtonGroupProps {\n  primaryLabel?: string\n  secondaryLabel?: string\n  onPrimaryClick?: () => void\n  onSecondaryClick?: () => void\n  primaryVariant?: ButtonProps[\"variant\"]\n  secondaryVariant?: ButtonProps[\"variant\"]\n  size?: ButtonProps[\"size\"]\n  className?: string\n  disabled?: boolean\n  loading?: boolean\n}\n\nexport function ButtonGroup({\n  primaryLabel = \"Submit\",\n  secondaryLabel = \"Cancel\",\n  onPrimaryClick,\n  onSecondaryClick,\n  primaryVariant = \"default\",\n  secondaryVariant = \"ghost\",\n  size = \"sm\",\n  className,\n  disabled,\n  loading,\n}: ButtonGroupProps) {\n  return (\n    <div className={cn(\"flex gap-2\", className)} data-slot=\"button-group\">\n      <Button\n        variant={secondaryVariant}\n        size={size}\n        onClick={onSecondaryClick}\n        disabled={disabled || loading}\n      >\n        {secondaryLabel}\n      </Button>\n      <Button\n        variant={primaryVariant}\n        size={size}\n        onClick={onPrimaryClick}\n        disabled={disabled || loading}\n      >\n        {loading ? \"Loading...\" : primaryLabel}\n      </Button>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/button-group.tsx"
+    }
+  ],
+  "categories": [
+    "interactive",
+    "form"
+  ]
+}

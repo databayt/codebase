@@ -1,0 +1,63 @@
+---
+title: Native Select
+description: Styled native select element for simple forms.
+component: true
+---
+
+<ComponentPreview name="native-select-preview" className="mb-4">
+  <NativeSelectPreview />
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add native-select
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="native-select-preview" title="components/atom/native-select-preview.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/components/ui/native-select"
+```
+
+```tsx
+<NativeSelect>
+  <NativeSelectOption value="">Select status</NativeSelectOption>
+  <NativeSelectOption value="todo">Todo</NativeSelectOption>
+  <NativeSelectOption value="done">Done</NativeSelectOption>
+</NativeSelect>
+```
+
+Use the native select when a plain platform control is enough — it needs no
+JavaScript, works inside forms out of the box, and inherits RTL behavior from
+the browser. Reach for the composed `Select` when you need custom item
+rendering or grouped commands.

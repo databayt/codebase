@@ -25,18 +25,28 @@ interface RegistryItem {
   }>
 }
 
-const REGISTRY_URL = "http://localhost:3000/r/styles/default"
+// Registry base resolves in fetchRegistryItem (remote-first, local fallback)
 const COMPONENTS_PATH = path.join(PROJECT_ROOT, "src", "components")
 
 async function fetchRegistryItem(name: string): Promise<RegistryItem> {
-  // For local development, read from public/r/styles/default
-  const jsonPath = path.join(PROJECT_ROOT, "public", "r", "styles", "default", `${name}.json`)
+  // Deployed registry first (override with CODEBASE_REGISTRY_URL), local
+  // public/r fallback for development inside the repo.
+  const baseUrl =
+    process.env.CODEBASE_REGISTRY_URL ?? "https://cb.databayt.org/r/styles/default"
 
   try {
+    const res = await fetch(`${baseUrl}/${name}.json`)
+    if (res.ok) return (await res.json()) as RegistryItem
+  } catch {
+    // fall through to local read
+  }
+
+  const jsonPath = path.join(PROJECT_ROOT, "public", "r", "styles", "default", `${name}.json`)
+  try {
     const content = await fs.readFile(jsonPath, "utf-8")
-    return JSON.parse(content)
-  } catch (error) {
-    throw new Error(`Component "${name}" not found in registry`)
+    return JSON.parse(content) as RegistryItem
+  } catch {
+    throw new Error(`Component "${name}" not found in registry (remote + local)`)
   }
 }
 

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "labeled-textarea",
+  "description": "Textarea with attached label, hint and error message",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "label",
+    "textarea"
+  ],
+  "files": [
+    {
+      "path": "components/atom/labeled-textarea.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Label } from \"@/components/ui/label\"\nimport { Textarea } from \"@/components/ui/textarea\"\ntype TextareaProps = React.ComponentProps<typeof Textarea>\nimport { cn } from \"@/lib/utils\"\n\nexport interface LabeledTextareaProps extends Omit<TextareaProps, \"id\"> {\n  label: string\n  containerClassName?: string\n}\n\nexport function LabeledTextarea({\n  label,\n  containerClassName,\n  className,\n  ...props\n}: LabeledTextareaProps) {\n  const id = React.useId()\n\n  return (\n    <div className={cn(\"grid gap-2\", containerClassName)} data-slot=\"labeled-textarea\">\n      <Label htmlFor={id}>{label}</Label>\n      <Textarea id={id} className={className} {...props} />\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/labeled-textarea.tsx"
+    }
+  ],
+  "categories": [
+    "form"
+  ]
+}

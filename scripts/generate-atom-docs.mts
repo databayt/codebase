@@ -1,182 +1,158 @@
+/**
+ * generate-atom-docs — scaffold MDX pages for registry atoms.
+ *
+ *   pnpm generate:docs            # scaffold missing pages, merge meta.json
+ *   pnpm generate:docs --prune    # also drop meta.json entries with no MDX file
+ *
+ * Scaffold-only: existing .mdx files are never touched. Output follows the
+ * hand-written page contract (ComponentPreview → Installation CodeTabs →
+ * Usage); the preview is emitted self-closing — add a demo child once the
+ * preview component is registered in src/mdx-components.tsx.
+ */
 import fs from "fs/promises"
 import path from "path"
 import { fileURLToPath } from "url"
-import { atoms } from "../src/registry/default/atoms/_registry.js"
+import { createRequire } from "module"
+import type { RegistryItem } from "../src/registry/schema"
+
+const require = createRequire(import.meta.url)
+const { atoms } = require("../src/registry/default/atoms/_registry") as {
+  atoms: RegistryItem[]
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = path.resolve(__dirname, "..")
 const CONTENT_PATH = path.join(PROJECT_ROOT, "content", "atoms", "(root)")
 
-async function ensureDir(dirPath: string) {
-  try {
-    await fs.mkdir(dirPath, { recursive: true })
-  } catch (error) {
-    console.error(`Failed to create directory ${dirPath}:`, error)
-  }
+function pascalCase(name: string): string {
+  return name
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join("")
 }
 
-function generateMDX(atom: typeof atoms[0]): string {
-  const title = atom.name
+function titleCase(name: string): string {
+  return name
     .split("-")
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ")
+}
 
-  const dependencies = atom.dependencies || []
-  const registryDependencies = atom.registryDependencies || []
-  const categories = atom.categories || []
+function generateMDX(atom: RegistryItem): string {
+  const title = titleCase(atom.name)
+  const componentName = pascalCase(atom.name)
+  const filePath = atom.files?.[0]?.path ?? `components/atom/${atom.name}.tsx`
 
-  const frontmatter = `---
-title: "${title}"
-description: "${atom.description}"
+  return `---
+title: ${title}
+description: ${atom.description ?? `${title} atom.`}
 component: true
-categories: [${categories.map(c => `"${c}"`).join(", ")}]
-${dependencies.length > 0 ? `dependencies: [${dependencies.map(d => `"${d}"`).join(", ")}]` : ""}
-${registryDependencies.length > 0 ? `registryDependencies: [${registryDependencies.map(d => `"${d}"`).join(", ")}]` : ""}
----`
+---
 
-  const installCommand = `npx codebase add ${atom.name}`
-
-  const content = `${frontmatter}
-
-# ${title}
-
-${atom.description}
+<ComponentPreview name="${atom.name}" className="mb-4" />
 
 ## Installation
 
-<Tabs defaultValue="cli">
-  <TabsList>
-    <TabsTrigger value="cli">CLI</TabsTrigger>
-    <TabsTrigger value="manual">Manual</TabsTrigger>
-  </TabsList>
-  <TabsContent value="cli">
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 \`\`\`bash
-${installCommand}
+npx codebase add ${atom.name}
 \`\`\`
 
-  </TabsContent>
-  <TabsContent value="manual">
+</TabsContent>
 
-### Install dependencies
+<TabsContent value="manual">
 
-${dependencies.length > 0 ? `
-\`\`\`bash
-npm install ${dependencies.join(" ")}
-\`\`\`
-` : "*No external dependencies required.*"}
+<Steps>
 
-### Copy component code
+<Step>Copy and paste the following code into your project.</Step>
 
-Copy and paste the following code into your project:
+<ComponentSource name="${atom.name}" title="${filePath}" />
 
-${atom.files?.map(f => `
-**${f.path}**
+<Step>Update the import paths to match your project setup.</Step>
 
-\`\`\`tsx title="${f.path}"
-// Component code will be populated from registry
-\`\`\`
-`).join("\n") || ""}
+</Steps>
 
-  </TabsContent>
-</Tabs>
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
 \`\`\`tsx
-import { ${title.replace(/\s+/g, "")} } from "@/components/atom/${atom.name}"
-
-export default function Example() {
-  return (
-    <${title.replace(/\s+/g, "")} />
-  )
-}
+import { ${componentName} } from "@/components/atom/${atom.name}"
 \`\`\`
 
-## Examples
-
-### Default
-
-<ComponentPreview name="${atom.name}-demo">
-  <${title.replace(/\s+/g, "")} />
-</ComponentPreview>
-
-## API Reference
-
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| \`className\` | \`string\` | - | Additional CSS classes |
-| \`children\` | \`React.ReactNode\` | - | Child elements |
-
-## Accessibility
-
-- Follows WAI-ARIA design patterns
-- Keyboard navigable
-- Screen reader friendly
-
-## Notes
-
-${categories.includes("ai") ? "- This component is optimized for AI interactions\n" : ""}${categories.includes("animation") ? "- Includes smooth animations and transitions\n" : ""}${dependencies.length > 0 ? `- Requires external dependencies: ${dependencies.join(", ")}\n` : ""}
+\`\`\`tsx
+<${componentName} />
+\`\`\`
 `
-
-  return content
 }
 
-async function generateAllDocs() {
-  console.log("Generating MDX documentation for atoms...")
+interface MetaJson {
+  title: string
+  pages: string[]
+  [key: string]: unknown
+}
 
-  await ensureDir(CONTENT_PATH)
+async function mergeMetaJson(prune: boolean): Promise<void> {
+  const metaPath = path.join(CONTENT_PATH, "meta.json")
+  const meta = JSON.parse(await fs.readFile(metaPath, "utf-8")) as MetaJson
 
-  let generated = 0
-  let skipped = 0
+  const mdxFiles = (await fs.readdir(CONTENT_PATH))
+    .filter((f) => f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.mdx$/, ""))
+  const mdxSet = new Set(mdxFiles)
 
+  let pages = [...meta.pages]
+
+  if (prune) {
+    const before = pages.length
+    pages = pages.filter((p) => mdxSet.has(p))
+    if (before !== pages.length)
+      console.log(`  meta.json: pruned ${before - pages.length} ghost entries`)
+  }
+
+  // Union: keep existing order, append any MDX file not yet listed (sorted).
+  const listed = new Set(pages)
+  const missing = mdxFiles.filter((f) => !listed.has(f)).sort()
+  if (missing.length) {
+    // Keep "index" first if present.
+    pages = [...pages, ...missing]
+    console.log(`  meta.json: added ${missing.length} pages (${missing.join(", ")})`)
+  }
+
+  await fs.writeFile(metaPath, JSON.stringify({ ...meta, pages }, null, 2) + "\n")
+}
+
+async function main(): Promise<void> {
+  const prune = process.argv.includes("--prune")
+  await fs.mkdir(CONTENT_PATH, { recursive: true })
+
+  let created = 0
   for (const atom of atoms) {
-    const filename = `${atom.name}.mdx`
-    const filepath = path.join(CONTENT_PATH, filename)
-
+    const target = path.join(CONTENT_PATH, `${atom.name}.mdx`)
     try {
-      // Check if file already exists
-      await fs.access(filepath)
-      console.log(`  ⏭️  Skipped ${filename} (already exists)`)
-      skipped++
+      await fs.access(target)
+      continue // scaffold-only: never touch existing pages
     } catch {
-      // File doesn't exist, create it
-      const content = generateMDX(atom)
-      await fs.writeFile(filepath, content)
-      console.log(`  ✅ Created ${filename}`)
-      generated++
+      await fs.writeFile(target, generateMDX(atom))
+      console.log(`  created ${atom.name}.mdx`)
+      created++
     }
   }
 
-  console.log(`\nSummary:`)
-  console.log(`  Generated: ${generated} files`)
-  console.log(`  Skipped: ${skipped} files`)
-  console.log(`  Total atoms: ${atoms.length}`)
-
-  // Update meta.json
-  await updateMetaJson()
+  await mergeMetaJson(prune)
+  console.log(`Done. ${created} page(s) scaffolded.`)
 }
 
-async function updateMetaJson() {
-  console.log("\nUpdating meta.json...")
-
-  const metaPath = path.join(CONTENT_PATH, "meta.json")
-
-  // Sort atoms alphabetically for sidebar
-  const sortedAtoms = [...atoms]
-    .map(a => a.name)
-    .sort()
-
-  const meta = {
-    title: "Atoms",
-    pages: ["index", ...sortedAtoms]
-  }
-
-  await fs.writeFile(metaPath, JSON.stringify(meta, null, 2))
-  console.log("  ✅ Updated meta.json")
-}
-
-// Run generator
-generateAllDocs().catch(console.error)
+main().catch((err: unknown) => {
+  console.error(err instanceof Error ? err.message : err)
+  process.exit(1)
+})

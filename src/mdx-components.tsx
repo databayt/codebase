@@ -39,6 +39,10 @@ import { PromptInput } from "@/components/atom/prompt-input"
 import { Reasoning } from "@/components/atom/reasoning"
 import { IconsPreview } from "@/components/atom/icons-preview"
 import { FontsPreview } from "@/components/atom/fonts-preview"
+import { ComboboxPreview } from "@/components/atom/combobox-preview"
+import { NativeSelectPreview } from "@/components/atom/native-select-preview"
+import { DirectionPreview } from "@/components/atom/direction-preview"
+import { ChatPrimitivesPreview } from "@/components/atom/chat-primitives-preview"
 import { CardsActivityGoal } from "@/components/atom/activity-goal"
 import { CardsReportIssue } from "@/components/atom/report-issue"
 import { CardsShare } from "@/components/atom/share"
@@ -368,6 +372,10 @@ const mdxComponents = {
     Reasoning,
     Icons: IconsPreview,
     Fonts: FontsPreview,
+    ComboboxPreview,
+    NativeSelectPreview,
+    DirectionPreview,
+    ChatPrimitivesPreview,
     ActivityGoal: () => <CardsActivityGoal dictionary={defaultDictionary} />,
     ReportIssue: () => <CardsReportIssue dictionary={defaultDictionary} />,
     Share: () => <CardsShare dictionary={defaultDictionary} />,

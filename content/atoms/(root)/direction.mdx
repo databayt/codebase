@@ -1,0 +1,58 @@
+---
+title: Direction
+description: Direction provider that makes portalled primitives RTL/LTR aware.
+component: true
+---
+
+<ComponentPreview name="direction-preview" className="mb-4">
+  <DirectionPreview />
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add direction
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="direction-preview" title="components/atom/direction-preview.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DirectionProvider } from "@/components/ui/direction"
+```
+
+```tsx
+<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
+  <App />
+</DirectionProvider>
+```
+
+This site wraps every locale layout in a `DirectionProvider` driven by the
+active language, so dropdowns, sheets, and menus rendered through portals
+inherit the correct direction automatically. The `dir` attribute on `<html>`
+handles static layout; the provider handles Radix primitives.

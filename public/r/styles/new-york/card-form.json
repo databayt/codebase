@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-form",
+  "description": "Card shell for forms with header, content and footer slots",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "card"
+  ],
+  "files": [
+    {
+      "path": "components/atom/card-form.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface CardFormProps {\n  title: string\n  description?: string\n  children: React.ReactNode\n  footer?: React.ReactNode\n  className?: string\n  contentClassName?: string\n  dir?: \"ltr\" | \"rtl\"\n}\n\nexport function CardForm({\n  title,\n  description,\n  children,\n  footer,\n  className,\n  contentClassName,\n  dir = \"ltr\",\n}: CardFormProps) {\n  return (\n    <Card\n      className={cn(className)}\n      dir={dir}\n      data-slot=\"card-form\"\n    >\n      <CardHeader>\n        <CardTitle>{title}</CardTitle>\n        {description && <CardDescription>{description}</CardDescription>}\n      </CardHeader>\n      <CardContent className={cn(\"grid gap-6\", contentClassName)}>\n        {children}\n      </CardContent>\n      {footer && <CardFooter className=\"justify-between space-x-2\">{footer}</CardFooter>}\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/card-form.tsx"
+    }
+  ],
+  "categories": [
+    "form",
+    "card"
+  ]
+}

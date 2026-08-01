@@ -1,0 +1,49 @@
+---
+title: Site Heading
+description: Site section heading with title and description lockup
+component: true
+---
+
+<ComponentPreview name="site-heading" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add site-heading
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="site-heading" title="components/atom/site-heading.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { SiteHeading } from "@/components/atom/site-heading"
+```
+
+```tsx
+<SiteHeading />
+```

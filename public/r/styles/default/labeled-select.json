@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "labeled-select",
+  "description": "Select with attached label, hint and error message",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "label",
+    "select"
+  ],
+  "files": [
+    {
+      "path": "components/atom/labeled-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Label } from \"@/components/ui/label\"\nimport {\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SelectOption {\n  value: string\n  label: string\n}\n\nexport interface LabeledSelectProps {\n  label: string\n  options: SelectOption[]\n  defaultValue?: string\n  placeholder?: string\n  className?: string\n  triggerClassName?: string\n  onValueChange?: (value: string) => void\n}\n\nexport function LabeledSelect({\n  label,\n  options,\n  defaultValue,\n  placeholder = \"Select\",\n  className,\n  triggerClassName,\n  onValueChange,\n}: LabeledSelectProps) {\n  const id = React.useId()\n\n  return (\n    <div className={cn(\"grid gap-2\", className)} data-slot=\"labeled-select\">\n      <Label htmlFor={id}>{label}</Label>\n      <Select defaultValue={defaultValue} onValueChange={onValueChange}>\n        <SelectTrigger\n          id={id}\n          className={cn(\"w-full\", triggerClassName)}\n          aria-label={label}\n        >\n          <SelectValue placeholder={placeholder} />\n        </SelectTrigger>\n        <SelectContent>\n          {options.map((option) => (\n            <SelectItem key={option.value} value={option.value}>\n              {option.label}\n            </SelectItem>\n          ))}\n        </SelectContent>\n      </Select>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/labeled-select.tsx"
+    }
+  ],
+  "categories": [
+    "form"
+  ]
+}

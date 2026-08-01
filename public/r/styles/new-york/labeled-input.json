@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "labeled-input",
+  "description": "Input with attached label, hint and error message",
+  "type": "registry:atom",
+  "registryDependencies": [
+    "label",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "components/atom/labeled-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Label } from \"@/components/ui/label\"\nimport { Input } from \"@/components/ui/input\"\ntype InputProps = React.ComponentProps<typeof Input>\nimport { cn } from \"@/lib/utils\"\n\nexport interface LabeledInputProps extends Omit<InputProps, \"id\"> {\n  label: string\n  containerClassName?: string\n}\n\nexport function LabeledInput({\n  label,\n  containerClassName,\n  className,\n  ...props\n}: LabeledInputProps) {\n  const id = React.useId()\n\n  return (\n    <div className={cn(\"grid gap-2\", containerClassName)} data-slot=\"labeled-input\">\n      <Label htmlFor={id}>{label}</Label>\n      <Input id={id} className={className} {...props} />\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/labeled-input.tsx"
+    }
+  ],
+  "categories": [
+    "form"
+  ]
+}

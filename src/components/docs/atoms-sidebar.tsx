@@ -15,77 +15,36 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Flat list of links without sections
-const ATOMS_LINKS = [
-  { name: "Introduction", href: "/atoms" },
+type PageTree = typeof atomsSource.pageTree
 
-  // Form / Authentication
-  { name: "OAuth Button", href: "/atoms/oauth-button" },
-  { name: "OAuth Button Group", href: "/atoms/oauth-button-group" },
-  { name: "Divider With Text", href: "/atoms/divider-with-text" },
-  { name: "Form Field", href: "/atoms/form-field" },
-  { name: "Settings Toggle Row", href: "/atoms/settings-toggle-row" },
-  { name: "Payment Method Selector", href: "/atoms/payment-method-selector" },
+type PageTreeNode = PageTree["children"][number]
 
-  // Display / User
-  { name: "User Info Card", href: "/atoms/user-info-card" },
-
-  // Card Components
-  { name: "Activity Goal", href: "/atoms/activity-goal" },
-  { name: "Calendar", href: "/atoms/calendar" },
-  { name: "Metric", href: "/atoms/metric" },
-  { name: "Report Issue", href: "/atoms/report-issue" },
-  { name: "Share", href: "/atoms/share" },
-  { name: "Stats", href: "/atoms/stats" },
-
-  // Animation
-  { name: "Card Hover Effect", href: "/atoms/card-hover-effect" },
-  { name: "Cards Metric", href: "/atoms/cards-metric" },
-  { name: "Card", href: "/atoms/card" },
-  { name: "Gradient Animation", href: "/atoms/gradient-animation" },
-  { name: "Infinite Cards", href: "/atoms/infinite-cards" },
-  { name: "Infinite Slider", href: "/atoms/infinite-slider" },
-  { name: "Progressive Blur", href: "/atoms/progressive-blur" },
-  { name: "Simple Marquee", href: "/atoms/simple-marquee" },
-  { name: "Sticky Scroll", href: "/atoms/sticky-scroll" },
-
-  // Interactive
-  { name: "Accordion", href: "/atoms/accordion" },
-  { name: "Expand Button", href: "/atoms/expand-button" },
-  { name: "Faceted", href: "/atoms/faceted" },
-  { name: "Sortable", href: "/atoms/sortable" },
-  { name: "Tabs", href: "/atoms/tabs" },
-  { name: "Two Buttons", href: "/atoms/two-buttons" },
-
-  // AI
-  { name: "AI Prompt Input", href: "/atoms/ai-prompt-input" },
-  { name: "AI Response Display", href: "/atoms/ai-response-display" },
-  { name: "AI Status Indicator", href: "/atoms/ai-status-indicator" },
-  { name: "AI Streaming Text", href: "/atoms/ai-streaming-text" },
-  { name: "Prompt Input", href: "/atoms/prompt-input" },
-  { name: "Reasoning", href: "/atoms/reasoning" },
-  { name: "Response", href: "/atoms/response" },
-
-  // Layout
-  { name: "Agent Heading", href: "/atoms/agent-heading" },
-  { name: "Announcement", href: "/atoms/announcement" },
-  { name: "Header Section", href: "/atoms/header-section" },
-  { name: "Loading", href: "/atoms/loading" },
-  { name: "Modal System", href: "/atoms/modal-system" },
-  { name: "Page Actions", href: "/atoms/page-actions" },
-  { name: "Page Header", href: "/atoms/page-header" },
-  { name: "Theme Provider", href: "/atoms/theme-provider" },
-
-  // Utilities
-  { name: "Fonts", href: "/atoms/fonts" },
-  { name: "Icons", href: "/atoms/icons" },
-]
+// Flatten the fumadocs page tree (folders included) into ordered links.
+// meta.json owns the order; every MDX page appears automatically.
+function collectLinks(nodes: PageTreeNode[]): { name: string; href: string }[] {
+  const links: { name: string; href: string }[] = []
+  for (const node of nodes) {
+    if (node.type === "page") {
+      links.push({ name: String(node.name), href: node.url })
+    } else if (node.type === "folder") {
+      if (node.index) {
+        links.push({ name: String(node.index.name), href: node.index.url })
+      }
+      links.push(...collectLinks(node.children))
+    }
+  }
+  return links
+}
 
 export function AtomsSidebar({
   tree,
   ...props
-}: React.ComponentProps<typeof Sidebar> & { tree: typeof atomsSource.pageTree }) {
+}: React.ComponentProps<typeof Sidebar> & { tree: PageTree }) {
   const pathname = usePathname()
+  // Routes live under /[lang]; tree urls do not carry the locale prefix.
+  const pathWithoutLang = pathname.replace(/^\/(en|ar)(?=\/|$)/, "") || "/"
+
+  const links = collectLinks(tree.children)
 
   return (
     <Sidebar
@@ -99,8 +58,8 @@ export function AtomsSidebar({
             <SidebarGroup className="p-0">
               <SidebarGroupContent>
                 <SidebarMenu>
-                  {ATOMS_LINKS.map(({ name, href }) => {
-                    const isActive = pathname === href
+                  {links.map(({ name, href }) => {
+                    const isActive = pathWithoutLang === href
 
                     return (
                       <SidebarMenuItem key={href}>

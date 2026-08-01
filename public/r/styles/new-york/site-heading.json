@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "site-heading",
+  "description": "Site section heading with title and description lockup",
+  "type": "registry:atom",
+  "files": [
+    {
+      "path": "components/atom/site-heading.tsx",
+      "content": "\"use client\";\nimport React from 'react';\n\ntype Props = {\n    title: string;\n    description: string;\n    align?: 'center' | 'start' | 'end'; // Added 'end' as an alignment option\n    size?: 'sm' | 'md' | 'lg'; // Added 'lg' as a size option\n    className?: string; // Added optional className for custom styling\n};\n\nconst SiteHeading = ({ \n    title, \n    description, \n    align = 'center', \n    size = 'lg', \n    className = '' \n}: Props) => {\n    // Determine alignment classes\n    const alignClasses = {\n        'center': 'items-center text-center',\n        'start': 'items-start text-start',\n        'end': 'items-end text-end'\n    };\n\n    // Determine size classes\n    const titleSizeClasses = {\n        'sm': 'text-xl sm:text-2xl font-medium',\n        'md': 'text-3xl sm:text-4xl md:text-4xl font-semibold',\n        'lg': 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold'\n    };\n\n    const descriptionSizeClasses = {\n        'sm': 'text-sm sm:text-base',\n        'md': 'text-base sm:text-lg',\n        'lg': 'text-base sm:text-lg md:text-xl'\n    };\n\n    const spacingClasses = {\n        'sm': 'gap-1 pb-2',\n        'md': 'gap-2 py-2 md:py-4',\n        'lg': 'gap-2 sm:gap-3 py-4 md:py-6 lg:py-8'\n    };\n\n    return (\n        <div className={`flex flex-col ${alignClasses[align]} ${spacingClasses[size]} ${className}`}>\n            <h2 className={`font-heading leading-tight ${titleSizeClasses[size]}`}>\n                {title}\n            </h2>\n\n            <p className={`max-w-prose leading-normal text-muted-foreground ${descriptionSizeClasses[size]}`}>\n                {description}\n            </p>\n        </div>\n    );\n};\n\nexport default SiteHeading;\n",
+      "type": "registry:component",
+      "target": "components/site-heading.tsx"
+    }
+  ],
+  "categories": [
+    "display",
+    "layout"
+  ]
+}

@@ -1669,6 +1669,106 @@ export const Index: Record<string, any> = {
         "utility"
       ],
       "meta": {}
+    },
+    "button-group": {
+      "name": "button-group",
+      "description": "Horizontal or vertical group of related buttons with shared styling",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/button-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "categories": [
+        "interactive",
+        "form"
+      ],
+      "meta": {}
+    },
+    "card-form": {
+      "name": "card-form",
+      "description": "Card shell for forms with header, content and footer slots",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/card-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card"
+      ],
+      "categories": [
+        "form",
+        "card"
+      ],
+      "meta": {}
+    },
+    "labeled-input": {
+      "name": "labeled-input",
+      "description": "Input with attached label, hint and error message",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/labeled-input.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "input"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "labeled-select": {
+      "name": "labeled-select",
+      "description": "Select with attached label, hint and error message",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/labeled-select.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "select"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "labeled-textarea": {
+      "name": "labeled-textarea",
+      "description": "Textarea with attached label, hint and error message",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/labeled-textarea.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "textarea"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "site-heading": {
+      "name": "site-heading",
+      "description": "Site section heading with title and description lockup",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/site-heading.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "categories": [
+        "display",
+        "layout"
+      ],
+      "meta": {}
     }
   },
   "new-york": {
@@ -3337,6 +3437,106 @@ export const Index: Record<string, any> = {
       "categories": [
         "ui",
         "utility"
+      ],
+      "meta": {}
+    },
+    "button-group": {
+      "name": "button-group",
+      "description": "Horizontal or vertical group of related buttons with shared styling",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/button-group.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "categories": [
+        "interactive",
+        "form"
+      ],
+      "meta": {}
+    },
+    "card-form": {
+      "name": "card-form",
+      "description": "Card shell for forms with header, content and footer slots",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/card-form.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "card"
+      ],
+      "categories": [
+        "form",
+        "card"
+      ],
+      "meta": {}
+    },
+    "labeled-input": {
+      "name": "labeled-input",
+      "description": "Input with attached label, hint and error message",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/labeled-input.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "input"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "labeled-select": {
+      "name": "labeled-select",
+      "description": "Select with attached label, hint and error message",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/labeled-select.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "select"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "labeled-textarea": {
+      "name": "labeled-textarea",
+      "description": "Textarea with attached label, hint and error message",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/labeled-textarea.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [
+        "label",
+        "textarea"
+      ],
+      "categories": [
+        "form"
+      ],
+      "meta": {}
+    },
+    "site-heading": {
+      "name": "site-heading",
+      "description": "Site section heading with title and description lockup",
+      "type": "registry:atom",
+      "files": [
+        "components/atom/site-heading.tsx"
+      ],
+      "dependencies": [],
+      "registryDependencies": [],
+      "categories": [
+        "display",
+        "layout"
       ],
       "meta": {}
     }

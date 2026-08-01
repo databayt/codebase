@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { Label } from "@/components/ui/label"
-import { Textarea, type TextareaProps } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea"
+type TextareaProps = React.ComponentProps<typeof Textarea>
 import { cn } from "@/lib/utils"
 
 export interface LabeledTextareaProps extends Omit<TextareaProps, "id"> {

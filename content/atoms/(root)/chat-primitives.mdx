@@ -1,0 +1,68 @@
+---
+title: Chat Primitives
+description: Message, bubble, attachment and marker primitives for conversational interfaces.
+component: true
+---
+
+<ComponentPreview name="chat-primitives-preview" className="mb-4">
+  <ChatPrimitivesPreview />
+</ComponentPreview>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx codebase add message bubble attachment marker message-scroller
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="chat-primitives-preview" title="components/atom/chat-primitives-preview.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Message, MessageAvatar, MessageContent, MessageGroup } from "@/components/ui/message"
+import { Bubble, BubbleContent, BubbleGroup } from "@/components/ui/bubble"
+import { Attachment, AttachmentContent, AttachmentMedia, AttachmentTitle } from "@/components/ui/attachment"
+import { Marker, MarkerContent } from "@/components/ui/marker"
+```
+
+```tsx
+<MessageGroup>
+  <Message>
+    <MessageAvatar>AI</MessageAvatar>
+    <MessageContent>Hello!</MessageContent>
+  </Message>
+  <Message align="end">
+    <MessageContent>Hi there.</MessageContent>
+  </Message>
+</MessageGroup>
+```
+
+Five primitives compose the chat surface: `Message` rows with avatars and
+footers, `Bubble` for short grouped exchanges, `Attachment` for files and
+media, `Marker` for date separators and annotations, and `MessageScroller`
+for an auto-following viewport during streaming. All of them align with
+logical properties, so `align="end"` lands on the correct side in Arabic.

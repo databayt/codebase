@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { Label } from "@/components/ui/label"
-import { Input, type InputProps } from "@/components/ui/input"
+import { Input } from "@/components/ui/input"
+type InputProps = React.ComponentProps<typeof Input>
 import { cn } from "@/lib/utils"
 
 export interface LabeledInputProps extends Omit<InputProps, "id"> {

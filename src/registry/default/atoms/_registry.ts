@@ -639,4 +639,53 @@ export const atoms: Registry["items"] = [
     ],
     dependencies: ["next/font/google"],
   },
+
+  // Decomposed form/auth atoms (registered 2026-08)
+  {
+    name: "button-group",
+    type: "registry:atom",
+    description: "Horizontal or vertical group of related buttons with shared styling",
+    categories: ["interactive", "form"],
+    files: [{ path: "components/atom/button-group.tsx", type: "registry:component" }],
+    registryDependencies: ["button"],
+  },
+  {
+    name: "card-form",
+    type: "registry:atom",
+    description: "Card shell for forms with header, content and footer slots",
+    categories: ["form", "card"],
+    files: [{ path: "components/atom/card-form.tsx", type: "registry:component" }],
+    registryDependencies: ["card"],
+  },
+  {
+    name: "labeled-input",
+    type: "registry:atom",
+    description: "Input with attached label, hint and error message",
+    categories: ["form"],
+    files: [{ path: "components/atom/labeled-input.tsx", type: "registry:component" }],
+    registryDependencies: ["label", "input"],
+  },
+  {
+    name: "labeled-select",
+    type: "registry:atom",
+    description: "Select with attached label, hint and error message",
+    categories: ["form"],
+    files: [{ path: "components/atom/labeled-select.tsx", type: "registry:component" }],
+    registryDependencies: ["label", "select"],
+  },
+  {
+    name: "labeled-textarea",
+    type: "registry:atom",
+    description: "Textarea with attached label, hint and error message",
+    categories: ["form"],
+    files: [{ path: "components/atom/labeled-textarea.tsx", type: "registry:component" }],
+    registryDependencies: ["label", "textarea"],
+  },
+  {
+    name: "site-heading",
+    type: "registry:atom",
+    description: "Site section heading with title and description lockup",
+    categories: ["display", "layout"],
+    files: [{ path: "components/atom/site-heading.tsx", type: "registry:component" }],
+  },
 ]
