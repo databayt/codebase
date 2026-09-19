@@ -1,0 +1,35 @@
+{
+  // codebase (cb.databayt.org) on Cloudflare Containers — the same lane as hogwarts,
+  // mkan, kun and marketing. A thin Worker forwards every request to one container
+  // running the Next standalone server. cb.databayt.org is a proxied AAAA 100:: black
+  // hole in the databayt.org zone; the route below is what actually serves it.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "codebase",
+  "main": "cf/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "vars": {
+    // next-auth v5 builds its redirects from the request URL, and the standalone server
+    // reports that as 0.0.0.0:3000 (Next standalone quirk); AUTH_URL pins the real origin.
+    // Vercel never needed it — and the pulled prod env stores NEXTAUTH_URL without a
+    // scheme ("cb.databayt.org"), which next-auth cannot use as an origin either.
+    "AUTH_URL": "https://cb.databayt.org"
+  },
+  "containers": [
+    {
+      "class_name": "CodebaseContainer",
+      "image": "./Dockerfile.cf",
+      "max_instances": 1,
+      // standard-1 (½ vCPU / 4 GiB): the registry, four fumadocs content trees and the
+      // template docs make this heavier than marketing. Drop to basic if smoke says so.
+      "instance_type": "standard-1"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "CODEBASE", "class_name": "CodebaseContainer" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["CodebaseContainer"] }],
+  "routes": [{ "pattern": "cb.databayt.org/*", "zone_name": "databayt.org" }]
+}

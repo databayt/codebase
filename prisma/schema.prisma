@@ -5,6 +5,11 @@
 generator client {
   provider   = "prisma-client-js"
   engineType = "library"
+  // The Cloudflare container runs node:22-bookworm-slim (Debian 12 / OpenSSL 3.0), but the
+  // image is built from a standalone bundle compiled on macOS, where `native` resolves to the
+  // darwin engine alone. Without the Debian target the container starts fine and every static
+  // page renders — then the first query (login) fails on a missing query engine.
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
