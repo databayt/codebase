@@ -22,9 +22,10 @@
       "class_name": "CodebaseContainer",
       "image": "./Dockerfile.cf",
       "max_instances": 1,
-      // standard-1 (½ vCPU / 4 GiB): the registry, four fumadocs content trees and the
-      // template docs make this heavier than marketing. Drop to basic if smoke says so.
-      "instance_type": "standard-1"
+      // basic = ¼ vCPU / 1 GiB. Provisioned standard-1 defensively for the registry and the
+      // four content trees, then measured: the smoke peaked at 416 MiB over every route.
+      // Bump back to standard-1 if the container restarts under real traffic.
+      "instance_type": "basic"
     }
   ],
   "durable_objects": {

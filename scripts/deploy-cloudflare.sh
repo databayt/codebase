@@ -77,7 +77,7 @@ smoke() {
   node cf/env-split.mjs "$ENV_FILE" docker > "$DENV"
   docker rm -f codebase-cf-smoke >/dev/null 2>&1 || true
   echo "==> docker run :3500"
-  docker run -d --rm --name codebase-cf-smoke --platform linux/amd64 -p 3500:3000 --memory 4g --env-file "$DENV" "$IMAGE" >/dev/null
+  docker run -d --rm --name codebase-cf-smoke --platform linux/amd64 -p 3500:3000 --memory 1g --env-file "$DENV" "$IMAGE" >/dev/null
   local i
   for i in $(seq 1 90); do curl -sf -o /dev/null "http://localhost:3500/" && break; sleep 2; done
   echo "    boot: ${i}x2s"
