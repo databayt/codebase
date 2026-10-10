@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "logos-01",
+  "title": "Logos 01",
+  "description": "Trusted-by label beside an infinite logo marquee with faded, progressively blurred edges.",
+  "registryDependencies": [
+    "@codebase/infinite-slider",
+    "@codebase/progressive-blur"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/logos-01/page.tsx",
+      "content": "import { Logos } from \"@/registry/bases/base/blocks/logos-01/components/logos-01\"\nimport { dictionary } from \"@/registry/bases/base/blocks/logos-01/logos-01-dictionary\"\n\nexport default async function Page({\n  params,\n}: {\n  params?: Promise<{ lang?: string }>\n}) {\n  const { lang } = (await params) ?? {}\n  const locale = lang === \"ar\" ? \"ar\" : \"en\"\n  return <Logos dictionary={dictionary[locale]} lang={locale} />\n}\n",
+      "type": "registry:page",
+      "target": "app/logos-01/page.tsx"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/logos-01/components/logos-01.tsx",
+      "content": "import { InfiniteSlider } from \"@/components/atom/infinite-slider\"\nimport { ProgressiveBlur } from \"@/components/atom/progressive-blur\"\nimport { cn } from \"@/lib/utils\"\n\nexport type LogosDictionary = {\n  title: string\n  logos: {\n    name: string\n    src: string\n  }[]\n}\n\nexport function Logos({\n  dictionary,\n  lang,\n  className,\n}: {\n  dictionary: LogosDictionary\n  lang: \"en\" | \"ar\"\n  className?: string\n}) {\n  const isRTL = lang === \"ar\"\n\n  return (\n    <section\n      dir={isRTL ? \"rtl\" : \"ltr\"}\n      aria-labelledby=\"logos-01-title\"\n      className={cn(\"overflow-hidden bg-background py-16\", className)}\n    >\n      <div className=\"mx-auto max-w-6xl px-6 lg:px-8\">\n        <div className=\"flex flex-col items-center gap-4 md:flex-row md:gap-0\">\n          <div className=\"shrink-0 text-center md:border-e md:pe-6 md:text-start\">\n            <h2\n              id=\"logos-01-title\"\n              className=\"text-base font-medium whitespace-pre-line\"\n            >\n              {dictionary.title}\n            </h2>\n          </div>\n\n          <ul className=\"sr-only\">\n            {dictionary.logos.map((logo) => (\n              <li key={logo.name}>{logo.name}</li>\n            ))}\n          </ul>\n\n          {/* The track is laid out LTR so the duplicated strip loops seamlessly;\n              in RTL it runs the other way, flowing toward the reading start. */}\n          <div\n            dir=\"ltr\"\n            aria-hidden=\"true\"\n            className=\"relative w-full flex-1 overflow-hidden py-6 md:w-auto\"\n          >\n            <InfiniteSlider\n              speedOnHover={20}\n              speed={40}\n              gap={96}\n              reverse={isRTL}\n            >\n              {dictionary.logos.map((logo) => (\n                <div\n                  key={logo.name}\n                  className=\"flex items-center gap-2 text-foreground opacity-60 transition-opacity duration-300 hover:opacity-100\"\n                >\n                  {/* eslint-disable-next-line @next/next/no-img-element */}\n                  <img\n                    src={logo.src}\n                    alt=\"\"\n                    width={24}\n                    height={24}\n                    loading=\"lazy\"\n                    className=\"size-6 object-contain dark:invert\"\n                  />\n                  <span className=\"text-lg font-semibold tracking-tight whitespace-nowrap\">\n                    {logo.name}\n                  </span>\n                </div>\n              ))}\n            </InfiniteSlider>\n\n            <div className=\"pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-linear-to-r from-background via-background/80 to-transparent\" />\n            <div className=\"pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-linear-to-l from-background via-background/80 to-transparent\" />\n\n            <ProgressiveBlur\n              className=\"pointer-events-none absolute top-0 left-0 z-20 h-full w-24\"\n              direction=\"left\"\n              blurIntensity={1}\n            />\n            <ProgressiveBlur\n              className=\"pointer-events-none absolute top-0 right-0 z-20 h-full w-24\"\n              direction=\"right\"\n              blurIntensity={1}\n            />\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/logos-01/logos-01-dictionary.ts",
+      "content": "import { type LogosDictionary } from \"@/registry/bases/base/blocks/logos-01/components/logos-01\"\n\nconst logos: LogosDictionary[\"logos\"] = [\n  { name: \"Vercel\", src: \"https://cdn.simpleicons.org/vercel/18181b\" },\n  { name: \"Stripe\", src: \"https://cdn.simpleicons.org/stripe/18181b\" },\n  { name: \"GitHub\", src: \"https://cdn.simpleicons.org/github/18181b\" },\n  { name: \"Notion\", src: \"https://cdn.simpleicons.org/notion/18181b\" },\n  { name: \"Figma\", src: \"https://cdn.simpleicons.org/figma/18181b\" },\n  { name: \"Shopify\", src: \"https://cdn.simpleicons.org/shopify/18181b\" },\n  { name: \"Supabase\", src: \"https://cdn.simpleicons.org/supabase/18181b\" },\n  { name: \"Linear\", src: \"https://cdn.simpleicons.org/linear/18181b\" },\n]\n\nexport const dictionary: Record<\"en\" | \"ar\", LogosDictionary> = {\n  en: {\n    title: \"Trusted by teams\\nat leading companies\",\n    logos,\n  },\n  ar: {\n    title: \"تثق بنا فرقٌ\\nفي شركات رائدة\",\n    logos,\n  },\n}\n",
+      "type": "registry:file",
+      "target": "app/logos-01/logos-01-dictionary.ts"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "320px"
+  },
+  "categories": [
+    "logos"
+  ],
+  "type": "registry:block"
+}

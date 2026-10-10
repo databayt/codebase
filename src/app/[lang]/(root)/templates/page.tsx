@@ -10,9 +10,9 @@ export const revalidate = false
 // Mirrors shadcn's /blocks page: a handful of featured templates.
 const FEATURED_TEMPLATES = [
   "dashboard-01",
+  "hero-07",
+  "pricing-01",
   "sidebar-07",
-  "sidebar-03",
-  "hero-04",
   "login-03",
 ]
 

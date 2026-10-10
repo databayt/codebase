@@ -3,6 +3,9 @@
   "name": "progressive-blur",
   "title": "Progressive Blur",
   "description": "Progressive blur effect for images and backgrounds",
+  "dependencies": [
+    "framer-motion"
+  ],
   "files": [
     {
       "path": "src/components/atom/progressive-blur.tsx",

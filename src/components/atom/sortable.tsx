@@ -40,8 +40,22 @@ import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { useComposedRefs } from "@/components/table/lib/compose-refs";
 import { cn } from "@/lib/utils";
+
+// Compose a forwarded ref with a local callback ref (inlined so the atom
+// installs without the table module).
+function useComposedRefs<T>(
+  ...refs: Array<React.Ref<T> | undefined>
+): React.RefCallback<T> {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return React.useCallback((node: T) => {
+    for (const ref of refs) {
+      if (typeof ref === "function") ref(node);
+      else if (ref) (ref as React.MutableRefObject<T>).current = node;
+    }
+  }, refs);
+}
+
 
 type SortableRenderProp = useRender.RenderProp;
 

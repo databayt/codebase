@@ -1,12 +1,16 @@
 "use client"
 
 import * as React from "react"
-import type { getDictionary } from "@/components/local/dictionaries"
 import { CardForm } from "@/components/atom/card-form"
 import { LabeledSelect } from "@/components/atom/labeled-select"
 import { LabeledInput } from "@/components/atom/labeled-input"
 import { LabeledTextarea } from "@/components/atom/labeled-textarea"
 import { ButtonGroup } from "@/components/atom/button-group"
+
+// Optional copy overrides in the shape of a site dictionary
+// (e.g. dictionary.cards.<atom>.*); English defaults render without it.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Dictionary = Record<string, any>
 
 const areaOptions = [
   { value: "team", label: "Team" },
@@ -24,7 +28,7 @@ const severityOptions = [
 ]
 
 interface CardsReportIssueProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Dictionary
 }
 
 export function CardsReportIssue({ dictionary }: CardsReportIssueProps) {

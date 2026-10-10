@@ -3,6 +3,9 @@
   "name": "cards-metric",
   "title": "Cards Metric",
   "description": "Metric display cards with statistics",
+  "dependencies": [
+    "recharts"
+  ],
   "registryDependencies": [
     "card"
   ],

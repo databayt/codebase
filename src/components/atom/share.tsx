@@ -1,6 +1,5 @@
 "use client"
 
-import type { getDictionary } from "@/components/local/dictionaries"
 import {
   Avatar,
   AvatarFallback,
@@ -25,8 +24,13 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 
+// Optional copy overrides in the shape of a site dictionary
+// (e.g. dictionary.cards.<atom>.*); English defaults render without it.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Dictionary = Record<string, any>
+
 interface CardsShareProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Dictionary
 }
 
 export function CardsShare({ dictionary }: CardsShareProps) {

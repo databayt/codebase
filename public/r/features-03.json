@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-03",
+  "title": "Features 03",
+  "description": "A checklist of included features in a three-column grid of bordered rows with check marks.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/features-03/page.tsx",
+      "content": "import { Features } from \"@/registry/bases/base/blocks/features-03/components/features-03\"\nimport { dictionary } from \"@/registry/bases/base/blocks/features-03/features-03-dictionary\"\n\nexport default async function Page({\n  params,\n}: {\n  params?: Promise<{ lang?: string }>\n}) {\n  const { lang } = (await params) ?? {}\n  const locale = lang === \"ar\" ? \"ar\" : \"en\"\n  return <Features dictionary={dictionary[locale]} lang={locale} />\n}\n",
+      "type": "registry:page",
+      "target": "app/features-03/page.tsx"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/features-03/components/features-03.tsx",
+      "content": "import { Check } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport type FeaturesDictionary = {\n  heading: string\n  description?: string\n  items: { text: string }[]\n}\n\nexport function Features({\n  dictionary,\n  lang,\n  className,\n}: {\n  dictionary: FeaturesDictionary\n  lang: \"en\" | \"ar\"\n  className?: string\n}) {\n  const dir = lang === \"ar\" ? \"rtl\" : \"ltr\"\n\n  return (\n    <section dir={dir} className={cn(\"bg-background py-16 md:py-24\", className)}>\n      <div className=\"mx-auto max-w-6xl px-6\">\n        <div className=\"mb-10 max-w-2xl\">\n          <h2 className=\"font-heading text-2xl font-bold tracking-tight text-balance md:text-3xl\">\n            {dictionary.heading}\n          </h2>\n          {dictionary.description && (\n            <p className=\"mt-3 text-pretty text-muted-foreground\">\n              {dictionary.description}\n            </p>\n          )}\n        </div>\n        <ul className=\"grid gap-3 sm:grid-cols-2 lg:grid-cols-3\">\n          {dictionary.items.map((item) => (\n            <li\n              key={item.text}\n              className=\"flex items-center gap-3 rounded-lg border bg-background p-4\"\n            >\n              <Check\n                aria-hidden=\"true\"\n                strokeWidth={2.25}\n                className=\"size-5 shrink-0 text-primary\"\n              />\n              <span className=\"text-sm font-medium\">{item.text}</span>\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/features-03/features-03-dictionary.ts",
+      "content": "import { type FeaturesDictionary } from \"@/registry/bases/base/blocks/features-03/components/features-03\"\n\nexport const dictionary: Record<\"en\" | \"ar\", FeaturesDictionary> = {\n  en: {\n    heading: \"Included in every plan\",\n    description:\n      \"No add-ons, no surprises. Every Acme workspace comes with the essentials from day one.\",\n    items: [\n      { text: \"Unlimited projects and tasks\" },\n      { text: \"Real-time collaboration\" },\n      { text: \"Role-based permissions\" },\n      { text: \"Single sign-on (SSO)\" },\n      { text: \"Automated backups\" },\n      { text: \"Audit log and activity history\" },\n      { text: \"Mobile apps for iOS and Android\" },\n      { text: \"Arabic and English interface\" },\n      { text: \"Priority email support\" },\n    ],\n  },\n  ar: {\n    heading: \"متوفر في جميع الباقات\",\n    description:\n      \"بلا إضافات مدفوعة وبلا مفاجآت. تأتي كل مساحة عمل في Acme بالأساسيات منذ اليوم الأول.\",\n    items: [\n      { text: \"مشاريع ومهام غير محدودة\" },\n      { text: \"تعاون لحظي\" },\n      { text: \"صلاحيات حسب الأدوار\" },\n      { text: \"تسجيل دخول موحّد (SSO)\" },\n      { text: \"نسخ احتياطي تلقائي\" },\n      { text: \"سجل تدقيق وتاريخ للنشاط\" },\n      { text: \"تطبيقات للجوال على iOS وAndroid\" },\n      { text: \"واجهة باللغتين العربية والإنجليزية\" },\n      { text: \"دعم ذو أولوية عبر البريد الإلكتروني\" },\n    ],\n  },\n}\n",
+      "type": "registry:file",
+      "target": "app/features-03/features-03-dictionary.ts"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "560px"
+  },
+  "categories": [
+    "features"
+  ],
+  "type": "registry:block"
+}

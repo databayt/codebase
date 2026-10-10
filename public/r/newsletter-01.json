@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "newsletter-01",
+  "title": "Newsletter 01",
+  "description": "Centered newsletter sign-up: heading, short pitch, tilted mail glyph and an inline email field with subscribe button.",
+  "registryDependencies": [
+    "button",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/newsletter-01/page.tsx",
+      "content": "import { Newsletter } from \"@/registry/bases/base/blocks/newsletter-01/components/newsletter-01\"\nimport { dictionary } from \"@/registry/bases/base/blocks/newsletter-01/newsletter-01-dictionary\"\n\nexport default async function Page({\n  params,\n}: {\n  params?: Promise<{ lang?: string }>\n}) {\n  const { lang } = (await params) ?? {}\n  const locale = lang === \"ar\" ? \"ar\" : \"en\"\n  return <Newsletter dictionary={dictionary[locale]} lang={locale} />\n}\n",
+      "type": "registry:page",
+      "target": "app/newsletter-01/page.tsx"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/newsletter-01/components/newsletter-01.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckCircle2, Mail } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\n\nexport type NewsletterDictionary = {\n  title: string\n  description: string\n  emailLabel: string\n  emailPlaceholder: string\n  subscribe: string\n  note: string\n  success: string\n}\n\nexport function Newsletter({\n  dictionary,\n  lang,\n  className,\n}: {\n  dictionary: NewsletterDictionary\n  lang: \"en\" | \"ar\"\n  className?: string\n}) {\n  const dir = lang === \"ar\" ? \"rtl\" : \"ltr\"\n  const id = React.useId()\n  const [email, setEmail] = React.useState(\"\")\n  const [subscribed, setSubscribed] = React.useState(false)\n\n  return (\n    <section\n      dir={dir}\n      aria-labelledby={`${id}-title`}\n      className={cn(\"bg-background py-16 md:py-24\", className)}\n    >\n      <div className=\"mx-auto max-w-xl px-6 text-center\">\n        <h2\n          id={`${id}-title`}\n          className=\"font-heading text-3xl font-bold tracking-tight text-balance md:text-4xl\"\n        >\n          {dictionary.title}\n        </h2>\n        <p className=\"mt-4 text-lg text-pretty text-muted-foreground\">\n          {dictionary.description}\n        </p>\n      </div>\n\n      <div className=\"mx-auto max-w-sm px-6 pt-8\">\n        <div className=\"mb-3 flex justify-start\">\n          <span\n            aria-hidden=\"true\"\n            className=\"grid size-12 -rotate-12 place-items-center rounded-2xl border bg-muted text-foreground shadow-sm rtl:rotate-12\"\n          >\n            <Mail className=\"size-6\" />\n          </span>\n        </div>\n\n        {subscribed ? (\n          <p\n            role=\"status\"\n            className=\"flex items-center gap-2 rounded-lg border bg-muted/50 px-3 py-2.5 text-sm font-medium\"\n          >\n            <CheckCircle2 aria-hidden=\"true\" className=\"size-4 shrink-0 text-primary\" />\n            {dictionary.success}\n          </p>\n        ) : (\n          <form\n            onSubmit={(event) => {\n              // Demo only: connect your email provider here.\n              event.preventDefault()\n              if (!email) return\n              setSubscribed(true)\n              setEmail(\"\")\n            }}\n            className=\"flex items-center gap-2\"\n          >\n            <label htmlFor={`${id}-email`} className=\"sr-only\">\n              {dictionary.emailLabel}\n            </label>\n            <Input\n              id={`${id}-email`}\n              type=\"email\"\n              name=\"email\"\n              autoComplete=\"email\"\n              dir=\"ltr\"\n              required\n              value={email}\n              onChange={(event) => setEmail(event.target.value)}\n              placeholder={dictionary.emailPlaceholder}\n              className=\"flex-1 text-start rtl:text-end\"\n            />\n            <Button type=\"submit\" className=\"px-4\">\n              {dictionary.subscribe}\n            </Button>\n          </form>\n        )}\n\n        <p className=\"mt-3 text-start text-xs text-muted-foreground\">\n          {dictionary.note}\n        </p>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/newsletter-01/newsletter-01-dictionary.ts",
+      "content": "import { type NewsletterDictionary } from \"@/registry/bases/base/blocks/newsletter-01/components/newsletter-01\"\n\nexport const dictionary: Record<\"en\" | \"ar\", NewsletterDictionary> = {\n  en: {\n    title: \"Newsletter\",\n    description:\n      \"Product updates, practical guides and the occasional behind-the-scenes story. Once a month, never spam.\",\n    emailLabel: \"Email address\",\n    emailPlaceholder: \"Email address\",\n    subscribe: \"Subscribe\",\n    note: \"Unsubscribe at any time with one click.\",\n    success: \"You're subscribed. Check your inbox to confirm.\",\n  },\n  ar: {\n    title: \"النشرة البريدية\",\n    description:\n      \"تحديثات المنتج وأدلة عملية وقصص من وراء الكواليس بين الحين والآخر. مرة واحدة في الشهر، بلا رسائل مزعجة.\",\n    emailLabel: \"البريد الإلكتروني\",\n    emailPlaceholder: \"البريد الإلكتروني\",\n    subscribe: \"اشترك\",\n    note: \"يمكنك إلغاء الاشتراك في أي وقت بنقرة واحدة.\",\n    success: \"تم اشتراكك. تفقّد بريدك الوارد لتأكيد الاشتراك.\",\n  },\n}\n",
+      "type": "registry:file",
+      "target": "app/newsletter-01/newsletter-01-dictionary.ts"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "480px"
+  },
+  "categories": [
+    "newsletter"
+  ],
+  "type": "registry:block"
+}

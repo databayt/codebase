@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-02",
+  "title": "Stats 02",
+  "description": "Centered heading above a muted rounded panel with three large key figures.",
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/stats-02/page.tsx",
+      "content": "import { Stats } from \"@/registry/bases/base/blocks/stats-02/components/stats-02\"\nimport { dictionary } from \"@/registry/bases/base/blocks/stats-02/stats-02-dictionary\"\n\nexport default async function Page({\n  params,\n}: {\n  params?: Promise<{ lang?: string }>\n}) {\n  const { lang } = (await params) ?? {}\n  const locale = lang === \"ar\" ? \"ar\" : \"en\"\n  return <Stats dictionary={dictionary[locale]} lang={locale} />\n}\n",
+      "type": "registry:page",
+      "target": "app/stats-02/page.tsx"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/stats-02/components/stats-02.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\nexport type StatsDictionary = {\n  title: string\n  description: string\n  items: {\n    value: string\n    label: string\n  }[]\n}\n\nexport function Stats({\n  dictionary,\n  lang,\n  className,\n}: {\n  dictionary: StatsDictionary\n  lang: \"en\" | \"ar\"\n  className?: string\n}) {\n  const dir = lang === \"ar\" ? \"rtl\" : \"ltr\"\n\n  return (\n    <section\n      dir={dir}\n      aria-labelledby=\"stats-02-title\"\n      className={cn(\"bg-background py-16 md:py-24\", className)}\n    >\n      <div className=\"mx-auto max-w-6xl px-6 lg:px-8\">\n        <div className=\"mx-auto mb-10 max-w-2xl text-center md:mb-12\">\n          <h2\n            id=\"stats-02-title\"\n            className=\"text-3xl font-bold tracking-tight text-balance md:text-4xl\"\n          >\n            {dictionary.title}\n          </h2>\n          <p className=\"mt-4 text-base text-pretty text-muted-foreground md:text-lg\">\n            {dictionary.description}\n          </p>\n        </div>\n\n        <dl className=\"grid gap-8 rounded-2xl border bg-muted/40 p-8 sm:grid-cols-2 md:grid-cols-3 md:p-12\">\n          {dictionary.items.map((item) => (\n            <div key={item.label} className=\"flex flex-col-reverse text-center\">\n              <dt className=\"mt-2 text-sm text-muted-foreground\">\n                {item.label}\n              </dt>\n              <dd className=\"text-4xl font-bold tracking-tight tabular-nums md:text-5xl\">\n                {item.value}\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/stats-02/stats-02-dictionary.ts",
+      "content": "import { type StatsDictionary } from \"@/registry/bases/base/blocks/stats-02/components/stats-02\"\n\nexport const dictionary: Record<\"en\" | \"ar\", StatsDictionary> = {\n  en: {\n    title: \"Built for teams that move fast\",\n    description:\n      \"Thousands of teams rely on Acme every day to ship faster, stay aligned, and keep their customers happy.\",\n    items: [\n      { value: \"10,000+\", label: \"Teams onboarded\" },\n      { value: \"99.9%\", label: \"Uptime over the last 12 months\" },\n      { value: \"4.9/5\", label: \"Average customer rating\" },\n    ],\n  },\n  ar: {\n    title: \"صُمّم للفرق التي تتحرك بسرعة\",\n    description:\n      \"تعتمد آلاف الفرق على أكمي يوميًا لتسليم أعمالها أسرع، والبقاء على تنسيق دائم، وإسعاد عملائها.\",\n    items: [\n      { value: \"10,000+\", label: \"فرق انضمت إلى المنصة\" },\n      { value: \"99.9%\", label: \"نسبة التشغيل خلال آخر 12 شهرًا\" },\n      { value: \"4.9/5\", label: \"متوسط تقييم العملاء\" },\n    ],\n  },\n}\n",
+      "type": "registry:file",
+      "target": "app/stats-02/stats-02-dictionary.ts"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "600px"
+  },
+  "categories": [
+    "stats"
+  ],
+  "type": "registry:block"
+}

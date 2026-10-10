@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-02",
+  "title": "FAQ 02",
+  "description": "Two-column FAQ: heading and subtitle beside a divided accordion list with optional links.",
+  "registryDependencies": [
+    "accordion"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/faq-02/page.tsx",
+      "content": "import { Faq } from \"@/registry/bases/base/blocks/faq-02/components/faq-02\"\nimport { dictionary } from \"@/registry/bases/base/blocks/faq-02/faq-02-dictionary\"\n\nexport default async function Page({\n  params,\n}: {\n  params?: Promise<{ lang?: string }>\n}) {\n  const { lang } = (await params) ?? {}\n  const locale = lang === \"ar\" ? \"ar\" : \"en\"\n  return <Faq dictionary={dictionary[locale]} lang={locale} />\n}\n",
+      "type": "registry:page",
+      "target": "app/faq-02/page.tsx"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/faq-02/components/faq-02.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\nimport {\n  Accordion,\n  AccordionContent,\n  AccordionItem,\n  AccordionTrigger,\n} from \"@/components/ui/accordion\"\n\nexport type FaqItem = {\n  question: string\n  answer: string\n  /** Optional list of links under the answer (docs, contact...). */\n  links?: { label: string; href: string }[]\n}\n\nexport type FaqDictionary = {\n  /** Use \"\\n\" to break the heading into lines on large screens. */\n  title: string\n  subtitle: string\n  items: FaqItem[]\n}\n\nexport function Faq({\n  dictionary,\n  lang,\n  className,\n}: {\n  dictionary: FaqDictionary\n  lang: \"en\" | \"ar\"\n  className?: string\n}) {\n  const dir = lang === \"ar\" ? \"rtl\" : \"ltr\"\n\n  return (\n    <section\n      dir={dir}\n      aria-labelledby=\"faq-02-title\"\n      className={cn(\"bg-background py-16 md:py-32\", className)}\n    >\n      <div className=\"mx-auto grid w-full max-w-6xl gap-y-12 px-4 md:px-6 lg:grid-cols-[1fr_2fr] lg:gap-x-16\">\n        <div className=\"text-center lg:text-start\">\n          <h2\n            id=\"faq-02-title\"\n            className=\"mb-4 font-heading text-4xl font-extrabold tracking-tight text-balance md:text-5xl lg:whitespace-pre-line\"\n          >\n            {dictionary.title}\n          </h2>\n          <p className=\"text-base text-muted-foreground md:text-lg\">\n            {dictionary.subtitle}\n          </p>\n        </div>\n\n        <Accordion\n          defaultValue={[\"faq-0\"]}\n          className=\"w-full sm:mx-auto sm:max-w-xl lg:ms-auto lg:me-0 lg:max-w-none\"\n        >\n          {dictionary.items.map((item, index) => (\n            <AccordionItem key={item.question} value={`faq-${index}`}>\n              <AccordionTrigger className=\"py-5 text-base\">\n                {item.question}\n              </AccordionTrigger>\n              <AccordionContent className=\"pb-5 text-base text-muted-foreground\">\n                <p>{item.answer}</p>\n                {item.links && item.links.length > 0 && (\n                  <ul className=\"list-outside list-disc space-y-2 ps-5\">\n                    {item.links.map((link) => (\n                      <li key={link.label}>\n                        <a href={link.href}>{link.label}</a>\n                      </li>\n                    ))}\n                  </ul>\n                )}\n              </AccordionContent>\n            </AccordionItem>\n          ))}\n        </Accordion>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/faq-02/faq-02-dictionary.ts",
+      "content": "import { type FaqDictionary } from \"@/registry/bases/base/blocks/faq-02/components/faq-02\"\n\nexport const dictionary: Record<\"en\" | \"ar\", FaqDictionary> = {\n  en: {\n    title: \"Frequently\\nasked questions\",\n    subtitle: \"Can't find what you're looking for? Our team is happy to help.\",\n    items: [\n      {\n        question: \"What does the product include?\",\n        answer:\n          \"A complete workspace for your team: projects, tasks, documents, reporting and integrations with the tools you already use.\",\n      },\n      {\n        question: \"How much does it cost?\",\n        answer:\n          \"Pricing is transparent and based on the plan you choose. There is a free tier, and paid plans unlock advanced features.\",\n      },\n      {\n        question: \"How long does it take to get started?\",\n        answer:\n          \"A basic setup takes minutes. A full rollout, including data migration and training, usually takes one to two weeks.\",\n      },\n      {\n        question: \"Do you offer support?\",\n        answer:\n          \"Yes. Every plan includes documentation and email support, and paid plans add onboarding sessions and priority response times.\",\n      },\n      {\n        question: \"Still have questions?\",\n        answer: \"Browse the documentation or reach out to us directly.\",\n        links: [\n          { label: \"Read the documentation\", href: \"#\" },\n          { label: \"Talk to our team\", href: \"#\" },\n        ],\n      },\n    ],\n  },\n  ar: {\n    title: \"الأسئلة\\nالشائعة\",\n    subtitle: \"لم تجد ما تبحث عنه؟ يسعد فريقنا بمساعدتك.\",\n    items: [\n      {\n        question: \"ماذا يتضمن المنتج؟\",\n        answer:\n          \"مساحة عمل متكاملة لفريقك: المشاريع والمهام والمستندات والتقارير، مع تكاملات مع الأدوات التي تستخدمها بالفعل.\",\n      },\n      {\n        question: \"كم تبلغ التكلفة؟\",\n        answer:\n          \"أسعارنا واضحة وتعتمد على الخطة التي تختارها. تتوفر باقة مجانية، وتتيح الخطط المدفوعة ميزات متقدمة.\",\n      },\n      {\n        question: \"كم يستغرق البدء؟\",\n        answer:\n          \"يستغرق الإعداد الأساسي دقائق معدودة، أما التشغيل الكامل بما فيه نقل البيانات والتدريب فيستغرق عادةً أسبوعًا إلى أسبوعين.\",\n      },\n      {\n        question: \"هل تقدمون الدعم؟\",\n        answer:\n          \"نعم، تشمل كل خطة التوثيق والدعم عبر البريد الإلكتروني، وتضيف الخطط المدفوعة جلسات تهيئة وأولوية في الاستجابة.\",\n      },\n      {\n        question: \"هل لديك أسئلة أخرى؟\",\n        answer: \"تصفّح التوثيق أو تواصل معنا مباشرة.\",\n        links: [\n          { label: \"اقرأ التوثيق\", href: \"#\" },\n          { label: \"تحدّث مع فريقنا\", href: \"#\" },\n        ],\n      },\n    ],\n  },\n}\n",
+      "type": "registry:file",
+      "target": "app/faq-02/faq-02-dictionary.ts"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "700px"
+  },
+  "categories": [
+    "faq"
+  ],
+  "type": "registry:block"
+}

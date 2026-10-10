@@ -3,6 +3,10 @@
   "name": "modal-system",
   "title": "Modal System",
   "description": "Complete modal system with carousel and steps",
+  "dependencies": [
+    "@iconify/react",
+    "next-themes"
+  ],
   "registryDependencies": [
     "dialog",
     "button"

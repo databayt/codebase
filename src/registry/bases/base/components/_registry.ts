@@ -32,6 +32,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["display", "interactive"],
+    dependencies: ["date-fns"],
   },
   {
     name: "chat",
@@ -77,6 +78,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["data", "display"],
+    dependencies: ["recharts"],
   },
   {
     name: "report-issue",
@@ -211,6 +213,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["ai", "form"],
+    dependencies: ["ai", "nanoid"],
   },
   {
     name: "response",
@@ -224,6 +227,13 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["ai", "display"],
+    dependencies: [
+      "rehype-katex",
+      "remark-gfm",
+      "remark-math",
+      "sonner",
+      "streamdown",
+    ],
   },
   {
     name: "reasoning",
@@ -264,6 +274,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["display", "animation"],
+    dependencies: ["framer-motion"],
   },
   {
     name: "cards-metric",
@@ -278,6 +289,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["display", "data"],
+    dependencies: ["recharts"],
   },
   {
     name: "gradient-animation",
@@ -317,6 +329,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["animation", "display"],
+    dependencies: ["framer-motion", "react-use-measure"],
   },
   {
     name: "progressive-blur",
@@ -330,6 +343,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["animation", "display"],
+    dependencies: ["framer-motion"],
   },
   {
     name: "sticky-scroll",
@@ -343,6 +357,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["animation", "display"],
+    dependencies: ["framer-motion"],
   },
   {
     name: "simple-marquee",
@@ -479,7 +494,12 @@ export const components: Registry["items"] = [
     title: "Sortable",
     description: "Drag-and-drop sortable list component",
     type: "registry:component",
-    dependencies: ["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities"],
+    dependencies: [
+      "@dnd-kit/core",
+      "@dnd-kit/modifiers",
+      "@dnd-kit/sortable",
+      "@dnd-kit/utilities",
+    ],
     files: [
       {
         path: "components/atom/sortable.tsx",
@@ -597,6 +617,7 @@ export const components: Registry["items"] = [
       },
     ],
     categories: ["modal", "dialog"],
+    dependencies: ["@iconify/react", "next-themes"],
   },
   {
     name: "loading",
@@ -670,7 +691,6 @@ export const components: Registry["items"] = [
     title: "Icons",
     description: "Comprehensive icon library",
     type: "registry:component",
-    dependencies: ["lucide-react"],
     files: [
       {
         path: "components/atom/icons.tsx",
@@ -684,7 +704,6 @@ export const components: Registry["items"] = [
     title: "Fonts",
     description: "Font configuration utilities",
     type: "registry:component",
-    dependencies: ["next/font/google"],
     files: [
       {
         path: "components/atom/fonts.ts",

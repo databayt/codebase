@@ -1,15 +1,19 @@
 "use client"
 
 import { addDays } from "date-fns"
-import type { getDictionary } from "@/components/local/dictionaries"
 
 import { Calendar } from "@/components/ui/calendar"
 import { Card, CardContent } from "@/components/ui/card"
 
+// Optional copy overrides in the shape of a site dictionary
+// (e.g. dictionary.cards.<atom>.*); English defaults render without it.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Dictionary = Record<string, any>
+
 const start = new Date(2023, 5, 5)
 
 interface CardsCalendarProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Dictionary
 }
 
 export function CardsCalendar({ dictionary }: CardsCalendarProps) {

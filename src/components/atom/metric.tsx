@@ -1,7 +1,6 @@
 "use client"
 
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
-import type { getDictionary } from "@/components/local/dictionaries"
 
 import {
   Card,
@@ -16,6 +15,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+
+// Optional copy overrides in the shape of a site dictionary
+// (e.g. dictionary.cards.<atom>.*); English defaults render without it.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Dictionary = Record<string, any>
 
 const data = [
   { day: "Mon", average: 400, today: 240 },
@@ -39,7 +43,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 interface CardsMetricProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Dictionary
 }
 
 export function CardsMetric({ dictionary }: CardsMetricProps) {

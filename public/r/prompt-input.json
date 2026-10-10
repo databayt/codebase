@@ -3,6 +3,10 @@
   "name": "prompt-input",
   "title": "Prompt Input",
   "description": "Advanced prompt input with keyboard shortcuts and suggestions",
+  "dependencies": [
+    "ai",
+    "nanoid"
+  ],
   "registryDependencies": [
     "button",
     "textarea"

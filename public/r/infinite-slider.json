@@ -3,6 +3,10 @@
   "name": "infinite-slider",
   "title": "Infinite Slider",
   "description": "Infinite auto-scrolling slider with smooth animations",
+  "dependencies": [
+    "framer-motion",
+    "react-use-measure"
+  ],
   "files": [
     {
       "path": "src/components/atom/infinite-slider.tsx",

@@ -15,7 +15,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import type { getDictionary } from "@/components/local/dictionaries"
+
+// Optional copy overrides in the shape of a site dictionary
+// (e.g. dictionary.cards.<atom>.*); English defaults render without it.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Dictionary = Record<string, any>
 
 const revenueData = [
   { month: "Jan", revenue: 10400 },
@@ -54,7 +58,7 @@ const subscriptionConfig = {
 } satisfies ChartConfig
 
 interface CardsStatsProps {
-  dictionary?: Awaited<ReturnType<typeof getDictionary>>
+  dictionary?: Dictionary
 }
 
 export function CardsStats({ dictionary }: CardsStatsProps) {

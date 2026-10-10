@@ -3,9 +3,6 @@
   "name": "icons",
   "title": "Icons",
   "description": "Comprehensive icon library",
-  "dependencies": [
-    "lucide-react"
-  ],
   "files": [
     {
       "path": "src/components/atom/icons.tsx",

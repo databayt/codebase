@@ -280,5 +280,243 @@
       "authentication",
       "login"
     ]
+  },
+  {
+    "name": "header-03",
+    "description": "Thin sticky bar: mark and quiet text links on the start side, language, theme and sign-in on the end; a \"Menu\" control opens a sheet of large links on phones.",
+    "categories": [
+      "header"
+    ]
+  },
+  {
+    "name": "header-04",
+    "description": "Bold wordmark with pill-shaped nav links, a language link, a rounded call-to-action and a \"More\" menu; a full-height sheet of large links on phones.",
+    "categories": [
+      "header"
+    ]
+  },
+  {
+    "name": "header-05",
+    "description": "Storefront header: utility top bar with a help dropdown, category nav with full-width mega menus, an expanding search tray, favorites and bag, and an accordion drawer on phones.",
+    "categories": [
+      "header"
+    ]
+  },
+  {
+    "name": "footer-03",
+    "description": "A tall rounded call-to-action card with a light and a black headline line and a pill button, over a quiet bar with the wordmark, links and legal line.",
+    "categories": [
+      "footer"
+    ]
+  },
+  {
+    "name": "footer-04",
+    "description": "Always-dark footer: four link columns (2 × 2 on phones) beside a \"ready to start\" button with a lifted hover and a row of social icons.",
+    "categories": [
+      "footer"
+    ]
+  },
+  {
+    "name": "footer-05",
+    "description": "Muted footer with a newsletter form, four link columns and a bottom line with the brand, copyright and legal links.",
+    "categories": [
+      "footer"
+    ]
+  },
+  {
+    "name": "hero-05",
+    "description": "A split hero with a stacked black headline, subtitle and two actions beside a large geometric brand mark.",
+    "categories": [
+      "hero"
+    ]
+  },
+  {
+    "name": "hero-06",
+    "description": "A full-bleed editorial hero on a solid primary field with an oversized word-group headline, a highlighted closing phrase and a scroll-down pill.",
+    "categories": [
+      "hero"
+    ]
+  },
+  {
+    "name": "hero-07",
+    "description": "A full-screen photo or video hero with a word-by-word 3D headline reveal and a pill search field.",
+    "categories": [
+      "hero"
+    ]
+  },
+  {
+    "name": "hero-08",
+    "description": "A full-bleed campaign carousel with uppercase headlines, dot pagination and a play/pause control ringed by autoplay progress.",
+    "categories": [
+      "hero"
+    ]
+  },
+  {
+    "name": "features-01",
+    "description": "A heading with a three-column grid of bordered feature cards, each with an icon that warms to the primary color on hover.",
+    "categories": [
+      "features"
+    ]
+  },
+  {
+    "name": "features-02",
+    "description": "Alternating image and text rows with a tag, bullet list and link; images sit in a browser-window frame and the rows mirror in RTL.",
+    "categories": [
+      "features"
+    ]
+  },
+  {
+    "name": "features-03",
+    "description": "A checklist of included features in a three-column grid of bordered rows with check marks.",
+    "categories": [
+      "features"
+    ]
+  },
+  {
+    "name": "features-04",
+    "description": "An Apple-style centered feature grid with large icons and headings, configurable columns and default, muted or inverted surfaces.",
+    "categories": [
+      "features"
+    ]
+  },
+  {
+    "name": "cta-01",
+    "description": "A rounded call-to-action panel with pill buttons built from cva variants, in night, soft or brand tones.",
+    "categories": [
+      "cta"
+    ]
+  },
+  {
+    "name": "cta-02",
+    "description": "A centered call-to-action banner in a bordered muted card with primary and outline buttons.",
+    "categories": [
+      "cta"
+    ]
+  },
+  {
+    "name": "cta-03",
+    "description": "A full-bleed animated gradient call-to-action that follows the pointer and insets with rounded corners as it scrolls away.",
+    "categories": [
+      "cta"
+    ]
+  },
+  {
+    "name": "stats-01",
+    "description": "Parallax photo banner with a headline, followed by four counters that spring-count up when scrolled into view.",
+    "categories": [
+      "stats"
+    ]
+  },
+  {
+    "name": "stats-02",
+    "description": "Centered heading above a muted rounded panel with three large key figures.",
+    "categories": [
+      "stats"
+    ]
+  },
+  {
+    "name": "logos-01",
+    "description": "Trusted-by label beside an infinite logo marquee with faded, progressively blurred edges.",
+    "categories": [
+      "logos"
+    ]
+  },
+  {
+    "name": "logos-02",
+    "description": "Autoplaying partner carousel of photo-and-quote cards, driven by a row of partner logo tabs.",
+    "categories": [
+      "logos"
+    ]
+  },
+  {
+    "name": "testimonials-01",
+    "description": "Centered heading over a three-column grid of quote cards with avatar, name and role.",
+    "categories": [
+      "testimonials"
+    ]
+  },
+  {
+    "name": "testimonials-02",
+    "description": "Primary-colored band with marquee watermarks, a scrollable chat-bubble testimonial card and vertical category tabs.",
+    "categories": [
+      "testimonials"
+    ]
+  },
+  {
+    "name": "testimonials-03",
+    "description": "Centered looping carousel of large story cards with rating, date and portrait; neighbouring cards peek at reduced scale.",
+    "categories": [
+      "testimonials"
+    ]
+  },
+  {
+    "name": "pricing-01",
+    "description": "Three plan cards with a monthly/yearly billing toggle, animated prices and a highlighted plan.",
+    "categories": [
+      "pricing"
+    ]
+  },
+  {
+    "name": "pricing-02",
+    "description": "Compare-plans table with grouped features and info popovers, stacking into collapsible plan cards on mobile.",
+    "categories": [
+      "pricing"
+    ]
+  },
+  {
+    "name": "faq-01",
+    "description": "Centered FAQ with rounded, tinted accordion cards that turn solid when open, plus a contact line.",
+    "categories": [
+      "faq"
+    ]
+  },
+  {
+    "name": "faq-02",
+    "description": "Two-column FAQ: heading and subtitle beside a divided accordion list with optional links.",
+    "categories": [
+      "faq"
+    ]
+  },
+  {
+    "name": "how-it-works-01",
+    "description": "Three numbered steps with icon medallions joined by a dashed connector, revealed in sequence on scroll.",
+    "categories": [
+      "how-it-works"
+    ]
+  },
+  {
+    "name": "how-it-works-02",
+    "description": "Big heading over four columns of use-case cards that drift apart as you scroll (looping tracks on mobile), closed by a stats row.",
+    "categories": [
+      "how-it-works"
+    ]
+  },
+  {
+    "name": "team-01",
+    "description": "Four-up grid of portrait cards with name, role, short bio and social icon links, plus a hiring call-out.",
+    "categories": [
+      "team"
+    ]
+  },
+  {
+    "name": "contact-01",
+    "description": "Contact channel cards (chat, phone, email, address, hours) above a two-column message form with a success state.",
+    "categories": [
+      "contact"
+    ]
+  },
+  {
+    "name": "newsletter-01",
+    "description": "Centered newsletter sign-up: heading, short pitch, tilted mail glyph and an inline email field with subscribe button.",
+    "categories": [
+      "newsletter"
+    ]
+  },
+  {
+    "name": "blog-01",
+    "description": "Editorial blog index: masthead, feed of posts with author, tag, date and thumbnail, and a sticky sidebar of picks and topics.",
+    "categories": [
+      "blog"
+    ]
   }
 ]

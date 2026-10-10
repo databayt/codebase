@@ -3,6 +3,9 @@
   "name": "sticky-scroll",
   "title": "Sticky Scroll",
   "description": "Sticky scroll reveal animation",
+  "dependencies": [
+    "framer-motion"
+  ],
   "files": [
     {
       "path": "src/components/atom/sticky-scroll.tsx",

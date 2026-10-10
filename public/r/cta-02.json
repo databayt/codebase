@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-02",
+  "title": "CTA 02",
+  "description": "A centered call-to-action banner in a bordered muted card with primary and outline buttons.",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/cta-02/page.tsx",
+      "content": "import { Cta } from \"@/registry/bases/base/blocks/cta-02/components/cta-02\"\nimport { dictionary } from \"@/registry/bases/base/blocks/cta-02/cta-02-dictionary\"\n\nexport default async function Page({\n  params,\n}: {\n  params?: Promise<{ lang?: string }>\n}) {\n  const { lang } = (await params) ?? {}\n  const locale = lang === \"ar\" ? \"ar\" : \"en\"\n  return <Cta dictionary={dictionary[locale]} lang={locale} />\n}\n",
+      "type": "registry:page",
+      "target": "app/cta-02/page.tsx"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/cta-02/components/cta-02.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nexport type CtaDictionary = {\n  title: string\n  description?: string\n  primary: { label: string; href: string }\n  secondary?: { label: string; href: string }\n}\n\nexport function Cta({\n  dictionary,\n  lang,\n  className,\n}: {\n  dictionary: CtaDictionary\n  lang: \"en\" | \"ar\"\n  className?: string\n}) {\n  const dir = lang === \"ar\" ? \"rtl\" : \"ltr\"\n\n  return (\n    <section dir={dir} className={cn(\"bg-background py-16 md:py-24\", className)}>\n      <div className=\"mx-auto max-w-6xl px-6\">\n        <div className=\"rounded-2xl border bg-muted/40 px-6 py-10 text-center md:px-12 md:py-14\">\n          <h2 className=\"mx-auto max-w-3xl font-heading text-2xl font-bold tracking-tight text-balance md:text-3xl\">\n            {dictionary.title}\n          </h2>\n          {dictionary.description && (\n            <p className=\"mx-auto mt-4 max-w-2xl text-pretty text-muted-foreground\">\n              {dictionary.description}\n            </p>\n          )}\n          <div className=\"mt-8 flex flex-col justify-center gap-3 sm:flex-row\">\n            <Button\n              size=\"lg\"\n              className=\"px-6\"\n              nativeButton={false}\n              render={<a href={dictionary.primary.href} />}\n            >\n              {dictionary.primary.label}\n            </Button>\n            {dictionary.secondary && (\n              <Button\n                size=\"lg\"\n                variant=\"outline\"\n                className=\"px-6\"\n                nativeButton={false}\n                render={<a href={dictionary.secondary.href} />}\n              >\n                {dictionary.secondary.label}\n              </Button>\n            )}\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/bases/base/blocks/cta-02/cta-02-dictionary.ts",
+      "content": "import { type CtaDictionary } from \"@/registry/bases/base/blocks/cta-02/components/cta-02\"\n\nexport const dictionary: Record<\"en\" | \"ar\", CtaDictionary> = {\n  en: {\n    title: \"Start running your projects the simple way\",\n    description:\n      \"Join thousands of teams who plan, track and deliver their work with Acme. Set up takes less than five minutes.\",\n    primary: { label: \"Get started\", href: \"#\" },\n    secondary: { label: \"View pricing\", href: \"/pricing\" },\n  },\n  ar: {\n    title: \"ابدأ في إدارة مشاريعك بالطريقة الأبسط\",\n    description:\n      \"انضم إلى آلاف الفرق التي تخطط لأعمالها وتتابعها وتنجزها مع Acme. لا يستغرق الإعداد أكثر من خمس دقائق.\",\n    primary: { label: \"ابدأ الآن\", href: \"#\" },\n    secondary: { label: \"اطّلع على الأسعار\", href: \"/pricing\" },\n  },\n}\n",
+      "type": "registry:file",
+      "target": "app/cta-02/cta-02-dictionary.ts"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "460px"
+  },
+  "categories": [
+    "cta"
+  ],
+  "type": "registry:block"
+}

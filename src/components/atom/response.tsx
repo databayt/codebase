@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { CheckCircle2, AlertCircle, XCircle, Loader2 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 
 type ResponseStatus = 'streaming' | 'done' | 'failed' | 'rejected' | null;
 
@@ -22,8 +22,6 @@ export const Response = memo(
     className,
     children,
     parseIncompleteMarkdown = true,
-    allowedImagePrefixes = ['*'],
-    allowedLinkPrefixes = ['*'],
     remarkPlugins = [remarkGfm, remarkMath],
     rehypePlugins = [rehypeKatex],
     status = null,
@@ -33,7 +31,6 @@ export const Response = memo(
   }: ResponseProps) => {
     const [displayedContent, setDisplayedContent] = useState('');
     const [currentStatus, setCurrentStatus] = useState<ResponseStatus>(status);
-    const { toast } = useToast();
     const content = String(children || '');
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -66,16 +63,12 @@ export const Response = memo(
           onStatusChange?.('done');
 
           // Show success notification
-          toast({
-            title: 'Response Complete',
-            description: 'AI has finished generating the response',
-            duration: 2000,
-          });
+          toast.success('Response Complete', { description: 'AI has finished generating the response', duration: 2000 });
         }
       }, streamDelay);
 
       return () => clearInterval(streamInterval);
-    }, [content, status, streamDelay, onStatusChange, toast]);
+    }, [content, status, streamDelay, onStatusChange]);
 
     // Auto-scroll effect - scroll whenever displayedContent changes
     useEffect(() => {
@@ -99,28 +92,14 @@ export const Response = memo(
 
         // Show status notifications
         if (status === 'done') {
-          toast({
-            title: 'Success',
-            description: 'Response generated successfully',
-            duration: 2000,
-          });
+          toast.success('Success', { description: 'Response generated successfully', duration: 2000 });
         } else if (status === 'failed') {
-          toast({
-            title: 'Failed',
-            description: 'Failed to generate response',
-            variant: 'destructive',
-            duration: 3000,
-          });
+          toast.error('Failed', { description: 'Failed to generate response', duration: 3000 });
         } else if (status === 'rejected') {
-          toast({
-            title: 'Rejected',
-            description: 'Response was rejected',
-            variant: 'destructive',
-            duration: 3000,
-          });
+          toast.error('Rejected', { description: 'Response was rejected', duration: 3000 });
         }
       }
-    }, [status, currentStatus, toast]);
+    }, [status, currentStatus]);
 
     return (
       <div className="relative" ref={containerRef}>
@@ -168,12 +147,10 @@ export const Response = memo(
             'prose-ul:list-disc prose-ol:list-decimal',
             'prose-li:text-muted-foreground prose-li:marker:text-primary',
             'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
-            'text-left', // Ensure text is aligned to start
+            'text-start', // Logical alignment so Arabic reads right-to-left
             className,
           )}
           parseIncompleteMarkdown={parseIncompleteMarkdown}
-          allowedImagePrefixes={allowedImagePrefixes}
-          allowedLinkPrefixes={allowedLinkPrefixes}
           remarkPlugins={remarkPlugins}
           rehypePlugins={rehypePlugins}
           {...props}

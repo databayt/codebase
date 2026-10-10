@@ -3,6 +3,9 @@
   "name": "card-hover-effect",
   "title": "Card Hover Effect",
   "description": "Card with animated hover effects and transitions",
+  "dependencies": [
+    "framer-motion"
+  ],
   "files": [
     {
       "path": "src/components/atom/card-hover-effect.tsx",
