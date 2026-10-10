@@ -493,20 +493,20 @@ interface SchoolActionsProps {
 export function SchoolActions({ school, onEdit, onDelete }: SchoolActionsProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-8 w-8 p-0">
-          <MoreHorizontal className="h-4 w-4" />
-        </Button>
+      <DropdownMenuTrigger
+        render={<Button variant="ghost" className="h-8 w-8 p-0" />}
+      >
+        <MoreHorizontal className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {onEdit && (
           <DropdownMenuItem onClick={() => onEdit(school)}>
-            <Edit className="mr-2 h-4 w-4" /> Edit
+            <Edit className="me-2 h-4 w-4" /> Edit
           </DropdownMenuItem>
         )}
         {onDelete && (
           <DropdownMenuItem onClick={() => onDelete(school)} className="text-destructive">
-            <Trash2 className="mr-2 h-4 w-4" /> Delete
+            <Trash2 className="me-2 h-4 w-4" /> Delete
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

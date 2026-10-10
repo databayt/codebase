@@ -454,20 +454,19 @@ Each template generates a JSON file:
 
 ```json
 {
-  "$schema": "https://ui.shadcn.com/schema.json",
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dashboard-01",
-  "type": "registry:template",
+  "type": "registry:block",
   "description": "A dashboard layout with sidebar navigation",
   "files": [
     {
-      "path": "templates/dashboard-01/page.tsx",
+      "path": "src/registry/bases/base/blocks/dashboard-01/page.tsx",
       "content": "// Full component code here",
       "type": "registry:page",
       "target": "app/dashboard/page.tsx"
     }
   ],
   "dependencies": [
-    "@radix-ui/react-icons",
     "@tanstack/react-table"
   ],
   "registryDependencies": [
@@ -475,8 +474,8 @@ Each template generates a JSON file:
     "card",
     "table"
   ],
-  "categories": ["application"],
-  "subcategory": "dashboard"
+  "categories": ["dashboard"],
+  "meta": { "iframeHeight": "900px" }
 }
 ```
 

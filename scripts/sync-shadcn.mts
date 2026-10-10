@@ -27,6 +27,7 @@ const PROTECTED = [
   "faceted",
   "form", // react-hook-form wrapper rebuilt on useRender; not in the base registry
   "sonner", // base registry ships toast instead
+  "sheet", // RTL fix: physical sides without the CLI's slide flip (docs/UPSTREAM.md)
 ] as const
 
 const PINNED = ["chart"] as const // held on recharts 2; upstream targets recharts 3

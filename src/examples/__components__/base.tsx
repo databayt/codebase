@@ -12,6 +12,14 @@ export const Components: Record<string, any> = {
       ) || "accordion-demo"
     return { default: mod.default || mod[exportName] }
   }),
+  "accordion-multiple": React.lazy(async () => {
+    const mod = await import("@/examples/base/accordion-multiple")
+    const exportName =
+      Object.keys(mod).find(
+        (key) => typeof mod[key] === "function" || typeof mod[key] === "object"
+      ) || "accordion-multiple"
+    return { default: mod.default || mod[exportName] }
+  }),
   "activity-goal-demo": React.lazy(async () => {
     const mod = await import("@/examples/base/activity-goal-demo")
     const exportName =

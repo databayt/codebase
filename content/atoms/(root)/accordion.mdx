@@ -29,7 +29,7 @@ npx shadcn@latest add accordion
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @radix-ui/react-accordion
+npm install @base-ui/react
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -56,7 +56,7 @@ import {
 ```
 
 ```tsx
-<Accordion type="single" collapsible>
+<Accordion defaultValue={["item-1"]}>
   <AccordionItem value="item-1">
     <AccordionTrigger>Is it accessible?</AccordionTrigger>
     <AccordionContent>

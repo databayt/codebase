@@ -224,18 +224,7 @@ const mdxComponents = {
         </>
       )
     },
-    // MDX content still writes the radix API (`type="single" collapsible`,
-    // `type="multiple"`); Base UI's Accordion takes a `multiple` boolean and
-    // is always collapsible, so translate here instead of leaking the props
-    // onto the DOM.
-    Accordion: ({
-      type,
-      collapsible: _collapsible,
-      ...props
-    }: ComponentProps<typeof Accordion> & {
-      type?: "single" | "multiple"
-      collapsible?: boolean
-    }) => <Accordion multiple={type === "multiple"} {...props} />,
+    Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,

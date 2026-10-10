@@ -8,6 +8,10 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       "name": "accordion-demo",
       "filePath": "src/examples/base/accordion-demo.tsx"
     },
+    "accordion-multiple": {
+      "name": "accordion-multiple",
+      "filePath": "src/examples/base/accordion-multiple.tsx"
+    },
     "activity-goal-demo": {
       "name": "activity-goal-demo",
       "filePath": "src/examples/base/activity-goal-demo.tsx"

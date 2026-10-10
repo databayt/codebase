@@ -48,6 +48,11 @@ Pipeline (ports of upstream files, same names):
 7. **Kept ui extras**: `form.tsx` (react-hook-form, on `useRender`), `sonner.tsx`,
    `faceted.tsx`, `sortable.tsx`, `custom-video-player.tsx`, `international-demo.tsx`;
    `chart.tsx` pinned to recharts 2. The useRender wrappers carry `"use client"`.
+8. **`sheet.tsx` RTL fix**: `side` is a physical edge (upstream's own RTL example picks
+   `side={dir === "rtl" ? "left" : "right"}`), but the CLI's RTL pass flips the slide
+   offset under `rtl:` and turns the border logical, so in Arabic a left sheet slid in
+   from the right with its border on the screen edge. Ours keeps it physical (no `rtl:`
+   flips, `border-r` / `border-l`). Re-check after every `shadcn add sheet -o`.
 
 ## Downstream note
 
