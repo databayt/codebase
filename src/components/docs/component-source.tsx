@@ -43,7 +43,7 @@ export async function ComponentSource({
 
   if (src && !code) {
     try {
-      code = await fs.readFile(path.join(process.cwd(), src), "utf-8")
+      code = await fs.readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), src), "utf-8")
     } catch (error) {
       console.error(`Failed to read file: ${src}`, error)
     }

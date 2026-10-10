@@ -33,7 +33,7 @@ export async function getDemoItem(name: string, styleName: string = DEFAULT_STYL
     return null
   }
 
-  const content = await fs.readFile(path.join(process.cwd(), demo.filePath), "utf-8")
+  const content = await fs.readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), demo.filePath), "utf-8")
 
   return {
     name: demo.name,
@@ -47,6 +47,10 @@ export async function getDemoItem(name: string, styleName: string = DEFAULT_STYL
     ],
   }
 }
+
+// File reads below run at build time only: every page that calls them is
+// prerendered (force-static), so the turbopackIgnore hints keep Next from
+// tracing the whole project into the standalone server.
 
 export function getRegistryComponent(name: string, styleName: string = DEFAULT_STYLE) {
   return getDemoComponent(name, styleName) ?? getStylesComponent(styleName, name)
@@ -113,7 +117,7 @@ export async function getRegistryItem(
 }
 
 async function getFileContent(file: RegistryItemFile) {
-  let code = await fs.readFile(path.join(process.cwd(), file.path), "utf-8")
+  let code = await fs.readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), file.path), "utf-8")
 
   // Some registry items use default export. We want named exports instead.
   if (file.type !== "registry:page") {
