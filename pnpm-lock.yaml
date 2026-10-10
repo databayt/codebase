@@ -104,6 +104,9 @@ importers:
       '@react-pdf/renderer':
         specifier: ^4.5.1
         version: 4.5.1(react@19.2.5)
+      '@rive-app/webgl2':
+        specifier: ^2.44.1
+        version: 2.44.1
       '@shadcn/react':
         specifier: ^0.2.1
         version: 0.2.1(@types/react@19.2.14)(react@19.2.5)
@@ -3338,6 +3341,9 @@ packages:
 
   '@react-pdf/types@2.11.1':
     resolution: {integrity: sha512-i9xQgfaDU9QoeNnbp6rltXCWg1huEh195rpOuN8cE4BZ2FuLdQrsIcb2dhFF9aOxXf+XBA6LOSpIW051MDD/bw==}
+
+  '@rive-app/webgl2@2.44.1':
+    resolution: {integrity: sha512-nEmg4E+/EMU36VralhmkbZJ9HuCVS+KzqQOURcquo1vnc5uilwyiCFUwS9hz4bkFk4CYwfv0oM0x4CaEIfd4Gg==}
 
   '@rollup/rollup-android-arm-eabi@4.60.2':
     resolution: {integrity: sha512-dnlp69efPPg6Uaw2dVqzWRfAWRnYVb1XJ8CyyhIbZeaq4CA5/mLeZ1IEt9QqQxmbdvagjLIm2ZL8BxXv5lH4Yw==}
@@ -11817,6 +11823,8 @@ snapshots:
       '@react-pdf/font': 4.0.8
       '@react-pdf/primitives': 4.3.0
       '@react-pdf/stylesheet': 6.2.1
+
+  '@rive-app/webgl2@2.44.1': {}
 
   '@rollup/rollup-android-arm-eabi@4.60.2':
     optional: true

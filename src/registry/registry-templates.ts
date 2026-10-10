@@ -1036,6 +1036,25 @@ export const templates: RegistryItem[] = [
     }
   },
   {
+    name: "hero-04",
+    description: "Hero with animated Rive gradient background and dual CTA",
+    type: "registry:template",
+    dependencies: ["@rive-app/webgl2"],
+    registryDependencies: [
+      "button"
+    ],
+    files: [
+      {
+        path: "templates/hero-04/page.tsx",
+        type: "registry:page"
+      }
+    ],
+    categories: ["hero"],
+    meta: {
+      iframeHeight: "800px"
+    }
+  },
+  {
     name: "leads-01",
     description: "Lead management board with cards, filters and capture form",
     type: "registry:template",

@@ -855,6 +855,27 @@ export const Index: Record<string, any> = {
         "iframeHeight": "600px"
       }
     },
+    "hero-04": {
+      "name": "hero-04",
+      "description": "Hero with animated Rive gradient background and dual CTA",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/default/templates/hero-04/page")),
+      "files": [
+        "registry/default/templates/hero-04/page.tsx"
+      ],
+      "dependencies": [
+        "@rive-app/webgl2"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "categories": [
+        "hero"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      }
+    },
     "leads-01": {
       "name": "leads-01",
       "description": "Lead management board with cards, filters and capture form",
@@ -2700,6 +2721,27 @@ export const Index: Record<string, any> = {
       ],
       "meta": {
         "iframeHeight": "600px"
+      }
+    },
+    "hero-04": {
+      "name": "hero-04",
+      "description": "Hero with animated Rive gradient background and dual CTA",
+      "type": "registry:template",
+      "component": React.lazy(() => import("@/registry/new-york/templates/hero-04/page")),
+      "files": [
+        "registry/new-york/templates/hero-04/page.tsx"
+      ],
+      "dependencies": [
+        "@rive-app/webgl2"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "categories": [
+        "hero"
+      ],
+      "meta": {
+        "iframeHeight": "800px"
       }
     },
     "leads-01": {
