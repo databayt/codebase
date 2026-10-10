@@ -20,17 +20,22 @@ export function GitHubLink() {
 }
 
 async function StarsCount() {
-  const data = await fetch("https://api.github.com/repos/databayt/hogwarts", {
+  // Unauthenticated GitHub allows 60 calls/hour per IP; a rate-limit body or a
+  // dropped socket must hide the count, not fail the prerender of every page.
+  const stars = await fetch("https://api.github.com/repos/databayt/hogwarts", {
     next: { revalidate: 86400 },
   })
-  const json = await data.json()
+    .then((res) => (res.ok ? res.json() : null))
+    .then((json) => json?.stargazers_count)
+    .catch(() => undefined)
+  if (typeof stars !== "number") return null
 
   const formattedCount =
-    json.stargazers_count >= 1000
-      ? json.stargazers_count % 1000 === 0
-        ? `${Math.floor(json.stargazers_count / 1000)}k`
-        : `${(json.stargazers_count / 1000).toFixed(1)}k`
-      : json.stargazers_count.toLocaleString()
+    stars >= 1000
+      ? stars % 1000 === 0
+        ? `${Math.floor(stars / 1000)}k`
+        : `${(stars / 1000).toFixed(1)}k`
+      : stars.toLocaleString()
 
   return (
     <span className="text-muted-foreground w-fit text-xs tabular-nums">
