@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-04",
+  "title": "Hero 04",
+  "description": "Hero with animated Rive gradient background and dual CTA",
+  "dependencies": [
+    "@rive-app/webgl2"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/hero-04/page.tsx",
+      "content": "\"use client\"\n\nimport { useEffect, useRef, useState } from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\n\n// Animated Rive \"bubble\" gradient behind the hero — originally the databayt.org homepage hero.\nfunction RiveBackground() {\n  const canvasRef = useRef<HTMLCanvasElement>(null)\n  const [isMobile, setIsMobile] = useState(false)\n\n  useEffect(() => {\n    const checkMobile = () => setIsMobile(window.innerWidth < 768)\n    checkMobile()\n    window.addEventListener(\"resize\", checkMobile)\n    return () => window.removeEventListener(\"resize\", checkMobile)\n  }, [])\n\n  useEffect(() => {\n    let rive: { cleanup: () => void } | null = null\n\n    const initRive = async () => {\n      if (!canvasRef.current) return\n      const { Rive } = await import(\"@rive-app/webgl2\")\n      rive = new Rive({\n        src: \"/templates/hero-04/bubble-tiptap.riv\",\n        canvas: canvasRef.current,\n        artboard: \"bubble\",\n        animations: \"bubble-timeline\",\n        autoplay: true,\n      })\n    }\n\n    initRive()\n    return () => rive?.cleanup()\n  }, [])\n\n  return (\n    <div className=\"pointer-events-none absolute inset-0 z-0 overflow-hidden\">\n      {/* Top fade — blends into the header */}\n      <div\n        className=\"pointer-events-none absolute inset-0 z-10\"\n        style={{\n          background:\n            \"linear-gradient(to bottom, var(--background) 0%, transparent 8%)\",\n        }}\n      />\n      <div className=\"absolute inset-0 z-[1] select-none\">\n        <div\n          className=\"relative flex select-none items-start justify-center\"\n          style={{\n            top: isMobile ? \"50%\" : \"-40%\",\n            left: isMobile ? \"50%\" : \"20%\",\n            transform: isMobile ? \"translate(-50%, -50%)\" : \"none\",\n            paddingTop: isMobile ? \"0\" : \"20rem\",\n          }}\n        >\n          <canvas\n            ref={canvasRef}\n            className=\"select-none\"\n            style={{\n              width: isMobile ? \"200vw\" : \"120vw\",\n              maxWidth: isMobile ? \"120rem\" : \"80rem\",\n              aspectRatio: isMobile ? \"3 / 2\" : \"2 / 1\",\n            }}\n          />\n        </div>\n      </div>\n    </div>\n  )\n}\n\nconst ctaClass =\n  \"h-auto w-52 rounded-2xl px-6 py-3 font-semibold transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 hover:rounded-3xl hover:shadow-[4px_4px_0px_var(--foreground)] active:translate-x-0 active:translate-y-0 active:rounded-2xl active:shadow-none md:w-48 md:py-2\"\n\nexport default function HeroTemplate() {\n  return (\n    <section className=\"relative flex h-screen items-center justify-start overflow-hidden md:justify-center\">\n      <RiveBackground />\n      <div className=\"relative z-10 px-6 md:px-0\">\n        <div className=\"flex flex-col items-start gap-4 text-start md:items-center md:text-center\">\n          <h1 className=\"text-5xl font-black sm:text-7xl md:text-6xl lg:text-[90px]\">\n            Automate the boring,\n            <br />\n            elevate the wondrous\n          </h1>\n          <p className=\"leading-normal text-muted-foreground sm:text-xl sm:leading-8 md:max-w-3xl\">\n            Building codebase for business automation and open sourcing\n            everything. Follow along as we figure this out together.\n          </p>\n          <div className=\"mt-2 flex flex-col items-start gap-4 md:mx-auto md:flex-row md:items-center\">\n            <Button className={`${ctaClass} bg-emerald-700 text-background hover:bg-emerald-700`}>\n              Appointment\n            </Button>\n            <Button variant=\"outline\" className={ctaClass}>\n              Services\n            </Button>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/hero-04/page.tsx"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "800px"
+  },
+  "categories": [
+    "hero"
+  ],
+  "type": "registry:block"
+}

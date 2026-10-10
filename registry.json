@@ -1,0 +1,2390 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "codebase",
+  "homepage": "https://cb.databayt.org",
+  "items": [
+    {
+      "name": "activity-goal",
+      "title": "Activity Goal",
+      "description": "Activity goal tracking card with chart visualization",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "chart"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/activity-goal.tsx",
+          "type": "registry:component",
+          "target": "components/atom/activity-goal.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "data"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "calendar",
+      "title": "Calendar",
+      "description": "Interactive calendar card component",
+      "registryDependencies": [
+        "card",
+        "calendar"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/calendar.tsx",
+          "type": "registry:component",
+          "target": "components/atom/calendar.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "interactive"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "chat",
+      "title": "Chat",
+      "description": "Composable chat primitives with context-based state management",
+      "registryDependencies": [
+        "card",
+        "avatar",
+        "input",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/chat.tsx",
+          "type": "registry:component",
+          "target": "components/atom/chat.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "interactive"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "data-table",
+      "title": "Data Table",
+      "description": "Composable data table primitives with sorting, filtering, and pagination",
+      "dependencies": [
+        "@tanstack/react-table"
+      ],
+      "registryDependencies": [
+        "card",
+        "table",
+        "button",
+        "input",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/data-table.tsx",
+          "type": "registry:component",
+          "target": "components/atom/data-table.tsx"
+        }
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "metric",
+      "title": "Metric",
+      "description": "Metric display card with progress indicator",
+      "registryDependencies": [
+        "card",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/metric.tsx",
+          "type": "registry:component",
+          "target": "components/atom/metric.tsx"
+        }
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "report-issue",
+      "title": "Report Issue",
+      "description": "Issue reporting form card",
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label",
+        "select",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/report-issue.tsx",
+          "type": "registry:component",
+          "target": "components/atom/report-issue.tsx"
+        }
+      ],
+      "categories": [
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "share",
+      "title": "Share",
+      "description": "Social sharing card with multiple platforms",
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/share.tsx",
+          "type": "registry:component",
+          "target": "components/atom/share.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "interactive"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "stats",
+      "title": "Stats",
+      "description": "Statistics overview card with multiple metrics",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "card",
+        "chart"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/stats.tsx",
+          "type": "registry:component",
+          "target": "components/atom/stats.tsx"
+        }
+      ],
+      "categories": [
+        "data",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "team-member",
+      "title": "Team Member",
+      "description": "Composable team member primitives with role management",
+      "registryDependencies": [
+        "card",
+        "button",
+        "avatar",
+        "popover",
+        "command"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/team-member.tsx",
+          "type": "registry:component",
+          "target": "components/atom/team-member.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ai-prompt-input",
+      "title": "Ai Prompt Input",
+      "description": "AI-powered prompt input component with suggestions and completions",
+      "registryDependencies": [
+        "button",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/ai/ai-prompt-input.tsx",
+          "type": "registry:component",
+          "target": "components/atom/ai/ai-prompt-input.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ai-status-indicator",
+      "title": "Ai Status Indicator",
+      "description": "Visual indicator for AI processing states",
+      "files": [
+        {
+          "path": "src/components/atom/ai/ai-status-indicator.tsx",
+          "type": "registry:component",
+          "target": "components/atom/ai/ai-status-indicator.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "feedback"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ai-streaming-text",
+      "title": "Ai Streaming Text",
+      "description": "Streaming text animation for AI responses",
+      "files": [
+        {
+          "path": "src/components/atom/ai/ai-streaming-text.tsx",
+          "type": "registry:component",
+          "target": "components/atom/ai/ai-streaming-text.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "ai-response-display",
+      "title": "Ai Response Display",
+      "description": "Display AI responses with markdown and code highlighting",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/ai-response-display.tsx",
+          "type": "registry:component",
+          "target": "components/atom/ai-response-display.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "prompt-input",
+      "title": "Prompt Input",
+      "description": "Advanced prompt input with keyboard shortcuts and suggestions",
+      "registryDependencies": [
+        "button",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/prompt-input.tsx",
+          "type": "registry:component",
+          "target": "components/atom/prompt-input.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "response",
+      "title": "Response",
+      "description": "Response container with formatting and actions",
+      "files": [
+        {
+          "path": "src/components/atom/response.tsx",
+          "type": "registry:component",
+          "target": "components/atom/response.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "reasoning",
+      "title": "Reasoning",
+      "description": "Display reasoning steps and thought processes",
+      "files": [
+        {
+          "path": "src/components/atom/reasoning.tsx",
+          "type": "registry:component",
+          "target": "components/atom/reasoning.tsx"
+        }
+      ],
+      "categories": [
+        "ai",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "description": "Enhanced card component with hover effects",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/card.tsx",
+          "type": "registry:component",
+          "target": "components/atom/card.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "layout"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "card-hover-effect",
+      "title": "Card Hover Effect",
+      "description": "Card with animated hover effects and transitions",
+      "files": [
+        {
+          "path": "src/components/atom/card-hover-effect.tsx",
+          "type": "registry:component",
+          "target": "components/atom/card-hover-effect.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "animation"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "cards-metric",
+      "title": "Cards Metric",
+      "description": "Metric display cards with statistics",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/cards-metric.tsx",
+          "type": "registry:component",
+          "target": "components/atom/cards-metric.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "data"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "gradient-animation",
+      "title": "Gradient Animation",
+      "description": "Animated gradient background effect",
+      "files": [
+        {
+          "path": "src/components/atom/gradient-animation.tsx",
+          "type": "registry:component",
+          "target": "components/atom/gradient-animation.tsx"
+        }
+      ],
+      "categories": [
+        "animation",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "infinite-cards",
+      "title": "Infinite Cards",
+      "description": "Infinite scrolling card carousel",
+      "files": [
+        {
+          "path": "src/components/atom/infinite-cards.tsx",
+          "type": "registry:component",
+          "target": "components/atom/infinite-cards.tsx"
+        }
+      ],
+      "categories": [
+        "animation",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "infinite-slider",
+      "title": "Infinite Slider",
+      "description": "Infinite auto-scrolling slider with smooth animations",
+      "files": [
+        {
+          "path": "src/components/atom/infinite-slider.tsx",
+          "type": "registry:component",
+          "target": "components/atom/infinite-slider.tsx"
+        }
+      ],
+      "categories": [
+        "animation",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "progressive-blur",
+      "title": "Progressive Blur",
+      "description": "Progressive blur effect for images and backgrounds",
+      "files": [
+        {
+          "path": "src/components/atom/progressive-blur.tsx",
+          "type": "registry:component",
+          "target": "components/atom/progressive-blur.tsx"
+        }
+      ],
+      "categories": [
+        "animation",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "sticky-scroll",
+      "title": "Sticky Scroll",
+      "description": "Sticky scroll reveal animation",
+      "files": [
+        {
+          "path": "src/components/atom/sticky-scroll.tsx",
+          "type": "registry:component",
+          "target": "components/atom/sticky-scroll.tsx"
+        }
+      ],
+      "categories": [
+        "animation",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "simple-marquee",
+      "title": "Simple Marquee",
+      "description": "Simple auto-scrolling marquee component",
+      "files": [
+        {
+          "path": "src/components/atom/simple-marquee.tsx",
+          "type": "registry:component",
+          "target": "components/atom/simple-marquee.tsx"
+        }
+      ],
+      "categories": [
+        "animation",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "oauth-button",
+      "title": "Oauth Button",
+      "description": "Single OAuth button with provider icon",
+      "registryDependencies": [
+        "button",
+        "icons"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/oauth-button.tsx",
+          "type": "registry:component",
+          "target": "components/atom/oauth-button.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "oauth-button-group",
+      "title": "Oauth Button Group",
+      "description": "Grid of OAuth buttons for multiple providers",
+      "registryDependencies": [
+        "oauth-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/oauth-button-group.tsx",
+          "type": "registry:component",
+          "target": "components/atom/oauth-button-group.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "authentication"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "divider-with-text",
+      "title": "Divider With Text",
+      "description": "Horizontal divider with centered text label",
+      "files": [
+        {
+          "path": "src/components/atom/divider-with-text.tsx",
+          "type": "registry:component",
+          "target": "components/atom/divider-with-text.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "layout"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "user-info-card",
+      "title": "User Info Card",
+      "description": "User avatar with name and email display",
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/user-info-card.tsx",
+          "type": "registry:component",
+          "target": "components/atom/user-info-card.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "user"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "settings-toggle-row",
+      "title": "Settings Toggle Row",
+      "description": "Settings row with label, description, and toggle switch",
+      "registryDependencies": [
+        "switch",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/settings-toggle-row.tsx",
+          "type": "registry:component",
+          "target": "components/atom/settings-toggle-row.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "settings"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "form-field",
+      "title": "Form Field",
+      "description": "Form field primitives with label and input",
+      "registryDependencies": [
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/form-field.tsx",
+          "type": "registry:component",
+          "target": "components/atom/form-field.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "input"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "payment-method-selector",
+      "title": "Payment Method Selector",
+      "description": "Payment method radio selector with icons",
+      "registryDependencies": [
+        "radio-group",
+        "label",
+        "icons"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/payment-method-selector.tsx",
+          "type": "registry:component",
+          "target": "components/atom/payment-method-selector.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "payment"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "faceted",
+      "title": "Faceted",
+      "description": "Faceted filter component for data tables",
+      "registryDependencies": [
+        "button",
+        "popover",
+        "checkbox",
+        "separator",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/faceted.tsx",
+          "type": "registry:component",
+          "target": "components/atom/faceted.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "interactive"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "sortable",
+      "title": "Sortable",
+      "description": "Drag-and-drop sortable list component",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/sortable.tsx",
+          "type": "registry:component",
+          "target": "components/atom/sortable.tsx"
+        }
+      ],
+      "categories": [
+        "interactive",
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "expand-button",
+      "title": "Expand Button",
+      "description": "Expandable button with reveal animation",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/expand-button.tsx",
+          "type": "registry:component",
+          "target": "components/atom/expand-button.tsx"
+        }
+      ],
+      "categories": [
+        "interactive",
+        "ui"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "header-section",
+      "title": "Header Section",
+      "description": "Reusable header section component",
+      "files": [
+        {
+          "path": "src/components/atom/header-section.tsx",
+          "type": "registry:component",
+          "target": "components/atom/header-section.tsx"
+        }
+      ],
+      "categories": [
+        "layout",
+        "navigation"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "page-actions",
+      "title": "Page Actions",
+      "description": "Page-level action buttons container",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/page-actions.tsx",
+          "type": "registry:component",
+          "target": "components/atom/page-actions.tsx"
+        }
+      ],
+      "categories": [
+        "layout",
+        "navigation"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "page-header",
+      "title": "Page Header",
+      "description": "Consistent page header with breadcrumbs",
+      "files": [
+        {
+          "path": "src/components/atom/page-header.tsx",
+          "type": "registry:component",
+          "target": "components/atom/page-header.tsx"
+        }
+      ],
+      "categories": [
+        "layout",
+        "navigation"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "description": "Enhanced tabs component with animations",
+      "registryDependencies": [
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/tabs.tsx",
+          "type": "registry:component",
+          "target": "components/atom/tabs.tsx"
+        }
+      ],
+      "categories": [
+        "navigation",
+        "ui"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "modal-system",
+      "title": "Modal System",
+      "description": "Complete modal system with carousel and steps",
+      "registryDependencies": [
+        "dialog",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/modal/carousel.tsx",
+          "type": "registry:component",
+          "target": "components/atom/modal/carousel.tsx"
+        },
+        {
+          "path": "src/components/atom/modal/context.tsx",
+          "type": "registry:component",
+          "target": "components/atom/modal/context.tsx"
+        },
+        {
+          "path": "src/components/atom/modal/indicator.tsx",
+          "type": "registry:component",
+          "target": "components/atom/modal/indicator.tsx"
+        },
+        {
+          "path": "src/components/atom/modal/modal.tsx",
+          "type": "registry:component",
+          "target": "components/atom/modal/modal.tsx"
+        },
+        {
+          "path": "src/components/atom/modal/route-modal.tsx",
+          "type": "registry:component",
+          "target": "components/atom/modal/route-modal.tsx"
+        },
+        {
+          "path": "src/components/atom/modal/step.ts",
+          "type": "registry:component",
+          "target": "components/atom/modal/step.ts"
+        },
+        {
+          "path": "src/components/atom/modal/type.ts",
+          "type": "registry:component",
+          "target": "components/atom/modal/type.ts"
+        },
+        {
+          "path": "src/components/atom/modal/ui.tsx",
+          "type": "registry:component",
+          "target": "components/atom/modal/ui.tsx"
+        }
+      ],
+      "categories": [
+        "modal",
+        "dialog"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "loading",
+      "title": "Loading",
+      "description": "Loading spinner and skeleton components",
+      "files": [
+        {
+          "path": "src/components/atom/loading.tsx",
+          "type": "registry:component",
+          "target": "components/atom/loading.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "feedback"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "announcement",
+      "title": "Announcement",
+      "description": "Announcement banner component",
+      "files": [
+        {
+          "path": "src/components/atom/announcement.tsx",
+          "type": "registry:component",
+          "target": "components/atom/announcement.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "feedback"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "two-buttons",
+      "title": "Two Buttons",
+      "description": "Dual button group component",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/two-buttons.tsx",
+          "type": "registry:component",
+          "target": "components/atom/two-buttons.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "interactive"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "agent-heading",
+      "title": "Agent Heading",
+      "description": "Agent conversation heading component",
+      "files": [
+        {
+          "path": "src/components/atom/agent-heading.tsx",
+          "type": "registry:component",
+          "target": "components/atom/agent-heading.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "display"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "theme-provider",
+      "title": "Theme Provider",
+      "description": "Theme provider wrapper component",
+      "dependencies": [
+        "next-themes"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/atom/theme-provider.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "utility"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "icons",
+      "title": "Icons",
+      "description": "Comprehensive icon library",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/icons.tsx",
+          "type": "registry:component",
+          "target": "components/atom/icons.tsx"
+        }
+      ],
+      "categories": [
+        "ui",
+        "utility"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "fonts",
+      "title": "Fonts",
+      "description": "Font configuration utilities",
+      "dependencies": [
+        "next/font/google"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/fonts.ts",
+          "type": "registry:component",
+          "target": "components/atom/fonts.ts"
+        }
+      ],
+      "categories": [
+        "ui",
+        "utility"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "button-group",
+      "title": "Button Group",
+      "description": "Horizontal or vertical group of related buttons with shared styling",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/button-group.tsx",
+          "type": "registry:component",
+          "target": "components/atom/button-group.tsx"
+        }
+      ],
+      "categories": [
+        "interactive",
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "card-form",
+      "title": "Card Form",
+      "description": "Card shell for forms with header, content and footer slots",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/card-form.tsx",
+          "type": "registry:component",
+          "target": "components/atom/card-form.tsx"
+        }
+      ],
+      "categories": [
+        "form",
+        "card"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "labeled-input",
+      "title": "Labeled Input",
+      "description": "Input with attached label, hint and error message",
+      "registryDependencies": [
+        "label",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/labeled-input.tsx",
+          "type": "registry:component",
+          "target": "components/atom/labeled-input.tsx"
+        }
+      ],
+      "categories": [
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "labeled-select",
+      "title": "Labeled Select",
+      "description": "Select with attached label, hint and error message",
+      "registryDependencies": [
+        "label",
+        "select"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/labeled-select.tsx",
+          "type": "registry:component",
+          "target": "components/atom/labeled-select.tsx"
+        }
+      ],
+      "categories": [
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "labeled-textarea",
+      "title": "Labeled Textarea",
+      "description": "Textarea with attached label, hint and error message",
+      "registryDependencies": [
+        "label",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/atom/labeled-textarea.tsx",
+          "type": "registry:component",
+          "target": "components/atom/labeled-textarea.tsx"
+        }
+      ],
+      "categories": [
+        "form"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "site-heading",
+      "title": "Site Heading",
+      "description": "Site section heading with title and description lockup",
+      "files": [
+        {
+          "path": "src/components/atom/site-heading.tsx",
+          "type": "registry:component",
+          "target": "components/atom/site-heading.tsx"
+        }
+      ],
+      "categories": [
+        "display",
+        "layout"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "dashboard-01",
+      "title": "Dashboard 01",
+      "description": "A dashboard with sidebar, charts and data table.",
+      "dependencies": [
+        "@tanstack/react-table",
+        "recharts",
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "select",
+        "separator",
+        "sidebar",
+        "breadcrumb",
+        "dropdown-menu",
+        "avatar",
+        "badge",
+        "table",
+        "chart"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard-01/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/chart-area-interactive.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/data-table.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/nav-documents.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/nav-secondary.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/nav-user.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/section-cards.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/components/site-header.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/dashboard-01/data.json",
+          "type": "registry:file",
+          "target": "app/dashboard-01/data.json"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-01",
+      "title": "Sidebar 01",
+      "description": "A simple sidebar with navigation grouped by section.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-01/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-01/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-01/components/search-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-01/components/version-switcher.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "login-01",
+      "title": "Login 01",
+      "description": "A simple login form.",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "field"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/login-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/login-01/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/login-01/components/login-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-01",
+      "title": "Hero 01",
+      "description": "Landing page hero section with CTA and gradient background",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/hero-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-01/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "hero"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-03",
+      "title": "Sidebar 03",
+      "description": "A sidebar with submenus",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-03/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-03/components/app-sidebar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-07",
+      "title": "Sidebar 07",
+      "description": "A sidebar that collapses to icons",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-07/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-07/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-07/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-07/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-07/components/nav-projects.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-07/components/nav-user.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-07/components/team-switcher.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-02",
+      "title": "Sidebar 02",
+      "description": "A sidebar with collapsible sections.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-02/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-02/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-02/components/search-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-02/components/version-switcher.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-04",
+      "title": "Sidebar 04",
+      "description": "A floating sidebar with submenus.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-04/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-04/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-04/components/app-sidebar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-05",
+      "title": "Sidebar 05",
+      "description": "A sidebar with collapsible submenus.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "label",
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-05/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-05/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-05/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-05/components/search-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-06",
+      "title": "Sidebar 06",
+      "description": "A sidebar with submenus as dropdowns.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "card",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-06/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-06/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-06/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-06/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-06/components/sidebar-opt-in-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-08",
+      "title": "Sidebar 08",
+      "description": "An inset sidebar with secondary navigation.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-08/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-08/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-08/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-08/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-08/components/nav-projects.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-08/components/nav-secondary.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-08/components/nav-user.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-09",
+      "title": "Sidebar 09",
+      "description": "Collapsible nested sidebars.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar",
+        "switch",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-09/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-09/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-09/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-09/components/nav-user.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-10",
+      "title": "Sidebar 10",
+      "description": "A sidebar in a popover.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "popover",
+        "collapsible",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-10/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/nav-actions.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/nav-favorites.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/nav-secondary.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/nav-workspaces.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-10/components/team-switcher.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-11",
+      "title": "Sidebar 11",
+      "description": "A sidebar with a collapsible file tree.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-11/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-11/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-11/components/app-sidebar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-12",
+      "title": "Sidebar 12",
+      "description": "A sidebar with a calendar.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "calendar",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-12/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-12/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-12/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-12/components/calendars.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-12/components/date-picker.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-12/components/nav-user.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-13",
+      "title": "Sidebar 13",
+      "description": "A sidebar in a dialog.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "button",
+        "dialog"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-13/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-13/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-13/components/settings-dialog.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-14",
+      "title": "Sidebar 14",
+      "description": "A sidebar on the right.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-14/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-14/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-14/components/app-sidebar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-15",
+      "title": "Sidebar 15",
+      "description": "A left and right sidebar.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "popover",
+        "collapsible",
+        "dropdown-menu",
+        "calendar",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-15/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/calendars.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/date-picker.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/nav-favorites.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/nav-secondary.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/nav-user.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/nav-workspaces.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/sidebar-left.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/sidebar-right.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-15/components/team-switcher.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-16",
+      "title": "Sidebar 16",
+      "description": "A sidebar with a sticky site header.",
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "separator",
+        "collapsible",
+        "dropdown-menu",
+        "avatar",
+        "button",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/page.tsx",
+          "type": "registry:page",
+          "target": "app/sidebar-16/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/nav-projects.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/nav-secondary.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/nav-user.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/search-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/sidebar-16/components/site-header.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "900px"
+      },
+      "categories": [
+        "sidebar",
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "signup-01",
+      "title": "Signup 01",
+      "description": "A simple signup form.",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/signup-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup-01/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/signup-01/components/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "signup-02",
+      "title": "Signup 02",
+      "description": "A two column signup page with a cover image.",
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/signup-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup-02/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/signup-02/components/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      },
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "signup-03",
+      "title": "Signup 03",
+      "description": "A signup page with a muted background color.",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/signup-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup-03/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/signup-03/components/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "700px"
+      },
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "signup-04",
+      "title": "Signup 04",
+      "description": "A signup page with form and image.",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/signup-04/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup-04/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/signup-04/components/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      },
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "signup-05",
+      "title": "Signup 05",
+      "description": "A simple signup form with social providers.",
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/signup-05/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup-05/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/signup-05/components/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "authentication",
+        "signup"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "subscription-01",
+      "title": "Subscription 01",
+      "description": "Subscription management with plan details, billing info, and cancel/update actions",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "separator",
+        "dialog",
+        "radio-group",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/subscription-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/subscription-01/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      },
+      "categories": [
+        "subscription"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "subscription-02",
+      "title": "Subscription 02",
+      "description": "Invoice history table with status badges, dates, and download actions",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "card",
+        "button",
+        "table",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/subscription-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/subscription-02/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "subscription"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "subscription-03",
+      "title": "Subscription 03",
+      "description": "Usage tracking table with token consumption and cost breakdown",
+      "registryDependencies": [
+        "table",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/subscription-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/subscription-03/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "500px"
+      },
+      "categories": [
+        "subscription"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "header-01",
+      "title": "Header 01",
+      "description": "Responsive navigation header with logo and menu links",
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/header-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/header-01/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "100px"
+      },
+      "categories": [
+        "header"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "header-02",
+      "title": "Header 02",
+      "description": "Header with dropdown navigation and user menu",
+      "registryDependencies": [
+        "button",
+        "navigation-menu",
+        "dropdown-menu",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/header-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/header-02/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "100px"
+      },
+      "categories": [
+        "header"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "footer-01",
+      "title": "Footer 01",
+      "description": "Simple footer with links and copyright",
+      "registryDependencies": [
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/footer-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer-01/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "200px"
+      },
+      "categories": [
+        "footer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "footer-02",
+      "title": "Footer 02",
+      "description": "Footer with newsletter signup and social links",
+      "registryDependencies": [
+        "button",
+        "input",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/footer-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/footer-02/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "300px"
+      },
+      "categories": [
+        "footer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-02",
+      "title": "Hero 02",
+      "description": "Hero section with image background and overlay",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/hero-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-02/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "hero"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-03",
+      "title": "Hero 03",
+      "description": "Hero with split layout - content and image",
+      "registryDependencies": [
+        "button",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/hero-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-03/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "hero"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-04",
+      "title": "Hero 04",
+      "description": "Hero with animated Rive gradient background and dual CTA",
+      "dependencies": [
+        "@rive-app/webgl2"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/hero-04/page.tsx",
+          "type": "registry:page",
+          "target": "app/hero-04/page.tsx"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      },
+      "categories": [
+        "hero"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "leads-01",
+      "title": "Leads 01",
+      "description": "Lead management board with cards, filters and capture form",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "badge",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/leads-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/leads-01/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/leads-01/components/content.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/leads-01/components/all.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/leads-01/components/featured.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/leads-01/components/card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/leads-01/components/form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "800px"
+      },
+      "categories": [
+        "dashboard"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "login-03",
+      "title": "Login 03",
+      "description": "Login form with muted card layout",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/login-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/login-03/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/login-03/components/login-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "login-04",
+      "title": "Login 04",
+      "description": "Split login form with image panel",
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "src/registry/bases/base/blocks/login-04/page.tsx",
+          "type": "registry:page",
+          "target": "app/login-04/page.tsx"
+        },
+        {
+          "path": "src/registry/bases/base/blocks/login-04/components/login-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px"
+      },
+      "categories": [
+        "authentication",
+        "login"
+      ],
+      "type": "registry:block"
+    }
+  ]
+}

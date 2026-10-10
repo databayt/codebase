@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats",
+  "title": "Stats",
+  "description": "Statistics overview card with multiple metrics",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "card",
+    "chart"
+  ],
+  "files": [
+    {
+      "path": "src/components/atom/stats.tsx",
+      "content": "\"use client\"\n\nimport { Bar, BarChart, Line, LineChart } from \"recharts\"\nimport { DollarSign, Users } from \"lucide-react\"\n\nimport {\n  Card,\n  CardContent,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport {\n  ChartConfig,\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n} from \"@/components/ui/chart\"\nimport type { getDictionary } from \"@/components/local/dictionaries\"\n\nconst revenueData = [\n  { month: \"Jan\", revenue: 10400 },\n  { month: \"Feb\", revenue: 14405 },\n  { month: \"Mar\", revenue: 9400 },\n  { month: \"Apr\", revenue: 8200 },\n  { month: \"May\", revenue: 7000 },\n  { month: \"Jun\", revenue: 9600 },\n  { month: \"Jul\", revenue: 11244 },\n  { month: \"Aug\", revenue: 26475 },\n]\n\nconst subscriptionData = [\n  { month: \"Jan\", subscription: 240 },\n  { month: \"Feb\", subscription: 300 },\n  { month: \"Mar\", subscription: 200 },\n  { month: \"Apr\", subscription: 278 },\n  { month: \"May\", subscription: 189 },\n  { month: \"Jun\", subscription: 239 },\n  { month: \"Jul\", subscription: 278 },\n  { month: \"Aug\", subscription: 189 },\n]\n\nconst revenueConfig = {\n  revenue: {\n    label: \"Revenue\",\n    color: \"var(--chart-1)\",\n  },\n} satisfies ChartConfig\n\nconst subscriptionConfig = {\n  subscription: {\n    label: \"Subscriptions\",\n    color: \"var(--chart-2)\",\n  },\n} satisfies ChartConfig\n\ninterface CardsStatsProps {\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\n}\n\nexport function CardsStats({ dictionary }: CardsStatsProps) {\n  return (\n    <div className=\"grid gap-4 sm:grid-cols-2\">\n      <Card>\n        <CardHeader className=\"flex flex-row items-center justify-between pb-2\">\n          <CardTitle className=\"text-sm font-medium\">\n            {dictionary?.cards?.stats?.totalRevenue || \"Total Revenue\"}\n          </CardTitle>\n          <DollarSign className=\"h-4 w-4 text-muted-foreground\" />\n        </CardHeader>\n        <CardContent>\n          <div className=\"text-2xl font-bold\">\n            {dictionary?.cards?.stats?.revenueAmount || \"$15,231.89\"}\n          </div>\n          <p className=\"text-xs text-muted-foreground\">\n            {dictionary?.cards?.stats?.revenueGrowth || \"+20.1% from last month\"}\n          </p>\n          <ChartContainer config={revenueConfig} className=\"mt-4 h-[80px] w-full\">\n            <LineChart\n              accessibilityLayer\n              data={revenueData}\n              margin={{ top: 5, right: 10, left: 10, bottom: 0 }}\n            >\n              <Line\n                type=\"monotone\"\n                strokeWidth={2}\n                dataKey=\"revenue\"\n                stroke=\"var(--color-revenue)\"\n                dot={false}\n                activeDot={{ r: 6 }}\n              />\n              <ChartTooltip\n                cursor={false}\n                content={<ChartTooltipContent hideLabel hideIndicator />}\n              />\n            </LineChart>\n          </ChartContainer>\n        </CardContent>\n      </Card>\n      <Card>\n        <CardHeader className=\"flex flex-row items-center justify-between pb-2\">\n          <CardTitle className=\"text-sm font-medium\">\n            {dictionary?.cards?.stats?.subscriptions || \"Subscriptions\"}\n          </CardTitle>\n          <Users className=\"h-4 w-4 text-muted-foreground\" />\n        </CardHeader>\n        <CardContent>\n          <div className=\"text-2xl font-bold\">\n            {dictionary?.cards?.stats?.subscriptionCount || \"+2350\"}\n          </div>\n          <p className=\"text-xs text-muted-foreground\">\n            {dictionary?.cards?.stats?.subscriptionGrowth || \"+180.1% from last month\"}\n          </p>\n          <ChartContainer config={subscriptionConfig} className=\"mt-4 h-[80px] w-full\">\n            <BarChart accessibilityLayer data={subscriptionData}>\n              <Bar\n                dataKey=\"subscription\"\n                fill=\"var(--color-subscription)\"\n                radius={4}\n              />\n              <ChartTooltip\n                cursor={false}\n                content={<ChartTooltipContent hideLabel hideIndicator />}\n              />\n            </BarChart>\n          </ChartContainer>\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/atom/stats.tsx"
+    }
+  ],
+  "categories": [
+    "data",
+    "display"
+  ],
+  "type": "registry:component"
+}

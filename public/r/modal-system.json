@@ -1,0 +1,65 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "modal-system",
+  "title": "Modal System",
+  "description": "Complete modal system with carousel and steps",
+  "registryDependencies": [
+    "dialog",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/atom/modal/carousel.tsx",
+      "content": "// import React from 'react';\n// import { Icon } from \"@iconify/react\";\n// import { Button } from '../ui/button';\n\n// interface CarouselProps {\n\n//   prevStep: () => void;\n//   nextStep: () => void;\n// }\n\n// const Carousel: React.FC<CarouselProps> = ({ prevStep, nextStep }) => (\n//   <>\n//     <Button onClick={prevStep}>Back</Button>\n//     <Button onClick={nextStep}>Next</Button>\n//   </>\n// );\n\n// export default Carousel;",
+      "type": "registry:component",
+      "target": "components/atom/modal/carousel.tsx"
+    },
+    {
+      "path": "src/components/atom/modal/context.tsx",
+      "content": "'use client';\nimport { ModalContextProps, ModalState } from \"./type\";\nimport React, { createContext, useState, useContext } from \"react\";\n\nconst ModalContext = createContext<ModalContextProps | undefined>(undefined);\n\nexport const useModal = () => {\n  const context = useContext(ModalContext);\n  if (!context) {\n    throw new Error('useModal must be used within a ModalProvider');\n  }\n  return context;\n};\n\nexport const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {\n  const [modal, setModal] = useState<ModalState>({open: false, id: null});\n\n  const openModal = (id?: string | null) => {\n    setModal({open: true, id: id || null});\n  };\n\n  const closeModal = () => {\n    setModal({open: false, id: null});\n  };\n\n  const handleCloseModal = () => {\n    setModal({open: false, id: null});\n  };\n\n  return (\n    <ModalContext.Provider value={{ modal, openModal, closeModal, handleCloseModal }}>\n      {children}\n    </ModalContext.Provider>\n  );\n};",
+      "type": "registry:component",
+      "target": "components/atom/modal/context.tsx"
+    },
+    {
+      "path": "src/components/atom/modal/indicator.tsx",
+      "content": "import React from 'react';\n\ninterface IndicatorProps {\n  totalSteps: number;\n  currentStep: number;\n}\n\nconst Indicator: React.FC<IndicatorProps> = ({ totalSteps, currentStep }) => {\n  return (\n    <div className=\"flex justify-center space-x-2\">\n      {Array.from({ length: totalSteps }).map((_, step) => (\n        <div\n          key={step}\n          className={`h-3 w-3 rounded-full ${\n            step + 1 === currentStep ? \"bg-black\" : \"bg-gray-300\"\n          }`}\n        />\n      ))}\n    </div>\n  );\n};\n\nexport default Indicator;",
+      "type": "registry:component",
+      "target": "components/atom/modal/indicator.tsx"
+    },
+    {
+      "path": "src/components/atom/modal/modal.tsx",
+      "content": "\"use client\";\nimport { useModal } from \"@/components/atom/modal/context\";\nimport React, { useState, useEffect } from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { X } from 'lucide-react';\n\n\n// Custom hook for managing body scroll\nfunction useBodyScroll(open: boolean) {\n  React.useEffect(() => {\n    if (open) {\n      document.body.style.overflow = 'hidden';\n    } else {\n      document.body.style.overflow = 'unset';\n    }\n    return () => {\n      document.body.style.overflow = 'unset';\n    };\n  }, [open]);\n}\n\ninterface Props {\n  content: React.ReactNode;\n  sm?: boolean;\n}\n\nfunction Modal({ content, sm = false }: Props) {\n  const { modal, closeModal } = useModal();\n  useBodyScroll(modal.open);\n  const [isMobile, setIsMobile] = useState(false);\n\n  // Check if screen is mobile\n  useEffect(() => {\n    const checkIfMobile = () => {\n      setIsMobile(window.innerWidth < 768);\n    };\n    \n    // Initial check\n    checkIfMobile();\n    \n    // Add event listener for window resize\n    window.addEventListener('resize', checkIfMobile);\n    \n    // Cleanup event listener\n    return () => window.removeEventListener('resize', checkIfMobile);\n  }, []);\n\n\n\n  return (\n    <>\n      {modal.open && (\n        <>\n          <div\n            className=\"fixed inset-0 w-full h-screen bg-black bg-opacity-70\"\n            onClick={closeModal}\n          />\n          <div className=\"fixed inset-0 w-full h-screen z-50 flex justify-center items-center\">\n            <div \n              className={`relative z-50 bg-background ${\n                sm \n                  ? isMobile\n                    ? 'w-full h-screen px-20 py-4 overflow-auto'\n                    : 'm-4 px-20 py-8 max-w-2xl w-[24rem] h-[24rem] rounded-lg' \n                  : 'w-full h-screen overflow-hidden px-20 py-4 sm:pt-14'\n              }`}\n            >\n              {/* <Button \n                size='icon' \n                variant='outline' \n                className=\"rounded-full absolute top-4 right-4 z-10\"\n                onClick={closeModal}\n              >\n                <X className=\"h-5 w-5\" />\n              </Button> */}\n              {content}\n            </div>\n          </div>\n        </>\n      )}\n    </>\n  );\n}\n\nexport default Modal;",
+      "type": "registry:component",
+      "target": "components/atom/modal/modal.tsx"
+    },
+    {
+      "path": "src/components/atom/modal/route-modal.tsx",
+      "content": "\"use client\";\n\nimport { useEffect } from \"react\";\nimport { useRouter } from \"next/navigation\";\nimport Modal from \"./modal\";\nimport { useModal } from \"./context\";\n\ninterface RouteModalProps {\n  content: React.ReactNode;\n  returnTo: string;\n  sm?: boolean;\n}\n\nexport function RouteModal({ content, returnTo, sm = false }: RouteModalProps) {\n  const { modal, openModal } = useModal();\n  const router = useRouter();\n\n  useEffect(() => {\n    openModal();\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, []);\n\n  useEffect(() => {\n    if (!modal.open) {\n      router.push(returnTo);\n    }\n  }, [modal.open, router, returnTo]);\n\n  return <Modal content={content} sm={sm} />;\n}\n\nexport default RouteModal;\n\n\n",
+      "type": "registry:component",
+      "target": "components/atom/modal/route-modal.tsx"
+    },
+    {
+      "path": "src/components/atom/modal/step.ts",
+      "content": "",
+      "type": "registry:component",
+      "target": "components/atom/modal/step.ts"
+    },
+    {
+      "path": "src/components/atom/modal/type.ts",
+      "content": "export interface ModalState {\n    open: boolean;\n    id: string | null;\n  }\n  \n  export interface ModalContextProps {\n    modal: ModalState;\n    openModal: (id?: string | null) => void;\n    closeModal: () => void;\n    handleCloseModal: () => void;\n  }",
+      "type": "registry:component",
+      "target": "components/atom/modal/type.ts"
+    },
+    {
+      "path": "src/components/atom/modal/ui.tsx",
+      "content": "\"use client\";\nimport { Button } from \"@/components/ui/button\";\nimport { useModal } from \"./context\";\nimport React from \"react\";\nimport { X } from \"lucide-react\";\nimport { useTheme } from \"next-themes\";\n\ninterface Props {\n  content: React.ReactNode;\n  big?: boolean;\n  full?: boolean; // Add the 'full' prop here\n}\n\nfunction Modal({ content, big = false, full = false }: Props) {\n  const { closeModal } = useModal();\n  const { theme = 'light' } = useTheme();\n\n  return (\n    <div className={`fixed inset-0 w-full h-screen z-50 flex  ${theme === 'dark' ? 'bg-black' : 'bg-white'}  justify-center items-center`}>\n      <div className=\"absolute inset-0 w-full h-screen\" onClick={closeModal}></div>\n      <div className={`\n        relative p-8 z-70 z-80\n        ${full ? 'w-full h-full max-w-none' : big ? 'max-w-4xl w-[35rem] h-[42rem]' : 'max-w-2xl w-[24rem] h-[29rem]'} \n        ${theme === 'dark' ? 'dark' : 'light'}\n        \n\n      `}>\n        {full && \n        <Button size='icon' variant='outline' onClick={closeModal} className=\"absolute top-0 right-0 m-4\">\n        <X size={25} />\n        </Button>}\n        {content}\n      </div>\n    </div>\n  );\n}\nexport default Modal;\n\n",
+      "type": "registry:component",
+      "target": "components/atom/modal/ui.tsx"
+    }
+  ],
+  "categories": [
+    "modal",
+    "dialog"
+  ],
+  "type": "registry:component"
+}

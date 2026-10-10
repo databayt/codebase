@@ -1,330 +1,294 @@
+// Builds codebase's registry — a port of shadcn's apps/v4/scripts/build-registry.mts
+// for one style (base-nova). Steps:
+//   1. registry/__index__.tsx       metadata index   Index[style][name]
+//   2. registry/__components__/     lazy component shards + getComponent()
+//   3. examples/__index__.tsx       ExamplesIndex[base][name] (+ __components__)
+//   4. registry/__blocks__.json     block metadata
+//   5. registry.json (repo root)    then `shadcn build` -> public/r/<name>.json
+//
+// Flags (same names as upstream): --examples, --indexes, --registry.
+// No flag runs everything.
+import { execFileSync } from "child_process"
 import fs from "fs/promises"
+import { createRequire } from "module"
 import path from "path"
 import { fileURLToPath } from "url"
-import { createRequire } from "module"
-import type { RegistryItem, RegistryItemFile } from "../src/registry/schema"
 
 // Node 25 no longer surfaces named exports from CJS-transpiled .ts modules
-// into .mts ESM imports; createRequire sidesteps the interop entirely.
+// into .mts ESM imports; createRequire sidesteps the interop.
 const require = createRequire(import.meta.url)
-const { templates } = require("../src/registry/registry-templates") as {
-  templates: RegistryItem[]
-}
-const { registryCategories } = require("../src/registry/registry-categories") as {
-  registryCategories: unknown
-}
-const { atoms } = require("../src/registry/default/atoms/_registry") as {
-  atoms: RegistryItem[]
-}
-const { uiItems } = require("../src/registry/registry-ui") as {
-  uiItems: RegistryItem[]
-}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const PROJECT_ROOT = path.resolve(__dirname, "..")
-const REGISTRY_PATH = path.join(PROJECT_ROOT, "src", "registry")
-const PUBLIC_REGISTRY_PATH = path.join(PROJECT_ROOT, "public", "r")
+const ROOT = path.resolve(__dirname, "..")
+const SRC = path.join(ROOT, "src")
+const BASE_DIR = path.join(SRC, "registry", "bases", "base")
+const EXAMPLES_DIR = path.join(SRC, "examples")
 
-const STYLES = ["default", "new-york"] as const
-type Style = (typeof STYLES)[number]
+export const STYLES = ["base-nova"] as const
+const BASES = ["base"] as const
 
-async function ensureDir(dirPath: string): Promise<void> {
-  await fs.mkdir(dirPath, { recursive: true })
-}
-
-async function fileExists(filePath: string): Promise<boolean> {
-  try {
-    await fs.access(filePath)
-    return true
-  } catch {
-    return false
-  }
-}
-
-// new-york is the source of truth for template sources; default is generated.
-async function syncStyles(): Promise<void> {
-  console.log("Syncing styles (new-york -> default)...")
-
-  const sourceStyle = "new-york"
-  const targetStyle = "default"
-
-  for (const template of templates) {
-    for (const file of template.files ?? []) {
-      const sourcePath = path.join(REGISTRY_PATH, sourceStyle, file.path)
-      const targetPath = path.join(REGISTRY_PATH, targetStyle, file.path)
-
-      if (await fileExists(sourcePath)) {
-        await ensureDir(path.dirname(targetPath))
-
-        let content = await fs.readFile(sourcePath, "utf-8")
-        content = content.replace(
-          new RegExp(`@/registry/${sourceStyle}/`, "g"),
-          `@/registry/${targetStyle}/`
-        )
-
-        await fs.writeFile(targetPath, content)
-      }
-    }
-  }
-}
-
-async function buildRegistryIndex(): Promise<void> {
-  console.log("Building registry index (src/__registry__/index.tsx)...")
-
-  const registryIndex: Record<string, Record<string, unknown>> = {
-    default: {},
-    "new-york": {},
-  }
-
-  for (const style of STYLES) {
-    for (const template of templates) {
-      registryIndex[style][template.name] = {
-        name: template.name,
-        description: template.description,
-        type: template.type,
-        component: `React.lazy(() => import("@/registry/${style}/templates/${template.name}/page"))`,
-        files: (template.files ?? []).map((f) => `registry/${style}/${f.path}`),
-        dependencies: template.dependencies || [],
-        registryDependencies: template.registryDependencies || [],
-        categories: template.categories || [],
-        meta: template.meta || {},
-      }
-    }
-  }
-
-  // Atoms are style-invariant: computed once, aliased into new-york.
-  for (const atom of atoms) {
-    registryIndex["default"][atom.name] = {
-      name: atom.name,
-      description: atom.description,
-      type: atom.type,
-      files: (atom.files ?? []).map((f) => f.path),
-      dependencies: atom.dependencies || [],
-      registryDependencies: atom.registryDependencies || [],
-      categories: atom.categories || [],
-      meta: atom.meta || {},
-    }
-    registryIndex["new-york"][atom.name] = registryIndex["default"][atom.name]
-  }
-
-  const indexContent = `import React from "react"
-
-export const Index: Record<string, any> = ${JSON.stringify(registryIndex, null, 2)
-    .replace(/"React\.lazy\((.*?)\)"/g, "React.lazy($1)")
-    .replace(/\\"/g, '"')}
+const HEADER = `// @ts-nocheck
+// This file is autogenerated by scripts/build-registry.mts
+// Do not edit this file directly.
 `
 
-  await ensureDir(path.join(PROJECT_ROOT, "src", "__registry__"))
-  await fs.writeFile(
-    path.join(PROJECT_ROOT, "src", "__registry__", "index.tsx"),
-    indexContent
-  )
+type RegistryFile = { path: string; type: string; target?: string }
+type RegistryItem = {
+  name: string
+  title?: string
+  description?: string
+  type: string
+  dependencies?: string[]
+  registryDependencies?: string[]
+  files?: RegistryFile[]
+  categories?: string[]
+  meta?: Record<string, unknown>
 }
 
-async function resolveItemFiles(
-  item: RegistryItem,
-  style: Style
-): Promise<RegistryItemFile[]> {
-  const files: RegistryItemFile[] = []
-
-  for (const file of item.files ?? []) {
-    // Templates live per-style under src/registry/<style>/; atoms and ui
-    // live style-invariant under src/.
-    const filePath =
-      item.type === "registry:template"
-        ? path.join(REGISTRY_PATH, style, file.path)
-        : path.join(PROJECT_ROOT, "src", file.path)
-
-    if (!(await fileExists(filePath))) continue
-
-    const content = await fs.readFile(filePath, "utf-8")
-    const target =
-      file.target ??
-      (item.type === "registry:template"
-        ? file.path.replace("templates/", "app/")
-        : item.type === "registry:ui"
-          ? file.path
-          : `components/${file.path.replace("components/atom/", "")}`)
-
-    files.push({
-      path: file.path,
-      content,
-      type: (file.type ?? "registry:component") as RegistryItemFile["type"],
-      target,
-    } as RegistryItemFile)
-  }
-
-  return files
+function loadRegistry(): { name: string; homepage: string; items: RegistryItem[] } {
+  const { registry } = require("../src/registry/bases/base/registry")
+  return registry
 }
 
-function toRegistryJson(item: RegistryItem, files: RegistryItemFile[]): RegistryItem {
-  return {
-    $schema: "https://ui.shadcn.com/schema/registry-item.json",
-    name: item.name,
-    description: item.description,
-    type: item.type,
-    dependencies: item.dependencies,
-    registryDependencies: item.registryDependencies,
-    files,
-    categories: item.categories,
-    meta: item.meta,
-  }
+// Manifest paths follow upstream (relative to the base dir: "blocks/…"),
+// except atoms, which live in the databayt hierarchy at src/components/atom.
+export function sourcePath(file: RegistryFile) {
+  return file.path.startsWith("components/atom/")
+    ? path.join("src", file.path)
+    : path.join("src", "registry", "bases", "base", file.path)
 }
 
-async function buildStyleJSONs(): Promise<void> {
-  console.log("Building style JSONs (public/r/styles)...")
-
-  for (const style of STYLES) {
-    const styleDir = path.join(PUBLIC_REGISTRY_PATH, "styles", style)
-    // Clean rebuild so deleted registry entries don't leave orphan JSONs.
-    await fs.rm(styleDir, { recursive: true, force: true })
-    await ensureDir(styleDir)
-
-    for (const item of [...templates, ...atoms, ...uiItems]) {
-      const files = await resolveItemFiles(item, style)
-      await fs.writeFile(
-        path.join(styleDir, `${item.name}.json`),
-        JSON.stringify(toRegistryJson(item, files), null, 2)
-      )
-    }
-    console.log(
-      `  ${style}: ${templates.length} templates + ${atoms.length} atoms + ${uiItems.length} ui`
-    )
-  }
+// Import specifier for the lazy component of an item (its first file).
+function importSpecifier(file: RegistryFile) {
+  return "@/" + sourcePath(file).replace(/^src\//, "").replace(/\.tsx?$/, "")
 }
 
-// Legacy URL surface consumed by getTemplateCode(): /r/templates/<style>/<name>.json
-async function buildTemplateJSONs(): Promise<void> {
-  console.log("Building template JSONs (public/r/templates)...")
-
-  for (const style of STYLES) {
-    const dir = path.join(PUBLIC_REGISTRY_PATH, "templates", style)
-    await fs.rm(dir, { recursive: true, force: true })
-    await ensureDir(dir)
-
-    for (const template of templates) {
-      const files = await resolveItemFiles(template, style)
-      await fs.writeFile(
-        path.join(dir, `${template.name}.json`),
-        JSON.stringify(toRegistryJson(template, files), null, 2)
-      )
-    }
-
-    await fs.writeFile(
-      path.join(dir, "registry.json"),
-      JSON.stringify(
-        {
-          name: "codebase-templates",
-          homepage: "https://cb.databayt.org/templates",
-          items: templates.map((t) => t.name),
-        },
-        null,
-        2
-      )
-    )
+// Atoms install under components/atom/ so consumers keep the databayt
+// hierarchy and `@/components/atom/x` imports resolve unchanged.
+function withTarget(item: RegistryItem, file: RegistryFile): RegistryFile {
+  if (file.target) return file
+  if (item.type === "registry:component" && file.path.startsWith("components/atom/")) {
+    return { ...file, target: file.path }
   }
+  return file
 }
 
-async function buildCategories(): Promise<void> {
-  console.log("Building categories...")
-  await fs.writeFile(
-    path.join(PUBLIC_REGISTRY_PATH, "categories.json"),
-    JSON.stringify(registryCategories, null, 2)
-  )
-}
-
-async function buildThemes(): Promise<void> {
-  console.log("Building themes...")
-
-  const themes = {
-    slate: {
-      cssVars: {
-        light: {
-          background: "0 0% 100%",
-          foreground: "222.2 84% 4.9%",
-          card: "0 0% 100%",
-          "card-foreground": "222.2 84% 4.9%",
-          popover: "0 0% 100%",
-          "popover-foreground": "222.2 84% 4.9%",
-          primary: "222.2 47.4% 11.2%",
-          "primary-foreground": "210 40% 98%",
-          secondary: "210 40% 96.1%",
-          "secondary-foreground": "222.2 47.4% 11.2%",
-          muted: "210 40% 96.1%",
-          "muted-foreground": "215.4 16.3% 46.9%",
-          accent: "210 40% 96.1%",
-          "accent-foreground": "222.2 47.4% 11.2%",
-          destructive: "0 84.2% 60.2%",
-          "destructive-foreground": "210 40% 98%",
-          border: "214.3 31.8% 91.4%",
-          input: "214.3 31.8% 91.4%",
-          ring: "222.2 84% 4.9%",
-        },
-        dark: {
-          background: "222.2 84% 4.9%",
-          foreground: "210 40% 98%",
-          card: "222.2 84% 4.9%",
-          "card-foreground": "210 40% 98%",
-          popover: "222.2 84% 4.9%",
-          "popover-foreground": "210 40% 98%",
-          primary: "210 40% 98%",
-          "primary-foreground": "222.2 47.4% 11.2%",
-          secondary: "217.2 32.6% 17.5%",
-          "secondary-foreground": "210 40% 98%",
-          muted: "217.2 32.6% 17.5%",
-          "muted-foreground": "215 20.2% 65.1%",
-          accent: "217.2 32.6% 17.5%",
-          "accent-foreground": "210 40% 98%",
-          destructive: "0 62.8% 30.6%",
-          "destructive-foreground": "210 40% 98%",
-          border: "217.2 32.6% 17.5%",
-          input: "217.2 32.6% 17.5%",
-          ring: "212.7 26.8% 83.9%",
-        },
-      },
-    },
-  }
-
-  await ensureDir(path.join(PUBLIC_REGISTRY_PATH, "colors"))
-
-  for (const [name, theme] of Object.entries(themes)) {
-    await fs.writeFile(
-      path.join(PUBLIC_REGISTRY_PATH, "colors", `${name}.json`),
-      JSON.stringify(theme, null, 2)
-    )
-  }
-
-  let css = ""
-  for (const [, theme] of Object.entries(themes)) {
-    for (const [mode, vars] of Object.entries(theme.cssVars)) {
-      const selector = mode === "light" ? `:root` : `.dark`
-      css += `${selector} {\n`
-      for (const [key, value] of Object.entries(vars)) {
-        css += `  --${key}: ${value};\n`
-      }
-      css += `}\n\n`
-    }
-  }
-
-  await fs.writeFile(path.join(PUBLIC_REGISTRY_PATH, "themes.css"), css)
-}
-
-async function build(): Promise<void> {
-  console.log("Building registry...")
-
+async function writeIfChanged(file: string, content: string) {
   try {
-    await syncStyles()
-    await buildRegistryIndex()
-    await buildStyleJSONs()
-    await buildTemplateJSONs()
-    await buildCategories()
-    await buildThemes()
-
-    console.log("Build completed successfully!")
-  } catch (error) {
-    console.error("Build failed:", error)
-    process.exit(1)
-  }
+    if ((await fs.readFile(file, "utf8")) === content) return
+  } catch {}
+  await fs.mkdir(path.dirname(file), { recursive: true })
+  await fs.writeFile(file, content)
 }
 
-build()
+function lazyEntry(name: string, specifier: string) {
+  return `  ${JSON.stringify(name)}: React.lazy(async () => {
+    const mod = await import(${JSON.stringify(specifier)})
+    const exportName =
+      Object.keys(mod).find(
+        (key) => typeof mod[key] === "function" || typeof mod[key] === "object"
+      ) || ${JSON.stringify(name)}
+    return { default: mod.default || mod[exportName] }
+  }),`
+}
+
+function shardDispatcher(shards: Record<string, string[]>) {
+  const entries = Object.entries(shards)
+    .map(
+      ([style, names]) => `  ${JSON.stringify(style)}: {
+    load: () => import("./${style}"),
+    names: new Set(${JSON.stringify(names)}),
+  },`
+    )
+    .join("\n")
+
+  return `${HEADER}import * as React from "react"
+
+const shards: Record<
+  string,
+  {
+    load: () => Promise<{ Components: Record<string, any> }>
+    names: Set<string>
+  }
+> = {
+${entries}
+}
+
+const cache = new Map<string, any>()
+
+// Sync existence check via the names set; the shard module (and with it the
+// component's dynamic-import subtree) only loads when the component renders.
+export function getComponent(styleName: string, name: string) {
+  const shard = shards[styleName]
+  if (!shard?.names.has(name)) {
+    return undefined
+  }
+
+  const cacheKey = \`\${styleName}:\${name}\`
+  let component = cache.get(cacheKey)
+  if (!component) {
+    component = React.lazy(async () => {
+      const { Components } = await shard.load()
+      return { default: Components[name] }
+    })
+    cache.set(cacheKey, component)
+  }
+
+  return component
+}
+`
+}
+
+async function buildIndexes(items: RegistryItem[]) {
+  console.log("Building registry indexes...")
+  const index: Record<string, Record<string, unknown>> = {}
+  const shardNames: Record<string, string[]> = {}
+
+  for (const style of STYLES) {
+    index[style] = {}
+    const lazies: string[] = []
+
+    for (const item of items) {
+      const files = (item.files ?? []).map((f) => withTarget(item, f))
+      index[style][item.name] = {
+        name: item.name,
+        title: item.title,
+        description: item.description ?? "",
+        type: item.type,
+        registryDependencies: item.registryDependencies,
+        files: files.map((f) => ({ ...f, path: sourcePath(f) })),
+        categories: item.categories,
+        meta: item.meta,
+      }
+
+      // Blocks render their page; components render their main file.
+      const main =
+        files.find((f) => f.type === "registry:page") ?? files[0]
+      if (main && /\.tsx$/.test(main.path)) {
+        lazies.push(lazyEntry(item.name, importSpecifier(main)))
+      }
+    }
+
+    shardNames[style] = items
+      .filter((i) => {
+        const f = i.files?.find((x) => x.type === "registry:page") ?? i.files?.[0]
+        return f && /\.tsx$/.test(f.path)
+      })
+      .map((i) => i.name)
+
+    await writeIfChanged(
+      path.join(SRC, "registry", "__components__", `${style}.tsx`),
+      `${HEADER}import * as React from "react"\n\nexport const Components: Record<string, any> = {\n${lazies.join("\n")}\n}\n`
+    )
+  }
+
+  await writeIfChanged(
+    path.join(SRC, "registry", "__components__", "index.tsx"),
+    shardDispatcher(shardNames)
+  )
+  await writeIfChanged(
+    path.join(SRC, "registry", "__index__.tsx"),
+    `${HEADER}\nexport const Index: Record<string, Record<string, any>> = ${JSON.stringify(index, null, 2)}\n`
+  )
+
+  const blocks = items
+    .filter((i) => i.type === "registry:block")
+    .map((i) => ({ name: i.name, description: i.description ?? "", categories: i.categories ?? [] }))
+  await writeIfChanged(
+    path.join(SRC, "registry", "__blocks__.json"),
+    JSON.stringify(blocks, null, 2) + "\n"
+  )
+}
+
+async function buildExamples() {
+  console.log("Building examples index...")
+  const index: Record<string, Record<string, unknown>> = {}
+  const shardNames: Record<string, string[]> = {}
+
+  for (const base of BASES) {
+    const dir = path.join(EXAMPLES_DIR, base)
+    let files: string[] = []
+    try {
+      files = (await fs.readdir(dir)).filter((f) => /\.tsx$/.test(f)).sort()
+    } catch {}
+
+    index[base] = {}
+    const lazies: string[] = []
+    for (const file of files) {
+      const name = file.replace(/\.tsx$/, "")
+      index[base][name] = { name, filePath: `src/examples/${base}/${file}` }
+      lazies.push(lazyEntry(name, `@/examples/${base}/${name}`))
+    }
+    shardNames[base] = Object.keys(index[base])
+
+    await writeIfChanged(
+      path.join(EXAMPLES_DIR, "__components__", `${base}.tsx`),
+      `${HEADER}import * as React from "react"\n\nexport const Components: Record<string, any> = {\n${lazies.join("\n")}\n}\n`
+    )
+  }
+
+  await writeIfChanged(
+    path.join(EXAMPLES_DIR, "__components__", "index.tsx"),
+    shardDispatcher(shardNames)
+  )
+  await writeIfChanged(
+    path.join(EXAMPLES_DIR, "__index__.tsx"),
+    `${HEADER}\nexport const ExamplesIndex: Record<string, Record<string, any>> = ${JSON.stringify(index, null, 2)}\n`
+  )
+}
+
+async function buildPublicRegistry(registry: ReturnType<typeof loadRegistry>) {
+  console.log("Building registry.json + public/r (shadcn build)...")
+  const registryJson = {
+    $schema: "https://ui.shadcn.com/schema/registry.json",
+    name: registry.name,
+    homepage: registry.homepage,
+    items: registry.items.map((item) => ({
+      ...item,
+      files: (item.files ?? []).map((f) => {
+        const file = withTarget(item, f)
+        return { ...file, path: sourcePath(file) }
+      }),
+    })),
+  }
+  await writeIfChanged(
+    path.join(ROOT, "registry.json"),
+    JSON.stringify(registryJson, null, 2) + "\n"
+  )
+
+  // Clean rebuild so removed items don't leave orphan JSON behind. Only our
+  // own <name>.json files are removed; colors/, icons/, themes.css stay.
+  const out = path.join(ROOT, "public", "r")
+  await fs.mkdir(out, { recursive: true })
+  for (const entry of await fs.readdir(out, { withFileTypes: true })) {
+    if (entry.isFile() && entry.name.endsWith(".json")) {
+      await fs.rm(path.join(out, entry.name))
+    }
+  }
+
+  execFileSync(
+    path.join(ROOT, "node_modules", ".bin", "shadcn"),
+    ["build", "registry.json", "--output", "public/r"],
+    { cwd: ROOT, stdio: "inherit" }
+  )
+}
+
+async function main() {
+  const args = new Set(process.argv.slice(2))
+  const all = !["--examples", "--indexes", "--registry"].some((f) => args.has(f))
+  const registry = loadRegistry()
+
+  if (all || args.has("--indexes")) await buildIndexes(registry.items)
+  if (all || args.has("--examples")) await buildExamples()
+  if (all || args.has("--registry")) await buildPublicRegistry(registry)
+
+  console.log(
+    `Done: ${registry.items.filter((i) => i.type === "registry:block").length} templates, ` +
+      `${registry.items.filter((i) => i.type === "registry:component").length} atoms.`
+  )
+}
+
+main().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})

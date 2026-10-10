@@ -42,7 +42,7 @@ Modern landing page hero with:
    - `page.tsx` - Main component
    - `components/` - Sub-components
 3. Register in `registry-templates.ts`
-4. Run `pnpm build:registry` to generate files
+4. Run `pnpm registry:build` to generate files
 
 ## Usage
 
@@ -62,7 +62,7 @@ Templates are displayed in `/templates` page, integrated with existing template 
 
 ```bash
 # Build registry files
-pnpm build:registry
+pnpm registry:build
 
 # Start development server
 pnpm dev

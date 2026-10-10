@@ -30,7 +30,7 @@ pack at `~/.claude/skills/shadcn/`; this file is the repo-specific truth.
   `src/app/[lang]/layout.tsx` so portalled primitives inherit direction.
 - Registry: one Zod schema (`src/registry/schema.ts`, with intentional
   `registry:atom`/`registry:template` extensions), one build
-  (`pnpm build:registry`), published at `public/r/styles/{default,new-york}/`
+  (`pnpm registry:build`), published at `public/r/styles/{default,new-york}/`
   and `public/r/templates/`.
 
 ## Sync workflow

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "subscription-02",
+  "title": "Subscription 02",
+  "description": "Invoice history table with status badges, dates, and download actions",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "card",
+    "button",
+    "table",
+    "badge"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/subscription-02/page.tsx",
+      "content": "\"use client\"\n\nimport { InvoiceHistory, type InvoiceItem } from \"@/components/billingsdk/invoice-history\"\n\nconst demoInvoices: InvoiceItem[] = [\n  {\n    id: \"INV-001\",\n    date: \"Dec 1, 2024\",\n    amount: \"$20.00\",\n    status: \"paid\",\n    description: \"Pro Plan - Monthly Subscription\",\n    invoiceUrl: \"#\"\n  },\n  {\n    id: \"INV-002\",\n    date: \"Nov 1, 2024\",\n    amount: \"$20.00\",\n    status: \"paid\",\n    description: \"Pro Plan - Monthly Subscription\",\n    invoiceUrl: \"#\"\n  },\n  {\n    id: \"INV-003\",\n    date: \"Oct 1, 2024\",\n    amount: \"$20.00\",\n    status: \"paid\",\n    description: \"Pro Plan - Monthly Subscription\",\n    invoiceUrl: \"#\"\n  },\n  {\n    id: \"INV-004\",\n    date: \"Sep 1, 2024\",\n    amount: \"$15.00\",\n    status: \"refunded\",\n    description: \"Starter Plan - Partial Refund\",\n    invoiceUrl: \"#\"\n  },\n  {\n    id: \"INV-005\",\n    date: \"Aug 1, 2024\",\n    amount: \"$10.00\",\n    status: \"void\",\n    description: \"Starter Plan - Cancelled\",\n    invoiceUrl: \"#\"\n  }\n]\n\nexport default function Page() {\n  return (\n    <div className=\"flex min-h-screen items-center justify-center p-4\">\n      <InvoiceHistory\n        className=\"max-w-4xl w-full\"\n        title=\"Invoice History\"\n        description=\"Your past invoices and payment receipts.\"\n        invoices={demoInvoices}\n        onDownload={(invoiceId) => console.log(\"Downloading invoice:\", invoiceId)}\n      />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/subscription-02/page.tsx"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "600px"
+  },
+  "categories": [
+    "subscription"
+  ],
+  "type": "registry:block"
+}

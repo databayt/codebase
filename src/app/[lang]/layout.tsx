@@ -46,7 +46,7 @@ export default async function LocaleLayout({
     // Get the pathname to check if we're in a view route
     const headersList = await headers();
     const pathname = headersList.get('x-pathname') || '';
-    const isViewRoute = pathname.includes('/view/templates/');
+    const isViewRoute = pathname.includes('/view/');
 
     // Fallback to default locale if config not found
     const config = localeConfig[lang] || localeConfig['en'];

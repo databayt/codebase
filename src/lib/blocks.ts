@@ -1,30 +1,32 @@
 "use server"
 
-import { registryItemSchema } from "@/registry/schema"
-import { z } from "zod"
+import { type RegistryItem } from "shadcn/schema"
 
-import { Style } from "@/components/root/template/registry-styles"
+import { registry } from "@/registry/bases/base/registry"
 
+// Port of shadcn's apps/v4/lib/blocks.ts. Templates are registry:block items.
 export async function getAllBlockIds(
-  types: z.infer<typeof registryItemSchema>["type"][] = [
-    "registry:component",
+  types: RegistryItem["type"][] = [
+    "registry:block",
     "registry:internal",
   ],
-  categories: string[] = [],
-  style: Style["name"] = "new-york"
+  categories: string[] = []
 ): Promise<string[]> {
-  const { Index } = await import("@/__registry__")
-  const index = z.record(z.string(), registryItemSchema).parse(Index[style])
+  const blocks = await getAllBlocks(types, categories)
+  return blocks.map((block) => block.name)
+}
 
-  return Object.values(index)
-    .filter(
-      (block) =>
-        types.includes(block.type) &&
-        (categories.length === 0 ||
-          block.categories?.some((category) =>
-            categories.includes(category)
-          )) &&
-        !block.name.startsWith("chart-")
-    )
-    .map((block) => block.name)
+export async function getAllBlocks(
+  types: RegistryItem["type"][] = [
+    "registry:block",
+    "registry:internal",
+  ],
+  categories: string[] = []
+) {
+  return (registry.items as RegistryItem[]).filter(
+    (block) =>
+      types.includes(block.type) &&
+      (categories.length === 0 ||
+        block.categories?.some((category) => categories.includes(category)))
+  )
 }

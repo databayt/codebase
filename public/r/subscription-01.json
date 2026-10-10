@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "subscription-01",
+  "title": "Subscription 01",
+  "description": "Subscription management with plan details, billing info, and cancel/update actions",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "badge",
+    "separator",
+    "dialog",
+    "radio-group",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "src/registry/bases/base/blocks/subscription-01/page.tsx",
+      "content": "\"use client\"\n\nimport { SubscriptionManagement } from \"@/components/billingsdk/subscription-management\"\nimport { type CurrentPlan, plans } from \"@/lib/billingsdk-config\"\n\nexport default function Page() {\n  const currentPlan: CurrentPlan = {\n    plan: plans[1],\n    type: \"monthly\",\n    price: \"$20\",\n    nextBillingDate: \"January 15, 2025\",\n    paymentMethod: \"Visa ending in 4242\",\n    status: \"active\"\n  }\n\n  return (\n    <div className=\"flex min-h-screen items-center justify-center p-4\">\n      <SubscriptionManagement\n        className=\"max-w-2xl w-full\"\n        currentPlan={currentPlan}\n        updatePlan={{\n          currentPlan: currentPlan.plan,\n          plans: plans,\n          onPlanChange: (planId) => console.log(\"Plan changed to:\", planId),\n          triggerText: \"Update Plan\"\n        }}\n        cancelSubscription={{\n          title: \"Cancel Subscription\",\n          description: \"Are you sure you want to cancel your subscription?\",\n          leftPanelImageUrl: \"https://images.unsplash.com/photo-1557683316-973673baf926?w=400&q=80\",\n          plan: currentPlan.plan,\n          warningTitle: \"You will lose access to Pro features\",\n          warningText: \"If you cancel your subscription, you will be downgraded to the Starter plan at the end of your billing period.\",\n          onCancel: async (planId) => {\n            console.log(\"Cancelling subscription:\", planId)\n            return new Promise((resolve) => setTimeout(resolve, 1000))\n          },\n          onKeepSubscription: async (planId) => console.log(\"Keeping subscription:\", planId)\n        }}\n      />\n    </div>\n  )\n}\n",
+      "type": "registry:page",
+      "target": "app/subscription-01/page.tsx"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "800px"
+  },
+  "categories": [
+    "subscription"
+  ],
+  "type": "registry:block"
+}

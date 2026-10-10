@@ -193,7 +193,7 @@ pnpm codebase add calendar
    - Follow the same pattern
    - Add to `_registry.ts`
    - Run `pnpm generate:docs`
-   - Run `pnpm build:registry`
+   - Run `pnpm registry:build`
 
 ## Summary
 

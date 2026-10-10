@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "metric",
+  "title": "Metric",
+  "description": "Metric display card with progress indicator",
+  "registryDependencies": [
+    "card",
+    "progress"
+  ],
+  "files": [
+    {
+      "path": "src/components/atom/metric.tsx",
+      "content": "\"use client\"\n\nimport { CartesianGrid, Line, LineChart, XAxis } from \"recharts\"\nimport type { getDictionary } from \"@/components/local/dictionaries\"\n\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\nimport {\n  ChartConfig,\n  ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n} from \"@/components/ui/chart\"\n\nconst data = [\n  { day: \"Mon\", average: 400, today: 240 },\n  { day: \"Tue\", average: 300, today: 139 },\n  { day: \"Wed\", average: 200, today: 980 },\n  { day: \"Thu\", average: 278, today: 390 },\n  { day: \"Fri\", average: 189, today: 480 },\n  { day: \"Sat\", average: 239, today: 380 },\n  { day: \"Sun\", average: 349, today: 430 },\n]\n\nconst chartConfig = {\n  today: {\n    label: \"Today\",\n    color: \"var(--chart-1)\",\n  },\n  average: {\n    label: \"Average\",\n    color: \"var(--chart-2)\",\n  },\n} satisfies ChartConfig\n\ninterface CardsMetricProps {\n  dictionary?: Awaited<ReturnType<typeof getDictionary>>\n}\n\nexport function CardsMetric({ dictionary }: CardsMetricProps) {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>\n          {dictionary?.cards?.metric?.title || \"Exercise Minutes\"}\n        </CardTitle>\n        <CardDescription>\n          {dictionary?.cards?.metric?.description || \"Your exercise minutes are ahead of where you normally are.\"}\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"pb-4\">\n        <ChartContainer config={chartConfig} className=\"h-[200px] w-full\">\n          <LineChart\n            accessibilityLayer\n            data={data}\n            margin={{ left: 12, right: 12 }}\n          >\n            <CartesianGrid vertical={false} />\n            <XAxis\n              dataKey=\"day\"\n              tickLine={false}\n              axisLine={false}\n              tickMargin={8}\n            />\n            <ChartTooltip\n              cursor={false}\n              content={<ChartTooltipContent />}\n            />\n            <Line\n              dataKey=\"today\"\n              type=\"monotone\"\n              stroke=\"var(--color-today)\"\n              strokeWidth={2}\n              dot={{ fill: \"var(--color-today)\" }}\n              activeDot={{ r: 6 }}\n            />\n            <Line\n              dataKey=\"average\"\n              type=\"monotone\"\n              stroke=\"var(--color-average)\"\n              strokeWidth={2}\n              strokeOpacity={0.5}\n              dot={{ fill: \"var(--color-average)\", opacity: 0.5 }}\n              activeDot={{ r: 6 }}\n            />\n          </LineChart>\n        </ChartContainer>\n      </CardContent>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/atom/metric.tsx"
+    }
+  ],
+  "categories": [
+    "data",
+    "display"
+  ],
+  "type": "registry:component"
+}

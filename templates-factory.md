@@ -144,7 +144,7 @@ Run the registry build script:
 
 ```bash
 # Build registry JSON files
-pnpm build:registry
+pnpm registry:build
 
 # This generates:
 # - public/r/styles/new-york/your-template.json
@@ -376,7 +376,7 @@ Apply custom themes:
 rm -rf .next __registry__
 
 # Rebuild registry
-pnpm build:registry
+pnpm registry:build
 
 # Restart dev server
 pnpm dev
@@ -395,7 +395,7 @@ pnpm dev
 - Clear browser cache
 
 ### Registry Updates
-- Run build:registry after changes
+- Run registry:build after changes
 - Verify JSON generation
 - Check public/r/ directory
 - Test CLI installation

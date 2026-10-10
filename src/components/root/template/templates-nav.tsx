@@ -4,7 +4,12 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { registryCategories } from "@/lib/categories"
+import blocks from "@/registry/__blocks__.json"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+
+// Categories are declared up front for the section library; only those
+// with at least one template show in the nav.
+const populated = new Set(blocks.flatMap((block) => block.categories))
 
 export function TemplatesNav() {
   const pathname = usePathname()
@@ -17,7 +22,9 @@ export function TemplatesNav() {
             category={{ name: "Featured", slug: "", hidden: false }}
             isActive={pathname === "/templates" || pathname === "/en/templates" || pathname === "/ar/templates"}
           />
-          {registryCategories.map((category) => (
+          {registryCategories
+            .filter((category) => populated.has(category.slug))
+            .map((category) => (
             <TemplatesNavLink
               key={category.slug}
               category={category}
@@ -27,7 +34,7 @@ export function TemplatesNav() {
                 pathname === `/ar/templates/${category.slug}`
               }
             />
-          ))}
+            ))}
         </nav>
         <ScrollBar orientation="horizontal" className="invisible" />
       </ScrollArea>
@@ -56,7 +63,7 @@ function TemplatesNavLink({
       className="flex h-7 items-center justify-center rounded-full px-4 text-center transition-colors hover:text-primary data-[active=true]:bg-muted data-[active=true]:text-primary"
       data-active={isActive}
     >
-      <h6>{category.name}</h6>
+      <h6 className="whitespace-nowrap">{category.name}</h6>
     </Link>
   )
 }

@@ -47,6 +47,12 @@
     }
   }
 
+  /* Registry previews (/view/[style]/[name]) render edge to edge. The
+     layout can't detect them from headers: the view route is force-static. */
+  .layout-container:has(> [data-slot="registry-view"]) {
+    padding-inline: 0;
+  }
+
   /* Note: .container is defined as @utility in globals.css to match shadcn/ui
      Use container-xl for the old 1280px max-width behavior */
 

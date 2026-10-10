@@ -47,7 +47,7 @@ Check `pnpm sync:shadcn` (drift radar) before assuming a primitive's API.
    (ComponentPreview → Installation CodeTabs → Usage) and merges `meta.json`.
    Add a live demo child once the preview is registered in
    `src/mdx-components.tsx`.
-5. `pnpm build:registry` — publishes `public/r/styles/*/<name>.json`.
+5. `pnpm registry:build` — publishes `public/r/styles/*/<name>.json`.
 
 The atoms sidebar is pageTree-driven — a page listed in `meta.json` appears
 automatically; never hardcode sidebar links.
@@ -76,7 +76,7 @@ automatically; never hardcode sidebar links.
 - [ ] Registered in `atoms-index.ts` (+ `_registry.ts` if installable)
 - [ ] MDX page exists and is in `meta.json`
 - [ ] Logical properties; verified visually on `/ar`
-- [ ] `pnpm build:registry` run; JSON exists in `public/r/styles/default/`
+- [ ] `pnpm registry:build` run; JSON exists in `public/r/styles/default/`
 - [ ] No `@radix-ui/react-*` imports; no hand-rolled empty/field patterns
 
 ## Protected atoms — do not "modernize"

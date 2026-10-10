@@ -1,4 +1,4 @@
-import { docs, docsArabic, atoms, templatesDocs } from "@/.source"
+import { docs, docsArabic, atoms } from "@/.source"
 import { loader } from "fumadocs-core/source"
 
 export const docsSource = loader({
@@ -14,9 +14,4 @@ export const docsArabicSource = loader({
 export const atomsSource = loader({
   baseUrl: "/atoms",
   source: atoms.toFumadocsSource(),
-})
-
-export const templatesSource = loader({
-  baseUrl: "/templates",
-  source: templatesDocs.toFumadocsSource(),
 })

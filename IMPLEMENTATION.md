@@ -211,12 +211,12 @@ pnpm codebase add infinite-slider
 1. Add atom to `src/registry/default/atoms/_registry.ts`
 2. Run `pnpm generate:docs` to create MDX
 3. Edit generated MDX in `content/atoms/(root)/`
-4. Run `pnpm build:registry` to update registry
+4. Run `pnpm registry:build` to update registry
 
 ### Building Registry
 
 ```bash
-pnpm build:registry
+pnpm registry:build
 ```
 
 This generates:
@@ -322,7 +322,7 @@ Edit `src/registry/default/atoms/_registry.ts`:
 
 ### 3. Build Registry
 ```bash
-pnpm build:registry
+pnpm registry:build
 ```
 
 ### 4. Generate Documentation
@@ -444,7 +444,7 @@ Example: `public/r/styles/default/ai-prompt-input.json`
 ls src/registry/default/atoms/_registry.ts
 
 # Rebuild
-pnpm build:registry
+pnpm registry:build
 ```
 
 ### CLI Can't Find Component
@@ -456,7 +456,7 @@ pnpm build:registry
 ls public/r/styles/default/*.json
 
 # Rebuild if missing
-pnpm build:registry
+pnpm registry:build
 ```
 
 ### MDX Files Not Generating

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "two-buttons",
+  "title": "Two Buttons",
+  "description": "Dual button group component",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/components/atom/two-buttons.tsx",
+      "content": "import React from \"react\"\nimport Link from \"next/link\"\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\ninterface Props {\n  primaryLabel: string\n  primaryHref: string\n  secondaryLabel: string\n  secondaryHref: string\n  className?: string\n}\n\nexport function TwoButtons({\n  primaryLabel,\n  primaryHref,\n  secondaryLabel,\n  secondaryHref,\n  className,\n}: Props) {\n  return (\n    <div className={cn(\"flex flex-wrap gap-4\", className)}>\n      <Button asChild>\n        <Link href={primaryHref}>\n          {primaryLabel}\n        </Link>\n      </Button>\n      <Button variant=\"ghost\" asChild>\n        <Link href={secondaryHref}>\n          {secondaryLabel}\n        </Link>\n      </Button>\n    </div>\n  )\n}",
+      "type": "registry:component",
+      "target": "components/atom/two-buttons.tsx"
+    }
+  ],
+  "categories": [
+    "ui",
+    "interactive"
+  ],
+  "type": "registry:component"
+}

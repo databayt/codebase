@@ -41,7 +41,7 @@ pnpm build                        # Production build
 
 ### Registry Management
 ```bash
-pnpm build:registry               # Build complete registry
+pnpm registry:build               # Build complete registry
 pnpm generate:docs                # Generate atom MDX docs
 pnpm sync:shadcn                  # Check for shadcn updates
 ```
@@ -112,7 +112,7 @@ export function MyAtom() {
 
 ### Step 3: Build & Generate
 ```bash
-pnpm build:registry        # Create registry JSON
+pnpm registry:build        # Create registry JSON
 pnpm generate:docs         # Create MDX documentation
 pnpm dev                   # View at /atoms/my-atom
 ```
