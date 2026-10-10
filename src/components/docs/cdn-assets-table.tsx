@@ -67,10 +67,10 @@ export function CdnAssetsTable({ className }: CdnAssetsTableProps) {
                         <td className="px-3 py-1.5">
                           <a href={src} target="_blank" rel="noopener noreferrer" className="block">
                             <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border bg-muted/40">
-                              {isImage(a.key) ? (
+                              {isImage(a.key) || a.poster ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
-                                  src={src}
+                                  src={a.poster ? srcFor(a.poster) : src}
                                   alt={name}
                                   loading="lazy"
                                   className="max-h-full max-w-full object-contain"

@@ -6,7 +6,7 @@ import dynamic from "next/dynamic"
 import { cn } from "@/lib/utils"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { isImage, type CdnAsset } from "@/lib/cdn"
-import { buildFacets } from "./config"
+import { buildFacets, isVideo } from "./config"
 
 // Lottie player is loaded only when a .json animation is actually rendered, so
 // lottie-web never weighs down the initial showroom bundle.
@@ -16,7 +16,6 @@ const LottieThumb = dynamic(
 )
 
 const isLottie = (key: string) => key.toLowerCase().endsWith(".json")
-const isVideo = (key: string) => /\.(webm|mp4)$/i.test(key)
 
 interface ArtsGalleryProps {
   assets: CdnAsset[]
@@ -110,12 +109,17 @@ export default function ArtsGallery({ assets, urlBase, source, domain }: ArtsGal
                     ) : isLottie(a.key) ? (
                       <LottieThumb src={src} />
                     ) : isVideo(a.key) ? (
+                      // Poster first, play on hover: a tab of tutorials must not
+                      // download and decode every video at once.
                       <video
-                        src={src}
-                        autoPlay
+                        src={a.poster ? src : `${src}#t=0.5`}
+                        poster={a.poster ? srcFor(a.poster) : undefined}
+                        preload={a.poster ? "none" : "metadata"}
                         loop
                         muted
                         playsInline
+                        onMouseEnter={(e) => void e.currentTarget.play().catch(() => {})}
+                        onMouseLeave={(e) => e.currentTarget.pause()}
                         className="max-h-full max-w-full object-contain"
                       />
                     ) : (

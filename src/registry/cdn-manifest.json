@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-02",
+  "generatedAt": "2026-10-10",
   "source": "s3",
   "bucket": "databayt-cdn",
   "domain": "cdn.databayt.org",
@@ -151,6 +151,41 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/destinations/airport.png",
+      "size": 4944,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/coral-coast.png",
+      "size": 7232,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/marina.png",
+      "size": 7739,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/nearby.png",
+      "size": 4638,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/port-sudan.png",
+      "size": 8097,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/red-sea-university.png",
+      "size": 7816,
+      "contentType": "image/png"
+    },
+    {
+      "key": "airbnb/destinations/suakin.png",
+      "size": 5628,
+      "contentType": "image/png"
+    },
+    {
       "key": "airbnb/dining-table.svg",
       "size": 349,
       "contentType": "image/svg+xml"
@@ -276,6 +311,36 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/highlights/central.svg",
+      "size": 461,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/family-friendly.svg",
+      "size": 738,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/peaceful.svg",
+      "size": 419,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/spacious.svg",
+      "size": 895,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/stylish.svg",
+      "size": 257,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/highlights/unique.svg",
+      "size": 504,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/homes-selected.webm",
       "size": 63923,
       "contentType": "video/webm"
@@ -296,9 +361,24 @@
       "contentType": "video/webm"
     },
     {
+      "key": "airbnb/host-about-place.mp4",
+      "size": 720686,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "airbnb/host-finish-setup.mp4",
+      "size": 914047,
+      "contentType": "video/mp4"
+    },
+    {
       "key": "airbnb/host-greets-you.svg",
       "size": 816,
       "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/host-stand-out.mp4",
+      "size": 674788,
+      "contentType": "video/mp4"
     },
     {
       "key": "airbnb/hot-tub.svg",
@@ -406,6 +486,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/outdoor-dining.svg",
+      "size": 731,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/outdoor-furniture.svg",
       "size": 463,
       "contentType": "image/svg+xml"
@@ -426,8 +511,18 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "airbnb/piano.svg",
+      "size": 1572,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "airbnb/pocket-wifi.svg",
       "size": 436,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "airbnb/pool-table.svg",
+      "size": 1711,
       "contentType": "image/svg+xml"
     },
     {
@@ -916,6 +1011,11 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "anthropic/clock.svg",
+      "size": 34088,
+      "contentType": "image/svg+xml"
+    },
+    {
       "key": "anthropic/close.svg",
       "size": 651,
       "contentType": "image/svg+xml"
@@ -1243,6 +1343,26 @@
     {
       "key": "anthropic/hourglass.svg",
       "size": 11687,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "anthropic/illustrations/hand-keyboard.svg",
+      "size": 12046,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "anthropic/illustrations/hand-shape-build.svg",
+      "size": 11001,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "anthropic/illustrations/node-globe.svg",
+      "size": 13343,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "key": "anthropic/illustrations/scale-shapes.svg",
+      "size": 6476,
       "contentType": "image/svg+xml"
     },
     {
@@ -1654,6 +1774,51 @@
       "key": "anthropic/wordmark.svg",
       "size": 1969,
       "contentType": "image/svg+xml"
+    },
+    {
+      "key": "avatars/accountant.webp",
+      "size": 15530,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/admin.webp",
+      "size": 15530,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/dev.webp",
+      "size": 15530,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/parent.webp",
+      "size": 8918,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/parent1.webp",
+      "size": 9394,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/staff.webp",
+      "size": 7494,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/student.webp",
+      "size": 8918,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/teacher.webp",
+      "size": 5764,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "avatars/user.webp",
+      "size": 8918,
+      "contentType": "image/webp"
     },
     {
       "key": "clickview/2d-shapes-illustration.png",
@@ -7326,6 +7491,16 @@
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/balqalam-wordmarks-mp4.bb73cb8e.mp4",
+      "size": 127804,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "hogwarts/balqalam-wordmarks-poster.bd329dd0.webp",
+      "size": 2404,
+      "contentType": "image/webp"
+    },
+    {
       "key": "hogwarts/blackboard.png",
       "size": 3195,
       "contentType": "image/png"
@@ -7861,8 +8036,28 @@
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/galaxy-brain-bronze.png",
+      "size": 113477,
+      "contentType": "image/png"
+    },
+    {
       "key": "hogwarts/galaxy-brain-detail.png",
       "size": 216326,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/galaxy-brain-gold.png",
+      "size": 115488,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/galaxy-brain-silver.png",
+      "size": 83299,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/galaxy-brain.png",
+      "size": 83716,
       "contentType": "image/png"
     },
     {
@@ -8031,6 +8226,11 @@
       "contentType": "image/jpeg"
     },
     {
+      "key": "hogwarts/ha-compare-1.69ef92a9.avif",
+      "size": 206439,
+      "contentType": "image/avif"
+    },
+    {
       "key": "hogwarts/hagrid.jpeg",
       "size": 33894,
       "contentType": "image/jpeg"
@@ -8056,249 +8256,24 @@
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/hero-3d-poster.16479ca7.webp",
+      "size": 46280,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "hogwarts/hero-3d.a5a7c1a1.mp4",
+      "size": 797149,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "hogwarts/home-ar-1600.395d3aa3.avif",
+      "size": 19766,
+      "contentType": "image/avif"
+    },
+    {
       "key": "hogwarts/hupplepuff.jpeg",
       "size": 35500,
       "contentType": "image/jpeg"
-    },
-    {
-      "key": "hogwarts/icons/.backup/036c01a9e427ea0f4d1e6c7221e4f6dce2259bf7-1000x1000.svg",
-      "size": 7798,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/07c019d3b2596ff9d1a70c4af1efd00b0a775510-1000x1000.svg",
-      "size": 29620,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/0d259ed89e181ad18dea036804f50080ea61e77a-1680x1260.svg",
-      "size": 8472,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/0df729ce74e4c9dd62c3342c9549ce6c7cef1202-1000x1000.svg",
-      "size": 10792,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/1576ae23eaf481f33bd36ab468171cc69d12361a-1000x1000.svg",
-      "size": 15412,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/1c3d1af62032009538b8bf5864139ca124b06741-1000x1000.svg",
-      "size": 24042,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/1c3e87fd90491089b2971dc34f9f75bb8a80f713-1000x1000.svg",
-      "size": 8840,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/2174acb37a84767550abfe2588eb5648f941a897-1000x1000.svg",
-      "size": 15876,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/33dbe8f783d4835a838b4c4ae85d3c04e352fee1-1000x1000.svg",
-      "size": 13723,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/33ddc751e21fb4b116b3f57dd553f0bc55ea09d1-1000x1000.svg",
-      "size": 13773,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/39c40393e610cc0a5e65f50ad12ff5ada273f792-1000x1000.svg",
-      "size": 12021,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/39db33950eb113e504a5b9fc56db490a64673e96-1000x1000.svg",
-      "size": 14348,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/423062049d4676b41d52b16068cbb5e21603190e-1000x1000.svg",
-      "size": 18137,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/46e4aa7ea208ed440d5bd9e9e3a0ee66bc336ff1-1000x1000.svg",
-      "size": 14348,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/4d663bd87c391c144b9bca513b3849ccfa00a3b9-1000x1000.svg",
-      "size": 14035,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/5f455d24ea80569b34eb4347f06152d8a5508722-1000x1000.svg",
-      "size": 13343,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/6457c34fbcb012acf0f27f15a6006f700d0f50de-1000x1000.svg",
-      "size": 11952,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/6507d83d1197bb8630131d363fb8bea838d79ca7-1000x1000.svg",
-      "size": 14933,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/653e7474811cf768b6b0f628e253f98c60e2747e-1000x1000.svg",
-      "size": 19427,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/6905c83d0735e1bc430025fdd1748d1406079036-1000x1000.svg",
-      "size": 11001,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/6b1470e7fa2fb7280502291f204b88c412690076-1000x1000.svg",
-      "size": 9445,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/6e00dbffcddc82df5e471c43453abfc74ca94e8d-1000x1000.svg",
-      "size": 28537,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/74409af25137110ac04cc39e4d5ea0a2fbcea421-1000x1000.svg",
-      "size": 14104,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/77dd9077412abc790bf2bc6fa3383b37724d6305-1000x1000.svg",
-      "size": 12316,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/811dcfbdaac4ea3628e0a2a5a547b0a175d63bcf-1000x1000.svg",
-      "size": 13300,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/84dfc3a6a5b8bf79a0cd430524c1f5a89e376531-1681x1261.svg",
-      "size": 17936,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/8925ac952fa2cb8eb5e845b2e44f3e71b33fd695-1000x1000.svg",
-      "size": 9691,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/8d339ae8ecedecc1409db8f5bbb99c958db56946-1000x1000.svg",
-      "size": 7096,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/92f0be286703b4b8c906bcf1c95c7f3bbee5bd38-1000x1000.svg",
-      "size": 4980,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/97cf99624aa60f59b75f9e08cdf0f00d33c34804-1000x1000.svg",
-      "size": 6476,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/9a2bdeafe0f8f92dcc062ba47cc0a1014c4ecbc0-1000x1000.svg",
-      "size": 16030,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/9f6a378a1e3592cf8d27447457409ba12284faef-1000x1000.svg",
-      "size": 11395,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/a62b6eb169818f14c35b7a192af269e283f8fa93-1000x1000.svg",
-      "size": 13179,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/a683fdcfe3e2c7c6532342a0fa4ff789c3fd4852-1000x1000.svg",
-      "size": 16611,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/a97733b3607b54a30778eb89de08afd9e02b9fb3-1000x1000.svg",
-      "size": 9434,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/abc884c723daea810d2e986455358281a2f94102-1000x1000.svg",
-      "size": 8750,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/b1ce510c468b2920d4f8f61c17a50906801f939a-1000x1000.svg",
-      "size": 10412,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/b5c98d26c46edc43193e7f7e28a00633a538bb9c-1000x1000.svg",
-      "size": 13957,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/b68cbb43d7c8f56f0b14cc867e8d4d74445f78b0-1000x1000.svg",
-      "size": 19353,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/c0af2a56f56cf298ce5904f2901e9a36facd0dbe-1000x1000.svg",
-      "size": 12846,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/c1ef4c0b6882dfe985555b52999d370ea88a3c50-1000x1000.svg",
-      "size": 29660,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/c4a48972044d45df475f1dd84df3b74d221b6580-1000x1000.svg",
-      "size": 21534,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/cd4fd51deacd067d4e30aee4f4b149f6cba1b97b-1000x1000.svg",
-      "size": 7908,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/cd9cf56a7f049285b7c1c8786c0a600cf3d7f317-1000x1000.svg",
-      "size": 25105,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/d3dd09ad16c68461dc3fb01df5e84cf7ccafda6c-1000x1000.svg",
-      "size": 13263,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/ddad92700787ec1bf1d80359c0c5e6ca305682b0-1000x1000.svg",
-      "size": 12845,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/ee580919acaba2ddc07425f7a7390c8962cadc94-1000x1000.svg",
-      "size": 9711,
-      "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/.backup/f1d1a4c75433996f97b87ea0f3791022370e2765-1680x1260.svg",
-      "size": 28731,
-      "contentType": "image/svg+xml"
     },
     {
       "key": "hogwarts/icons/249.png",
@@ -10371,6 +10346,46 @@
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/modern-01-phone-mp4.3cddcc33.mp4",
+      "size": 1489216,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "hogwarts/modern-01-poster.5b0402ce.webp",
+      "size": 71372,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "hogwarts/modern-01-webm.6d5eaffa.webm",
+      "size": 1489349,
+      "contentType": "video/webm"
+    },
+    {
+      "key": "hogwarts/modern-02.488b03b9.avif",
+      "size": 24142,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/modern-08-phone.1e48398a.avif",
+      "size": 16993,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/modern-08-phone.207965c8.webp",
+      "size": 19854,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "hogwarts/modern-10-phone.06564e5f.webp",
+      "size": 38366,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "hogwarts/modern-10-phone.4b812576.avif",
+      "size": 41767,
+      "contentType": "image/avif"
+    },
+    {
       "key": "hogwarts/mtdt.png",
       "size": 4724,
       "contentType": "image/png"
@@ -10441,8 +10456,28 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "hogwarts/pair-extraordinaire-bronze.png",
+      "size": 104610,
+      "contentType": "image/png"
+    },
+    {
       "key": "hogwarts/pair-extraordinaire-detail.png",
       "size": 86848,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/pair-extraordinaire-gold.png",
+      "size": 107603,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/pair-extraordinaire-silver.png",
+      "size": 83261,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/pair-extraordinaire.png",
+      "size": 72908,
       "contentType": "image/png"
     },
     {
@@ -10596,13 +10631,48 @@
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/public-sponsor.png",
+      "size": 41558,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/public.png",
+      "size": 17378,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/pull-shark-bronze.png",
+      "size": 111645,
+      "contentType": "image/png"
+    },
+    {
       "key": "hogwarts/pull-shark-detail.png",
       "size": 231410,
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/pull-shark-gold.png",
+      "size": 111863,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/pull-shark-silver.png",
+      "size": 84910,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/pull-shark.png",
+      "size": 73496,
+      "contentType": "image/png"
+    },
+    {
       "key": "hogwarts/quickdraw-detail.png",
       "size": 85875,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/quickdraw.png",
+      "size": 68094,
       "contentType": "image/png"
     },
     {
@@ -10621,6 +10691,11 @@
       "contentType": "image/jpeg"
     },
     {
+      "key": "hogwarts/robot-fill.png",
+      "size": 9742,
+      "contentType": "image/png"
+    },
+    {
       "key": "hogwarts/robot.png",
       "size": 9912,
       "contentType": "image/png"
@@ -10629,6 +10704,126 @@
       "key": "hogwarts/role-based.png",
       "size": 8880,
       "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-bulk-ar-1600.689c9b4f.avif",
+      "size": 30773,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-bulk-en-1600.b5818b42.avif",
+      "size": 36874,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-done-ar-1600.2a120dfa.avif",
+      "size": 25838,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-done-en-1600.564e36d0.avif",
+      "size": 28836,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-finder-ar-1600.4cc98102.avif",
+      "size": 31425,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-finder-en-1600.5cd50bbb.avif",
+      "size": 34169,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-history-ar-1600.223b611f.avif",
+      "size": 30642,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-history-en-1600.8bd04529.avif",
+      "size": 35812,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-map-ar-1600.c7ff6f73.avif",
+      "size": 23932,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-map-en-1600.59b400e1.avif",
+      "size": 26008,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-review-ar-1600.ea7fbb91.avif",
+      "size": 22703,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-student-review-en-1600.2b79071d.avif",
+      "size": 23216,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-bulk-ar-1600.689c9b4f.avif",
+      "size": 30773,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-bulk-en-1600.b5818b42.avif",
+      "size": 36874,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-done-ar-1600.5cca348a.avif",
+      "size": 25642,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-done-en-1600.6c58baf3.avif",
+      "size": 28654,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-finder-ar-1600.8aaef632.avif",
+      "size": 31461,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-finder-en-1600.97343219.avif",
+      "size": 34020,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-history-ar-1600.d524792c.avif",
+      "size": 31910,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-history-en-1600.b9271bfb.avif",
+      "size": 35717,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-map-ar-1600.43aadc67.avif",
+      "size": 26052,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-map-en-1600.e1788124.avif",
+      "size": 27321,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-review-ar-1600.d2110653.avif",
+      "size": 22993,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-review-en-1600.8a4eb364.avif",
+      "size": 24912,
+      "contentType": "image/avif"
     },
     {
       "key": "hogwarts/short-answer.svg",
@@ -10876,14 +11071,44 @@
       "contentType": "image/svg+xml"
     },
     {
+      "key": "hogwarts/starstruck-bronze.png",
+      "size": 113928,
+      "contentType": "image/png"
+    },
+    {
       "key": "hogwarts/starstruck-detail.png",
       "size": 181194,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/starstruck-gold.png",
+      "size": 114855,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/starstruck-silver.png",
+      "size": 84610,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/starstruck.png",
+      "size": 71477,
       "contentType": "image/png"
     },
     {
       "key": "hogwarts/stcpay.svg",
       "size": 1106,
       "contentType": "image/svg+xml"
+    },
+    {
+      "key": "hogwarts/story-poster.5038a244.webp",
+      "size": 16066,
+      "contentType": "image/webp"
+    },
+    {
+      "key": "hogwarts/story.721b10fc.mp4",
+      "size": 5664402,
+      "contentType": "video/mp4"
     },
     {
       "key": "hogwarts/story.mp4",
@@ -10924,6 +11149,210 @@
       "key": "hogwarts/student.png",
       "size": 7754,
       "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/students/add-student-academic-ar-1600.8b257818.avif",
+      "size": 11467,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-academic-en-1600.bb588141.avif",
+      "size": 14766,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-address-ar-1600.c78c89ed.avif",
+      "size": 32063,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-address-en-1600.18b15295.avif",
+      "size": 34684,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-ar.8bb3d639.mp4",
+      "size": 10031146,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/students/add-student-ar.poster.c7a8d23e.webp"
+    },
+    {
+      "key": "hogwarts/students/add-student-ar.reel.0baf699a.mp4",
+      "size": 4173641,
+      "contentType": "video/mp4"
+    },
+    {
+      "key": "hogwarts/students/add-student-created-ar-1600.303aed35.avif",
+      "size": 27056,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-created-en-1600.7d158a5b.avif",
+      "size": 40463,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-cv-uploaded-ar-1600.23298d16.avif",
+      "size": 15168,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-cv-uploaded-en-1600.a0d2ffe2.avif",
+      "size": 15832,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-details-ar.91b3f1e7.mp4",
+      "size": 933614,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/students/add-student-details-ar.poster.ae4bbc7f.webp"
+    },
+    {
+      "key": "hogwarts/students/add-student-documents-ar-1600.b6f05b2f.avif",
+      "size": 10634,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-documents-en-1600.15bcdc92.avif",
+      "size": 11288,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-father-ar-1600.4bede086.avif",
+      "size": 11380,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-father-en-1600.6f4513f5.avif",
+      "size": 14106,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-finder-cv-ar-1600.36c52707.avif",
+      "size": 27414,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-finder-cv-en-1600.bcc42c75.avif",
+      "size": 27940,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-finder-photo-ar-1600.f9cf50b4.avif",
+      "size": 28373,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-finder-photo-en-1600.bb0a4d58.avif",
+      "size": 28896,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-academic-ar-1179.923b9828.avif",
+      "size": 20481,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-address-ar-1179.e0b9a902.avif",
+      "size": 71052,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-created-ar-1179.88173d42.avif",
+      "size": 41714,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-cv-uploaded-ar-1179.423bea02.avif",
+      "size": 41589,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-documents-ar-1179.c972d3d2.avif",
+      "size": 24262,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-father-ar-1179.05a79a4d.avif",
+      "size": 26041,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-list-ar-1179.bc53f6d3.avif",
+      "size": 38689,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-personal-ar-1179.a27e0776.avif",
+      "size": 22764,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-personal-filled-ar-1179.0315d829.avif",
+      "size": 24503,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-iphone-16-photo-uploaded-ar-1179.187321ba.avif",
+      "size": 34988,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-list-ar-1600.0ec177c7.avif",
+      "size": 33469,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-list-en-1600.b12fd460.avif",
+      "size": 39339,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-personal-ar-1600.454fe8e3.avif",
+      "size": 12449,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-personal-en-1600.ceb75e17.avif",
+      "size": 14657,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-personal-filled-ar-1600.ff0ebc95.avif",
+      "size": 12958,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-personal-filled-en-1600.90e3a129.avif",
+      "size": 15112,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-photo-uploaded-ar-1600.7102eee1.avif",
+      "size": 13704,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-photo-uploaded-en-1600.a36a96d3.avif",
+      "size": 14353,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/students/add-student-support-iphone-ar.25f1d326.mp4",
+      "size": 6751426,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/students/add-student-support-iphone-ar.poster.538dbda2.webp"
+    },
+    {
+      "key": "hogwarts/students/add-student-support-mac-ar.00180e5f.mp4",
+      "size": 10091534,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/students/add-student-support-mac-ar.poster.81d5c7cd.webp"
+    },
+    {
+      "key": "hogwarts/students/students-ar-1600.d71826a1.avif",
+      "size": 33873,
+      "contentType": "image/avif"
     },
     {
       "key": "hogwarts/subjects/biological-sciences.png",
@@ -11019,6 +11448,96 @@
       "key": "hogwarts/teacher.png",
       "size": 17494,
       "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-address-ar-1600.d8270138.avif",
+      "size": 31483,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-address-en-1600.9202d445.avif",
+      "size": 37875,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-contact-ar-1600.97b68fcf.avif",
+      "size": 13685,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-contact-en-1600.28c03853.avif",
+      "size": 13403,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-created-ar-1600.ec260855.avif",
+      "size": 30579,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-created-en-1600.e41f6c2b.avif",
+      "size": 39172,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-employment-ar-1600.f5473665.avif",
+      "size": 11021,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-employment-en-1600.8e4c4f87.avif",
+      "size": 13028,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-expertise-ar-1600.1429fd4b.avif",
+      "size": 35032,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-expertise-en-1600.c505a13c.avif",
+      "size": 34102,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-expertise-picked-ar-1600.9f8d215b.avif",
+      "size": 35993,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-expertise-picked-en-1600.a611ec62.avif",
+      "size": 35040,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-information-ar-1600.7d7f18d7.avif",
+      "size": 10124,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-information-en-1600.7ca58695.avif",
+      "size": 11612,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-information-filled-ar-1600.acb2f84c.avif",
+      "size": 10397,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-information-filled-en-1600.aa7b4b14.avif",
+      "size": 11920,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-list-ar-1600.66b4042e.avif",
+      "size": 29525,
+      "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-list-en-1600.672eb562.avif",
+      "size": 38041,
+      "contentType": "image/avif"
     },
     {
       "key": "hogwarts/techincal.png",
@@ -11143,6 +11662,11 @@
     {
       "key": "hogwarts/yolo-detail.png",
       "size": 1985,
+      "contentType": "image/png"
+    },
+    {
+      "key": "hogwarts/yolo.png",
+      "size": 58529,
       "contentType": "image/png"
     },
     {

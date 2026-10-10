@@ -60,6 +60,14 @@ const URL_BASE: string = (() => {
 const FLATTEN_VENDOR = process.argv.includes("--flatten-vendor");
 const OUT = resolve(process.cwd(), "src/registry/cdn-manifest.json");
 
+/**
+ * Prefixes the showroom leaves out: bulk content with its own browser
+ * (catalog/, mkan's user-uploaded listing photos), the legacy balqalam/ keys
+ * that moved under hogwarts/, and backups. Listing them grew the manifest to
+ * ~68k objects, which the /arts page would ship to every visitor.
+ */
+const SKIP = [/^catalog\//, /^mkan\//, /^balqalam\//, /\/\.backup\//];
+
 /** Known vendor brand prefixes eligible for sub-folder flattening. */
 const VENDORS = new Set(["anthropic", "airbnb", "apple", "google", "openai"]);
 
@@ -104,6 +112,50 @@ function guessContentType(key: string): string {
   return map[ext] ?? "application/octet-stream";
 }
 
+/**
+ * Fold the shoot/record publish grammar to one tile per asset:
+ *   <stem>-<w>.<hash>.{avif,webp}  → the 1600 avif (else the narrowest avif)
+ *   <stem>.<hash>.mp4              → kept, with <stem>.poster.<hash>.webp as its poster
+ *   <stem>.av1.<hash>.mp4 · <stem>.<hash>.vtt · posters → dropped (sidecars)
+ */
+function collapse(assets: CdnAsset[]): CdnAsset[] {
+  const HASH = "[0-9a-f]{8}";
+  const still = new RegExp(`^(.*)-(\\d+)\\.${HASH}\\.(avif|webp)$`);
+  const poster = new RegExp(`^(.*)\\.poster\\.${HASH}\\.webp$`);
+  const sidecar = new RegExp(`\\.(av1\\.${HASH}\\.mp4|${HASH}\\.vtt)$`);
+  const video = new RegExp(`^(.*)\\.${HASH}\\.mp4$`);
+
+  const posters = new Map<string, string>();
+  const best = new Map<string, { asset: CdnAsset; width: number }>();
+  const out: CdnAsset[] = [];
+
+  for (const a of assets) {
+    const p = a.key.match(poster);
+    if (p) {
+      posters.set(p[1], a.key);
+      continue;
+    }
+    if (sidecar.test(a.key)) continue;
+    const s = a.key.match(still);
+    if (s) {
+      if (s[3] !== "avif") continue;
+      const width = Number(s[2]);
+      const cur = best.get(s[1]);
+      const rank = (w: number) => (w === 1600 ? -1 : w);
+      if (!cur || rank(width) < rank(cur.width)) best.set(s[1], { asset: a, width });
+      continue;
+    }
+    out.push(a);
+  }
+
+  for (const a of out) {
+    const v = a.key.match(video);
+    const p = v && posters.get(v[1]);
+    if (p) a.poster = p;
+  }
+  return [...out, ...[...best.values()].map((b) => b.asset)];
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -128,6 +180,7 @@ async function main() {
     pageCount++;
     for (const obj of res.Contents ?? []) {
       if (!obj.Key || obj.Key.endsWith("/")) continue; // skip folder placeholders
+      if (SKIP.some((re) => re.test(obj.Key!))) continue;
       const resolvedKey = flatten(obj.Key);
       const slug = provenanceSlug(resolvedKey);
       assets.push({
@@ -140,9 +193,10 @@ async function main() {
     token = res.IsTruncated ? res.NextContinuationToken : undefined;
   } while (token);
 
-  console.log(`Scanned ${pageCount} page(s), found ${assets.length} object(s).`);
+  console.log(`Scanned ${pageCount} page(s), kept ${assets.length} object(s).`);
 
-  assets.sort((a, b) => a.key.localeCompare(b.key));
+  const tiles = collapse(assets);
+  tiles.sort((a, b) => a.key.localeCompare(b.key));
 
   const manifest: CdnManifest = {
     generatedAt: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
@@ -150,12 +204,12 @@ async function main() {
     bucket: BUCKET,
     domain: DOMAIN,
     urlBase: URL_BASE,
-    assets,
+    assets: tiles,
   };
 
   writeFileSync(OUT, JSON.stringify(manifest, null, 2) + "\n");
   console.log(
-    `Wrote ${assets.length} asset(s)\n  bucket : s3://${BUCKET}\n  urlBase: ${URL_BASE}\n  output : ${OUT}`,
+    `Wrote ${tiles.length} tile(s) from ${assets.length} object(s)\n  bucket : s3://${BUCKET}\n  urlBase: ${URL_BASE}\n  output : ${OUT}`,
   );
 }
 

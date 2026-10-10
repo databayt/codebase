@@ -56,6 +56,8 @@ export interface CdnAsset {
    * first path segment when omitted.
    */
   slug?: string
+  /** A video's poster key (its `.poster.<hash>.webp` sibling), set by the manifest build. */
+  poster?: string
 }
 
 /** The provenance slug for an asset — explicit slug, else the first path segment. */

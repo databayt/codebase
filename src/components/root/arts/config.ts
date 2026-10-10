@@ -56,6 +56,11 @@ export interface Facet {
   test: (a: CdnAsset) => boolean
 }
 
+export const isVideo = (key: string) => /\.(webm|mp4)$/i.test(key)
+
+/** A /shoot still — `<flow>-<step>-<locale>-<w>.<hash>.avif`, one per screen after the manifest fold. */
+const isScreen = (key: string) => /-\d+\.[0-9a-f]{8}\.avif$/i.test(key)
+
 const titleCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
 export function buildFacets(assets: CdnAsset[]): Facet[] {
@@ -66,6 +71,14 @@ export function buildFacets(assets: CdnAsset[]): Facet[] {
   const featuredTest = (a: CdnAsset) => featured.has(a.key)
   if (assets.some(featuredTest)) {
     facets.push({ id: "featured", label: "Featured", test: featuredTest })
+  }
+
+  // Media from /record and /shoot — tutorials, reels and product screens.
+  if (assets.some((a) => isVideo(a.key))) {
+    facets.push({ id: "video", label: "Video", test: (a) => isVideo(a.key) })
+  }
+  if (assets.some((a) => isScreen(a.key))) {
+    facets.push({ id: "screens", label: "Screens", test: (a) => isScreen(a.key) })
   }
 
   // 2) Brand / namespace tabs — known brands always, then extras present.
