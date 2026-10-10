@@ -1,7 +1,7 @@
 /**
  * sync-shadcn — upstream drift radar for src/components/ui/
  *
- * Fetches the shadcn/ui registry over HTTP (no clone needed), normalizes
+ * Fetches the shadcn/ui base-vega registry over HTTP (no clone needed), normalizes
  * upstream file content to our aliases + RTL logical properties, and diffs
  * against the local ui/ tree.
  *
@@ -16,7 +16,8 @@ import { promises as fs } from "fs"
 import path from "path"
 
 const REGISTRY_BASE = "https://ui.shadcn.com/r"
-const UPSTREAM_STYLE = "new-york-v4"
+// Base UI lane, vega style (closest to the old new-york look). See docs/UPSTREAM.md.
+const UPSTREAM_STYLE = "base-vega"
 const UI_DIR = path.join(process.cwd(), "src", "components", "ui")
 
 const PROTECTED = [
@@ -24,12 +25,14 @@ const PROTECTED = [
   "custom-video-player",
   "sortable",
   "faceted",
+  "form", // react-hook-form wrapper rebuilt on useRender; not in the base registry
+  "sonner", // base registry ships toast instead
 ] as const
 
 const PINNED = ["chart"] as const // held on recharts 2; upstream targets recharts 3
 
-// Base-UI-lane items with no Radix-lane file — skip silently.
-const NON_RADIX = ["toast"] as const
+// Items to skip silently (none on the Base UI lane today).
+const NON_RADIX = [] as const
 
 interface RegistryIndexItem {
   name: string
@@ -60,6 +63,7 @@ function normalizeAliases(content: string): string {
     .replaceAll(`@/registry/${UPSTREAM_STYLE}/ui/`, "@/components/ui/")
     .replaceAll(`@/registry/${UPSTREAM_STYLE}/hooks/`, "@/hooks/")
     .replaceAll(`@/registry/${UPSTREAM_STYLE}/lib/`, "@/lib/")
+    .replace(/^import \{ cn \} from "cn"$/m, 'import { cn } from "@/lib/utils"')
 }
 
 /**
@@ -100,8 +104,14 @@ function normalizeRtl(content: string): string {
   return out
 }
 
+// useRender wrappers carry a "use client" we add (they render inside server
+// components here); don't count it as drift.
 function normalize(content: string): string {
-  return normalizeRtl(normalizeAliases(content)).trimEnd() + "\n"
+  return (
+    normalizeRtl(normalizeAliases(content))
+      .replace(/^"use client"\n\n/, "")
+      .trimEnd() + "\n"
+  )
 }
 
 /**
@@ -116,6 +126,16 @@ function stripRtlVariants(content: string): string {
     .replace(/\s+"/g, '"')
     .replace(/ {2,}/g, " ")
     .replace(/ className=""/g, "")
+}
+
+// Compare modulo our "use client" and blank-line noise.
+function comparable(content: string): string {
+  return stripRtlVariants(
+    content
+      .replace(/^"use client"\n+/, "")
+      .replace(/\n{2,}/g, "\n")
+      .trimEnd() + "\n"
+  )
 }
 
 function countChangedLines(ours: string, upstream: string): number {
@@ -163,8 +183,8 @@ async function inspectItem(name: string): Promise<Map<string, Verdict>> {
       verdicts.set(base, { kind: "new" })
       continue
     }
-    const upstream = stripRtlVariants(normalize(file.content))
-    const ours = stripRtlVariants(local.trimEnd() + "\n")
+    const upstream = comparable(normalize(file.content))
+    const ours = comparable(local)
     if (upstream === ours) {
       verdicts.set(base, { kind: "in-sync" })
     } else {

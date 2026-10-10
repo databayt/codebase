@@ -1,0 +1,59 @@
+---
+title: "Upstream"
+description: "How codebase mirrors shadcn/ui: atoms are components, templates are blocks, one registry installable with the shadcn CLI."
+---
+
+codebase is a [shadcn registry](https://ui.shadcn.com/docs/registry). It is built the way [ui.shadcn.com](https://ui.shadcn.com) builds itself, on **Base UI** with the **base-vega** style, and installs with the stock shadcn CLI.
+
+## Install from codebase
+
+Add the namespace to your `components.json` once:
+
+```json
+{
+  "registries": {
+    "@codebase": "https://cb.databayt.org/r/{name}.json"
+  }
+}
+```
+
+Then install atoms and templates by name:
+
+```bash
+npx shadcn@latest add @codebase/hero-07 @codebase/pricing-01 @codebase/metric
+```
+
+Primitives they depend on (button, card, accordion…) come from shadcn automatically.
+
+## The mapping
+
+| codebase | shadcn/ui | Registry type |
+|---|---|---|
+| UI | ui | `registry:ui` (from shadcn) |
+| Atoms | components | `registry:component` |
+| Templates | blocks | `registry:block` |
+
+- **Atoms** are documented like shadcn components: a live preview from a demo file, then Installation (CLI / Manual), then Usage. They install to `components/atom/`.
+- **Templates** are shown like shadcn blocks: the `/templates` gallery by category, a resizable preview with desktop, tablet and mobile sizes, a code view with the file tree, and a copy-to-install command.
+
+## Section templates
+
+Marketing sections (header, hero, features, CTA, stats, logos, pricing, testimonials, FAQ, how-it-works, team, contact, newsletter, blog, footer) take a typed `dictionary` and a `lang`:
+
+```tsx
+import { Pricing } from "@/components/pricing-01"
+import { dictionary } from "./pricing-01-dictionary"
+
+export default function Page() {
+  return <Pricing dictionary={dictionary.ar} lang="ar" />
+}
+```
+
+Each ships English and Arabic demo content and is built RTL-first with logical classes. Map your own i18n dictionary into the same shape.
+
+## Where we diverge on purpose
+
+- **Our site chrome**: header, footer, page heading, page nav and homepage are codebase's own design.
+- **i18n**: every route lives under `/en` or `/ar`, including the template preview iframe.
+- **Atoms install to `components/atom/`** to keep the databayt component hierarchy.
+- **Unique file names per template**, so several templates can be installed side by side.

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Questionnaire as QuestionnairePrimitive } from "@shadcn/react/questionnaire"
-import { cn } from "@/lib/utils"
+import { cn } from "cn"
 
 import { buttonVariants, type Button } from "@/components/ui/button"
 import { CheckIcon } from "lucide-react"
@@ -60,7 +60,7 @@ function QuestionnaireTitle({
     <QuestionnairePrimitive.Title
       data-slot="questionnaire-title"
       className={cn(
-        "font-heading text-base font-semibold text-pretty [&:not(:has(~[data-slot=questionnaire-description]))]:mb-5",
+        "text-base font-semibold text-pretty [&:not(:has(~[data-slot=questionnaire-description]))]:mb-5",
         className
       )}
       {...props}

@@ -1,52 +1,42 @@
 ---
 name: shadcn
-description: shadcn/ui expert for Radix primitives, registry system, and MCP integration
+description: shadcn/ui expert for Base UI primitives, registry system, and MCP integration
 model: opus
-version: "CLI v4 / 61-item Radix lane (verified 2026-08-01)"
+version: "CLI 4.21.4 / base-vega lane (verified 2026-10-10)"
 handoff: [atom, template, block, tailwind]
 ---
 
 # shadcn Agent (codebase)
 
 Expert for this repo's shadcn/ui mirror. This is a **Next.js 16 / React 19 /
-Tailwind v4** codebase on the **Radix lane** — upstream made Base UI the
-default for *new* projects (July 2026); we deliberately stay Radix. The deep
-org-wide reference lives at `~/.claude/agents/shadcn.md` and the knowledge
-pack at `~/.claude/skills/shadcn/`; this file is the repo-specific truth.
+Tailwind v4** codebase on the **Base UI lane, style base-vega** (upstream's
+default since July 2026; vega is the base style closest to the old new-york
+look). Pin, mapping and divergences: `docs/UPSTREAM.md`. The org-wide
+reference lives at `~/.claude/agents/shadcn.md`; this file is repo truth.
 
-## The mirror, as of 2026-08
+## The mirror, as of 2026-10
 
-- `src/components/ui/` — 65 files: 61-item upstream parity (incl. `combobox`,
-  `native-select`, `direction`, and the chat set `attachment`/`bubble`/
-  `marker`/`message`/`message-scroller`) + 4 protected customs
-  (`international-demo`, `custom-video-player`, `sortable`, `faceted`) +
-  `chart.tsx` pinned to recharts 2.
-- Unified `radix-ui` package everywhere
-  (`import { Dialog as DialogPrimitive } from "radix-ui"`); a handful of
-  custom modules keep per-package deps (icons, direction, slot, select,
-  tooltip, dialog) — do not "clean" them.
-- RTL: ui files use logical properties (`start-/end-/ms-/me-`), directional
-  icons carry `rtl:rotate-180`, and `DirectionProvider` wraps
-  `src/app/[lang]/layout.tsx` so portalled primitives inherit direction.
-- Registry: one Zod schema (`src/registry/schema.ts`, with intentional
-  `registry:atom`/`registry:template` extensions), one build
-  (`pnpm registry:build`), published at `public/r/styles/{default,new-york}/`
-  and `public/r/templates/`.
+- `src/components/ui/` — base-vega wrappers from the shadcn CLI (RTL on,
+  `cn` from the `cn` package) + kept extras (`form` on `useRender`, `sonner`,
+  `faceted`, `sortable`, `custom-video-player`, `international-demo`) +
+  `chart.tsx` pinned to recharts 2. No `radix-ui` anywhere (`.migration/`).
+- `globals.css` imports `shadcn/tailwind.css` (the data-open/checked/…
+  variants the base wrappers rely on).
+- Registry: upstream's bases layout (`src/registry/bases/base/{components,blocks}`),
+  `shadcn/schema` types, root `registry.json`, `shadcn build` → `public/r/`,
+  namespace `@codebase`.
 
 ## Sync workflow
 
-1. `pnpm sync:shadcn` — HTTP drift radar against
-   `ui.shadcn.com/r/styles/new-york-v4`. Reads-only by default; respects
-   PROTECTED + PINNED lists; `--write` pulls, `--only a,b` scopes.
-   Expected floor: ~6 files with intentional RTL deltas (calendar, sidebar…).
-2. Targeted refresh: `pnpm exec shadcn add -y -o <names>` then review
-   `git diff src/components/ui/` file-by-file before committing.
-3. Codemods available in CLI v4: `migrate radix` (done 2026-08),
-   `migrate rtl` (done for ui/), `migrate icons`; also `eject`, `preset`,
-   `apply`, `view`, `search`, `mcp`.
-4. Never overwrite the 4 custom ui files, `chart.tsx`, `globals.css`
-   (its `[dir="rtl"]` block), or anything in CLAUDE.md's
-   "Custom Parts — DO NOT DISTURB".
+1. `npx shadcn add <component> --diff` — exact CLI drift for one primitive
+   (resolves icons, fonts and RTL like a real install). `pnpm sync:shadcn`
+   is the faster HTTP radar for the whole set.
+2. Take a primitive: `npx shadcn add <component> -y -o`, review
+   `git diff src/components/ui/` before committing. Never for the kept extras.
+3. Site internals (registry lib, block viewer, preview/source, build script):
+   diff against `/Users/abdout/oss/shadcn-ui/apps/v4` after a `git pull`,
+   port, then bump the SHA in `docs/UPSTREAM.md`.
+4. Never overwrite anything in CLAUDE.md's "Custom Parts — DO NOT DISTURB".
 
 ## MCP + registries
 
@@ -59,9 +49,9 @@ Use `mcp__shadcn__*` tools to search/view items before writing new UI.
 
 | Kind | Source | Docs | Publish |
 |---|---|---|---|
-| ui primitive | `src/components/ui/` | (showcased via atoms pages when useful) | `registry-ui.ts` → `public/r` |
-| atom | `src/components/atom/` (flat) | `content/atoms/(root)/` | `_registry.ts` → `public/r` |
-| template | `src/registry/new-york/templates/` (source) | `content/templates/(root)/` | `registry-templates.ts` → `public/r` |
+| ui primitive | `src/components/ui/` | — | not republished (consumers get it from @shadcn) |
+| atom = component | `src/components/atom/` (flat) + `src/examples/base/<atom>-demo.tsx` | `content/atoms/(root)/` | `bases/base/components/_registry.ts` → `public/r/<name>.json` |
+| template = block | `src/registry/bases/base/blocks/<name>/` | the `/templates` gallery | `bases/base/blocks/_registry.ts` → `public/r/<name>.json` |
 
 Hand off atom work to the `atom` agent and template work to the `template`
 agent; they carry the full registration flows.

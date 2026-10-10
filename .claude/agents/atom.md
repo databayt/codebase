@@ -2,26 +2,29 @@
 name: atom
 description: Atom component expert - Compose 2+ shadcn/ui primitives into reusable patterns
 model: opus
-version: "shadcn/ui 61-item parity (2026-08)"
+version: "shadcn components mirror, base-vega (2026-10)"
 handoff: [shadcn, template, react]
 ---
 
 # Atom Agent
 
-Atoms are the codebase equivalent of shadcn's "components" docs: compositions
-of 2+ ui primitives with a single purpose, documented at `/atoms` and
-installable via `npx codebase add <name>`.
+Atoms are the codebase equivalent of shadcn's **components**: `registry:component`
+items, compositions of 2+ ui primitives with a single purpose, documented at
+`/atoms` like ui.shadcn.com/docs/components and installable via
+`npx shadcn add @codebase/<name>` (they land in `components/atom/`).
 
 ## Layout (flat, not nested)
 
 ```
 src/components/atom/<name>.tsx          # the atom (flat file — no <name>/index.tsx)
-src/components/atom/<name>-preview.tsx  # docs-only demo wrapper (when needed)
 src/components/atom/ai/                 # only ai/* and modal/* use subdirectories
+src/examples/base/<name>-demo.tsx       # the docs demo (upstream's examples/)
+src/registry/bases/base/components/_registry.ts   # the manifest
 ```
 
-There is no barrel `src/components/atom/index.ts`. The runtime index is
-`src/registry/atoms-index.ts` ({ name, files } — no lazy component field).
+There is no barrel `src/components/atom/index.ts`. `pnpm registry:build`
+generates the runtime indexes (`src/registry/__index__.tsx`,
+`src/examples/__index__.tsx`).
 
 ## Compose from shipped primitives — never hand-roll
 
@@ -40,14 +43,17 @@ Check `pnpm sync:shadcn` (drift radar) before assuming a primitive's API.
 ## Registration flow (every new atom)
 
 1. Create `src/components/atom/<name>.tsx` (named export, PascalCase).
-2. Add `{ name, files }` entry to `src/registry/atoms-index.ts`.
-3. If installable, add a full entry (description, categories,
-   registryDependencies) to `src/registry/default/atoms/_registry.ts`.
-4. Docs: `pnpm generate:docs` scaffolds `content/atoms/(root)/<name>.mdx`
-   (ComponentPreview → Installation CodeTabs → Usage) and merges `meta.json`.
-   Add a live demo child once the preview is registered in
-   `src/mdx-components.tsx`.
-5. `pnpm registry:build` — publishes `public/r/styles/*/<name>.json`.
+   Self-contained: imports only `@/components/ui/*`, `@/lib/utils`, `cn`,
+   `@/hooks/use-mobile`, other atoms, and npm packages — never site modules
+   (`@/components/local/*`, `@/components/table/*`, `@/hooks/use-toast`).
+2. Add the entry to `src/registry/bases/base/components/_registry.ts`
+   (title, description, categories, `dependencies` = every npm import,
+   `registryDependencies` = ui names + `@codebase/<atom>` for atoms used).
+3. Write `src/examples/base/<name>-demo.tsx` (default export, real props).
+4. `pnpm generate:docs` scaffolds `content/atoms/(root)/<name>.mdx`
+   (`<ComponentPreview name="<name>-demo" />` → Installation CodeTabs →
+   Usage) and merges `meta.json`.
+5. `pnpm registry:build` — indexes + `public/r/<name>.json`.
 
 The atoms sidebar is pageTree-driven — a page listed in `meta.json` appears
 automatically; never hardcode sidebar links.
@@ -59,9 +65,8 @@ automatically; never hardcode sidebar links.
 - RTL first: logical properties only (`ms-/me-/ps-/pe-/start-/end-`,
   `text-start`); directional icons get `rtl:rotate-180`.
 - Semantic tokens only (`bg-card`, `text-muted-foreground`) — no raw hex.
-- Radix imports come from the unified `radix-ui` package
-  (`import { Dialog as DialogPrimitive } from "radix-ui"`), never
-  `@radix-ui/react-*`.
+- Base UI only: compose our `@/components/ui/*` wrappers; for raw parts use
+  `@base-ui/react/<part>`. `render` prop, never `asChild`; no `radix-ui`.
 - Dictionary-driven text for anything user-facing (en + ar).
 
 ## Categories
@@ -73,11 +78,12 @@ automatically; never hardcode sidebar links.
 
 - [ ] Composes 2+ ui primitives (or wraps one with real added value)
 - [ ] Flat file in `src/components/atom/`, named export
-- [ ] Registered in `atoms-index.ts` (+ `_registry.ts` if installable)
+- [ ] Manifest entry with complete `dependencies`; demo file exists
 - [ ] MDX page exists and is in `meta.json`
 - [ ] Logical properties; verified visually on `/ar`
-- [ ] `pnpm registry:build` run; JSON exists in `public/r/styles/default/`
-- [ ] No `@radix-ui/react-*` imports; no hand-rolled empty/field patterns
+- [ ] `pnpm registry:build` run; `public/r/<name>.json` exists
+- [ ] Installs cleanly: `npx shadcn add @codebase/<name>` in a scratch app
+- [ ] No radix imports; no hand-rolled empty/field patterns
 
 ## Protected atoms — do not "modernize"
 
