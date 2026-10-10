@@ -4,16 +4,7 @@ description: A card wrapper for form content with title, description, and footer
 component: true
 ---
 
-<ComponentPreview name="card-form" className="mb-4">
-  <CardForm
-    title="Contact Us"
-    description="Fill out the form below."
-    footer={<ButtonGroup primaryLabel="Send" secondaryLabel="Cancel" />}
-  >
-    <LabeledInput label="Name" placeholder="Your name" />
-    <LabeledInput label="Email" type="email" placeholder="your@email.com" />
-  </CardForm>
-</ComponentPreview>
+<ComponentPreview name="card-form-demo" />
 
 ## Installation
 
@@ -26,7 +17,7 @@ component: true
 <TabsContent value="cli">
 
 ```bash
-npx codebase add card-form
+npx shadcn@latest add @codebase/card-form
 ```
 
 </TabsContent>

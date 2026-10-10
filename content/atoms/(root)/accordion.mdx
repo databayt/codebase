@@ -4,33 +4,7 @@ description: A vertically stacked set of interactive headings that each reveal a
 component: true
 ---
 
-<ComponentPreview className="mb-4">
-  <Accordion
-    type="single"
-    collapsible
-    className="w-full"
-    defaultValue="item-1"
-  >
-    <AccordionItem value="item-1">
-      <AccordionTrigger>Product Information</AccordionTrigger>
-      <AccordionContent>
-        Our flagship product combines cutting-edge technology with sleek design.
-      </AccordionContent>
-    </AccordionItem>
-    <AccordionItem value="item-2">
-      <AccordionTrigger>Shipping Details</AccordionTrigger>
-      <AccordionContent>
-        We offer worldwide shipping through trusted courier partners.
-      </AccordionContent>
-    </AccordionItem>
-    <AccordionItem value="item-3">
-      <AccordionTrigger>Return Policy</AccordionTrigger>
-      <AccordionContent>
-        We stand behind our products with a comprehensive 30-day return policy.
-      </AccordionContent>
-    </AccordionItem>
-  </Accordion>
-</ComponentPreview>
+<ComponentPreview name="accordion-demo" />
 
 ## Installation
 
@@ -60,7 +34,7 @@ npm install @radix-ui/react-accordion
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="accordion" title="components/ui/accordion.tsx" />
+<ComponentSource src="src/components/ui/accordion.tsx" title="components/ui/accordion.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 

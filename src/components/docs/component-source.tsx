@@ -2,48 +2,56 @@ import * as React from "react"
 import fs from "node:fs/promises"
 import path from "node:path"
 import { highlightCode } from "@/lib/highlight-code"
+import { getDemoItem, getRegistryItem } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 import { CopyButton } from "@/components/docs/copy-button"
 import { CodeCollapsibleWrapper } from "@/components/docs/code-collapsible-wrapper"
-import { AtomsIndex } from "@/registry/atoms-index"
 
 interface ComponentSourceProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string
+  src?: string
   code?: string
   language?: string
   fileName?: string
   title?: string
   collapsible?: boolean
+  styleName?: string
 }
 
+// Mirrors shadcn's components/component-source.tsx: `name` resolves a demo
+// (examples/) or a registry item, `src` reads a file from the repo root.
 export async function ComponentSource({
   name,
+  src,
   code: codeProp,
   language,
   fileName,
   title,
   collapsible = true,
+  styleName,
   className,
   ...props
 }: ComponentSourceProps) {
   let code = codeProp
 
-  // If name provided, fetch from registry
   if (name && !code) {
-    const item = AtomsIndex[name]
-    if (item?.files?.[0]) {
-      const filePath = path.join(process.cwd(), item.files[0].path)
-      try {
-        code = await fs.readFile(filePath, "utf-8")
-        // Transform imports for user consumption
-        code = code
-          .replace(/^"use client"\s*\n?/m, "")
-          .replace(/\/\* eslint-disable \*\/\s*\n?/g, "")
-      } catch (error) {
-        console.error(`Failed to read file: ${filePath}`, error)
-      }
+    const item =
+      (await getDemoItem(name, styleName)) ??
+      (await getRegistryItem(name, styleName))
+    code = item?.files?.[0]?.content
+  }
+
+  if (src && !code) {
+    try {
+      code = await fs.readFile(path.join(process.cwd(), src), "utf-8")
+    } catch (error) {
+      console.error(`Failed to read file: ${src}`, error)
     }
   }
+
+  code = code
+    ?.replace(/^"use client"\s*\n?/m, "")
+    .replace(/\/\* eslint-disable \*\/\s*\n?/g, "")
 
   if (!code) {
     return null

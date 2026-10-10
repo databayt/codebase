@@ -4,17 +4,7 @@ description: A select dropdown with an associated label.
 component: true
 ---
 
-<ComponentPreview name="labeled-select" className="mb-4">
-  <LabeledSelect
-    label="Category"
-    options={[
-      { value: "billing", label: "Billing" },
-      { value: "support", label: "Support" },
-      { value: "account", label: "Account" },
-    ]}
-    defaultValue="billing"
-  />
-</ComponentPreview>
+<ComponentPreview name="labeled-select-demo" />
 
 ## Installation
 
@@ -27,7 +17,7 @@ component: true
 <TabsContent value="cli">
 
 ```bash
-npx codebase add labeled-select
+npx shadcn@latest add @codebase/labeled-select
 ```
 
 </TabsContent>

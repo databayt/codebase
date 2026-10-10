@@ -13,11 +13,11 @@ import fs from "fs/promises"
 import path from "path"
 import { fileURLToPath } from "url"
 import { createRequire } from "module"
-import type { RegistryItem } from "../src/registry/schema"
+import type { RegistryItem } from "shadcn/schema"
 
 const require = createRequire(import.meta.url)
-const { atoms } = require("../src/registry/default/atoms/_registry") as {
-  atoms: RegistryItem[]
+const { components: atoms } = require("../src/registry/bases/base/components/_registry") as {
+  components: RegistryItem[]
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -42,6 +42,7 @@ function generateMDX(atom: RegistryItem): string {
   const title = titleCase(atom.name)
   const componentName = pascalCase(atom.name)
   const filePath = atom.files?.[0]?.path ?? `components/atom/${atom.name}.tsx`
+  // Scaffolded pages expect a demo at src/examples/base/<name>-demo.tsx.
 
   return `---
 title: ${title}
@@ -49,7 +50,7 @@ description: ${atom.description ?? `${title} atom.`}
 component: true
 ---
 
-<ComponentPreview name="${atom.name}" className="mb-4" />
+<ComponentPreview name="${atom.name}-demo" />
 
 ## Installation
 
@@ -62,7 +63,7 @@ component: true
 <TabsContent value="cli">
 
 \`\`\`bash
-npx codebase add ${atom.name}
+npx shadcn@latest add @codebase/${atom.name}
 \`\`\`
 
 </TabsContent>

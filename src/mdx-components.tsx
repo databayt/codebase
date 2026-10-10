@@ -1,90 +1,29 @@
 import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { ComponentSource } from "@/components/docs/component-source"
 import { CodeTabs } from "@/components/docs/code-tabs"
 import { CodeBlockCommand } from "@/components/docs/code-block-command"
 import { CopyButton } from "@/components/docs/copy-button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-// Atom components
-import { InfiniteMovingCards } from "@/components/atom/simple-marquee"
-import { Response } from "@/components/atom/response"
-import { SortablePreview } from "@/components/atom/sortable-preview"
-import { StickyScroll } from "@/components/atom/sticky-scroll"
-import { ThemeProvider } from "@/components/atom/theme-provider"
-import { InfiniteSlider } from "@/components/atom/infinite-slider"
-import { InfiniteMovingCards as InfiniteCards } from "@/components/atom/infinite-cards"
-import { ProgressiveBlur } from "@/components/atom/progressive-blur"
-import { Faceted } from "@/components/atom/faceted"
-import ExpandButton from "@/components/atom/expand-button"
-import { HeaderSection } from "@/components/atom/header-section"
-import { PageActionsPreview } from "@/components/atom/page-actions-preview"
-import { PageHeader } from "@/components/atom/page-header"
-import { TabsNav } from "@/components/atom/tabs"
-import { Announcement } from "@/components/atom/announcement"
-import Loading from "@/components/atom/loading"
-import { TwoButtonsPreview } from "@/components/atom/two-buttons-preview"
-import AgentHeading from "@/components/atom/agent-heading"
-import { GradientAnimation } from "@/components/atom/gradient-animation"
-import { CardHoverEffect } from "@/components/atom/card-hover-effect"
 import { CardPreview } from "@/components/atom/card-preview"
-import { CardsMetric } from "@/components/atom/cards-metric"
-import { PromptInput } from "@/components/atom/prompt-input"
-import { Reasoning } from "@/components/atom/reasoning"
-import { IconsPreview } from "@/components/atom/icons-preview"
-import { FontsPreview } from "@/components/atom/fonts-preview"
-import { ComboboxPreview } from "@/components/atom/combobox-preview"
-import { NativeSelectPreview } from "@/components/atom/native-select-preview"
-import { DirectionPreview } from "@/components/atom/direction-preview"
-import { ChatPrimitivesPreview } from "@/components/atom/chat-primitives-preview"
-import { TemplatePreview } from "@/components/docs/template-preview"
-import { CardsActivityGoal } from "@/components/atom/activity-goal"
-import { CardsReportIssue } from "@/components/atom/report-issue"
-import { CardsShare } from "@/components/atom/share"
-import { CardsCalendar } from "@/components/atom/calendar"
-import { CardsMetric as CardsMetricSingle } from "@/components/atom/metric"
-import { CardsStats } from "@/components/atom/stats"
-// New small atoms
 import { OAuthButton } from "@/components/atom/oauth-button"
 import { OAuthButtonGroup } from "@/components/atom/oauth-button-group"
 import { DividerWithText } from "@/components/atom/divider-with-text"
 import { UserInfoCard } from "@/components/atom/user-info-card"
 import { SettingsToggleRow } from "@/components/atom/settings-toggle-row"
-import { FormField, FormFieldText } from "@/components/atom/form-field"
+import { FormFieldText } from "@/components/atom/form-field"
 import { PaymentMethodSelector } from "@/components/atom/payment-method-selector"
-// Form atoms
-import { LabeledSelect } from "@/components/atom/labeled-select"
-import { LabeledInput } from "@/components/atom/labeled-input"
-import { LabeledTextarea } from "@/components/atom/labeled-textarea"
-import { CardForm } from "@/components/atom/card-form"
 import { ButtonGroup } from "@/components/atom/button-group"
 import { DirectoryStructure } from "@/components/docs/directory-structure"
 import { Structure } from "@/components/docs/structure"
 import { PrismaStructure } from "@/components/docs/prisma-structure"
 import { CdnAssetsTable } from "@/components/docs/cdn-assets-table"
-// AI components
-import {
-  AiPromptInputPreview,
-  AiStatusIndicatorPreview,
-  AiStreamingTextPreview,
-} from "@/components/atom/ai-previews"
-import { AIResponseDisplay } from "@/components/atom/ai-response-display"
-import { ModalSystem } from "@/components/atom/modal-system"
 import { StoryVideo } from "@/components/docs/story-video"
 
 // This file is required to use MDX in `app` directory.
 
-// Create a default dictionary for MDX components that require it
-const defaultDictionary = {
-  locale: 'en',
-  cards: {},
-} as any
 const mdxComponents = {
     // Allows customizing built-in components, e.g. to add styling.
     h1: ({ className, ...props }) => (
@@ -358,50 +297,13 @@ const mdxComponents = {
       />
     ),
     // Atom components
-    SimpleMarquee: InfiniteMovingCards,
-    Response,
-    Sortable: SortablePreview,
-    StickyScroll,
-    ThemeProvider,
-    InfiniteSlider,
-    InfiniteCards,
-    ProgressiveBlur,
-    Faceted,
-    ExpandButton,
-    HeaderSection,
-    PageActions: PageActionsPreview,
-    PageHeader,
-    TabsNav,
-    Announcement,
-    Loading,
-    TwoButtons: TwoButtonsPreview,
-    AgentHeading,
-    GradientAnimation,
-    CardHoverEffect,
     Card: CardPreview,
-    CardsMetric,
-    PromptInput,
-    Reasoning,
-    Icons: IconsPreview,
-    Fonts: FontsPreview,
-    ComboboxPreview,
-    NativeSelectPreview,
-    DirectionPreview,
-    ChatPrimitivesPreview,
-    TemplatePreview,
-    ActivityGoal: () => <CardsActivityGoal dictionary={defaultDictionary} />,
-    ReportIssue: () => <CardsReportIssue dictionary={defaultDictionary} />,
-    Share: () => <CardsShare dictionary={defaultDictionary} />,
-    Calendar: () => <CardsCalendar dictionary={defaultDictionary} />,
-    Metric: () => <CardsMetricSingle dictionary={defaultDictionary} />,
-    Stats: () => <CardsStats dictionary={defaultDictionary} />,
     // New small atoms
     OAuthButton,
     OAuthButtonGroup,
     DividerWithText,
     UserInfoCard,
     SettingsToggleRow,
-    FormField,
     FormFieldText,
     PaymentMethodSelector,
     DirectoryStructure,
@@ -409,16 +311,7 @@ const mdxComponents = {
     PrismaStructure,
     CdnAssetsTable,
     // AI components
-    AiPromptInput: AiPromptInputPreview,
-    AiStatusIndicator: AiStatusIndicatorPreview,
-    AiStreamingText: AiStreamingTextPreview,
-    AiResponseDisplay: AIResponseDisplay,
-    ModalSystem,
     // Form atoms
-    LabeledSelect,
-    LabeledInput,
-    LabeledTextarea,
-    CardForm,
     ButtonGroup,
     StoryVideo,
 }

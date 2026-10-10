@@ -1,10 +1,12 @@
 import * as React from "react"
-import fs from "node:fs/promises"
-import path from "node:path"
 import { cn } from "@/lib/utils"
 import { highlightCode } from "@/lib/highlight-code"
+import {
+  getDemoItem,
+  getRegistryComponent,
+  getRegistryItem,
+} from "@/lib/registry"
 import { CopyButton } from "@/components/docs/copy-button"
-import { AtomsIndex } from "@/registry/atoms-index"
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string
@@ -12,6 +14,7 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   hideCode?: boolean
   chromeLessOnMobile?: boolean
   code?: string
+  styleName?: string
 }
 
 export async function ComponentPreview({
@@ -22,26 +25,33 @@ export async function ComponentPreview({
   hideCode = false,
   chromeLessOnMobile = false,
   code: codeProp,
+  styleName,
   ...props
 }: ComponentPreviewProps) {
   let code = codeProp
   let highlightedCode: string | null = null
 
-  // If name provided, fetch code from registry
-  if (name && !code) {
-    const item = AtomsIndex[name]
-    if (item?.files?.[0]) {
-      const filePath = path.join(process.cwd(), item.files[0].path)
-      try {
-        code = await fs.readFile(filePath, "utf-8")
-        // Transform imports for user consumption
-        code = code
-          .replace(/^"use client"\s*\n?/m, "")
-          .replace(/\/\* eslint-disable \*\/\s*\n?/g, "")
-      } catch (error) {
-        console.error(`Failed to read file: ${filePath}`, error)
-      }
+  // Mirrors shadcn's components/component-preview.tsx: `name` resolves a demo
+  // from examples/ (or a registry item) for both the preview and its source.
+  // Inline children still work for docs pages that render ad-hoc previews.
+  if (name && !children) {
+    const Component = getRegistryComponent(name, styleName)
+    if (Component) {
+      children = (
+        <React.Suspense fallback={null}>
+          <Component />
+        </React.Suspense>
+      )
     }
+  }
+
+  if (name && !code) {
+    const item =
+      (await getDemoItem(name, styleName)) ??
+      (await getRegistryItem(name, styleName))
+    code = item?.files?.[0]?.content
+      ?.replace(/^"use client"\s*\n?/m, "")
+      .replace(/\/\* eslint-disable \*\/\s*\n?/g, "")
   }
 
   if (code) {
