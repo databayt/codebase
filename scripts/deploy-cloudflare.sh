@@ -48,7 +48,7 @@ build() {
   [[ -f .next/standalone/server.js ]] || { echo "ABORT: .next/standalone/server.js missing"; exit 1; }
 
   # These are read off disk at request time; a missing one is a 404 at runtime, not a build error.
-  for p in content/docs content/docs-ar content/atoms content/templates; do
+  for p in content/docs content/docs-ar content/atoms; do
     [[ -e ".next/standalone/$p" ]] && echo "    traced: $p" || echo "    WARNING: $p not traced into standalone"
   done
   # The container is Debian; a darwin-only Prisma engine passes every page render and then
