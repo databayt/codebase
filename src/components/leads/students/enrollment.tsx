@@ -23,25 +23,27 @@ export function EnrollmentStep({ form, isView }: StudentFormStepProps) {
         render={({ field }) => (
           <FormItem className="flex flex-col">
             <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-full pl-3 text-left font-normal",
-                      !field.value && "text-muted-foreground"
-                    )}
-                    disabled={isView}
-                  >
-                    {field.value ? (
-                      format(new Date(field.value), "PPP")
-                    ) : (
-                      <span>Enrollment date</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
+              <FormControl>
+                <PopoverTrigger
+                  render={
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                      disabled={isView}
+                    />
+                  }
+                >
+                  {field.value ? (
+                    format(new Date(field.value), "PPP")
+                  ) : (
+                    <span>Enrollment date</span>
+                  )}
+                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                </PopoverTrigger>
+              </FormControl>
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
                   mode="single"

@@ -1,6 +1,12 @@
 "use client";
 
-import { PropsWithChildren, useEffect, useState, type FC } from "react";
+import {
+  PropsWithChildren,
+  useEffect,
+  useState,
+  type FC,
+  type ReactElement,
+} from "react";
 import { CircleXIcon, FileIcon, PaperclipIcon } from "lucide-react";
 import {
   AttachmentPrimitive,
@@ -89,10 +95,9 @@ const AttachmentPreviewDialog: FC<PropsWithChildren> = ({ children }) => {
     <Dialog>
       <DialogTrigger
         className="cursor-pointer transition-colors hover:bg-accent/50"
-        asChild
-      >
-        {children}
-      </DialogTrigger>
+        nativeButton={false}
+        render={children as ReactElement}
+      />
       <DialogContent>
         <DialogTitle className="aui-sr-only">
           Image Attachment Preview
@@ -108,7 +113,7 @@ const AttachmentThumb: FC = () => {
   const src = useAttachmentSrc();
   return (
     <Avatar className="flex size-10 items-center justify-center rounded border bg-muted text-sm">
-      <AvatarFallback delayMs={isImage ? 200 : 0}>
+      <AvatarFallback delay={isImage ? 200 : 0}>
         <FileIcon />
       </AvatarFallback>
       <AvatarImage src={src} />
@@ -136,15 +141,13 @@ const AttachmentUI: FC = () => {
     <Tooltip>
       <AttachmentPrimitive.Root className="relative mt-3">
         <AttachmentPreviewDialog>
-          <TooltipTrigger asChild>
-            <div className="flex h-12 w-40 items-center justify-center gap-2 rounded-lg border p-1">
-              <AttachmentThumb />
-              <div className="flex-grow basis-0">
-                <p className="line-clamp-1 text-xs font-bold break-all text-ellipsis text-muted-foreground">
-                  <AttachmentPrimitive.Name />
-                </p>
-                <p className="text-xs text-muted-foreground">{typeLabel}</p>
-              </div>
+          <TooltipTrigger render={<div className="flex h-12 w-40 items-center justify-center gap-2 rounded-lg border p-1" />}>
+            <AttachmentThumb />
+            <div className="flex-grow basis-0">
+              <p className="line-clamp-1 text-xs font-bold break-all text-ellipsis text-muted-foreground">
+                <AttachmentPrimitive.Name />
+              </p>
+              <p className="text-xs text-muted-foreground">{typeLabel}</p>
             </div>
           </TooltipTrigger>
         </AttachmentPreviewDialog>

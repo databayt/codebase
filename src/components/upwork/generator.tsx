@@ -153,7 +153,7 @@ export function ProposalGenerator({ jobAnalysis, jobDetails }: ProposalGenerator
                     />
                     <Label
                       htmlFor={t.value}
-                      className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+                      className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary [&:has([data-checked])]:border-primary cursor-pointer"
                     >
                       <span className="text-2xl mb-1">{t.icon}</span>
                       <span className="text-sm font-medium">{t.label}</span>

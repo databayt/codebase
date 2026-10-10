@@ -114,14 +114,16 @@ export function NavActions() {
         <Star />
       </Button>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-7 w-7 data-[state=open]:bg-accent"
-          >
-            <MoreHorizontal />
-          </Button>
+        <PopoverTrigger
+          render={
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7 data-popup-open:bg-accent"
+            />
+          }
+        >
+          <MoreHorizontal />
         </PopoverTrigger>
         <PopoverContent
           className="w-56 overflow-hidden rounded-lg p-0"

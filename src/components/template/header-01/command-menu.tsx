@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { type DialogProps } from "@radix-ui/react-dialog"
+import type { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { Circle, File, Laptop, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/command"
 import type { getDictionary } from "@/components/local/dictionaries"
 
-interface CommandMenuProps extends DialogProps {
+interface CommandMenuProps extends DialogPrimitive.Root.Props {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>
 }
 

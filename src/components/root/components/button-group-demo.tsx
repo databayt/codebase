@@ -58,10 +58,8 @@ export function ButtonGroupDemo() {
           <span className="hidden sm:inline">Snooze</span>
         </Button>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon-sm" aria-label="More options">
-              <MoreHorizontalIcon />
-            </Button>
+          <DropdownMenuTrigger render={<Button variant="outline" size="icon-sm" aria-label="More options" />}>
+            <MoreHorizontalIcon />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuGroup>

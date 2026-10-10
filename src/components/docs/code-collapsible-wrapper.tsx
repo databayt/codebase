@@ -31,25 +31,32 @@ export function CodeCollapsibleWrapper({
       className={cn("group/collapsible relative md:-mx-1", className)}
       {...props}
     >
-      <CollapsibleTrigger asChild>
-        <div className="absolute top-1.5 end-9 z-10 flex items-center">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground h-7 rounded-md px-2"
-          >
-            {isOpened ? collapseText : expandText}
-          </Button>
-          <Separator orientation="vertical" className="mx-1.5 !h-4" />
-        </div>
+      <CollapsibleTrigger
+        nativeButton={false}
+        render={
+          <div className="absolute top-1.5 end-9 z-10 flex items-center" />
+        }
+      >
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-muted-foreground h-7 rounded-md px-2"
+        >
+          {isOpened ? collapseText : expandText}
+        </Button>
+        <Separator orientation="vertical" className="mx-1.5 !h-4" />
       </CollapsibleTrigger>
+      {/* Radix `forceMount` kept the closed panel visible (clipped to
+          max-h-64). Base UI's `keepMounted` sets `hidden` on a closed panel,
+          so drop that attribute to keep the clipped preview on screen. */}
       <CollapsibleContent
-        forceMount
-        className="relative mt-6 overflow-hidden data-[state=closed]:max-h-64 [&>figure]:mt-0 [&>figure]:md:!mx-0"
+        keepMounted
+        render={({ hidden: _hidden, ...panelProps }) => <div {...panelProps} />}
+        className="relative mt-6 overflow-hidden data-closed:max-h-64 [&>figure]:mt-0 [&>figure]:md:!mx-0"
       >
         {children}
       </CollapsibleContent>
-      <CollapsibleTrigger className="from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-20 items-center justify-center rounded-b-lg bg-gradient-to-b text-sm group-data-[state=open]/collapsible:hidden">
+      <CollapsibleTrigger className="from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-20 items-center justify-center rounded-b-lg bg-gradient-to-b text-sm group-data-open/collapsible:hidden">
         {isOpened ? collapseText : expandText}
       </CollapsibleTrigger>
     </Collapsible>

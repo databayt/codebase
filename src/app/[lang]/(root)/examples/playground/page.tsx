@@ -49,7 +49,14 @@ export default function PlaygroundPage() {
         <div className="container flex flex-col items-start justify-between gap-2 py-4 sm:flex-row sm:items-center sm:gap-0 md:h-16">
           <h2 className="pl-0.5 text-lg font-semibold">Playground</h2>
           <div className="ml-auto flex w-full gap-2 sm:justify-end">
-            <Select defaultValue="gpt-4">
+            <Select
+              defaultValue="gpt-4"
+              items={{
+                "gpt-4": "GPT-4",
+                "gpt-3.5": "GPT-3.5 Turbo",
+                "claude-3": "Claude 3 Opus",
+              }}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a model" />
               </SelectTrigger>

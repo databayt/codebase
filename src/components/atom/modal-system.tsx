@@ -16,8 +16,8 @@ export function ModalSystem() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Open Modal</Button>
+      <DialogTrigger render={<Button variant="outline" />}>
+        Open Modal
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

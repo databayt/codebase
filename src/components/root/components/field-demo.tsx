@@ -65,7 +65,7 @@ export function FieldDemo() {
                   <FieldLabel htmlFor="checkout-7j9-exp-month-ts6">
                     Month
                   </FieldLabel>
-                  <Select defaultValue="">
+                  <Select>
                     <SelectTrigger id="checkout-7j9-exp-month-ts6">
                       <SelectValue placeholder="MM" />
                     </SelectTrigger>
@@ -91,7 +91,7 @@ export function FieldDemo() {
                   <FieldLabel htmlFor="checkout-7j9-exp-year-f59">
                     Year
                   </FieldLabel>
-                  <Select defaultValue="">
+                  <Select>
                     <SelectTrigger id="checkout-7j9-exp-year-f59">
                       <SelectValue placeholder="YYYY" />
                     </SelectTrigger>

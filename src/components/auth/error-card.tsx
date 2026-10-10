@@ -1,5 +1,5 @@
 'use client';
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { RxExclamationTriangle as ExclamationTriangleIcon } from "react-icons/rx";
 import { useSearchParams } from "next/navigation";
 
 import { CardWrapper } from "@/components/auth/card-wrapper";

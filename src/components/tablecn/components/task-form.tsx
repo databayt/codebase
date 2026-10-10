@@ -70,7 +70,14 @@ export function TaskForm<T extends FieldValues>({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Label</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                items={TASK_LABEL_VALUES.map((item) => ({
+                  value: item,
+                  label: getLabelLabel(item),
+                }))}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a label" />
@@ -96,7 +103,14 @@ export function TaskForm<T extends FieldValues>({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                items={TASK_STATUS_VALUES.map((item) => ({
+                  value: item,
+                  label: getStatusLabel(item),
+                }))}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a status" />
@@ -122,7 +136,14 @@ export function TaskForm<T extends FieldValues>({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Priority</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                items={TASK_PRIORITY_VALUES.map((item) => ({
+                  value: item,
+                  label: getPriorityLabel(item),
+                }))}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a priority" />

@@ -131,13 +131,11 @@ export function CancelSubscriptionDialog({
                 handleDialogClose();
             }
         }}>
-            <DialogTrigger asChild>
-                <Button variant="outline">{triggerButtonText || "Cancel Subscription"}</Button>
-            </DialogTrigger>
+            <DialogTrigger render={<Button variant="outline" />}>{triggerButtonText || "Cancel Subscription"}</DialogTrigger>
             <DialogContent className={cn("sm:max-w-[1000px] flex flex-col md:flex-row p-0 overflow-hidden text-foreground w-[95%] md:w-[100%]", leftPanelImageUrl ? "" : "sm:max-w-[500px]", className)} style={themeStyles}>
                 <DialogTitle className="sr-only">{title}</DialogTitle>
                 <DialogClose
-                    className="absolute right-4 top-4 z-10 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                    className="absolute right-4 top-4 z-10 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-open:bg-accent data-open:text-muted-foreground"
                     onClick={handleDialogClose}
                 >
                     <X className="h-4 w-4" />

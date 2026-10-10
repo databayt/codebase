@@ -90,7 +90,7 @@ export const ChatWindow = memo(function ChatWindow({
   useEffect(() => {
     if (scrollAreaRef.current) {
       // Use smooth scrolling for better UX
-      const scrollElement = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      const scrollElement = scrollAreaRef.current.querySelector('[data-slot="scroll-area-viewport"]');
       if (scrollElement) {
         scrollElement.scrollTo({
           top: scrollElement.scrollHeight,

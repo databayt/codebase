@@ -2189,6 +2189,9 @@
       "name": "footer-02",
       "title": "Footer 02",
       "description": "Footer with newsletter signup and social links",
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
       "registryDependencies": [
         "button",
         "input",

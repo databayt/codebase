@@ -29,11 +29,8 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-} from "@/components/ui/popover";
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
+import { Popover } from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -48,6 +45,47 @@ import { useDebouncedCallback } from "@/components/tablecn/hooks/use-debounced-c
 import { getCellKey, getLineCount } from "@/components/tablecn/lib/data-grid";
 import { cn } from "@/lib/utils";
 import type { CellVariantProps, FileCellData } from "@/components/tablecn/types/data-grid";
+
+/**
+ * Base UI has no Popover.Anchor part: anchoring is done with the Positioner's
+ * `anchor` prop, which the shared ui/popover `PopoverContent` does not expose.
+ * Same classes as ui/popover `PopoverContent`, plus `anchor`.
+ */
+function PopoverContent({
+  className,
+  anchor,
+  align = "center",
+  alignOffset = 0,
+  side = "bottom",
+  sideOffset = 4,
+  ...props
+}: PopoverPrimitive.Popup.Props &
+  Pick<
+    PopoverPrimitive.Positioner.Props,
+    "anchor" | "align" | "alignOffset" | "side" | "sideOffset"
+  >) {
+  return (
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Positioner
+        anchor={anchor}
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+        sideOffset={sideOffset}
+        className="isolate z-50"
+      >
+        <PopoverPrimitive.Popup
+          data-slot="popover-content"
+          className={cn(
+            "z-50 flex w-72 origin-(--transform-origin) flex-col gap-4 rounded-md bg-popover p-4 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            className,
+          )}
+          {...props}
+        />
+      </PopoverPrimitive.Positioner>
+    </PopoverPrimitive.Portal>
+  );
+}
 
 export function ShortTextCell<TData>({
   cell,
@@ -255,15 +293,14 @@ export function LongTextCell<TData>({
     [meta, value, initialValue, rowIndex, columnId, readOnly],
   );
 
-  const onOpenAutoFocus: NonNullable<
-    React.ComponentProps<typeof PopoverContent>["onOpenAutoFocus"]
-  > = React.useCallback((event) => {
-    event.preventDefault();
+  // Base UI: `initialFocus` replaces Radix `onOpenAutoFocus` + preventDefault
+  const initialFocus = React.useCallback(() => {
     if (textareaRef.current) {
       textareaRef.current.focus();
       const length = textareaRef.current.value.length;
       textareaRef.current.setSelectionRange(length, length);
     }
+    return false;
   }, []);
 
   const onBlur = React.useCallback(() => {
@@ -311,27 +348,26 @@ export function LongTextCell<TData>({
 
   return (
     <Popover open={isEditing} onOpenChange={onOpenChange}>
-      <PopoverAnchor asChild>
-        <DataGridCellWrapper
-          ref={containerRef}
-          cell={cell}
-          table={table}
-          rowIndex={rowIndex}
-          columnId={columnId}
-          isEditing={isEditing}
-          isFocused={isFocused}
-          isSelected={isSelected}
-        >
-          <span data-slot="grid-cell-content">{value}</span>
-        </DataGridCellWrapper>
-      </PopoverAnchor>
+      <DataGridCellWrapper
+        ref={containerRef}
+        cell={cell}
+        table={table}
+        rowIndex={rowIndex}
+        columnId={columnId}
+        isEditing={isEditing}
+        isFocused={isFocused}
+        isSelected={isSelected}
+      >
+        <span data-slot="grid-cell-content">{value}</span>
+      </DataGridCellWrapper>
       <PopoverContent
         data-grid-cell-editor=""
+        anchor={containerRef}
         align="start"
         side="bottom"
         sideOffset={sideOffset}
         className="w-[400px] rounded-none p-0"
-        onOpenAutoFocus={onOpenAutoFocus}
+        initialFocus={initialFocus}
       >
         <Textarea
           placeholder="Enter text..."
@@ -749,14 +785,14 @@ export function CheckboxCell<TData>({
   }, []);
 
   const onCheckboxMouseDown = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
     },
     [],
   );
 
   const onCheckboxDoubleClick = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
     },
     [],
@@ -813,8 +849,8 @@ export function SelectCell<TData>({
   }
 
   const onValueChange = React.useCallback(
-    (newValue: string) => {
-      if (readOnly) return;
+    (newValue: string | null) => {
+      if (readOnly || newValue === null) return;
       setValue(newValue);
       meta?.onDataUpdate?.({ rowIndex, columnId, value: newValue });
       meta?.onCellEditingStop?.();
@@ -866,6 +902,7 @@ export function SelectCell<TData>({
     >
       {isEditing ? (
         <Select
+          items={options}
           value={value}
           onValueChange={onValueChange}
           open={isEditing}
@@ -883,7 +920,7 @@ export function SelectCell<TData>({
             align="start"
             alignOffset={-8}
             sideOffset={-8}
-            className="min-w-[calc(var(--radix-select-trigger-width)+16px)]"
+            className="min-w-[calc(var(--anchor-width)+16px)]"
           >
             {options.map((option) => (
               <SelectItem key={option.value} value={option.value}>
@@ -986,12 +1023,10 @@ export function MultiSelectCell<TData>({
     [meta, rowIndex, columnId, readOnly],
   );
 
-  const onOpenAutoFocus: NonNullable<
-    React.ComponentProps<typeof PopoverContent>["onOpenAutoFocus"]
-  > = React.useCallback((event) => {
-    event.preventDefault();
-    inputRef.current?.focus();
-  }, []);
+  const anchorRef = React.useRef<HTMLDivElement>(null);
+
+  // Base UI: `initialFocus` replaces Radix `onOpenAutoFocus` + preventDefault
+  const initialFocus = React.useCallback(() => inputRef.current ?? true, []);
 
   const onWrapperKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -1063,15 +1098,14 @@ export function MultiSelectCell<TData>({
     >
       {isEditing ? (
         <Popover open={isEditing} onOpenChange={onOpenChange}>
-          <PopoverAnchor asChild>
-            <div className="absolute inset-0" />
-          </PopoverAnchor>
+          <div ref={anchorRef} className="absolute inset-0" />
           <PopoverContent
             data-grid-cell-editor=""
+            anchor={anchorRef}
             align="start"
             sideOffset={sideOffset}
             className="w-[300px] rounded-none p-0"
-            onOpenAutoFocus={onOpenAutoFocus}
+            initialFocus={initialFocus}
           >
             <Command className="**:data-[slot=command-input-wrapper]:h-auto **:data-[slot=command-input-wrapper]:border-none **:data-[slot=command-input-wrapper]:p-0 [&_[data-slot=command-input-wrapper]_svg]:hidden">
               <div className="flex min-h-9 flex-wrap items-center gap-1 border-b px-3 py-1.5">
@@ -1198,6 +1232,7 @@ export function DateCell<TData>({
   const [value, setValue] = React.useState(initialValue ?? "");
   const containerRef = React.useRef<HTMLDivElement>(null);
   const meta = table.options.meta;
+  const anchorRef = React.useRef<HTMLSpanElement>(null);
 
   const prevInitialValueRef = React.useRef(initialValue);
   if (initialValue !== prevInitialValueRef.current) {
@@ -1259,14 +1294,13 @@ export function DateCell<TData>({
       onKeyDown={onWrapperKeyDown}
     >
       <Popover open={isEditing} onOpenChange={onOpenChange}>
-        <PopoverAnchor asChild>
-          <span data-slot="grid-cell-content">
-            {formatDateForDisplay(value)}
-          </span>
-        </PopoverAnchor>
+        <span ref={anchorRef} data-slot="grid-cell-content">
+          {formatDateForDisplay(value)}
+        </span>
         {isEditing && (
           <PopoverContent
             data-grid-cell-editor=""
+            anchor={anchorRef}
             align="start"
             alignOffset={-8}
             className="w-auto p-0"
@@ -1725,21 +1759,17 @@ export function FileCell<TData>({
     [meta, rowIndex, columnId, readOnly],
   );
 
-  const onEscapeKeyDown: NonNullable<
-    React.ComponentProps<typeof PopoverContent>["onEscapeKeyDown"]
-  > = React.useCallback((event) => {
-    // Prevent the escape key from propagating to the data grid's keyboard handler
-    // which would call blurCell() and remove focus from the cell
-    event.stopPropagation();
-  }, []);
+  // Radix `onEscapeKeyDown` + stopPropagation is gone: Base UI popups stop
+  // Escape propagation by default (keeps the grid from calling blurCell()).
 
-  const onOpenAutoFocus: NonNullable<
-    React.ComponentProps<typeof PopoverContent>["onOpenAutoFocus"]
-  > = React.useCallback((event) => {
-    event.preventDefault();
+  const anchorRef = React.useRef<HTMLDivElement>(null);
+
+  // Base UI: `initialFocus` replaces Radix `onOpenAutoFocus` + preventDefault
+  const initialFocus = React.useCallback(() => {
     queueMicrotask(() => {
       dropzoneRef.current?.focus();
     });
+    return false;
   }, []);
 
   const onWrapperKeyDown = React.useCallback(
@@ -1820,16 +1850,14 @@ export function FileCell<TData>({
     >
       {isEditing ? (
         <Popover open={isEditing} onOpenChange={onOpenChange}>
-          <PopoverAnchor asChild>
-            <div className="absolute inset-0" />
-          </PopoverAnchor>
+          <div ref={anchorRef} className="absolute inset-0" />
           <PopoverContent
             data-grid-cell-editor=""
+            anchor={anchorRef}
             align="start"
             sideOffset={sideOffset}
             className="w-[400px] rounded-none p-0"
-            onEscapeKeyDown={onEscapeKeyDown}
-            onOpenAutoFocus={onOpenAutoFocus}
+            initialFocus={initialFocus}
           >
             <div className="flex flex-col gap-2 p-3">
               <span id={labelId} className="sr-only">

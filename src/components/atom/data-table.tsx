@@ -189,10 +189,10 @@ export function DataTableToolbar({
       {children}
       {showColumnToggle && (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
+          <DropdownMenuTrigger
+            render={<Button variant="outline" className="ml-auto" />}
+          >
+            Columns <ChevronDown />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {table

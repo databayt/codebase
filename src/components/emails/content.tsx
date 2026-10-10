@@ -67,11 +67,9 @@ export default function EmailsContent() {
           </p>
         </div>
         <Dialog>
-          <DialogTrigger asChild>
-            <Button>
-              <Mail className="mr-2 h-4 w-4" />
-              Compose Email
-            </Button>
+          <DialogTrigger render={<Button />}>
+            <Mail className="mr-2 h-4 w-4" />
+            Compose Email
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>

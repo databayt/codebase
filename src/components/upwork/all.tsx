@@ -159,7 +159,11 @@ export function ProposalList() {
           />
         </div>
 
-        <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as any)}>
+        <Select
+          value={statusFilter}
+          onValueChange={(v) => setStatusFilter(v as any)}
+          items={[{ value: "all", label: "All Status" }, ...PROPOSAL_STATUS_OPTIONS]}
+        >
           <SelectTrigger className="w-[150px]">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
@@ -173,7 +177,11 @@ export function ProposalList() {
           </SelectContent>
         </Select>
 
-        <Select value={toneFilter} onValueChange={(v) => setToneFilter(v as any)}>
+        <Select
+          value={toneFilter}
+          onValueChange={(v) => setToneFilter(v as any)}
+          items={[{ value: "all", label: "All Tones" }, ...PROPOSAL_TONES]}
+        >
           <SelectTrigger className="w-[150px]">
             <SelectValue placeholder="Tone" />
           </SelectTrigger>

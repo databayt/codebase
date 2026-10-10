@@ -20,15 +20,15 @@ export function TwoButtons({
 }: Props) {
   return (
     <div className={cn("flex flex-wrap gap-4", className)}>
-      <Button asChild>
-        <Link href={primaryHref}>
-          {primaryLabel}
-        </Link>
+      <Button nativeButton={false} render={<Link href={primaryHref} />}>
+        {primaryLabel}
       </Button>
-      <Button variant="ghost" asChild>
-        <Link href={secondaryHref}>
-          {secondaryLabel}
-        </Link>
+      <Button
+        variant="ghost"
+        nativeButton={false}
+        render={<Link href={secondaryHref} />}
+      >
+        {secondaryLabel}
       </Button>
     </div>
   )

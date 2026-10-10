@@ -13,7 +13,7 @@ import puppeteer from "puppeteer"
 const require = createRequire(import.meta.url)
 const { registry } = require("../src/registry/bases/base/registry")
 
-const STYLE = "base-nova"
+const STYLE = "base-vega"
 const BASE_URL = process.env.CAPTURE_BASE_URL ?? "http://localhost:3000"
 const OUT_DIR = path.join(process.cwd(), "public", "r", "styles", STYLE)
 

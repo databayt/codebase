@@ -949,6 +949,7 @@ export const blocks: Registry["items"] = [
     description: "Footer with newsletter signup and social links",
     type: "registry:block",
     registryDependencies: ["button", "input", "separator"],
+    dependencies: ["@tabler/icons-react"],
     files: [
       {
         path: "blocks/footer-02/page.tsx",

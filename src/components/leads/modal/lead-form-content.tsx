@@ -233,6 +233,7 @@ export function LeadFormContent({ form, isView, dictionary }: LeadFormContentPro
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   disabled={isView}
+                  items={LEAD_STATUS_OPTIONS}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -262,6 +263,7 @@ export function LeadFormContent({ form, isView, dictionary }: LeadFormContentPro
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   disabled={isView}
+                  items={LEAD_SOURCE_OPTIONS}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -291,6 +293,7 @@ export function LeadFormContent({ form, isView, dictionary }: LeadFormContentPro
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   disabled={isView}
+                  items={PRIORITY_OPTIONS}
                 >
                   <FormControl>
                     <SelectTrigger>

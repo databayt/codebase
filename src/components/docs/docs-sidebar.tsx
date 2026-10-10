@@ -68,11 +68,11 @@ export function DocsSidebar({
                   return (
                     <SidebarMenuItem key={href}>
                       <SidebarMenuButton
-                        asChild
                         isActive={isActive}
                         className="relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium p-0"
+                        render={<Link href={fullHref} className="block w-full" />}
                       >
-                        <Link href={fullHref} className="block w-full">{name}</Link>
+                        {name}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   )

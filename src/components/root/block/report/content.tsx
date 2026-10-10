@@ -138,6 +138,7 @@ export default function ReportBlockContent({
             <Select
               value={selectedType}
               onValueChange={(v) => setSelectedType(v as ReportType)}
+              items={REPORT_TYPE_LABELS}
             >
               <SelectTrigger className="w-[280px]">
                 <SelectValue placeholder="Select report type" />

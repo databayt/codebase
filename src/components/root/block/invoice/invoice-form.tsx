@@ -255,7 +255,13 @@ export function InvoiceForm({
                   <Label htmlFor="currency">Currency</Label>
                   <Select
                     value={form.watch("currency")}
-                    onValueChange={(value) => form.setValue("currency", value)}
+                    onValueChange={(value) => {
+                      if (value) form.setValue("currency", value)
+                    }}
+                    items={CURRENCIES.map((currency) => ({
+                      value: currency.code,
+                      label: `${currency.symbol} ${currency.code} - ${currency.name}`,
+                    }))}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select currency" />

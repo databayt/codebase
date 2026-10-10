@@ -1,7 +1,6 @@
 "use client";
 
 import { ShareIcon } from "lucide-react";
-import type { TooltipContentProps } from "@radix-ui/react-tooltip";
 import Image from "next/image";
 import { ComponentPropsWithRef, type FC } from "react";
 
@@ -12,7 +11,7 @@ import { Thread } from "./thread";
 
 type ButtonWithTooltipProps = ComponentPropsWithRef<typeof Button> & {
   tooltip: string;
-  side?: TooltipContentProps["side"];
+  side?: ComponentPropsWithRef<typeof TooltipContent>["side"];
 };
 
 const ButtonWithTooltip: FC<ButtonWithTooltipProps> = ({
@@ -23,11 +22,9 @@ const ButtonWithTooltip: FC<ButtonWithTooltipProps> = ({
 }) => {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button {...rest}>
-          {children}
-          <span className="sr-only">{tooltip}</span>
-        </Button>
+      <TooltipTrigger render={<Button {...rest} />}>
+        {children}
+        <span className="sr-only">{tooltip}</span>
       </TooltipTrigger>
       <TooltipContent side={side}>{tooltip}</TooltipContent>
     </Tooltip>

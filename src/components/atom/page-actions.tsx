@@ -36,17 +36,18 @@ export function PageActions({ actions, className }: PageActionsProps) {
           <Button
             key={index}
             variant={action.variant || (index === 0 ? "default" : "outline")}
-            asChild
+            nativeButton={false}
+            render={
+              <Link
+                href={action.href}
+                target={action.external ? "_blank" : undefined}
+                rel={action.external ? "noopener noreferrer" : undefined}
+              />
+            }
           >
-            <Link
-              href={action.href}
-              target={action.external ? "_blank" : undefined}
-              rel={action.external ? "noopener noreferrer" : undefined}
-            >
-              {action.iconPosition === "left" && iconElement}
-              {action.label}
-              {action.iconPosition !== "left" && iconElement}
-            </Link>
+            {action.iconPosition === "left" && iconElement}
+            {action.label}
+            {action.iconPosition !== "left" && iconElement}
           </Button>
         )
       })}

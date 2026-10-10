@@ -157,17 +157,21 @@ export function NotionPromptForm() {
         <InputGroupAddon align="block-end">
           <Popover open={mentionOpen} onOpenChange={setMentionOpen}>
             <Tooltip>
-              <TooltipTrigger asChild>
-                <PopoverTrigger asChild>
-                  <InputGroupButton
-                    variant="outline"
-                    className="rounded-full"
-                    size="icon-xs"
-                    aria-label="Mention"
-                  >
-                    <AtSignIcon />
-                  </InputGroupButton>
-                </PopoverTrigger>
+              <TooltipTrigger
+                render={
+                  <PopoverTrigger
+                    render={
+                      <InputGroupButton
+                        variant="outline"
+                        className="rounded-full"
+                        size="icon-xs"
+                        aria-label="Mention"
+                      />
+                    }
+                  />
+                }
+              >
+                <AtSignIcon />
               </TooltipTrigger>
               <TooltipContent>Add mention</TooltipContent>
             </Tooltip>
@@ -224,31 +228,31 @@ export function NotionPromptForm() {
             </PopoverContent>
           </Popover>
           <Tooltip>
-            <TooltipTrigger asChild>
-              <InputGroupButton
-                variant="outline"
-                className="rounded-full"
-                size="icon-xs"
-                aria-label="Attach file"
-              >
-                <PaperclipIcon />
-              </InputGroupButton>
+            <TooltipTrigger
+              render={
+                <InputGroupButton
+                  variant="outline"
+                  className="rounded-full"
+                  size="icon-xs"
+                  aria-label="Attach file"
+                />
+              }
+            >
+              <PaperclipIcon />
             </TooltipTrigger>
             <TooltipContent>Attach file</TooltipContent>
           </Tooltip>
           <DropdownMenu open={modelOpen} onOpenChange={setModelOpen}>
-            <DropdownMenuTrigger asChild>
-              <InputGroupButton variant="ghost" className="ml-auto gap-1">
-                <SparklesIcon className="size-3" />
-                {selectedModel.name}
-                <ChevronDownIcon className="size-3" />
-              </InputGroupButton>
+            <DropdownMenuTrigger render={<InputGroupButton variant="ghost" className="ml-auto gap-1" />}>
+              <SparklesIcon className="size-3" />
+              {selectedModel.name}
+              <ChevronDownIcon className="size-3" />
             </DropdownMenuTrigger>
             <DropdownMenuContent side="top" align="end">
               {MODELS.map((model) => (
                 <DropdownMenuItem
                   key={model.id}
-                  onSelect={() => {
+                  onClick={() => {
                     setSelectedModel(model)
                     setModelOpen(false)
                   }}

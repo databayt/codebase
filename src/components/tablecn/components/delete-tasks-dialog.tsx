@@ -30,8 +30,9 @@ import { useMediaQuery } from "@/components/tablecn/hooks/use-media-query";
 
 import { deleteTasks } from "@/components/tablecn/actions/actions";
 
-interface DeleteTasksDialogProps
-  extends React.ComponentPropsWithoutRef<typeof Dialog> {
+interface DeleteTasksDialogProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   tasks: Row<TablecnTask>["original"][];
   showTrigger?: boolean;
   onSuccess?: () => void;
@@ -41,7 +42,8 @@ export function DeleteTasksDialog({
   tasks,
   showTrigger = true,
   onSuccess,
-  ...props
+  open,
+  onOpenChange,
 }: DeleteTasksDialogProps) {
   const [isDeletePending, startDeleteTransition] = React.useTransition();
   const isDesktop = useMediaQuery("(min-width: 640px)");
@@ -57,7 +59,7 @@ export function DeleteTasksDialog({
         return;
       }
 
-      props.onOpenChange?.(false);
+      onOpenChange?.(false);
       toast.success("Tasks deleted");
       onSuccess?.();
     });
@@ -65,13 +67,11 @@ export function DeleteTasksDialog({
 
   if (isDesktop) {
     return (
-      <Dialog {...props}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         {showTrigger ? (
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">
-              <Trash className="mr-2 size-4" aria-hidden="true" />
-              Delete ({tasks.length})
-            </Button>
+          <DialogTrigger render={<Button variant="outline" size="sm" />}>
+            <Trash className="mr-2 size-4" aria-hidden="true" />
+            Delete ({tasks.length})
           </DialogTrigger>
         ) : null}
         <DialogContent>
@@ -84,8 +84,8 @@ export function DeleteTasksDialog({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="gap-2 sm:space-x-0">
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+            <DialogClose render={<Button variant="outline" />}>
+              Cancel
             </DialogClose>
             <Button
               aria-label="Delete selected rows"
@@ -108,13 +108,11 @@ export function DeleteTasksDialog({
   }
 
   return (
-    <Drawer {...props}>
+    <Drawer open={open} onOpenChange={onOpenChange}>
       {showTrigger ? (
-        <DrawerTrigger asChild>
-          <Button variant="outline" size="sm">
-            <Trash className="mr-2 size-4" aria-hidden="true" />
-            Delete ({tasks.length})
-          </Button>
+        <DrawerTrigger render={<Button variant="outline" size="sm" />}>
+          <Trash className="mr-2 size-4" aria-hidden="true" />
+          Delete ({tasks.length})
         </DrawerTrigger>
       ) : null}
       <DrawerContent>
@@ -127,8 +125,8 @@ export function DeleteTasksDialog({
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="gap-2 sm:space-x-0">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+          <DrawerClose render={<Button variant="outline" />}>
+            Cancel
           </DrawerClose>
           <Button
             aria-label="Delete selected rows"

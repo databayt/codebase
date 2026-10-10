@@ -114,18 +114,20 @@ export function CardsChat({ dictionary }: CardsChatProps) {
               <p className="text-sm text-muted-foreground">m@example.com</p>
             </div>
           </div>
-          <TooltipProvider delayDuration={0}>
+          <TooltipProvider delay={0}>
             <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="ml-auto rounded-full"
-                  onClick={() => setOpen(true)}
-                >
-                  <Plus />
-                  <span className="sr-only">New message</span>
-                </Button>
+              <TooltipTrigger
+                render={
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="ml-auto rounded-full"
+                    onClick={() => setOpen(true)}
+                  />
+                }
+              >
+                <Plus />
+                <span className="sr-only">New message</span>
               </TooltipTrigger>
               <TooltipContent sideOffset={10}>New message</TooltipContent>
             </Tooltip>

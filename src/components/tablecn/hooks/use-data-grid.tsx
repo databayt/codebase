@@ -1,6 +1,6 @@
 "use client";
 
-import { useDirection } from "@radix-ui/react-direction";
+import { useDirection } from "@/components/ui/direction";
 import {
   type ColumnDef,
   type ColumnFiltersState,

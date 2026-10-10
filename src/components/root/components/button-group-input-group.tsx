@@ -35,17 +35,19 @@ export function ButtonGroupInputGroup() {
           />
           <InputGroupAddon align="inline-end">
             <Tooltip>
-              <TooltipTrigger asChild>
-                <InputGroupButton
-                  onClick={() => setVoiceEnabled(!voiceEnabled)}
-                  data-active={voiceEnabled}
-                  className="data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
-                  aria-pressed={voiceEnabled}
-                  size="icon-xs"
-                  aria-label="Voice Mode"
-                >
-                  <AudioLinesIcon />
-                </InputGroupButton>
+              <TooltipTrigger
+                render={
+                  <InputGroupButton
+                    onClick={() => setVoiceEnabled(!voiceEnabled)}
+                    data-active={voiceEnabled}
+                    className="data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
+                    aria-pressed={voiceEnabled}
+                    size="icon-xs"
+                    aria-label="Voice Mode"
+                  />
+                }
+              >
+                <AudioLinesIcon />
               </TooltipTrigger>
               <TooltipContent>Voice Mode</TooltipContent>
             </Tooltip>

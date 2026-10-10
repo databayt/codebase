@@ -15,7 +15,15 @@ interface Props {
 
 export default function ProviderSelect({ value, onChange }: Props) {
   return (
-    <Select value={value} onValueChange={(v) => onChange(v as any)}>
+    <Select
+      value={value}
+      onValueChange={(v) => onChange(v as any)}
+      items={{
+        gemini: "Gemini 1.5 (free)",
+        openai: "OpenAI GPT-4o Mini",
+        local: "Local Heuristic",
+      }}
+    >
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Provider" />
       </SelectTrigger>

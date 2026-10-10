@@ -65,9 +65,7 @@ export function SettingsDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button size="sm">Open Dialog</Button>
-      </DialogTrigger>
+      <DialogTrigger render={<Button size="sm" />}>Open Dialog</DialogTrigger>
       <DialogContent className="overflow-hidden p-0 md:max-h-[500px] md:max-w-[700px] lg:max-w-[800px]">
         <DialogTitle className="sr-only">Settings</DialogTitle>
         <DialogDescription className="sr-only">
@@ -82,13 +80,11 @@ export function SettingsDialog() {
                     {data.nav.map((item) => (
                       <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton
-                          asChild
                           isActive={item.name === "Messages & media"}
+                          render={<a href="#" />}
                         >
-                          <a href="#">
-                            <item.icon />
-                            <span>{item.name}</span>
-                          </a>
+                          <item.icon />
+                          <span>{item.name}</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}

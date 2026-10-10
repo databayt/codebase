@@ -180,9 +180,11 @@ export const PromptInputActionAddAttachments = ({
     return (
         <DropdownMenuItem
             data-slot="prompt-input-action-add-attachments"
+            // Radix kept the menu open via onSelect preventDefault; Base UI
+            // equivalent is closeOnClick={false} + onClick
+            closeOnClick={false}
             {...props}
-            onSelect={(e) => {
-                e.preventDefault();
+            onClick={() => {
                 attachments.openFileDialog();
             }}
         >
@@ -578,11 +580,16 @@ export const PromptInputActionMenuTrigger = ({
                                                  children,
                                                  ...props
                                              }: PromptInputActionMenuTriggerProps) => (
-    <DropdownMenuTrigger asChild data-slot="prompt-input-action-menu-trigger">
-        <PromptInputButton className={className} {...props}>
-            {children ?? <PlusIcon className="size-4" />}
-        </PromptInputButton>
-    </DropdownMenuTrigger>
+    <DropdownMenuTrigger
+        data-slot="prompt-input-action-menu-trigger"
+        render={
+            // children stay on the render element so PromptInputButton can
+            // size itself (icon vs default) from its own child count
+            <PromptInputButton className={className} {...props}>
+                {children ?? <PlusIcon className="size-4" />}
+            </PromptInputButton>
+        }
+    />
 );
 
 export type PromptInputActionMenuContentProps = ComponentProps<

@@ -20,7 +20,7 @@ interface TablecnLayoutProps {
 
 export default async function TablecnLayout({ children }: TablecnLayoutProps) {
   return (
-    <TooltipProvider delayDuration={120}>
+    <TooltipProvider delay={120}>
       <NuqsAdapter>
         <div className="relative flex min-h-screen flex-col">
           <SiteHeader />

@@ -9,7 +9,7 @@ import { registryItemSchema, type RegistryItem } from "shadcn/schema"
 import { getComponent as getStylesComponent } from "@/registry/__components__"
 import { Index as StylesIndex } from "@/registry/__index__"
 
-export const DEFAULT_STYLE = "base-nova"
+export const DEFAULT_STYLE = "base-vega"
 
 type RegistryItemFile = NonNullable<RegistryItem["files"]>[number]
 

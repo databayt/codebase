@@ -113,10 +113,10 @@ function DataTableActionBarAction({
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>{trigger}</TooltipTrigger>
+      <TooltipTrigger render={trigger} />
       <TooltipContent
         sideOffset={6}
-        className="border bg-accent font-semibold text-foreground dark:bg-zinc-900 [&>span]:hidden"
+        className="border bg-accent font-semibold text-foreground dark:bg-zinc-900 [&>[aria-hidden=true]]:hidden"
       >
         <p>{tooltip}</p>
       </TooltipContent>
@@ -145,19 +145,21 @@ function DataTableActionBarSelection<TData>({
         className="mr-1 ml-2 data-[orientation=vertical]:h-4"
       />
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-5"
-            onClick={onClearSelection}
-          >
-            <X className="size-3.5" />
-          </Button>
+        <TooltipTrigger
+          render={
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-5"
+              onClick={onClearSelection}
+            />
+          }
+        >
+          <X className="size-3.5" />
         </TooltipTrigger>
         <TooltipContent
           sideOffset={10}
-          className="flex items-center gap-2 border bg-accent px-2 py-1 font-semibold text-foreground dark:bg-zinc-900 [&>span]:hidden"
+          className="flex items-center gap-2 border bg-accent px-2 py-1 font-semibold text-foreground dark:bg-zinc-900 [&>[aria-hidden=true]]:hidden"
         >
           <p>Clear selection</p>
           <kbd className="select-none rounded border bg-background px-1.5 py-px font-mono font-normal text-[0.7rem] text-foreground shadow-xs">

@@ -173,12 +173,12 @@ function BlockViewerToolbar({ styleName }: { styleName: string }) {
       <div className="ml-auto flex items-center gap-2">
         <div className="h-8 items-center gap-1.5 rounded-md border p-[3px] shadow-none">
           <ToggleGroup
-            type="single"
-            defaultValue="100%"
+            defaultValue={["100%"]}
             onValueChange={(value) => {
               setView("preview")
-              if (resizablePanelRef?.current) {
-                resizablePanelRef.current.resize(value)
+              const [size] = value
+              if (size && resizablePanelRef?.current) {
+                resizablePanelRef.current.resize(size)
               }
             }}
             className="gap-1 *:data-[slot=toggle-group-item]:size-6! *:data-[slot=toggle-group-item]:rounded-sm!"
@@ -197,13 +197,12 @@ function BlockViewerToolbar({ styleName }: { styleName: string }) {
               size="icon"
               variant="ghost"
               className="size-6 rounded-sm p-0"
-              asChild
               title="Open in New Tab"
+              nativeButton={false}
+              render={<Link href={viewUrl} target="_blank" />}
             >
-              <Link href={viewUrl} target="_blank">
-                <span className="sr-only">Open in New Tab</span>
-                <Fullscreen />
-              </Link>
+              <span className="sr-only">Open in New Tab</span>
+              <Fullscreen />
             </Button>
             <Separator orientation="vertical" className="h-4!" />
             <Button
@@ -413,7 +412,7 @@ function Tree({ item, index }: { item: FileTree; index: number }) {
         <SidebarMenuButton
           isActive={item.path === activeFile}
           onClick={() => item.path && setActiveFile(item.path)}
-          className="rounded-none pl-(--index) whitespace-nowrap hover:bg-muted-foreground/15 focus:bg-muted-foreground/15 focus-visible:bg-muted-foreground/15 active:bg-muted-foreground/15 data-[active=true]:bg-muted-foreground/15"
+          className="rounded-none pl-(--index) whitespace-nowrap hover:bg-muted-foreground/15 focus:bg-muted-foreground/15 focus-visible:bg-muted-foreground/15 active:bg-muted-foreground/15 data-active:bg-muted-foreground/15"
           data-index={index}
           style={
             {
@@ -432,22 +431,24 @@ function Tree({ item, index }: { item: FileTree; index: number }) {
   return (
     <SidebarMenuItem>
       <Collapsible
-        className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90"
+        className="group/collapsible [&[data-open]>button>svg:first-child]:rotate-90"
         defaultOpen
       >
-        <CollapsibleTrigger asChild>
-          <SidebarMenuButton
-            className="rounded-none pl-(--index) whitespace-nowrap hover:bg-muted-foreground/15 focus:bg-muted-foreground/15 focus-visible:bg-muted-foreground/15 active:bg-muted-foreground/15 data-[active=true]:bg-muted-foreground/15"
-            style={
-              {
-                "--index": `${index * (index === 1 ? 1 : 1.2)}rem`,
-              } as React.CSSProperties
-            }
-          >
-            <ChevronRight className="transition-transform" />
-            <Folder />
-            {item.name}
-          </SidebarMenuButton>
+        <CollapsibleTrigger
+          render={
+            <SidebarMenuButton
+              className="rounded-none pl-(--index) whitespace-nowrap hover:bg-muted-foreground/15 focus:bg-muted-foreground/15 focus-visible:bg-muted-foreground/15 active:bg-muted-foreground/15 data-active:bg-muted-foreground/15"
+              style={
+                {
+                  "--index": `${index * (index === 1 ? 1 : 1.2)}rem`,
+                } as React.CSSProperties
+              }
+            />
+          }
+        >
+          <ChevronRight className="transition-transform" />
+          <Folder />
+          {item.name}
         </CollapsibleTrigger>
         <CollapsibleContent>
           <SidebarMenuSub className="m-0 w-full translate-x-0 border-none p-0">

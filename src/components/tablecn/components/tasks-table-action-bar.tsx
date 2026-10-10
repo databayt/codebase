@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectTrigger } from "@radix-ui/react-select";
+import { Select as SelectPrimitive } from "@base-ui/react/select";
 import type { Table } from "@tanstack/react-table";
 import { ArrowUp, CheckCircle2, Download, Trash2 } from "lucide-react";
 import * as React from "react";
@@ -111,19 +111,21 @@ export function TasksTableActionBar({ table }: TasksTableActionBarProps) {
       />
       <div className="flex items-center gap-1.5">
         <Select
-          onValueChange={(value: TablecnTaskStatus) =>
-            onTaskUpdate({ field: "status", value })
-          }
+          onValueChange={(value: TablecnTaskStatus | null) => {
+            if (value) onTaskUpdate({ field: "status", value });
+          }}
         >
-          <SelectTrigger asChild>
-            <DataTableActionBarAction
-              size="icon"
-              tooltip="Update status"
-              isPending={getIsActionPending("update-status")}
-            >
-              <CheckCircle2 />
-            </DataTableActionBarAction>
-          </SelectTrigger>
+          <SelectPrimitive.Trigger
+            render={
+              <DataTableActionBarAction
+                size="icon"
+                tooltip="Update status"
+                isPending={getIsActionPending("update-status")}
+              />
+            }
+          >
+            <CheckCircle2 />
+          </SelectPrimitive.Trigger>
           <SelectContent align="center">
             <SelectGroup>
               {TASK_STATUS_VALUES.map((status) => (
@@ -135,19 +137,21 @@ export function TasksTableActionBar({ table }: TasksTableActionBarProps) {
           </SelectContent>
         </Select>
         <Select
-          onValueChange={(value: TablecnTaskPriority) =>
-            onTaskUpdate({ field: "priority", value })
-          }
+          onValueChange={(value: TablecnTaskPriority | null) => {
+            if (value) onTaskUpdate({ field: "priority", value });
+          }}
         >
-          <SelectTrigger asChild>
-            <DataTableActionBarAction
-              size="icon"
-              tooltip="Update priority"
-              isPending={getIsActionPending("update-priority")}
-            >
-              <ArrowUp />
-            </DataTableActionBarAction>
-          </SelectTrigger>
+          <SelectPrimitive.Trigger
+            render={
+              <DataTableActionBarAction
+                size="icon"
+                tooltip="Update priority"
+                isPending={getIsActionPending("update-priority")}
+              />
+            }
+          >
+            <ArrowUp />
+          </SelectPrimitive.Trigger>
           <SelectContent align="center">
             <SelectGroup>
               {TASK_PRIORITY_VALUES.map((priority) => (

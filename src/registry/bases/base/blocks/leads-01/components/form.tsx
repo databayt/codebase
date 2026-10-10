@@ -35,6 +35,21 @@ const leadFormSchema = z.object({
 
 type LeadFormValues = z.infer<typeof leadFormSchema>
 
+const statusItems = [
+  { label: "New", value: "new" },
+  { label: "Contacted", value: "contacted" },
+  { label: "Qualified", value: "qualified" },
+  { label: "Converted", value: "converted" },
+]
+
+const sourceItems = [
+  { label: "Website", value: "website" },
+  { label: "Referral", value: "referral" },
+  { label: "Social Media", value: "social" },
+  { label: "Email Campaign", value: "email" },
+  { label: "Other", value: "other" },
+]
+
 export function LeadForm() {
   const form = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
@@ -114,7 +129,11 @@ export function LeadForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  items={statusItems}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select status" />
@@ -138,7 +157,11 @@ export function LeadForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Source</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  items={sourceItems}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select source" />

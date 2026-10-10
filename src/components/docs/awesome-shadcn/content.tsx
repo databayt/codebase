@@ -32,7 +32,14 @@ export default function AwesomeShadcn() {
   return (
     <div className="py-4">
       <div className="mb-8 flex items-center gap-3">
-        <Select value={selectedTag} onValueChange={setSelectedTag}>
+        <Select
+          value={selectedTag}
+          onValueChange={(value) => setSelectedTag(value ?? "all")}
+          items={[
+            { value: "all", label: "All tags" },
+            ...tags.map((t) => ({ value: t, label: t })),
+          ]}
+        >
           <SelectTrigger className="w-[160px]">
             <SelectValue placeholder="Filter by tag" />
           </SelectTrigger>

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ColumnSort, SortDirection, Table } from "@tanstack/react-table";
+import type { ColumnSort, Table } from "@tanstack/react-table";
 import {
   ArrowDownUp,
   ChevronsUpDown,
@@ -173,24 +173,22 @@ export function DataTableSortList<TData>({
       getItemValue={(item) => item.id}
     >
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button variant="outline" size="sm" onKeyDown={onTriggerKeyDown}>
-            <ArrowDownUp />
-            Sort
-            {sorting.length > 0 && (
-              <Badge
-                variant="secondary"
-                className="h-[18.24px] rounded-[3.2px] px-[5.12px] font-mono font-normal text-[10.4px]"
-              >
-                {sorting.length}
-              </Badge>
-            )}
-          </Button>
+        <PopoverTrigger render={<Button variant="outline" size="sm" onKeyDown={onTriggerKeyDown} />}>
+          <ArrowDownUp />
+          Sort
+          {sorting.length > 0 && (
+            <Badge
+              variant="secondary"
+              className="h-[18.24px] rounded-[3.2px] px-[5.12px] font-mono font-normal text-[10.4px]"
+            >
+              {sorting.length}
+            </Badge>
+          )}
         </PopoverTrigger>
         <PopoverContent
           aria-labelledby={labelId}
           aria-describedby={descriptionId}
-          className="flex w-full max-w-[var(--radix-popover-content-available-width)] origin-[var(--radix-popover-content-transform-origin)] flex-col gap-3.5 p-4 sm:min-w-[380px]"
+          className="flex w-full max-w-[var(--available-width)] origin-[var(--transform-origin)] flex-col gap-3.5 p-4 sm:min-w-[380px]"
           {...props}
         >
           <div className="flex flex-col gap-1">
@@ -316,21 +314,23 @@ function DataTableSortItem({
         onKeyDown={onItemKeyDown}
       >
         <Popover open={showFieldSelector} onOpenChange={setShowFieldSelector}>
-          <PopoverTrigger asChild>
-            <Button
-              id={fieldTriggerId}
-              aria-controls={fieldListboxId}
-              variant="outline"
-              size="sm"
-              className="w-44 justify-between rounded font-normal"
-            >
-              <span className="truncate">{columnLabels.get(sort.id)}</span>
-              <ChevronsUpDown className="opacity-50" />
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button
+                id={fieldTriggerId}
+                aria-controls={fieldListboxId}
+                variant="outline"
+                size="sm"
+                className="w-44 justify-between rounded font-normal"
+              />
+            }
+          >
+            <span className="truncate">{columnLabels.get(sort.id)}</span>
+            <ChevronsUpDown className="opacity-50" />
           </PopoverTrigger>
           <PopoverContent
             id={fieldListboxId}
-            className="w-[var(--radix-popover-trigger-width)] origin-[var(--radix-popover-content-transform-origin)] p-0"
+            className="w-[var(--anchor-width)] origin-[var(--transform-origin)] p-0"
           >
             <Command>
               <CommandInput placeholder="Search fields..." />
@@ -355,9 +355,11 @@ function DataTableSortItem({
           open={showDirectionSelector}
           onOpenChange={setShowDirectionSelector}
           value={sort.desc ? "desc" : "asc"}
-          onValueChange={(value: SortDirection) =>
-            onSortUpdate(sort.id, { desc: value === "desc" })
-          }
+          items={dataTableConfig.sortOrders}
+          onValueChange={(value: string | null) => {
+            if (!value) return;
+            onSortUpdate(sort.id, { desc: value === "desc" });
+          }}
         >
           <SelectTrigger
             aria-controls={directionListboxId}
@@ -367,7 +369,7 @@ function DataTableSortItem({
           </SelectTrigger>
           <SelectContent
             id={directionListboxId}
-            className="min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)]"
+            className="min-w-[var(--anchor-width)] origin-[var(--transform-origin)]"
           >
             {dataTableConfig.sortOrders.map((order) => (
               <SelectItem key={order.value} value={order.value}>

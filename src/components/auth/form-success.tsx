@@ -1,4 +1,4 @@
-import { CheckCircledIcon } from "@radix-ui/react-icons";
+import { RxCheckCircled as CheckCircledIcon } from "react-icons/rx";
 
 interface FormSuccessProps {
   message?: string;

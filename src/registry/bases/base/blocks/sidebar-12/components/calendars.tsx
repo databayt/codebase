@@ -34,13 +34,11 @@ export function Calendars({
               className="group/collapsible"
             >
               <SidebarGroupLabel
-                asChild
                 className="group/label w-full text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                render={<CollapsibleTrigger />}
               >
-                <CollapsibleTrigger>
-                  {calendar.name}{" "}
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </CollapsibleTrigger>
+                {calendar.name}{" "}
+                <ChevronRight className="ml-auto transition-transform group-data-open/collapsible:rotate-90" />
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>

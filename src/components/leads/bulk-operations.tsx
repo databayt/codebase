@@ -10,6 +10,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuGroup,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -86,17 +87,14 @@ export function BulkOperations({ selectedLeads, onComplete }: BulkOperationsProp
       </Badge>
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            size="sm"
-            disabled={isProcessing}
-          >
-            Bulk Actions
-            <ChevronDown className="h-4 w-4 ml-2" />
-          </Button>
+        <DropdownMenuTrigger render={<Button size="sm" disabled={isProcessing} />}>
+          Bulk Actions
+          <ChevronDown className="h-4 w-4 ml-2" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Bulk Operations</DropdownMenuLabel>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Bulk Operations</DropdownMenuLabel>
+          </DropdownMenuGroup>
           <DropdownMenuSeparator />
 
           <DropdownMenuItem onClick={() => handleBulkStatusUpdate('contacted')}>

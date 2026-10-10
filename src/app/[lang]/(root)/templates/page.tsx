@@ -30,10 +30,8 @@ export default async function TemplatesPage({
       ))}
       <div className="container-wrapper">
         <div className="container flex justify-center py-6">
-          <Button asChild variant="outline">
-            <Link href={`/${lang}/templates/sidebar`}>
-              Browse more templates
-            </Link>
+          <Button variant="outline" render={<Link href={`/${lang}/templates/sidebar`} />} nativeButton={false}>
+            Browse more templates
           </Button>
         </div>
       </div>

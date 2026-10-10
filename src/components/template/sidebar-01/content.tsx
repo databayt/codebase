@@ -65,11 +65,11 @@ export function DocsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
                 return (
                   <SidebarMenuItem key={href}>
                     <SidebarMenuButton
-                      asChild
                       isActive={isActive}
-                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-0"
+                      className="data-active:bg-accent data-active:border-accent relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium px-0"
+                      render={<Link href={href} />}
                     >
-                      <Link href={href}>{name}</Link>
+                      {name}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )

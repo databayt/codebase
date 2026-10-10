@@ -64,11 +64,11 @@ export function AtomsSidebar({
                     return (
                       <SidebarMenuItem key={href}>
                         <SidebarMenuButton
-                          asChild
                           isActive={isActive}
                           className="relative h-[30px] w-full border border-transparent text-[0.8rem] font-medium p-0"
+                          render={<Link href={href} className="block w-full" />}
                         >
-                          <Link href={href} className="block w-full">{name}</Link>
+                          {name}
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     )

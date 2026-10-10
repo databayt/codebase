@@ -190,6 +190,10 @@ const SettingsPage = () => {
                       disabled={isPending}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      items={{
+                        [UserRole.ADMIN]: "Admin",
+                        [UserRole.USER]: "User",
+                      }}
                     >
                       <FormControl>
                         <SelectTrigger>

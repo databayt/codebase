@@ -285,7 +285,18 @@ const mdxComponents = {
         </>
       )
     },
-    Accordion,
+    // MDX content still writes the radix API (`type="single" collapsible`,
+    // `type="multiple"`); Base UI's Accordion takes a `multiple` boolean and
+    // is always collapsible, so translate here instead of leaking the props
+    // onto the DOM.
+    Accordion: ({
+      type,
+      collapsible: _collapsible,
+      ...props
+    }: ComponentProps<typeof Accordion> & {
+      type?: "single" | "multiple"
+      collapsible?: boolean
+    }) => <Accordion multiple={type === "multiple"} {...props} />,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
@@ -313,7 +324,7 @@ const mdxComponents = {
     }: ComponentProps<typeof TabsTrigger>) => (
       <TabsTrigger
         className={cn(
-          "text-muted-foreground data-[state=active]:text-foreground data-[state=active]:border-primary dark:data-[state=active]:border-primary hover:text-primary rounded-none border-0 border-b-2 border-transparent bg-transparent px-0 pb-3 text-base data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:data-[state=active]:bg-transparent",
+          "text-muted-foreground data-active:text-foreground data-active:border-primary dark:data-active:border-primary hover:text-primary rounded-none border-0 border-b-2 border-transparent bg-transparent px-0 pb-3 text-base data-active:bg-transparent data-active:shadow-none dark:data-active:bg-transparent",
           className
         )}
         {...props}

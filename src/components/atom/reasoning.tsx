@@ -1,6 +1,5 @@
 'use client';
 
-import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import {
   Collapsible,
   CollapsibleContent,
@@ -9,7 +8,15 @@ import {
 import { cn } from '@/lib/utils';
 import { BrainIcon, ChevronDownIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
-import { createContext, memo, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Response } from './response';
 
 type ReasoningContextValue = {
@@ -20,6 +27,41 @@ type ReasoningContextValue = {
 };
 
 const ReasoningContext = createContext<ReasoningContextValue | null>(null);
+
+// Controlled/uncontrolled state (replaces radix's useControllableState):
+// `prop` wins when defined; `onChange` fires only when the value changes.
+function useControllableState<T>({
+  prop,
+  defaultProp,
+  onChange,
+}: {
+  prop?: T;
+  defaultProp: T;
+  onChange?: (value: T) => void;
+}) {
+  const [uncontrolled, setUncontrolled] = useState<T>(defaultProp);
+  const isControlled = prop !== undefined;
+  const value = isControlled ? (prop as T) : uncontrolled;
+  const onChangeRef = useRef(onChange);
+
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  });
+
+  const setValue = useCallback(
+    (next: T) => {
+      if (!isControlled) {
+        setUncontrolled(next);
+      }
+      if (next !== value) {
+        onChangeRef.current?.(next);
+      }
+    },
+    [isControlled, value],
+  );
+
+  return [value, setValue] as const;
+}
 
 const useReasoning = () => {
   const context = useContext(ReasoningContext);
@@ -162,7 +204,7 @@ export const ReasoningContent = memo(
     <CollapsibleContent
       className={cn(
         'mt-4 text-sm',
-        'data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 text-muted-foreground outline-none data-[state=closed]:animate-out data-[state=open]:animate-in',
+        'data-closed:fade-out-0 data-closed:slide-out-to-top-2 data-open:slide-in-from-top-2 text-muted-foreground outline-none data-closed:animate-out data-open:animate-in',
         className,
       )}
       {...props}

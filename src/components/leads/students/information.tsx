@@ -69,25 +69,27 @@ export function InformationStep({ form, isView }: StudentFormStepProps) {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-full pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                      disabled={isView}
-                    >
-                      {field.value ? (
-                        format(new Date(field.value), "PPP")
-                      ) : (
-                        <span>Date of birth</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
+                <FormControl>
+                  <PopoverTrigger
+                    render={
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                        disabled={isView}
+                      />
+                    }
+                  >
+                    {field.value ? (
+                      format(new Date(field.value), "PPP")
+                    ) : (
+                      <span>Date of birth</span>
+                    )}
+                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  </PopoverTrigger>
+                </FormControl>
                 <PopoverContent className="w-auto p-0" align="start" sideOffset={4}>
                   <Calendar
                     mode="single"
@@ -108,7 +110,12 @@ export function InformationStep({ form, isView }: StudentFormStepProps) {
           name="gender"
           render={({ field }) => (
             <FormItem>
-              <Select onValueChange={field.onChange} value={field.value} disabled={isView}>
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                disabled={isView}
+                items={{ male: "Male", female: "Female" }}
+              >
                 <FormControl>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select gender" />

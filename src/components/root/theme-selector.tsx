@@ -32,7 +32,11 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
       <Label htmlFor="theme-selector" className="sr-only">
         Theme
       </Label>
-      <Select value="neutral" onValueChange={() => {}}>
+      <Select
+        value="neutral"
+        onValueChange={() => {}}
+        items={THEMES.map((t) => ({ value: t.name, label: t.label }))}
+      >
         <SelectTrigger
           id="theme-selector"
           className="bg-secondary text-secondary-foreground border-secondary h-8 justify-start shadow-none w-auto"
@@ -45,7 +49,7 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
             <SelectItem
               key={t.name}
               value={t.name}
-              className="data-[state=checked]:opacity-50"
+              className="data-selected:opacity-50"
             >
               {t.label}
             </SelectItem>

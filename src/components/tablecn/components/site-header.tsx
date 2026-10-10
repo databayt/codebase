@@ -84,15 +84,21 @@ export function SiteHeader() {
           </nav>
           <div className="ms-auto flex items-center gap-2">
             <Separator orientation="vertical" />
-            <Button variant="ghost" size="icon" className="size-8" asChild>
-              <Link
-                aria-label="GitHub repo"
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icons.gitHub className="size-4" aria-hidden="true" />
-              </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8"
+              render={
+                <Link
+                  aria-label="GitHub repo"
+                  href={siteConfig.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              nativeButton={false}
+            >
+              <Icons.gitHub className="size-4" aria-hidden="true" />
             </Button>
             <ModeSwitcher />
           </div>

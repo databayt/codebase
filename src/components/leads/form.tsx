@@ -226,7 +226,7 @@ export function Form({ open, onClose, onSuccess, lead, mode = 'create' }: FormPr
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Status</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value} items={LEAD_STATUS}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select status" />
@@ -251,7 +251,7 @@ export function Form({ open, onClose, onSuccess, lead, mode = 'create' }: FormPr
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Source</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value} items={LEAD_SOURCE}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select source" />
@@ -283,7 +283,9 @@ export function Form({ open, onClose, onSuccess, lead, mode = 'create' }: FormPr
                       max={100}
                       step={1}
                       value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
+                      onValueChange={(value) =>
+                        field.onChange(typeof value === "number" ? value : value[0])
+                      }
                     />
                   </FormControl>
                   <FormDescription>

@@ -36,12 +36,32 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Slot } from "@radix-ui/react-slot";
+import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { useComposedRefs } from "@/components/table/lib/compose-refs";
 import { cn } from "@/lib/utils";
+
+type SortableRenderProp = useRender.RenderProp;
+
+/**
+ * `render` is the Base UI composition prop. `asChild` is kept as a deprecated
+ * alias for existing call sites: its single child element becomes the render
+ * target, with the same prop-merge rules Radix Slot used (child props win,
+ * handlers chain, className/style join).
+ */
+function getRenderTarget(
+  render: SortableRenderProp | undefined,
+  asChild: boolean | undefined,
+  children: React.ReactNode,
+): { render: SortableRenderProp | undefined; children: React.ReactNode } {
+  if (render) return { render, children };
+  if (asChild && React.isValidElement(children)) {
+    return { render: children, children: undefined };
+  }
+  return { render: undefined, children };
+}
 
 const orientationConfig = {
   vertical: {
@@ -311,7 +331,9 @@ SortableContentContext.displayName = CONTENT_NAME;
 interface SortableContentProps extends React.ComponentPropsWithoutRef<"div"> {
   strategy?: SortableContextProps["strategy"];
   children: React.ReactNode;
+  /** @deprecated use `render` */
   asChild?: boolean;
+  render?: SortableRenderProp;
   withoutSlot?: boolean;
 }
 
@@ -320,6 +342,7 @@ const SortableContent = React.forwardRef<HTMLDivElement, SortableContentProps>(
     const {
       strategy: strategyProp,
       asChild,
+      render,
       withoutSlot,
       children,
       ...contentProps
@@ -327,7 +350,18 @@ const SortableContent = React.forwardRef<HTMLDivElement, SortableContentProps>(
 
     const context = useSortableContext(CONTENT_NAME);
 
-    const ContentPrimitive = asChild ? Slot : "div";
+    const target = getRenderTarget(render, asChild, children);
+    const content = useRender({
+      defaultTagName: "div",
+      render: target.render,
+      ref: forwardedRef,
+      enabled: !withoutSlot,
+      props: {
+        "data-slot": "sortable-content",
+        ...contentProps,
+        children: target.children,
+      },
+    });
 
     return (
       <SortableContentContext.Provider value={true}>
@@ -335,17 +369,7 @@ const SortableContent = React.forwardRef<HTMLDivElement, SortableContentProps>(
           items={context.items}
           strategy={strategyProp ?? context.strategy}
         >
-          {withoutSlot ? (
-            children
-          ) : (
-            <ContentPrimitive
-              data-slot="sortable-content"
-              {...contentProps}
-              ref={forwardedRef}
-            >
-              {children}
-            </ContentPrimitive>
-          )}
+          {withoutSlot ? children : content}
         </SortableContext>
       </SortableContentContext.Provider>
     );
@@ -377,7 +401,9 @@ function useSortableItemContext(consumerName: string) {
 interface SortableItemProps extends React.ComponentPropsWithoutRef<"div"> {
   value: UniqueIdentifier;
   asHandle?: boolean;
+  /** @deprecated use `render` */
   asChild?: boolean;
+  render?: SortableRenderProp;
   disabled?: boolean;
 }
 
@@ -388,8 +414,10 @@ const SortableItem = React.forwardRef<HTMLDivElement, SortableItemProps>(
       style,
       asHandle,
       asChild,
+      render,
       disabled,
       className,
+      children,
       ...itemProps
     } = props;
 
@@ -444,33 +472,39 @@ const SortableItem = React.forwardRef<HTMLDivElement, SortableItemProps>(
       [id, attributes, listeners, setActivatorNodeRef, isDragging, disabled],
     );
 
-    const ItemPrimitive = asChild ? Slot : "div";
+    const target = getRenderTarget(render, asChild, children);
+    const item = useRender({
+      defaultTagName: "div",
+      render: target.render,
+      ref: composedRef,
+      props: {
+        id,
+        "data-disabled": disabled,
+        "data-dragging": isDragging ? "" : undefined,
+        "data-slot": "sortable-item",
+        ...itemProps,
+        ...(asHandle && !disabled ? attributes : {}),
+        ...(asHandle && !disabled ? listeners : {}),
+        style: composedStyle,
+        className: cn(
+          "focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1",
+          {
+            "touch-none select-none": asHandle,
+            "cursor-default": context.flatCursor,
+            "data-dragging:cursor-grabbing": !context.flatCursor,
+            "cursor-grab": !isDragging && asHandle && !context.flatCursor,
+            "opacity-50": isDragging,
+            "pointer-events-none opacity-50": disabled,
+          },
+          className,
+        ),
+        children: target.children,
+      },
+    });
 
     return (
       <SortableItemContext.Provider value={itemContext}>
-        <ItemPrimitive
-          id={id}
-          data-disabled={disabled}
-          data-dragging={isDragging ? "" : undefined}
-          data-slot="sortable-item"
-          {...itemProps}
-          {...(asHandle && !disabled ? attributes : {})}
-          {...(asHandle && !disabled ? listeners : {})}
-          ref={composedRef}
-          style={composedStyle}
-          className={cn(
-            "focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1",
-            {
-              "touch-none select-none": asHandle,
-              "cursor-default": context.flatCursor,
-              "data-dragging:cursor-grabbing": !context.flatCursor,
-              "cursor-grab": !isDragging && asHandle && !context.flatCursor,
-              "opacity-50": isDragging,
-              "pointer-events-none opacity-50": disabled,
-            },
-            className,
-          )}
-        />
+        {item}
       </SortableItemContext.Provider>
     );
   },
@@ -479,14 +513,17 @@ SortableItem.displayName = ITEM_NAME;
 
 interface SortableItemHandleProps
   extends React.ComponentPropsWithoutRef<"button"> {
+  /** @deprecated use `render` */
   asChild?: boolean;
+  render?: SortableRenderProp;
 }
 
 const SortableItemHandle = React.forwardRef<
   HTMLButtonElement,
   SortableItemHandleProps
 >((props, forwardedRef) => {
-  const { asChild, disabled, className, ...itemHandleProps } = props;
+  const { asChild, render, disabled, className, children, ...itemHandleProps } =
+    props;
 
   const context = useSortableContext(ITEM_HANDLE_NAME);
   const itemContext = useSortableItemContext(ITEM_HANDLE_NAME);
@@ -498,29 +535,32 @@ const SortableItemHandle = React.forwardRef<
     itemContext.setActivatorNodeRef(node);
   });
 
-  const HandlePrimitive = asChild ? Slot : "button";
+  const target = getRenderTarget(render, asChild, children);
 
-  return (
-    <HandlePrimitive
-      type="button"
-      aria-controls={itemContext.id}
-      data-disabled={isDisabled}
-      data-dragging={itemContext.isDragging ? "" : undefined}
-      data-slot="sortable-item-handle"
-      {...itemHandleProps}
-      {...(isDisabled ? {} : itemContext.attributes)}
-      {...(isDisabled ? {} : itemContext.listeners)}
-      ref={composedRef}
-      className={cn(
+  return useRender({
+    defaultTagName: "button",
+    render: target.render,
+    ref: composedRef,
+    props: {
+      type: "button",
+      "aria-controls": itemContext.id,
+      "data-disabled": isDisabled,
+      "data-dragging": itemContext.isDragging ? "" : undefined,
+      "data-slot": "sortable-item-handle",
+      ...itemHandleProps,
+      ...(isDisabled ? {} : itemContext.attributes),
+      ...(isDisabled ? {} : itemContext.listeners),
+      className: cn(
         "select-none disabled:pointer-events-none disabled:opacity-50",
         context.flatCursor
           ? "cursor-default"
           : "cursor-grab data-dragging:cursor-grabbing",
         className,
-      )}
-      disabled={isDisabled}
-    />
-  );
+      ),
+      disabled: isDisabled,
+      children: target.children,
+    },
+  });
 });
 SortableItemHandle.displayName = ITEM_HANDLE_NAME;
 

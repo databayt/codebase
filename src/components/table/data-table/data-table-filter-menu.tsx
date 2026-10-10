@@ -50,6 +50,12 @@ const THROTTLE_MS = 50;
 const OPEN_MENU_SHORTCUT = "f";
 const REMOVE_FILTER_SHORTCUTS = ["backspace", "delete"];
 
+// Base UI's Select.Value renders the raw value unless `items` maps it to a label.
+const booleanItems = [
+  { label: "True", value: "true" },
+  { label: "False", value: "false" },
+];
+
 interface DataTableFilterMenuProps<TData>
   extends React.ComponentProps<typeof PopoverContent> {
   table: Table<TData>;
@@ -254,22 +260,24 @@ export function DataTableFilterMenu<TData>({
         </Button>
       )}
       <Popover open={open} onOpenChange={onOpenChange}>
-        <PopoverTrigger asChild>
-          <Button
-            aria-label="Open filter command menu"
-            variant="outline"
-            size={filters.length > 0 ? "icon" : "sm"}
-            className={cn(filters.length > 0 && "size-8", "h-8")}
-            ref={triggerRef}
-            onKeyDown={onTriggerKeyDown}
-          >
-            <ListFilter />
-            {filters.length > 0 ? null : "Filter"}
-          </Button>
+        <PopoverTrigger
+          render={
+            <Button
+              aria-label="Open filter command menu"
+              variant="outline"
+              size={filters.length > 0 ? "icon" : "sm"}
+              className={cn(filters.length > 0 && "size-8", "h-8")}
+              ref={triggerRef}
+              onKeyDown={onTriggerKeyDown}
+            />
+          }
+        >
+          <ListFilter />
+          {filters.length > 0 ? null : "Filter"}
         </PopoverTrigger>
         <PopoverContent
           align={align}
-          className="w-full max-w-[var(--radix-popover-content-available-width)] origin-[var(--radix-popover-content-transform-origin)] p-0"
+          className="w-full max-w-[var(--available-width)] origin-[var(--transform-origin)] p-0"
           {...props}
         >
           <Command loop className="[&_[cmdk-input-wrapper]_svg]:hidden">
@@ -401,21 +409,23 @@ function DataTableFilterItem<TData>({
         onKeyDown={onItemKeyDown}
       >
         <Popover open={showFieldSelector} onOpenChange={setShowFieldSelector}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="rounded-none rounded-l-md border border-r-0 font-normal dark:bg-input/30"
-            >
-              {columnMeta?.icon && (
-                <columnMeta.icon className="text-muted-foreground" />
-              )}
-              {columnMeta?.label ?? column.id}
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button
+                variant="ghost"
+                size="sm"
+                className="rounded-none rounded-l-md border border-r-0 font-normal dark:bg-input/30"
+              />
+            }
+          >
+            {columnMeta?.icon && (
+              <columnMeta.icon className="text-muted-foreground" />
+            )}
+            {columnMeta?.label ?? column.id}
           </PopoverTrigger>
           <PopoverContent
             align="start"
-            className="w-48 origin-[var(--radix-popover-content-transform-origin)] p-0"
+            className="w-48 origin-[var(--transform-origin)] p-0"
           >
             <Command loop>
               <CommandInput placeholder="Search fields..." />
@@ -462,15 +472,17 @@ function DataTableFilterItem<TData>({
           open={showOperatorSelector}
           onOpenChange={setShowOperatorSelector}
           value={filter.operator}
-          onValueChange={(value: FilterOperator) =>
+          items={filterOperators}
+          onValueChange={(value: FilterOperator | null) => {
+            if (!value) return;
             onFilterUpdate(filter.filterId, {
               operator: value,
               value:
                 value === "isEmpty" || value === "isNotEmpty"
                   ? ""
                   : filter.value,
-            })
-          }
+            });
+          }}
         >
           <SelectTrigger
             aria-controls={operatorListboxId}
@@ -480,7 +492,7 @@ function DataTableFilterItem<TData>({
           </SelectTrigger>
           <SelectContent
             id={operatorListboxId}
-            className="origin-[var(--radix-select-content-transform-origin)]"
+            className="origin-[var(--transform-origin)]"
           >
             {filterOperators.map((operator) => (
               <SelectItem
@@ -678,9 +690,11 @@ function onFilterInputRender<TData>({
           open={showValueSelector}
           onOpenChange={setShowValueSelector}
           value={typeof filter.value === "string" ? filter.value : "true"}
-          onValueChange={(value: "true" | "false") =>
-            onFilterUpdate(filter.filterId, { value })
-          }
+          items={booleanItems}
+          onValueChange={(value: string | null) => {
+            if (value === null) return;
+            onFilterUpdate(filter.filterId, { value });
+          }}
         >
           <SelectTrigger
             id={inputId}
@@ -712,47 +726,49 @@ function onFilterInputRender<TData>({
 
       return (
         <Popover open={showValueSelector} onOpenChange={setShowValueSelector}>
-          <PopoverTrigger asChild>
-            <Button
-              id={inputId}
-              aria-controls={inputListboxId}
-              variant="ghost"
-              size="sm"
-              className="h-full min-w-16 rounded-none border px-1.5 font-normal dark:bg-input/30"
-            >
-              {selectedOptions.length === 0 ? (
-                filter.variant === "multiSelect" ? (
-                  "Select options..."
-                ) : (
-                  "Select option..."
-                )
+          <PopoverTrigger
+            render={
+              <Button
+                id={inputId}
+                aria-controls={inputListboxId}
+                variant="ghost"
+                size="sm"
+                className="h-full min-w-16 rounded-none border px-1.5 font-normal dark:bg-input/30"
+              />
+            }
+          >
+            {selectedOptions.length === 0 ? (
+              filter.variant === "multiSelect" ? (
+                "Select options..."
               ) : (
-                <>
-                  <div className="-space-x-2 flex items-center rtl:space-x-reverse">
-                    {selectedOptions.map((selectedOption) =>
-                      selectedOption.icon ? (
-                        <div
-                          key={selectedOption.value}
-                          className="rounded-full border bg-background p-0.5"
-                        >
-                          <selectedOption.icon className="size-3.5" />
-                        </div>
-                      ) : null,
-                    )}
-                  </div>
-                  <span className="truncate">
-                    {selectedOptions.length > 1
-                      ? `${selectedOptions.length} selected`
-                      : selectedOptions[0]?.label}
-                  </span>
-                </>
-              )}
-            </Button>
+                "Select option..."
+              )
+            ) : (
+              <>
+                <div className="-space-x-2 flex items-center rtl:space-x-reverse">
+                  {selectedOptions.map((selectedOption) =>
+                    selectedOption.icon ? (
+                      <div
+                        key={selectedOption.value}
+                        className="rounded-full border bg-background p-0.5"
+                      >
+                        <selectedOption.icon className="size-3.5" />
+                      </div>
+                    ) : null,
+                  )}
+                </div>
+                <span className="truncate">
+                  {selectedOptions.length > 1
+                    ? `${selectedOptions.length} selected`
+                    : selectedOptions[0]?.label}
+                </span>
+              </>
+            )}
           </PopoverTrigger>
           <PopoverContent
             id={inputListboxId}
             align="start"
-            className="w-48 origin-[var(--radix-popover-content-transform-origin)] p-0"
+            className="w-48 origin-[var(--transform-origin)] p-0"
           >
             <Command>
               <CommandInput placeholder="Search options..." />
@@ -814,25 +830,27 @@ function onFilterInputRender<TData>({
 
       return (
         <Popover open={showValueSelector} onOpenChange={setShowValueSelector}>
-          <PopoverTrigger asChild>
-            <Button
-              id={inputId}
-              aria-controls={inputListboxId}
-              variant="ghost"
-              size="sm"
-              className={cn(
-                "h-full rounded-none border px-1.5 font-normal dark:bg-input/30",
-                !filter.value && "text-muted-foreground",
-              )}
-            >
-              <CalendarIcon className="size-3.5" />
-              <span className="truncate">{displayValue}</span>
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button
+                id={inputId}
+                aria-controls={inputListboxId}
+                variant="ghost"
+                size="sm"
+                className={cn(
+                  "h-full rounded-none border px-1.5 font-normal dark:bg-input/30",
+                  !filter.value && "text-muted-foreground",
+                )}
+              />
+            }
+          >
+            <CalendarIcon className="size-3.5" />
+            <span className="truncate">{displayValue}</span>
           </PopoverTrigger>
           <PopoverContent
             id={inputListboxId}
             align="start"
-            className="w-auto origin-[var(--radix-popover-content-transform-origin)] p-0"
+            className="w-auto origin-[var(--transform-origin)] p-0"
           >
             {filter.operator === "isBetween" ? (
               <Calendar

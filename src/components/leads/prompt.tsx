@@ -425,7 +425,24 @@ An error occurred while processing your request. Please try again.`);
                   <span className="hidden md:flex">Attach</span>
                 </PromptInputButton>
 
-                <Select value={selectedModel} onValueChange={(value) => setSelectedModel(value as 'groq' | 'claude')}>
+                <Select
+                  value={selectedModel}
+                  onValueChange={(value) => setSelectedModel(value as 'groq' | 'claude')}
+                  items={{
+                    groq: (
+                      <div className="flex items-center gap-2">
+                        <AILogoIcon className="h-4 w-4" />
+                        <span>Groq</span>
+                      </div>
+                    ),
+                    claude: (
+                      <div className="flex items-center gap-2">
+                        <AIBrainIcon className="h-4 w-4" />
+                        <span>Claude</span>
+                      </div>
+                    ),
+                  }}
+                >
                   <SelectTrigger
                     className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-100 ease-in-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-muted hover:bg-blue-100 hover:border-transparent h-8 gap-1.5 rounded-full px-3 text-muted-foreground hover:text-foreground w-auto min-w-[120px]"
                     size="sm"

@@ -26,19 +26,20 @@ export default function TaxonomyHeader({ dictionary }: TaxonomyHeaderProps) {
                         </div>
                         <nav className="flex items-center gap-0.5">
                             <Button
-                                asChild
                                 variant="ghost"
                                 size="icon"
                                 className="h-8 w-8 px-0"
+                                nativeButton={false}
+                                render={
+                                    <Link
+                                        href={siteConfig.links.github}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    />
+                                }
                             >
-                                <Link
-                                    href={siteConfig.links.github}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <Icons.gitHub className="h-4 w-4" />
-                                    <span className="sr-only">{dictionary?.header?.github || "GitHub"}</span>
-                                </Link>
+                                <Icons.gitHub className="h-4 w-4" />
+                                <span className="sr-only">{dictionary?.header?.github || "GitHub"}</span>
                             </Button>
                             <LangSwitcher />
                             <ModeSwitcher />

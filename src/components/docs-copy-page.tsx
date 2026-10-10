@@ -1,7 +1,10 @@
 "use client"
 
+import * as React from "react"
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 import { Check as IconCheck, ChevronDown as IconChevronDown, Copy as IconCopy } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,12 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverTrigger } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import type { getDictionary } from "@/components/local/dictionaries"
 
@@ -96,6 +94,7 @@ export function DocsCopyPage({ page, url, dictionary }: { page: string; url: str
   const { copyToClipboard, isCopied } = useCopyToClipboard()
   const menuItems = getMenuItems(dictionary)
   const copyPageText = dictionary?.docs?.copyPage || "Copy Page"
+  const anchorRef = React.useRef<HTMLDivElement>(null)
 
   const trigger = (
     <Button
@@ -109,8 +108,10 @@ export function DocsCopyPage({ page, url, dictionary }: { page: string; url: str
 
   return (
     <Popover>
-      <div className="bg-secondary group/buttons relative flex rounded-lg *:[[data-slot=button]]:focus-visible:relative *:[[data-slot=button]]:focus-visible:z-10">
-        <PopoverAnchor />
+      <div
+        ref={anchorRef}
+        className="bg-secondary group/buttons relative flex rounded-lg *:[[data-slot=button]]:focus-visible:relative *:[[data-slot=button]]:focus-visible:z-10"
+      >
         <Button
           variant="secondary"
           size="sm"
@@ -121,14 +122,10 @@ export function DocsCopyPage({ page, url, dictionary }: { page: string; url: str
           {copyPageText}
         </Button>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild className="hidden sm:flex">
-            {trigger}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="shadow-none">
+          <DropdownMenuTrigger className="hidden sm:flex" render={trigger} />
+          <DropdownMenuContent align="end" className="w-auto shadow-none">
             {Object.entries(menuItems).map(([key, value]) => (
-              <DropdownMenuItem key={key} asChild>
-                {value(url)}
-              </DropdownMenuItem>
+              <DropdownMenuItem key={key} render={value(url)} />
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -136,25 +133,39 @@ export function DocsCopyPage({ page, url, dictionary }: { page: string; url: str
           orientation="vertical"
           className="!bg-foreground/10 absolute top-0 end-8 z-0 !h-8 peer-focus-visible:opacity-0 sm:end-7 sm:!h-7"
         />
-        <PopoverTrigger asChild className="flex sm:hidden">
-          {trigger}
-        </PopoverTrigger>
-        <PopoverContent
-          className="bg-background/70 dark:bg-background/60 w-52 !origin-center rounded-lg p-1 shadow-sm backdrop-blur-sm"
-          align="start"
-        >
-          {Object.entries(menuItems).map(([key, value]) => (
-            <Button
-              variant="ghost"
-              size="lg"
-              asChild
-              key={key}
-              className="*:[svg]:text-muted-foreground w-full justify-start text-base font-normal"
+        <PopoverTrigger className="flex sm:hidden" render={trigger} />
+        {/* Radix PopoverAnchor positioned this popover against the whole
+            button group. Base UI has no Anchor part; the Positioner takes an
+            `anchor` instead, which the ui wrapper does not expose, so this
+            renders the wrapper's Portal > Positioner > Popup with its classes. */}
+        <PopoverPrimitive.Portal>
+          <PopoverPrimitive.Positioner
+            anchor={anchorRef}
+            align="start"
+            side="bottom"
+            sideOffset={4}
+            className="isolate z-50"
+          >
+            <PopoverPrimitive.Popup
+              data-slot="popover-content"
+              className={cn(
+                "z-50 flex w-72 origin-(--transform-origin) flex-col gap-4 rounded-md bg-popover p-4 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+                "bg-background/70 dark:bg-background/60 w-52 !origin-center gap-0 rounded-lg p-1 shadow-sm backdrop-blur-sm"
+              )}
             >
-              {value(url)}
-            </Button>
-          ))}
-        </PopoverContent>
+              {Object.entries(menuItems).map(([key, value]) => (
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  key={key}
+                  nativeButton={false}
+                  render={value(url)}
+                  className="*:[svg]:text-muted-foreground w-full justify-start text-base font-normal"
+                />
+              ))}
+            </PopoverPrimitive.Popup>
+          </PopoverPrimitive.Positioner>
+        </PopoverPrimitive.Portal>
       </div>
     </Popover>
   )

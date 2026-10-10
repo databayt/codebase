@@ -97,7 +97,7 @@ export function CodeBlockCommand({
                 <TabsTrigger
                   key={key}
                   value={key}
-                  className="data-[state=active]:bg-accent data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none"
+                  className="data-active:bg-accent data-active:border-input h-7 border border-transparent pt-0.5 data-active:shadow-none"
                 >
                   {key}
                 </TabsTrigger>
@@ -123,17 +123,19 @@ export function CodeBlockCommand({
         </div>
       </Tabs>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            data-slot="copy-button"
-            size="icon"
-            variant="ghost"
-            className="absolute top-2 end-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
-            onClick={copyCommand}
-          >
-            <span className="sr-only">{copyText}</span>
-            {hasCopied ? <IconCheck /> : <IconCopy />}
-          </Button>
+        <TooltipTrigger
+          render={
+            <Button
+              data-slot="copy-button"
+              size="icon"
+              variant="ghost"
+              className="absolute top-2 end-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
+              onClick={copyCommand}
+            />
+          }
+        >
+          <span className="sr-only">{copyText}</span>
+          {hasCopied ? <IconCheck /> : <IconCopy />}
         </TooltipTrigger>
         <TooltipContent>
           {hasCopied ? copiedText : copyToClipboardText}

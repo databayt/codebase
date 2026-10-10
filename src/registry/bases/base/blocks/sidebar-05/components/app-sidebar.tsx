@@ -168,16 +168,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEnd className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Documentation</span>
-                  <span className="">v1.0.0</span>
-                </div>
-              </a>
+            <SidebarMenuButton size="lg" render={<a href="#" />}>
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <GalleryVerticalEnd className="size-4" />
+              </div>
+              <div className="flex flex-col gap-0.5 leading-none">
+                <span className="font-semibold">Documentation</span>
+                <span className="">v1.0.0</span>
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -193,12 +191,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 className="group/collapsible"
               >
                 <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton>
-                      {item.title}{" "}
-                      <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                      <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
-                    </SidebarMenuButton>
+                  <CollapsibleTrigger render={<SidebarMenuButton />}>
+                    {item.title}{" "}
+                    <Plus className="ml-auto group-data-open/collapsible:hidden" />
+                    <Minus className="ml-auto group-data-closed/collapsible:hidden" />
                   </CollapsibleTrigger>
                   {item.items?.length ? (
                     <CollapsibleContent>
@@ -206,10 +202,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         {item.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
                             <SidebarMenuSubButton
-                              asChild
                               isActive={item.isActive}
+                              render={<a href={item.url} />}
                             >
-                              <a href={item.url}>{item.title}</a>
+                              {item.title}
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

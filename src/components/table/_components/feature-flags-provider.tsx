@@ -55,7 +55,7 @@ export function FeatureFlagsProvider({ children }: FeatureFlagsProviderProps) {
   );
 
   const onFilterFlagChange = React.useCallback(
-    (value: FilterFlag) => {
+    (value: FilterFlag | null) => {
       setFilterFlag(value);
     },
     [setFilterFlag],
@@ -74,30 +74,33 @@ export function FeatureFlagsProvider({ children }: FeatureFlagsProviderProps) {
     <FeatureFlagsContext.Provider value={contextValue}>
       <div className="w-full overflow-x-auto p-1">
         <ToggleGroup
-          type="single"
           variant="outline"
           size="sm"
-          value={filterFlag}
-          onValueChange={onFilterFlagChange}
+          value={filterFlag ? [filterFlag] : []}
+          onValueChange={(value) =>
+            onFilterFlagChange((value[0] as FilterFlag | undefined) ?? null)
+          }
           className="w-fit gap-0"
         >
           {flagConfig.featureFlags.map((flag) => (
-            <Tooltip key={flag.value} delayDuration={700}>
-              <ToggleGroupItem
-                value={flag.value}
-                className="whitespace-nowrap px-3 text-xs data-[state=on]:bg-accent/70 data-[state=on]:hover:bg-accent/90"
-                asChild
+            <Tooltip key={flag.value}>
+              <TooltipTrigger
+                delay={700}
+                render={
+                  <ToggleGroupItem
+                    value={flag.value}
+                    className="whitespace-nowrap px-3 text-xs data-pressed:bg-accent/70 data-pressed:hover:bg-accent/90"
+                  />
+                }
               >
-                <TooltipTrigger>
-                  <flag.icon className="size-3.5 shrink-0" />
-                  {flag.label}
-                </TooltipTrigger>
-              </ToggleGroupItem>
+                <flag.icon className="size-3.5 shrink-0" />
+                {flag.label}
+              </TooltipTrigger>
               <TooltipContent
                 align="start"
                 side="bottom"
                 sideOffset={6}
-                className="flex flex-col gap-1.5 border bg-background py-2 font-semibold text-foreground [&>span]:hidden"
+                className="flex flex-col gap-1.5 border bg-background py-2 font-semibold text-foreground [&>[aria-hidden=true]]:hidden"
               >
                 <div>{flag.tooltipTitle}</div>
                 <p className="text-balance text-muted-foreground text-xs">

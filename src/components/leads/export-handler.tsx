@@ -11,6 +11,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuGroup,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -56,14 +57,14 @@ export function ExportHandler({ filters, selectedLeads }: ExportHandlerProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" disabled={exporting}>
-          <Download className="h-4 w-4 mr-2" />
-          Export
-        </Button>
+      <DropdownMenuTrigger render={<Button variant="outline" size="sm" disabled={exporting} />}>
+        <Download className="h-4 w-4 mr-2" />
+        Export
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Export Format</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Export Format</DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => handleExport('csv')}>
           <FileText className="h-4 w-4 mr-2" />

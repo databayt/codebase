@@ -1,4 +1,4 @@
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { RxExclamationTriangle as ExclamationTriangleIcon } from "react-icons/rx";
 
 interface FormErrorProps {
   message?: string;

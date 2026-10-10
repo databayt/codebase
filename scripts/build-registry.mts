@@ -1,5 +1,5 @@
 // Builds codebase's registry — a port of shadcn's apps/v4/scripts/build-registry.mts
-// for one style (base-nova). Steps:
+// for one style (base-vega). Steps:
 //   1. registry/__index__.tsx       metadata index   Index[style][name]
 //   2. registry/__components__/     lazy component shards + getComponent()
 //   3. examples/__index__.tsx       ExamplesIndex[base][name] (+ __components__)
@@ -24,7 +24,7 @@ const SRC = path.join(ROOT, "src")
 const BASE_DIR = path.join(SRC, "registry", "bases", "base")
 const EXAMPLES_DIR = path.join(SRC, "examples")
 
-export const STYLES = ["base-nova"] as const
+export const STYLES = ["base-vega"] as const
 const BASES = ["base"] as const
 
 const HEADER = `// @ts-nocheck

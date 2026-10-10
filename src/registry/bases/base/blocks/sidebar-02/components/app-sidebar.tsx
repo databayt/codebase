@@ -184,21 +184,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <SidebarGroup>
               <SidebarGroupLabel
-                asChild
                 className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                render={<CollapsibleTrigger />}
               >
-                <CollapsibleTrigger>
-                  {item.title}{" "}
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </CollapsibleTrigger>
+                {item.title}{" "}
+                <ChevronRight className="ml-auto transition-transform group-data-open/collapsible:rotate-90" />
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {item.items.map((item) => (
                       <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={item.isActive}>
-                          <a href={item.url}>{item.title}</a>
+                        <SidebarMenuButton
+                          isActive={item.isActive}
+                          render={<a href={item.url} />}
+                        >
+                          {item.title}
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}

@@ -1,6 +1,12 @@
 "use client";
 
-import { PropsWithChildren, useEffect, useState, type FC } from "react";
+import {
+  PropsWithChildren,
+  useEffect,
+  useState,
+  type FC,
+  type ReactElement,
+} from "react";
 import Image from "next/image";
 import { XIcon, PlusIcon, FileText } from "lucide-react";
 import {
@@ -90,10 +96,9 @@ const AttachmentPreviewDialog: FC<PropsWithChildren> = ({ children }) => {
     <Dialog>
       <DialogTrigger
         className="aui-attachment-preview-trigger cursor-pointer transition-colors hover:bg-accent/50"
-        asChild
-      >
-        {children}
-      </DialogTrigger>
+        nativeButton={false}
+        render={children as ReactElement}
+      />
       <DialogContent className="aui-attachment-preview-dialog-content p-2 sm:max-w-3xl [&_svg]:text-background [&>button]:rounded-full [&>button]:bg-foreground/60 [&>button]:p-1 [&>button]:opacity-100 [&>button]:!ring-0 [&>button]:hover:[&_svg]:text-destructive">
         <DialogTitle className="aui-sr-only sr-only">
           Image Attachment Preview
@@ -119,7 +124,7 @@ const AttachmentThumb: FC = () => {
         alt="Attachment preview"
         className="aui-attachment-tile-image object-cover"
       />
-      <AvatarFallback delayMs={isImage ? 200 : 0}>
+      <AvatarFallback delay={isImage ? 200 : 0}>
         <FileText className="aui-attachment-tile-fallback-icon size-8 text-muted-foreground" />
       </AvatarFallback>
     </Avatar>
@@ -158,19 +163,8 @@ const AttachmentUI: FC = () => {
         )}
       >
         <AttachmentPreviewDialog>
-          <TooltipTrigger asChild>
-            <div
-              className={cn(
-                "aui-attachment-tile size-14 cursor-pointer overflow-hidden rounded-[14px] border bg-muted transition-opacity hover:opacity-75",
-                isComposer &&
-                  "aui-attachment-tile-composer border-foreground/20",
-              )}
-              role="button"
-              id="attachment-tile"
-              aria-label={`${typeLabel} attachment`}
-            >
-              <AttachmentThumb />
-            </div>
+          <TooltipTrigger render={<div className={cn( "aui-attachment-tile size-14 cursor-pointer overflow-hidden rounded-[14px] border bg-muted transition-opacity hover:opacity-75", isComposer && "aui-attachment-tile-composer border-foreground/20", )} role="button" id="attachment-tile" aria-label={`${typeLabel} attachment`} />}>
+            <AttachmentThumb />
           </TooltipTrigger>
         </AttachmentPreviewDialog>
         {isComposer && <AttachmentRemove />}

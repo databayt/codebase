@@ -43,7 +43,12 @@ export const ModelPicker: FC = () => {
   const selectedModelData = models.find(m => m.value === selectedModel);
 
   return (
-    <Select value={selectedModel} onValueChange={handleModelChange}>
+    <Select
+      value={selectedModel}
+      onValueChange={(value) => {
+        if (value) handleModelChange(value);
+      }}
+    >
       <SelectTrigger className="h-8 w-[100px] rounded-full bg-background border-border hover:bg-blue-100 hover:border-transparent dark:hover:bg-blue-950 transition-colors" size="sm">
         <SelectValue>
           {selectedModelData && (

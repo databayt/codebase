@@ -70,7 +70,7 @@ export default function TableLayout({ children }: React.PropsWithChildren) {
         data-site-id={siteConfig.url}
         src="https://assets.onedollarstats.com/stonks.js"
       />
-      <TooltipProvider delayDuration={120}>
+      <TooltipProvider delay={120}>
         <NuqsAdapter>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />

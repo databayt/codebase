@@ -38,10 +38,12 @@ export function NavMain({
         {items.map((item) => (
           <DropdownMenu key={item.title}>
             <SidebarMenuItem>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                  {item.title} <MoreHorizontal className="ml-auto" />
-                </SidebarMenuButton>
+              <DropdownMenuTrigger
+                render={
+                  <SidebarMenuButton className="data-popup-open:bg-sidebar-accent data-popup-open:text-sidebar-accent-foreground" />
+                }
+              >
+                {item.title} <MoreHorizontal className="ml-auto" />
               </DropdownMenuTrigger>
               {item.items?.length ? (
                 <DropdownMenuContent
@@ -50,8 +52,11 @@ export function NavMain({
                   className="min-w-56 rounded-lg"
                 >
                   {item.items.map((item) => (
-                    <DropdownMenuItem asChild key={item.title}>
-                      <a href={item.url}>{item.title}</a>
+                    <DropdownMenuItem
+                      key={item.title}
+                      render={<a href={item.url} />}
+                    >
+                      {item.title}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>

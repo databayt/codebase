@@ -1,6 +1,6 @@
 "use client";
 
-import { useDirection } from "@radix-ui/react-direction";
+import { useDirection } from "@/components/ui/direction";
 import { flexRender, type Row } from "@tanstack/react-table";
 import type { Virtualizer } from "@tanstack/react-virtual";
 import * as React from "react";

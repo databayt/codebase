@@ -42,25 +42,27 @@ export function CopyButton({
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          data-slot="copy-button"
-          data-copied={hasCopied}
-          size="icon"
-          variant={variant}
-          className={cn(
-            "bg-code absolute top-3 end-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
-            className
-          )}
-          onClick={() => {
-            copyToClipboardWithMeta(value)
-            setHasCopied(true)
-          }}
-          {...props}
-        >
-          <span className="sr-only">{copyText}</span>
-          {hasCopied ? <IconCheck /> : <IconCopy />}
-        </Button>
+      <TooltipTrigger
+        render={
+          <Button
+            data-slot="copy-button"
+            data-copied={hasCopied}
+            size="icon"
+            variant={variant}
+            className={cn(
+              "bg-code absolute top-3 end-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
+              className
+            )}
+            onClick={() => {
+              copyToClipboardWithMeta(value)
+              setHasCopied(true)
+            }}
+            {...props}
+          />
+        }
+      >
+        <span className="sr-only">{copyText}</span>
+        {hasCopied ? <IconCheck /> : <IconCopy />}
       </TooltipTrigger>
       <TooltipContent>{hasCopied ? copiedText : copyToClipboardText}</TooltipContent>
     </Tooltip>

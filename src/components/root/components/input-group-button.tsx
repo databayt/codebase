@@ -23,14 +23,16 @@ export function InputGroupButtonExample() {
         <InputGroupInput placeholder="example.com" className="!pl-1" />
         <InputGroupAddon>
           <Popover>
-            <PopoverTrigger asChild>
-              <InputGroupButton
-                className="rounded-full"
-                size="icon-xs"
-                aria-label="Info"
-              >
-                <InfoIcon />
-              </InputGroupButton>
+            <PopoverTrigger
+              render={
+                <InputGroupButton
+                  className="rounded-full"
+                  size="icon-xs"
+                  aria-label="Info"
+                />
+              }
+            >
+              <InfoIcon />
             </PopoverTrigger>
             <PopoverContent className="text-sm" side="top">
               Your connection is not secure

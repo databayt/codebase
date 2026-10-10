@@ -1,6 +1,6 @@
 "use client";
 
-import { useDirection } from "@radix-ui/react-direction";
+import { useDirection } from "@/components/ui/direction";
 import { flexRender } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
 import * as React from "react";

@@ -48,9 +48,7 @@ export function UpdatePlanDialog({ currentPlan, plans, onPlanChange, className, 
 
     return (
         <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-            <DialogTrigger asChild>
-                <Button>{triggerText || "Update Plan"}</Button>
-            </DialogTrigger>
+            <DialogTrigger render={<Button />}>{triggerText || "Update Plan"}</DialogTrigger>
             <DialogContent className={cn(
                 "gap-3 sm:gap-4 max-h-[95vh] sm:max-h-[90vh] flex flex-col text-foreground",
                 "w-[calc(100vw-2rem)] sm:w-full max-w-2xl",

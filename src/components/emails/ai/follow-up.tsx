@@ -154,7 +154,7 @@ John`);
             <Slider
               id="number"
               value={[numberOfFollowUps]}
-              onValueChange={([v]) => setNumberOfFollowUps(v)}
+              onValueChange={(v) => setNumberOfFollowUps(typeof v === "number" ? v : v[0])}
               min={1}
               max={10}
               step={1}
@@ -173,7 +173,7 @@ John`);
             <Slider
               id="days"
               value={[daysBetween]}
-              onValueChange={([v]) => setDaysBetween(v)}
+              onValueChange={(v) => setDaysBetween(typeof v === "number" ? v : v[0])}
               min={1}
               max={30}
               step={1}

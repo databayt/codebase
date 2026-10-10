@@ -1,7 +1,7 @@
 "use client";
 
 import { faker } from "@faker-js/faker";
-import { DirectionProvider } from "@radix-ui/react-direction";
+import { DirectionProvider } from "@/components/ui/direction";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Languages } from "lucide-react";
 import * as React from "react";
@@ -235,9 +235,10 @@ export function DataGridDemo() {
           <Checkbox
             aria-label="Select all"
             className="after:-inset-2.5 relative transition-[shadow,border] after:absolute after:content-[''] hover:border-primary/40"
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
+            checked={table.getIsAllPageRowsSelected()}
+            indeterminate={
+              !table.getIsAllPageRowsSelected() &&
+              table.getIsSomePageRowsSelected()
             }
             onCheckedChange={(value) =>
               table.toggleAllPageRowsSelected(!!value)
@@ -560,7 +561,7 @@ export function DataGridDemo() {
   const height = Math.max(400, windowSize.height - 150);
 
   return (
-    <DirectionProvider dir={dir}>
+    <DirectionProvider direction={dir}>
       <DataGridDemoImpl
         data={data}
         onDataChange={setData}

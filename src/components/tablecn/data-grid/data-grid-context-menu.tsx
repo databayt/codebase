@@ -104,13 +104,9 @@ function ContextMenuImpl<TData>({
     [contextMenu.x, contextMenu.y],
   );
 
-  const onCloseAutoFocus: NonNullable<
-    React.ComponentProps<typeof DropdownMenuContent>["onCloseAutoFocus"]
-  > = React.useCallback(
-    (event) => {
-      event.preventDefault();
-      dataGridRef?.current?.focus();
-    },
+  // Base UI: restore focus to the grid (not the hidden trigger) on close
+  const finalFocus = React.useCallback(
+    () => dataGridRef?.current ?? false,
     [dataGridRef],
   );
 
@@ -188,21 +184,21 @@ function ContextMenuImpl<TData>({
         data-grid-popover=""
         align="start"
         className="w-48"
-        onCloseAutoFocus={onCloseAutoFocus}
+        finalFocus={finalFocus}
       >
-        <DropdownMenuItem onSelect={onCopy}>
+        <DropdownMenuItem onClick={onCopy}>
           <CopyIcon />
           Copy
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={onCut}
+          onClick={onCut}
           disabled={table.options.meta?.readOnly}
         >
           <ScissorsIcon />
           Cut
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={onClear}
+          onClick={onClear}
           disabled={table.options.meta?.readOnly}
         >
           <EraserIcon />
@@ -211,7 +207,7 @@ function ContextMenuImpl<TData>({
         {onRowsDelete && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive" onSelect={onDelete}>
+            <DropdownMenuItem variant="destructive" onClick={onDelete}>
               <Trash2Icon />
               Delete rows
             </DropdownMenuItem>

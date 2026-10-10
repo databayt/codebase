@@ -75,6 +75,12 @@ const THROTTLE_MS = 50;
 const OPEN_MENU_SHORTCUT = "f";
 const REMOVE_FILTER_SHORTCUTS = ["backspace", "delete"];
 
+// Base UI's Select.Value renders the raw value unless `items` maps it to a label.
+const booleanItems = [
+  { label: "True", value: "true" },
+  { label: "False", value: "false" },
+];
+
 interface DataTableFilterListProps<TData>
   extends React.ComponentProps<typeof PopoverContent> {
   table: Table<TData>;
@@ -230,24 +236,22 @@ export function DataTableFilterList<TData>({
       getItemValue={(item) => item.filterId}
     >
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button variant="outline" size="sm" onKeyDown={onTriggerKeyDown}>
-            <ListFilter />
-            Filter
-            {filters.length > 0 && (
-              <Badge
-                variant="secondary"
-                className="h-[18.24px] rounded-[3.2px] px-[5.12px] font-mono font-normal text-[10.4px]"
-              >
-                {filters.length}
-              </Badge>
-            )}
-          </Button>
+        <PopoverTrigger render={<Button variant="outline" size="sm" onKeyDown={onTriggerKeyDown} />}>
+          <ListFilter />
+          Filter
+          {filters.length > 0 && (
+            <Badge
+              variant="secondary"
+              className="h-[18.24px] rounded-[3.2px] px-[5.12px] font-mono font-normal text-[10.4px]"
+            >
+              {filters.length}
+            </Badge>
+          )}
         </PopoverTrigger>
         <PopoverContent
           aria-describedby={descriptionId}
           aria-labelledby={labelId}
-          className="flex w-full max-w-[var(--radix-popover-content-available-width)] origin-[var(--radix-popover-content-transform-origin)] flex-col gap-3.5 p-4 sm:min-w-[380px]"
+          className="flex w-full max-w-[var(--available-width)] origin-[var(--transform-origin)] flex-col gap-3.5 p-4 sm:min-w-[380px]"
           {...props}
         >
           <div className="flex flex-col gap-1">
@@ -402,7 +406,9 @@ function DataTableFilterItem<TData>({
           ) : index === 1 ? (
             <Select
               value={joinOperator}
-              onValueChange={(value: JoinOperator) => setJoinOperator(value)}
+              onValueChange={(value: JoinOperator | null) => {
+                if (value) setJoinOperator(value);
+              }}
             >
               <SelectTrigger
                 aria-label="Select join operator"
@@ -413,8 +419,8 @@ function DataTableFilterItem<TData>({
               </SelectTrigger>
               <SelectContent
                 id={joinOperatorListboxId}
-                position="popper"
-                className="min-w-(--radix-select-trigger-width) lowercase"
+                alignItemWithTrigger={false}
+                className="min-w-(--anchor-width) lowercase"
               >
                 {dataTableConfig.joinOperators.map((joinOperator) => (
                   <SelectItem key={joinOperator} value={joinOperator}>
@@ -430,24 +436,26 @@ function DataTableFilterItem<TData>({
           )}
         </div>
         <Popover open={showFieldSelector} onOpenChange={setShowFieldSelector}>
-          <PopoverTrigger asChild>
-            <Button
-              aria-controls={fieldListboxId}
-              variant="outline"
-              size="sm"
-              className="w-32 justify-between rounded font-normal"
-            >
-              <span className="truncate">
-                {columns.find((column) => column.id === filter.id)?.columnDef
-                  .meta?.label ?? "Select field"}
-              </span>
-              <ChevronsUpDown className="opacity-50" />
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button
+                aria-controls={fieldListboxId}
+                variant="outline"
+                size="sm"
+                className="w-32 justify-between rounded font-normal"
+              />
+            }
+          >
+            <span className="truncate">
+              {columns.find((column) => column.id === filter.id)?.columnDef
+                .meta?.label ?? "Select field"}
+            </span>
+            <ChevronsUpDown className="opacity-50" />
           </PopoverTrigger>
           <PopoverContent
             id={fieldListboxId}
             align="start"
-            className="w-40 origin-[var(--radix-popover-content-transform-origin)] p-0"
+            className="w-40 origin-[var(--transform-origin)] p-0"
           >
             <Command>
               <CommandInput placeholder="Search fields..." />
@@ -491,15 +499,17 @@ function DataTableFilterItem<TData>({
           open={showOperatorSelector}
           onOpenChange={setShowOperatorSelector}
           value={filter.operator}
-          onValueChange={(value: FilterOperator) =>
+          items={filterOperators}
+          onValueChange={(value: FilterOperator | null) => {
+            if (!value) return;
             onFilterUpdate(filter.filterId, {
               operator: value,
               value:
                 value === "isEmpty" || value === "isNotEmpty"
                   ? ""
                   : filter.value,
-            })
-          }
+            });
+          }}
         >
           <SelectTrigger
             aria-controls={operatorListboxId}
@@ -511,7 +521,7 @@ function DataTableFilterItem<TData>({
           </SelectTrigger>
           <SelectContent
             id={operatorListboxId}
-            className="origin-[var(--radix-select-content-transform-origin)]"
+            className="origin-[var(--transform-origin)]"
           >
             {filterOperators.map((operator) => (
               <SelectItem
@@ -639,11 +649,13 @@ function onFilterInputRender<TData>({
           open={showValueSelector}
           onOpenChange={setShowValueSelector}
           value={filter.value}
-          onValueChange={(value) =>
+          items={booleanItems}
+          onValueChange={(value) => {
+            if (value === null) return;
             onFilterUpdate(filter.filterId, {
               value,
-            })
-          }
+            });
+          }}
         >
           <SelectTrigger
             id={inputId}
@@ -686,27 +698,29 @@ function onFilterInputRender<TData>({
           }}
           multiple={multiple}
         >
-          <FacetedTrigger asChild>
-            <Button
-              id={inputId}
-              aria-controls={inputListboxId}
-              aria-label={`${columnMeta?.label} filter value${multiple ? "s" : ""}`}
-              variant="outline"
-              size="sm"
-              className="w-full rounded font-normal"
-            >
-              <FacetedBadgeList
-                options={columnMeta?.options}
-                placeholder={
-                  columnMeta?.placeholder ??
-                  `Select option${multiple ? "s" : ""}...`
-                }
+          <FacetedTrigger
+            render={
+              <Button
+                id={inputId}
+                aria-controls={inputListboxId}
+                aria-label={`${columnMeta?.label} filter value${multiple ? "s" : ""}`}
+                variant="outline"
+                size="sm"
+                className="w-full rounded font-normal"
               />
-            </Button>
+            }
+          >
+            <FacetedBadgeList
+              options={columnMeta?.options}
+              placeholder={
+                columnMeta?.placeholder ??
+                `Select option${multiple ? "s" : ""}...`
+              }
+            />
           </FacetedTrigger>
           <FacetedContent
             id={inputListboxId}
-            className="w-[200px] origin-[var(--radix-popover-content-transform-origin)]"
+            className="w-[200px] origin-[var(--transform-origin)]"
           >
             <FacetedInput
               aria-label={`Search ${columnMeta?.label} options`}
@@ -752,26 +766,28 @@ function onFilterInputRender<TData>({
 
       return (
         <Popover open={showValueSelector} onOpenChange={setShowValueSelector}>
-          <PopoverTrigger asChild>
-            <Button
-              id={inputId}
-              aria-controls={inputListboxId}
-              aria-label={`${columnMeta?.label} date filter`}
-              variant="outline"
-              size="sm"
-              className={cn(
-                "w-full justify-start rounded text-left font-normal",
-                !filter.value && "text-muted-foreground",
-              )}
-            >
-              <CalendarIcon />
-              <span className="truncate">{displayValue}</span>
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button
+                id={inputId}
+                aria-controls={inputListboxId}
+                aria-label={`${columnMeta?.label} date filter`}
+                variant="outline"
+                size="sm"
+                className={cn(
+                  "w-full justify-start rounded text-left font-normal",
+                  !filter.value && "text-muted-foreground",
+                )}
+              />
+            }
+          >
+            <CalendarIcon />
+            <span className="truncate">{displayValue}</span>
           </PopoverTrigger>
           <PopoverContent
             id={inputListboxId}
             align="start"
-            className="w-auto origin-[var(--radix-popover-content-transform-origin)] p-0"
+            className="w-auto origin-[var(--transform-origin)] p-0"
           >
             {filter.operator === "isBetween" ? (
               <Calendar

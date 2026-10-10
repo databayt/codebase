@@ -13,6 +13,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
+import type { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import {
   Popover,
   PopoverContent,
@@ -43,7 +44,12 @@ function useFacetedContext(name: string) {
 }
 
 interface FacetedProps<Multiple extends boolean = false>
-  extends React.ComponentProps<typeof Popover> {
+  extends Omit<React.ComponentProps<typeof Popover>, "onOpenChange"> {
+  /** Base UI passes event details; they are absent when Faceted closes itself after a single select. */
+  onOpenChange?: (
+    open: boolean,
+    eventDetails?: PopoverPrimitive.Root.ChangeEventDetails,
+  ) => void;
   value?: FacetedValue<Multiple>;
   onValueChange?: (value: FacetedValue<Multiple> | undefined) => void;
   children?: React.ReactNode;
@@ -68,11 +74,14 @@ function Faceted<Multiple extends boolean = false>(
   const open = isControlled ? openProp : uncontrolledOpen;
 
   const onOpenChange = React.useCallback(
-    (newOpen: boolean) => {
+    (
+      newOpen: boolean,
+      eventDetails?: PopoverPrimitive.Root.ChangeEventDetails,
+    ) => {
       if (!isControlled) {
         setUncontrolledOpen(newOpen);
       }
-      onOpenChangeProp?.(newOpen);
+      onOpenChangeProp?.(newOpen, eventDetails);
     },
     [isControlled, onOpenChangeProp],
   );
@@ -204,7 +213,7 @@ function FacetedContent(props: React.ComponentProps<typeof PopoverContent>) {
       {...contentProps}
       align="start"
       className={cn(
-        "w-[200px] origin-(--radix-popover-content-transform-origin) p-0",
+        "w-[200px] origin-(--transform-origin) p-0",
         className,
       )}
     >

@@ -37,11 +37,11 @@ export default function ExamplesLayout({
         <PageHeaderHeading className="max-w-4xl">{title}</PageHeaderHeading>
         <PageHeaderDescription>{description}</PageHeaderDescription>
         <PageActions>
-          <Button asChild size="sm">
-            <Link href="/docs/installation">Get Started</Link>
+          <Button size="sm" render={<Link href="/docs/installation" />} nativeButton={false}>
+            Get Started
           </Button>
-          <Button asChild size="sm" variant="ghost">
-            <Link href="/docs/components">View Components</Link>
+          <Button size="sm" variant="ghost" render={<Link href="/docs/components" />} nativeButton={false}>
+            View Components
           </Button>
         </PageActions>
       </PageHeader>

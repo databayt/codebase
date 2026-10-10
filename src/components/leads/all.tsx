@@ -189,11 +189,9 @@ export function All({
             </div>
 
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="justify-between min-w-[120px] h-9 px-3">
-                  {filters.status ? LEAD_STATUS[filters.status] : 'Status'}
-                  <ChevronDown className="h-4 w-4 ml-2" />
-                </Button>
+              <DropdownMenuTrigger render={<Button variant="outline" className="justify-between min-w-[120px] h-9 px-3" />}>
+                {filters.status ? LEAD_STATUS[filters.status] : 'Status'}
+                <ChevronDown className="h-4 w-4 ml-2" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => onFiltersChange({ ...filters, status: undefined })}>
@@ -211,11 +209,9 @@ export function All({
             </DropdownMenu>
 
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="justify-between min-w-[120px] h-9 px-3">
-                  {filters.source ? LEAD_SOURCE[filters.source] : 'Source'}
-                  <ChevronDown className="h-4 w-4 ml-2" />
-                </Button>
+              <DropdownMenuTrigger render={<Button variant="outline" className="justify-between min-w-[120px] h-9 px-3" />}>
+                {filters.source ? LEAD_SOURCE[filters.source] : 'Source'}
+                <ChevronDown className="h-4 w-4 ml-2" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => onFiltersChange({ ...filters, source: undefined })}>
@@ -235,15 +231,13 @@ export function All({
             <div className="flex-1"></div>
 
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="link" className="h-9 w-9 p-0 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" style={{width: '28px', height: '28px'}}>
-                    <g fill="none" stroke="currentColor" strokeWidth="1">
-                      <circle cx="12" cy="12" r="3.5"/>
-                      <path d="M21 12s-1-8-9-8s-9 8-9 8"/>
-                    </g>
-                  </svg>
-                </Button>
+              <DropdownMenuTrigger render={<Button variant="link" className="h-9 w-9 p-0 flex items-center justify-center" />}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" style={{width: '28px', height: '28px'}}>
+                  <g fill="none" stroke="currentColor" strokeWidth="1">
+                    <circle cx="12" cy="12" r="3.5"/>
+                    <path d="M21 12s-1-8-9-8s-9 8-9 8"/>
+                  </g>
+                </svg>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem>
@@ -349,17 +343,13 @@ export function All({
                 <TableCell className="px-2 last:pr-4">
                   <div className="flex justify-center">
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
+                      <DropdownMenuTrigger render={<Button variant="ghost" size="icon" />}>
+                        <MoreHorizontal className="h-4 w-4" />
                       </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem asChild>
-                        <Link href={`/en/leads/${lead.id}`}>
-                          <Eye className="h-4 w-4 mr-2" />
-                          View
-                        </Link>
+                      <DropdownMenuItem render={<Link href={`/en/leads/${lead.id}`} />}>
+                        <Eye className="h-4 w-4 mr-2" />
+                        View
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => setEditLead(lead)}>
                         <Edit className="h-4 w-4 mr-2" />

@@ -23,13 +23,11 @@ export function DirectionPreview() {
       >
         Direction: {dir.toUpperCase()}
       </Button>
-      <DirectionProvider dir={dir}>
+      <DirectionProvider direction={dir}>
         <div dir={dir} className="rounded-lg border p-6">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary">
-                {dir === "rtl" ? "افتح القائمة" : "Open menu"}
-              </Button>
+            <DropdownMenuTrigger render={<Button variant="secondary" />}>
+              {dir === "rtl" ? "افتح القائمة" : "Open menu"}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               <DropdownMenuItem>

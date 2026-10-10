@@ -23,7 +23,7 @@ import {
   Clock,
   FileText,
 } from 'lucide-react';
-import { LinkedInLogoIcon } from '@radix-ui/react-icons';
+import { RxLinkedinLogo as LinkedInLogoIcon } from 'react-icons/rx';
 import { usePageScraper, useLeadExtractor, usePageAnalyzer } from './use-scraper';
 import { PAGE_TYPES, LEAD_POTENTIAL_LEVELS } from './constant';
 import type { ExtractedLead } from './type';

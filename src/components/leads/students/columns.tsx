@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/table/data-table/data-table-column-header";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useModal } from "@/components/atom/modal/context";
 import { deleteStudent } from "@/components/platform/students/actions";
 import { DeleteToast, ErrorToast, confirmDeleteDialog } from "@/components/atom/toast";
@@ -68,14 +68,14 @@ export const getStudentColumns = (dictionary?: Dictionary['school']['students'])
       };
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Open menu</span>
-            </Button>
+          <DropdownMenuTrigger render={<Button variant="ghost" className="h-8 w-8 p-0" />}>
+            <MoreHorizontal className="h-4 w-4" />
+            <span className="sr-only">Open menu</span>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>{columns.actions}</DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>{columns.actions}</DropdownMenuLabel>
+            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={onView}>View</DropdownMenuItem>
             <DropdownMenuItem onClick={onEdit}>{dict.editStudent || "Edit"}</DropdownMenuItem>

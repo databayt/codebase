@@ -226,11 +226,12 @@ export function TeamMemberRoleSelect({
 
   return (
     <Popover {...props}>
-      <PopoverTrigger asChild data-slot="team-member-role-trigger">
-        <Button variant="outline" size="sm" className="ml-auto">
-          {currentRole?.name ?? "Select role"}{" "}
-          <ChevronDown className="text-muted-foreground" />
-        </Button>
+      <PopoverTrigger
+        data-slot="team-member-role-trigger"
+        render={<Button variant="outline" size="sm" className="ml-auto" />}
+      >
+        {currentRole?.name ?? "Select role"}{" "}
+        <ChevronDown className="text-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent
         data-slot="team-member-role-content"

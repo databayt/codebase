@@ -59,7 +59,7 @@ export default async function LocaleLayout({
     return (
         <html lang={lang} dir={config.dir} suppressHydrationWarning>
             <body className={cn(fontClass, fontVariables, "group/body overscroll-none antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]")} suppressHydrationWarning>
-                <DirectionProvider dir={isRTL ? "rtl" : "ltr"}>
+                <DirectionProvider direction={isRTL ? "rtl" : "ltr"}>
                     <ThemeProvider>
                         <TooltipProvider>
                             <div className={isViewRoute ? "" : "layout-container"}>

@@ -56,10 +56,8 @@ export function CardsTeamMembers({ dictionary }: CardsTeamMembersProps) {
             </div>
           </div>
           <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" size="sm" className="ml-auto">
-                Owner <ChevronDown className="text-muted-foreground" />
-              </Button>
+            <PopoverTrigger render={<Button variant="outline" size="sm" className="ml-auto" />}>
+              Owner <ChevronDown className="text-muted-foreground" />
             </PopoverTrigger>
             <PopoverContent className="p-0" align="end">
               <Command>
@@ -109,10 +107,8 @@ export function CardsTeamMembers({ dictionary }: CardsTeamMembersProps) {
             </div>
           </div>
           <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" size="sm" className="ml-auto">
-                Member <ChevronDown className="text-muted-foreground" />
-              </Button>
+            <PopoverTrigger render={<Button variant="outline" size="sm" className="ml-auto" />}>
+              Member <ChevronDown className="text-muted-foreground" />
             </PopoverTrigger>
             <PopoverContent className="p-0" align="end">
               <Command>
@@ -164,10 +160,8 @@ export function CardsTeamMembers({ dictionary }: CardsTeamMembersProps) {
             </div>
           </div>
           <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" size="sm" className="ml-auto">
-                Member <ChevronDown className="text-muted-foreground" />
-              </Button>
+            <PopoverTrigger render={<Button variant="outline" size="sm" className="ml-auto" />}>
+              Member <ChevronDown className="text-muted-foreground" />
             </PopoverTrigger>
             <PopoverContent className="p-0" align="end">
               <Command>

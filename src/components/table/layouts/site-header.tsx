@@ -27,15 +27,21 @@ export function SiteHeader() {
           </Link>
         </nav>
         <nav className="flex flex-1 items-center md:justify-end">
-          <Button variant="ghost" size="icon" className="size-8" asChild>
-            <Link
-              aria-label="GitHub repo"
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icons.gitHub className="size-4" aria-hidden="true" />
-            </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8"
+            nativeButton={false}
+            render={
+              <Link
+                aria-label="GitHub repo"
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
+          >
+            <Icons.gitHub className="size-4" aria-hidden="true" />
           </Button>
           <ModeToggle />
         </nav>

@@ -10,8 +10,8 @@ const shards: Record<
     names: Set<string>
   }
 > = {
-  "base-nova": {
-    load: () => import("./base-nova"),
+  "base-vega": {
+    load: () => import("./base-vega"),
     names: new Set(["activity-goal","calendar","chat","data-table","metric","report-issue","share","stats","team-member","ai-prompt-input","ai-status-indicator","ai-streaming-text","ai-response-display","prompt-input","response","reasoning","card","card-hover-effect","cards-metric","gradient-animation","infinite-cards","infinite-slider","progressive-blur","sticky-scroll","simple-marquee","oauth-button","oauth-button-group","divider-with-text","user-info-card","settings-toggle-row","form-field","payment-method-selector","faceted","sortable","expand-button","header-section","page-actions","page-header","tabs","modal-system","loading","announcement","two-buttons","agent-heading","theme-provider","icons","button-group","card-form","labeled-input","labeled-select","labeled-textarea","site-heading","dashboard-01","sidebar-01","login-01","hero-01","sidebar-03","sidebar-07","sidebar-02","sidebar-04","sidebar-05","sidebar-06","sidebar-08","sidebar-09","sidebar-10","sidebar-11","sidebar-12","sidebar-13","sidebar-14","sidebar-15","sidebar-16","signup-01","signup-02","signup-03","signup-04","signup-05","subscription-01","subscription-02","subscription-03","header-01","header-02","footer-01","footer-02","hero-02","hero-03","hero-04","leads-01","login-03","login-04"]),
   },
 }

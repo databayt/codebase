@@ -15,16 +15,14 @@ const LinkButton = ({ href, type, children }: { href: string; type: "repository"
   )
   
   return (
-    <Button variant="ghost" size="sm" asChild>
-      <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
-        {type === "repository" && (
-          <span className="mr-1 inline-flex">
-            <Repository />
-          </span>
-        )}
-        {children}
-        {type === "preview" && <Preview />}
-      </a>
+    <Button variant="ghost" size="sm" render={<a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center" />} nativeButton={false}>
+      {type === "repository" && (
+        <span className="mr-1 inline-flex">
+          <Repository />
+        </span>
+      )}
+      {children}
+      {type === "preview" && <Preview />}
     </Button>
   )
 }

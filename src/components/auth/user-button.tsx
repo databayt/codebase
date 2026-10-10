@@ -1,7 +1,7 @@
 "use client";
 
 import { FaUser } from "react-icons/fa";
-import { ExitIcon } from "@radix-ui/react-icons"
+import { RxExit as ExitIcon } from "react-icons/rx";
 
 import {
   DropdownMenu,

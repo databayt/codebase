@@ -42,7 +42,16 @@ export function CardsReportIssue({ dictionary }: CardsReportIssueProps) {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="grid gap-2">
             <Label htmlFor={`area-${id}`}>Area</Label>
-            <Select defaultValue="billing">
+            <Select
+              defaultValue="billing"
+              items={{
+                team: "Team",
+                billing: "Billing",
+                account: "Account",
+                deployments: "Deployments",
+                support: "Support",
+              }}
+            >
               <SelectTrigger id={`area-${id}`} aria-label="Area">
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
@@ -57,7 +66,15 @@ export function CardsReportIssue({ dictionary }: CardsReportIssueProps) {
           </div>
           <div className="grid gap-2">
             <Label htmlFor={`security-level-${id}`}>Security Level</Label>
-            <Select defaultValue="2">
+            <Select
+              defaultValue="2"
+              items={{
+                "1": "Severity 1 (Highest)",
+                "2": "Severity 2",
+                "3": "Severity 3",
+                "4": "Severity 4 (Lowest)",
+              }}
+            >
               <SelectTrigger
                 id={`security-level-${id}`}
                 className="line-clamp-1 w-full truncate"

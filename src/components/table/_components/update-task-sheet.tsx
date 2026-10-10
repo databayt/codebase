@@ -22,8 +22,11 @@ import { type UpdateTaskSchema, updateTaskSchema } from "../_lib/validations";
 import { TaskForm } from "./task-form";
 
 interface UpdateTaskSheetProps
-  extends React.ComponentPropsWithRef<typeof Sheet> {
+  extends Omit<React.ComponentPropsWithRef<typeof Sheet>, "onOpenChange"> {
   task: Task | null;
+  // Narrowed to the single-arg form so the sheet can close itself after a
+  // save; Base UI's (open, eventDetails) handler accepts it unchanged.
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
@@ -70,10 +73,8 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
         </SheetHeader>
         <TaskForm<UpdateTaskSchema> form={form} onSubmit={onSubmit}>
           <SheetFooter className="gap-2 pt-2 sm:space-x-0">
-            <SheetClose asChild>
-              <Button type="button" variant="outline">
-                Cancel
-              </Button>
+            <SheetClose render={<Button type="button" variant="outline" />}>
+              Cancel
             </SheetClose>
             <Button disabled={isPending}>
               {isPending && (

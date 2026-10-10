@@ -37,13 +37,13 @@ export function FieldHear() {
                   >
                     <Field
                       orientation="horizontal"
-                      className="gap-1.5 overflow-hidden px-3! py-1.5! transition-all duration-100 ease-linear group-has-data-[state=checked]/field-label:px-2!"
+                      className="gap-1.5 overflow-hidden px-3! py-1.5! transition-all duration-100 ease-linear group-has-data-checked/field-label:px-2!"
                     >
                       <Checkbox
                         value={option.value}
                         id={option.value}
                         defaultChecked={option.value === "social-media"}
-                        className="-ml-6 -translate-x-1 rounded-full transition-all duration-100 ease-linear data-[state=checked]:ml-0 data-[state=checked]:translate-x-0"
+                        className="-ml-6 -translate-x-1 rounded-full transition-all duration-100 ease-linear data-checked:ml-0 data-checked:translate-x-0"
                       />
                       <FieldTitle>{option.label}</FieldTitle>
                     </Field>

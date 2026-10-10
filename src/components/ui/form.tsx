@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import type { Label as LabelPrimitive } from "radix-ui"
-import { Slot } from "radix-ui"
+import { useRender } from "@base-ui/react/use-render"
 import {
   Controller,
   FormProvider,
@@ -90,7 +89,7 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
 function FormLabel({
   className,
   ...props
-}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+}: React.ComponentProps<typeof Label>) {
   const { error, formItemId } = useFormField()
 
   return (
@@ -104,22 +103,37 @@ function FormLabel({
   )
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof Slot.Root>) {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+type FormControlProps = React.HTMLAttributes<HTMLElement> & {
+  ref?: React.Ref<HTMLElement>
+  /** Explicit render target; by default the single child element is used. */
+  render?: useRender.RenderProp
+}
 
-  return (
-    <Slot.Root
-      data-slot="form-control"
-      id={formItemId}
-      aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
-      }
-      aria-invalid={!!error}
-      {...props}
-    />
-  )
+/**
+ * Forwards `id`, `aria-describedby` and `aria-invalid` to its single child
+ * (the Radix Slot behavior, rebuilt on Base UI `useRender`): the child element
+ * is the render target and its own props win, handlers chain, className and
+ * style join.
+ */
+function FormControl({ children, render, ref, ...props }: FormControlProps) {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+  const childIsElement = !render && React.isValidElement(children)
+
+  return useRender({
+    defaultTagName: "div",
+    render: render ?? (childIsElement ? children : undefined),
+    ref,
+    props: {
+      "data-slot": "form-control",
+      id: formItemId,
+      "aria-describedby": !error
+        ? `${formDescriptionId}`
+        : `${formDescriptionId} ${formMessageId}`,
+      "aria-invalid": !!error,
+      ...props,
+      children: childIsElement ? undefined : children,
+    },
+  })
 }
 
 function FormDescription({ className, ...props }: React.ComponentProps<"p">) {

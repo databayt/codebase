@@ -19,10 +19,8 @@ export function ButtonGroupPopover() {
         Copilot
       </Button>
       <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline" size="icon-sm" aria-label="Agent tasks">
-            <ChevronDownIcon />
-          </Button>
+        <PopoverTrigger render={<Button variant="outline" size="icon-sm" aria-label="Agent tasks" />}>
+          <ChevronDownIcon />
         </PopoverTrigger>
         <PopoverContent className="w-80" align="end">
           <div className="grid gap-4">

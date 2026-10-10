@@ -30,16 +30,15 @@ export function LangSwitcher() {
 
   return (
     <Button
-      asChild
       variant="ghost"
       size="icon"
       className="h-8 w-8 px-0"
       title={`Switch to ${targetConfig.nativeName}`}
+      nativeButton={false}
+      render={<Link href={getLocalePath()} />}
     >
-      <Link href={getLocalePath()}>
-        <Languages className="h-4 w-4" />
-        <span className="sr-only">Switch language to {targetConfig.nativeName}</span>
-      </Link>
+      <Languages className="h-4 w-4" />
+      <span className="sr-only">Switch language to {targetConfig.nativeName}</span>
     </Button>
   )
 }

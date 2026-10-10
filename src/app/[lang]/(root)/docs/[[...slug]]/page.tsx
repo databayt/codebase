@@ -103,12 +103,10 @@ export default async function DocsPage(props: {
                       variant="secondary"
                       size="icon"
                       className="extend-touch-target ms-auto size-8 shadow-none md:size-7"
-                      asChild
+                      render={<Link href={neighbours.previous.url} />} nativeButton={false}
                     >
-                      <Link href={neighbours.previous.url}>
-                        <ArrowLeft />
-                        <span className="sr-only">{dictionary?.common?.previous || "Previous"}</span>
-                      </Link>
+                      <ArrowLeft />
+                      <span className="sr-only">{dictionary?.common?.previous || "Previous"}</span>
                     </Button>
                   )}
                   {neighbours.next && (
@@ -116,12 +114,10 @@ export default async function DocsPage(props: {
                       variant="secondary"
                       size="icon"
                       className="extend-touch-target size-8 shadow-none md:size-7"
-                      asChild
+                      render={<Link href={neighbours.next.url} />} nativeButton={false}
                     >
-                      <Link href={neighbours.next.url}>
-                        <span className="sr-only">{dictionary?.common?.next || "Next"}</span>
-                        <ArrowRight />
-                      </Link>
+                      <span className="sr-only">{dictionary?.common?.next || "Next"}</span>
+                      <ArrowRight />
                     </Button>
                   )}
                 </div>
@@ -135,17 +131,13 @@ export default async function DocsPage(props: {
             {links ? (
               <div className="flex items-center gap-2 pt-4">
                 {links?.doc && (
-                  <Badge asChild variant="secondary" className="rounded-full">
-                    <a href={links.doc} target="_blank" rel="noreferrer">
-                      Docs <ArrowUpRight className="ms-1 h-3 w-3" />
-                    </a>
+                  <Badge variant="secondary" className="rounded-full" render={<a href={links.doc} target="_blank" rel="noreferrer" />}>
+                    Docs <ArrowUpRight className="ms-1 h-3 w-3" />
                   </Badge>
                 )}
                 {links?.api && (
-                  <Badge asChild variant="secondary" className="rounded-full">
-                    <a href={links.api} target="_blank" rel="noreferrer">
-                      API Reference <ArrowUpRight className="ms-1 h-3 w-3" />
-                    </a>
+                  <Badge variant="secondary" className="rounded-full" render={<a href={links.api} target="_blank" rel="noreferrer" />}>
+                    API Reference <ArrowUpRight className="ms-1 h-3 w-3" />
                   </Badge>
                 )}
               </div>
@@ -160,12 +152,10 @@ export default async function DocsPage(props: {
             <Button
               variant="secondary"
               size="sm"
-              asChild
               className="shadow-none"
+              render={<Link href={neighbours.previous.url} />} nativeButton={false}
             >
-              <Link href={neighbours.previous.url}>
-                <ArrowLeft /> {neighbours.previous.name}
-              </Link>
+              <ArrowLeft /> {neighbours.previous.name}
             </Button>
           )}
           {neighbours.next && (
@@ -173,11 +163,9 @@ export default async function DocsPage(props: {
               variant="secondary"
               size="sm"
               className="ms-auto shadow-none"
-              asChild
+              render={<Link href={neighbours.next.url} />} nativeButton={false}
             >
-              <Link href={neighbours.next.url}>
-                {neighbours.next.name} <ArrowRight />
-              </Link>
+              {neighbours.next.name} <ArrowRight />
             </Button>
           )}
         </div>

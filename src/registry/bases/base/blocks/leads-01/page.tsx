@@ -18,11 +18,9 @@ export default function LeadsTemplate() {
           <h2 className="text-3xl font-bold tracking-tight">Leads Management</h2>
           <div className="flex items-center space-x-2">
             <Dialog>
-              <DialogTrigger asChild>
-                <Button>
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Add Lead
-                </Button>
+              <DialogTrigger render={<Button />}>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add Lead
               </DialogTrigger>
               <DialogContent className="sm:max-w-[600px]">
                 <LeadForm />

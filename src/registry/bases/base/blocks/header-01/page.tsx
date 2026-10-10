@@ -41,11 +41,9 @@ export default function HeaderTemplate() {
 
         <div className="flex lg:hidden">
           <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Open menu</span>
-              </Button>
+            <SheetTrigger render={<Button variant="ghost" size="icon" />}>
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Open menu</span>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
               <div className="mt-6 flow-root">

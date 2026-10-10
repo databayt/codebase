@@ -26,6 +26,21 @@ interface CardsPaymentMethodProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
+const MONTHS = [
+  { value: "1", label: "January" },
+  { value: "2", label: "February" },
+  { value: "3", label: "March" },
+  { value: "4", label: "April" },
+  { value: "5", label: "May" },
+  { value: "6", label: "June" },
+  { value: "7", label: "July" },
+  { value: "8", label: "August" },
+  { value: "9", label: "September" },
+  { value: "10", label: "October" },
+  { value: "11", label: "November" },
+  { value: "12", label: "December" },
+]
+
 export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
   return (
     <Card className="shadow-none border" dir={dictionary.locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -46,7 +61,7 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
             />
             <Label
               htmlFor="card"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary [&:has([data-checked])]:border-primary"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +88,7 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
             />
             <Label
               htmlFor="paypal"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary [&:has([data-checked])]:border-primary"
             >
               <Icons.paypal className="mb-3 h-6 w-6" />
               Paypal
@@ -88,7 +103,7 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
             />
             <Label
               htmlFor="apple"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary "
+              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-checked:border-primary [&:has([data-checked])]:border-primary "
             >
               <Icons.apple className="mb-3 h-6 w-6" />
               Apple
@@ -110,23 +125,16 @@ export function CardsPaymentMethod({ dictionary }: CardsPaymentMethodProps) {
         <div className="grid grid-cols-3 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="month">Expires</Label>
-            <Select>
+            <Select items={MONTHS}>
               <SelectTrigger id="month" aria-label="Month">
                 <SelectValue placeholder="Month" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="1">January</SelectItem>
-                <SelectItem value="2">February</SelectItem>
-                <SelectItem value="3">March</SelectItem>
-                <SelectItem value="4">April</SelectItem>
-                <SelectItem value="5">May</SelectItem>
-                <SelectItem value="6">June</SelectItem>
-                <SelectItem value="7">July</SelectItem>
-                <SelectItem value="8">August</SelectItem>
-                <SelectItem value="9">September</SelectItem>
-                <SelectItem value="10">October</SelectItem>
-                <SelectItem value="11">November</SelectItem>
-                <SelectItem value="12">December</SelectItem>
+                {MONTHS.map((month) => (
+                  <SelectItem key={month.value} value={month.value}>
+                    {month.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

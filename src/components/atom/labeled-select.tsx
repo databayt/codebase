@@ -40,7 +40,13 @@ export function LabeledSelect({
   return (
     <div className={cn("grid gap-2", className)} data-slot="labeled-select">
       <Label htmlFor={id}>{label}</Label>
-      <Select defaultValue={defaultValue} onValueChange={onValueChange}>
+      <Select
+        defaultValue={defaultValue}
+        onValueChange={(value) => {
+          // Base UI widens the value to `string | null`; keep the string-only API
+          if (value !== null) onValueChange?.(value)
+        }}
+      >
         <SelectTrigger
           id={id}
           className={cn("w-full", triggerClassName)}

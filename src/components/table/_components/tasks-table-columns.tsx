@@ -56,9 +56,10 @@ export function getTasksTableColumns({
       id: "select",
       header: ({ table }) => (
         <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
+          checked={table.getIsAllPageRowsSelected()}
+          indeterminate={
+            !table.getIsAllPageRowsSelected() &&
+            table.getIsSomePageRowsSelected()
           }
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
@@ -225,18 +226,20 @@ export function getTasksTableColumns({
 
         return (
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                aria-label="Open menu"
-                variant="ghost"
-                className="flex size-8 p-0 data-[state=open]:bg-muted"
-              >
-                <Ellipsis className="size-4" aria-hidden="true" />
-              </Button>
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  aria-label="Open menu"
+                  variant="ghost"
+                  className="flex size-8 p-0 data-popup-open:bg-muted"
+                />
+              }
+            >
+              <Ellipsis className="size-4" aria-hidden="true" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
               <DropdownMenuItem
-                onSelect={() => setRowAction({ row, variant: "update" })}
+                onClick={() => setRowAction({ row, variant: "update" })}
               >
                 Edit
               </DropdownMenuItem>
@@ -276,7 +279,7 @@ export function getTasksTableColumns({
               </DropdownMenuSub>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onSelect={() => setRowAction({ row, variant: "delete" })}
+                onClick={() => setRowAction({ row, variant: "delete" })}
               >
                 Delete
                 <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>

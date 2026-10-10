@@ -17,7 +17,7 @@ import {
   Copy,
   AlertCircle,
 } from 'lucide-react';
-import { LinkedInLogoIcon } from '@radix-ui/react-icons';
+import { RxLinkedinLogo as LinkedInLogoIcon } from 'react-icons/rx';
 import { useLeadExtractor } from './use-scraper';
 
 export function LeadExtractor() {

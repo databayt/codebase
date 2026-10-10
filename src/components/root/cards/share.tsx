@@ -30,6 +30,10 @@ interface CardsShareProps {
 }
 
 export function CardsShare({ dictionary }: CardsShareProps) {
+  const accessItems = {
+    edit: dictionary?.cards?.share?.canEdit || "Can edit",
+    view: dictionary?.cards?.share?.canView || "Can view",
+  }
   return (
     <Card className="shadow-none border" dir={dictionary.locale === 'ar' ? 'rtl' : 'ltr'}>
       <CardHeader className="pb-3">
@@ -67,7 +71,7 @@ export function CardsShare({ dictionary }: CardsShareProps) {
                   <p className="text-sm text-muted-foreground">m@example.com</p>
                 </div>
               </div>
-              <Select defaultValue="edit">
+              <Select defaultValue="edit" items={accessItems}>
                 <SelectTrigger className="ml-auto w-[110px] rtl:mr-auto rtl:ml-0" aria-label={dictionary?.cards?.share?.editLabel || "Edit"}>
                   <SelectValue placeholder={dictionary?.cards?.share?.selectPlaceholder || "Select"} />
                 </SelectTrigger>
@@ -90,7 +94,7 @@ export function CardsShare({ dictionary }: CardsShareProps) {
                   <p className="text-sm text-muted-foreground">b@example.com</p>
                 </div>
               </div>
-              <Select defaultValue="view">
+              <Select defaultValue="view" items={accessItems}>
                 <SelectTrigger className="ml-auto w-[110px] rtl:mr-auto rtl:ml-0" aria-label={dictionary?.cards?.share?.editLabel || "Edit"}>
                   <SelectValue placeholder={dictionary?.cards?.share?.selectPlaceholder || "Select"} />
                 </SelectTrigger>
@@ -113,7 +117,7 @@ export function CardsShare({ dictionary }: CardsShareProps) {
                   <p className="text-sm text-muted-foreground">p@example.com</p>
                 </div>
               </div>
-              <Select defaultValue="view">
+              <Select defaultValue="view" items={accessItems}>
                 <SelectTrigger className="ml-auto w-[110px] rtl:mr-auto rtl:ml-0" aria-label={dictionary?.cards?.share?.editLabel || "Edit"}>
                   <SelectValue placeholder={dictionary?.cards?.share?.selectPlaceholder || "Select"} />
                 </SelectTrigger>

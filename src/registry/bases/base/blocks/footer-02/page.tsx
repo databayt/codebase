@@ -2,7 +2,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { GitHubLogoIcon, TwitterLogoIcon, LinkedInLogoIcon, VideoIcon } from "@radix-ui/react-icons"
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+  IconVideo,
+} from "@tabler/icons-react"
 
 const footerLinks = {
   product: [
@@ -23,10 +28,10 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { name: "Twitter", href: "#", icon: TwitterLogoIcon },
-  { name: "GitHub", href: "#", icon: GitHubLogoIcon },
-  { name: "LinkedIn", href: "#", icon: LinkedInLogoIcon },
-  { name: "YouTube", href: "#", icon: VideoIcon },
+  { name: "Twitter", href: "#", icon: IconBrandTwitter },
+  { name: "GitHub", href: "#", icon: IconBrandGithub },
+  { name: "LinkedIn", href: "#", icon: IconBrandLinkedin },
+  { name: "YouTube", href: "#", icon: IconVideo },
 ]
 
 export default function FooterTemplate() {

@@ -45,10 +45,8 @@ export default function AuthBlockContent({ lang }: AuthBlockContentProps) {
               <CardDescription>{feature.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button asChild variant="outline" className="w-full">
-                <Link href={`/${lang}${feature.href}`}>
-                  View {feature.title}
-                </Link>
+              <Button variant="outline" className="w-full" nativeButton={false} render={<Link href={`/${lang}${feature.href}`} />}>
+                View {feature.title}
               </Button>
             </CardContent>
           </Card>
