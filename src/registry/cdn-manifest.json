@@ -10706,6 +10706,12 @@
       "contentType": "image/png"
     },
     {
+      "key": "hogwarts/school/bulk/bulk-student-ar.ed3724f0.mp4",
+      "size": 4913030,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/school/bulk/bulk-student-ar.poster.d3baafd3.webp"
+    },
+    {
       "key": "hogwarts/school/bulk/bulk-student-bulk-ar-1600.689c9b4f.avif",
       "size": 30773,
       "contentType": "image/avif"
@@ -10764,6 +10770,12 @@
       "key": "hogwarts/school/bulk/bulk-student-review-en-1600.2b79071d.avif",
       "size": 23216,
       "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/school/bulk/bulk-teacher-ar.58ceb017.mp4",
+      "size": 4655964,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/school/bulk/bulk-teacher-ar.poster.e4e3abb1.webp"
     },
     {
       "key": "hogwarts/school/bulk/bulk-teacher-bulk-ar-1600.689c9b4f.avif",
@@ -11458,6 +11470,12 @@
       "key": "hogwarts/teachers/add-teacher-address-en-1600.9202d445.avif",
       "size": 37875,
       "contentType": "image/avif"
+    },
+    {
+      "key": "hogwarts/teachers/add-teacher-ar.af55f4e6.mp4",
+      "size": 7036582,
+      "contentType": "video/mp4",
+      "poster": "hogwarts/teachers/add-teacher-ar.poster.2b9c196f.webp"
     },
     {
       "key": "hogwarts/teachers/add-teacher-contact-ar-1600.97b68fcf.avif",
