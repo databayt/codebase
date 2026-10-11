@@ -1,15 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import type { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
-import { Circle, File, Laptop, Moon, Sun } from "lucide-react"
+import { Circle, File, Laptop, Moon, Sun, X } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { docsConfig } from "./constants"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -19,6 +20,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command"
 import type { getDictionary } from "@/components/local/dictionaries"
+import { AssetResults, parseQuery, spotlightFilter, useAssetIndex } from "./asset-search"
 
 interface CommandMenuProps extends DialogPrimitive.Root.Props {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>
@@ -26,8 +28,38 @@ interface CommandMenuProps extends DialogPrimitive.Root.Props {
 
 export function CommandMenu({ dictionary, ...props }: CommandMenuProps) {
   const router = useRouter()
+  const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
+  const [query, setQuery] = React.useState("")
+  const [scopeCleared, setScopeCleared] = React.useState(false)
   const { setTheme } = useTheme()
+  const index = useAssetIndex(open)
+
+  // On /<lang>/arts/<namespace>… Spotlight starts scoped to that namespace.
+  const lang = pathname?.match(/^\/(en|ar)(?=\/|$)/)?.[1] ?? "en"
+  const tabScope = pathname?.match(/^\/(?:en|ar)\/arts\/([^/]+)/)?.[1] ?? null
+  const namespaces = React.useMemo(
+    () => new Set(index?.keys.map((k) => k.split("/")[0]) ?? []),
+    [index],
+  )
+  const pathScope = tabScope && namespaces.has(tabScope) && !scopeCleared ? tabScope : null
+  const scope = parseQuery(query, namespaces).scope ?? pathScope
+  const assetResults =
+    index && (
+      <AssetResults
+        index={index}
+        query={query}
+        scope={pathScope}
+        lang={lang}
+        onNavigate={(href) => runCommand(() => router.push(href))}
+      />
+    )
+
+  React.useEffect(() => {
+    if (open) return
+    setQuery("")
+    setScopeCleared(false)
+  }, [open])
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -72,7 +104,29 @@ export function CommandMenu({ dictionary, ...props }: CommandMenuProps) {
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder={dictionary?.header?.searchPlaceholder || "Type a command or search..."} />
+        <Command filter={spotlightFilter}>
+        <CommandInput
+          value={query}
+          onValueChange={setQuery}
+          placeholder={dictionary?.header?.searchPlaceholder || "Search docs, or @hogwarts for assets..."}
+        />
+        {scope && (
+          <div className="flex items-center gap-2 border-b px-3 py-1.5 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 font-mono">
+              in: {scope}
+              {scope === pathScope && !parseQuery(query, namespaces).scope && (
+                <button
+                  type="button"
+                  aria-label="Search everything"
+                  onClick={() => setScopeCleared(true)}
+                  className="hover:text-foreground"
+                >
+                  <X className="size-3" />
+                </button>
+              )}
+            </span>
+          </div>
+        )}
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Links">
@@ -109,6 +163,7 @@ export function CommandMenu({ dictionary, ...props }: CommandMenuProps) {
               ))}
             </CommandGroup>
           ))}
+          {assetResults}
           <CommandSeparator />
           <CommandGroup heading="Theme">
             <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
@@ -125,6 +180,7 @@ export function CommandMenu({ dictionary, ...props }: CommandMenuProps) {
             </CommandItem>
           </CommandGroup>
         </CommandList>
+        </Command>
       </CommandDialog>
     </>
   )
