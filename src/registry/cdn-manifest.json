@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10",
+  "generatedAt": "2026-10-11",
   "source": "s3",
   "bucket": "databayt-cdn",
   "domain": "cdn.databayt.org",
@@ -476,11 +476,6 @@
       "contentType": "image/svg+xml"
     },
     {
-      "key": "airbnb/motion.css",
-      "size": 4196,
-      "contentType": "application/octet-stream"
-    },
-    {
       "key": "airbnb/movie-theater.svg",
       "size": 540,
       "contentType": "image/svg+xml"
@@ -802,12 +797,12 @@
     },
     {
       "key": "anthropic/arrow-down.svg",
-      "size": 904,
+      "size": 939,
       "contentType": "image/svg+xml"
     },
     {
       "key": "anthropic/arrow-right-line.svg",
-      "size": 250,
+      "size": 285,
       "contentType": "image/svg+xml"
     },
     {
@@ -872,7 +867,7 @@
     },
     {
       "key": "anthropic/caret-small.svg",
-      "size": 539,
+      "size": 574,
       "contentType": "image/svg+xml"
     },
     {
@@ -1077,7 +1072,7 @@
     },
     {
       "key": "anthropic/download.svg",
-      "size": 800,
+      "size": 835,
       "contentType": "image/svg+xml"
     },
     {
@@ -1212,7 +1207,7 @@
     },
     {
       "key": "anthropic/hamburger-menu.svg",
-      "size": 677,
+      "size": 712,
       "contentType": "image/svg+xml"
     },
     {
@@ -1332,7 +1327,7 @@
     },
     {
       "key": "anthropic/help-circle.svg",
-      "size": 1072,
+      "size": 1107,
       "contentType": "image/svg+xml"
     },
     {
@@ -1507,7 +1502,7 @@
     },
     {
       "key": "anthropic/news.svg",
-      "size": 944,
+      "size": 979,
       "contentType": "image/svg+xml"
     },
     {
@@ -1597,7 +1592,7 @@
     },
     {
       "key": "anthropic/play-filled.svg",
-      "size": 521,
+      "size": 556,
       "contentType": "image/svg+xml"
     },
     {
@@ -1687,7 +1682,7 @@
     },
     {
       "key": "anthropic/search-large.svg",
-      "size": 666,
+      "size": 701,
       "contentType": "image/svg+xml"
     },
     {
@@ -8981,11 +8976,6 @@
       "contentType": "image/svg+xml"
     },
     {
-      "key": "hogwarts/icons/extracted-urls.txt",
-      "size": 18585,
-      "contentType": "application/octet-stream"
-    },
-    {
       "key": "hogwarts/icons/f1664b95be4e2e828a180cf9f015a0b6f8365472-5760x3240.png",
       "size": 29839,
       "contentType": "image/png"
@@ -9106,11 +9096,6 @@
       "contentType": "image/svg+xml"
     },
     {
-      "key": "hogwarts/icons/icon-renaming-mapping.md",
-      "size": 11582,
-      "contentType": "application/octet-stream"
-    },
-    {
       "key": "hogwarts/icons/id.png",
       "size": 34717,
       "contentType": "image/png"
@@ -9192,7 +9177,7 @@
     },
     {
       "key": "hogwarts/icons/news.svg",
-      "size": 944,
+      "size": 979,
       "contentType": "image/svg+xml"
     },
     {
@@ -9239,16 +9224,6 @@
       "key": "hogwarts/icons/People-Multiple-01.svg",
       "size": 10792,
       "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/rename-icons.ps1",
-      "size": 7961,
-      "contentType": "application/octet-stream"
-    },
-    {
-      "key": "hogwarts/icons/rename-log.txt",
-      "size": 9428,
-      "contentType": "application/octet-stream"
     },
     {
       "key": "hogwarts/icons/resume.png",
@@ -9476,11 +9451,6 @@
       "contentType": "image/svg+xml"
     },
     {
-      "key": "hogwarts/icons/whatsapp/cdn-manifest.json",
-      "size": 8104,
-      "contentType": "application/json"
-    },
-    {
       "key": "hogwarts/icons/whatsapp/ic-wa-archived-24.svg",
       "size": 993,
       "contentType": "image/svg+xml"
@@ -9694,11 +9664,6 @@
       "key": "hogwarts/icons/whatsapp/ic-wa-voice-16.svg",
       "size": 534,
       "contentType": "image/svg+xml"
-    },
-    {
-      "key": "hogwarts/icons/whatsapp/manifest.json",
-      "size": 3551,
-      "contentType": "application/json"
     },
     {
       "key": "hogwarts/icons/whatsapp/pic-wa-contact-doc.jpg",
@@ -10402,7 +10367,7 @@
     },
     {
       "key": "hogwarts/news.svg",
-      "size": 944,
+      "size": 979,
       "contentType": "image/svg+xml"
     },
     {

@@ -68,6 +68,14 @@ const OUT = resolve(process.cwd(), "src/registry/cdn-manifest.json");
  */
 const SKIP = [/^catalog\//, /^mkan\//, /^balqalam\//, /\/\.backup\//];
 
+/**
+ * Only media reaches the showroom. Tooling output that lands in the bucket
+ * (icon manifests, rename logs, scripts, stylesheets) would render as bare
+ * extension tiles. JSON passes for Lottie, but never a *manifest.json.
+ */
+const MEDIA = /\.(svg|png|jpe?g|webp|avif|gif|ico|mp4|webm|json)$/i;
+const isMedia = (key: string) => MEDIA.test(key) && !/manifest\.json$/i.test(key);
+
 /** Known vendor brand prefixes eligible for sub-folder flattening. */
 const VENDORS = new Set(["anthropic", "airbnb", "apple", "google", "openai"]);
 
@@ -180,7 +188,7 @@ async function main() {
     pageCount++;
     for (const obj of res.Contents ?? []) {
       if (!obj.Key || obj.Key.endsWith("/")) continue; // skip folder placeholders
-      if (SKIP.some((re) => re.test(obj.Key!))) continue;
+      if (SKIP.some((re) => re.test(obj.Key!)) || !isMedia(obj.Key)) continue;
       const resolvedKey = flatten(obj.Key);
       const slug = provenanceSlug(resolvedKey);
       assets.push({
